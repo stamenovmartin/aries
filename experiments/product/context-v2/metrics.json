@@ -1,0 +1,29 @@
+{
+  "memory-only": {
+    "trials": 8,
+    "correct_citations": 8,
+    "grounded": 8,
+    "retrieved_relevant_records": 0,
+    "model_calls": 8,
+    "input_tokens": 1044,
+    "output_tokens": 56,
+    "median_latency_ms": 223.3462789999976,
+    "median_context_chars": 236.0,
+    "cost_usd": null,
+    "cost_note": "local native token usage measured; compute cost not priced"
+  },
+  "expanded": {
+    "trials": 8,
+    "correct_citations": 8,
+    "grounded": 8,
+    "retrieved_relevant_records": 6,
+    "model_calls": 8,
+    "input_tokens": 2312,
+    "output_tokens": 74,
+    "median_latency_ms": 320.7139599999209,
+    "median_context_chars": 663.5,
+    "cost_usd": null,
+    "cost_note": "local native token usage measured; compute cost not priced"
+  },
+  "interpretation": "Expanded context supplies six otherwise absent relevant records across eight trials. Empty-context abstention remains correct. Extra context has an inference cost; no token-saving claim."
+}

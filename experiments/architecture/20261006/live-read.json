@@ -1,0 +1,239 @@
+{
+  "recorded_at": "2026-10-06T08:50:17.817133+00:00",
+  "reads": [
+    {
+      "route": "/api/health",
+      "http_status": 200,
+      "data": {
+        "status": "healthy",
+        "status_means": "'healthy' means only that the database answers.",
+        "components": [
+          {
+            "component": "application",
+            "status": "ok",
+            "detail": "process answers \u00b7 env development",
+            "probe": "local",
+            "checked_at": "2026-10-06T08:50:17.686290+00:00",
+            "uptime_seconds": 0.0,
+            "pid": 2117
+          },
+          {
+            "component": "database",
+            "status": "ok",
+            "detail": "answers in 6 ms",
+            "probe": "db",
+            "checked_at": "2026-10-06T08:50:17.692061+00:00"
+          },
+          {
+            "component": "queue",
+            "status": "ok",
+            "detail": "0 scheduled, 18 awaiting a human",
+            "probe": "db",
+            "checked_at": "2026-10-06T08:50:17.691322+00:00",
+            "counts": {
+              "scheduled_queued": 0,
+              "scheduled_overdue": 0,
+              "proposals_open": 18
+            }
+          },
+          {
+            "component": "workers",
+            "status": "ok",
+            "detail": "8 workers running",
+            "probe": "local",
+            "checked_at": "2026-10-06T08:50:17.692185+00:00",
+            "workers": [
+              {
+                "name": "aries.automations",
+                "state": "running",
+                "alive": true,
+                "last_tick": "2026-10-06T08:50:03.435793",
+                "every_seconds": 60,
+                "check_every_s": 60,
+                "enabled": true,
+                "error": null
+              },
+              {
+                "name": "aries.shell.watchdog",
+                "state": "running",
+                "alive": true,
+                "last_tick": "2026-10-06T08:50:10.355262",
+                "every_seconds": 15,
+                "check_every_s": 15,
+                "enabled": true,
+                "error": null
+              },
+              {
+                "name": "aries.workspace",
+                "state": "running",
+                "alive": true,
+                "last_tick": "2026-10-06T08:50:15.959465",
+                "every_seconds": 2,
+                "check_every_s": 2,
+                "enabled": true,
+                "error": null
+              },
+              {
+                "name": "autopilot",
+                "state": "running",
+                "alive": true,
+                "last_tick": "2026-10-06T08:42:43.298220",
+                "every_seconds": 72000,
+                "check_every_s": 900,
+                "enabled": false,
+                "error": null
+              },
+              {
+                "name": "housekeeping",
+                "state": "running",
+                "alive": true,
+                "last_tick": "2026-10-06T08:42:43.298447",
+                "every_seconds": 21600,
+                "check_every_s": 1800,
+                "enabled": true,
+                "error": null
+              },
+              {
+                "name": "learning",
+                "state": "running",
+                "alive": true,
+                "last_tick": "2026-10-06T08:42:43.299861",
+                "every_seconds": 86400,
+                "check_every_s": 1800,
+                "enabled": true,
+                "error": null
+              },
+              {
+                "name": "scheduler",
+                "state": "running",
+                "alive": true,
+                "last_tick": "2026-10-06T08:49:54.792658",
+                "every_seconds": 30,
+                "check_every_s": 30,
+                "enabled": true,
+                "error": null
+              },
+              {
+                "name": "triggers",
+                "state": "running",
+                "alive": true,
+                "last_tick": "2026-10-06T08:48:53.304844",
+                "every_seconds": 600,
+                "check_every_s": 120,
+                "enabled": true,
+                "error": null
+              }
+            ]
+          },
+          {
+            "component": "ai_provider",
+            "status": "unknown",
+            "detail": "Ollama at http://127.0.0.1:11435 \u00b7 not verified live",
+            "probe": "local",
+            "checked_at": "2026-10-06T08:50:17.692219+00:00",
+            "reason": "no live probe on the hot path",
+            "provider": "ollama",
+            "observed": {
+              "calls": 5
+            }
+          },
+          {
+            "component": "execution_gates",
+            "status": "ok",
+            "detail": "dry_run=False \u00b7 live_tools=['desktop.open_url', 'desktop.open_app', 'aries.open_section', 'aries.run_automation']",
+            "probe": "local",
+            "checked_at": "2026-10-06T08:50:17.692240+00:00",
+            "dry_run": false,
+            "live_tools": [
+              "desktop.open_url",
+              "desktop.open_app",
+              "aries.open_section",
+              "aries.run_automation"
+            ],
+            "executing_live": true
+          }
+        ],
+        "summary": {
+          "counts": {
+            "ok": 5,
+            "unknown": 1
+          },
+          "worst": "ok",
+          "unverified": [
+            "ai_provider"
+          ],
+          "failing": []
+        }
+      }
+    },
+    {
+      "route": "/api/aries/intelligence/health",
+      "http_status": 200,
+      "data": {
+        "gateway_live": true,
+        "gateway": {
+          "service": "aries-local-model",
+          "backend": {
+            "reachable": true,
+            "model_available": true,
+            "models": [
+              "bge-m3:latest",
+              "qwen2.5:1.5b",
+              "qwen2.5:7b"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "route": "/api/aries/intelligence/stats",
+      "http_status": 200,
+      "data": {
+        "window_events": 4526,
+        "window_limit": 10000,
+        "total_requests": 1315,
+        "requests_scope": "Router invocations, including previews; not distinct completed tasks",
+        "usage_scope": "ARIES-initiated requests in retained events only; excludes other terminal sessions, applications and account-wide usage",
+        "account_usage_available": false,
+        "account_remaining_quota": null,
+        "token_subtotals_note": "Measured fields sum available per-request reports only; incomplete coverage is not total consumption. Cached input may be included.",
+        "cloud_input_tokens_total": null,
+        "cloud_output_tokens_total": null,
+        "routed_by_level": {
+          "code": 981,
+          "local": 244,
+          "cloud": 90
+        },
+        "completed_by_level": {
+          "code": 623,
+          "local": 12,
+          "cloud": 9
+        },
+        "unattributed_completed_tasks": 491,
+        "cloud_escalation_percent": 6.844106463878327,
+        "cloud_requests": 469,
+        "local_requests": 1381,
+        "cloud_successful_responses": 462,
+        "measured_cloud_input_tokens": 6516047,
+        "measured_cloud_output_tokens": 34885,
+        "cloud_usage_unknown": 7,
+        "estimated_api_cost_usd": null,
+        "priced_requests_cost_usd": 0,
+        "unpriced_cloud_requests": 469,
+        "estimated_token_savings": null,
+        "savings_note": "Requires measured matched all-cloud baseline; not inferred from routing."
+      }
+    },
+    {
+      "route": "/api/aries/workspace/capabilities",
+      "http_status": 200,
+      "data": {
+        "response_type": "dict",
+        "top_level_keys": [
+          "capabilities"
+        ],
+        "entries": null
+      }
+    }
+  ]
+}

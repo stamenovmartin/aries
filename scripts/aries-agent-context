@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+"""Read the current ARIES handoff into the reviewing agent's session, without taking actions."""
+import json
+import hashlib
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def context(source='unknown'):
+    parts = [
+        'ARIES_RESUME_CONTEXT_V1: current local handoff, not proof of completion. '
+        'Latest user instructions override stale notes. Read the referenced evidence '
+        'and new coordination messages before edits; do not repeat denied actions.',
+    ]
+    if source not in {'startup', 'resume', 'clear', 'compact', 'fork'}:
+        source = 'unknown'
+    try:
+        digest = hashlib.sha256((ROOT / 'SESSION_STATE.md').read_bytes()).hexdigest()
+    except OSError:
+        digest = 'unavailable'
+    parts.append(f'Hook source: {source}; current handoff SHA256: {digest}.')
+    for filename, limit, tail in [('SESSION_STATE.md', 6000, False),
+                                  ('COORDINATION.md', 3000, True)]:
+        try:
+            text = (ROOT / filename).read_text()
+        except OSError:
+            text = f'{filename} unavailable; inspect the repository before assuming task state.'
+        if len(text) > limit:
+            text = ('[Earlier entries omitted]\n' + text[-limit:] if tail else
+                    text[:limit] + '\n[Read the remaining handoff from the file]')
+        parts.append(f'\n--- {filename} ---\n{text}')
+    return '\n'.join(parts)
+
+
+def main():
+    try:
+        event = json.load(sys.stdin)
+    except (ValueError, OSError):
+        return
+    if event.get('hook_event_name') != 'SessionStart':
+        return
+    print(json.dumps({'hookSpecificOutput': {
+        'hookEventName': 'SessionStart', 'additionalContext': context(event.get('source')),
+    }}, ensure_ascii=False))
+
+
+if __name__ == '__main__':
+    main()

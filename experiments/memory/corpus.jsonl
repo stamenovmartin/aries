@@ -1,0 +1,45 @@
+{"id": "cmd-youtube-mk", "text": "вклучи YouTube.", "lang": "mixed", "provenance": "observed", "expect": "ABORT", "note": "journalctl --user -u aries-voice.service, 2026-09-24"}
+{"id": "cmd-news-mk", "text": "што има денас од вести.", "lang": "mk", "provenance": "observed", "expect": "ABORT", "note": "observed; a question about today, not a fact about the user"}
+{"id": "cmd-song-mk", "text": "отвори YouTube и пуште песната на 2 бону и Лозана.", "lang": "mixed", "provenance": "observed", "expect": "ABORT"}
+{"id": "cmd-song-only-open", "text": "само отвори YouTube, не пушти песна, да треба и тоа да го на", "lang": "mk", "provenance": "observed", "expect": "ABORT", "note": "truncated by the voice loop exactly as stored"}
+{"id": "cmd-music-en", "text": "play some music.", "lang": "en", "provenance": "observed", "expect": "ABORT"}
+{"id": "cmd-split-en", "text": "split the screen left and right.", "lang": "en", "provenance": "observed", "expect": "ABORT"}
+{"id": "cmd-settings-en", "text": "open settings.", "lang": "en", "provenance": "observed", "expect": "ABORT"}
+{"id": "asr-garble-mk", "text": "имаш рука прај што ти до октомврика седиш?", "lang": "mk", "provenance": "observed", "expect": "ANY", "note": "large-v3 mis-transcription; kept because real input contains these"}
+{"id": "cmd-song-asr", "text": "пушти ја песнах на 2.0 зано и пушти ја допеја.", "lang": "mk", "provenance": "observed", "expect": "ABORT"}
+{"id": "cmd-shownews-en", "text": "show the news.", "lang": "en", "provenance": "observed", "expect": "ABORT"}
+{"id": "cmd-spotify", "text": "open Spotify.", "lang": "en", "provenance": "observed", "expect": "ABORT"}
+{"id": "q-student-id", "text": "do you have a student ID?", "lang": "en", "provenance": "observed", "expect": "ANY"}
+{"id": "q-certificate", "text": "get a certificate for 70 euros.", "lang": "en", "provenance": "observed", "expect": "ANY"}
+{"id": "cmd-sysstatus", "text": "open system status.", "lang": "en", "provenance": "observed", "expect": "ABORT"}
+{"id": "cmd-song-mixed", "text": "опен YouTube пемплеј да сонг 2 бона е еднот Лозано.", "lang": "mixed", "provenance": "observed", "expect": "ABORT"}
+{"id": "id-name-study", "text": "Јас се викам Мартин и студирам на ФИНКИ.", "lang": "mk", "provenance": "authored", "kind": "identity", "expect": "KEEP"}
+{"id": "fact-project", "text": "Мојот проект се вика АРИЕС и е личен асистент на Линукс.", "lang": "mk", "provenance": "authored", "kind": "fact", "expect": "KEEP"}
+{"id": "pref-coffee-morning", "text": "Сакам кафе наутро, без шеќер.", "lang": "mk", "provenance": "authored", "kind": "preference", "expect": "KEEP"}
+{"id": "pref-tea-evening", "text": "Навечер пијам чај, не кафе.", "lang": "mk", "provenance": "authored", "kind": "preference", "expect": "COEXIST", "coexists_with": "pref-coffee-morning", "note": "TANGLE: circumstance-dependent, not a contradiction"}
+{"id": "pref-work-late", "text": "Најдобро работам доцна навечер.", "lang": "mk", "provenance": "authored", "kind": "preference", "expect": "KEEP", "stale": true, "superseded_by": "pref-work-early"}
+{"id": "pref-work-early", "text": "Порано работев навечер, ама сега станувам рано и работам наутро.", "lang": "mk", "provenance": "authored", "kind": "preference", "expect": "SUPERSEDE", "supersedes": "pref-work-late"}
+{"id": "fact-thesis", "text": "Мастер трудот ми е за адаптивни агентски системи.", "lang": "mk", "provenance": "authored", "kind": "fact", "expect": "KEEP"}
+{"id": "pref-python-yaml", "text": "I use Python every day and I hate writing YAML.", "lang": "en", "provenance": "authored", "kind": "preference", "expect": "KEEP"}
+{"id": "fact-ram", "text": "Мојот лаптоп има 16 гигабајти рам, затоа не можам да вртам големи модели.", "lang": "mk", "provenance": "authored", "kind": "fact", "expect": "KEEP"}
+{"id": "pref-no-notify", "text": "Не сакам да ми праќаш нотификации додека работам.", "lang": "mk", "provenance": "authored", "kind": "preference", "expect": "KEEP"}
+{"id": "pref-news-mk", "text": "Сакам вестите да ми ги читаш на македонски, не на англиски.", "lang": "mk", "provenance": "authored", "kind": "preference", "expect": "KEEP"}
+{"id": "plan-presentation", "text": "Имам презентација на 15 октомври за мастерот.", "lang": "mk", "provenance": "authored", "kind": "plan", "expect": "KEEP"}
+{"id": "fact-brother-birthday", "text": "Роденденот на брат ми е на 3 ноември.", "lang": "mk", "provenance": "authored", "kind": "fact", "expect": "KEEP"}
+{"id": "ep-aries-part-one", "text": "Вчера го завршив првиот дел од АРИЕС.", "lang": "mk", "provenance": "authored", "kind": "episodic", "expect": "KEEP"}
+{"id": "secret-wifi", "text": "Мојата лозинка за вај-фај е mk12345678.", "lang": "mk", "provenance": "authored", "expect": "GATE", "note": "must never reach the store"}
+{"id": "excluded-therapy", "text": "Одам на терапија секој вторник наутро.", "lang": "mk", "provenance": "authored", "expect": "GATE", "excluded_topic": "терапија", "note": "privacy.excluded_memory_topics, enforced on the machine write path"}
+{"id": "dup-coffee", "text": "Сакам кафе наутро без шеќер.", "lang": "mk", "provenance": "authored", "expect": "NOOP", "duplicate_of": "pref-coffee-morning"}
+{"id": "pref-dark-mode", "text": "I prefer dark mode everywhere.", "lang": "en", "provenance": "authored", "kind": "preference", "expect": "KEEP"}
+{"id": "pref-light-outside", "text": "But when I read outside in the sun I switch to the light theme.", "lang": "en", "provenance": "authored", "kind": "preference", "expect": "COEXIST", "coexists_with": "pref-dark-mode"}
+{"id": "fact-mentor-old", "text": "Мојот ментор е професор Иванов.", "lang": "mk", "provenance": "authored", "kind": "fact", "expect": "KEEP", "stale": true, "superseded_by": "fact-mentor-new"}
+{"id": "fact-mentor-new", "text": "Сега менторка ми е професорка Петрова, менторот се смени.", "lang": "mk", "provenance": "authored", "kind": "fact", "expect": "SUPERSEDE", "supersedes": "fact-mentor-old"}
+{"id": "pref-music-latin", "text": "Sakam da mi puštiš muzika koga rabotam dolgo.", "lang": "mk-latin", "provenance": "authored", "kind": "preference", "expect": "KEEP", "note": "Macedonian in Latin script, as the ASR sometimes returns it"}
+{"id": "plan-deadline-en", "text": "The thesis deadline is in June.", "lang": "en", "provenance": "authored", "kind": "plan", "expect": "KEEP"}
+{"id": "id-city", "text": "Живеам во Скопје, во Аеродром.", "lang": "mk", "provenance": "authored", "kind": "identity", "expect": "KEEP"}
+{"id": "fact-no-coffee-late", "text": "Докторот ми рече да не пијам кафе после шест часот навечер.", "lang": "mk", "provenance": "authored", "kind": "fact", "expect": "KEEP"}
+{"id": "plan-german", "text": "Учам германски секој ден по половина час.", "lang": "mk", "provenance": "authored", "kind": "plan", "expect": "KEEP"}
+{"id": "plan-monitor", "text": "Ми треба да купам нов монитор од 27 инчи.", "lang": "mk", "provenance": "authored", "kind": "plan", "expect": "KEEP"}
+{"id": "pref-no-windows", "text": "Не ми се допаѓа кога АРИЕС отвора прозорци без да прашам.", "lang": "mk", "provenance": "authored", "kind": "preference", "expect": "KEEP"}
+{"id": "secret-card", "text": "Бројот на картичката ми е 4111 1111 1111 1111.", "lang": "mk", "provenance": "authored", "expect": "GATE"}
+{"id": "plan-backup", "text": "Секоја недела правам бекап на Документи на надворешен диск.", "lang": "mk", "provenance": "authored", "kind": "plan", "expect": "KEEP"}

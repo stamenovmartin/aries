@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# Put RHVoice's Macedonian voices where ARIES can reach them, without root.
+#
+# WHY THIS EXISTS
+# ---------------
+# RHVoice is the only synthesizer with a voice recorded from a Macedonian
+# speaker (Kiko, male, © Government of North Macedonia; Suze, female, recorded
+# at UKIM Skopje with UNICEF funding). It is packaged in Ubuntu, so the ordinary
+# answer is:
+#
+#     sudo apt install rhvoice-macedonian librhvoice5
+#
+# ARIES prefers that install when it is present. This script is for when it is
+# not and root is not available: `apt-get download` needs no privileges, and a
+# .deb is an ar archive, so the same files can be unpacked into var/models/
+# and loaded from there. Nothing is installed system-wide and nothing is
+# compiled — there is no C++ toolchain on this machine to compile with.
+#
+# LICENCE, BECAUSE IT MATTERS HERE
+# --------------------------------
+# The engine is LGPL-2.1. The voices are NOT free: Kiko is CC BY-NC-SA 4.0 and
+# Suze is CC BY-NC-ND 4.0, which is why Debian files them under non-free. Fine
+# for one person's own assistant. Not fine for anything sold, and NoDerivatives
+# means Suze may not be fine-tuned.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+DEST="var/models/rhvoice"
+
+if [ -d /usr/share/RHVoice/voices ] && [ -f /usr/lib/x86_64-linux-gnu/libRHVoice.so.5 ]; then
+  echo "RHVoice is already installed system-wide; ARIES will use that. Nothing to do."
+  echo "  voices: $(ls /usr/share/RHVoice/voices | tr '\n' ' ')"
+  exit 0
+fi
+
+# librhvoice-audio2 and libportaudio2 are only needed for RHVoice's own playback,
+# which ARIES does not use — it takes the samples and sends them to PipeWire. They
+# are fetched anyway because libRHVoice.so.5 records them as dependencies, and a
+# missing one turns a clear error into a dlopen failure.
+PACKAGES="librhvoice5 librhvoice-core10 librhvoice-audio2 libportaudio2 rhvoice-macedonian"
+WORK="$(mktemp -d)"
+trap 'rm -rf "$WORK"' EXIT
+
+echo "fetching: $PACKAGES"
+( cd "$WORK" && apt-get download $PACKAGES >/dev/null )
+
+mkdir -p "$DEST"
+for deb in "$WORK"/*.deb; do
+  dpkg-deb -x "$deb" "$DEST/" 2>/dev/null || {
+    ( cd "$WORK" && ar x "$deb" && tar -xf data.tar.* -C "$OLDPWD/$DEST/" && rm -f data.tar.* control.tar.* debian-binary )
+  }
+  echo "  $(basename "$deb")"
+done
+
+VOICES="$DEST/usr/share/RHVoice/voices"
+if [ ! -d "$VOICES" ] || [ -z "$(ls -A "$VOICES" 2>/dev/null)" ]; then
+  echo "no voices unpacked into $VOICES" >&2; exit 1
+fi
+echo "voices in $VOICES: $(ls "$VOICES" | tr '\n' ' ')"
+echo "size: $(du -sh "$DEST" | cut -f1)"

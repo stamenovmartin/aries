@@ -1,0 +1,102 @@
+{
+  "label": "smoke",
+  "n": 6,
+  "settings": {
+    "intelligence.local_confidence_threshold": "0.82",
+    "intelligence.local_model": "qwen2.5:7b",
+    "workspace.agent_demo_directory": "~/Documents/ARIES-Demo",
+    "workspace.controlled_browser": "False"
+  },
+  "results": [
+    {
+      "id": "acti-mk-01",
+      "klass": "actionable",
+      "lang": "mk",
+      "utterance": "намали го звукот",
+      "intent": "FILE_ACTION",
+      "tool": "workspace",
+      "confidence": 1.0,
+      "complexity": "simple",
+      "level": "code",
+      "source": "rule",
+      "requires_cloud": false,
+      "reason": "Existing validated deterministic command mapping",
+      "seconds": 0.014
+    },
+    {
+      "id": "acti-mk-02",
+      "klass": "actionable",
+      "lang": "mk",
+      "utterance": "зголеми го звукот",
+      "intent": "FILE_ACTION",
+      "tool": "workspace",
+      "confidence": 1.0,
+      "complexity": "simple",
+      "level": "code",
+      "source": "rule",
+      "requires_cloud": false,
+      "reason": "Existing validated deterministic command mapping",
+      "seconds": 0.002
+    },
+    {
+      "id": "acti-mk-03",
+      "klass": "actionable",
+      "lang": "mk",
+      "utterance": "звук 30",
+      "intent": "FILE_ACTION",
+      "tool": "workspace",
+      "confidence": 1.0,
+      "complexity": "simple",
+      "level": "code",
+      "source": "rule",
+      "requires_cloud": false,
+      "reason": "Existing validated deterministic command mapping",
+      "seconds": 0.002
+    },
+    {
+      "id": "acti-mk-04",
+      "klass": "actionable",
+      "lang": "mk",
+      "utterance": "тивко",
+      "intent": "FILE_ACTION",
+      "tool": "workspace",
+      "confidence": 1.0,
+      "complexity": "simple",
+      "level": "code",
+      "source": "rule",
+      "requires_cloud": false,
+      "reason": "Existing validated deterministic command mapping",
+      "seconds": 0.002
+    },
+    {
+      "id": "acti-mk-05",
+      "klass": "actionable",
+      "lang": "mk",
+      "utterance": "исклучи го звукот",
+      "intent": "SYSTEM_ACTION",
+      "tool": "none",
+      "confidence": 0.7,
+      "complexity": "simple",
+      "level": "cloud",
+      "source": "local",
+      "requires_cloud": false,
+      "reason": "请求涉及系统健康检查，具体为音量控制",
+      "seconds": 4.42
+    },
+    {
+      "id": "acti-mk-06",
+      "klass": "actionable",
+      "lang": "mk",
+      "utterance": "колку диск ми е слободен",
+      "intent": "SYSTEM_ACTION",
+      "tool": "none",
+      "confidence": 0.95,
+      "complexity": "simple",
+      "level": "local",
+      "source": "local",
+      "requires_cloud": false,
+      "reason": "用户询问空闲磁盘空间，属于检查机器健康状态",
+      "seconds": 4.762
+    }
+  ]
+}

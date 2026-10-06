@@ -1,0 +1,20 @@
+{
+  "item": "A2 integration",
+  "time": "2026-10-03T15:12:02.799722+00:00",
+  "command": "APP_ENV=test PYTHONPATH=vendor/agentic-core:vendor:. .venv/bin/python eval/locking/smoke.py",
+  "surface": "real orchestration with scratch database and capacity override",
+  "passed": true,
+  "read_only_subgoals": 3,
+  "max_concurrent": 3,
+  "writer_transactions": 926,
+  "recovery_passes": 926,
+  "contended_acquisitions": 933,
+  "lock_errors": 0,
+  "timeouts": 0,
+  "live_48h": "not measured",
+  "changes": [
+    "service.save",
+    "service.progress",
+    "recover_stuck"
+  ]
+}

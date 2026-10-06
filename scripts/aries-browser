@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+"""Launch ARIES Chromium inside an outer OS sandbox, including no network.
+
+Ubuntu blocks Chromium's own user-namespace sandbox here. Bubblewrap is allowed;
+it owns the isolation instead. CDP pipes are the only browser data connection.
+"""
+import os
+import sys
+from pathlib import Path
+
+binary = Path(os.environ["ARIES_CHROMIUM_BIN"]).resolve(strict=True)
+cache = (Path.home() / ".cache/ms-playwright").resolve()
+if not binary.is_relative_to(cache) or binary.name != "chrome":
+    raise SystemExit("Unexpected Chromium installation")
+runtime = Path(os.environ.get("XDG_RUNTIME_DIR", f"/run/user/{os.getuid()}"))
+display = os.environ.get("WAYLAND_DISPLAY", "wayland-0")
+if Path(display).name != display or not (runtime / display).exists():
+    raise SystemExit("A local Wayland display is required")
+args = ["/usr/bin/bwrap", "--unshare-all", "--die-with-parent", "--new-session",
+        "--ro-bind", "/usr", "/usr", "--ro-bind", "/lib", "/lib", "--ro-bind", "/lib64", "/lib64",
+        "--ro-bind", str(binary.parent), str(binary.parent),
+        "--ro-bind", "/etc/fonts", "/etc/fonts", "--ro-bind", "/etc/ld.so.cache", "/etc/ld.so.cache",
+        "--proc", "/proc", "--dev", "/dev", "--tmpfs", "/tmp", "--tmpfs", "/dev/shm",
+        "--ro-bind", str(runtime / display), str(runtime / display),
+        "--clearenv", "--setenv", "HOME", "/tmp", "--setenv", "PATH", "/usr/bin:/bin",
+        "--setenv", "XDG_RUNTIME_DIR", str(runtime), "--setenv", "WAYLAND_DISPLAY", display,
+        "--setenv", "LANG", "C.UTF-8", str(binary), "--ozone-platform=wayland", *sys.argv[1:]]
+os.execv(args[0], args)

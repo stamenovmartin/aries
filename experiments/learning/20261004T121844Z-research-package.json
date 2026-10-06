@@ -1,0 +1,27 @@
+{
+  "problem": "Claims about the project lived in prose and in memory, not in artifacts. Numbers were quoted without denominators, two experiments had been invalidated without that being written down anywhere a reader would find it, and nothing stated which claims the evidence actually supported.",
+  "change": [
+    "research_package/scripts/extract_results.py \u2014 single extractor; 58 provenance records from raw artifacts",
+    "research_package/scripts/pkg_figures.py \u2014 four vector figures at today's numbers, not the book's stale ones",
+    "research_package/scripts/check_matrix.py \u2014 generates the claim-matrix summary from its own rows",
+    "research_package/scripts/build_pdf.py \u2014 figure fences, --flat mode, Contents no longer lists itself",
+    "10 package documents + supervisor/BRIEFING.md",
+    "ARIES_Supervisor_Briefing.pdf (9 pp) and ARIES_Research_Evidence_Package.pdf (36 pp)"
+  ],
+  "validation": {
+    "citable numbers with a recorded denominator and raw file": "0 -> 58",
+    "claim-matrix summary cells correct": "2/6 hand-written -> 6/6 generated",
+    "claims with an explicit verdict": "0 -> 30",
+    "PDFs built and verified": "ARIES_Supervisor_Briefing.pdf 9 pp, ARIES_Research_Evidence_Package.pdf 36 pp, both A4, titles set",
+    "live analytics re-read at extraction time": "coverage 325/381, contradictions 0/325, lifetime 7177/7588"
+  },
+  "limitations": [
+    "ra-05 needs an owner policy decision: should ARIES refuse to read its own source?",
+    "oo-02 is a real defect: terminal state 'done' assigned when no capability ran",
+    "database is locked: 0.44% of scheduler passes, diagnosed not fixed, 48h window open",
+    "privacy partition untested: no instrumentation counts outbound provider calls by data class",
+    "cloud pilot artifacts record requested_model: null"
+  ],
+  "lesson": "Two errors in this batch were the same error: a count written by hand drifting from the rows it summarised, and a reproducibility gap asserted from memory ('model identity not pinned') that the artifacts contradicted \u2014 qwen2.5:7b at threshold 0.82 was in every router artifact's settings block. Both were caught by reading the artifact rather than by rereading the prose. The rule this produces: any number stated in a document must be either extracted by a script from an artifact or checked against one before the document is rendered. Prose is not a store of record.",
+  "next_action": "Build an independently authored abstention fixture (~200 utterances, second annotator). It is the cheapest fix to the largest confound and gates every target above an undergraduate thesis."
+}

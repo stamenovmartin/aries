@@ -1,0 +1,958 @@
+{
+  "run": "20260930T223656Z-21b4d4",
+  "mode": "core",
+  "cases": [
+    {
+      "name": "create folder",
+      "result": {
+        "id": "3776b071fd424ad08c123abb90ed7f99",
+        "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4",
+        "state": "done",
+        "updated_at": "2026-09-30T22:37:00.009596",
+        "created_at": "2026-09-30T22:36:56.595236",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "create_folder",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4"
+            },
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4",
+            "prepared": true,
+            "state": "done",
+            "goal_id": "3776b071fd424ad08c123abb90ed7f99",
+            "result": {
+              "state": "done",
+              "summary": "Folder exists on disk",
+              "verification": {
+                "met": true,
+                "evidence": "Folder exists on disk"
+              },
+              "cards": [
+                {
+                  "title": "Create Folder",
+                  "text": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4",
+                  "evidence": "Folder exists on disk"
+                }
+              ],
+              "elapsed_seconds": 0.04
+            }
+          }
+        ],
+        "cards": [
+          {
+            "title": "Create Folder",
+            "text": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4",
+            "evidence": "Folder exists on disk"
+          }
+        ],
+        "gaps": [],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "UNKNOWN",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "983e8ed13cdd4ae5ba52ff8ce96dacaa",
+            "text": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:21.539542",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 5,
+            "valid_at": "2026-09-30T22:34:21.539542",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "17a837cc1ef04f1b89bd8cbbac812cd2",
+            "text": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.781202",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 4,
+            "valid_at": "2026-09-30T22:34:28.781202",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "fb80985460fa4692bb41f19d53801ea9",
+            "text": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content.",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.585564",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 5,
+            "valid_at": "2026-09-30T22:34:28.585564",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "f7cd913eef0e4b38a8e06c09d9bbca96",
+            "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/missing.txt",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.997498",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 1,
+            "valid_at": "2026-09-30T22:34:28.997498",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "1ab0e709f9df47ffae860f81f1efda54",
+            "confidence": 1.0
+          },
+          {
+            "id": "88fc42eaf11c4af89013e0e3c1310b52",
+            "confidence": 0.9634
+          },
+          {
+            "id": "f7f7fac03b1a413b95490a073e810c7b",
+            "confidence": 0.9991
+          },
+          {
+            "id": "832de361a1ec4df3b38414a1bd13725d",
+            "confidence": 0.9959
+          }
+        ],
+        "related": [
+          {
+            "id": "d9b9491ac9504fb6a43258b1e0dc23cd",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status"
+          },
+          {
+            "id": "b2f40d0e627248ea97765b6fcba4e5a0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "5bcc09ea6769418790ae25196d333b5a",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04"
+          },
+          {
+            "id": "30b4260e02e74ff3800b0afc44e8ab40",
+            "request": "Read /home/stamenovmartin/aries/experiments/coordination/codex-followup-proof.txt"
+          },
+          {
+            "id": "4d2109a2bed14946a2c46bc382ad5046",
+            "request": "Read /home/stamenovmartin/aries/experiments/coordination/codex-followup-proof.txt"
+          }
+        ],
+        "collected_at": "2026-09-30T22:36:59.930123",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 3.975
+    },
+    {
+      "name": "create file",
+      "result": {
+        "id": "2c008373ffc9452891b7ff0dca5702d0",
+        "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt, ARIES demo: independently verified file content.",
+        "state": "done",
+        "updated_at": "2026-09-30T22:37:00.973212",
+        "created_at": "2026-09-30T22:37:00.552873",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "create_file",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt",
+              "content": "ARIES demo: independently verified file content.\n"
+            },
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt, ARIES demo: independently verified file content.\n",
+            "prepared": true,
+            "state": "done",
+            "goal_id": "2c008373ffc9452891b7ff0dca5702d0",
+            "result": {
+              "state": "done",
+              "summary": "File bytes match the requested text",
+              "verification": {
+                "met": true,
+                "evidence": "File bytes match the requested text"
+              },
+              "cards": [
+                {
+                  "title": "Create File",
+                  "text": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt",
+                  "evidence": "File bytes match the requested text"
+                }
+              ],
+              "elapsed_seconds": 0.021
+            }
+          }
+        ],
+        "cards": [
+          {
+            "title": "Create File",
+            "text": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt",
+            "evidence": "File bytes match the requested text"
+          }
+        ],
+        "gaps": [],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "UNKNOWN",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "fb80985460fa4692bb41f19d53801ea9",
+            "text": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content.",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.585564",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 6,
+            "valid_at": "2026-09-30T22:34:28.585564",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "983e8ed13cdd4ae5ba52ff8ce96dacaa",
+            "text": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:21.539542",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 6,
+            "valid_at": "2026-09-30T22:34:21.539542",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "17a837cc1ef04f1b89bd8cbbac812cd2",
+            "text": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.781202",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 5,
+            "valid_at": "2026-09-30T22:34:28.781202",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "f7cd913eef0e4b38a8e06c09d9bbca96",
+            "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/missing.txt",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.997498",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 2,
+            "valid_at": "2026-09-30T22:34:28.997498",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "f7f7fac03b1a413b95490a073e810c7b",
+            "confidence": 0.9991
+          },
+          {
+            "id": "1ab0e709f9df47ffae860f81f1efda54",
+            "confidence": 1.0
+          },
+          {
+            "id": "88fc42eaf11c4af89013e0e3c1310b52",
+            "confidence": 0.9634
+          },
+          {
+            "id": "832de361a1ec4df3b38414a1bd13725d",
+            "confidence": 0.9959
+          }
+        ],
+        "related": [
+          {
+            "id": "3776b071fd424ad08c123abb90ed7f99",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4"
+          },
+          {
+            "id": "d9b9491ac9504fb6a43258b1e0dc23cd",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status"
+          },
+          {
+            "id": "b2f40d0e627248ea97765b6fcba4e5a0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "5bcc09ea6769418790ae25196d333b5a",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04"
+          },
+          {
+            "id": "30b4260e02e74ff3800b0afc44e8ab40",
+            "request": "Read /home/stamenovmartin/aries/experiments/coordination/codex-followup-proof.txt"
+          }
+        ],
+        "collected_at": "2026-09-30T22:37:00.913452",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 0.99
+    },
+    {
+      "name": "three-step workflow",
+      "result": {
+        "id": "8ab8b71bd3344a1f9d0473342fd40d5d",
+        "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4; system status",
+        "state": "done",
+        "updated_at": "2026-09-30T22:37:03.327283",
+        "created_at": "2026-09-30T22:37:01.545612",
+        "steps": [
+          {
+            "kind": "capability",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt",
+            "capability": "read_file",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt"
+            },
+            "prepared": true,
+            "state": "done",
+            "goal_id": "8ab8b71bd3344a1f9d0473342fd40d5d",
+            "result": {
+              "state": "done",
+              "summary": "1 results",
+              "cards": [
+                {
+                  "title": "demo.txt",
+                  "text": "ARIES demo: independently verified file content.\n",
+                  "source": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt",
+                  "evidence": "Read from disk"
+                }
+              ],
+              "elapsed_seconds": 0.001
+            }
+          },
+          {
+            "kind": "capability",
+            "request": "list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4",
+            "capability": "list_folder",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4"
+            },
+            "prepared": true,
+            "state": "done",
+            "goal_id": "8ab8b71bd3344a1f9d0473342fd40d5d",
+            "result": {
+              "state": "done",
+              "summary": "1 results",
+              "cards": [
+                {
+                  "title": "demo.txt",
+                  "text": "File",
+                  "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt",
+                  "evidence": "Directory entry on disk"
+                }
+              ],
+              "elapsed_seconds": 0.001
+            }
+          },
+          {
+            "kind": "capability",
+            "request": "system status",
+            "capability": "system",
+            "args": {},
+            "prepared": true,
+            "state": "done",
+            "goal_id": "8ab8b71bd3344a1f9d0473342fd40d5d",
+            "result": {
+              "state": "done",
+              "summary": "18 results",
+              "cards": [
+                {
+                  "title": "cpu.load_per_core",
+                  "text": "0.239 ",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "cpu.pressure",
+                  "text": "0.15 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "cpu.used_pct",
+                  "text": "9.2 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "memory.used_pct",
+                  "text": "28.2 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "memory.swap_used_pct",
+                  "text": "4.6 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "memory.pressure",
+                  "text": "0.01 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "disk.used_pct",
+                  "text": "8.5 %",
+                  "evidence": "Live system probe",
+                  "source": "/"
+                },
+                {
+                  "title": "disk.used_pct",
+                  "text": "0.6 %",
+                  "evidence": "Live system probe",
+                  "source": "/boot/efi"
+                },
+                {
+                  "title": "thermal.celsius",
+                  "text": "16.8 °C",
+                  "evidence": "Live system probe",
+                  "source": "acpitz0"
+                },
+                {
+                  "title": "thermal.celsius",
+                  "text": "27.8 °C",
+                  "evidence": "Live system probe",
+                  "source": "acpitz1"
+                },
+                {
+                  "title": "thermal.celsius",
+                  "text": "47.0 °C",
+                  "evidence": "Live system probe",
+                  "source": "pch_cannonlake"
+                },
+                {
+                  "title": "thermal.celsius",
+                  "text": "37.0 °C",
+                  "evidence": "Live system probe",
+                  "source": "x86_pkg_temp"
+                },
+                {
+                  "title": "gpu.temp_celsius",
+                  "text": "45.0 °C",
+                  "evidence": "Live system probe",
+                  "source": "gpu0"
+                },
+                {
+                  "title": "gpu.utilization_pct",
+                  "text": "0.0 %",
+                  "evidence": "Live system probe",
+                  "source": "gpu0"
+                },
+                {
+                  "title": "gpu.memory_used_pct",
+                  "text": "70.7 %",
+                  "evidence": "Live system probe",
+                  "source": "gpu0"
+                },
+                {
+                  "title": "services.failed_count",
+                  "text": "0.0 ",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "uptime.days",
+                  "text": "0.01 days",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "uptime.reboot_required",
+                  "text": "0.0 ",
+                  "evidence": "Live system probe",
+                  "source": ""
+                }
+              ],
+              "elapsed_seconds": 0.101
+            }
+          }
+        ],
+        "cards": [
+          {
+            "title": "demo.txt",
+            "text": "ARIES demo: independently verified file content.\n",
+            "source": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt",
+            "evidence": "Read from disk"
+          },
+          {
+            "title": "demo.txt",
+            "text": "File",
+            "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt",
+            "evidence": "Directory entry on disk"
+          },
+          {
+            "title": "cpu.load_per_core",
+            "text": "0.239 ",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "cpu.pressure",
+            "text": "0.15 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "cpu.used_pct",
+            "text": "9.2 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "memory.used_pct",
+            "text": "28.2 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "memory.swap_used_pct",
+            "text": "4.6 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "memory.pressure",
+            "text": "0.01 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "disk.used_pct",
+            "text": "8.5 %",
+            "evidence": "Live system probe",
+            "source": "/"
+          },
+          {
+            "title": "disk.used_pct",
+            "text": "0.6 %",
+            "evidence": "Live system probe",
+            "source": "/boot/efi"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "16.8 °C",
+            "evidence": "Live system probe",
+            "source": "acpitz0"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "27.8 °C",
+            "evidence": "Live system probe",
+            "source": "acpitz1"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "47.0 °C",
+            "evidence": "Live system probe",
+            "source": "pch_cannonlake"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "37.0 °C",
+            "evidence": "Live system probe",
+            "source": "x86_pkg_temp"
+          },
+          {
+            "title": "gpu.temp_celsius",
+            "text": "45.0 °C",
+            "evidence": "Live system probe",
+            "source": "gpu0"
+          },
+          {
+            "title": "gpu.utilization_pct",
+            "text": "0.0 %",
+            "evidence": "Live system probe",
+            "source": "gpu0"
+          },
+          {
+            "title": "gpu.memory_used_pct",
+            "text": "70.7 %",
+            "evidence": "Live system probe",
+            "source": "gpu0"
+          },
+          {
+            "title": "services.failed_count",
+            "text": "0.0 ",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "uptime.days",
+            "text": "0.01 days",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "uptime.reboot_required",
+            "text": "0.0 ",
+            "evidence": "Live system probe",
+            "source": ""
+          }
+        ],
+        "gaps": [],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "FILE_ACTION",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "17a837cc1ef04f1b89bd8cbbac812cd2",
+            "text": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.781202",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 7,
+            "valid_at": "2026-09-30T22:34:28.781202",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "983e8ed13cdd4ae5ba52ff8ce96dacaa",
+            "text": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:21.539542",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 7,
+            "valid_at": "2026-09-30T22:34:21.539542",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "fb80985460fa4692bb41f19d53801ea9",
+            "text": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content.",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.585564",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 8,
+            "valid_at": "2026-09-30T22:34:28.585564",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "f7cd913eef0e4b38a8e06c09d9bbca96",
+            "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/missing.txt",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.997498",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 3,
+            "valid_at": "2026-09-30T22:34:28.997498",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "88fc42eaf11c4af89013e0e3c1310b52",
+            "confidence": 0.9634
+          },
+          {
+            "id": "1ab0e709f9df47ffae860f81f1efda54",
+            "confidence": 1.0
+          },
+          {
+            "id": "f7f7fac03b1a413b95490a073e810c7b",
+            "confidence": 0.9991
+          },
+          {
+            "id": "832de361a1ec4df3b38414a1bd13725d",
+            "confidence": 0.9959
+          }
+        ],
+        "related": [
+          {
+            "id": "2c008373ffc9452891b7ff0dca5702d0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "3776b071fd424ad08c123abb90ed7f99",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4"
+          },
+          {
+            "id": "d9b9491ac9504fb6a43258b1e0dc23cd",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status"
+          },
+          {
+            "id": "b2f40d0e627248ea97765b6fcba4e5a0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "5bcc09ea6769418790ae25196d333b5a",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04"
+          }
+        ],
+        "collected_at": "2026-09-30T22:37:03.114708",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 2.257
+    },
+    {
+      "name": "negative control: missing file",
+      "result": {
+        "id": "d246e9b4a254455a92987fa9ca9854ca",
+        "request": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/missing.txt",
+        "state": "failed",
+        "updated_at": "2026-09-30T22:37:05.197713",
+        "created_at": "2026-09-30T22:37:03.800263",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "read_file",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/missing.txt"
+            },
+            "request": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/missing.txt",
+            "prepared": true,
+            "state": "running",
+            "goal_id": "d246e9b4a254455a92987fa9ca9854ca"
+          }
+        ],
+        "cards": [],
+        "gaps": [
+          "Read accepts a regular UTF-8 text file up to 100 KB"
+        ],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "UNKNOWN",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "f7cd913eef0e4b38a8e06c09d9bbca96",
+            "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/missing.txt",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.997498",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 4,
+            "valid_at": "2026-09-30T22:34:28.997498",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "17a837cc1ef04f1b89bd8cbbac812cd2",
+            "text": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.781202",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 8,
+            "valid_at": "2026-09-30T22:34:28.781202",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "fb80985460fa4692bb41f19d53801ea9",
+            "text": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content.",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.585564",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 9,
+            "valid_at": "2026-09-30T22:34:28.585564",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "983e8ed13cdd4ae5ba52ff8ce96dacaa",
+            "text": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:21.539542",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 8,
+            "valid_at": "2026-09-30T22:34:21.539542",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "832de361a1ec4df3b38414a1bd13725d",
+            "confidence": 0.9959
+          },
+          {
+            "id": "88fc42eaf11c4af89013e0e3c1310b52",
+            "confidence": 0.9634
+          },
+          {
+            "id": "f7f7fac03b1a413b95490a073e810c7b",
+            "confidence": 0.9991
+          },
+          {
+            "id": "1ab0e709f9df47ffae860f81f1efda54",
+            "confidence": 1.0
+          }
+        ],
+        "related": [
+          {
+            "id": "8ab8b71bd3344a1f9d0473342fd40d5d",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4; system status"
+          },
+          {
+            "id": "2c008373ffc9452891b7ff0dca5702d0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "3776b071fd424ad08c123abb90ed7f99",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4"
+          },
+          {
+            "id": "d9b9491ac9504fb6a43258b1e0dc23cd",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status"
+          },
+          {
+            "id": "b2f40d0e627248ea97765b6fcba4e5a0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content."
+          }
+        ],
+        "collected_at": "2026-09-30T22:37:05.176480",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 2.286
+    },
+    {
+      "name": "health automation",
+      "result": {
+        "ran": true,
+        "automation_id": "aries.health",
+        "task_id": 1122,
+        "verdict": "pass",
+        "status": "ok",
+        "severity": "ok",
+        "summary": "healthy — 17 checks, nothing above threshold",
+        "proposal_id": null,
+        "requires_approval": false,
+        "trigger": "api"
+      },
+      "passed": true,
+      "seconds": 0.366
+    }
+  ],
+  "commit": "3eb5f46680b41567e0470ffa82509c8f35facf16",
+  "working_tree_dirty": true,
+  "scope": "Installed-system acceptance, not a controlled agent benchmark.",
+  "source_sha256": "d2f88dc237f067ebcdc812572072e02f30908e9768f8c558b124a9eb00450699",
+  "passed": 5,
+  "total": 5
+}

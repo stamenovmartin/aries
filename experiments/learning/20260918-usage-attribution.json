@@ -1,0 +1,6 @@
+{
+  "problem": "User also uses the reviewing agent/Codex outside ARIES; account consumption cannot be attributed to ARIES.",
+  "change": "Stats explicitly scope measurements to retained ARIES requests, expose unknown account quota and null incomplete token totals; preserve known subtotals. Documentation clarified.",
+  "validation": "tests/test_intelligence.py ALL PASSED including four new attribution/missing-count checks.",
+  "limitations": "No access to external sessions or account-wide billing/quota. Running service needs reload to expose additive fields."
+}

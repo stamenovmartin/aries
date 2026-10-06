@@ -1,0 +1,18 @@
+{
+  "problem": "Preparation exceptions bypassed per-step evidence; executor exceptions falsely asserted nothing executed.",
+  "change": "Preserve existing policy with SourceRejected codes; record typed preparation/execution failures and unknown post-error state, rollback before independent persistence.",
+  "validation": {
+    "live": "experiments/remediation/20261003/failure-evidence.json",
+    "typed_errors_before": "0/8",
+    "typed_errors_after": "8/8",
+    "frozen_refusal_before": "0/8",
+    "frozen_refusal_after": "6/8",
+    "scoped_tests": "18 failure persistence checks and existing source/workspace/verification/polling suites passed",
+    "deployment": "Maintenance-drained core update completed"
+  },
+  "limitations": [
+    "Full60 rerun pending the reviewing agent release of audio measurement; full item not closed.",
+    "Two missing-file targets remain unmet policy-refusal predicates; no relabeling.",
+    "No permissions broadened or denied read retried through another path."
+  ]
+}

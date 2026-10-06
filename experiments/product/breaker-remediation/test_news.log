@@ -1,0 +1,71 @@
+/home/stamenovmartin/aries/tests/test_news.py:38: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = now or datetime.utcnow()
+/home/stamenovmartin/aries/tests/test_news.py:340: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+/home/stamenovmartin/aries/tests/test_news.py:261: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  old = datetime.utcnow() - timedelta(days=30)
+--- test_a_gate_skips_the_rest_when_nothing_is_collected
+PASS  the cluster gate closes when no item was collected
+PASS  and says so in words
+PASS  dependent nodes skip rather than crash
+PASS  the pass still completes
+--- test_an_avoided_topic_is_never_delivered
+PASS  an item matching an avoided topic is excluded despite a strong match
+PASS  and the exclusion names the topic
+PASS  nothing was delivered
+--- test_an_item_already_stored_is_not_stored_again
+PASS  the first pass succeeds (ok)
+PASS  the second pass succeeds too (ok)
+PASS  and does not fail on a duplicate insert
+PASS  every stored item is stored once (3 rows, 3 distinct)
+--- test_an_item_is_delivered_only_once
+PASS  the first pass delivers it
+PASS  the second pass does not deliver it again
+PASS  and it is stored once
+--- test_briefing_rejects_stale_and_dismissed
+PASS  stale publication and dismissed items cannot fill briefing
+--- test_curated_coverage_does_not_override_avoid
+PASS  curated subject feed covers implicit ML article
+PASS  avoided subject overrides curated coverage
+--- test_duplicates_are_merged_across_sources
+PASS  both items are stored
+PASS  one represents the story
+PASS  the other is recorded as a duplicate of it
+PASS  the user is told once
+--- test_every_source_failing_is_a_failed_pass
+PASS  a pass where every source failed does not report success
+PASS  and the run is recorded as failed
+--- test_items_older_than_the_window_are_rejected
+PASS  a stale item is not treated as news
+PASS  and nothing is delivered
+--- test_one_dead_source_does_not_cost_the_others
+PASS  the pass still succeeds
+PASS  the working source still delivered
+PASS  the failure is recorded against the source that failed
+PASS  and not against the healthy one
+--- test_relevance_decides_delivery
+PASS  a relevant item is delivered
+PASS  an irrelevant one is stored but not shown
+PASS  and every item records why
+PASS  the delivered one names the topic that matched
+--- test_source_performance_is_recorded
+PASS  items seen are counted against the source
+PASS  and items that reached the user are counted separately
+PASS  so a useful rate exists
+PASS  and the source is healthy
+--- test_the_briefing_cap_applies_to_everything
+PASS  no more than the cap is delivered, however relevant
+PASS  the rest are stored, not discarded
+--- test_the_circuit_breaker_opens_after_repeated_failures
+PASS  after enough consecutive failures the automation is paused
+PASS  and it says how long it waited
+PASS  force does not bypass a broken automation
+--- test_topic_diversity_and_held_cap
+PASS  three interests survive unequal topic volume
+PASS  relevance alone never interrupts
+PASS  held items count against cap
+--- test_workflow_runs_as_a_graph
+PASS  the pass succeeds
+PASS  every workflow node is recorded as a decision
+PASS  and each says whether it ran and why
+ALL PASSED

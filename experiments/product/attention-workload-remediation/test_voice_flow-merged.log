@@ -1,0 +1,92 @@
+--- test_ambiguous_aliases_never_submit_a_room_conversation
+PASS  ordinary speech is not a wake: ара, што правиш
+PASS  ordinary speech is not a wake: Ара отвори Firefox
+PASS  ordinary speech is not a wake: ary open Firefox
+PASS  explicit supported name still activates: Ари, отвори Firefox
+PASS  explicit supported name still activates: ARIES, show status
+PASS  explicit supported name still activates: Хари, отвори Firefox
+PASS  real serve loop neither submits nor speaks after an ambiguous alias
+--- test_caption_echoes_and_wake_word_boundaries
+PASS  discard standalone caption: Thank you for watching.
+PASS  discard standalone caption: Thanks for watching! Subscribe for more videos.
+PASS  discard standalone caption: Captions by GetTranscribed.com
+PASS  discard standalone caption: Ari, thanks for watching.
+PASS  a quoted phrase inside an actual command is preserved
+PASS  a bare wake name opens the follow-up window
+PASS  a longer word never wakes the assistant
+PASS  caption filtering actually runs after segment decoding
+--- test_capture_never_reads_a_sink_monitor
+PASS  a sink monitor is not counted as an input
+PASS  a default source that is really a sink is overridden by the microphone
+PASS  and the override is announced, not silent
+PASS  a correct default source is left alone
+PASS  no input at all resolves to None rather than to a guess
+PASS  having no input at all is said out loud too
+PASS  an input whose every jack reads unavailable is reported as unplugged
+PASS  and that is what gets said, ahead of any default-source complaint
+PASS  a graph that cannot answer the question says None, not False
+PASS  an explicit --input is always honoured
+PASS  record() resolves its target instead of trusting the session default
+--- test_delayed_results_are_polled_once_without_replaying_commands
+PASS  only bounded queued IDs enter delayed delivery
+PASS  completed task is delivered with its original language
+PASS  status polling cannot post or rerun the command
+PASS  the same completion is never delivered twice
+PASS  a transient status failure retains the existing goal
+PASS  pending delivery expires instead of polling forever
+--- test_file_reply_reads_verified_contents_instead_of_process_prose
+PASS  a file answer speaks the content from final verified evidence
+PASS  long spoken files are explicitly a bounded preview
+--- test_measurement_answer_uses_final_requested_evidence
+PASS  speech agrees with final recheck and stays on the requested metric
+PASS  parallel answers never read the bookkeeping cards aloud
+--- test_own_speech_is_not_taken_as_a_command
+PASS  every spoken reply is remembered
+PASS  the reply heard back is recognised as an echo
+PASS  an unrelated command is not an echo
+PASS  a single short word is too little evidence to call an echo
+PASS  while audio is out, our own sentence is discarded
+PASS  the reason is recorded, not silent
+PASS  in a quiet room the same words are a person speaking, not an echo
+PASS  a middling score passes in a quiet room
+PASS  and passes equally while audio is playing — no second, stricter bar
+PASS  no threshold constant exists that depends on playback
+--- test_pending_failed_and_unavailable_results_do_not_claim_completion
+PASS  zero wait has no network call and reports work still pending
+PASS  network failure makes completion unknown
+PASS  old readings cannot hide a failed final outcome
+PASS  approval remains a request to the user
+PASS  another goal cannot supply the answer
+--- test_pending_replies_survive_restart_without_replaying_actions
+PASS  queued result is accepted for durable delivery
+PASS  state persists IDs only with private file permissions
+PASS  restart recovers the pending goal and language
+PASS  restored delivery reads the original result
+PASS  restored delivery only makes a status GET
+PASS  delivered result is removed durably
+Could not restore pending voice replies; task results remain in the dashboard.
+PASS  corrupt state does not prevent voice startup
+PASS  invalid IDs and expired or invalid deadlines are discarded
+--- test_queued_command_reads_only_its_result_and_speaks_the_answer
+PASS  polls only the submitted goal, without resubmitting the action
+PASS  says measured disk space rather than the queue receipt
+--- test_receipt_is_saved_before_waiting_for_completion
+PASS  a restart during the initial wait preserves the accepted task ID
+--- test_rejected_command_is_spoken_without_execution_retry
+PASS  a real serve-loop rejection speaks the requested clarification
+PASS  a rejected command is never retried or polled as a running task
+PASS  connection errors are audible without exposing raw transport internals
+PASS  repeat protection gives an audible waiting instruction
+--- test_serve_delivers_a_late_answer_between_captures
+PASS  serve first acknowledges waiting, then speaks the completed answer
+PASS  late-answer delivery invokes the original action only once
+--- test_the_real_serve_loop_speaks_the_completed_result
+PASS  serve actually waits for the result before replying
+PASS  serve passes the answer to blocking speech, not the queue receipt
+--- test_weak_language_evidence_still_stays_inside_the_two_languages
+PASS  weak evidence still constrains decoding to an allowed language
+PASS  but weak evidence forfeits the vocabulary prompt
+PASS  confident evidence does get the prompt
+PASS  measured Macedonian confidence of .2 remains usable
+PASS  no allowed-language evidence at all is unknown, not a guess
+ALL PASSED

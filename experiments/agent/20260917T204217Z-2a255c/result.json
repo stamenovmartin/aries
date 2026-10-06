@@ -1,0 +1,154 @@
+{
+  "run": "20260917T204217Z-2a255c",
+  "mode": "live local model",
+  "cases": [
+    {
+      "scenario": "file-workflow",
+      "goal": "Create a file called aries-m14-test.txt in /home/stamenovmartin/Documents/ARIES-Demo/20260917T204217Z-2a255c containing:\nARIES M14 verified execution\nThen read it back.",
+      "passed": true,
+      "task_id": "86f26004d7134823b3fe2db3084a7af3",
+      "approvals": [
+        {
+          "step_id": "921d0502cb5543c6aab39a71357ac8ec",
+          "capability": "file.write",
+          "arguments": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204217Z-2a255c/aries-m14-test.txt",
+            "content": "ARIES M14 verified execution"
+          }
+        }
+      ],
+      "task_state": "done",
+      "steps": 2,
+      "planner_calls": 3,
+      "metrics": {
+        "planner_calls": 3,
+        "number_of_steps": 2,
+        "execution_time": 0.0806,
+        "planner_time": 7.1435107629986305,
+        "capability_failures": 0,
+        "verification_failures": 0,
+        "retries": 0,
+        "invalid_decisions": 0,
+        "wrong_capability_selections": 0,
+        "input_tokens": 11235,
+        "output_tokens": 239,
+        "total_tokens": 11474,
+        "token_measurement_complete": true,
+        "estimated_input_tokens": 8721,
+        "estimated_output_tokens": 130,
+        "task_final_status": "done",
+        "wall_seconds": 4.183
+      },
+      "local_model_observed": true,
+      "seconds": 10.792
+    },
+    {
+      "scenario": "system-inspection",
+      "goal": "Check disk usage and report which filesystem has the highest percentage used.",
+      "passed": true,
+      "task_id": "72318d58b6f44434a848907de0d70e95",
+      "task_state": "done",
+      "steps": 1,
+      "planner_calls": 2,
+      "metrics": {
+        "planner_calls": 2,
+        "number_of_steps": 1,
+        "execution_time": 0.0183,
+        "planner_time": 2.904876475000492,
+        "capability_failures": 0,
+        "verification_failures": 0,
+        "retries": 0,
+        "invalid_decisions": 0,
+        "wrong_capability_selections": 0,
+        "input_tokens": 5846,
+        "output_tokens": 67,
+        "total_tokens": 5913,
+        "token_measurement_complete": true,
+        "estimated_input_tokens": 5141,
+        "estimated_output_tokens": 41,
+        "task_final_status": "done",
+        "wall_seconds": 2.979
+      },
+      "local_model_observed": true,
+      "seconds": 4.654
+    },
+    {
+      "scenario": "negative-control",
+      "goal": "Read /this/path/does/not/exist/aries.txt",
+      "passed": false,
+      "task_id": "8ec9ef8fd07c43999df1d8a0fe8db961",
+      "task_state": "failed",
+      "steps": 0,
+      "planner_calls": 1,
+      "metrics": {
+        "planner_calls": 1,
+        "number_of_steps": 0,
+        "execution_time": 0.0,
+        "planner_time": 1.6762735569991492,
+        "capability_failures": 0,
+        "verification_failures": 0,
+        "retries": 0,
+        "invalid_decisions": 0,
+        "wrong_capability_selections": 0,
+        "input_tokens": 2740,
+        "output_tokens": 25,
+        "total_tokens": 2765,
+        "token_measurement_complete": true,
+        "estimated_input_tokens": 2478,
+        "estimated_output_tokens": 21,
+        "task_final_status": "failed",
+        "wall_seconds": 1.702
+      },
+      "local_model_observed": true,
+      "error": "The file does not exist at the specified path.",
+      "seconds": 3.078
+    },
+    {
+      "scenario": "browser",
+      "goal": "Open https://www.python.org and report the observed page title.",
+      "passed": true,
+      "task_id": "029e1582129843ae89311f8189a6058f",
+      "approvals": [
+        {
+          "step_id": "21b36a8ace5d4a61b08c43ef6f6bb92d",
+          "capability": "browser.open",
+          "arguments": {
+            "url": "https://www.python.org"
+          }
+        }
+      ],
+      "task_state": "done",
+      "steps": 2,
+      "planner_calls": 3,
+      "metrics": {
+        "planner_calls": 3,
+        "number_of_steps": 2,
+        "execution_time": 2.8637,
+        "planner_time": 5.9627372970026045,
+        "capability_failures": 0,
+        "verification_failures": 0,
+        "retries": 0,
+        "invalid_decisions": 0,
+        "wrong_capability_selections": 0,
+        "input_tokens": 12964,
+        "output_tokens": 153,
+        "total_tokens": 13117,
+        "token_measurement_complete": true,
+        "estimated_input_tokens": 11036,
+        "estimated_output_tokens": 87,
+        "task_final_status": "done",
+        "wall_seconds": 7.08
+      },
+      "local_model_observed": true,
+      "seconds": 13.412
+    }
+  ],
+  "excluded": [],
+  "commit": "c1adb8041e2a1bd3acd1efd5f300a09a2b968967",
+  "dirty": true,
+  "source_sha256": "f2dd1956f2ecbe4d733dff9b5cadff8eddc7427f6ef3626b4f2b59e5e8f4501e",
+  "scope": "Engineering acceptance, not a held-out model benchmark; every attempt retained.",
+  "readiness_attempts": 4,
+  "passed": 3,
+  "total": 4
+}

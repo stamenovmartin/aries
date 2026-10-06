@@ -1,0 +1,28 @@
+{
+  "problem": "Attention Pass batched local inference was declared light and bypassed resource admission. Voice accepted ambiguous ara/ary names. Connector tests touched a personal keyring and could exit0 after failures.",
+  "change": "Deployed Attention Pass v1.0.1 with heavy_cpu declaration, removed ambiguous ara/ary wake aliases, isolated connector credential tests behind in-memory adapter and propagated harness failures. Core and already-active voice service reloaded.",
+  "validation": {
+    "scratch": "experiments/product/attention-workload-remediation/final-checks.json",
+    "scratch_passed": 248,
+    "scratch_suites": 4,
+    "merged": "experiments/product/attention-workload-remediation/merged-checks.json",
+    "merged_passed": 205,
+    "merged_suites": 3,
+    "live": "experiments/product/attention-workload-remediation/live-verification.json",
+    "live_workload": "heavy_cpu",
+    "voice_new_pid": 189486,
+    "voice_ready": true,
+    "source_stable": true,
+    "maintenance_active": false,
+    "retained_initial_failures": "Initial scratch docs missing and keyring locked; initial adapter patched public get_keyring but not core public methods. Both corrected, failed logs retained."
+  },
+  "limitations": [
+    "Declared CPU batch cost; no measured workload benchmark or dynamic GPU device classification.",
+    "Admission gates tested with synthetic sensors and mocked lifecycle; no actual connected source/model run performed.",
+    "Existing cooperative resource-budget stop mechanism still requires callers to poll stop_requested; not implemented by this declaration change.",
+    "Voice tests use decoded text and real serve loop with mocked capture/playback; no new acoustic false-positive or latency measurement.",
+    "Bare-name bounded followup and measured H variants remain; not all false wakes eliminated.",
+    "Credential tests use a test-only adapter; no live operating-system keyring verification.",
+    "Independent desktop acceptance remains blocked by locked session; no unlock or preflight bypass."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "problem": "Historical task reviews could guide plans, but ARIES could not compare retrieval versions on a fixed dataset or expose an explicit rollback.",
+  "change": "Added versioned overlap-v1/focused-v2 retrieval, a frozen 20-case synthetic relevance fixture and durable learning_eval queue capability. Reports preserve per-case selections, failure cases, digests, precision/recall and local timings. Learning provides Compare learning versions and an audited setting selector with immediate rollback. Planner experience records its retrieval version. Comparison never changes the active setting.",
+  "validation": [
+    "Standard suite passed: /tmp/aries-learning-comparison-suite.log, including 14 dedicated comparison checks and 419 UI client checks.",
+    "First frozen development fixture: baseline 15/20, candidate 19/20; four improvements, zero regressions, one remaining false positive.",
+    "Installed queue validation: experiments/workspace/verify_learning_comparison.json (completed, both versions and cases retained, active version unchanged, not promoted)."
+  ],
+  "limitations": "This is a developer regression fixture, not independently held-out research, end-to-end desktop task success, semantic search or model-weight RL. The sports/climate summary false positive remains visible. Baseline stays default; switching versions is explicit. No user review labels are fabricated. Login/display-timeout integration suites were not rerun."
+}

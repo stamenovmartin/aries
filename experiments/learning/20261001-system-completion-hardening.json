@@ -1,0 +1,23 @@
+{
+  "problem": [
+    "Lifecycle traces autoflushed on evaluator/retry/replan reads and blocked an independent SQLite writer. Cancellation was recorded as worker success.",
+    "Voice pending reply tracking disappeared on restart; endurance ignored an unsampled trailing interval; comparison reporting and live demo assumed exactly two retrieval versions."
+  ],
+  "change": [
+    "Committed lifecycle phase evidence before external waits and notified only after durable outcome; recorded cancellation as interrupted failure while propagating it.",
+    "Persisted bounded pending goal IDs, language and expiry atomically with mode 0600, including before initial result wait. Restore polls existing IDs only, never replays execution.",
+    "Included trailing interval and timestamp ordering in endurance coverage. Comparison summary derives counts and demo reads registered choices via API."
+  ],
+  "validation": [
+    "Real independent-writer regression: 8 failing assertions before, all 11 checks pass after. Engine 13 suites pass.",
+    "Full test.sh ALL SUITES PASSED (67 counted application/UI/HTTP suites, 3573 checks plus engine/reference). Final voice46 and endurance7 checks pass. Isolated Shell and session ALL PASSED.",
+    "Live core demo7/7. Initial full demo9/11 retained: stale version assertion corrected and retested; app launch refused while locked. News, brief and browser-agent title passed.",
+    "Historical 290-sample endurance still passes corrected accounting. Synthetic RHVoice-to-Whisper raw WER0.387, not human speech-quality acceptance. Evidence: experiments/coordination/system-completion-20260930/."
+  ],
+  "limitations": [
+    "Live desktop became locked; final app launch/focus requires unlock. No forced unlock or logout. No fresh human microphone-to-speaker acceptance.",
+    "The full suite preceded final focused edits; affected suites were rerun separately. Not every historical SQLite cause is proven resolved.",
+    "Pending IDs are removed before playback to avoid repeats; a crash during playback may lose spoken delivery but keeps task results.",
+    "Parallel mutations remain disabled. This verifies the existing feature set, not every future roadmap feature or general agent reliability."
+  ]
+}

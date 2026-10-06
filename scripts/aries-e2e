@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Real user journeys, on the installed system, across process boundaries.
+#
+#   ./scripts/aries-e2e              every journey
+#   ./scripts/aries-e2e section-check   just the section routing
+#
+# WHY THIS IS NOT IN test.sh
+# --------------------------
+# It starts real applications and needs a real display. It is the PRODUCT-green
+# half of the two levels of done: `test.sh` proves the components, this proves a
+# human could use them.
+#
+# The distinction is not academic. `test.sh` was green at 1511 assertions while
+# `scripts/aries-ui` exec'd itself in an infinite loop, so nothing ARIES offered
+# could open — for days. No component test touched it, because a launcher is not
+# a component, it is the seam between them, and seams are what component tests
+# skip by construction.
+set -uo pipefail
+cd "$(dirname "$0")/.."
+ROOT="$PWD"
+exec /usr/bin/python3 "$ROOT/tests/e2e/journeys.py" "$@"

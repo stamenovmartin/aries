@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-06T10:38:47.613946+00:00",
+  "passes": 43,
+  "suite": "tests/test_policy_evaluation.py",
+  "before_observed": {
+    "cheaper_all_failed_admitted": true,
+    "cheaper_unverified_only_admitted": true
+  },
+  "after": "Both rejected; at least one candidate Trial must report verified_success=True. Regressions, safety violations, missing rows and missing efficiency measurements still refuse admission.",
+  "scope": "Minimum artifact-admission condition, not independent verification of the truth of supplied records or a production promotion threshold. Mixed outcomes retain failures in denominator.",
+  "source_hashes": {
+    "aries/workspace/policy_evaluation.py": "0564faa9e45ddca6928d26bf6e14ced4746965d1e1b28c351c60a2ddc7be8893",
+    "tests/test_policy_evaluation.py": "cfe36f85618a862f1f22074c210e5ac881cb6afd8b75aa8b90f639e4b6b02d7f"
+  },
+  "deployment": "No live service restart or automatic policy promotion"
+}

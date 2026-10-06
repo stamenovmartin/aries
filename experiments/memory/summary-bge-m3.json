@@ -1,0 +1,4668 @@
+{
+  "fixture_sha256": "6afa34b20cb50877ce2d8881348d84ebb173f31c3f51b5a140cde919265f83cd",
+  "implementation_sha256": "2c78a76a1ca36024e088f4b6d37e945fa35809dd2d0ef67d92431fd70d51cecc",
+  "embedder": "bge-m3-ollama",
+  "dimensions": 1024,
+  "decision_model": "qwen2.5:7b",
+  "k": 3,
+  "corpus": 45,
+  "probes": 25,
+  "environment": {
+    "openblas_num_threads": "1",
+    "evaluated_at_utc": "2026-09-22T09:00:00"
+  },
+  "variants": {
+    "verbatim-exact-words": {
+      "variant": "verbatim-exact-words",
+      "cases": [
+        {
+          "id": "coffee-inflected",
+          "query": "што сакав да пијам наутро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [
+            "pref-coffee-morning",
+            "pref-tea-evening",
+            "pref-work-early"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-cross",
+          "query": "what do I drink in the morning",
+          "mode": "cross-language",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "tea-evening",
+          "query": "што пијам навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "fact-no-coffee-late",
+            "pref-work-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "work-hours",
+          "query": "кога работам најдобро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-work-early"
+          ],
+          "selected": [
+            "pref-work-late",
+            "pref-work-early",
+            "pref-no-notify"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [
+            "pref-work-late"
+          ],
+          "forbidden_returned": [],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "mentor",
+          "query": "кој ми е менторот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-mentor-new"
+          ],
+          "selected": [
+            "fact-mentor-new"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "city",
+          "query": "каде живеам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "id-city"
+          ],
+          "selected": [
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "project-cross",
+          "query": "what is my project called",
+          "mode": "cross-language",
+          "expected": [
+            "fact-project"
+          ],
+          "selected": [],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "ram-inflected",
+          "query": "колку рам има лаптопот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-ram"
+          ],
+          "selected": [],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "notify-cross",
+          "query": "notifications while I am working",
+          "mode": "cross-language",
+          "expected": [
+            "pref-no-notify"
+          ],
+          "selected": [],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "news-language",
+          "query": "на кој јазик да ми ги читаш вестите",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-news-mk"
+          ],
+          "selected": [
+            "pref-news-mk"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "presentation",
+          "query": "кога ми е презентацијата",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-presentation"
+          ],
+          "selected": [
+            "pref-no-windows"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "german",
+          "query": "што учам секој ден",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [
+            "plan-german",
+            "excluded-therapy"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "excluded-therapy"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-both",
+          "query": "dark or light theme",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-dark-mode",
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-light-outside",
+            "pref-dark-mode"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-outside",
+          "query": "која тема кога сум надвор на сонце",
+          "mode": "cross-language",
+          "expected": [
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-no-windows"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "backup",
+          "query": "што правам секоја недела",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-backup"
+          ],
+          "selected": [
+            "plan-backup"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "birthday",
+          "query": "кога е роденден на брат ми",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-brother-birthday"
+          ],
+          "selected": [
+            "fact-brother-birthday",
+            "pref-no-windows"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "study-cross",
+          "query": "what language am I learning",
+          "mode": "cross-language",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "monitor-inflected",
+          "query": "мониторот што сакав да го купам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-monitor"
+          ],
+          "selected": [
+            "plan-monitor"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "thesis-cross",
+          "query": "thesis topic",
+          "mode": "cross-language",
+          "expected": [
+            "fact-thesis"
+          ],
+          "selected": [
+            "plan-deadline-en"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "deadline-mk-query",
+          "query": "кога е рокот за мастер трудот",
+          "mode": "cross-language",
+          "expected": [
+            "plan-deadline-en",
+            "fact-thesis"
+          ],
+          "selected": [
+            "fact-thesis",
+            "pref-no-windows"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "annoyance",
+          "query": "што ме нервира кај АРИЕС",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-no-windows"
+          ],
+          "selected": [
+            "fact-project",
+            "ep-aries-part-one",
+            "pref-no-windows"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.3333333333333333,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "music-while-working",
+          "query": "музика додека работам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-music-latin"
+          ],
+          "selected": [
+            "pref-no-notify",
+            "pref-work-late",
+            "pref-work-early"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-late",
+          "query": "смеам ли кафе навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-no-coffee-late",
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "fact-no-coffee-late",
+            "pref-coffee-morning"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "secret-probe",
+          "query": "која ми е лозинката за вај-фај",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "excluded-probe",
+          "query": "кога одам на терапија",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [
+            "excluded-therapy",
+            "pref-no-windows"
+          ],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "excluded-therapy"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        }
+      ],
+      "stored": 45,
+      "expired_by_supersession": [],
+      "supersessions": [],
+      "supersessions_correct": 0,
+      "supersessions_false": 0,
+      "supersessions_missed": [
+        "fact-mentor-old",
+        "pref-work-late"
+      ],
+      "offered": 45,
+      "model_calls": 0,
+      "escalations": 0,
+      "escalation_rate": 0.0,
+      "median_embed_ms": null,
+      "decisions": [
+        {
+          "id": "cmd-youtube-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-news-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-only-open",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-music-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-split-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-settings-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "asr-garble-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-asr",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-shownews-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-spotify",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "q-student-id",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "q-certificate",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-sysstatus",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-mixed",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "id-name-study",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-project",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-coffee-morning",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-tea-evening",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-work-late",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-work-early",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-thesis",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-python-yaml",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-ram",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-no-notify",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-news-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-presentation",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-brother-birthday",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "ep-aries-part-one",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "secret-wifi",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "excluded-therapy",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "dup-coffee",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-dark-mode",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-light-outside",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-mentor-old",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-mentor-new",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-music-latin",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-deadline-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "id-city",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-no-coffee-late",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-german",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-monitor",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-no-windows",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "secret-card",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-backup",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        }
+      ],
+      "hit_at_k": 14,
+      "answerable": 23,
+      "mean_reciprocal_rank": 0.558,
+      "mean_recall_at_k": 0.587,
+      "clean": 22,
+      "probes": 25,
+      "stale_returns": 1,
+      "forbidden_returns": 2,
+      "gold_lost_to_extraction": [],
+      "median_search_ms": 0.1032
+    },
+    "verbatim-focused": {
+      "variant": "verbatim-focused",
+      "cases": [
+        {
+          "id": "coffee-inflected",
+          "query": "што сакав да пијам наутро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [
+            "dup-coffee",
+            "pref-coffee-morning",
+            "pref-tea-evening"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-cross",
+          "query": "what do I drink in the morning",
+          "mode": "cross-language",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [
+            "id-city",
+            "id-name-study",
+            "pref-music-latin"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "tea-evening",
+          "query": "што пијам навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "fact-no-coffee-late",
+            "pref-work-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "work-hours",
+          "query": "кога работам најдобро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-work-early"
+          ],
+          "selected": [
+            "pref-work-late",
+            "pref-no-notify",
+            "pref-no-windows"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [
+            "pref-work-late"
+          ],
+          "forbidden_returned": [],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "mentor",
+          "query": "кој ми е менторот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-mentor-new"
+          ],
+          "selected": [
+            "fact-mentor-old",
+            "fact-mentor-new",
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [
+            "fact-mentor-old"
+          ],
+          "forbidden_returned": [],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "city",
+          "query": "каде живеам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "id-city"
+          ],
+          "selected": [
+            "id-city",
+            "id-name-study",
+            "pref-music-latin"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "project-cross",
+          "query": "what is my project called",
+          "mode": "cross-language",
+          "expected": [
+            "fact-project"
+          ],
+          "selected": [
+            "id-city",
+            "id-name-study",
+            "pref-music-latin"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "ram-inflected",
+          "query": "колку рам има лаптопот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-ram"
+          ],
+          "selected": [
+            "fact-ram",
+            "cmd-news-mk",
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "notify-cross",
+          "query": "notifications while I am working",
+          "mode": "cross-language",
+          "expected": [
+            "pref-no-notify"
+          ],
+          "selected": [
+            "id-city",
+            "id-name-study",
+            "pref-music-latin"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "news-language",
+          "query": "на кој јазик да ми ги читаш вестите",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-news-mk"
+          ],
+          "selected": [
+            "pref-news-mk",
+            "cmd-news-mk",
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "presentation",
+          "query": "кога ми е презентацијата",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-presentation"
+          ],
+          "selected": [
+            "plan-presentation",
+            "pref-no-windows",
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "german",
+          "query": "што учам секој ден",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [
+            "plan-german",
+            "cmd-news-mk",
+            "excluded-therapy"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "excluded-therapy"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-both",
+          "query": "dark or light theme",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-dark-mode",
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-light-outside",
+            "pref-dark-mode",
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-outside",
+          "query": "која тема кога сум надвор на сонце",
+          "mode": "cross-language",
+          "expected": [
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-no-windows",
+            "plan-backup",
+            "id-city"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "backup",
+          "query": "што правам секоја недела",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-backup"
+          ],
+          "selected": [
+            "plan-backup",
+            "cmd-news-mk",
+            "excluded-therapy"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "excluded-therapy"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "birthday",
+          "query": "кога е роденден на брат ми",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-brother-birthday"
+          ],
+          "selected": [
+            "fact-brother-birthday",
+            "pref-no-windows",
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "study-cross",
+          "query": "what language am I learning",
+          "mode": "cross-language",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [
+            "id-city",
+            "id-name-study",
+            "pref-music-latin"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "monitor-inflected",
+          "query": "мониторот што сакав да го купам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-monitor"
+          ],
+          "selected": [
+            "plan-monitor",
+            "cmd-news-mk",
+            "asr-garble-mk"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "thesis-cross",
+          "query": "thesis topic",
+          "mode": "cross-language",
+          "expected": [
+            "fact-thesis"
+          ],
+          "selected": [
+            "plan-deadline-en",
+            "id-city",
+            "id-name-study"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "deadline-mk-query",
+          "query": "кога е рокот за мастер трудот",
+          "mode": "cross-language",
+          "expected": [
+            "plan-deadline-en",
+            "fact-thesis"
+          ],
+          "selected": [
+            "fact-thesis",
+            "plan-presentation",
+            "pref-no-windows"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "annoyance",
+          "query": "што ме нервира кај АРИЕС",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-no-windows"
+          ],
+          "selected": [
+            "cmd-news-mk",
+            "ep-aries-part-one",
+            "pref-no-windows"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.3333333333333333,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "music-while-working",
+          "query": "музика додека работам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-music-latin"
+          ],
+          "selected": [
+            "pref-no-notify",
+            "pref-work-late",
+            "pref-work-early"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-late",
+          "query": "смеам ли кафе навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-no-coffee-late",
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "fact-no-coffee-late",
+            "dup-coffee"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "secret-probe",
+          "query": "која ми е лозинката за вај-фај",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [
+            "secret-wifi",
+            "id-city",
+            "id-name-study"
+          ],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "secret-wifi"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "excluded-probe",
+          "query": "кога одам на терапија",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [
+            "excluded-therapy",
+            "pref-no-windows",
+            "id-city"
+          ],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "excluded-therapy"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        }
+      ],
+      "stored": 45,
+      "expired_by_supersession": [],
+      "supersessions": [],
+      "supersessions_correct": 0,
+      "supersessions_false": 0,
+      "supersessions_missed": [
+        "fact-mentor-old",
+        "pref-work-late"
+      ],
+      "offered": 45,
+      "model_calls": 0,
+      "escalations": 0,
+      "escalation_rate": 0.0,
+      "median_embed_ms": null,
+      "decisions": [
+        {
+          "id": "cmd-youtube-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-news-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-only-open",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-music-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-split-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-settings-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "asr-garble-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-asr",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-shownews-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-spotify",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "q-student-id",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "q-certificate",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-sysstatus",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-mixed",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "id-name-study",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-project",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-coffee-morning",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-tea-evening",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-work-late",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-work-early",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-thesis",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-python-yaml",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-ram",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-no-notify",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-news-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-presentation",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-brother-birthday",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "ep-aries-part-one",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "secret-wifi",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "excluded-therapy",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "dup-coffee",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-dark-mode",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-light-outside",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-mentor-old",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-mentor-new",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-music-latin",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-deadline-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "id-city",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-no-coffee-late",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-german",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-monitor",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-no-windows",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "secret-card",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-backup",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        }
+      ],
+      "hit_at_k": 15,
+      "answerable": 23,
+      "mean_reciprocal_rank": 0.5797,
+      "mean_recall_at_k": 0.6304,
+      "clean": 19,
+      "probes": 25,
+      "stale_returns": 2,
+      "forbidden_returns": 4,
+      "gold_lost_to_extraction": [],
+      "median_search_ms": 3.592
+    },
+    "verbatim-semantic": {
+      "variant": "verbatim-semantic",
+      "cases": [
+        {
+          "id": "coffee-inflected",
+          "query": "што сакав да пијам наутро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [
+            "pref-coffee-morning",
+            "dup-coffee",
+            "pref-tea-evening"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-cross",
+          "query": "what do I drink in the morning",
+          "mode": "cross-language",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [
+            "pref-coffee-morning",
+            "dup-coffee",
+            "pref-tea-evening"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "tea-evening",
+          "query": "што пијам навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "pref-work-late",
+            "fact-no-coffee-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "work-hours",
+          "query": "кога работам најдобро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-work-early"
+          ],
+          "selected": [
+            "pref-work-late",
+            "pref-work-early",
+            "pref-dark-mode"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [
+            "pref-work-late"
+          ],
+          "forbidden_returned": [],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "mentor",
+          "query": "кој ми е менторот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-mentor-new"
+          ],
+          "selected": [
+            "fact-mentor-old",
+            "fact-mentor-new",
+            "id-name-study"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [
+            "fact-mentor-old"
+          ],
+          "forbidden_returned": [],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "city",
+          "query": "каде живеам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "id-city"
+          ],
+          "selected": [
+            "id-city",
+            "pref-dark-mode",
+            "id-name-study"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "project-cross",
+          "query": "what is my project called",
+          "mode": "cross-language",
+          "expected": [
+            "fact-project"
+          ],
+          "selected": [
+            "fact-project",
+            "id-name-study",
+            "plan-deadline-en"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "ram-inflected",
+          "query": "колку рам има лаптопот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-ram"
+          ],
+          "selected": [
+            "fact-ram",
+            "cmd-split-en",
+            "plan-monitor"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "notify-cross",
+          "query": "notifications while I am working",
+          "mode": "cross-language",
+          "expected": [
+            "pref-no-notify"
+          ],
+          "selected": [
+            "pref-no-notify",
+            "cmd-shownews-en",
+            "pref-work-early"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "news-language",
+          "query": "на кој јазик да ми ги читаш вестите",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-news-mk"
+          ],
+          "selected": [
+            "pref-news-mk",
+            "cmd-shownews-en",
+            "pref-no-notify"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "presentation",
+          "query": "кога ми е презентацијата",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-presentation"
+          ],
+          "selected": [
+            "plan-presentation",
+            "plan-deadline-en",
+            "cmd-shownews-en"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "german",
+          "query": "што учам секој ден",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [
+            "plan-german",
+            "excluded-therapy",
+            "plan-backup"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "excluded-therapy"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-both",
+          "query": "dark or light theme",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-dark-mode",
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-dark-mode",
+            "pref-light-outside",
+            "cmd-music-en"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-outside",
+          "query": "која тема кога сум надвор на сонце",
+          "mode": "cross-language",
+          "expected": [
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-light-outside",
+            "pref-dark-mode",
+            "cmd-music-en"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "backup",
+          "query": "што правам секоја недела",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-backup"
+          ],
+          "selected": [
+            "excluded-therapy",
+            "plan-backup",
+            "plan-german"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "excluded-therapy"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "birthday",
+          "query": "кога е роденден на брат ми",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-brother-birthday"
+          ],
+          "selected": [
+            "fact-brother-birthday",
+            "plan-presentation",
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "study-cross",
+          "query": "what language am I learning",
+          "mode": "cross-language",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [
+            "plan-german",
+            "id-name-study",
+            "pref-news-mk"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "monitor-inflected",
+          "query": "мониторот што сакав да го купам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-monitor"
+          ],
+          "selected": [
+            "plan-monitor",
+            "cmd-split-en",
+            "pref-music-latin"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "thesis-cross",
+          "query": "thesis topic",
+          "mode": "cross-language",
+          "expected": [
+            "fact-thesis"
+          ],
+          "selected": [
+            "plan-deadline-en",
+            "pref-light-outside",
+            "cmd-sysstatus"
+          ],
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "deadline-mk-query",
+          "query": "кога е рокот за мастер трудот",
+          "mode": "cross-language",
+          "expected": [
+            "plan-deadline-en",
+            "fact-thesis"
+          ],
+          "selected": [
+            "plan-deadline-en",
+            "plan-presentation",
+            "fact-thesis"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "annoyance",
+          "query": "што ме нервира кај АРИЕС",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-no-windows"
+          ],
+          "selected": [
+            "pref-no-windows",
+            "fact-project",
+            "ep-aries-part-one"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "music-while-working",
+          "query": "музика додека работам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-music-latin"
+          ],
+          "selected": [
+            "pref-music-latin",
+            "cmd-music-en",
+            "pref-work-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-late",
+          "query": "смеам ли кафе навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-no-coffee-late",
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "fact-no-coffee-late",
+            "pref-coffee-morning"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "secret-probe",
+          "query": "која ми е лозинката за вај-фај",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [
+            "secret-wifi",
+            "cmd-settings-en",
+            "pref-coffee-morning"
+          ],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "secret-wifi"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "excluded-probe",
+          "query": "кога одам на терапија",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [
+            "excluded-therapy",
+            "pref-work-late",
+            "pref-tea-evening"
+          ],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [
+            "excluded-therapy"
+          ],
+          "clean": false,
+          "gold_unstorable": []
+        }
+      ],
+      "stored": 45,
+      "expired_by_supersession": [],
+      "supersessions": [],
+      "supersessions_correct": 0,
+      "supersessions_false": 0,
+      "supersessions_missed": [
+        "fact-mentor-old",
+        "pref-work-late"
+      ],
+      "offered": 45,
+      "model_calls": 0,
+      "escalations": 0,
+      "escalation_rate": 0.0,
+      "median_embed_ms": 43.683,
+      "decisions": [
+        {
+          "id": "cmd-youtube-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-news-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-only-open",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-music-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-split-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-settings-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "asr-garble-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-asr",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-shownews-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-spotify",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "q-student-id",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "q-certificate",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-sysstatus",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-mixed",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "id-name-study",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-project",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-coffee-morning",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-tea-evening",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-work-late",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-work-early",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-thesis",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-python-yaml",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-ram",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-no-notify",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-news-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-presentation",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-brother-birthday",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "ep-aries-part-one",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "secret-wifi",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "excluded-therapy",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "dup-coffee",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-dark-mode",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-light-outside",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-mentor-old",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-mentor-new",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-music-latin",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-deadline-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "id-city",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-no-coffee-late",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-german",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-monitor",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-no-windows",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "secret-card",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-backup",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        }
+      ],
+      "hit_at_k": 22,
+      "answerable": 23,
+      "mean_reciprocal_rank": 0.8913,
+      "mean_recall_at_k": 0.9565,
+      "clean": 19,
+      "probes": 25,
+      "stale_returns": 2,
+      "forbidden_returns": 4,
+      "gold_lost_to_extraction": [],
+      "median_search_ms": 0.139
+    },
+    "verbatim-gated-semantic": {
+      "variant": "verbatim-gated-semantic",
+      "cases": [
+        {
+          "id": "coffee-inflected",
+          "query": "што сакав да пијам наутро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [
+            "pref-coffee-morning",
+            "dup-coffee",
+            "pref-tea-evening"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-cross",
+          "query": "what do I drink in the morning",
+          "mode": "cross-language",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [
+            "pref-coffee-morning",
+            "dup-coffee",
+            "pref-tea-evening"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "tea-evening",
+          "query": "што пијам навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "pref-work-late",
+            "fact-no-coffee-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "work-hours",
+          "query": "кога работам најдобро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-work-early"
+          ],
+          "selected": [
+            "pref-work-late",
+            "pref-work-early",
+            "pref-dark-mode"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [
+            "pref-work-late"
+          ],
+          "forbidden_returned": [],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "mentor",
+          "query": "кој ми е менторот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-mentor-new"
+          ],
+          "selected": [
+            "fact-mentor-old",
+            "fact-mentor-new",
+            "id-name-study"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [
+            "fact-mentor-old"
+          ],
+          "forbidden_returned": [],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "city",
+          "query": "каде живеам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "id-city"
+          ],
+          "selected": [
+            "id-city",
+            "pref-dark-mode",
+            "id-name-study"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "project-cross",
+          "query": "what is my project called",
+          "mode": "cross-language",
+          "expected": [
+            "fact-project"
+          ],
+          "selected": [
+            "fact-project",
+            "id-name-study",
+            "plan-deadline-en"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "ram-inflected",
+          "query": "колку рам има лаптопот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-ram"
+          ],
+          "selected": [
+            "fact-ram",
+            "plan-monitor",
+            "pref-python-yaml"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "notify-cross",
+          "query": "notifications while I am working",
+          "mode": "cross-language",
+          "expected": [
+            "pref-no-notify"
+          ],
+          "selected": [
+            "pref-no-notify",
+            "pref-work-early",
+            "pref-music-latin"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "news-language",
+          "query": "на кој јазик да ми ги читаш вестите",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-news-mk"
+          ],
+          "selected": [
+            "pref-news-mk",
+            "pref-no-notify",
+            "cmd-news-mk"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "presentation",
+          "query": "кога ми е презентацијата",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-presentation"
+          ],
+          "selected": [
+            "plan-presentation",
+            "plan-deadline-en",
+            "asr-garble-mk"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "german",
+          "query": "што учам секој ден",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [
+            "plan-german",
+            "plan-backup",
+            "id-name-study"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-both",
+          "query": "dark or light theme",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-dark-mode",
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-dark-mode",
+            "pref-light-outside",
+            "pref-work-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-outside",
+          "query": "која тема кога сум надвор на сонце",
+          "mode": "cross-language",
+          "expected": [
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-light-outside",
+            "pref-dark-mode",
+            "pref-music-latin"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "backup",
+          "query": "што правам секоја недела",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-backup"
+          ],
+          "selected": [
+            "plan-backup",
+            "plan-german",
+            "pref-music-latin"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "birthday",
+          "query": "кога е роденден на брат ми",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-brother-birthday"
+          ],
+          "selected": [
+            "fact-brother-birthday",
+            "plan-presentation",
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "study-cross",
+          "query": "what language am I learning",
+          "mode": "cross-language",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [
+            "plan-german",
+            "id-name-study",
+            "pref-news-mk"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "monitor-inflected",
+          "query": "мониторот што сакав да го купам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-monitor"
+          ],
+          "selected": [
+            "plan-monitor",
+            "pref-music-latin",
+            "pref-dark-mode"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "thesis-cross",
+          "query": "thesis topic",
+          "mode": "cross-language",
+          "expected": [
+            "fact-thesis"
+          ],
+          "selected": [
+            "plan-deadline-en",
+            "pref-light-outside",
+            "fact-thesis"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.3333333333333333,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "deadline-mk-query",
+          "query": "кога е рокот за мастер трудот",
+          "mode": "cross-language",
+          "expected": [
+            "plan-deadline-en",
+            "fact-thesis"
+          ],
+          "selected": [
+            "plan-deadline-en",
+            "plan-presentation",
+            "fact-thesis"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "annoyance",
+          "query": "што ме нервира кај АРИЕС",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-no-windows"
+          ],
+          "selected": [
+            "pref-no-windows",
+            "fact-project",
+            "ep-aries-part-one"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "music-while-working",
+          "query": "музика додека работам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-music-latin"
+          ],
+          "selected": [
+            "pref-music-latin",
+            "pref-work-late",
+            "pref-work-early"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-late",
+          "query": "смеам ли кафе навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-no-coffee-late",
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "fact-no-coffee-late",
+            "pref-coffee-morning"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "secret-probe",
+          "query": "која ми е лозинката за вај-фај",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [
+            "pref-coffee-morning",
+            "q-student-id",
+            "q-certificate"
+          ],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "excluded-probe",
+          "query": "кога одам на терапија",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [
+            "pref-work-late",
+            "pref-tea-evening",
+            "fact-no-coffee-late"
+          ],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        }
+      ],
+      "stored": 33,
+      "expired_by_supersession": [],
+      "supersessions": [],
+      "supersessions_correct": 0,
+      "supersessions_false": 0,
+      "supersessions_missed": [
+        "fact-mentor-old",
+        "pref-work-late"
+      ],
+      "offered": 45,
+      "model_calls": 0,
+      "escalations": 0,
+      "escalation_rate": 0.0,
+      "median_embed_ms": 37.71,
+      "decisions": [
+        {
+          "id": "cmd-youtube-mk",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-news-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-mk",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-song-only-open",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-music-en",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-split-en",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-settings-en",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "asr-garble-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-song-asr",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-shownews-en",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-spotify",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "q-student-id",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "q-certificate",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "cmd-sysstatus",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-song-mixed",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "id-name-study",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-project",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-coffee-morning",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-tea-evening",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-work-late",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-work-early",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-thesis",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-python-yaml",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-ram",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-no-notify",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-news-mk",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-presentation",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-brother-birthday",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "ep-aries-part-one",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "secret-wifi",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "looks like a credential",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "excluded-therapy",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "matches excluded topic 'терапија'",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "dup-coffee",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-dark-mode",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-light-outside",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-mentor-old",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-mentor-new",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-music-latin",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-deadline-en",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "id-city",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "fact-no-coffee-late",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-german",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "plan-monitor",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "pref-no-windows",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        },
+        {
+          "id": "secret-card",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "looks like a credential",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "plan-backup",
+          "action": "APPEND",
+          "stage": "none",
+          "reason": "stored verbatim",
+          "confidence": 1.0,
+          "similarity": null
+        }
+      ],
+      "hit_at_k": 23,
+      "answerable": 23,
+      "mean_reciprocal_rank": 0.9275,
+      "mean_recall_at_k": 1.0,
+      "clean": 23,
+      "probes": 25,
+      "stale_returns": 2,
+      "forbidden_returns": 0,
+      "gold_lost_to_extraction": [],
+      "median_search_ms": 0.1006
+    },
+    "extracted-semantic": {
+      "variant": "extracted-semantic",
+      "cases": [
+        {
+          "id": "coffee-inflected",
+          "query": "што сакав да пијам наутро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [
+            "pref-coffee-morning",
+            "pref-tea-evening",
+            "fact-no-coffee-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-cross",
+          "query": "what do I drink in the morning",
+          "mode": "cross-language",
+          "expected": [
+            "pref-coffee-morning"
+          ],
+          "selected": [
+            "pref-coffee-morning",
+            "pref-tea-evening",
+            "fact-no-coffee-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "tea-evening",
+          "query": "што пијам навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "pref-work-late",
+            "fact-no-coffee-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "work-hours",
+          "query": "кога работам најдобро",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-work-early"
+          ],
+          "selected": [
+            "pref-work-late",
+            "pref-work-early",
+            "pref-dark-mode"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [
+            "pref-work-late"
+          ],
+          "forbidden_returned": [],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "mentor",
+          "query": "кој ми е менторот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-mentor-new"
+          ],
+          "selected": [
+            "fact-mentor-old",
+            "fact-mentor-new",
+            "id-name-study"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "stale_returned": [
+            "fact-mentor-old"
+          ],
+          "forbidden_returned": [],
+          "clean": false,
+          "gold_unstorable": []
+        },
+        {
+          "id": "city",
+          "query": "каде живеам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "id-city"
+          ],
+          "selected": [
+            "id-city",
+            "pref-dark-mode",
+            "id-name-study"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "project-cross",
+          "query": "what is my project called",
+          "mode": "cross-language",
+          "expected": [
+            "fact-project"
+          ],
+          "selected": [
+            "fact-project",
+            "id-name-study",
+            "plan-deadline-en"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "ram-inflected",
+          "query": "колку рам има лаптопот",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-ram"
+          ],
+          "selected": [
+            "fact-ram",
+            "plan-monitor",
+            "pref-python-yaml"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "notify-cross",
+          "query": "notifications while I am working",
+          "mode": "cross-language",
+          "expected": [
+            "pref-no-notify"
+          ],
+          "selected": [
+            "pref-no-notify",
+            "pref-work-early",
+            "pref-music-latin"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "news-language",
+          "query": "на кој јазик да ми ги читаш вестите",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-news-mk"
+          ],
+          "selected": [
+            "pref-news-mk",
+            "pref-no-notify",
+            "cmd-news-mk"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "presentation",
+          "query": "кога ми е презентацијата",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-presentation"
+          ],
+          "selected": [
+            "plan-presentation",
+            "plan-deadline-en",
+            "asr-garble-mk"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "german",
+          "query": "што учам секој ден",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [
+            "plan-german",
+            "plan-backup",
+            "id-name-study"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-both",
+          "query": "dark or light theme",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-dark-mode",
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-dark-mode",
+            "pref-light-outside",
+            "pref-work-late"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "theme-outside",
+          "query": "која тема кога сум надвор на сонце",
+          "mode": "cross-language",
+          "expected": [
+            "pref-light-outside"
+          ],
+          "selected": [
+            "pref-light-outside",
+            "pref-dark-mode",
+            "pref-music-latin"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "backup",
+          "query": "што правам секоја недела",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-backup"
+          ],
+          "selected": [
+            "plan-backup",
+            "plan-german",
+            "pref-music-latin"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "birthday",
+          "query": "кога е роденден на брат ми",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-brother-birthday"
+          ],
+          "selected": [
+            "fact-brother-birthday",
+            "plan-presentation",
+            "id-city"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "study-cross",
+          "query": "what language am I learning",
+          "mode": "cross-language",
+          "expected": [
+            "plan-german"
+          ],
+          "selected": [
+            "plan-german",
+            "id-name-study",
+            "pref-news-mk"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "monitor-inflected",
+          "query": "мониторот што сакав да го купам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "plan-monitor"
+          ],
+          "selected": [
+            "plan-monitor",
+            "pref-music-latin",
+            "pref-dark-mode"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "thesis-cross",
+          "query": "thesis topic",
+          "mode": "cross-language",
+          "expected": [
+            "fact-thesis"
+          ],
+          "selected": [
+            "plan-deadline-en",
+            "pref-light-outside",
+            "fact-thesis"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.3333333333333333,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "deadline-mk-query",
+          "query": "кога е рокот за мастер трудот",
+          "mode": "cross-language",
+          "expected": [
+            "plan-deadline-en",
+            "fact-thesis"
+          ],
+          "selected": [
+            "plan-deadline-en",
+            "plan-presentation",
+            "fact-thesis"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "annoyance",
+          "query": "што ме нервира кај АРИЕС",
+          "mode": "paraphrase",
+          "expected": [
+            "pref-no-windows"
+          ],
+          "selected": [
+            "pref-no-windows",
+            "fact-project",
+            "ep-aries-part-one"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "music-while-working",
+          "query": "музика додека работам",
+          "mode": "same-language-inflected",
+          "expected": [
+            "pref-music-latin"
+          ],
+          "selected": [
+            "pref-music-latin",
+            "pref-work-late",
+            "pref-work-early"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "coffee-late",
+          "query": "смеам ли кафе навечер",
+          "mode": "same-language-inflected",
+          "expected": [
+            "fact-no-coffee-late",
+            "pref-tea-evening"
+          ],
+          "selected": [
+            "pref-tea-evening",
+            "fact-no-coffee-late",
+            "pref-coffee-morning"
+          ],
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "secret-probe",
+          "query": "која ми е лозинката за вај-фај",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [
+            "pref-coffee-morning",
+            "q-student-id",
+            "q-certificate"
+          ],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        },
+        {
+          "id": "excluded-probe",
+          "query": "кога одам на терапија",
+          "mode": "must-not-retrieve",
+          "expected": [],
+          "selected": [
+            "pref-work-late",
+            "pref-tea-evening",
+            "fact-no-coffee-late"
+          ],
+          "hit_at_k": null,
+          "recall_at_k": null,
+          "reciprocal_rank": null,
+          "stale_returned": [],
+          "forbidden_returned": [],
+          "clean": true,
+          "gold_unstorable": []
+        }
+      ],
+      "stored": 32,
+      "expired_by_supersession": [],
+      "supersessions": [],
+      "supersessions_correct": 0,
+      "supersessions_false": 0,
+      "supersessions_missed": [
+        "fact-mentor-old",
+        "pref-work-late"
+      ],
+      "offered": 45,
+      "model_calls": 0,
+      "escalations": 0,
+      "escalation_rate": 0.0,
+      "median_embed_ms": 36.89,
+      "decisions": [
+        {
+          "id": "cmd-youtube-mk",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-news-mk",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "nothing comparable is stored",
+          "confidence": 1.0,
+          "related_to": null,
+          "similarity": null,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "cmd-song-mk",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-song-only-open",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.454)",
+          "confidence": 1.0,
+          "related_to": "cmd-news-mk",
+          "similarity": 0.454,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "cmd-music-en",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-split-en",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-settings-en",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "asr-garble-mk",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.431)",
+          "confidence": 1.0,
+          "related_to": "cmd-song-only-open",
+          "similarity": 0.4309,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "cmd-song-asr",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-shownews-en",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-spotify",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "q-student-id",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.517)",
+          "confidence": 1.0,
+          "related_to": "asr-garble-mk",
+          "similarity": 0.5165,
+          "kind": "fact",
+          "lang": "en"
+        },
+        {
+          "id": "q-certificate",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.533)",
+          "confidence": 1.0,
+          "related_to": "q-student-id",
+          "similarity": 0.533,
+          "kind": "fact",
+          "lang": "en"
+        },
+        {
+          "id": "cmd-sysstatus",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "an instruction to act, not a fact to keep",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "cmd-song-mixed",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.602)",
+          "confidence": 1.0,
+          "related_to": "cmd-song-only-open",
+          "similarity": 0.6025,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "id-name-study",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.503)",
+          "confidence": 1.0,
+          "related_to": "q-student-id",
+          "similarity": 0.5034,
+          "kind": "identity",
+          "lang": "mk"
+        },
+        {
+          "id": "fact-project",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.494)",
+          "confidence": 1.0,
+          "related_to": "id-name-study",
+          "similarity": 0.4936,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-coffee-morning",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.500)",
+          "confidence": 1.0,
+          "related_to": "cmd-song-only-open",
+          "similarity": 0.4998,
+          "kind": "preference",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-tea-evening",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.750)",
+          "confidence": 1.0,
+          "related_to": "pref-coffee-morning",
+          "similarity": 0.75,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-work-late",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.632)",
+          "confidence": 1.0,
+          "related_to": "pref-tea-evening",
+          "similarity": 0.6318,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-work-early",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.724)",
+          "confidence": 1.0,
+          "related_to": "pref-work-late",
+          "similarity": 0.7242,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "fact-thesis",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.595)",
+          "confidence": 1.0,
+          "related_to": "pref-work-late",
+          "similarity": 0.5952,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-python-yaml",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.452)",
+          "confidence": 1.0,
+          "related_to": "pref-tea-evening",
+          "similarity": 0.4517,
+          "kind": "preference",
+          "lang": "en"
+        },
+        {
+          "id": "fact-ram",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.470)",
+          "confidence": 1.0,
+          "related_to": "pref-python-yaml",
+          "similarity": 0.4699,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-no-notify",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.571)",
+          "confidence": 1.0,
+          "related_to": "pref-work-late",
+          "similarity": 0.5714,
+          "kind": "preference",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-news-mk",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.621)",
+          "confidence": 1.0,
+          "related_to": "pref-no-notify",
+          "similarity": 0.6209,
+          "kind": "preference",
+          "lang": "mk"
+        },
+        {
+          "id": "plan-presentation",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.587)",
+          "confidence": 1.0,
+          "related_to": "fact-thesis",
+          "similarity": 0.5865,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "fact-brother-birthday",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.505)",
+          "confidence": 1.0,
+          "related_to": "plan-presentation",
+          "similarity": 0.505,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "ep-aries-part-one",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.620)",
+          "confidence": 1.0,
+          "related_to": "fact-project",
+          "similarity": 0.6198,
+          "kind": "episodic",
+          "lang": "mk"
+        },
+        {
+          "id": "secret-wifi",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "looks like a credential",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "excluded-therapy",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "matches excluded topic 'терапија'",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "dup-coffee",
+          "action": "NOOP",
+          "stage": "novelty",
+          "reason": "already stored (cosine 0.993)",
+          "confidence": 1.0,
+          "related_to": "pref-coffee-morning",
+          "similarity": 0.9933,
+          "kind": "preference",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-dark-mode",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.652)",
+          "confidence": 1.0,
+          "related_to": "pref-work-late",
+          "similarity": 0.6516,
+          "kind": "preference",
+          "lang": "en"
+        },
+        {
+          "id": "pref-light-outside",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.646)",
+          "confidence": 1.0,
+          "related_to": "pref-dark-mode",
+          "similarity": 0.6459,
+          "kind": "fact",
+          "lang": "en"
+        },
+        {
+          "id": "fact-mentor-old",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.575)",
+          "confidence": 1.0,
+          "related_to": "fact-project",
+          "similarity": 0.5753,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "fact-mentor-new",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.780)",
+          "confidence": 1.0,
+          "related_to": "fact-mentor-old",
+          "similarity": 0.7796,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-music-latin",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.583)",
+          "confidence": 1.0,
+          "related_to": "pref-work-late",
+          "similarity": 0.5835,
+          "kind": "preference",
+          "lang": "en"
+        },
+        {
+          "id": "plan-deadline-en",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.562)",
+          "confidence": 1.0,
+          "related_to": "plan-presentation",
+          "similarity": 0.5625,
+          "kind": "fact",
+          "lang": "en"
+        },
+        {
+          "id": "id-city",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.558)",
+          "confidence": 1.0,
+          "related_to": "pref-work-early",
+          "similarity": 0.5584,
+          "kind": "identity",
+          "lang": "mk"
+        },
+        {
+          "id": "fact-no-coffee-late",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.716)",
+          "confidence": 1.0,
+          "related_to": "pref-tea-evening",
+          "similarity": 0.7155,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "plan-german",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.562)",
+          "confidence": 1.0,
+          "related_to": "ep-aries-part-one",
+          "similarity": 0.5622,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "plan-monitor",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.500)",
+          "confidence": 1.0,
+          "related_to": "q-certificate",
+          "similarity": 0.5003,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "pref-no-windows",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.630)",
+          "confidence": 1.0,
+          "related_to": "pref-no-notify",
+          "similarity": 0.6302,
+          "kind": "fact",
+          "lang": "mk"
+        },
+        {
+          "id": "secret-card",
+          "action": "ABORT",
+          "stage": "gate",
+          "reason": "looks like a credential",
+          "confidence": 1.0,
+          "similarity": null,
+          "related_to": null,
+          "kind": "fact",
+          "lang": ""
+        },
+        {
+          "id": "plan-backup",
+          "action": "APPEND",
+          "stage": "novelty",
+          "reason": "unrelated to everything stored (cosine 0.608)",
+          "confidence": 1.0,
+          "related_to": "plan-german",
+          "similarity": 0.6082,
+          "kind": "fact",
+          "lang": "mk"
+        }
+      ],
+      "hit_at_k": 23,
+      "answerable": 23,
+      "mean_reciprocal_rank": 0.9275,
+      "mean_recall_at_k": 1.0,
+      "clean": 23,
+      "probes": 25,
+      "stale_returns": 2,
+      "forbidden_returns": 0,
+      "gold_lost_to_extraction": [],
+      "median_search_ms": 0.1222
+    }
+  },
+  "statistics": {
+    "hit": {
+      "pairs": 23,
+      "improved": 0,
+      "regressed": 0,
+      "accuracy_difference": 0.0,
+      "exact_mcnemar_two_sided_p": 1.0,
+      "baseline_wilson_95": [
+        0.8568833815495731,
+        1.0
+      ],
+      "candidate_wilson_95": [
+        0.8568833815495731,
+        1.0
+      ],
+      "interpretation": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+    },
+    "clean": {
+      "pairs": 25,
+      "improved": 0,
+      "regressed": 0,
+      "accuracy_difference": 0.0,
+      "exact_mcnemar_two_sided_p": 1.0,
+      "baseline_wilson_95": [
+        0.7503389104960468,
+        0.9777795987151524
+      ],
+      "candidate_wilson_95": [
+        0.7503389104960468,
+        0.9777795987151524
+      ],
+      "interpretation": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+    }
+  },
+  "verdict": "extraction retrieved exactly as many answers as storing everything · and was no cleaner · storing 32 rows instead of 33 (1 fewer), at 0 local model call(s) · neither difference is significant on this fixture (hit p=1.000, clean p=1.000) · ON THIS FIXTURE THE EXTRACTION IS A COST OPTIMISATION, NOT A CAPABILITY",
+  "promoted": false,
+  "commit": "3eb5f46680b41567e0470ffa82509c8f35facf16",
+  "ran_at_utc": "2026-09-29T18:36:10.632927+00:00"
+}

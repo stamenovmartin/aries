@@ -1,0 +1,17 @@
+{
+  "problem": "F-06 unconditional verify_probe returned met=True on arbitrary executor and second-read data.",
+  "change": "Validate six probe kinds against requested identity and output shape. Directory/search/task require second-read snapshot agreement; volatile system metrics use explicit fresh_observation mode and validated fresh data, not numerical agreement.",
+  "validation": {
+    "date": "2026-10-06T11:27:24.097854+00:00",
+    "passed": 164,
+    "total": 164,
+    "checks": "experiments/product/probe-verification-remediation/checks.json",
+    "source_stable": true,
+    "initial_failure": "integration-initial.log: used name instead of actual probe field; corrected, original failure retained"
+  },
+  "limitations": [
+    "Not deployed yet.",
+    "Fresh-observation mode is not proof that old volatile values matched; no claim all58 verifiers independent.",
+    "Other SELF_REPORT/PLANNER_SUPPLIED verifier findings remain open."
+  ]
+}

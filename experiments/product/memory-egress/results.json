@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-06T11:05:03.903749+00:00",
+  "passed": true,
+  "runs": [
+    {
+      "suite": "transport",
+      "exit_code": 0,
+      "command": [
+        "/home/stamenovmartin/aries/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_memory_egress",
+        "-v"
+      ],
+      "log": "transport.log",
+      "passing_assertions": 0
+    },
+    {
+      "suite": "calibration",
+      "exit_code": 0,
+      "command": [
+        "/home/stamenovmartin/aries/.venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,types; import tests.test_memory as m; s=types.ModuleType('calibration_regression'); s.test_label=m.test_the_label_is_recovered_even_when_the_model_explains_itself; sys.exit(m.run_module(s))"
+      ],
+      "log": "calibration.log",
+      "passing_assertions": 5
+    },
+    {
+      "suite": "privacy",
+      "exit_code": 0,
+      "command": [
+        "/home/stamenovmartin/aries/.venv/bin/python",
+        "-B",
+        "tests/test_memory_privacy.py"
+      ],
+      "log": "privacy.log",
+      "passing_assertions": 26
+    }
+  ],
+  "source_before": {
+    "aries/workspace/memory/embedding.py": "6adbfdc969c86a7e76bce362e4df1ffe2cd8241cd5cbcf59da846969b7fa0d26",
+    "aries/workspace/memory/calibration.py": "367fd63796136c0378387ff158cdb94444d44e5652ac4adec241286cd8e8d9e2",
+    "aries/workspace/memory/local_transport.py": "592ecfb78ad44ac1c1955c50129ecf55f3ba985cf701e873fc56bae37abf4d0a",
+    "tests/test_memory_egress.py": "c782034266e81cd6d0a1c8e436ebe9f2d679edfbd02d4e4c9fa82e3452c7edc2",
+    "tests/test_memory.py": "51dfe79408167aa1abad0fc281dbbda0b6e7394f55fe479362e061f40f240b1b",
+    "tests/test_memory_privacy.py": "6530a7eca397cccb50f469c7fbf27e484cc14e496c0d5b2f0128551a13efa144"
+  },
+  "source_after": {
+    "aries/workspace/memory/embedding.py": "6adbfdc969c86a7e76bce362e4df1ffe2cd8241cd5cbcf59da846969b7fa0d26",
+    "aries/workspace/memory/calibration.py": "367fd63796136c0378387ff158cdb94444d44e5652ac4adec241286cd8e8d9e2",
+    "aries/workspace/memory/local_transport.py": "592ecfb78ad44ac1c1955c50129ecf55f3ba985cf701e873fc56bae37abf4d0a",
+    "tests/test_memory_egress.py": "c782034266e81cd6d0a1c8e436ebe9f2d679edfbd02d4e4c9fa82e3452c7edc2",
+    "tests/test_memory.py": "51dfe79408167aa1abad0fc281dbbda0b6e7394f55fe479362e061f40f240b1b",
+    "tests/test_memory_privacy.py": "6530a7eca397cccb50f469c7fbf27e484cc14e496c0d5b2f0128551a13efa144"
+  },
+  "source_stable": true,
+  "runtime_deployed": false,
+  "real_model_calls": 0,
+  "scope": "Synthetic loopback servers, adversarial URL inputs, isolated calibration/privacy regression",
+  "limitations": [
+    "No live service restart",
+    "Not a system-wide privacy leakage measurement",
+    "Trusted local server can itself relay data; this is client transport enforcement"
+  ]
+}

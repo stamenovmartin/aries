@@ -1,0 +1,31 @@
+{
+  "recorded_at": "2026-10-04T08:18:12.559585+00:00",
+  "problem": "Verification feedback alone did not reliably prevent unsupported model finish proposals; terminal decisions also carried executable arguments and were rejected.",
+  "change": "Added strict authored-answer adjudication, resumable paired pilot, generated evidence report, and default-off terminal JSON examples in the isolated research runner. Production unchanged.",
+  "validation": {
+    "pilot": "eval/research_feedback/pilots/20261004T080518Z/results.json",
+    "assigned_and_completed": "34/34",
+    "screen_unsupported_finish_episodes": {
+      "tool_only": "5/5",
+      "structured": "4/5"
+    },
+    "terminal_probe": {
+      "assigned_n": 12,
+      "attempts_n": 12,
+      "infrastructure_errors_n": 8,
+      "valid_pairs_n": 4,
+      "before_invalid_terminal_episodes": 4,
+      "after_invalid_terminal_episodes": 0,
+      "model_chose_stop_after_n": 4,
+      "same_settings": true,
+      "source_stable": true,
+      "limitations": "Nonrandomized development comparison on six known cases, not production deployment or independent task generalization; interrupted attempts retained."
+    }
+  },
+  "limitations": [
+    "Pilot data only; native and synthetic fault interventions cannot be pooled as one causal treatment.",
+    "Eight initial prompt-probe attempts failed before inference during API unavailability; retry blocked by another active suite. Four valid paired comparisons retained.",
+    "No production rollout, 600-run study, recovery benefit or diploma completion claimed.",
+    "Learning API submission pending end of active measurement window."
+  ]
+}

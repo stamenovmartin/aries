@@ -1,0 +1,172 @@
+{
+  "/api/health": {
+    "status": "healthy",
+    "status_means": "'healthy' means only that the database answers.",
+    "components": [
+      {
+        "component": "application",
+        "status": "ok",
+        "detail": "process answers \u00b7 env development",
+        "probe": "local",
+        "checked_at": "2026-10-06T09:46:38.362455+00:00",
+        "uptime_seconds": 0.0,
+        "pid": 49934
+      },
+      {
+        "component": "database",
+        "status": "ok",
+        "detail": "answers in 3 ms",
+        "probe": "db",
+        "checked_at": "2026-10-06T09:46:38.365193+00:00"
+      },
+      {
+        "component": "queue",
+        "status": "ok",
+        "detail": "0 scheduled, 18 awaiting a human",
+        "probe": "db",
+        "checked_at": "2026-10-06T09:46:38.368437+00:00",
+        "counts": {
+          "scheduled_queued": 0,
+          "scheduled_overdue": 0,
+          "proposals_open": 18
+        }
+      },
+      {
+        "component": "workers",
+        "status": "ok",
+        "detail": "8 workers running",
+        "probe": "local",
+        "checked_at": "2026-10-06T09:46:38.368516+00:00",
+        "workers": [
+          {
+            "name": "aries.automations",
+            "state": "running",
+            "alive": true,
+            "last_tick": "2026-10-06T09:46:17.710015",
+            "every_seconds": 60,
+            "check_every_s": 60,
+            "enabled": true,
+            "error": null
+          },
+          {
+            "name": "aries.shell.watchdog",
+            "state": "running",
+            "alive": true,
+            "last_tick": "2026-10-06T09:46:33.639160",
+            "every_seconds": 15,
+            "check_every_s": 15,
+            "enabled": true,
+            "error": null
+          },
+          {
+            "name": "aries.workspace",
+            "state": "running",
+            "alive": true,
+            "last_tick": "2026-10-06T09:46:36.681896",
+            "every_seconds": 2,
+            "check_every_s": 2,
+            "enabled": true,
+            "error": null
+          },
+          {
+            "name": "autopilot",
+            "state": "running",
+            "alive": true,
+            "last_tick": "2026-10-06T09:46:17.796439",
+            "every_seconds": 72000,
+            "check_every_s": 900,
+            "enabled": false,
+            "error": null
+          },
+          {
+            "name": "housekeeping",
+            "state": "running",
+            "alive": true,
+            "last_tick": "2026-10-06T09:46:17.796546",
+            "every_seconds": 21600,
+            "check_every_s": 1800,
+            "enabled": true,
+            "error": null
+          },
+          {
+            "name": "learning",
+            "state": "running",
+            "alive": true,
+            "last_tick": "2026-10-06T09:46:17.797521",
+            "every_seconds": 86400,
+            "check_every_s": 1800,
+            "enabled": true,
+            "error": null
+          },
+          {
+            "name": "scheduler",
+            "state": "running",
+            "alive": true,
+            "last_tick": "2026-10-06T09:46:17.798504",
+            "every_seconds": 30,
+            "check_every_s": 30,
+            "enabled": true,
+            "error": null
+          },
+          {
+            "name": "triggers",
+            "state": "running",
+            "alive": true,
+            "last_tick": "2026-10-06T09:46:17.799524",
+            "every_seconds": 600,
+            "check_every_s": 120,
+            "enabled": true,
+            "error": null
+          }
+        ]
+      },
+      {
+        "component": "ai_provider",
+        "status": "unknown",
+        "detail": "Ollama at http://localhost:11434 \u00b7 not verified live",
+        "probe": "local",
+        "checked_at": "2026-10-06T09:46:38.368848+00:00",
+        "reason": "no live probe on the hot path",
+        "provider": "ollama",
+        "observed": {
+          "calls": 0
+        }
+      },
+      {
+        "component": "execution_gates",
+        "status": "ok",
+        "detail": "dry_run=False \u00b7 live_tools=['desktop.open_url', 'desktop.open_app', 'aries.open_section', 'aries.run_automation']",
+        "probe": "local",
+        "checked_at": "2026-10-06T09:46:38.368866+00:00",
+        "dry_run": false,
+        "live_tools": [
+          "desktop.open_url",
+          "desktop.open_app",
+          "aries.open_section",
+          "aries.run_automation"
+        ],
+        "executing_live": true
+      }
+    ],
+    "summary": {
+      "counts": {
+        "ok": 5,
+        "unknown": 1
+      },
+      "worst": "ok",
+      "unverified": [
+        "ai_provider"
+      ],
+      "failing": []
+    }
+  },
+  "/api/aries/maintenance": {
+    "active": false,
+    "expires_in_seconds": 0,
+    "workspace_running": [],
+    "automations_running": [],
+    "ready_to_restart": false,
+    "scope": "Workspace queue and automation runner; existing single core process"
+  },
+  "at": 1791279998.3708713
+}

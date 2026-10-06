@@ -1,0 +1,24 @@
+--- test_assembly_isolates_memory_failure_and_preserves_coverage
+PASS  memory outage does not erase task context
+PASS  raw provider exception is not copied to prompt
+PASS  unavailable project and files remain explicit
+PASS  bounded history warning reaches planner
+PASS  planner retains provenance and hash
+--- test_cached_news_rechecks_permissions_and_freshness
+PASS  only permitted fresh undismissed news survives
+PASS  cache never claims a live fetch
+PASS  untrusted text cannot become instructions
+PASS  news choices stay personal
+PASS  source privacy policy is preserved
+--- test_irrelevant_goals_do_not_scan_extra_domains
+PASS  simple command activates no extra source
+--- test_task_scope_staleness_and_corrupt_records
+PASS  only related historical task survives
+PASS  history cannot claim current state
+PASS  task context remains local-only
+PASS  task hint expires within five minutes
+PASS  corrupt record disclosed
+PASS  shared failure words cannot cross project identity
+PASS  shared failure words cannot cross project identity
+PASS  bounded history exposes truncation
+ALL PASSED

@@ -1,0 +1,89 @@
+{"ts": "2026-10-06T12:02:32.682308+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T12:02:32.682603+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_a_question_is_answered_not_failed
+PASS  a request that asks nothing of the machine ends answered
+PASS  the reply is shown as the answer
+PASS  and is not recorded as a gap
+PASS  a supported task that gives up is still a failure, not an answer
+--- test_browser_scenario_and_unavailable_browser
+PASS  browser goal requires both open and observed read
+PASS  unavailable browser cannot become done
+--- test_budget_and_unsupported_goal
+PASS  action budget cannot be exceeded
+PASS  unsupported semantic goal cannot be marked done
+--- test_descriptor_path_and_search_goal_false_positive_controls
+PASS  parent symlink cannot redirect file syscall
+PASS  unrelated search state cannot satisfy query
+PASS  unrelated search state cannot satisfy query
+PASS  unrelated search state cannot satisfy query
+PASS  observed exact search URL satisfies query
+--- test_file_workflow_and_persistent_api
+PASS  file scenario completes only with OS verified bytes
+PASS  model completion prose is not the final answer
+PASS  each executed step has execution and verification evidence
+PASS  explicit lifecycle persisted
+PASS  measured tokens and calls persist
+{"ts": "2026-10-06T12:02:35.095364+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  persisted API 
+{"ts": "2026-10-06T12:02:35.099745+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  persisted API /steps
+{"ts": "2026-10-06T12:02:35.103683+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  persisted API /evidence
+{"ts": "2026-10-06T12:02:35.107328+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 404 Not Found\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  missing task returns 404
+--- test_finish_empty_unrelated_and_changed_state
+PASS  finish without evidence remains failed and bounded
+PASS  unrelated verified action cannot satisfy goal
+PASS  finish reobserves changed external state
+--- test_invalid_model_retry_is_recorded_and_bounded
+PASS  invalid JSON stops after two attempts
+PASS  invalid raw output persisted
+PASS  unknown capability retry cannot execute unknown tool
+--- test_macedonian_measurement_finishes_as_a_verified_answer
+PASS  a measured Macedonian question is answered rather than reported partial
+PASS  the answer retains independent proof IDs
+PASS  the spoken answer comes from readings, never the model finish claim
+--- test_negative_control_real_missing_file
+PASS  negative control never reports done
+PASS  real read error and unsuccessful evidence retained
+--- test_observation_bound_and_natural_routing
+PASS  huge observations remain valid bounded JSON
+PASS  natural goal routed to registry agent
+PASS  natural goal routed to registry agent
+PASS  natural goal routed to registry agent
+PASS  natural goal routed to registry agent
+--- test_policy_and_approval_are_before_execution
+PASS  file create without user intent is rejected
+PASS  system path write rejected
+PASS  approval request persists frozen inputs without executing
+--- test_registry_and_schema_validation
+PASS  all fifteen M14 capabilities remain registered
+PASS  invalid decision is rejected: not json
+PASS  invalid decision is rejected: {}
+PASS  invalid decision is rejected: {"action": "execute", "capability":
+PASS  invalid decision is rejected: {"action": "execute", "capability":
+PASS  invalid decision is rejected: {"action": "execute", "capability":
+PASS  invalid decision is rejected: {"action": "finish", "capability": 
+PASS  duplicate registry entry rejected
+--- test_registry_extension_and_persist_before_boundaries
+PASS  new capability executes without modifying planner core
+PASS  execution and observation persisted before external boundaries
+PASS  extension needs independent goal oracle before done
+--- test_restart_keeps_history_and_never_replays_uncertain_write
+PASS  restart cannot replay uncertain create
+PASS  dynamic recovery explicitly refuses automatic replay
+--- test_system_storage_answer_is_computed_from_probe
+PASS  storage scenario completes
+PASS  highest filesystem is derived from measured data
+--- test_user_write_target_and_confirmation_policy
+PASS  known user target enforced before write
+PASS  known user content enforced before write
+PASS  existing model confirmation setting is honored
+PASS  concurrent approval queues exactly one frozen proposal
+PASS  approved frozen write executes once and verifies
+PASS  active elapsed time accumulates across approval resume
+--- test_verification_failure_and_later_recovery
+PASS  executor success is not verification success
+PASS  verification failures counted separately
+PASS  planner may change arguments after failure and complete
+ALL PASSED

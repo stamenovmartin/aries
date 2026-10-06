@@ -1,0 +1,487 @@
+{
+  "id": "15eccd4802694b2ea1dc3cb079bbdbd0",
+  "request": "Create a file called aries-m14-test.txt in /home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7 containing:\nARIES M14 verified execution\nThen read it back.",
+  "state": "done",
+  "updated_at": "2026-09-17T20:48:58.838236",
+  "created_at": "2026-09-17T20:48:44.479360",
+  "steps": [
+    {
+      "step_id": "8d7984f8bcdc4b86849916cd62ef400c",
+      "task_id": "15eccd4802694b2ea1dc3cb079bbdbd0",
+      "step_index": 0,
+      "kind": "capability",
+      "request": "file.write",
+      "planner_decision": {
+        "action": "execute",
+        "capability": "file.write",
+        "arguments": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+          "content": "ARIES M14 verified execution"
+        },
+        "reason": "",
+        "summary": "",
+        "evidence_refs": []
+      },
+      "capability": "file.write",
+      "args": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+        "content": "ARIES M14 verified execution"
+      },
+      "started_at": "2026-09-17T20:48:54.627989+00:00",
+      "finished_at": "2026-09-17T20:48:54.695360+00:00",
+      "execution_status": "observed",
+      "verification_status": "verified",
+      "observation": {
+        "verification": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+          "size": 28,
+          "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+          "inode": 19791956,
+          "observed_at": "2026-09-17T20:48:54.694650+00:00",
+          "text": "ARIES M14 verified execution"
+        },
+        "evidence_id": "f532d273f2e040b9a7274b7b75f20bf7"
+      },
+      "error": null,
+      "evidence_refs": [
+        "f532d273f2e040b9a7274b7b75f20bf7"
+      ],
+      "model_usage": {
+        "measured": {
+          "input_tokens": 3446,
+          "output_tokens": 86,
+          "total_tokens": 3532
+        },
+        "native": {
+          "eval_count": 86,
+          "prompt_eval_count": 3446,
+          "total_duration": 6481563217
+        },
+        "estimated": {
+          "input_tokens": 2788,
+          "output_tokens": 56,
+          "method": "character-count / 4 heuristic; not tokenizer measurement"
+        }
+      },
+      "state": "verified",
+      "transitions": [
+        {
+          "state": "planned",
+          "timestamp": "2026-09-17T20:48:53.097015+00:00"
+        },
+        {
+          "state": "proposed",
+          "timestamp": "2026-09-17T20:48:53.108159+00:00"
+        },
+        {
+          "state": "executing",
+          "timestamp": "2026-09-17T20:48:54.627999+00:00"
+        },
+        {
+          "state": "observed",
+          "timestamp": "2026-09-17T20:48:54.680792+00:00"
+        },
+        {
+          "state": "verified",
+          "timestamp": "2026-09-17T20:48:54.694845+00:00"
+        }
+      ],
+      "approved": true,
+      "execution_result": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+        "write_call_completed": true
+      },
+      "observation_ref": "9697b745ef3c4c8494e44703ffe5e9fc",
+      "verification": {
+        "met": true,
+        "type": "file_state",
+        "data": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+          "size": 28,
+          "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+          "inode": 19791956,
+          "observed_at": "2026-09-17T20:48:54.694650+00:00",
+          "text": "ARIES M14 verified execution"
+        }
+      },
+      "seconds": 0.0703,
+      "result": {
+        "state": "done",
+        "summary": "Independently verified",
+        "elapsed_seconds": 0.0703
+      }
+    },
+    {
+      "step_id": "e686b8bce17741abbec0e58848197634",
+      "task_id": "15eccd4802694b2ea1dc3cb079bbdbd0",
+      "step_index": 1,
+      "kind": "capability",
+      "request": "file.read",
+      "planner_decision": {
+        "action": "execute",
+        "capability": "file.read",
+        "arguments": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt"
+        },
+        "reason": "",
+        "summary": "",
+        "evidence_refs": []
+      },
+      "capability": "file.read",
+      "args": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt"
+      },
+      "started_at": "2026-09-17T20:48:56.715056+00:00",
+      "finished_at": "2026-09-17T20:48:56.734664+00:00",
+      "execution_status": "observed",
+      "verification_status": "verified",
+      "observation": {
+        "verification": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+          "size": 28,
+          "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+          "inode": 19791956,
+          "observed_at": "2026-09-17T20:48:56.734180+00:00",
+          "text": "ARIES M14 verified execution"
+        },
+        "evidence_id": "487090f83a95430381e2d961ff170352"
+      },
+      "error": null,
+      "evidence_refs": [
+        "487090f83a95430381e2d961ff170352"
+      ],
+      "model_usage": {
+        "measured": {
+          "input_tokens": 3722,
+          "output_tokens": 73,
+          "total_tokens": 3795
+        },
+        "native": {
+          "eval_count": 73,
+          "prompt_eval_count": 3722,
+          "total_duration": 1956567816
+        },
+        "estimated": {
+          "input_tokens": 2895,
+          "output_tokens": 44,
+          "method": "character-count / 4 heuristic; not tokenizer measurement"
+        }
+      },
+      "state": "verified",
+      "transitions": [
+        {
+          "state": "planned",
+          "timestamp": "2026-09-17T20:48:56.702637+00:00"
+        },
+        {
+          "state": "executing",
+          "timestamp": "2026-09-17T20:48:56.715065+00:00"
+        },
+        {
+          "state": "observed",
+          "timestamp": "2026-09-17T20:48:56.724629+00:00"
+        },
+        {
+          "state": "verified",
+          "timestamp": "2026-09-17T20:48:56.734309+00:00"
+        }
+      ],
+      "execution_result": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19791956,
+        "observed_at": "2026-09-17T20:48:56.724545+00:00",
+        "text": "ARIES M14 verified execution"
+      },
+      "observation_ref": "a0281d92c64547338dff5e7df3367c0a",
+      "verification": {
+        "met": true,
+        "type": "file_state",
+        "data": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+          "size": 28,
+          "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+          "inode": 19791956,
+          "observed_at": "2026-09-17T20:48:56.734180+00:00",
+          "text": "ARIES M14 verified execution"
+        }
+      },
+      "seconds": 0.0213,
+      "result": {
+        "state": "done",
+        "summary": "Independently verified",
+        "elapsed_seconds": 0.0213
+      }
+    }
+  ],
+  "cards": [
+    {
+      "title": "Verified goal result",
+      "text": "Verified file: /home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt\nARIES M14 verified execution",
+      "evidence": "c93d35c43c5d4f80b3084af42f14d8fa, 86e326598d024dc1a4e96192047d26e5"
+    }
+  ],
+  "gaps": [],
+  "agent_engine": "m14",
+  "collected_at": "2026-09-17T20:48:46.545012",
+  "evidence": [
+    {
+      "evidence_id": "9697b745ef3c4c8494e44703ffe5e9fc",
+      "type": "execution_observation",
+      "source": "file.write",
+      "timestamp": "2026-09-17T20:48:54.680816+00:00",
+      "step_id": "8d7984f8bcdc4b86849916cd62ef400c",
+      "verified": false,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+        "write_call_completed": true
+      }
+    },
+    {
+      "evidence_id": "f532d273f2e040b9a7274b7b75f20bf7",
+      "type": "file_state",
+      "source": "file.write",
+      "timestamp": "2026-09-17T20:48:54.694806+00:00",
+      "step_id": "8d7984f8bcdc4b86849916cd62ef400c",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19791956,
+        "observed_at": "2026-09-17T20:48:54.694650+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "a0281d92c64547338dff5e7df3367c0a",
+      "type": "execution_observation",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:48:56.724645+00:00",
+      "step_id": "e686b8bce17741abbec0e58848197634",
+      "verified": false,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19791956,
+        "observed_at": "2026-09-17T20:48:56.724545+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "487090f83a95430381e2d961ff170352",
+      "type": "file_state",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:48:56.734283+00:00",
+      "step_id": "e686b8bce17741abbec0e58848197634",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19791956,
+        "observed_at": "2026-09-17T20:48:56.734180+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "c93d35c43c5d4f80b3084af42f14d8fa",
+      "type": "file_state",
+      "source": "file.write",
+      "timestamp": "2026-09-17T20:48:58.836411+00:00",
+      "step_id": "8d7984f8bcdc4b86849916cd62ef400c",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19791956,
+        "observed_at": "2026-09-17T20:48:58.836348+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "86e326598d024dc1a4e96192047d26e5",
+      "type": "file_state",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:48:58.837717+00:00",
+      "step_id": "e686b8bce17741abbec0e58848197634",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19791956,
+        "observed_at": "2026-09-17T20:48:58.837670+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    }
+  ],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "Create a file called aries-m14-test.txt in /home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7 containing:\nARIES M14 verified execution\nThen read it back.",
+    "finished": true,
+    "max_steps": 8,
+    "contract": {
+      "supported": true,
+      "requirements": [
+        {
+          "capability": "file.write",
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+          "content_sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616"
+        },
+        {
+          "capability": "file.read",
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+          "content_sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-09-17T20:48:46.563150+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 3446,
+            "output_tokens": 86,
+            "total_tokens": 3532
+          },
+          "native": {
+            "eval_count": 86,
+            "prompt_eval_count": 3446,
+            "total_duration": 6481563217
+          },
+          "estimated": {
+            "input_tokens": 2788,
+            "output_tokens": 56,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"file.write\",\n  \"arguments\": {\n    \"path\": \"/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt\",\n    \"content\": \"ARIES M14 verified execution\"\n  }\n}",
+        "decision": {
+          "action": "execute",
+          "capability": "file.write",
+          "arguments": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt",
+            "content": "ARIES M14 verified execution"
+          },
+          "reason": "",
+          "summary": "",
+          "evidence_refs": []
+        },
+        "seconds": 6.525
+      },
+      {
+        "index": 1,
+        "timestamp": "2026-09-17T20:48:54.704616+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 3722,
+            "output_tokens": 73,
+            "total_tokens": 3795
+          },
+          "native": {
+            "eval_count": 73,
+            "prompt_eval_count": 3722,
+            "total_duration": 1956567816
+          },
+          "estimated": {
+            "input_tokens": 2895,
+            "output_tokens": 44,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"file.read\",\n  \"arguments\": {\n    \"path\": \"/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt\"\n  }\n}",
+        "decision": {
+          "action": "execute",
+          "capability": "file.read",
+          "arguments": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt"
+          },
+          "reason": "",
+          "summary": "",
+          "evidence_refs": []
+        },
+        "seconds": 1.9835
+      },
+      {
+        "index": 2,
+        "timestamp": "2026-09-17T20:48:56.743585+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 4070,
+            "output_tokens": 82,
+            "total_tokens": 4152
+          },
+          "native": {
+            "eval_count": 82,
+            "prompt_eval_count": 4070,
+            "total_duration": 2044051177
+          },
+          "estimated": {
+            "input_tokens": 3038,
+            "output_tokens": 30,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\n  \"action\": \"finish\",\n  \"evidence_refs\": [\"f532d273f2e040b9a7274b7b75f20bf7\", \"487090f83a95430381e2d961ff170352\"]\n}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "f532d273f2e040b9a7274b7b75f20bf7",
+            "487090f83a95430381e2d961ff170352"
+          ]
+        },
+        "seconds": 2.0775
+      }
+    ],
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-09-17T20:48:46.553748+00:00"
+    },
+    "metrics": {
+      "planner_calls": 3,
+      "number_of_steps": 2,
+      "execution_time": 0.0916,
+      "planner_time": 10.58603902699906,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 0,
+      "invalid_decisions": 0,
+      "wrong_capability_selections": 0,
+      "input_tokens": 11238,
+      "output_tokens": 241,
+      "total_tokens": 11479,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 8721,
+      "estimated_output_tokens": 130,
+      "task_final_status": "done",
+      "wall_seconds": 10.785,
+      "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+    },
+    "completion_checks": [
+      {
+        "at": "2026-09-17T20:48:58.838017+00:00",
+        "met": true,
+        "reason": "Verified file: /home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt\nARIES M14 verified execution"
+      }
+    ],
+    "summary": "Verified file: /home/stamenovmartin/Documents/ARIES-Demo/20260917T204843Z-1ae7a7/aries-m14-test.txt\nARIES M14 verified execution"
+  },
+  "final_evidence_refs": [
+    "c93d35c43c5d4f80b3084af42f14d8fa",
+    "86e326598d024dc1a4e96192047d26e5"
+  ]
+}

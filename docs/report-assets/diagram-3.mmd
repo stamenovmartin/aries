@@ -1,0 +1,30 @@
+flowchart TB
+  subgraph L1["СЛУШАЊЕ"]
+    direction LR
+    MIC["pw-record<br/>16 kHz mono"] --> VAD["Silero VAD · ONNX<br/>крај по 400 ms · cap 15 s"]
+    VAD --> LANG{"pick_language<br/>p ≥ 0.10?"}
+    LANG -->|Да| FORCE["форсиран јазик<br/>+ word-list prompt"]
+    LANG -->|Не| FREE["слободно<br/>мултијазично"]
+    FORCE --> W["faster-whisper<br/>large-v3 · beam 1"]
+    FREE --> W
+  end
+  subgraph L2["ПОРТА · што смее да продолжи"]
+    direction LR
+    H{"Халуцинација?<br/>logprob · compression<br/>prompt echo · caption"} -->|Да| DROP["отфрли и запиши<br/>со оценките"]
+    H -->|Не| WAKE{"wake_match<br/>14 форми · цел збор"}
+    WAKE -->|Не| SILENT["молчи:<br/>не се јавува"]
+    WAKE -->|само име| FOLLOW["слушај 6 s пак,<br/>без втор wake word"]
+  end
+  subgraph L3["ДЕЈСТВО И ОДГОВОР"]
+    direction LR
+    ACT["POST /shell/act<br/>истиот router што<br/>го користи и лентата"] --> POLL["чекај траен исход<br/>до 8 s по ID"]
+    POLL --> REP["replies.sentence()<br/>мерење → реченица"]
+    REP --> TTS["RHVoice Kiko<br/>68 ms до прв звук"]
+    TTS --> PLAY["pw-play · blocking:<br/>не слуша додека зборува"]
+  end
+  L1 --> L2
+  L2 -->|"име + команда"| L3
+  classDef working fill:#102d31,stroke:#48d9ba,color:#e5fff8,stroke-width:2px
+  classDef partial fill:#302918,stroke:#e8b95b,color:#fff4d8,stroke-width:2px
+  class MIC,VAD,LANG,FORCE,FREE,W,H,DROP,WAKE,SILENT,FOLLOW,ACT,REP,TTS,PLAY working
+  class POLL partial

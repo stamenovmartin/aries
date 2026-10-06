@@ -1,0 +1,14 @@
+--- test_health_measurement_stays_available_under_bad_sensors
+PASS  diagnostic health pass remains available
+--- test_registered_attention_rejects_hot_and_blind_sensors_before_lifecycle
+PASS  actual batch admission refuses too_hot
+PASS  no lifecycle/model execution after refusal
+PASS  actual batch admission refuses cpu_busy
+PASS  no lifecycle/model execution after refusal
+PASS  actual batch admission refuses sensor_unavailable
+PASS  no lifecycle/model execution after refusal
+--- test_unattended_batch_requires_permission_but_explicit_cool_run_can_start
+PASS  unattended inference batch cannot borrow permission from light work
+PASS  explicit cool run reaches lifecycle once
+PASS  completed lifecycle releases resource tracking
+ALL PASSED

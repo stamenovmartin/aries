@@ -1,0 +1,24 @@
+{
+  "problem": [
+    "Spoken compound measurements required semicolons and named follow-ups fell back to planning.",
+    "Verified file references were English-only and non-dictionary readings could break context extraction.",
+    "Voice HTTP refusals were silent; tasks outlasting the initial wait never got an automatic spoken completion. File replies narrated verification metadata."
+  ],
+  "change": [
+    "Added complete-request recognition for natural MK, Latin and English measurement questions and named follow-ups. Unknown clauses refuse the direct path.",
+    "Added Macedonian and Latin references such as прочитај ја and otvori go, retaining 30-minute verified-source limits and ambiguity refusal.",
+    "Added audible clarification/connection/rate-limit feedback, bounded round-robin pending-goal polling between microphone captures, and final file-content replies with labelled length-limited previews. Actions are never resubmitted."
+  ],
+  "validation": [
+    "28 spoken-request/context checks, 12 existing file/context checks, 12 production queue integration checks, 148 workspace checks and 37 voice checks passed. Live smoke: core/API/database/UI passed; desktop checks failed while GNOME ScreenSaver.GetActive returned true (locked session).",
+    "Live провери ги дискот и меморијата goal7ff87ee263164d76bc7d438521b5f330 completed in5.485s. CPU follow-up queued behind an active file task, exposing the delayed-reply gap.",
+    "Live прочитај ја goal30b4260e02e74ff3800b0afc44e8ab40 retained original request and verified source reference, independently read the same test file, and completed in14.181s. New pending-result reader retrieved it without an execution retry."
+  ],
+  "limitations": [
+    "Delayed speech delivery is in-process: daemon restart loses pending speech tracking, while durable task results remain available. Tracking is capped at16 tasks and30minutes, with at most two0.3-second reads per capture cycle.",
+    "No new microphone-to-speaker acceptance recording. Live command/result paths and serve-loop speech calls were checked separately.",
+    "Natural parsing covers bounded measurement phrases; arbitrary multi-step requests still depend on the existing planner. Ambiguous files require a named choice.",
+    "Heavy active tasks can still delay measurements through shared concurrency policy. No model routing defaults were changed.",
+    "Correction to implementation lesson44: full live smoke did NOT pass. Locked GNOME suspended the desktop bridge; unlocked desktop acceptance remains pending. No unlock or logout was forced."
+  ]
+}

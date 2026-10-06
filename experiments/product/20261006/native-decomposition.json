@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "plan": {
+    "nodes": [
+      {
+        "id": "log_status",
+        "role": "system.status",
+        "goal": "Check system status",
+        "capabilities": [
+          "system.status"
+        ],
+        "depends_on": []
+      },
+      {
+        "id": "log_processes",
+        "role": "system.processes",
+        "goal": "List running processes",
+        "capabilities": [
+          "system.processes"
+        ],
+        "depends_on": []
+      }
+    ],
+    "reason": ""
+  },
+  "usage": {
+    "data_classes": [
+      "instruction",
+      "user_request"
+    ],
+    "egress_blocked_reason": "Privacy mode requires local inference",
+    "usage_details": null,
+    "reported_cost_usd": null,
+    "estimated_cost_usd": null,
+    "prompt_eval_count": 165,
+    "eval_count": 86,
+    "provider": "ollama",
+    "model": "qwen2.5:7b",
+    "execution_level": "local"
+  },
+  "seconds": 6.026034839999738
+}

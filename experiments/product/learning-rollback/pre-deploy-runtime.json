@@ -1,0 +1,163 @@
+{
+  "maintenance": {
+    "active": false,
+    "expires_in_seconds": 0,
+    "workspace_running": [],
+    "automations_running": [],
+    "ready_to_restart": false,
+    "scope": "Workspace queue and automation runner; existing single core process"
+  },
+  "runtime": {
+    "state": "RUNNING",
+    "means": "ARIES is running and everything inside it is working",
+    "summary": "8 workers alive, 6 automation(s) enabled",
+    "installed": true,
+    "enabled": true,
+    "api_reachable": true,
+    "components": [
+      {
+        "name": "database",
+        "kind": "storage",
+        "ok": true,
+        "detail": "answering",
+        "severity": "ok"
+      },
+      {
+        "name": "aries.automations",
+        "kind": "worker",
+        "ok": true,
+        "detail": "running",
+        "severity": "ok"
+      },
+      {
+        "name": "aries.shell.watchdog",
+        "kind": "worker",
+        "ok": true,
+        "detail": "running",
+        "severity": "ok"
+      },
+      {
+        "name": "aries.workspace",
+        "kind": "worker",
+        "ok": true,
+        "detail": "running",
+        "severity": "ok"
+      },
+      {
+        "name": "autopilot",
+        "kind": "worker",
+        "ok": true,
+        "detail": "running (switched off)",
+        "severity": "ok"
+      },
+      {
+        "name": "housekeeping",
+        "kind": "worker",
+        "ok": true,
+        "detail": "running",
+        "severity": "ok"
+      },
+      {
+        "name": "learning",
+        "kind": "worker",
+        "ok": true,
+        "detail": "running",
+        "severity": "ok"
+      },
+      {
+        "name": "scheduler",
+        "kind": "worker",
+        "ok": true,
+        "detail": "running",
+        "severity": "ok"
+      },
+      {
+        "name": "triggers",
+        "kind": "worker",
+        "ok": true,
+        "detail": "running",
+        "severity": "ok"
+      },
+      {
+        "name": "Attention Pass",
+        "kind": "automation",
+        "ok": true,
+        "detail": "nothing to read from 1 source(s)",
+        "severity": "ok"
+      },
+      {
+        "name": "Morning Brief",
+        "kind": "automation",
+        "ok": true,
+        "detail": "18 item(s) across 5 section(s): 18 decision(s) waiting for you",
+        "severity": "ok"
+      },
+      {
+        "name": "Topic Dashboards",
+        "kind": "automation",
+        "ok": true,
+        "detail": "Queued 3 topic dashboards; reused 0 pending",
+        "severity": "ok"
+      },
+      {
+        "name": "System Health Monitor",
+        "kind": "automation",
+        "ok": true,
+        "detail": "healthy \u2014 17 checks, nothing above threshold",
+        "severity": "ok"
+      },
+      {
+        "name": "Learning Loop",
+        "kind": "automation",
+        "ok": true,
+        "detail": "3 change(s) applied: 0 up, 3 down, 1 shadowed by your own settings; 1 left to you (ai)",
+        "severity": "ok"
+      },
+      {
+        "name": "News Radar",
+        "kind": "automation",
+        "ok": true,
+        "detail": "1 delivered from 1 source(s), 0 held, 3 duplicates merged, 110 rejected, 20 sources, 1 source(s) failed",
+        "severity": "ok"
+      }
+    ],
+    "problems": [],
+    "systemd": {
+      "available": true,
+      "reason": null,
+      "units": {
+        "aries.target": {
+          "name": "aries.target",
+          "loaded": true,
+          "active": "active",
+          "sub": "active",
+          "enabled": "enabled",
+          "since": "Tue 2026-10-06 10:42:41 CEST",
+          "pid": null,
+          "restarts": 0,
+          "result": "",
+          "running": false,
+          "detail": ""
+        },
+        "aries-core.service": {
+          "name": "aries-core.service",
+          "loaded": true,
+          "active": "active",
+          "sub": "running",
+          "enabled": "enabled",
+          "since": "Tue 2026-10-06 13:31:36 CEST",
+          "pid": 143805,
+          "restarts": 0,
+          "result": "success",
+          "running": true,
+          "detail": ""
+        }
+      }
+    },
+    "checked_at": "2026-10-06T14:07:35",
+    "process": {
+      "pid": 143805,
+      "started_at": "2026-10-06T11:31:37.214564"
+    }
+  }
+}

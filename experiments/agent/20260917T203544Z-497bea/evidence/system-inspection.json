@@ -1,0 +1,166 @@
+{
+  "evidence": [
+    {
+      "evidence_id": "b9db48a4932547a29886f91c57d06e71",
+      "type": "execution_observation",
+      "source": "system.storage",
+      "timestamp": "2026-09-17T20:36:08.657743+00:00",
+      "step_id": "89f242a4ab6945f1b782ad77a0d65966",
+      "verified": false,
+      "data": {
+        "probe": "statvfs",
+        "filesystems": [
+          {
+            "metric": "disk.used_pct",
+            "subject": "/",
+            "value": 5.4,
+            "unit": "%",
+            "detail": {
+              "free_gib": 409.79,
+              "size_gib": 433.09,
+              "fstype": "ext4",
+              "device": "/dev/sdc1"
+            },
+            "unavailable": null
+          },
+          {
+            "metric": "disk.used_pct",
+            "subject": "/boot/efi",
+            "value": 0.6,
+            "unit": "%",
+            "detail": {
+              "free_gib": 1.04,
+              "size_gib": 1.05,
+              "fstype": "vfat",
+              "device": "/dev/sdc2"
+            },
+            "unavailable": null
+          }
+        ],
+        "highest": {
+          "metric": "disk.used_pct",
+          "subject": "/",
+          "value": 5.4,
+          "unit": "%",
+          "detail": {
+            "free_gib": 409.79,
+            "size_gib": 433.09,
+            "fstype": "ext4",
+            "device": "/dev/sdc1"
+          },
+          "unavailable": null
+        },
+        "observed_at": "2026-09-17T20:36:08.657667+00:00"
+      }
+    },
+    {
+      "evidence_id": "dba42e980d9b4e559c2d3d2be8a6a357",
+      "type": "storage_probe",
+      "source": "system.storage",
+      "timestamp": "2026-09-17T20:36:08.665636+00:00",
+      "step_id": "89f242a4ab6945f1b782ad77a0d65966",
+      "verified": true,
+      "data": {
+        "probe": "statvfs",
+        "filesystems": [
+          {
+            "metric": "disk.used_pct",
+            "subject": "/",
+            "value": 5.4,
+            "unit": "%",
+            "detail": {
+              "free_gib": 409.79,
+              "size_gib": 433.09,
+              "fstype": "ext4",
+              "device": "/dev/sdc1"
+            },
+            "unavailable": null
+          },
+          {
+            "metric": "disk.used_pct",
+            "subject": "/boot/efi",
+            "value": 0.6,
+            "unit": "%",
+            "detail": {
+              "free_gib": 1.04,
+              "size_gib": 1.05,
+              "fstype": "vfat",
+              "device": "/dev/sdc2"
+            },
+            "unavailable": null
+          }
+        ],
+        "highest": {
+          "metric": "disk.used_pct",
+          "subject": "/",
+          "value": 5.4,
+          "unit": "%",
+          "detail": {
+            "free_gib": 409.79,
+            "size_gib": 433.09,
+            "fstype": "ext4",
+            "device": "/dev/sdc1"
+          },
+          "unavailable": null
+        },
+        "observed_at": "2026-09-17T20:36:08.665581+00:00"
+      }
+    },
+    {
+      "evidence_id": "9d971a8c939c484a8b523bb937ce1307",
+      "type": "storage_probe",
+      "source": "system.storage",
+      "timestamp": "2026-09-17T20:36:09.903678+00:00",
+      "step_id": "89f242a4ab6945f1b782ad77a0d65966",
+      "verified": true,
+      "data": {
+        "probe": "statvfs",
+        "filesystems": [
+          {
+            "metric": "disk.used_pct",
+            "subject": "/",
+            "value": 5.4,
+            "unit": "%",
+            "detail": {
+              "free_gib": 409.79,
+              "size_gib": 433.09,
+              "fstype": "ext4",
+              "device": "/dev/sdc1"
+            },
+            "unavailable": null
+          },
+          {
+            "metric": "disk.used_pct",
+            "subject": "/boot/efi",
+            "value": 0.6,
+            "unit": "%",
+            "detail": {
+              "free_gib": 1.04,
+              "size_gib": 1.05,
+              "fstype": "vfat",
+              "device": "/dev/sdc2"
+            },
+            "unavailable": null
+          }
+        ],
+        "highest": {
+          "metric": "disk.used_pct",
+          "subject": "/",
+          "value": 5.4,
+          "unit": "%",
+          "detail": {
+            "free_gib": 409.79,
+            "size_gib": 433.09,
+            "fstype": "ext4",
+            "device": "/dev/sdc1"
+          },
+          "unavailable": null
+        },
+        "observed_at": "2026-09-17T20:36:09.903656+00:00"
+      }
+    }
+  ],
+  "final_refs": [
+    "9d971a8c939c484a8b523bb937ce1307"
+  ]
+}

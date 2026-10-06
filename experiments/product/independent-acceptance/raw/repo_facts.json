@@ -1,0 +1,1761 @@
+{
+  "generated_at": "2026-10-06T15:10:24.383984+00:00",
+  "repo_root": "/home/stamenovmartin/aries",
+  "python": "3.12.14",
+  "note": "Every count here is taken from the live object or the authoritative source named in each section's 'method' field. No count is taken from a grep over source text, except where a grep-style number is reported explicitly for contrast.",
+  "capabilities": {
+    "method": "import aries.workspace.registry; len(registry._items)",
+    "total": 58,
+    "grep_style_count_in_registry_py": 15,
+    "grep_undercount_factor": 3.87,
+    "by_effect": {
+      "create": 1,
+      "desktop": 7,
+      "display": 1,
+      "file_mutation": 5,
+      "input": 2,
+      "network": 1,
+      "notify": 1,
+      "open": 10,
+      "read": 29,
+      "service": 1
+    },
+    "by_risk_level": {
+      "high": 2,
+      "low": 51,
+      "medium": 5
+    },
+    "requires_approval_true": 12,
+    "requires_approval_false": 46,
+    "requires_approval_names": [
+      "browser.download",
+      "desktop.close",
+      "display.set_brightness",
+      "file.copy",
+      "file.edit",
+      "file.move",
+      "file.rename",
+      "input.clipboard_write",
+      "input.type_text",
+      "network.wifi_connect",
+      "notification.send",
+      "system.service_control"
+    ],
+    "registering_module_counts": {
+      "aries.workspace.browser_capabilities": 11,
+      "aries.workspace.desktop_capabilities": 9,
+      "aries.workspace.file_capabilities": 6,
+      "aries.workspace.input_capabilities": 4,
+      "aries.workspace.network_capabilities": 5,
+      "aries.workspace.registry": 15,
+      "aries.workspace.screen_capabilities": 3,
+      "aries.workspace.system_capabilities": 5
+    },
+    "names": [
+      "browser.back",
+      "browser.click",
+      "browser.download",
+      "browser.elements",
+      "browser.forward",
+      "browser.navigate",
+      "browser.observe",
+      "browser.open",
+      "browser.read",
+      "browser.scroll",
+      "browser.search",
+      "browser.tabs",
+      "browser.type",
+      "browser.wait",
+      "desktop.close",
+      "desktop.focus",
+      "desktop.launch",
+      "desktop.maximize",
+      "desktop.minimize",
+      "desktop.move",
+      "desktop.observe",
+      "desktop.resize",
+      "desktop.tile",
+      "desktop.unmaximize",
+      "desktop.windows",
+      "display.brightness",
+      "display.set_brightness",
+      "file.copy",
+      "file.edit",
+      "file.exists",
+      "file.list",
+      "file.metadata",
+      "file.move",
+      "file.read",
+      "file.rename",
+      "file.search",
+      "file.semantic_search",
+      "file.write",
+      "input.clipboard_read",
+      "input.clipboard_write",
+      "input.editable_targets",
+      "input.type_text",
+      "network.status",
+      "network.wifi_connect",
+      "network.wifi_list",
+      "notification.send",
+      "screen.capture",
+      "screen.read",
+      "screen.screenshot",
+      "system.disk",
+      "system.packages",
+      "system.processes",
+      "system.service",
+      "system.service_control",
+      "system.services",
+      "system.status",
+      "system.storage",
+      "task.inspect"
+    ]
+  },
+  "spoken_catalogue": {
+    "method": "import aries.workspace.capabilities; len(CATALOGUE/SENSITIVE/WRITES/ARGUMENTS)",
+    "spoken_catalogue_entries": 54,
+    "spoken_sensitive_needing_approval": 9,
+    "spoken_that_write": 13,
+    "argument_schemas": 54,
+    "spoken_names": [
+      "abilities",
+      "agent_task",
+      "brief",
+      "brightness",
+      "browser_close",
+      "browser_fill",
+      "browser_follow",
+      "browser_inspect",
+      "browser_open",
+      "build_python",
+      "can_you",
+      "clipboard_read",
+      "clipboard_write",
+      "create_file",
+      "create_folder",
+      "disk",
+      "editable_fields",
+      "evaluation",
+      "find_files",
+      "health",
+      "inspect_app",
+      "install_app",
+      "learning_eval",
+      "list_apps",
+      "list_folder",
+      "media_control",
+      "move_file",
+      "network_status",
+      "open_app",
+      "open_path",
+      "open_url",
+      "package_info",
+      "play_music",
+      "processes",
+      "python_project",
+      "read_article",
+      "read_file",
+      "read_screen",
+      "refresh_news",
+      "remember",
+      "research",
+      "say",
+      "screenshot",
+      "search_web",
+      "service_control",
+      "services",
+      "set_brightness",
+      "set_volume",
+      "system",
+      "trash_file",
+      "type_text",
+      "ui_action",
+      "wifi_connect",
+      "wifi_list"
+    ],
+    "sensitive_names": [
+      "browser_fill",
+      "clipboard_write",
+      "install_app",
+      "move_file",
+      "service_control",
+      "trash_file",
+      "type_text",
+      "ui_action",
+      "wifi_connect"
+    ],
+    "writing_names": [
+      "browser_close",
+      "browser_fill",
+      "browser_follow",
+      "browser_open",
+      "build_python",
+      "create_file",
+      "create_folder",
+      "install_app",
+      "move_file",
+      "open_path",
+      "python_project",
+      "trash_file",
+      "ui_action"
+    ]
+  },
+  "api_routes": {
+    "method": "import aries.api.app; len(app.routes)",
+    "route_objects_total": 156,
+    "path_method_pairs_total": 160,
+    "aries_prefixed_route_objects": 104,
+    "unique_paths": 139,
+    "unique_aries_paths": 90,
+    "by_http_method": {
+      "DELETE": 7,
+      "GET": 86,
+      "HEAD": 4,
+      "PATCH": 2,
+      "POST": 59,
+      "PUT": 2
+    },
+    "aries_paths": [
+      "/api/aries/analytics",
+      "/api/aries/attention",
+      "/api/aries/attention/run",
+      "/api/aries/automations",
+      "/api/aries/automations/{automation_id}",
+      "/api/aries/automations/{automation_id}/enabled",
+      "/api/aries/automations/{automation_id}/metrics",
+      "/api/aries/automations/{automation_id}/run",
+      "/api/aries/automations/{automation_id}/runs",
+      "/api/aries/brief",
+      "/api/aries/brief/history",
+      "/api/aries/brief/{brief_id}/seen",
+      "/api/aries/command",
+      "/api/aries/connect",
+      "/api/aries/connect/{source_id}",
+      "/api/aries/connect/{source_id}/check",
+      "/api/aries/connections",
+      "/api/aries/data",
+      "/api/aries/data/clean",
+      "/api/aries/data/sweep",
+      "/api/aries/data/working-set",
+      "/api/aries/desktop/capabilities",
+      "/api/aries/health/latest",
+      "/api/aries/home",
+      "/api/aries/intelligence/ab-task",
+      "/api/aries/intelligence/classify",
+      "/api/aries/intelligence/cloud-baseline",
+      "/api/aries/intelligence/extract",
+      "/api/aries/intelligence/health",
+      "/api/aries/intelligence/route",
+      "/api/aries/intelligence/stats",
+      "/api/aries/interests",
+      "/api/aries/interests/score",
+      "/api/aries/interests/{topic}",
+      "/api/aries/learning/controls",
+      "/api/aries/learning/controls/reset",
+      "/api/aries/learning/controls/{event_id}/undo",
+      "/api/aries/learning/evidence",
+      "/api/aries/learning/explain/{subject:path}",
+      "/api/aries/learning/feedback",
+      "/api/aries/learning/feedback/{feedback_id}/scope",
+      "/api/aries/learning/history",
+      "/api/aries/learning/preferences",
+      "/api/aries/learning/proposals",
+      "/api/aries/learning/reversals",
+      "/api/aries/learning/task-reviews",
+      "/api/aries/learning/task-reviews/{goal_id}",
+      "/api/aries/maintenance",
+      "/api/aries/news",
+      "/api/aries/news/briefing",
+      "/api/aries/news/{item_id}/feedback",
+      "/api/aries/notifications",
+      "/api/aries/notifications/briefing",
+      "/api/aries/operator",
+      "/api/aries/operator/history",
+      "/api/aries/power",
+      "/api/aries/power/events",
+      "/api/aries/power/workloads",
+      "/api/aries/runtime",
+      "/api/aries/runtime/components",
+      "/api/aries/settings",
+      "/api/aries/settings/{key}",
+      "/api/aries/shell/act",
+      "/api/aries/shell/config",
+      "/api/aries/shell/guard",
+      "/api/aries/shell/guard/resume",
+      "/api/aries/shell/status",
+      "/api/aries/sources",
+      "/api/aries/sources/catalogue",
+      "/api/aries/sources/from-catalogue",
+      "/api/aries/sources/resolve",
+      "/api/aries/sources/types",
+      "/api/aries/sources/{source_id}",
+      "/api/aries/sources/{source_id}/feedback",
+      "/api/aries/worker",
+      "/api/aries/worker/tick",
+      "/api/aries/workspace",
+      "/api/aries/workspace/applications",
+      "/api/aries/workspace/capabilities",
+      "/api/aries/workspace/context",
+      "/api/aries/workspace/memories",
+      "/api/aries/workspace/memories/{memory_id}",
+      "/api/aries/workspace/memory-replacements/{proposal_id}/review",
+      "/api/aries/workspace/telemetry",
+      "/api/aries/workspace/{goal_id}",
+      "/api/aries/workspace/{goal_id}/approve",
+      "/api/aries/workspace/{goal_id}/cancel",
+      "/api/aries/workspace/{goal_id}/evidence",
+      "/api/aries/workspace/{goal_id}/recover",
+      "/api/aries/workspace/{goal_id}/steps"
+    ],
+    "all_paths": [
+      "/api/agents",
+      "/api/aries/analytics",
+      "/api/aries/attention",
+      "/api/aries/attention/run",
+      "/api/aries/automations",
+      "/api/aries/automations/{automation_id}",
+      "/api/aries/automations/{automation_id}/enabled",
+      "/api/aries/automations/{automation_id}/metrics",
+      "/api/aries/automations/{automation_id}/run",
+      "/api/aries/automations/{automation_id}/runs",
+      "/api/aries/brief",
+      "/api/aries/brief/history",
+      "/api/aries/brief/{brief_id}/seen",
+      "/api/aries/command",
+      "/api/aries/connect",
+      "/api/aries/connect/{source_id}",
+      "/api/aries/connect/{source_id}/check",
+      "/api/aries/connections",
+      "/api/aries/data",
+      "/api/aries/data/clean",
+      "/api/aries/data/sweep",
+      "/api/aries/data/working-set",
+      "/api/aries/desktop/capabilities",
+      "/api/aries/health/latest",
+      "/api/aries/home",
+      "/api/aries/intelligence/ab-task",
+      "/api/aries/intelligence/classify",
+      "/api/aries/intelligence/cloud-baseline",
+      "/api/aries/intelligence/extract",
+      "/api/aries/intelligence/health",
+      "/api/aries/intelligence/route",
+      "/api/aries/intelligence/stats",
+      "/api/aries/interests",
+      "/api/aries/interests/score",
+      "/api/aries/interests/{topic}",
+      "/api/aries/learning/controls",
+      "/api/aries/learning/controls/reset",
+      "/api/aries/learning/controls/{event_id}/undo",
+      "/api/aries/learning/evidence",
+      "/api/aries/learning/explain/{subject:path}",
+      "/api/aries/learning/feedback",
+      "/api/aries/learning/feedback/{feedback_id}/scope",
+      "/api/aries/learning/history",
+      "/api/aries/learning/preferences",
+      "/api/aries/learning/proposals",
+      "/api/aries/learning/reversals",
+      "/api/aries/learning/task-reviews",
+      "/api/aries/learning/task-reviews/{goal_id}",
+      "/api/aries/maintenance",
+      "/api/aries/news",
+      "/api/aries/news/briefing",
+      "/api/aries/news/{item_id}/feedback",
+      "/api/aries/notifications",
+      "/api/aries/notifications/briefing",
+      "/api/aries/operator",
+      "/api/aries/operator/history",
+      "/api/aries/power",
+      "/api/aries/power/events",
+      "/api/aries/power/workloads",
+      "/api/aries/runtime",
+      "/api/aries/runtime/components",
+      "/api/aries/settings",
+      "/api/aries/settings/{key}",
+      "/api/aries/shell/act",
+      "/api/aries/shell/config",
+      "/api/aries/shell/guard",
+      "/api/aries/shell/guard/resume",
+      "/api/aries/shell/status",
+      "/api/aries/sources",
+      "/api/aries/sources/catalogue",
+      "/api/aries/sources/from-catalogue",
+      "/api/aries/sources/resolve",
+      "/api/aries/sources/types",
+      "/api/aries/sources/{source_id}",
+      "/api/aries/sources/{source_id}/feedback",
+      "/api/aries/worker",
+      "/api/aries/worker/tick",
+      "/api/aries/workspace",
+      "/api/aries/workspace/applications",
+      "/api/aries/workspace/capabilities",
+      "/api/aries/workspace/context",
+      "/api/aries/workspace/memories",
+      "/api/aries/workspace/memories/{memory_id}",
+      "/api/aries/workspace/memory-replacements/{proposal_id}/review",
+      "/api/aries/workspace/telemetry",
+      "/api/aries/workspace/{goal_id}",
+      "/api/aries/workspace/{goal_id}/approve",
+      "/api/aries/workspace/{goal_id}/cancel",
+      "/api/aries/workspace/{goal_id}/evidence",
+      "/api/aries/workspace/{goal_id}/recover",
+      "/api/aries/workspace/{goal_id}/steps",
+      "/api/audit",
+      "/api/context",
+      "/api/context/{module}/{name}",
+      "/api/environment",
+      "/api/environment/go-live",
+      "/api/evals/cases",
+      "/api/evals/run",
+      "/api/evals/runs",
+      "/api/evals/runs/{run_id}",
+      "/api/events",
+      "/api/events/propose",
+      "/api/execution/plans/{plan_key}/steps/{step}/reconcile",
+      "/api/execution/recent",
+      "/api/execution/tool",
+      "/api/feedback",
+      "/api/health",
+      "/api/learning/distill",
+      "/api/learning/rules",
+      "/api/logs",
+      "/api/memory",
+      "/api/memory/ask",
+      "/api/memory/recall",
+      "/api/observability/metrics",
+      "/api/observability/workers",
+      "/api/observability/workers/{name}/run",
+      "/api/orchestration/plan",
+      "/api/proposals",
+      "/api/proposals/{proposal_id}/approve",
+      "/api/proposals/{proposal_id}/reject",
+      "/api/route",
+      "/api/scheduler",
+      "/api/scheduler/tasks/{task_id}",
+      "/api/scheduler/tick",
+      "/api/scheduler/{scheduled_id}",
+      "/api/settings/credentials",
+      "/api/settings/credentials/{key}/revoke",
+      "/api/tasks",
+      "/api/tasks/{task_id}",
+      "/api/tasks/{task_id}/approve",
+      "/api/tasks/{task_id}/cancel",
+      "/api/tasks/{task_id}/reject",
+      "/api/tasks/{task_id}/run",
+      "/api/tools",
+      "/api/workflows",
+      "/docs",
+      "/docs/oauth2-redirect",
+      "/openapi.json",
+      "/redoc"
+    ]
+  },
+  "database": {
+    "method": "sqlite3.connect(\"file:var/aries.db?mode=ro\", uri=True); SELECT FROM sqlite_master",
+    "path": "/home/stamenovmartin/aries/var/aries.db",
+    "size_bytes": 271585280,
+    "tables_total": 45,
+    "tables_including_sqlite_internal": 45,
+    "aries_prefixed_tables": 23,
+    "views": 0,
+    "indexes": 119,
+    "table_names": [
+      "action_proposals",
+      "agent_steps",
+      "api_tokens",
+      "approval_requests",
+      "aries_automation_runs",
+      "aries_briefs",
+      "aries_budget_reservations",
+      "aries_feedback",
+      "aries_goal_budgets",
+      "aries_health_samples",
+      "aries_intelligence_events",
+      "aries_interests",
+      "aries_learning_changes",
+      "aries_learning_controls",
+      "aries_learning_evidence_uses",
+      "aries_news_items",
+      "aries_notifications",
+      "aries_resource_events",
+      "aries_reversals",
+      "aries_routing_cache",
+      "aries_settings",
+      "aries_sources",
+      "aries_working_set",
+      "aries_workspace_conclusion_sources",
+      "aries_workspace_conclusions",
+      "aries_workspace_goals",
+      "aries_workspace_memories",
+      "artifacts",
+      "audit_events",
+      "automation_logs",
+      "chat_messages",
+      "eval_cases",
+      "eval_results",
+      "eval_runs",
+      "execution_operations",
+      "execution_plans",
+      "execution_steps",
+      "feedback",
+      "learned_rules",
+      "memory_items",
+      "scheduled_tasks",
+      "stored_credentials",
+      "task_runs",
+      "tasks",
+      "users"
+    ],
+    "row_counts": {
+      "action_proposals": 36,
+      "agent_steps": 2672,
+      "api_tokens": 0,
+      "approval_requests": 16,
+      "aries_automation_runs": 1547,
+      "aries_briefs": 55,
+      "aries_budget_reservations": 34,
+      "aries_feedback": 83,
+      "aries_goal_budgets": 7,
+      "aries_health_samples": 16306,
+      "aries_intelligence_events": 4599,
+      "aries_interests": 6,
+      "aries_learning_changes": 38,
+      "aries_learning_controls": 0,
+      "aries_learning_evidence_uses": 0,
+      "aries_news_items": 6517,
+      "aries_notifications": 667,
+      "aries_resource_events": 3,
+      "aries_reversals": 1,
+      "aries_routing_cache": 3,
+      "aries_settings": 34,
+      "aries_sources": 26,
+      "aries_working_set": 8,
+      "aries_workspace_conclusion_sources": 65,
+      "aries_workspace_conclusions": 65,
+      "aries_workspace_goals": 8041,
+      "aries_workspace_memories": 65,
+      "artifacts": 0,
+      "audit_events": 21859,
+      "automation_logs": 298204,
+      "chat_messages": 0,
+      "eval_cases": 0,
+      "eval_results": 0,
+      "eval_runs": 0,
+      "execution_operations": 1045,
+      "execution_plans": 0,
+      "execution_steps": 0,
+      "feedback": 0,
+      "learned_rules": 0,
+      "memory_items": 0,
+      "scheduled_tasks": 0,
+      "stored_credentials": 0,
+      "task_runs": 1343,
+      "tasks": 1344,
+      "users": 0
+    },
+    "total_rows_all_tables": 364689
+  },
+  "source_size": {
+    "method": "pathlib rglob(\"*.py\"), __pycache__ excluded; physical line count",
+    "aries": {
+      "files": 203,
+      "lines": 40787,
+      "blank_lines": 5637,
+      "comment_lines": 2320,
+      "code_or_docstring_lines": 32830,
+      "bytes": 2055454
+    },
+    "aries_ui": {
+      "files": 29,
+      "lines": 5614,
+      "blank_lines": 716,
+      "comment_lines": 106,
+      "code_or_docstring_lines": 4792,
+      "bytes": 260897
+    },
+    "tests": {
+      "files": 112,
+      "lines": 20692,
+      "blank_lines": 3179,
+      "comment_lines": 487,
+      "code_or_docstring_lines": 17026,
+      "bytes": 1072783
+    },
+    "scripts": {
+      "files": 1,
+      "lines": 31,
+      "blank_lines": 6,
+      "comment_lines": 1,
+      "code_or_docstring_lines": 24,
+      "bytes": 858
+    },
+    "eval": {
+      "files": 21,
+      "lines": 3749,
+      "blank_lines": 423,
+      "comment_lines": 123,
+      "code_or_docstring_lines": 3203,
+      "bytes": 198726
+    },
+    "experiments": {
+      "files": 119,
+      "lines": 19156,
+      "blank_lines": 2076,
+      "comment_lines": 1003,
+      "code_or_docstring_lines": 16077,
+      "bytes": 1021019
+    },
+    "aries_plus_aries_ui": {
+      "files": 232,
+      "lines": 46401
+    },
+    "repo_wide_python_excluding_venv_and_vendor": {
+      "files": 513,
+      "lines": 95940,
+      "excluded": [
+        ".git",
+        ".venv",
+        "__pycache__",
+        "node_modules",
+        "vendor"
+      ]
+    },
+    "vendor_python_files": 464,
+    "shell": {
+      "extensions_counted": [
+        ".js",
+        ".css",
+        ".json",
+        ".xml"
+      ],
+      "files": 18,
+      "lines": 4406
+    },
+    "session": {
+      "extensions_counted": [
+        ".sh",
+        ".desktop",
+        ".conf",
+        ".py"
+      ],
+      "files": 2,
+      "lines": 27
+    },
+    "share": {
+      "extensions_counted": [
+        ".desktop",
+        ".svg",
+        ".png",
+        ".xml",
+        ".json"
+      ],
+      "files": 13,
+      "lines": 649
+    }
+  },
+  "systemd_units": {
+    "method": "list repo systemd/ directory, split on filename suffix",
+    "total": 6,
+    "service": 4,
+    "timer": 1,
+    "target": 1,
+    "by_kind": {
+      "service": [
+        "aries-core.service",
+        "aries-endurance.service",
+        "aries-local-model.service",
+        "aries-voice.service"
+      ],
+      "target": [
+        "aries.target"
+      ],
+      "timer": [
+        "aries-endurance.timer"
+      ]
+    },
+    "names": [
+      "aries-core.service",
+      "aries-endurance.service",
+      "aries-endurance.timer",
+      "aries-local-model.service",
+      "aries-voice.service",
+      "aries.target"
+    ],
+    "installed_in_user_systemd_dir": [
+      "aries-core.service",
+      "aries-endurance.service",
+      "aries-endurance.timer",
+      "aries-local-model.service",
+      "aries-voice.service",
+      "aries.target",
+      "ollama.service"
+    ]
+  },
+  "scripts": {
+    "method": "list scripts/ recursively, __pycache__ excluded; os.access(X_OK)",
+    "files_total": 45,
+    "executable": 44,
+    "aries_prefixed": 36,
+    "by_extension": {
+      ".py": 1,
+      ".sh": 7,
+      ".sql": 1,
+      "no_extension": 36
+    },
+    "names": [
+      "aries",
+      "aries-agent-context",
+      "aries-agent-demo",
+      "aries-browser",
+      "aries-build-report",
+      "aries-build-technical-report",
+      "aries-capability-docs",
+      "aries-claude",
+      "aries-computer-benchmark",
+      "aries-demo",
+      "aries-dock",
+      "aries-e2e",
+      "aries-endurance",
+      "aries-fetch-embedder",
+      "aries-fetch-model",
+      "aries-fetch-rhvoice",
+      "aries-fetch-voice",
+      "aries-intelligence-ab",
+      "aries-intelligence-eval",
+      "aries-memory-eval",
+      "aries-news-demo",
+      "aries-production-check",
+      "aries-record-learning",
+      "aries-research",
+      "aries-service",
+      "aries-session",
+      "aries-session-doctor",
+      "aries-session-root",
+      "aries-session-root-uninstall",
+      "aries-shell",
+      "aries-smoke",
+      "aries-triage-queue",
+      "aries-ui",
+      "aries-update",
+      "aries-verification-table",
+      "aries-voice",
+      "init-db.sql",
+      "init_db.py",
+      "run_tests.sh",
+      "start.sh",
+      "test-background-mode.sh",
+      "test-session.sh",
+      "test-shell-api.sh",
+      "test-shell.sh",
+      "test.sh"
+    ],
+    "executable_names": [
+      "aries",
+      "aries-agent-context",
+      "aries-agent-demo",
+      "aries-browser",
+      "aries-build-report",
+      "aries-build-technical-report",
+      "aries-capability-docs",
+      "aries-claude",
+      "aries-computer-benchmark",
+      "aries-demo",
+      "aries-dock",
+      "aries-e2e",
+      "aries-endurance",
+      "aries-fetch-embedder",
+      "aries-fetch-model",
+      "aries-fetch-rhvoice",
+      "aries-fetch-voice",
+      "aries-intelligence-ab",
+      "aries-intelligence-eval",
+      "aries-memory-eval",
+      "aries-news-demo",
+      "aries-production-check",
+      "aries-record-learning",
+      "aries-research",
+      "aries-service",
+      "aries-session",
+      "aries-session-doctor",
+      "aries-session-root",
+      "aries-session-root-uninstall",
+      "aries-shell",
+      "aries-smoke",
+      "aries-triage-queue",
+      "aries-ui",
+      "aries-update",
+      "aries-verification-table",
+      "aries-voice",
+      "init_db.py",
+      "run_tests.sh",
+      "start.sh",
+      "test-background-mode.sh",
+      "test-session.sh",
+      "test-shell-api.sh",
+      "test-shell.sh",
+      "test.sh"
+    ]
+  },
+  "flags": {
+    "method": "import aries.flags; enumerate FLAGS and describe()",
+    "total": 14,
+    "currently_on": 13,
+    "currently_off": 1,
+    "default_on": 13,
+    "default_off": 1,
+    "names": [
+      "ARIES_CAP_TOPK",
+      "ARIES_COMPLETION_PROGRESS_GUARD",
+      "ARIES_CONTEXT_ENGINE",
+      "ARIES_CONTRACT_FINISH",
+      "ARIES_GOAL_TEAMS",
+      "ARIES_MK_FROZEN",
+      "ARIES_PLAN_MEMORY",
+      "ARIES_ROUTER_ABSTAIN",
+      "ARIES_STATE_SNAPSHOT",
+      "ARIES_TERMINAL_READ_FAILURE",
+      "ARIES_TILE_HIDPI",
+      "ARIES_TRACE_FEWSHOT",
+      "ARIES_TYPE_STRICT",
+      "ARIES_VERIFY_FEEDBACK"
+    ],
+    "off_now": [
+      "ARIES_GOAL_TEAMS"
+    ],
+    "primary_language": "en",
+    "listen_languages": [
+      "en"
+    ],
+    "supported_languages": [
+      "en",
+      "mk"
+    ],
+    "whisper_models_declared": [
+      "base",
+      "large-v3",
+      "large-v3-turbo"
+    ],
+    "whisper_models_present_on_disk": [
+      "var/models/faster-whisper-base",
+      "var/models/faster-whisper-large-v3"
+    ]
+  },
+  "brief_collectors": {
+    "method": "import aries.brief.sections; enumerate _COLLECTORS; split on _pending closure",
+    "total": 8,
+    "live": 5,
+    "declared_unavailable": 3,
+    "live_names": [
+      "automations",
+      "decisions",
+      "learning",
+      "news",
+      "system"
+    ],
+    "declared_unavailable_names": [
+      "calendar",
+      "email",
+      "projects"
+    ],
+    "declared_unavailable_reasons": {
+      "calendar": "no calendar is connected — Integrations (§22) is not built yet",
+      "email": "no mailbox is connected — Integrations (§21) is not built yet",
+      "projects": "project tracking (§13/05) is not built yet"
+    },
+    "names_via_public_api": [
+      "automations",
+      "calendar",
+      "decisions",
+      "email",
+      "learning",
+      "news",
+      "projects",
+      "system"
+    ]
+  },
+  "execution_budgets": {
+    "method": "import aries.workspace.orchestration; read constants, ROUTE and ALTERNATIVES",
+    "attempt_cap_capability_invocations_per_subgoal": 4,
+    "retry_cap_repeats_of_one_strategy": 2,
+    "alternative_cap_distinct_alternatives": 2,
+    "max_subgoals_fan_out_width": 4,
+    "ceiling": 4,
+    "aging_deferrals": 3,
+    "retry_backoff_seconds": [
+      1.0,
+      3.0
+    ],
+    "agent_max_steps_setting_default": 8,
+    "typed_error_codes_in_route_table": 9,
+    "route_verdict_counts": {
+      "reroute": 3,
+      "retry": 2,
+      "stop": 4
+    },
+    "typed_error_code_names": [
+      "AMBIGUOUS",
+      "AUTH_REQUIRED",
+      "CAPABILITY_UNAVAILABLE",
+      "NETWORK_ERROR",
+      "NON_RETRYABLE",
+      "PERMISSION_REQUIRED",
+      "TARGET_NOT_FOUND",
+      "TRANSIENT",
+      "VERIFICATION_FAILED"
+    ],
+    "primaries_with_declared_alternatives": 5,
+    "declared_alternatives_total": 5,
+    "declared_alternatives": {
+      "desktop.focus": [
+        "desktop.launch"
+      ],
+      "desktop.launch": [
+        "desktop.focus"
+      ],
+      "file.search": [
+        "file.semantic_search"
+      ],
+      "input.type_text": [
+        "input.clipboard_write"
+      ],
+      "screen.read": [
+        "screen.capture"
+      ]
+    }
+  },
+  "settings_schema": {
+    "method": "import aries.settings.schema; all_defs() / sections()",
+    "settings_total": 187,
+    "sections_total": 19,
+    "section_names": [
+      "ai",
+      "automations",
+      "autonomy",
+      "briefing",
+      "connect",
+      "data",
+      "general",
+      "health",
+      "intelligence",
+      "interests",
+      "learning",
+      "news",
+      "notifications",
+      "operator",
+      "power",
+      "privacy",
+      "shell",
+      "sources",
+      "workspace"
+    ],
+    "per_section": {
+      "ai": 9,
+      "automations": 4,
+      "autonomy": 3,
+      "briefing": 5,
+      "connect": 7,
+      "data": 11,
+      "general": 5,
+      "health": 21,
+      "intelligence": 17,
+      "interests": 3,
+      "learning": 16,
+      "news": 16,
+      "notifications": 4,
+      "operator": 6,
+      "power": 12,
+      "privacy": 4,
+      "shell": 17,
+      "sources": 4,
+      "workspace": 23
+    }
+  },
+  "automations": {
+    "method": "import aries; aries.automations.all_automations()",
+    "total": 7,
+    "uses_no_model": 7,
+    "uses_a_model": 0,
+    "names": [
+      "Attention Pass",
+      "Data Lifecycle",
+      "Learning Loop",
+      "Morning Brief",
+      "News Radar",
+      "System Health Monitor",
+      "Topic Dashboards"
+    ],
+    "specs": [
+      {
+        "name": "Attention Pass",
+        "enabled_setting": "connect.attention_enabled",
+        "interval_setting": null,
+        "time_setting": null,
+        "agents": []
+      },
+      {
+        "name": "Morning Brief",
+        "enabled_setting": "briefing.morning_enabled",
+        "interval_setting": null,
+        "time_setting": "briefing.morning_time",
+        "agents": []
+      },
+      {
+        "name": "Topic Dashboards",
+        "enabled_setting": "workspace.dashboard_enabled",
+        "interval_setting": null,
+        "time_setting": null,
+        "agents": []
+      },
+      {
+        "name": "Data Lifecycle",
+        "enabled_setting": "data.enabled",
+        "interval_setting": null,
+        "time_setting": null,
+        "agents": []
+      },
+      {
+        "name": "System Health Monitor",
+        "enabled_setting": "health.enabled",
+        "interval_setting": null,
+        "time_setting": null,
+        "agents": []
+      },
+      {
+        "name": "Learning Loop",
+        "enabled_setting": "learning.enabled",
+        "interval_setting": null,
+        "time_setting": null,
+        "agents": []
+      },
+      {
+        "name": "News Radar",
+        "enabled_setting": "news.enabled",
+        "interval_setting": null,
+        "time_setting": null,
+        "agents": []
+      }
+    ]
+  },
+  "tests": {
+    "method": "ast.parse each tests/**/test_*.py; count def test_* and check() calls",
+    "pytest_installed_in_venv": false,
+    "collected_tests": {
+      "UNOBTAINABLE": "this suite has no pytest and no non-executing collector; each file self-runs via run_module(). AST test-function count is reported instead."
+    },
+    "test_files": 102,
+    "test_files_top_level_only": 101,
+    "test_functions_ast": 819,
+    "check_assertions_ast": 3063,
+    "grep_style_def_test_count": 819,
+    "files_that_would_not_parse": [],
+    "per_file": {
+      "integration/test_background_mode.py": {
+        "test_functions": 0,
+        "check_calls": 18
+      },
+      "test_abstention_vocabulary.py": {
+        "test_functions": 4,
+        "check_calls": 18
+      },
+      "test_accessibility.py": {
+        "test_functions": 3,
+        "check_calls": 12
+      },
+      "test_agent_completion_progress.py": {
+        "test_functions": 3,
+        "check_calls": 4
+      },
+      "test_agent_execution.py": {
+        "test_functions": 17,
+        "check_calls": 56
+      },
+      "test_agent_replay.py": {
+        "test_functions": 2,
+        "check_calls": 9
+      },
+      "test_analytics.py": {
+        "test_functions": 21,
+        "check_calls": 97
+      },
+      "test_analytics_ui.py": {
+        "test_functions": 0,
+        "check_calls": 0
+      },
+      "test_api.py": {
+        "test_functions": 13,
+        "check_calls": 84
+      },
+      "test_attention_resource_policy.py": {
+        "test_functions": 3,
+        "check_calls": 6
+      },
+      "test_automation_breaker.py": {
+        "test_functions": 3,
+        "check_calls": 11
+      },
+      "test_automations.py": {
+        "test_functions": 9,
+        "check_calls": 39
+      },
+      "test_brief.py": {
+        "test_functions": 12,
+        "check_calls": 42
+      },
+      "test_browser.py": {
+        "test_functions": 3,
+        "check_calls": 8
+      },
+      "test_capability_failure_evidence.py": {
+        "test_functions": 3,
+        "check_calls": 8
+      },
+      "test_clarification.py": {
+        "test_functions": 5,
+        "check_calls": 9
+      },
+      "test_coding.py": {
+        "test_functions": 2,
+        "check_calls": 8
+      },
+      "test_connect.py": {
+        "test_functions": 26,
+        "check_calls": 82
+      },
+      "test_context_engine.py": {
+        "test_functions": 5,
+        "check_calls": 22
+      },
+      "test_context_sources.py": {
+        "test_functions": 4,
+        "check_calls": 18
+      },
+      "test_cpu_usage.py": {
+        "test_functions": 3,
+        "check_calls": 5
+      },
+      "test_db_concurrency.py": {
+        "test_functions": 2,
+        "check_calls": 5
+      },
+      "test_docs.py": {
+        "test_functions": 3,
+        "check_calls": 6
+      },
+      "test_endurance.py": {
+        "test_functions": 1,
+        "check_calls": 7
+      },
+      "test_execution_boundaries.py": {
+        "test_functions": 4,
+        "check_calls": 8
+      },
+      "test_feedback.py": {
+        "test_functions": 16,
+        "check_calls": 57
+      },
+      "test_finish_proposal.py": {
+        "test_functions": 5,
+        "check_calls": 11
+      },
+      "test_goal_budgets.py": {
+        "test_functions": 3,
+        "check_calls": 12
+      },
+      "test_goal_contracts.py": {
+        "test_functions": 5,
+        "check_calls": 12
+      },
+      "test_goal_graph.py": {
+        "test_functions": 6,
+        "check_calls": 18
+      },
+      "test_goal_graph_admission.py": {
+        "test_functions": 3,
+        "check_calls": 9
+      },
+      "test_goal_origin.py": {
+        "test_functions": 4,
+        "check_calls": 13
+      },
+      "test_goal_planner.py": {
+        "test_functions": 4,
+        "check_calls": 10
+      },
+      "test_health.py": {
+        "test_functions": 14,
+        "check_calls": 34
+      },
+      "test_inference_egress.py": {
+        "test_functions": 4,
+        "check_calls": 18
+      },
+      "test_input_capabilities.py": {
+        "test_functions": 13,
+        "check_calls": 51
+      },
+      "test_intelligence.py": {
+        "test_functions": 9,
+        "check_calls": 53
+      },
+      "test_interests.py": {
+        "test_functions": 17,
+        "check_calls": 67
+      },
+      "test_learning.py": {
+        "test_functions": 13,
+        "check_calls": 39
+      },
+      "test_learning_controls.py": {
+        "test_functions": 8,
+        "check_calls": 30
+      },
+      "test_learning_eval.py": {
+        "test_functions": 4,
+        "check_calls": 19
+      },
+      "test_learning_evidence_reuse.py": {
+        "test_functions": 6,
+        "check_calls": 17
+      },
+      "test_lifecycle.py": {
+        "test_functions": 16,
+        "check_calls": 45
+      },
+      "test_m15_browser.py": {
+        "test_functions": 1,
+        "check_calls": 9
+      },
+      "test_m15_desktop.py": {
+        "test_functions": 2,
+        "check_calls": 11
+      },
+      "test_m15_files_context.py": {
+        "test_functions": 2,
+        "check_calls": 15
+      },
+      "test_maintenance.py": {
+        "test_functions": 1,
+        "check_calls": 6
+      },
+      "test_media_autoplay.py": {
+        "test_functions": 2,
+        "check_calls": 6
+      },
+      "test_memory.py": {
+        "test_functions": 24,
+        "check_calls": 115
+      },
+      "test_memory_egress.py": {
+        "test_functions": 5,
+        "check_calls": 0
+      },
+      "test_memory_privacy.py": {
+        "test_functions": 6,
+        "check_calls": 19
+      },
+      "test_memory_responsiveness.py": {
+        "test_functions": 3,
+        "check_calls": 6
+      },
+      "test_memory_review.py": {
+        "test_functions": 5,
+        "check_calls": 21
+      },
+      "test_model_parameters.py": {
+        "test_functions": 8,
+        "check_calls": 32
+      },
+      "test_network_capabilities.py": {
+        "test_functions": 19,
+        "check_calls": 89
+      },
+      "test_news.py": {
+        "test_functions": 16,
+        "check_calls": 48
+      },
+      "test_news_summaries.py": {
+        "test_functions": 1,
+        "check_calls": 5
+      },
+      "test_notify.py": {
+        "test_functions": 6,
+        "check_calls": 22
+      },
+      "test_operator.py": {
+        "test_functions": 32,
+        "check_calls": 92
+      },
+      "test_orchestration.py": {
+        "test_functions": 23,
+        "check_calls": 96
+      },
+      "test_orchestration_integration.py": {
+        "test_functions": 3,
+        "check_calls": 11
+      },
+      "test_planner_context.py": {
+        "test_functions": 6,
+        "check_calls": 17
+      },
+      "test_planner_grammar.py": {
+        "test_functions": 5,
+        "check_calls": 14
+      },
+      "test_policy_artifacts.py": {
+        "test_functions": 11,
+        "check_calls": 0
+      },
+      "test_policy_evaluation.py": {
+        "test_functions": 4,
+        "check_calls": 16
+      },
+      "test_power.py": {
+        "test_functions": 31,
+        "check_calls": 136
+      },
+      "test_power_fail_closed.py": {
+        "test_functions": 3,
+        "check_calls": 14
+      },
+      "test_probe_verification.py": {
+        "test_functions": 2,
+        "check_calls": 12
+      },
+      "test_pronoun_arguments.py": {
+        "test_functions": 5,
+        "check_calls": 12
+      },
+      "test_read_file_language.py": {
+        "test_functions": 2,
+        "check_calls": 3
+      },
+      "test_replies.py": {
+        "test_functions": 9,
+        "check_calls": 21
+      },
+      "test_reversal.py": {
+        "test_functions": 10,
+        "check_calls": 41
+      },
+      "test_runaway.py": {
+        "test_functions": 4,
+        "check_calls": 18
+      },
+      "test_runtime.py": {
+        "test_functions": 14,
+        "check_calls": 50
+      },
+      "test_screen_capabilities.py": {
+        "test_functions": 8,
+        "check_calls": 59
+      },
+      "test_security.py": {
+        "test_functions": 15,
+        "check_calls": 42
+      },
+      "test_self_protection.py": {
+        "test_functions": 4,
+        "check_calls": 7
+      },
+      "test_service_control_approval.py": {
+        "test_functions": 7,
+        "check_calls": 35
+      },
+      "test_session.py": {
+        "test_functions": 14,
+        "check_calls": 51
+      },
+      "test_settings.py": {
+        "test_functions": 9,
+        "check_calls": 32
+      },
+      "test_settings_ui.py": {
+        "test_functions": 0,
+        "check_calls": 0
+      },
+      "test_shell.py": {
+        "test_functions": 43,
+        "check_calls": 126
+      },
+      "test_shell_watchdog.py": {
+        "test_functions": 2,
+        "check_calls": 8
+      },
+      "test_sources.py": {
+        "test_functions": 17,
+        "check_calls": 74
+      },
+      "test_speech.py": {
+        "test_functions": 9,
+        "check_calls": 48
+      },
+      "test_spoken_requests.py": {
+        "test_functions": 2,
+        "check_calls": 7
+      },
+      "test_system_capabilities.py": {
+        "test_functions": 9,
+        "check_calls": 89
+      },
+      "test_task_reviews.py": {
+        "test_functions": 4,
+        "check_calls": 17
+      },
+      "test_terminal_failure.py": {
+        "test_functions": 3,
+        "check_calls": 10
+      },
+      "test_tile_hidpi.py": {
+        "test_functions": 9,
+        "check_calls": 34
+      },
+      "test_tts_regression.py": {
+        "test_functions": 6,
+        "check_calls": 26
+      },
+      "test_type_text_refusal.py": {
+        "test_functions": 7,
+        "check_calls": 30
+      },
+      "test_ui_client.py": {
+        "test_functions": 13,
+        "check_calls": 53
+      },
+      "test_ui_contract.py": {
+        "test_functions": 11,
+        "check_calls": 37
+      },
+      "test_ui_render.py": {
+        "test_functions": 1,
+        "check_calls": 4
+      },
+      "test_verification_coverage.py": {
+        "test_functions": 5,
+        "check_calls": 18
+      },
+      "test_verification_recording.py": {
+        "test_functions": 3,
+        "check_calls": 11
+      },
+      "test_voice_flow.py": {
+        "test_functions": 15,
+        "check_calls": 68
+      },
+      "test_window_lifecycle.py": {
+        "test_functions": 4,
+        "check_calls": 17
+      },
+      "test_workspace.py": {
+        "test_functions": 22,
+        "check_calls": 73
+      },
+      "test_workspace_polling.py": {
+        "test_functions": 1,
+        "check_calls": 6
+      },
+      "test_workspace_recovery.py": {
+        "test_functions": 10,
+        "check_calls": 27
+      }
+    }
+  },
+  "generated_doc_counts": {
+    "method": "read the generated docs/ artefacts; cross-check the table row count against the live registry",
+    "capabilities_md_table_rows": 58,
+    "verification_table": {
+      "capabilities_in_the_registry_AS_THE_GENERATOR_COUNTS_IT": 54,
+      "with_dedicated_branch_in_verify": 9,
+      "re_reading_state_inside_execute": 24,
+      "proved_in_a_delegate_module": 18,
+      "proof_via_operator_run": 6,
+      "read_only_answer_is_the_observation": 11,
+      "changing_state_without_proving_it": 4,
+      "recorded_as_verified_in_the_live_ledger": 9
+    },
+    "verification_table_note": "The generator's own line 'capabilities in the registry' reports the SPOKEN catalogue size, not the typed registry size. Both exist in this repo and differ; a document citing this line is citing the spoken set."
+  },
+  "docs_and_experiments": {
+    "method": "list the trees",
+    "old_docs": {
+      "md_files": 38,
+      "md_lines": 6868,
+      "md_words": 59232,
+      "names": [
+        "README.md",
+        "architecture/CURRENT_GAPS.md",
+        "architecture/EVALUATION_PLAN.md",
+        "architecture/IMPLEMENTATION_ORDER.md",
+        "architecture/NEXT_AI_ARCHITECTURE.md",
+        "docs-mk/01_sto_e.md",
+        "docs-mk/02_stek.md",
+        "docs-mk/03_sloevi.md",
+        "docs-mk/04_podatoci.md",
+        "docs-mk/05_odluki.md",
+        "docs-mk/06_ograniceno.md",
+        "reports/ARIES_REPORT.md",
+        "reports/ARIES_TECHNICAL_REPORT_MK.md",
+        "research_package/00_EXECUTIVE_SUMMARY.md",
+        "research_package/01_EXPERIMENT_INVENTORY.md",
+        "research_package/02_DATA_PROVENANCE.md",
+        "research_package/03_RESULTS_TABLES.md",
+        "research_package/04_CASE_STUDIES.md",
+        "research_package/05_FAILURE_TAXONOMY.md",
+        "research_package/06_BASELINE_ABLATION_MATRIX.md",
+        "research_package/07_REPRODUCIBILITY.md",
+        "research_package/08_THESIS_SCOPE.md",
+        "research_package/15_CLAIM_EVIDENCE_MATRIX.md",
+        "research_package/RESEARCH_AUDIT.md",
+        "research_package/supervisor/BRIEFING.md",
+        "thesis/00_ABSTRACT.md",
+        "thesis/00_ABSTRACT_MK.md",
+        "thesis/01_INTRODUCTION.md",
+        "thesis/02_RELATED_WORK.md",
+        "thesis/03_SYSTEM.md",
+        "thesis/04_METHOD.md",
+        "thesis/05_RESULTS_ABSTENTION.md",
+        "thesis/06_RESULTS_VERIFICATION.md",
+        "thesis/07_DISCUSSION.md",
+        "thesis/08_LIMITATIONS.md",
+        "thesis/09_CONCLUSION.md",
+        "thesis/10_REFERENCES.md",
+        "thesis/FINKI_REQUIREMENTS.md"
+      ]
+    },
+    "docs": {
+      "md_files": 66,
+      "md_lines": 15619,
+      "md_words": 132545,
+      "names": [
+        "ADVANCED_WORKSPACE.md",
+        "AGENT_EXECUTION.md",
+        "API.md",
+        "ARCHITECTURE.md",
+        "AUTOMATIONS.md",
+        "BACKGROUND_VALIDATION.md",
+        "BUILD_JOURNAL.md",
+        "BUILD_RESULTS.md",
+        "CAPABILITIES.md",
+        "CHANGELOG.md",
+        "COMMAND_HISTORY.md",
+        "DATA.md",
+        "DEMO.md",
+        "DESIGN_SYSTEM.md",
+        "ENGINE_MIGRATION_GUIDE.md",
+        "ENGINE_README.md",
+        "ERROR_LOG.md",
+        "EXPERIMENTS.md",
+        "GITHUB_RESEARCH.md",
+        "INSTALLATION.md",
+        "INTEGRATIONS.md",
+        "INTEGRATION_CAPABILITY_SPEC.md",
+        "INTELLIGENCE.md",
+        "INTERESTS.md",
+        "JARVIS_ARCHITECTURE.md",
+        "JARVIS_PROGRESS.md",
+        "LEARNING.md",
+        "LEARNING_COMPARISON.md",
+        "MEMORY.md",
+        "MULTI_AGENT.md",
+        "OPERATOR.md",
+        "PERSONAL_NEWS.md",
+        "POWER.md",
+        "PRODUCTION_READINESS.md",
+        "PRODUCT_IDENTITY.md",
+        "RESEARCH_DEMO.md",
+        "ROADMAP.md",
+        "RUNTIME.md",
+        "SECURITY.md",
+        "SESSION.md",
+        "SETTINGS.md",
+        "SHELL.md",
+        "SOURCES.md",
+        "SPEECH.md",
+        "STATE_OF_ARIES.md",
+        "TASK_RECOVERY.md",
+        "TASK_REVIEW_LEARNING.md",
+        "TESTING.md",
+        "UI.md",
+        "VISION.md",
+        "WINDOWS_AND_LEARNING.md",
+        "WORKSPACE.md",
+        "decisions/ADR-0001-build-on-agentic-core.md",
+        "decisions/ADR-0002-runtime-uv-python312.md",
+        "decisions/ADR-0003-settings-precedence.md",
+        "decisions/ADR-0004-ui-technology.md",
+        "decisions/ADR-0005-runtime-model.md",
+        "decisions/ADR-0006-background-mode-inhibitor.md",
+        "decisions/ADR-0007-resource-policy.md",
+        "decisions/ADR-0008-shell-technology.md",
+        "publication/README.md",
+        "publication/m14-results.md",
+        "publication/paper.md",
+        "publication/slides.md",
+        "technical-report-assets/README.md",
+        "verification_table.md"
+      ]
+    },
+    "experiments": {
+      "top_level_dirs": 40,
+      "dir_names": [
+        "__pycache__",
+        "agent",
+        "architecture",
+        "aries100",
+        "assistant-benchmark",
+        "background",
+        "clarification-references",
+        "coordination",
+        "demo",
+        "document-review",
+        "documentation",
+        "dynamic_agents",
+        "endurance",
+        "evolution",
+        "hardening",
+        "intelligence",
+        "interests",
+        "learning",
+        "locking",
+        "memory",
+        "memory-preservation",
+        "model_router",
+        "news",
+        "operator",
+        "orchestrator",
+        "planner",
+        "product",
+        "readiness",
+        "remediation",
+        "router-en",
+        "router-ood",
+        "router-rejected-handoff",
+        "runtime",
+        "speech",
+        "stability-watch",
+        "ui",
+        "verification",
+        "verification-feedback",
+        "voice",
+        "workspace"
+      ],
+      "json_files": 598
+    },
+    "eval": {
+      "top_level_dirs": 7,
+      "dir_names": [
+        "agent_suite",
+        "locking",
+        "reporting",
+        "research_feedback",
+        "smoke",
+        "surfaces",
+        "triage_queue"
+      ],
+      "json_files": 125
+    }
+  },
+  "document_inventory": {
+    "method": "count files; read each PDF's own /Count page-tree value",
+    "per_folder": {
+      "architecture": {
+        "md_top_level": 4,
+        "md_recursive": 4,
+        "pdf": 0
+      },
+      "book": {
+        "md_top_level": 0,
+        "md_recursive": 0,
+        "pdf": 1
+      },
+      "docs-mk": {
+        "md_top_level": 6,
+        "md_recursive": 6,
+        "pdf": 1
+      },
+      "reports": {
+        "md_top_level": 2,
+        "md_recursive": 2,
+        "pdf": 2
+      },
+      "research_package": {
+        "md_top_level": 11,
+        "md_recursive": 12,
+        "pdf": 2
+      },
+      "thesis": {
+        "md_top_level": 13,
+        "md_recursive": 13,
+        "pdf": 1
+      }
+    },
+    "pdf_page_counts": {
+      "book/ARIES.pdf": 344,
+      "docs-mk/ARIES_Tehnicka_Dokumentacija.pdf": 21,
+      "reports/ARIES_REPORT.pdf": 31,
+      "reports/ARIES_TECHNICAL_REPORT_MK.pdf": 14,
+      "research_package/ARIES_Research_Evidence_Package.pdf": 36,
+      "research_package/ARIES_Supervisor_Briefing.pdf": 9,
+      "thesis/ARIES_Thesis.pdf": 32
+    },
+    "provenance_records": 58,
+    "provenance_commit": "f09b497",
+    "indexed_suite_runs": 15,
+    "thesis_numbered_chapter_files": 12
+  },
+  "package_layout": {
+    "method": "list aries/ directories containing __init__.py",
+    "aries_subpackages": 21,
+    "aries_subpackage_names": [
+      "analytics",
+      "api",
+      "automations",
+      "brief",
+      "connect",
+      "health",
+      "integrations",
+      "intelligence",
+      "interests",
+      "learning",
+      "lifecycle",
+      "news",
+      "notify",
+      "operator",
+      "power",
+      "runtime",
+      "settings",
+      "shell",
+      "sources",
+      "speech",
+      "workspace"
+    ],
+    "aries_subdirectories": 21,
+    "aries_ui_pages": 16,
+    "aries_ui_page_names": [
+      "analytics",
+      "applications",
+      "automations",
+      "brief",
+      "connections",
+      "dashboard",
+      "data",
+      "files",
+      "home",
+      "interests",
+      "learning",
+      "monitor",
+      "news",
+      "operator",
+      "settings",
+      "system"
+    ]
+  },
+  "git": {
+    "method": "git rev-list / git log",
+    "commits": 98,
+    "head": "9e224a83802b3e0031874444d5934641c29d5d61",
+    "branch": "master",
+    "first_commit_date": "2026-10-06T15:45:15+02:00",
+    "last_commit_date": "2026-10-06T15:45:15+02:00",
+    "tracked_files": 1599
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "started_at": "2026-10-01T00:28:57.139463+00:00",
+  "fixture_sha256": "7607c0b1dbf06bd72485e5c33ed15e081585d5fe1445b471d45df21a7cd47193",
+  "source_hashes_start": {
+    "aries/workspace/service.py": "624c2720dd921d2796c50f08e399937d449b8f1717d495879259a79352d8962e",
+    "aries/workspace/capabilities.py": "81c49dd637cd052d09cb89b113cc4be52acb84ed0a2179b3da091ded05d8b981",
+    "aries/workspace/agent.py": "38afaeaf77df383fbc28b19dd8a0894d2ffdd358f70f14aec85a0c8dcbad6fb2",
+    "aries/workspace/agent_planner.py": "b0e5ac73c789b4d7dc18afd1b174ff6976d6b59e2d36536f5f26dafb18c618bb",
+    "aries/intelligence/router.py": "7acac89631e91fd5bb125fbf4b0bdb28a8ae282c53346e496fbf30facb9806f9",
+    "aries/workspace/verification.py": "edb1974ede1f16d701d573e63649321b2f06b2a3c176f88424b1b7580110b9c6"
+  },
+  "core_invocation_start": "5b3bf6b74ca446d89298557052986188",
+  "cases": [
+    {
+      "id": "b001",
+      "category": "single_read",
+      "language": "en",
+      "started_at": "2026-10-01T00:28:57.150456+00:00",
+      "passed": true,
+      "goal_id": "a8a6d2732b68440db294fe169782866e",
+      "state": "done",
+      "steps_n": 1,
+      "capabilities": [
+        "read_file"
+      ],
+      "oracle": "independent complete-byte hashes or exact preview of owned files",
+      "planner": {
+        "planner_calls": null,
+        "invalid_decisions": null,
+        "retries": null
+      },
+      "latency_s": 54.12
+    },
+    {
+      "id": "b002",
+      "category": "single_read",
+      "language": "mk",
+      "started_at": "2026-10-01T00:29:51.270773+00:00",
+      "passed": false,
+      "goal_id": "50f6c7dbb45b4ed09008704d593de227",
+      "error": "TimeoutError: timed out",
+      "latency_s": 49.862
+    },
+    {
+      "id": "b003",
+      "category": "single_read",
+      "language": "en",
+      "started_at": "2026-10-01T00:30:41.132603+00:00",
+      "passed": false,
+      "error": "TimeoutError: timed out",
+      "latency_s": 20.02
+    }
+  ],
+  "scope": "60 goals:16 multi-step,12 single-file,4 directory,8 package,8 ambiguous,8 refusal,4 desktop. No destructive mutations, no automatic approval. Does not cover email, typing, HiDPI or service-control acceptance.",
+  "completed_n": 3,
+  "passed_n": 1,
+  "interrupted_due_to_live_api_timeout": true
+}

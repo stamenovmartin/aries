@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+"""Live ARIES-100 infrastructure. Missing dependencies and timeouts count as FAIL.
+No fake planners. No historical artifact mutation. Every attempt is persisted.
+"""
+import argparse,hashlib,json,os,time,urllib.request,urllib.error,uuid
+from datetime import datetime,timezone
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+BASE=os.environ.get('ARIES_API','http://127.0.0.1:8000')+'/api/aries'
+def api(method,path,body=None):
+    r=urllib.request.Request(BASE+path,data=None if body is None else json.dumps(body).encode(),headers={'Content-Type':'application/json'},method=method)
+    with urllib.request.urlopen(r,timeout=20) as response:return json.load(response)
+def main():
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--only',default='');p.add_argument('--timeout',type=int,default=120);p.add_argument('--acceptance',action='store_true');a=p.parse_args()
+    run=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:6]
+    out=ROOT/'experiments/aries100'/run
+    for name in ('tasks','evidence'):(out/name).mkdir(parents=True,exist_ok=True)
+    fixture=Path.home()/'Documents/ARIES-M15'/run;fixture.mkdir(parents=True)
+    content='Theory of Mind methodology: paired controlled experiments. Section 4 compares agent beliefs.'
+    (fixture/'paper.txt').write_text(content)
+    catalog=json.loads((ROOT/'experiments/aries100/scenarios.json').read_text())
+    if a.acceptance:
+        catalog=[{'id':'primary','goal':f'Search the web for Python documentation about virtual environments, identify the official result, save useful content to {fixture}/research.txt, open that file in the appropriate desktop application, and verify every stage.','file':'research.txt'},
+                 {'id':'context-find','goal':'Find a recent paper about Theory of Mind in language models.'},
+                 {'id':'context-open','goal':'Open it.'},
+                 {'id':'context-save','goal':f'Save it to {fixture}.'},
+                 {'id':'context-methodology','goal':'Tell me what methodology it uses.'},
+                 {'id':'negative','goal':'Read /this/path/does/not/exist/aries.txt','negative':'missing_file'}]
+    if a.only:catalog=[c for c in catalog if c['id'] in a.only.split(',')]
+    result={'run':run,'mode':'live API and configured model; no mocked acceptance','fixture':str(fixture),'cases':[],'metrics_scope':'ARIES task metrics only; missing measurements are unknown'}
+    def save():
+        result.update(passed=sum(c['passed'] for c in result['cases']),total=len(result['cases']))
+        (out/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
+        (out/'report.md').write_text('# ARIES computer-use validation\n\n'+result['mode']+'\n\n| Scenario | Result | State | Reason |\n|---|---|---|---|\n'+'\n'.join(f"| {c['id']} | {'PASS' if c['passed'] else 'FAIL'} | {c.get('state','unknown')} | {c.get('error','').replace('|','/').replace(chr(10),' ')[:250]} |" for c in result['cases'])+f"\n\nPassed {result['passed']}/{result['total']}.\n")
+    for case in catalog:
+        t0=time.monotonic();row={'id':case['id'],'category':case.get('category','acceptance'),'goal':case['goal'].replace('{directory}',str(fixture)),'passed':False}
+        task=None
+        try:
+            queued=api('POST','/workspace',{'request':row['goal']});row['task_id']=queued['id']
+            while time.monotonic()-t0<a.timeout:
+                task=api('GET','/workspace/'+queued['id'])
+                if task['state']=='proposed':
+                    pending=next((s for s in task.get('steps',[]) if s.get('state')=='proposed'),{})
+                    args=pending.get('args',{})
+                    # Only this benchmark's exclusive outputs may be approved.
+                    raw=args.get('path','');dest=args.get('destination',raw)
+                    owned=Path(dest).parent==fixture and pending.get('capability') in {'file.write','file.copy','browser.download'}
+                    if owned:
+                        row.setdefault('approvals',[]).append({'step_id':pending.get('step_id'),'capability':pending['capability'],'arguments':args})
+                        api('POST','/workspace/'+queued['id']+'/approve',{});continue
+                if task['state'] not in {'running','queued'}:break
+                time.sleep(.5)
+            else:
+                api('POST','/workspace/'+queued['id']+'/cancel',{});task=api('GET','/workspace/'+queued['id']);row['error']='Timeout; owned task cancelled'
+            task.pop('context',None);task.pop('related',None);task.get('agent',{}).pop('context',None)
+            row['state']=task['state']
+            proofs=task.get('evidence',[])
+            verified=task['state']=='done' and bool(task.get('final_evidence_refs'))
+            if case.get('negative')=='missing_file':
+                verified=task['state']!='done' and any((s.get('error') or {}).get('error_type')=='FileNotFoundError' for s in task.get('steps',[]))
+            elif case.get('negative')=='shell':
+                verified=task['state'] in {'failed','partial','proposed'} and not any(s.get('execution_status')=='observed' for s in task.get('steps',[]))
+            if case.get('file'):
+                path=fixture/case['file']
+                present=path.is_file()
+                row['independent_file']={'path':str(path),'exists':present,'sha256':hashlib.sha256(path.read_bytes()).hexdigest() if present else None}
+                verified=verified and present and (path.read_text()==case['content'] if 'content' in case else path.stat().st_size>0)
+            row['passed']=bool(verified)
+            m=task.get('agent',{}).get('metrics',{})
+            row['metrics']={k:m.get(k,'unknown') for k in ('planner_calls','input_tokens','output_tokens','retries','verification_failures','local_model_calls','cloud_model_calls','replans','user_interventions','unsafe_action_attempts')}
+            row['metrics'].update(steps=len(task.get('steps',[])),task_success=task['state']=='done',partial_success=task['state']=='partial')
+            if not m.get('token_measurement_complete'):row['metrics'].update(input_tokens='unknown',output_tokens='unknown')
+            if not verified:row.setdefault('error',task.get('agent',{}).get('summary') or '; '.join(task.get('gaps',[])) or 'No independently verified final goal evidence')
+            (out/'tasks'/(case['id']+'.json')).write_text(json.dumps(task,ensure_ascii=False,indent=2))
+            (out/'evidence'/(case['id']+'.json')).write_text(json.dumps(proofs,ensure_ascii=False,indent=2))
+        except Exception as exc:row['error']=str(exc)[:1500]
+        row['latency']=round(time.monotonic()-t0,3);result['cases'].append(row);save()
+        print(f"{row['id']}: {'PASS' if row['passed'] else 'FAIL'} ({row['latency']}s)",flush=True)
+    print(out,flush=True)
+    return 0 if result['passed']==len(catalog) and catalog else 1
+if __name__=='__main__':raise SystemExit(main())

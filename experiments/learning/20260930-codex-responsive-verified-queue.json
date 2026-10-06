@@ -1,0 +1,25 @@
+{
+  "problem": [
+    "CPU questions required a utilization reading which the probe did not emit.",
+    "Async memory tasks ran synchronous embedding and30-second model requests on the API event loop, stalling task reads; new utterances could remain undrained.",
+    "Orchestration was disconnected from the production worker; legacy dispatch could steal children as empty plans; routine measurements paid for cloud planning.",
+    "Spoken answers could select an older measurement or include bookkeeping cards."
+  ],
+  "change": [
+    "Added sampled CPU utilization from /proc/stat with unavailable handling for invalid counters and nonblocking sampling.",
+    "Offloaded model load, passage/query embedding and extraction to threads, retaining DB/cache mutation on event loop; pending speech now drains after in-flight inference.",
+    "Wired worker orchestration for read-only measurement requests, including semicolon-separated questions; shared capacity, permissions, queue cap, child isolation, parent roll-up and idempotence retained. Mutations remain on existing sequential approval path.",
+    "Voice selects final referenced evidence for measured answers and speaks parent answer text without bookkeeping headings."
+  ],
+  "validation": [
+    "CPU8, memory126 plus responsiveness6, orchestration99 plus production integration12, voice23, health33 pass. Full suite all other suites passed; context-reload test failed503, then both4096/8192 assertions passed after Ollama restart. Default8192 restored.",
+    "Live CPU goal538dac69ee414e5894cec49bd5c307ed answered;62 concurrent GET polls had no timeouts, max0.961s.",
+    "Live direct disk b9dfaabdd6e443379ed42a8c22eb3fe2 done2.910s; RAM+CPU28bd212ef7cc40b99bd113ec084e519a done6.492s, no planner calls. Result-derived speech contains actual measurements. Live smoke passed."
+  ],
+  "limitations": [
+    "No fresh microphone-to-speaker user acceptance recording; command/result and actual speech-call wiring tested.",
+    "Parallel production entry supports deterministic read-only measurements; arbitrary parallel mutations and their exact approval resume remain unsupported.",
+    "Ollama reload recovered after restart; root cause and recurrence not established. Historical SQLite locking is not declared solved.",
+    "No claim of full fictional Jarvis capability, arbitrary application mastery, or reliable local planning for every task."
+  ]
+}

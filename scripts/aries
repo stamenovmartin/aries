@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# The ARIES command line. Data lives under var/ unless DATABASE_URL says otherwise.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+export PYTHONPATH="$PWD/vendor/agentic-core:$PWD/vendor:$PWD:${PYTHONPATH:-}"
+export DATABASE_URL="${DATABASE_URL:-sqlite+aiosqlite:///$PWD/var/aries.db}"
+export DATA_DIR="${DATA_DIR:-$PWD/var}"
+exec .venv/bin/python -m aries.cli "$@"

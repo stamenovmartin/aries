@@ -1,0 +1,179 @@
+{
+  "positive": {
+    "id": "3b3f530d8f6941849c455ec29954635a",
+    "state": "done",
+    "seconds": 22.65,
+    "passed": true,
+    "expected": {
+      "/home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/a.txt": "c0919d27e1389cf3a3057b88ce7016d4c048220276d00ae86f440cef1d64099f",
+      "/home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/b.txt": "08dfa31e0bb07bb8bdf8fd937d2cbc2cf30f00a541c7d208f6a5688b914be28b"
+    },
+    "delivered": {
+      "/home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/a.txt": "c0919d27e1389cf3a3057b88ce7016d4c048220276d00ae86f440cef1d64099f",
+      "/home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/b.txt": "08dfa31e0bb07bb8bdf8fd937d2cbc2cf30f00a541c7d208f6a5688b914be28b"
+    },
+    "metrics": {
+      "planner_calls": 2,
+      "number_of_steps": 2,
+      "execution_time": 0.11069999999999999,
+      "planner_time": 18.666518706997522,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 0,
+      "invalid_decisions": 0,
+      "wrong_capability_selections": 0,
+      "tool_calls": 2,
+      "verifier_calls": 4,
+      "replans": 0,
+      "input_tokens": 6218,
+      "output_tokens": 160,
+      "total_tokens": 6378,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 4812,
+      "estimated_output_tokens": 106,
+      "task_final_status": "done",
+      "estimated_context_tokens": 1226,
+      "automatic_finish_proposals": 1,
+      "resource_budget": {
+        "root_id": "3b3f530d8f6941849c455ec29954635a",
+        "max_calls": 32,
+        "max_tokens": 250000,
+        "max_tools": 64,
+        "max_cost_micros": 0,
+        "deadline": 1791288162.498241,
+        "calls": 2,
+        "tokens": 6378,
+        "tools": 6,
+        "cost_micros": 0,
+        "held": false,
+        "pending": 0,
+        "unknown": 0,
+        "token_policy": "conservative admission estimate; measured overrun holds root",
+        "unpriced_cost_is_unknown": true
+      },
+      "wall_seconds": 19.074,
+      "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+    }
+  },
+  "negative": {
+    "id": "96077500eda040e18af14bc4366ddb60",
+    "state": "failed",
+    "seconds": 4.14,
+    "passed": true,
+    "metrics": {
+      "planner_calls": 1,
+      "number_of_steps": 1,
+      "execution_time": 0.0379,
+      "planner_time": 2.4313592739999876,
+      "capability_failures": 1,
+      "verification_failures": 0,
+      "retries": 0,
+      "invalid_decisions": 0,
+      "wrong_capability_selections": 0,
+      "tool_calls": 1,
+      "verifier_calls": 0,
+      "replans": 0,
+      "input_tokens": 2474,
+      "output_tokens": 81,
+      "total_tokens": 2555,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 2037,
+      "estimated_output_tokens": 54,
+      "task_final_status": "failed",
+      "estimated_context_tokens": 595,
+      "terminal_read_failures": 1,
+      "resource_budget": {
+        "root_id": "96077500eda040e18af14bc4366ddb60",
+        "max_calls": 32,
+        "max_tokens": 250000,
+        "max_tools": 64,
+        "max_cost_micros": 0,
+        "deadline": 1791288183.148967,
+        "calls": 1,
+        "tokens": 2555,
+        "tools": 1,
+        "cost_micros": 0,
+        "held": false,
+        "pending": 0,
+        "unknown": 0,
+        "token_policy": "conservative admission estimate; measured overrun holds root",
+        "unpriced_cost_is_unknown": true
+      },
+      "wall_seconds": 2.625,
+      "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+    }
+  },
+  "integrity": {
+    "verification_honesty": {
+      "goals_in_window": 8027,
+      "goals_scanned": 1,
+      "goal_scan_cap": 1,
+      "cutoff_utc": "2025-10-06 11:33:07.002462",
+      "truncated": true,
+      "note": "Only the 1 most recent of 8027 goals were parsed; this is a sample, not a total",
+      "verification_independence": "Recorded verification status alone does not establish verifier independence or falsifiability",
+      "n": 1,
+      "buckets": {
+        "failed": 1
+      },
+      "looks_successful": 0,
+      "unverified": 0,
+      "coverage": {
+        "rate": null,
+        "trials": 0,
+        "of": "steps that look successful (verified + accepted + unconfirmed)",
+        "reason": "nothing to divide by in this window"
+      },
+      "failed": 1,
+      "no_outcome_recorded": 0,
+      "by_capability": [
+        {
+          "capability": "file.read",
+          "buckets": {
+            "failed": 1
+          },
+          "unverified": 0,
+          "coverage": {
+            "rate": null,
+            "trials": 0,
+            "of": "steps that look successful (verified + accepted + unconfirmed)",
+            "reason": "nothing to divide by in this window"
+          }
+        }
+      ],
+      "capability_count": 1,
+      "means": "coverage is the share of apparently-successful sampled steps carrying a verified status. This does not measure whether the verifier was independent or falsifiable",
+      "metric": "verification_honesty",
+      "source": "aries_workspace_goals.result_json (steps)",
+      "cost": "one capped result_json parse, shared shape with outcomes_by_capability; ~27 ms / 600 goals measured",
+      "query_ms": 19.2,
+      "window_days": 365
+    },
+    "verification_contradictions": {
+      "n": 0,
+      "reason": "no scanned step has a verified or verification_failed status; this says nothing about unscanned goals or verifier independence",
+      "goals_in_window": 8027,
+      "goals_scanned": 1,
+      "goal_scan_cap": 1,
+      "cutoff_utc": "2025-10-06 11:33:07.021867",
+      "truncated": true,
+      "note": "Only the 1 most recent of 8027 goals were parsed; this is a sample, not a total",
+      "verification_independence": "Recorded verification status alone does not establish verifier independence or falsifiability",
+      "metric": "verification_contradictions",
+      "source": "aries_workspace_goals.result_json (steps)",
+      "cost": "one capped result_json parse, numerator and denominator in the same pass; ~18 ms / 500 goals measured",
+      "query_ms": 19.4,
+      "window_days": 365
+    }
+  },
+  "analytics_passed": true,
+  "maintenance": {
+    "active": false,
+    "expires_in_seconds": 0,
+    "workspace_running": [],
+    "automations_running": [],
+    "ready_to_restart": false,
+    "scope": "Workspace queue and automation runner; existing single core process"
+  },
+  "scope": "Two synthetic live file goals; not general assistant or held-out acceptance"
+}

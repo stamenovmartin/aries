@@ -1,0 +1,1823 @@
+{
+  "document": "Handoff to Codex, the implementation author",
+  "from": "the reviewing agent, independent acceptance reviewer; not the author of any code named here",
+  "date": "2026-10-06",
+  "scope": "Consolidated from every file under raw/ — access_probe.json, budgets_concurrent.json, context_provenance.json, count_discrepancies.json, oracle_validation.json, replay_guard.json, repo_facts.json, review_evidence_recovery.json, review_goalgraph_termination.json, review_learning_loop.json, review_privacy_boundary.json, review_proactive_gates.json, review_verifier_integrity.json, review_voice_path.json, scopes_adversarial.json and verification_truth.json — plus findings.json (27 entries), fixtures.jsonl and fixtures_README.md. Every raw file named in the consolidation request exists; none is missing. Four files landed after the first consolidation pass (review_voice_path.json, review_learning_loop.json, verification_truth.json and a re-run oracle_validation.json) and are folded in here.",
+  "how_to_read_this": [
+    "evidence_kind is 'executed' only where the cited file says a probe, predicate or verifier was actually run. 'source' means a file was read. The two are never mixed inside one claim.",
+    "Every number carries the denominator its source stated. Nothing was rounded and no percentage was recomputed from a rounded value.",
+    "A finding reported by two reviewers independently is marked so. A finding where two reviewers disagree is in the disagreements block with both positions.",
+    "A FAIL in acceptance.json is a property that does not hold. It is not the same as a live exploitable hole, and the per-finding 'not_claimed' fields say which is which.",
+    "raw/review_learning_loop.json numbers its own findings L9-01 ... L9-15, which look like acceptance criterion ids (L9-1 ... L9-16) and are not. Every reference to that review's findings is written with the file path in front of it. Do not match on the bare token.",
+    "Four raw files landed after the first consolidation pass and changed two verdicts: raw/oracle_validation.json was re-run after the fixture repair, which closed F-12 and moved acceptance L9-4 from FAIL to PASS, and raw/verification_truth.json replaced the capped verification figures. Entry 1 of findings_ranked is that repair rather than a defect, because it changes what a later fixture result is worth."
+  ],
+  "summary": {
+    "findings_by_severity": {
+      "counting_rule": "Derived from the entries below, not asserted. Each entry is placed by the PRIMARY severity its source gave it; where two reviewers gave different severities for the same defect the primary is the one stated first in the entry, and the other is kept in that entry's severity field. severity_tier on each entry makes the ordering auditable: 0 = a completed repair rather than a defect, 1 = high, 2 = moderate/medium, 3 = low, 4 = informational.",
+      "repair_not_a_defect": 1,
+      "repair_ids": [
+        "R-01"
+      ],
+      "high": 15,
+      "high_ids": [
+        "F-05 / EVR-1",
+        "F-15 / VOICE-01 / VOICE-02",
+        "VOICE-03",
+        "L1-4 / VOICE-11 precondition",
+        "F-14 / learning L9-01",
+        "learning L9-02",
+        "learning L9-03",
+        "F-11",
+        "PG-01 / F-08",
+        "PG-02 / F-07",
+        "PG-03",
+        "verifier-integrity F1 / F-06 / EVR-3 / CR-04",
+        "verifier-integrity F2 / EVR-2",
+        "verifier-integrity F3 / EVR-4",
+        "F-12"
+      ],
+      "moderate_or_medium": 22,
+      "moderate_or_medium_ids": [
+        "F-04 / privacy F8",
+        "F-09 / PG-05",
+        "VOICE-06",
+        "VOICE-04",
+        "VOICE-05",
+        "VOICE-07",
+        "CR-01",
+        "CR-02",
+        "CR-03",
+        "learning L9-04",
+        "learning L9-05",
+        "learning L9-06 / L9-07",
+        "learning L9-08",
+        "learning L9-09",
+        "PG-06 / F-10",
+        "PG-04",
+        "PG-07",
+        "PG-08",
+        "verifier-integrity F4",
+        "verifier-integrity F5",
+        "verifier-integrity F6",
+        "CR-04"
+      ],
+      "low": 21,
+      "low_ids": [
+        "F-06",
+        "F-03",
+        "VOICE-10",
+        "VOICE-11",
+        "VOICE-09 / F-17",
+        "VOICE-08",
+        "CR-05",
+        "CR-06",
+        "EVR-5",
+        "learning L9-10",
+        "learning L9-11",
+        "learning L9-12",
+        "learning L9-13",
+        "CR-08",
+        "CR-07",
+        "PG-09",
+        "PG-10",
+        "PG-11",
+        "verifier-integrity F7",
+        "verifier-integrity F9",
+        "verifier-integrity F8"
+      ],
+      "informational": 9,
+      "informational_ids": [
+        "F-13",
+        "EVR-6",
+        "F-01",
+        "F-02",
+        "EVR-7",
+        "F-16",
+        "learning L9-14",
+        "learning L9-15",
+        "raw/count_discrepancies.json (no finding id exists for this; the file IS the finding)"
+      ],
+      "total_entries": 68,
+      "two_entries_are_not_on_the_standard_scale": "F-11 is labelled by its author 'HIGHEST VALUE OF THIS REVIEW — it revises a thesis conclusion, not just code' and F-12 'defect in OUR OWN instrument, reported before it could flatter us'. Both are placed in tier 1 by importance rather than coerced onto the scale, and both say so in their own severity field.",
+      "entries_carrying_a_second_severity_for_the_thesis": "F-06 'low as a defect, HIGH as a qualification on the thesis claim'; F-13 'CRITICAL for the thesis; moderate as a code defect'; F-14 'high — it decides whether Level 9 has a precondition at all'; F-15 'high — it contradicts the owner's explicit standing rule'; the count-integrity entry 'informational as code; high for every document that cites them'. Each is counted at its code severity.",
+      "cross_reviewer_duplicates_merged": [
+        "F-05 (findings.json) == EVR-1 (raw/review_evidence_recovery.json) — the effect-blind replay guard. Two reviewers, same defect, no disagreement.",
+        "F-07 (findings.json, moderate, source) == PG-02 (raw/review_proactive_gates.json, high, executed) — the condition gate fails open. One reviewer inspected, the other executed.",
+        "F-08 == PG-01 — both automation gates unreachable.",
+        "F-09 == PG-05 — the approval gate is trigger-blind.",
+        "F-10 == PG-06 — 'degraded' resets the breaker streak.",
+        "F-04 == raw/review_privacy_boundary.json F8 — the memory subsystem's ungated outbound path.",
+        "F-06 and F-11 (findings.json) overlap raw/review_verifier_integrity.json F1 and raw/review_evidence_recovery.json EVR-3 on verifier falsifiability, with a count disagreement recorded as D-1.",
+        "findings.json F-15 == raw/review_voice_path.json VOICE-01 and VOICE-02 — the wake gate, two reviewers, each stating which half it executed itself.",
+        "findings.json F-14 == raw/review_learning_loop.json finding L9-01 — no rollback; one executed the ratcheting, the other confirmed by source and corrected one sub-claim.",
+        "findings.json F-17 == raw/review_voice_path.json VOICE-09 and question 3 — forced language detection; F-17 verified only the unit file.",
+        "findings.json F-16 is NOT a duplicate but a retraction of one sub-claim of raw/review_voice_path.json VOICE-03; see disagreement D-8.",
+        "findings.json F-13 and raw/verification_truth.json are the same measurement; verification_truth.json is the uncapped computation F-13 argues for."
+      ]
+    },
+    "refuted_hypotheses": {
+      "counting_rule": "Counted as entries in each file's own refuted-hypotheses structure, not asserted. Verdicts are quoted rather than normalised, because several are partial.",
+      "entries_by_source": {
+        "findings.json N-01 … N-06": 6,
+        "raw/review_goalgraph_termination.json refuted_hypotheses": 9,
+        "raw/review_evidence_recovery.json refuted_hypotheses": 7,
+        "raw/review_privacy_boundary.json refuted_hypotheses": 5,
+        "raw/review_proactive_gates.json refuted_hypotheses": 7,
+        "raw/review_verifier_integrity.json refuted_hypotheses": 6,
+        "raw/review_learning_loop.json refuted_hypotheses": 9,
+        "raw/review_voice_path.json refuted_hypotheses": 10
+      },
+      "total_entries": 59,
+      "verdicts_that_are_not_a_plain_REFUTED": [
+        "findings.json N-03: 'Present in an earlier copy I had read; closed in current source. Not a live finding.' — a stale source, not a refuted hypothesis.",
+        "findings.json N-04: 'my test was wrong, the code is better' — our error, counted under corrections too.",
+        "findings.json N-06: a self-correction, counted under corrections too.",
+        "raw/review_privacy_boundary.json: 1 of 5 is 'PARTIALLY REFUTED' — a dedicated suite exists and asserts cloud dispatch counts per label, so 'no evidence at all' is wrong for 'unenforced' and 'untested' and right for 'measured'.",
+        "raw/review_proactive_gates.json: 1 of 7 is 'REFUTED for the normal path, CONFIRMED for the blind path'; another is 'REFUTED as unnecessary' because no crafting is needed when every automation is already 'light'.",
+        "raw/review_verifier_integrity.json: 3 of 6 are CONFIRMED rather than refuted, because they adjudicate a previous reviewer's claim; 1 is 'CONFIRMED on the evidence, PARTIALLY REFUTED on the verdict'. Only 3 are plain REFUTED.",
+        "raw/review_goalgraph_termination.json: all 9 say REFUTED, 3 of them with a named residual (CR-06 on the partial/failed label, CR-03 on least privilege, CR-07 on the in-memory residue).",
+        "raw/review_evidence_recovery.json: all 7 say REFUTED, 1 of them 'REFUTED as a route() defect — route() is correct. The defect is that route() is not the gate the live engine uses.'",
+        "raw/review_learning_loop.json: 1 of 9 is REFUTED 'but only by transaction scope', which is finding L9-10 — the read-only endpoints are read-only by accident, not by design."
+      ],
+      "plain_refutations_about_ARIES": 49,
+      "plain_refutations_note": "59 entries across eight sources. Subtract 3 findings.json N-entries that are corrections or stale source, the 3 raw/review_verifier_integrity.json entries that are CONFIRMED rather than refuted, 3 partials (privacy 'PARTIALLY REFUTED', verifier-integrity 'CONFIRMED on the evidence, PARTIALLY REFUTED on the verdict', proactive-gates 'REFUTED for the normal path, CONFIRMED for the blind path'), and 1 raw/review_learning_loop.json entry refuted 'only by transaction scope' -> 49. Arithmetic shown so it can be checked rather than trusted.",
+      "the_ones_that_matter_most_to_you": [
+        "The grant ceiling holds. Nesting a wider grant, an expired grant, a node asking for file.write and a node naming a path the user did not name all raise PermissionError (executed).",
+        "Evidence cannot be forged or borrowed through the finish decision. Invented, unverified, empty and verification_failed refs are all rejected (executed, isolated database).",
+        "Completion is a current-state claim, not a replay. Rewriting a file behind ARIES's back and replaying the identical finish returns met=False and demotes the step to 'stale' (executed).",
+        "The terminal-failure shortcut is scoped as you claim it is. Eight adversarial variants of the predicate; it fires only on the single supported file.read case (executed).",
+        "The privacy partition IS enforced in code, not merely configured. The reviewer's own earlier statement to the contrary is withdrawn (N-06).",
+        "route() is correct. The defect is that route() is not the gate the live engine uses (EVR-1).",
+        "The desktop window verifiers do NOT trust the shell's accepted=true reply; they re-read the compositor up to 10 times and the tile branch accepts no tolerance (executed).",
+        "File mutation verifiers are not satisfied by a planner-supplied hash: copy_bytes/move_bytes refuse unless the source really hashes to it (executed).",
+        "The automation runner has no unbounded retry loop, the worker honours automations.worker_enabled, may_run is NOT skipped on the Run-now/API/CLI paths, and may_run's hysteresis is not an unreachable threshold (executed).",
+        "aries/intelligence/inference.py does not exist; the privacy validation is in egress.py and generation.py:59-69.",
+        "The wake gate does NOT fire on prefixes: 'Ariana', 'arithmetic' and a mid-sentence 'Ari' were all refuted, and 'арамија' does not wake. The whole-word rule works; the token list is the defect.",
+        "Voice has NO privileged or shortcut route. Spoken input reaches the same submit function, planner, capability policy and verification recorder as a typed goal, and no policy function in the path even receives the origin.",
+        "_tell_voice_outcome is not a second self-triggering TTS path, and notifications are not spoken, so neither gives ARIES an unbounded way to put words on the loudspeakers.",
+        "operator.confirm_model_plans has NOT been turned off on this machine — refuted as of that reading, so the model branch does still freeze non-read effects.",
+        "interests.learn() cannot be coaxed into writing the user's weight column and SettingsService.learn() has no layer parameter at all: both guarantees are structural, and the reviewer attacked both and failed.",
+        "The learning loop does NOT reach planning, capability selection, context assembly, routing or approval, cannot create a topic it was never told about, and cannot lower news.relevance_threshold to make itself louder.",
+        "The automation circuit breaker, the health automation, damping and freezing are all refuted as rollback mechanisms — which is precisely why F-14 stands."
+      ]
+    },
+    "corrections": {
+      "total": 14,
+      "to_our_own_earlier_work_test_ledger_instrument_or_analysis": 9,
+      "to_a_parallel_reviewer_of_ours": 5,
+      "ids": [
+        "C-01",
+        "N-06",
+        "N-04",
+        "N-03",
+        "F-06-correction",
+        "C-02a",
+        "C-02b",
+        "F-12-correction",
+        "L5-1-provenance",
+        "F-16-correction",
+        "F-14-correction",
+        "C-03",
+        "R-01",
+        "L5-3-provenance"
+      ],
+      "all_are_listed_in": "corrections_to_our_own_review"
+    },
+    "acceptance_ledger_after_consolidation": {
+      "criteria_total": 91,
+      "criteria_before_this_consolidation": 38,
+      "criteria_added": 53,
+      "by_status": {
+        "BLOCKED": 1,
+        "FAIL": 58,
+        "PASS": 17,
+        "UNTESTED": 15
+      },
+      "by_state": {
+        "BUILT": 28,
+        "ENABLED": 48,
+        "VERIFIED": 15,
+        "GENERALLY_VALIDATED": 0
+      },
+      "by_level": {
+        "0": 4,
+        "1": 4,
+        "2": 11,
+        "3": 6,
+        "4": 6,
+        "5": 10,
+        "6": 6,
+        "7": 11,
+        "8": 10,
+        "9": 16,
+        "10": 7
+      },
+      "by_evidence_kind": {
+        "executed": 62,
+        "executed+source": 8,
+        "source": 21
+      },
+      "status_changes": [
+        "L5-3 PASS -> FAIL (findings.json F-13 and raw/verification_truth.json: the 85.3% figure is a moving, capped 6.2% sample reported as a window total)",
+        "L7-1 UNTESTED -> FAIL (raw/review_proactive_gates.json PG-01: both gates unreachable, executed)",
+        "L2-3 UNTESTED -> FAIL (findings.json F-15 and raw/review_voice_path.json VOICE-01/VOICE-02: executed wake-gate probes, plus a journal denominator)",
+        "L5-2 UNTESTED -> PASS (raw/review_goalgraph_termination.json refuted_hypotheses[1] and raw/review_evidence_recovery.json, executed on an isolated database)",
+        "L9-3 UNTESTED -> PASS, scoped to existence and independent authorship only (fixtures.jsonl, fixtures_README.md)",
+        "L9-4 FAIL -> PASS within the same day (raw/oracle_validation.json re-run after the repair: 49 DISCRIMINATING, 0 BLIND_TO_INACTION, 0 SETUP_FAILED; findings.json R-01)"
+      ],
+      "id_collision_warning": "raw/review_learning_loop.json numbers its own findings L9-01 … L9-15, which look like criterion ids in this ledger (L9-1 … L9-16) and are not. Every reference to that review's findings in this file is written with the file path in front of it. Do not match on the bare token."
+    }
+  },
+  "findings_ranked": [
+    {
+      "id": "R-01",
+      "title": "REPAIRED AND RE-VERIFIED: all 19 blind fixture oracles and both broken setups fixed; 49/49 runnable cases now discriminate",
+      "severity": "repair completed and independently re-verified — not a defect",
+      "blast_radius": "The whole held-out instrument. This entry is first because it changes what a later fixture result is worth.",
+      "source": "findings.json R-01, raw artifact raw/oracle_validation.json re-run",
+      "evidence_kind": "executed",
+      "measured": "before {DISCRIMINATING 28, BLIND_TO_INACTION 19, SETUP_FAILED 2, SKIPPED 8}; after {DISCRIMINATING 49, BLIND_TO_INACTION 0, SETUP_FAILED 0, SKIPPED 8}. 'I re-ran validate_oracles.py myself after the repair rather than accepting the repairer's tally.' Root causes found during the repair: jq's `min` over an empty array yields null, which compares below every number, so `min <= 2` passed with zero evidence (four cases); a check loop ending in `|| echo MISSING` always exited 0 (one case); prose text left as the LAST setup line, where its non-zero exit propagated (two cases).",
+      "one_line_fix": "Nothing to fix. Keep validate_oracles.py as the gate any new fixture case must pass before it is trusted.",
+      "acceptance_criterion": "L9-4",
+      "not_claimed": "'The fixture is now a sound instrument. It has still never been run against ARIES, and no number in it is a claim about the system.'",
+      "severity_tier": 0,
+      "rank": 1
+    },
+    {
+      "rank": 2,
+      "id": "F-05 / EVR-1",
+      "title": "A mutating capability that times out is marked retryable and the replay guard permits a duplicate",
+      "severity": "high",
+      "blast_radius": "29 mutating capabilities, 17 of them without approval; browser.click, browser.type, browser.navigate, desktop.move/resize/tile and desktop.launch would re-apply. file.write is separately protected by O_EXCL.",
+      "source": "findings.json F-05 and raw/review_evidence_recovery.json EVR-1 — two reviewers independently, no disagreement. Raw artifact: raw/replay_guard.json.",
+      "evidence_kind": "executed",
+      "measured": "mutating_capabilities_examined 29, repeat_after_timeout_allowed 29, repeat_after_timeout_allowed_without_approval 17; guard refuses 29/29 after a non-retryable error and 29/29 for an already-verified step. TimeoutError -> code TRANSIENT, retryable true.",
+      "one_line_fix": "Add the cap.effect term to the agent.py:367-368 predicate: a repeat of a non-read capability is refused regardless of the retryable flag, exactly as agent.py:86 already does for its own decision.",
+      "acceptance_criterion": "L3-5",
+      "not_claimed": "No agent was run and no capability was executed; the predicate was copied verbatim and evaluated against synthetic steps. Whether a real planner actually proposes the duplicate is untested — only that nothing stops it and that agent_planner.py:425 invites it.",
+      "severity_tier": 1
+    },
+    {
+      "id": "F-15 / VOICE-01 / VOICE-02",
+      "title": "The wake gate admits 'ара', a common Macedonian interjection, and the bare name reopens the microphone for 6 seconds with no second wake word",
+      "severity": "high — it contradicts the owner's explicit standing rule",
+      "blast_radius": "Every sentence spoken in the room, by anyone, on a machine where aries-voice is active and holding the microphone right now.",
+      "source": "findings.json F-15 and raw/review_voice_path.json VOICE-01 and VOICE-02 — two reviewers, agreeing, with the executed halves divided between them and each saying which half is theirs.",
+      "evidence_kind": "executed",
+      "measured": "EXECUTED wake_match() probe (no capture opened, no service touched): 'ара, што правиш' -> wakes, submits 'што правиш'; 'Harry, close the door' -> 'close the door'; 'Hari, install vscode' -> 'install vscode'; 'Ари.' -> wakes with an EMPTY remainder; 'арамија' and 'здраво како си' -> do not wake. VOICE-01's executed journal read: 2026-09-24T22:39:39 `· woken with no command: 'Ari.'` then 22:39:41 `✓ 'split to YouTube.' — Task queued (heard in 763ms, acted in 30ms)`; 22:39:56 then 22:40:04 the same shape. Journal denominators, all boots since 2026-09-24T22:32: 1372 lines, 641 `· not addressed`, 241 `· dropped`, 2 `· woken`, 131 counter lines, highest `[80 acted / 165 utterances]`.",
+      "one_line_fix": "Drop 'ара' and 'ary' from WAKE, and require the follow-up window's capture to parse as a command before submitting it.",
+      "acceptance_criterion": "L2-3",
+      "not_claimed": "The whole-word rule itself works and the gate holds for the first utterance — 'арамија' does not wake. findings.json F-15 is explicit that the follow-on 6-second window is the other reviewer's executed proof, not its own. Four hypotheses were refuted and must not be re-raised: prefix matching, Latin-script 'ara' as a token, a privileged voice route, and a confidence threshold on the wake decision.",
+      "severity_tier": 1,
+      "rank": 3
+    },
+    {
+      "id": "VOICE-03",
+      "title": "Deterministic transcripts execute mutating capabilities with no model-plan confirmation; the allowlist on that branch is nine names",
+      "severity": "high",
+      "blast_radius": "Every spoken transcript that re.fullmatches a hardcoded pattern. The only approval allowlist on that branch is capabilities.SENSITIVE, 9 legacy names.",
+      "source": "raw/review_voice_path.json VOICE-03 and question 5, with findings.json F-16 correcting one sub-claim",
+      "evidence_kind": "executed+source",
+      "measured": "The stated rule is at aries/operator/service.py:303: 'A guess is proposed; an exact match is performed.' LIVE settings, EXECUTED via GET /api/aries/operator and read-only sqlite: enabled=true, planner=router+model, confirm_model_plans=true, settle_seconds=8.0, model.location=local; operator.confirm_model_plans and operator.max_actions_per_hour ABSENT from aries_settings, i.e. at code defaults True and 60. EXECUTED journal read proves mistranscribed text reaches submit and acts: 80 actions across the journal.",
+      "one_line_fix": "Make the approval decision a function of the effect rather than of which matcher produced the step, and name voice as a distinct origin so origin=='voice' can require approval for a non-read effect.",
+      "acceptance_criterion": "L2-4",
+      "disagreement": "D-8",
+      "not_claimed": "The model branch is properly gated — unrecognised speech becomes an agent_task goal and every non-read effect freezes at `proposed`. The sub-claim that media_control/set_volume/set_brightness also escape operator.enabled and the hourly budget is NOT substantiated: findings.json F-16 checked aries/operator/service.py around line 298 and reports the opposite. Do not act on that sub-claim without re-checking both files.",
+      "severity_tier": 1,
+      "rank": 4
+    },
+    {
+      "id": "L1-4 / VOICE-11 precondition",
+      "title": "The HTTP API grants owner authority to every unauthenticated local request, because API_KEY is empty",
+      "severity": "high",
+      "blast_radius": "Every route behind EXECUTE and MANAGE_TOOLS, including the runaway guard's resume endpoint. Scope limit: the API binds 127.0.0.1, so the caller must already be on the machine.",
+      "source": "raw/review_voice_path.json live_state_read_only.api_auth",
+      "evidence_kind": "executed",
+      "measured": "API_KEY is EMPTY in /home/stamenovmartin/aries/.env (FASTAPI_ENV=development, SECRET_KEY empty), so vendor/agentic-core/agentic_core/api/main.py:103-104 grants shared_key_owner() to every unauthenticated request. EXECUTED: GET /api/aries/shell/guard with no X-API-Key returned HTTP 200 {\"paused\":{}}. The voice daemon sends no credential and is accepted as the owner.",
+      "one_line_fix": "Set API_KEY in .env, or make main.py:103-104 refuse rather than elevate when the shared key is empty outside a declared development mode.",
+      "acceptance_criterion": "L1-4",
+      "severity_tier": 1,
+      "rank": 5
+    },
+    {
+      "id": "F-14 / learning L9-01",
+      "title": "A learned change can be shadowed but never removed: there is no rollback, automatic or manual",
+      "severity": "high — it decides whether Level 9 has a precondition at all",
+      "blast_radius": "Every learned interest weight and the learned news.relevance_threshold, on a machine where the Learning Loop automation is one of the 7 registered.",
+      "source": "findings.json F-14 and raw/review_learning_loop.json finding L9-01 and question 6 — one reviewer executed the ratcheting behaviour, the other confirmed by source and corrected one claim.",
+      "evidence_kind": "executed",
+      "measured": "aries/learning/history.py:212-224 release() has zero callers. No clear_learned() exists for AriesInterest.learned_weight and every reference to it across aries/ is a read. The only HTTP route for clearing a setting (aries/api/routes.py:256-264) passes Layer.USER. Nothing outside aries/learning/ references AriesLearningChange or AriesReversal, so nothing reads the loop's history to judge it; the automation's declared evaluation_metrics and reward_signals (aries/learning/automation.py:236-263) are read by no controller.",
+      "one_line_fix": "Expose clear() at Layer.LEARNED, add a clear_learned() for AriesInterest.learned_weight, and give release() its caller.",
+      "acceptance_criterion": "L9-2, L9-5",
+      "not_claimed": "findings.json F-14 corrects the sub-claim that SettingsService.clear 'hardcodes Layer.USER': service.py:157 takes layer as a parameter, so LEARNED is expressible — it is unreachable in practice, not hardcoded. Two candidate substitutes are refuted: the automation circuit breaker and the health automation do not revert learned changes, and damping and freezing are not a rollback.",
+      "severity_tier": 1,
+      "rank": 6
+    },
+    {
+      "id": "learning L9-02",
+      "title": "The per-pass cap is not a bound per unit time: identical evidence is re-applied every pass",
+      "severity": "high",
+      "blast_radius": "Every learned interest weight and the learned relevance threshold. Theoretical ceiling max_step * 24 = 3.6 per day, i.e. full saturation of [0,1] within a day.",
+      "source": "raw/review_learning_loop.json finding L9-02 and question 3",
+      "evidence_kind": "executed",
+      "measured": "A single fixed 30-day fixture drove a topic weight 0.6 -> 0.998 in four passes and the relevance threshold 0.6 -> 0.95 (its ceiling) in five, with no new data. The oscillation guards never engage because the direction never changes, so damping stays 1.0 and the freeze never trips. Per-pass bound, which is real: delta = clamp((target-current)*confidence, +/- learning.max_step * damping), clamped to [0,1], 3dp; learning.max_step 0.15 (range 0.01-0.5); damping = 0.5 ** reversals; threshold step = max_step / 2 = 0.075 with hard ceiling 0.95. learning.interval_hours has a minimum of 1 and is not user_only.",
+      "one_line_fix": "Make propose() check what has already been applied from the same evidence window before proposing again.",
+      "acceptance_criterion": "L9-6",
+      "severity_tier": 1,
+      "rank": 7
+    },
+    {
+      "id": "learning L9-03",
+      "title": "The FATIGUE path escapes every stated safety property at once",
+      "severity": "high",
+      "blast_radius": "Any established topic position. It is the one write path with no minimum-evidence gate, no confirmation requirement and no step cap.",
+      "source": "raw/review_learning_loop.json finding L9-03",
+      "evidence_kind": "executed",
+      "measured": "A FATIGUE verdict (aries/learning/reversal.py:267-273) fires with (a) no learning.min_observations check, (b) no reversal_min_observations_factor, (c) no higher confidence level, (d) no reversal_confirmations and (e) no max_step or damping cap — it writes learned - learning.fatigue_step directly (default 0.05, range 0.01-0.3). Its only input is TopicEvidence.trend, which compares raw per-bucket POINT RATES with a 0.05 delta over buckets of as few as 3 observations: 'that is the 1 of 3 statistics.py is written to refuse, used as the sole decision input.'",
+      "one_line_fix": "Apply min_observations, the reversal confirmation count and the max_step/damping cap to the FATIGUE path as the ordinary path already does.",
+      "acceptance_criterion": "L9-7",
+      "severity_tier": 1,
+      "rank": 8
+    },
+    {
+      "rank": 9,
+      "id": "F-11",
+      "title": "Only 35 of 58 verifiers are independent, and the 0-contradictions result has a simpler explanation than the one the thesis gives",
+      "severity": "high as a qualification on the thesis; the reviewer's own label is 'HIGHEST VALUE OF THIS REVIEW — it revises a thesis conclusion, not just code'",
+      "blast_radius": "The thesis's central evidential claim, plus every downstream document that quotes it.",
+      "source": "findings.json F-11, built on raw/review_verifier_integrity.json",
+      "evidence_kind": "executed",
+      "measured": "INDEPENDENT 35, SELF_REPORT 10, TRIVIAL 12, PLANNER_SUPPLIED 1, UNDETERMINED 0, of 58 enumerated from the live registry. Joined against the ledger: verified_steps_all_time 1004; 763 (76.0%) from capabilities outside the m14 registry, explicitly excluded rather than assumed good or bad; steps_through_the_registry 241; INDEPENDENT 98 of 241 = 40.7%; SELF_REPORT or TRIVIAL or PLANNER_SUPPLIED 143 of 241 = 59.3%.",
+      "one_line_fix": "Report verification coverage split by whether the verifier is falsifiable; state 98/241 = 40.7% independent on the registry path; present BOTH explanations for the null and say the data does not separate them.",
+      "suggested_experiment": "Re-run the suite with the 23 non-independent verifiers replaced by falsifiable ones and measure the contradiction rate. If it stays 0 the original explanation is supported; if it rises it is refuted.",
+      "acceptance_criterion": "L5-4, L5-9",
+      "not_claimed": "Not that the system is dishonest — the independent verifiers are genuinely rigorous. Not that the 763 legacy-path steps are unverified; they were not classified and no claim is made. Not that the contradiction rate would be non-zero with falsifiable verifiers everywhere; that is the experiment this finding calls for, not a result it provides.",
+      "severity_tier": 1
+    },
+    {
+      "rank": 10,
+      "id": "PG-01 / F-08",
+      "title": "Both proactive gates are unreachable: every shipped automation is classified 'light'",
+      "severity": "high (PG-01); findings.json rates it informational and adds 'it hollows out Level 7'",
+      "blast_radius": "The whole of Level 7. All 7 registered automations; the permission gate and the condition gate both.",
+      "source": "raw/review_proactive_gates.json PG-01 and findings.json F-08",
+      "evidence_kind": "executed",
+      "measured": "All 7 registered automations (aries.attention, aries.brief, aries.dashboards, aries.data, aries.health, aries.learning, aries.news) resolve to workload class 'light' (heavy false, watches [], budgeted false); may_run returned allowed=true, code 'ok', reason 'lightweight work always runs', measurement {} for every one. 4 declare 'light' explicitly, 5 leave the field at its default. LIGHT.permission_setting is None.",
+      "one_line_fix": "Declare the real class on the automations that run the local model — the vocabulary's INFERENCE_LIGHT class exists for exactly that and is used by nobody.",
+      "acceptance_criterion": "L7-1",
+      "not_claimed": "The gates are not broken; they are correct code that governs nothing in the shipped configuration. The permission half was separately proved correct for all four display states.",
+      "severity_tier": 1
+    },
+    {
+      "rank": 11,
+      "id": "PG-02 / F-07",
+      "title": "The resource condition gate fails OPEN when a sensor cannot be read",
+      "severity": "high (PG-02, executed); moderate (F-07, source)",
+      "blast_radius": "Every heavy workload class once one is declared; today nothing reaches it because of PG-01.",
+      "source": "raw/review_proactive_gates.json PG-02 and findings.json F-07 — one reviewer inspected, the other executed, and they agree.",
+      "evidence_kind": "executed",
+      "measured": "With probe_thermal and probe_gpu raising OSError, measure() returned {temperature_celsius: null, temperature_unavailable: 'OSError: sensor gone', gpu_pct: null, gpu_unavailable: 'OSError: no gpu'} and may_run for heavy_cpu with power.allow_heavy_cpu=True returned allowed=true, code 'ok', reason 'within the limits that could be read; temperature unknown'. Guards are `is not None` at governor.py:364, :372, :380.",
+      "one_line_fix": "Fail closed for TEMPERATURE when the workload class watches it, or require an explicit setting to proceed without a thermal reading.",
+      "acceptance_criterion": "L7-5",
+      "not_claimed": "It is disclosed, not hidden: governor.py:385-391 builds a caveats list naming the unavailable sensor. The reviewer's point is that disclosure is not refusal. A second, unmeasured hazard is named and not claimed as a finding: there is no plausibility bound on readings that do arrive, so a stuck sensor at 0 degC reads as a cool machine.",
+      "severity_tier": 1
+    },
+    {
+      "rank": 12,
+      "id": "PG-03",
+      "title": "An 'over_budget' hold is released by a thermal criterion that has nothing to do with it",
+      "severity": "high",
+      "blast_radius": "Every budgeted workload class once one is declared; the class-wide hold, not one job.",
+      "source": "raw/review_proactive_gates.json PG-03, with PG-04 as the second mechanism",
+      "evidence_kind": "executed",
+      "measured": "active_hold (governor.py:266) treats both 'deferred' and 'over_budget' as active; release_holds (governor.py:279-312) only ever evaluates TEMPERATURE. Proven: an over_budget hold on heavy_cpu with the thermal probe pinned at 40 degC was released on tick 2 — about 2 minutes at the 60 s cadence — while the job still runs past its budget. PG-04: a 'deferred' hold was released on the FIRST tick once probe_thermal raised, bypassing the 5 degC resume margin and the 2-check streak.",
+      "one_line_fix": "Release a hold by the condition that created it; release_holds currently knows only one condition.",
+      "acceptance_criterion": "L7-6",
+      "not_claimed": "The normal thermal resume path is correct and was proved correct at a steady 74 degC against a ceiling of 80-5=75 with clear_checks=2. This is not the Entry 010 unreachable-threshold trap.",
+      "severity_tier": 1
+    },
+    {
+      "rank": 13,
+      "id": "verifier-integrity F1 / F-06 / EVR-3 / CR-04",
+      "title": "Capability verdicts that cannot return met=False",
+      "severity": "high (verifier-integrity F1); findings.json F-06 rates it 'low as a defect, HIGH as a qualification on the thesis claim'; EVR-3 low; CR-04 moderate",
+      "blast_radius": "12 of 58 capabilities by the fullest count; 6 of those via the verify_probe factory. 47 of 1004 verified steps all-time = 4.7%.",
+      "source": "raw/review_verifier_integrity.json F1, findings.json F-06, raw/review_evidence_recovery.json EVR-3, raw/review_goalgraph_termination.json CR-04",
+      "evidence_kind": "executed",
+      "measured": "TRIVIAL 12 of 58: file.list, file.search, system.status, system.storage, system.processes, task.inspect, desktop.windows, desktop.observe, browser.tabs, display.brightness, system.services, input.editable_targets. verify_probe bindings: 6. findings.json F-06 ledger slice: verified_steps_all_time 1004, verified_by_a_verifier_that_cannot_fail 47, share 4.7%, verified_by_a_verifier_that_can_fail 957. EVR-3 executed a contradicted result through verify_probe: recorded claim {'count':999,...} versus fresh {'count':0,...} still returned met True. CR-04 executed a contradictory system_probe: met True although the fresh probe shared nothing with the result it was asked to check.",
+      "one_line_fix": "Report verification coverage split: steps verified by a falsifiable verifier, and steps verified by a probe that cannot fail. The ledger already carries the capability name, so the split costs one GROUP BY.",
+      "acceptance_criterion": "L5-4",
+      "disagreement": "D-1 — 6 versus 7 versus 8 versus 12, depending on scope. Both counts are kept.",
+      "not_claimed": "Not that reads are unverifiable: for a read the fresh probe IS the evidence, the fresh probe is what reaches the evidence row, and contracts.evidence_matches still applies the requirement's path/url/metric constraints at completion time. CR-04 adds the one place it bites: for a bare 'Check system status' contract with no metric key there is no content gate at all, and contracts.answer then returns 'All supported goal conditions independently verified. See referenced evidence.' — a green done card with no status in it.",
+      "severity_tier": 1
+    },
+    {
+      "rank": 14,
+      "id": "verifier-integrity F2 / EVR-2",
+      "title": "browser.click is verified against a URL the planner itself supplied, so a click that did nothing can be recorded as verified",
+      "severity": "high (F2, executed); moderate (EVR-2, source)",
+      "blast_radius": "browser.click — one capability, effect open, requires_approval false. The only PLANNER_SUPPLIED verdict of the 58. Compounds with rank 1: an uncertain click may be repeated and each attempt can report itself verified.",
+      "source": "raw/review_verifier_integrity.json F2 and raw/review_evidence_recovery.json EVR-2",
+      "evidence_kind": "executed",
+      "measured": "EXECUTED: expected_url equal to the url the page is already on, result unchanged -> met=True; met=False when it differs. Click.expected_url (browser_capabilities.py:12) is model-supplied and validated only by pydantic.",
+      "one_line_fix": "Verify a click by a before/after invariant the planner cannot choose, not by a predicted url.",
+      "acceptance_criterion": "L5-5",
+      "not_claimed": "One sub-claim was refuted and should not be repeated: capabilities.py:469's args['expected_url']=state['url'] belongs to the older browser_fill capability, where it is a review-staleness guard, not a verification reference.",
+      "severity_tier": 1
+    },
+    {
+      "rank": 15,
+      "id": "verifier-integrity F3 / EVR-4",
+      "title": "browser.elements puts the executor's own element list into the verified evidence record",
+      "severity": "high (F3, executed); low (EVR-4, source)",
+      "blast_radius": "browser.elements only — but it is the one place where the other trivial verifiers' saving grace (fresh data reaches the evidence) does not apply.",
+      "source": "raw/review_verifier_integrity.json F3 and raw/review_evidence_recovery.json EVR-4",
+      "evidence_kind": "executed",
+      "measured": "verify_elements returns data={**result,'observed_page':fresh}; met is only fresh['url']==result['url']. EXECUTED: a result containing a ghost element verified met=True and the verdict's data['elements'] was byte-identical to the fabricated list.",
+      "one_line_fix": "Add a 'corroborated': false marker to the browser_elements evidence data — it costs nothing and keeps the handle-stability property the comment correctly defends.",
+      "acceptance_criterion": "L5-6",
+      "not_claimed": "met is not unconditional — it is a real if weak re-read, so the accurate statement is 'the element evidence is self-reported', not 'the verifier is a no-op'. The code's stated reason is genuine: re-enumerating would invalidate the handles the next step needs.",
+      "severity_tier": 1
+    },
+    {
+      "rank": 16,
+      "id": "F-12",
+      "title": "Nineteen of our own fixture oracles cannot distinguish success from ARIES doing nothing",
+      "severity": "defect in OUR OWN instrument, reported before it could flatter us — NOW REPAIRED, see R-01",
+      "blast_radius": "19 of 57 held-out scenarios, 6 of them in the held-out subset. Until repaired, the fixture cannot decide L2-1, L4-1 or L10-1.",
+      "source": "findings.json F-12, raw artifact raw/oracle_validation.json, runner validate_oracles.py",
+      "evidence_kind": "executed",
+      "measured": "57 cases against the null record {'state':'queued','steps':[],'evidence':[],'cards':[],'gaps':[]}: DISCRIMINATING 28, BLIND_TO_INACTION 19, SKIPPED_NEEDS_CONSENT 8, SETUP_FAILED 2. The 19 split 5 unambiguous (pz-05, pz-07, st-04, mc-01, mc-04 — cases that expect work done and would have passed for a system that did nothing) and 14 refuse-shaped (un-02, un-04, un-05, un-06, un-07, un-08, rv-02, rv-03, rv-04, rv-05, rv-06, rv-07, df-05, df-06). Held-out among the 19: un-02, un-05, un-08, rv-03, rv-06, df-06. SETUP_FAILED: ab-01 ('NOTE:: command not found') and df-03 ('confirm,: command not found').",
+      "one_line_fix": "Nonce-digest check for the 5 pass/partial cases, one structural check on an enumerated field for the 14 refuse cases, fix the 2 broken setups; validate_oracles.py is the acceptance test for the repair.",
+      "acceptance_criterion": "L9-4 (now PASS)",
+      "not_claimed": "Nothing in the fixture has been run against ARIES. No number in that directory is a claim about the system.",
+      "note_for_codex": "This is ours, not yours. It is listed here because it is the reason you should not accept a future fixture result from us until the repair lands.",
+      "status_update": "CLOSED. raw/oracle_validation.json was re-run after the repair: DISCRIMINATING 49, BLIND_TO_INACTION 0, SETUP_FAILED 0, SKIPPED_NEEDS_CONSENT 8. findings.json R-01 records the before/after and states the re-run was done by the reviewer rather than taking the repairer's tally.",
+      "severity_tier": 1
+    },
+    {
+      "rank": 17,
+      "id": "F-04 / privacy F8",
+      "title": "The memory subsystem reaches an env-overridable HTTP endpoint outside both the egress gate and the loopback check",
+      "severity": "moderate",
+      "blast_radius": "Three call sites: aries/workspace/memory/embedding.py:39,146-154 (raw memory texts to {endpoint}/api/embed), aries/workspace/memory/extraction.py:51,116-118 (the utterance and its context in a prompt), aries/workspace/memory/calibration.py:67 (urlopen).",
+      "source": "findings.json F-04 and raw/review_privacy_boundary.json F8 — raised by one reviewer, confirmed independently by the other.",
+      "evidence_kind": "source",
+      "measured": "No measurement. No network request was made by either reviewer.",
+      "one_line_fix": "Call providers.loopback_url() on ARIES_OLLAMA at import in all three files, or route them through the same validation every inference adapter already uses at providers.py:36 and :59.",
+      "acceptance_criterion": "L6-6",
+      "not_claimed": "This is NOT a leak. The default endpoint is loopback, so on an untouched install the text does not leave the machine; no outbound transfer was observed or attempted. Whether any deployment sets ARIES_OLLAMA off-machine is UNDETERMINED and needs the actual service environment, which neither review inspected.",
+      "severity_tier": 2
+    },
+    {
+      "rank": 18,
+      "id": "F-09 / PG-05",
+      "title": "The approval gate is trigger-blind: it cannot tell a user request from an unattended automation",
+      "severity": "moderate / medium",
+      "blast_radius": "registry.policy and both its call sites. 17 of 29 mutating capabilities carry requires_approval=False, and capabilities.SENSITIVE's 9 legacy names include none of them.",
+      "source": "findings.json F-09 and raw/review_proactive_gates.json PG-05",
+      "evidence_kind": "source",
+      "measured": "policy(db, cap, args, goal, *, approved=False) at registry.py:96 takes no actor/origin/trigger; neither call site (orchestration.py:334, agent.py:357) supplies one although service.submit carries and persists `origin` (service.py:154-156). Live settings read read-only: operator.enabled=true, automations.worker_enabled=true, workspace.dashboard_enabled=true; operator.confirm_model_plans absent from aries_settings, i.e. still default True. The dispatcher is live outside systemd as uvicorn PID 86078.",
+      "one_line_fix": "Pass origin into policy and require approval for a mutating capability whose origin is not a user request, independently of the global toggles.",
+      "acceptance_criterion": "L7-3",
+      "not_claimed": "There is no exploitable path today, and the scheduler path was EXECUTED-traced to prove it: of 7 automations only aries.dashboards touches the workspace and it submits kind='research', which service.py:543 skips in the capability loop, so registry.policy is never reached from the scheduler. This is a latent property of the gate, not a live hole.",
+      "severity_tier": 2
+    },
+    {
+      "id": "VOICE-06",
+      "title": "The service unit overrides aries.flags.listen_languages(), reinstating the mk/en misdetection the flag was created to remove",
+      "severity": "medium",
+      "blast_radius": "Every utterance decoded by the running daemon.",
+      "source": "raw/review_voice_path.json VOICE-06, with findings.json F-17 confirming the unit file only",
+      "evidence_kind": "executed",
+      "measured": "systemd/aries-voice.service:31-35 hardcodes `--languages mk,en`; voice.py consults aries.flags only when neither --languages nor --language was given (:974-987), although its help text at :948 calls flags 'the single place that decides'; aries/flags.py:194-204 returns ('en',) alone when the primary language is English. EXECUTED journal read: `· not addressed [mk 0.06] (1085ms): 'Рубен, што ја даде...'` and `[mk 0.21] … 'Сеќавање на Министерството за Доброј Доброј Доброј'`. raw/repo_facts.json flags: primary_language 'en', listen_languages ['en'], supported_languages ['en','mk'].",
+      "one_line_fix": "Remove --languages from the unit and let flags decide, or change flags and record why the unit's choice supersedes the 2026-10-03 measurement.",
+      "acceptance_criterion": "L2-7",
+      "severity_tier": 2,
+      "rank": 19
+    },
+    {
+      "id": "VOICE-04",
+      "title": "The echo guard presented as the replacement for the removed playback suppression is inert in the normal flow",
+      "severity": "medium",
+      "blast_radius": "Every capture that follows ARIES speaking.",
+      "source": "raw/review_voice_path.json VOICE-04",
+      "evidence_kind": "source",
+      "measured": "echoes_own_speech() is applied only when audio_is_playing() is true (voice.py:573), but speak() is blocking (:534) and the player has exited before the next listen() begins, so the precondition is normally False. It also compares against exactly one sentence, _LAST_SPOKEN[0], written only by speak_and_remember() (:533). EXECUTED probe confirms the function itself works when it runs: echoes_own_speech('Дискот е на 8.5 проценти', same) -> True.",
+      "one_line_fix": "Drop the audio_is_playing() precondition and keep a short ring buffer of recent spoken sentences, or restate in the file that serialisation is the real guard so nobody removes it believing the echo check covers it.",
+      "acceptance_criterion": "L2-6",
+      "not_claimed": "The reviewer lists observing audio_is_playing() at the moment of capture as a BLOCKED check: the value is neither logged nor exposed. One log line in decode_command() would both confirm it and make the guard auditable afterwards.",
+      "severity_tier": 2,
+      "rank": 20
+    },
+    {
+      "id": "VOICE-05",
+      "title": "Nothing content-based covers audio ARIES started but did not synthesise — the exact 2026-09-29 vector",
+      "severity": "medium",
+      "blast_radius": "Any goal that starts media: play_music, open_url, browser_open.",
+      "source": "raw/review_voice_path.json VOICE-05",
+      "evidence_kind": "executed+source",
+      "measured": "_LAST_SPOKEN only ever holds ARIES's own TTS, so a song started by play_music/open_url (aries/workspace/capabilities.py:663-691) is not in it and a wake word hallucinated out of it cannot be recognised. The acoustic coupling is EXECUTED-PROVEN: the current boot's journal is full of transcribed loudspeaker content ('Thanks for watching!', 'Subtitles by the Amara.org community', motivational-video speech), all of it reaching the wake gate.",
+      "one_line_fix": "If ARIES knows it started playback for a goal, make that goal's media title part of the echo-rejection vocabulary for as long as it plays.",
+      "acceptance_criterion": "L2-6",
+      "not_claimed": "The protections that DO hold for this case are structural (not recording from the sink monitor) and statistical (the runaway guard), not content-based. The reviewer refutes 'the removal of the playback-suppression thresholds left nothing in its place'.",
+      "severity_tier": 2,
+      "rank": 21
+    },
+    {
+      "id": "VOICE-07",
+      "title": "speech.speaking() is documented as the interlock and has zero callers; the `say` capability is a second TTS path that bypasses the echo memory",
+      "severity": "medium",
+      "blast_radius": "The documented barge-in guarantee, and every `say` from aries-core while the daemon holds the microphone.",
+      "source": "raw/review_voice_path.json VOICE-07",
+      "evidence_kind": "executed",
+      "measured": "aries/speech/__init__.py:52-56 states speaking() 'exists to be gated on' and that stop() exists so a person can cut ARIES off mid-word. EXECUTED grep across aries/, experiments/ and scripts/: ZERO callers of speaking(), exactly one caller of stop() (inside speak() itself), and the only speech.speak call sites outside aries/speech/ are experiments/voice/voice.py:534 and aries/workspace/capabilities.py:904.",
+      "one_line_fix": "Either implement the interlock the docstring describes or delete the claim, and route the `say` capability's text back to the daemon's echo memory.",
+      "acceptance_criterion": "L2-10",
+      "severity_tier": 2,
+      "rank": 22
+    },
+    {
+      "rank": 23,
+      "id": "CR-01",
+      "title": "A queued child can be admitted to run after its parent has been cancelled; claim() never checks the parent's state",
+      "severity": "moderate",
+      "blast_radius": "Team children are read-only and path-exact, so the damage there is unrequested reads after the user said stop. The same claim() also admits the static fan-out path, where a sub-goal may hold any capability including mutating and desktop ones.",
+      "source": "raw/review_goalgraph_termination.json CR-01",
+      "evidence_kind": "executed",
+      "measured": "With a parent WorkspaceGoal row in state 'cancelled', goal_graph.dependencies_ready returned (True, None) for a child whose prerequisite had reached 'done' with final_evidence_refs AND for a child with no declared dependencies. Reproduction script is in the finding.",
+      "one_line_fix": "One predicate in claim: re-read the parent row named by orchestration.parent_id and refuse unless it is still 'running'.",
+      "acceptance_criterion": "L8-6",
+      "not_claimed": "The race window itself was reasoned about, not measured: within one tick the roll_up-then-claim ordering is safe under service._lock, but service.cancel does not take that lock. Latent for the team path behind ARIES_GOAL_TEAMS; reachable on the static fan-out path. The existing test covers only the pre-creation case (tests/test_goal_graph.py:109).",
+      "severity_tier": 2
+    },
+    {
+      "rank": 24,
+      "id": "CR-02",
+      "title": "validate() admits a decomposition whose node order does not match the root requirement order, and synthesize() can then never verify it",
+      "severity": "moderate",
+      "blast_radius": "Every compound goal routed through a team. The model chooses node order, so 'done' versus 'partial' is nondeterministic for the same goal.",
+      "source": "raw/review_goalgraph_termination.json CR-02",
+      "evidence_kind": "executed",
+      "measured": "For 'Read <a> and read <b>' with root requirements [a, b], validate ACCEPTED nodes declared [read b, read a]; completion over the children's steps in synthesize order returned met=False ('No current verified evidence satisfies {\"capability\": \"file.read\", \"path\": \"<a>\"}'), and the same steps in root-requirement order returned met=True.",
+      "one_line_fix": "Either make validate require the node order to realise the root requirement order, or make synthesize order the concatenated steps by the root contract rather than by node declaration.",
+      "acceptance_criterion": "L4-4",
+      "not_claimed": "Latent: ARIES_GOAL_TEAMS defaults FALSE and is the one flag currently off. Both of your team tests happen to declare nodes in requirement order, so this is invisible to them — that is an observation about the tests, not an accusation.",
+      "severity_tier": 2
+    },
+    {
+      "rank": 25,
+      "id": "CR-03",
+      "title": "Specialist grants come from model-proposed capabilities and the union of all goal paths, not from each node's validated requirements",
+      "severity": "moderate",
+      "blast_radius": "Every team node. Executed: one node received all six SAFE_READS plus both goal paths, and could then read the sibling's file and enumerate processes.",
+      "source": "raw/review_goalgraph_termination.json CR-03",
+      "evidence_kind": "executed",
+      "measured": "validate() issued caps ['file.exists','file.list','file.read','system.processes','system.status','system.storage'] and paths ['/tmp/a.txt','/tmp/b.txt'] to a node whose only checkable requirement was file.read of /tmp/a.txt; under that grant scopes.enforce ALLOWED system.processes {}, system.status {} and file.read {'path':'/tmp/b.txt'}, and blocked only file.list /tmp and file.read /etc/passwd. Second proof: with an unsupported root contract, validate accepted two nodes doing 'List running processes' and 'Check system status', because the root cross-check at goal_graph.py:79 is guarded by root_contract['supported'].",
+      "one_line_fix": "Derive each node's grant from its own validated requirements rather than from its declared capabilities and the goal-wide path set, and run the root cross-check even when the root contract is unsupported.",
+      "acceptance_criterion": "L8-7",
+      "not_claimed": "The ceiling holds — that was separately executed-proved. This is a least-privilege defect inside the ceiling, not an escape, and the flag is off by default. 'Do not add tasks the user did not ask for' exists only in the prompt.",
+      "severity_tier": 2
+    },
+    {
+      "id": "learning L9-04",
+      "title": "_propose_threshold double-counts multi-topic items, inflating n and overstating confidence",
+      "severity": "medium",
+      "blast_radius": "Every news.relevance_threshold proposal, which is the one setting the loop can change.",
+      "source": "raw/review_learning_loop.json finding L9-04",
+      "evidence_kind": "executed",
+      "measured": "shown and dismissed sum PER-TOPIC slices (aries/learning/loop.py:284-288) while gather() increments one slice per topic per item (evidence.py:167-177), so an item matching k topics contributes k. EXECUTED on 10 real aries_news_items rows: shown 30, dismissed 30. The declared minimum of min_observations*2 = 20 can be met by 7 real items at k=3, and Proposal.confidence (= the Wilson interval's lower bound, computed on the inflated n) was 0.886 instead of 0.722.",
+      "one_line_fix": "Count distinct items rather than per-topic slices when computing the threshold's n.",
+      "acceptance_criterion": "L9-8",
+      "severity_tier": 2,
+      "rank": 26
+    },
+    {
+      "id": "learning L9-05",
+      "title": "The loop's own governing knobs, including its master switch, are machine-writable at the LEARNED layer",
+      "severity": "medium",
+      "blast_radius": "14 named setting keys, among them learning.enabled, learning.interval_hours and learning.max_step.",
+      "source": "raw/review_learning_loop.json finding L9-05",
+      "evidence_kind": "executed",
+      "measured": "Only learning.apply_changes carries user_only=True (aries/learning/settings.py:112-115). learning.enabled, learning.interval_hours, learning.max_step, learning.min_observations, learning.reversal_confirmations, learning.reversal_hysteresis, learning.max_reversals, learning.fatigue_step, learning.window_days, learning.engaged_threshold, learning.ignored_threshold, learning.noisy_threshold, news.relevance_threshold and interests.default_weight are all writable at Layer.LEARNED, which beats DEFAULT. EXECUTED, including SettingsService.learn('learning.enabled', …).",
+      "one_line_fix": "Mark the loop's own knobs user_only, starting with learning.enabled, learning.interval_hours and learning.max_step.",
+      "acceptance_criterion": "L9-9",
+      "not_claimed": "Four related hypotheses were refuted: interests.learn() cannot write the user's weight column, SettingsService.learn() has no layer parameter and cannot be pointed at a stronger layer, the loop cannot create a topic it was never told about, and it cannot lower news.relevance_threshold to make itself louder.",
+      "severity_tier": 2,
+      "rank": 27
+    },
+    {
+      "id": "learning L9-06 / L9-07",
+      "title": "Human authorship is a caller-supplied string, so 'user:<anything>' obtains USER-layer authority and bypasses the user_only guard",
+      "severity": "medium",
+      "blast_radius": "Every setting, including the three user_only keys the reviewer wrote through: learning.apply_changes, autonomy.level and autonomy.max_actions_per_hour.",
+      "source": "raw/review_learning_loop.json findings L9-06 and L9-07",
+      "evidence_kind": "executed",
+      "measured": "author_is_human = set_by.split(':')[0] in HUMAN_AUTHORS (aries/settings/service.py:55, 129-136). EXECUTED: set('news.relevance_threshold', 0.99, layer=Layer.USER, set_by='user:learning') is ACCEPTED and becomes the effective user value, while set_by='learning', 'system', 'aries.learning' and 'learning:loop' are all correctly refused. EXECUTED on three user_only keys via learn(set_by='user'): learning.apply_changes -> False, autonomy.level -> 'automated', autonomy.max_actions_per_hour -> 999.",
+      "one_line_fix": "Derive author_is_human from an authenticated principal or a capability rather than a parsed string, and make learn() refuse a user_only key regardless of set_by.",
+      "acceptance_criterion": "L9-10",
+      "not_claimed": "The prefix rule exists for a real reason: aries/learning/feedback.py:364,398 uses 'user:feedback' to carry a genuine human action. The reviewer records that the learning loop itself does not abuse this.",
+      "severity_tier": 2,
+      "rank": 28
+    },
+    {
+      "id": "learning L9-08",
+      "title": "interests.update() has no author gate and records every actor as human",
+      "severity": "medium",
+      "blast_radius": "The user's weight column and its audit trail.",
+      "source": "raw/review_learning_loop.json finding L9-08",
+      "evidence_kind": "executed",
+      "measured": "update() (aries/interests/service.py:105-135) validates the range of `weight` and nothing about who is writing it, then logs actor_type='human' unconditionally while passing the caller's actor string through. EXECUTED: interests.update(db, 'ai', weight=0.05, actor='learning') writes the USER column and produces an audit event reading actor_type='human', actor='learning'. aries/interests/models.py:19-21 claims 'weight is written only by the user'.",
+      "one_line_fix": "Gate interests.update() on the author the way SettingsService.set() does, and derive actor_type from that author.",
+      "acceptance_criterion": "L9-11",
+      "severity_tier": 2,
+      "rank": 29
+    },
+    {
+      "id": "learning L9-09",
+      "title": "The loop can silence the evidence that would contradict it",
+      "severity": "medium",
+      "blast_radius": "Both of the loop's writable quantities, in both directions, with no way for the loop to undo its own quieting.",
+      "source": "raw/review_learning_loop.json finding L9-09 and question 7",
+      "evidence_kind": "executed",
+      "measured": "WEIGHT loop: learned_weight enters interests.profile() -> relevance score -> disposition at aries/news/automation.py:217 (score < news.relevance_threshold -> 'below_threshold'), and evidence.gather() counts ONLY disposition in ('delivered','held') (aries/learning/evidence.py:143-161), so lowering a topic's weight removes that topic's items from its own evidence. THRESHOLD loop: a raised threshold shrinks the evidence base globally and is UPWARD ONLY.",
+      "one_line_fix": "Measure engagement on a held-out slice of items delivered regardless of the learned weight.",
+      "acceptance_criterion": "L9-12",
+      "not_claimed": "The deliberate mitigation is real and correctly implemented in the opposite direction: never-shown items are excluded so the loop cannot confirm a guess with manufactured zero-engagement.",
+      "severity_tier": 2,
+      "rank": 30
+    },
+    {
+      "rank": 31,
+      "id": "PG-06 / F-10",
+      "title": "status='degraded' resets the circuit breaker, so a permanently half-broken automation is never paused",
+      "severity": "medium (PG-06, executed); low (F-10)",
+      "blast_radius": "All 7 automations. runner.py:188-190 lets the automation body choose its own status and names System Health as reporting 'degraded' when a probe could not run, so this is a reachable configuration.",
+      "source": "raw/review_proactive_gates.json PG-06 and findings.json F-10",
+      "evidence_kind": "executed",
+      "measured": "Breaker opens at exactly 3 consecutive failures (1 closed, 2 closed, 3 OPEN, 4 open, 5 open), refuses with reason 'circuit_breaker_open', force=True does not bypass it, and half-opens after the 30-minute cooldown (proved at now+31 min). A 'skipped' row does not break the streak. One 'degraded' row after 5 failures reset the breaker to closed with streak 0. automations.breaker_threshold=0 disables it entirely.",
+      "one_line_fix": "Treat 'degraded' as not-a-success for the purposes of the failure streak in breaker.py:112-119.",
+      "acceptance_criterion": "L7-4",
+      "severity_tier": 2
+    },
+    {
+      "rank": 32,
+      "id": "PG-04",
+      "title": "A blind thermal sensor releases an existing hold immediately, with no margin and no streak",
+      "severity": "medium",
+      "blast_radius": "Every thermal hold. Losing a sensor becomes the fastest possible way to clear one.",
+      "source": "raw/review_proactive_gates.json PG-04",
+      "evidence_kind": "executed",
+      "measured": "A 'deferred' hold on heavy_cpu was released on the FIRST release_holds tick once probe_thermal raised, bypassing both the 5 degC resume margin and the 2-check streak. governor.py:288-299.",
+      "one_line_fix": "Require at least the clear-check streak before releasing a hold on an unreadable sensor, or hold with a stated reason instead of releasing.",
+      "acceptance_criterion": "L7-6",
+      "not_claimed": "The comment's reasoning is defensible and is quoted rather than dismissed: 'holding forever on a blind sensor would be the unreachable rule again'.",
+      "severity_tier": 2
+    },
+    {
+      "rank": 33,
+      "id": "PG-07",
+      "title": "A resource-policy or breaker refusal resets the pacing clock, costing a full interval",
+      "severity": "medium",
+      "blast_radius": "All 7 automations; worst for time-of-day ones, where a skipped row after the target time marks the day 'already ran' and the Morning Brief is silently lost for that day.",
+      "source": "raw/review_proactive_gates.json PG-07",
+      "evidence_kind": "executed",
+      "measured": "Refusals are recorded as status='skipped' rows and last_run()/due() apply no status filter. After a 'skipped' row, due() for aries.news returned (False, 'ran 0 min ago (every 120 min)'). This contradicts governor.py:373-375, 'It is re-asked on the next tick'.",
+      "one_line_fix": "Filter status='skipped' out of last_run()/due() pacing, or record refusals in a separate table.",
+      "acceptance_criterion": "L7-8",
+      "severity_tier": 2
+    },
+    {
+      "rank": 34,
+      "id": "PG-08",
+      "title": "An unrecognised workload name silently downgrades an automation to 'light'",
+      "severity": "medium",
+      "blast_radius": "Every workload declaration. A typo removes the gate with no log and no warning.",
+      "source": "raw/review_proactive_gates.json PG-08",
+      "evidence_kind": "executed",
+      "measured": "workload='heavy_gpu_typo' produced allowed=true, reason 'lightweight work always runs', workload 'light' (workload.py:95-105, governor.py:340).",
+      "one_line_fix": "Make the workload field an enum and refuse or log loudly on an unrecognised value.",
+      "acceptance_criterion": "L7-7",
+      "not_claimed": "The docstring's defence holds for a newly added field. It does not hold for a spec that was once correctly declared heavy and is later edited.",
+      "severity_tier": 2
+    },
+    {
+      "rank": 35,
+      "id": "verifier-integrity F4",
+      "title": "Six browser action verifiers compare against the executor's own post-action observation, so a no-op action verifies",
+      "severity": "medium",
+      "blast_radius": "browser.back, browser.forward, browser.wait, browser.observe, browser.scroll, and browser.open via rank 21.",
+      "source": "raw/review_verifier_integrity.json F4",
+      "evidence_kind": "executed",
+      "measured": "browser.back/forward/wait/observe fall through verify_state's expected chain to result['url']; browser.scroll compares result['scroll'] with the fresh scroll offset and never looks at args['pixels']. EXECUTED: args pixels=800 with result scroll=0 and fresh scroll=0 -> met=True.",
+      "one_line_fix": "Read a before-state for these verifiers so 'went back in history' and 'scrolled 800px' become propositions the system can falsify.",
+      "acceptance_criterion": "L5-4",
+      "severity_tier": 2
+    },
+    {
+      "rank": 36,
+      "id": "verifier-integrity F5",
+      "title": "browser.open never compares the url that was requested",
+      "severity": "medium",
+      "blast_radius": "browser.open. browser.search by contrast DOES check args['query'] against the live query string, which is why it classifies INDEPENDENT.",
+      "source": "raw/review_verifier_integrity.json F5",
+      "evidence_kind": "executed",
+      "measured": "verify_browser (registry.py:280) compares the fresh url with result['url']. EXECUTED: args url 'https://requested.test/login' with both result and fresh url 'https://example.com/page' -> met=True.",
+      "one_line_fix": "Compare the fresh url against args['url'], as browser.search already does for its query.",
+      "acceptance_criterion": "L5-4",
+      "not_claimed": "At finish time contracts.evidence_matches (contracts.py:130-136) does compare the goal's url, so the gap is in the per-step verdict for goals the contract compiler supports.",
+      "severity_tier": 2
+    },
+    {
+      "rank": 37,
+      "id": "verifier-integrity F6",
+      "title": "screen.read verifies the picture, not the text",
+      "severity": "medium",
+      "blast_radius": "screen.read. The fix needs no new machinery.",
+      "source": "raw/review_verifier_integrity.json F6",
+      "evidence_kind": "executed",
+      "measured": "screen_capabilities.py:710-712: met requires a non-uniform re-decoded PNG plus result['characters'] and result['mean_confidence']>0, both reported by the executor. EXECUTED: text 'TOTALLY FABRICATED OCR' with characters=21 and mean_confidence=77 -> met=True. _titles_found() already computes a real cross-check of the recovered text against observed window titles and stores it in data without letting it affect met.",
+      "one_line_fix": "Make the existing _titles_found() cross-check load-bearing on met, which moves the capability to INDEPENDENT.",
+      "acceptance_criterion": "L5-4",
+      "severity_tier": 2
+    },
+    {
+      "rank": 38,
+      "id": "CR-04",
+      "title": "verify_probe hardcodes met=True, so the completion recheck for every system.* requirement cannot fail",
+      "severity": "moderate; the reviewer adds 'pre-existing, load-bearing for the reviewed path'",
+      "blast_radius": "The six verify_probe capabilities, reached by the new automatic finish path (finish_proposal -> completion) without a model call.",
+      "source": "raw/review_goalgraph_termination.json CR-04",
+      "evidence_kind": "executed",
+      "measured": "verify_probe(contradictory_executor,'system_probe')({}, {'probes':'ORIGINAL'}, {}) returned {'met': True, 'type': 'system_probe', 'data': {'completely': 'different', 'observed_at': 'now'}}. Separately executed: contracts.answer for a bare system.status contract returns the literal string 'All supported goal conditions independently verified. See referenced evidence.'",
+      "one_line_fix": "Give the probe verifiers a content gate for the bare contracts, as contracts.measured_readings already provides for measurement contracts.",
+      "acceptance_criterion": "L5-4, L8-9",
+      "not_claimed": "For measurement contracts contracts.measured_readings still gates on the requested metric being present and finite, which is a real check. The gap is the bare 'Check system status' and 'List running processes' contracts, which have no content gate at all.",
+      "severity_tier": 2
+    },
+    {
+      "rank": 39,
+      "id": "F-06",
+      "title": "verify_probe cannot fail, so for six read capabilities 'verified' means only that the probe ran again",
+      "severity": "low as a defect, HIGH as a qualification on the thesis claim",
+      "blast_radius": "6 capabilities, all effect=read: file.list, file.search, system.status, system.storage, system.processes, task.inspect. 47 of 1004 verified steps all-time = 4.7%.",
+      "source": "findings.json F-06",
+      "evidence_kind": "executed",
+      "measured": "verified_steps_all_time 1004; verified_by_a_verifier_that_cannot_fail 47; share 4.7%; verified_by_a_verifier_that_can_fail 957; from a read-only query over aries_workspace_goals.result_json in var/aries.db.",
+      "one_line_fix": "Report verification coverage split by falsifiability (same fix as rank 7).",
+      "acceptance_criterion": "L5-4",
+      "disagreement": "D-1",
+      "not_claimed": "4.7% is small and the point is narrow: it should be stated rather than discovered by a reader. The 325/381 figure is the 365-day analytics window and has a different denominator; the two must not be mixed.",
+      "severity_tier": 3
+    },
+    {
+      "rank": 40,
+      "id": "F-03",
+      "title": "Context items dropped for budget are not named, while omitted historical sections are",
+      "severity": "low",
+      "blast_radius": "planner_context's memory-popping loop. One source of context provenance.",
+      "source": "findings.json F-03, raw artifact raw/context_provenance.json",
+      "evidence_kind": "executed",
+      "measured": "Case 'отфрлени ставки од контекст се именувани': expected true, observed false, detail '1 ставки отпаднаа; omitted_sections=['huge']'. One item entered, zero reached the planner. This is the single failure in that file (n 9, passed 8, failed 1).",
+      "one_line_fix": "Record dropped item ids and their sources alongside omitted_sections.",
+      "acceptance_criterion": "L6-4",
+      "not_claimed": "missing_sources IS recomputed after the drop, so the packet is honest about the EFFECT. What cannot be distinguished is the CAUSE.",
+      "severity_tier": 3
+    },
+    {
+      "id": "VOICE-10",
+      "title": "Spoken input has no interpretation-confirmation step, and an approval freeze opens no window",
+      "severity": "low",
+      "blast_radius": "Every spoken goal. A typed user confirms first; a spoken one does not, and a frozen spoken goal is invisible on the dashboard.",
+      "source": "raw/review_voice_path.json VOICE-10",
+      "evidence_kind": "executed+source",
+      "measured": "aries/api/routes.py:1081-1083 is the typed 'Do: <text>' confirmation; voice.py:890 submits immediately; routes.py:1163 is `present=not voice`, so a `proposed` voice goal produces no dashboard window and the only signal is the spoken HELD line and a notification (aries/speech/replies.py:73, :207-208). EXECUTED journal read: `✓ 'опен YouTube пемплеј да сонг 2 бона е еднот Лозано.' — Task queued`.",
+      "one_line_fix": "For a non-read effect from voice, read the interpretation back before acting, and make a `proposed` voice goal surface somewhere persistent.",
+      "acceptance_criterion": "L2-5",
+      "severity_tier": 3,
+      "rank": 41
+    },
+    {
+      "id": "VOICE-11",
+      "title": "The runaway guard's state is non-durable and its resume is ungated on an open API",
+      "severity": "low",
+      "blast_radius": "The one control the reviewer rates best in the voice path.",
+      "source": "raw/review_voice_path.json VOICE-11 and question 6",
+      "evidence_kind": "executed+source",
+      "measured": "aries/workspace/runaway.py:18-19 keeps the pause in process memory, so an aries-core restart clears it. POST /api/aries/shell/guard/resume (routes.py:1128-1132) needs no approval and writes no audit row, and `source` is a client-supplied body field so a caller can choose the laxer 'default' bucket. EXECUTED: GET /api/aries/shell/guard -> {\"paused\":{}} with no credential.",
+      "one_line_fix": "Persist the pause, audit resume, and derive the bucket from the authenticated principal or the route rather than from the body.",
+      "acceptance_criterion": "L2-9",
+      "not_claimed": "The limiter itself is ENFORCED by source: a repeat limit, a rate limit and a trip-and-pause, with stricter numbers for source 'voice' than for typed input, checked before any goal row is created. Tripping it is a BLOCKED check; the cheap substitute is a unit test against runaway.check with an injected `now`, whose signature already accepts one (runaway.py:53).",
+      "severity_tier": 3,
+      "rank": 42
+    },
+    {
+      "id": "VOICE-09 / F-17",
+      "title": "Language detection cannot reject: every utterance is forced into Macedonian or English",
+      "severity": "low (VOICE-09); findings.json F-17 rates it informational",
+      "blast_radius": "Every third-language utterance and every non-speech noise the microphone picks up.",
+      "source": "raw/review_voice_path.json VOICE-09 and question 3, with findings.json F-17",
+      "evidence_kind": "executed+source",
+      "measured": "pick_language() (voice.py:108-110) can only return None when `ranked` is empty, which cannot happen, so the 'unsupported detected language' drop at :567 is dead code under --languages mk,en. Corroborated by the journal containing no such line in 1372 lines while containing many near-zero-confidence decodes; live confidences as low as [mk 0.06] and [en 0.01] with the utterance still accepted.",
+      "one_line_fix": "Delete the unreachable branch and log when a decode was a forced choice rather than a confident one.",
+      "acceptance_criterion": "L2-8",
+      "not_claimed": "findings.json F-17 verified only that the unit file passes --languages mk,en and labels the rest 'reviewer executed'. Quantifying which language a real third-language utterance is forced into is a BLOCKED check needing a capture device or a second large-v3 instance on the GPU the daemon holds.",
+      "severity_tier": 3,
+      "rank": 43
+    },
+    {
+      "id": "VOICE-08",
+      "title": "caption_hallucination misses the most frequent real hallucination on this machine",
+      "severity": "low",
+      "blast_radius": "One pattern, caught downstream by the wake gate anyway.",
+      "source": "raw/review_voice_path.json VOICE-08",
+      "evidence_kind": "executed",
+      "measured": "caption_hallucination (voice.py:545-552) requires the normalised text to be exactly 'subtitles by amara org'; the live string is 'Subtitles by the Amara.org community', which normalises to 'subtitles by the amara org community' and does not fullmatch. EXECUTED: that string -> False; 'Thanks for watching!' -> True. EXECUTED journal count: the Amara string appears about 10 times in the current 2.5-hour boot and dozens of times overall, always logged `· not addressed` rather than `· dropped`.",
+      "one_line_fix": "Build the pattern from the live journal's own '· not addressed' and '· dropped' lines; the data is already there.",
+      "acceptance_criterion": "L2-11",
+      "not_claimed": "Listed because the '· not addressed' versus '· dropped' distinction is what any false-activation denominator will be built from, not because the hallucination itself is dangerous.",
+      "severity_tier": 3,
+      "rank": 44
+    },
+    {
+      "rank": 45,
+      "id": "CR-05",
+      "title": "decision.action=='fail' on an unsupported contract becomes terminal state 'answered', which analytics counts as a success, on model prose alone",
+      "severity": "low; 'open by design; the analytics bucketing is the part that is probably unintended'",
+      "blast_radius": "The product's own success-rate metric — aries/analytics/outcomes.py:56 buckets 'answered' as 'succeeded' unconditionally.",
+      "source": "raw/review_goalgraph_termination.json CR-05",
+      "evidence_kind": "executed+source",
+      "measured": "Source inspection for the branch (agent.py:304-311, 220-232). EXECUTED only for the gate: contracts.compile_goal('install Visual Studio Code', …) returns supported=False. The planner loop was NOT executed; that needs a model call.",
+      "one_line_fix": "Stop bucketing a zero-step, zero-evidence 'answered' as 'succeeded', or distinguish a conversational goal from an out-of-scope action request in the branch condition.",
+      "acceptance_criterion": "L4-6",
+      "not_claimed": "Two mitigations are real and were verified: eval/agent_suite/checks.py:185-188 requires a verified step before an 'answered' goal counts as a claim, and aries/workspace/traces.py:118-120 drops rows with no verified step so these never become few-shot examples.",
+      "severity_tier": 3
+    },
+    {
+      "rank": 46,
+      "id": "CR-06",
+      "title": "verify_exists reports met=True for a file that does not exist, which relabels a wholly failed read goal as 'partial'",
+      "severity": "low",
+      "blast_radius": "Any read goal where the planner calls file.exists first. State labelling and analytics bucketing.",
+      "source": "raw/review_goalgraph_termination.json CR-06",
+      "evidence_kind": "executed",
+      "measured": "With capabilities.checked_path stubbed to an identity function, verify_exists on a missing path returned {'met': True, 'type': 'file_state', 'data': {'exists': False, 'is_file': False, …}}. agent.py:431 and 297-302/433-434 then select \"'partial' if any(e['verified'] …) else 'failed'\".",
+      "one_line_fix": "Base the partial-versus-failed predicate on goal progress rather than on the presence of any verified evidence row.",
+      "acceptance_criterion": "L4-5",
+      "not_claimed": "It cannot reach 'done': no contract ever produces a file.exists requirement, so this is a labelling defect, not a false success. The capability description already steers the planner away ('For read goals use file.read directly') but nothing enforces it.",
+      "severity_tier": 3
+    },
+    {
+      "rank": 47,
+      "id": "EVR-5",
+      "title": "orchestration._interrupt labels a step that provably never started as an interrupted execution with uncertain effects",
+      "severity": "low",
+      "blast_radius": "The durable record for every interrupted goal that held a planned-but-unstarted step.",
+      "source": "raw/review_evidence_recovery.json EVR-5",
+      "evidence_kind": "source",
+      "measured": "orchestration.py:655-666 runs for any step still verification_status=='pending', including execution_status=='planned' with started_at None, and writes 'InterruptedExecution' plus an 'interrupted_execution' evidence row. agent.mark_interrupted (agent.py:39-47) fires only on execution_status=='executing' or state=='observed'.",
+      "one_line_fix": "Make orchestration._interrupt use the same predicate as agent.mark_interrupted.",
+      "acceptance_criterion": "L5-7",
+      "not_claimed": "It errs safe and never replays, so this is record honesty, not a safety hole.",
+      "severity_tier": 3
+    },
+    {
+      "id": "learning L9-10",
+      "title": "'Nothing here writes' is true only because the HTTP session never commits",
+      "severity": "low",
+      "blast_radius": "GET /learning/proposals, GET /learning/reversals and the CLI `learning reversals`.",
+      "source": "raw/review_learning_loop.json finding L9-10",
+      "evidence_kind": "source",
+      "measured": "propose() calls reversal.observe() for every established target, which db.add()s a PENDING row or increments confirmations, and flushes. Nothing is persisted only because get_db() yields a session and never commits (vendor/agentic-core/agentic_core/database/base.py:101-103) and the CLI paths return without committing.",
+      "one_line_fix": "Split a pure read path out of propose(), or make the observe() side effect explicit at the call site.",
+      "acceptance_criterion": "L9-13",
+      "not_claimed": "The user-facing risk is REFUTED — a user refreshing the UI cannot confirm a reversal — but, in the reviewer's words, 'only by transaction scope'.",
+      "severity_tier": 3,
+      "rank": 48
+    },
+    {
+      "id": "learning L9-11",
+      "title": "'Observe only' mode is not read-only and accumulates reversal confirmations",
+      "severity": "low",
+      "blast_radius": "Any owner who watches the loop before trusting it — exactly the careful path.",
+      "source": "raw/review_learning_loop.json finding L9-11",
+      "evidence_kind": "source",
+      "measured": "When learning.apply_changes is off, run_pass skips apply() but still commits (aries/learning/loop.py:339-353, commit at :353), persisting the pending-reversal rows and confirmation counts propose() created.",
+      "one_line_fix": "Skip the commit, or skip reversal.observe(), when apply_changes is off.",
+      "acceptance_criterion": "L9-14",
+      "not_claimed": "The consequence is a primed state machine: enabling apply_changes can apply a reversal on the very next pass, on confirmations gathered while the user believed nothing was happening.",
+      "severity_tier": 3,
+      "rank": 49
+    },
+    {
+      "id": "learning L9-12",
+      "title": "_CONTEXT is an unbounded module-level dict keyed on id(list)",
+      "severity": "low",
+      "blast_radius": "A long-lived API process serving GET /learning/reversals — a cross-request data-mixing hazard in a user-facing explanation surface.",
+      "source": "raw/review_learning_loop.json finding L9-12",
+      "evidence_kind": "source",
+      "measured": "propose() stashes the frozen/verdicts side-channel in a process-global dict keyed by id(proposals) (aries/learning/loop.py:256, 260-271) and never evicts: an unbounded leak, one entry per call for the process lifetime, plus id reuse once a list is garbage-collected.",
+      "one_line_fix": "Carry the side-channel on the Proposal objects or in an explicit return value rather than in a module-level dict keyed on id().",
+      "acceptance_criterion": "L9-15",
+      "severity_tier": 3,
+      "rank": 50
+    },
+    {
+      "id": "learning L9-13",
+      "title": "Proposal.scope is cosmetic; project-scoped interests are silently unreachable",
+      "severity": "low",
+      "blast_radius": "Any topic the user follows only inside a project.",
+      "source": "raw/review_learning_loop.json finding L9-13",
+      "evidence_kind": "executed",
+      "measured": "propose() resolves with interests.get(db, topic) and apply() writes with interests.learn(db, target, ...), both at the default scope '', so row.scope is always '' and the scope recorded in Proposal, AriesLearningChange and AriesReversal is always empty. Never learned about, never reported as skipped.",
+      "one_line_fix": "Pass the scope through propose()/apply(), or report project-scoped topics as explicitly skipped.",
+      "acceptance_criterion": "L9-16",
+      "severity_tier": 3,
+      "rank": 51
+    },
+    {
+      "rank": 52,
+      "id": "CR-08",
+      "title": "synthesize discards the verified root answer and always uses 'done', never 'answered'",
+      "severity": "low",
+      "blast_radius": "Every measurement or disk goal routed through a team. The voice reply layer and the UI are keyed on state and cards.",
+      "source": "raw/review_goalgraph_termination.json CR-08",
+      "evidence_kind": "source",
+      "measured": "goal_graph.py:195-199 uses completion's summary only inside `else: gaps.append(summary)`; :204-205 rebuilds cards from child observations; :209 sets state 'done' unconditionally, while agent.py:322 sets 'answered' for measurement contracts.",
+      "one_line_fix": "Keep completion's summary on the success path and mirror the single-goal path's 'answered' for measurement contracts.",
+      "acceptance_criterion": "L8-9",
+      "not_claimed": "Not reproduced; source inspection only. For compound reads the children's own summaries cover most of the content, which is why the reviewer rated it low.",
+      "severity_tier": 3
+    },
+    {
+      "rank": 53,
+      "id": "CR-07",
+      "title": "goal_graph.persist mutates the caller's data dict before its CAS and does not restore it when the CAS loses",
+      "severity": "low, narrow",
+      "blast_radius": "One durable row per lost race, which then claims role='parent' with non-existent child IDs and is exempt from the interrupted-goal sweep forever.",
+      "source": "raw/review_goalgraph_termination.json CR-07",
+      "evidence_kind": "source",
+      "measured": "Not reproduced, and the reviewer says why: the CAS can only lose if another writer changes the row between the db.get and the UPDATE, and they would not drive concurrent writers against a live queue. Read goal_graph.py:151-157 against the early return at :139.",
+      "one_line_fix": "Snapshot or deep-copy data before mutating it in persist, and restore on the rollback path.",
+      "acceptance_criterion": "L8-8",
+      "severity_tier": 3
+    },
+    {
+      "rank": 54,
+      "id": "PG-09",
+      "title": "The heavy-job budget register is process-local and the stop flag has no reader",
+      "severity": "low",
+      "blast_radius": "Latent: nothing declares a budgeted class today. Once one exists, a CLI-started heavy job is never budgeted and an API restart silently empties the register.",
+      "source": "raw/review_proactive_gates.json PG-09",
+      "evidence_kind": "source",
+      "measured": "governor._running (governor.py:406) is a module-level dict; aries/cli.py runs automations in a separate process at cli.py:395, 683, 702, 1257. Grep found no caller of governor.stop_requested anywhere in aries/. check_budgets never asks a stateful job to stop at all (governor.py:455-459). power.heavy_job_max_minutes default 20, min 1, max 720.",
+      "one_line_fix": "Persist the running-job register, and give stop_requested at least one reader before any class declares itself budgeted.",
+      "acceptance_criterion": "L7-10",
+      "severity_tier": 3
+    },
+    {
+      "rank": 55,
+      "id": "PG-10",
+      "title": "aries.data deletes user data unattended through the no-task-kind escape hatch",
+      "severity": "low",
+      "blast_radius": "The user's database on a 24-hour schedule, once data.enabled and data.cleaning_enabled are both on. Both are default False and neither is present in the live DB.",
+      "source": "raw/review_proactive_gates.json PG-10",
+      "evidence_kind": "source",
+      "measured": "task_kind=None (lifecycle/automation.py:70) routes it through runner.py:139 _run_directly, bypassing evaluation, ActionProposal and escalation by design (runner.py:17-18). risk='medium' is declared honestly with the comment 'it deletes; that is not a low-risk verb'. Runs are audited.",
+      "one_line_fix": "Require a per-pass ActionProposal for the deletion pass, or state in the setting's help text that enabling it is the approval.",
+      "acceptance_criterion": "L7-9",
+      "not_claimed": "Currently off. aries/lifecycle/policy.py schedules nothing — it is a declarative retention table whose minimum_days protections the reviewer judged sound.",
+      "severity_tier": 3
+    },
+    {
+      "rank": 56,
+      "id": "PG-11",
+      "title": "The maintenance early return retries every tick with no recorded run",
+      "severity": "low",
+      "blast_radius": "One automation at a time, for up to the 240 s maintenance lease; re-attempted every 60 s with no history row.",
+      "source": "raw/review_proactive_gates.json PG-11",
+      "evidence_kind": "source",
+      "measured": "runner.py:130-133 returns {'reason':'maintenance'} from inside the lock without calling record_run; due() is paced by the last recorded run (genome.py:293).",
+      "one_line_fix": "Record a 'skipped' row for the maintenance return as every other refusal in run_automation already does (runner.py:38-39).",
+      "acceptance_criterion": "L7-11",
+      "not_claimed": "Bounded and cheap. Interacts with PG-07, where recording a skipped row has its own cost — fix both together or neither.",
+      "severity_tier": 3
+    },
+    {
+      "rank": 57,
+      "id": "verifier-integrity F7",
+      "title": "system.service answers about a unit's state and verifies only the unit's name",
+      "severity": "low",
+      "blast_radius": "system.service (the read capability), not system.service_control.",
+      "source": "raw/review_verifier_integrity.json F7",
+      "evidence_kind": "executed",
+      "measured": "system_capabilities.py:354-356: met = fresh['unit']==result['unit'] and fresh['load_state']!='not-found'. EXECUTED: a fresh row saying active_state='inactive' verified a result claiming 'active'.",
+      "one_line_fix": "Compare active_state as well as unit in verify for system.service.",
+      "acceptance_criterion": "L5-4",
+      "not_claimed": "The fresh row is what reaches the evidence, so the final answer is still the re-read one; the verdict just does not notice the contradiction.",
+      "severity_tier": 3
+    },
+    {
+      "rank": 58,
+      "id": "verifier-integrity F9",
+      "title": "system.service_control's before/after invariant rests on a baseline the executor recorded",
+      "severity": "low, structural note",
+      "blast_radius": "The strongest verifier in the registry — the one L5-1 rests on.",
+      "source": "raw/review_verifier_integrity.json F9",
+      "evidence_kind": "source",
+      "measured": "control() (system_capabilities.py:393) reads `before` itself; verify_control (line 426) takes it from result['before'] and re-reads only the after-state.",
+      "one_line_fix": "Have verify_control capture its own baseline, or record that the baseline is executor-supplied in the evidence row.",
+      "acceptance_criterion": "L5-1",
+      "not_claimed": "The executor here is trusted Python rather than model output, so this is a structural note, not a live hole.",
+      "severity_tier": 3
+    },
+    {
+      "rank": 59,
+      "id": "verifier-integrity F8",
+      "title": "The independence of a read verifier is usually a second call of the SAME function, not a second mechanism",
+      "severity": "low",
+      "blast_radius": "verify_probe, verify_services, verify_packages, verify_status, verify_wifi, verify_metadata and the desktop/browser read verifiers.",
+      "source": "raw/review_verifier_integrity.json F8",
+      "evidence_kind": "source",
+      "measured": "Named as genuinely two-mechanism: system.service_control (InvocationID before/after), input.type_text and input.clipboard_write (a second AT-SPI/selection session in a separate subprocess), desktop.* (compositor geometry versus the shell's accepted reply), and the file/digest family.",
+      "one_line_fix": "State the thesis claim at that resolution rather than as 'independent verifier per capability'.",
+      "acceptance_criterion": "L5-1, L5-4",
+      "not_claimed": "A second call of the same function DOES catch staleness, a lying model and a transient. What it cannot catch is a systematic bug in the probe itself.",
+      "severity_tier": 3
+    },
+    {
+      "rank": 60,
+      "id": "F-13",
+      "title": "The thesis's headline verification figures are computed over 6.2% of the deployment, and the mechanism built to disclose exactly that does not fire for those two metrics",
+      "severity": "CRITICAL for the thesis; moderate as a code defect",
+      "blast_radius": "verification_honesty and verification_contradictions — the two metrics the project uses as its central evidence.",
+      "source": "findings.json F-13",
+      "evidence_kind": "executed",
+      "measured": "goals_in_the_database 8025; goals_created_within_365_days 8025; analytics_goal_scan_cap 500; share_of_goals_actually_scanned 500 / 8025 = 6.2%; steps_in_the_newest_500_goals 576; steps_in_all_goals 8276; share_of_steps_actually_scanned 576 / 8276 = 7.0%. The same query returned 325/381 = 85.3% on 2026-10-04 and 290/377 = 76.9% on 2026-10-06. Contradictions: capped window 0/290; full ledger 2 verification_failed against 1004 verified = 2/1006 = 0.20%, both outside the newest 500 goals. Caught by browser.search (INDEPENDENT) and browser.observe (SELF_REPORT). TRIVIAL verifiers failed 0 times in 84 steps.",
+      "one_line_fix": "Emit truncated, plus the scanned and available counts, from aries/analytics/integrity.py as aries/analytics/outcomes.py:135 already does — one field each.",
+      "acceptance_criterion": "L5-3, L5-8, L5-9",
+      "not_claimed": "No claim that the metric is deliberately misleading. The Window docstring states the correct intent in as many words; the flag simply is not emitted by integrity.py.",
+      "severity_tier": 4
+    },
+    {
+      "rank": 61,
+      "id": "EVR-6",
+      "title": "task.inspect reads any WorkspaceGoal row by id with no ownership check",
+      "severity": "informational",
+      "blast_radius": "Metadata only: another goal's state, step count and full list of evidence_ids.",
+      "source": "raw/review_evidence_recovery.json EVR-6",
+      "evidence_kind": "source",
+      "measured": "registry.py:365-372 does `await ctx['db'].get(WorkspaceGoal, args['task_id'])` with no comparison against ctx['task_id'] and no principal check, in contrast with browser_read (registry.py:271-272) and browser_capabilities.owned (browser_capabilities.py:21-24).",
+      "one_line_fix": "Apply the same ownership test the browser capabilities already apply.",
+      "acceptance_criterion": "L3-6",
+      "not_claimed": "No forgery follows: agent.py:54 computes `available` only from this goal's own data['evidence'], so a foreign evidence_id can never pass the refs <= available gate. It is listed because the ids it hands out are exactly the identifiers that gate is keyed on.",
+      "severity_tier": 4
+    },
+    {
+      "rank": 62,
+      "id": "F-01",
+      "title": "enforce() is inert when no grant is installed",
+      "severity": "informational, not a defect",
+      "blast_radius": "Every execution path that does not enter scopes.use(). Only aries/workspace/agent.py:114 and aries/workspace/goal_graph.py install a grant.",
+      "source": "findings.json F-01, raw artifact raw/scopes_adversarial.json case 'no grant: enforce is inert'",
+      "evidence_kind": "executed",
+      "measured": "expected allow, observed allow. The uncovered surface itself is not measured.",
+      "one_line_fix": "A counter of capability invocations that ran with grant=None would make the uncovered surface measurable rather than assumed.",
+      "acceptance_criterion": "L0-3",
+      "not_claimed": "The guarantee is a property of the callers, which is a design choice, not a bug. Nothing in the gate will say so, which is the part worth instrumenting.",
+      "severity_tier": 4
+    },
+    {
+      "rank": 63,
+      "id": "F-02",
+      "title": "A root budget can only be set once; tightening it later is silently ignored",
+      "severity": "informational",
+      "blast_radius": "aries/intelligence/budgets.py create(). root_id is a uuid4 hex, so collision or reuse is not a practical attack path.",
+      "source": "findings.json F-02, raw artifact raw/budgets_concurrent.json case 'повторен create ги менува лимитите'",
+      "evidence_kind": "executed",
+      "measured": "expected 10, observed 10 — max_calls stayed 10 after a second create with max_calls=1; detail 'on_conflict_do_nothing: вториот повик нема ефект'.",
+      "one_line_fix": "Return a signal when a second create would have tightened a cap and did nothing.",
+      "acceptance_criterion": "L8-10",
+      "not_claimed": "Idempotence is the right default for a shared root. The risk is only the missing signal.",
+      "severity_tier": 4
+    },
+    {
+      "rank": 64,
+      "id": "EVR-7",
+      "title": "The registry holds 58 capabilities, not the bounded 15 the design describes",
+      "severity": "informational",
+      "blast_radius": "Every acceptance claim phrased as '15 capabilities, each with an independent verifier' is measuring a subset.",
+      "source": "raw/review_evidence_recovery.json EVR-7",
+      "evidence_kind": "executed",
+      "measured": "registry._items yields 58: registry.py:391-408 registers 15, registry.py:411-432 registers seven further modules adding 43. EVR-7's own effect histogram reads 'read (26), open (8), desktop (7), file_mutation (4), input (2), create/notify/network/service/display (1 each)' and its prose says '32 non-read capabilities'.",
+      "one_line_fix": "Restate every bounded-registry claim against the live object.",
+      "acceptance_criterion": "L0-1",
+      "disagreement": "D-2 — EVR-7's histogram sums to 26 non-read, its prose says 32, and raw/repo_facts.json's live enumeration says 29. DO NOT TREAT 32 OR 26 AS RECONCILED.",
+      "severity_tier": 4
+    },
+    {
+      "id": "F-16",
+      "title": "Deterministic matches execute without the model-plan confirmation; operator.enabled is NOT bypassed",
+      "severity": "informational — correcting a reviewer, and the true mechanism is defensible",
+      "blast_radius": "One sub-claim of VOICE-03, retracted before it could travel.",
+      "source": "findings.json F-16",
+      "evidence_kind": "source",
+      "measured": "aries/operator/service.py around line 298 checks operator.enabled and returns early with a message telling the user to enable it; grep for media_control, set_volume and set_brightness in that file returns nothing.",
+      "one_line_fix": "No fix: the adjacent true fact is the branch asymmetry at operator/service.py:303, already carried by the VOICE-03 entry.",
+      "acceptance_criterion": "L2-4",
+      "disagreement": "D-8",
+      "severity_tier": 4,
+      "rank": 65
+    },
+    {
+      "id": "learning L9-14",
+      "title": "What is genuinely well built in the learning subsystem",
+      "severity": "informational",
+      "blast_radius": "None — this is the part Codex should not change while fixing the rest.",
+      "source": "raw/review_learning_loop.json finding L9-14",
+      "evidence_kind": "executed",
+      "measured": "The column split (AriesInterest.weight versus learned_weight) and the layer stack (USER 60 > LEARNED 30) make the precedence claim structural, and the two learn() entry points have no reachable parameter for a user value — 'I attacked both and failed'. The pending-reversal state machine behaves exactly as documented: alternating evidence opened a PENDING row and withdrew it as 'abandoned' with no change applied. The hysteresis-as-confidence design — a wider interval against the same threshold rather than a moved threshold — is called the right choice.",
+      "one_line_fix": "Preserve these while fixing L9-5 through L9-16; the forming guards are strong and it is only the undoing that is missing.",
+      "acceptance_criterion": "L9-1",
+      "severity_tier": 4,
+      "rank": 66
+    },
+    {
+      "id": "learning L9-15",
+      "title": "Level 9 assessment: the '0%' claim is wrong as stated and right in substance",
+      "severity": "informational",
+      "blast_radius": "How Level 9 is described.",
+      "source": "raw/review_learning_loop.json finding L9-15 and question 2",
+      "evidence_kind": "source",
+      "measured": "Wrong as stated: a scheduled loop does autonomously change system behaviour over days, with durable state, hysteresis and a change log. Right in substance: it is not self-improvement, because that requires a measured objective and the ability to undo a change that worsens it, and neither exists. Bound confirmed by question 2 (ENFORCED, executed): the loop can change exactly four things and has no write path into planning, capability selection, context assembly, routing or approval; the automation declares task_kind=None, agents=[], tools=[], permissions=[VIEW_DATA].",
+      "one_line_fix": "Describe the subsystem as content adaptation with a change log, not as self-improvement, and name the missing half (a measured objective and a revert).",
+      "acceptance_criterion": "L9-1",
+      "severity_tier": 4,
+      "rank": 67
+    },
+    {
+      "rank": 68,
+      "id": "raw/count_discrepancies.json (no finding id exists for this; the file IS the finding)",
+      "title": "Thirty-four located numeric claims in old-docs/ do not match the live objects",
+      "severity": "informational as code; high for every document that cites them",
+      "blast_radius": "11 distinct wrong facts across old-docs/; the 15 -> 58 capability error alone appears in 14 places.",
+      "source": "raw/count_discrepancies.json, generated by repo_facts.py against raw/repo_facts.json",
+      "evidence_kind": "executed",
+      "measured": "entries_recorded 90, WRONG 34, MATCHES 40, NOT_A_REPO_COUNT 16, distinct_wrong_facts 11, tallied from the entries themselves. The 11: registered capabilities (15/'fifteen'/'петнаесет' -> 58); the set of capability effects (4 named -> 10 distinct); scripts/ entry points (46 -> 45 files, 44 executable); systemd units (5 -> 6 unit files); Python files repo-wide (424 and 428 -> 458); aries/ Python lines (36,800 -> 40,324); aries_ui/ lines (5,519 -> 5,585); shell/ lines (4,389 -> 4,406); experiments/ Python lines (2,595 -> 10,924); tests/ size (15,370 lines / 63 files / 632 test functions / 2,428 static check sites -> 19,857 / 93 / 783 / 2,936); settings (182 -> 187) and documentation (52 files / 14,522 lines -> 66 / 15,619).",
+      "one_line_fix": "Regenerate every count from repo_facts.py and stamp the snapshot date, because the tree changed during the audit itself (test functions 776 -> 783, aries/ lines 40289 -> 40324, repo-wide .py 455 -> 458).",
+      "acceptance_criterion": "L0-4",
+      "most_instructive_single_line": "old-docs/README.md:92 is an audit line that explicitly CERTIFIES '15 способности' as correct ('точни') — a verification pass that confirmed the wrong number because it re-ran the same grep.",
+      "not_claimed": "16 of the 90 entries are not repository counts at all (experiment results, runtime measurements, per-run test-execution counts, forward-looking plans, regex false positives) and are excluded from the WRONG tally rather than counted against the documents.",
+      "severity_tier": 4
+    }
+  ],
+  "corrections_to_our_own_review": [
+    {
+      "id": "C-01",
+      "kind": "our own earlier work",
+      "wrong": "The registry holds 15 capabilities. Every document the reviewer wrote says 15.",
+      "right": "len(registry._items) == 58. 29 have a non-read effect; 12 of those require approval; 17 mutate without approval (browser.back/click/forward/navigate/open/scroll/search/type, desktop.focus/launch/maximize/minimize/move/resize/tile/unmaximize, file.write).",
+      "how_the_error_was_made": "Counted with grep -o \"Capability('...'\" over registry.py alone. That file literally contains 15 constructor calls; the remaining 43 are registered by other modules into the same registry object at import time. The grep looked authoritative and was not.",
+      "where_it_propagated": "old-docs/thesis/03_SYSTEM.md, old-docs/thesis/01_INTRODUCTION.md, old-docs/thesis/00_ABSTRACT*.md, old-docs/docs-mk/*.md, the diagram in old-docs/thesis/doc_figures.py, and fixtures_README.md ('there are fifteen capabilities').",
+      "what_was_dismissed_and_should_not_have_been": "old-docs/book/ already said '58 typed capabilities, 12 behind approval'. That was correct and the reviewer dismissed it as referring to a different registry. It did not.",
+      "lesson": "A count must come from the live object, not from a pattern match over one file.",
+      "why_codex_should_care": "If we got the simplest countable fact wrong by a factor of 3.87, treat every other count we hand you as needing the same live-object check."
+    },
+    {
+      "id": "N-06",
+      "kind": "our own earlier work",
+      "wrong": "The reviewer wrote in the thesis and documentation that the privacy partition has no enforcement, only provider selection.",
+      "right": "egress.cloud_block (aries/intelligence/egress.py:42-51) runs at generation.py:59-69 BEFORE a provider object is constructed, refuses personal/secret/unknown data classes, and fails closed on absent provenance, digest mismatch or unreadable policy. bind/classify sha256-bind the labels to the exact messages and schema, so the forced cloud escalation at agent_planner.py:400-403 cannot declassify.",
+      "accurate_statement": "ENFORCED but UNMEASURED. Aggregation by data class is absent (tracking.py stats() buckets only by execution_level), and a leak rate computed today would be tautologically zero because the gate compares labels to labels. The missing piece is a content-independent oracle, i.e. a canary fixture.",
+      "where_it_propagated": "old-docs/ inherits the error.",
+      "why_codex_should_care": "This one ran in your favour and we still had it backwards. The acceptance criterion L10-3 has been reworded accordingly."
+    },
+    {
+      "id": "N-04",
+      "kind": "our own test, not your code",
+      "wrong": "Expected planner_context to raise on an undersized budget.",
+      "right": "It degrades gracefully: memories are popped, oversized historical sections are omitted and named, and the ValueError fires only when the irreducible metadata still does not fit.",
+      "resolution": "The test case was re-specified rather than the code questioned.",
+      "why_codex_should_care": "A failing check from us is not automatically a defect in ARIES. This one was ours."
+    },
+    {
+      "id": "N-03",
+      "kind": "stale copy of your source",
+      "wrong": "policy()'s return value is discarded at the completion re-check.",
+      "right": "aries/workspace/agent.py:68 now raises PermissionError when policy() returns False.",
+      "resolution": "Present in an earlier copy the reviewer had read; closed in current source. Not a live finding.",
+      "why_codex_should_care": "If a finding from us names a line that no longer reads that way, say so and we will re-read rather than argue."
+    },
+    {
+      "id": "F-06-correction",
+      "kind": "a parallel reviewer of ours, corrected",
+      "wrong": "A parallel reviewer reported the cannot-fail verifier problem as covering system.status/storage/processes and implied the desktop family. A first grouping by verifier __name__ was also produced and was misleading.",
+      "right": "The desktop verifier at desktop_capabilities.py:99 is genuinely independent: it re-observes windows and compares geometry, maximized state and focus to the requested values, retrying up to 10 times. The __name__ grouping was misleading because several distinct closures are all named `verify`.",
+      "why_codex_should_care": "Do not accept a verifier classification from us that was produced by grouping on a function name."
+    },
+    {
+      "id": "C-02a",
+      "kind": "a parallel reviewer of ours, corrected",
+      "wrong": "The real registry has about 40 capabilities.",
+      "right": "len(registry._items) == 58, measured twice from the live object. aries.workspace.capabilities.CATALOGUE separately holds 54 deterministic vocabulary entries. The two are different surfaces and neither is 40.",
+      "why_codex_should_care": "Two surfaces exist — 58 typed registry entries and 54 spoken catalogue entries — and raw/repo_facts.json notes that the generated docs/verification_table.md line 'capabilities in the registry' actually reports the SPOKEN size, 54. A document citing that line is citing the spoken set."
+    },
+    {
+      "id": "C-02b",
+      "kind": "a parallel reviewer of ours, corrected",
+      "wrong": "This machine has no working microphone, so voice fixtures cannot create their precondition. On that premise a whole fixture class (barge-in) was dropped, and fixtures_README.md still says 'every analog jack reports available: no'.",
+      "right": "pw-dump reports two Audio/Source nodes (HD Webcam C510 Mono, Built-in Audio Analog Stereo) and a live pw-record is capturing from the first. The class should be written; it is blocked only by the microphone being held by the running voice service, which is a scheduling matter.",
+      "why_codex_should_care": "A capability we told you might be impossible on this machine is possible. raw/access_probe.json states it plainly: 'Desktop and voice acceptance are POSSIBLE on this machine, which I previously told Codex they might not be.'"
+    },
+    {
+      "id": "F-12-correction",
+      "kind": "our own instrument",
+      "wrong": "The 57-case held-out fixture was presented as a usable acceptance instrument.",
+      "right": "19 of its 57 oracles pass against a record in which ARIES did nothing, and 2 more have setups that do not execute (ab-01, df-03). We criticised ARIES for verify_probe returning met=True unconditionally and then shipped 19 oracles with the same defect.",
+      "resolution": "Repair in progress, with validate_oracles.py as the acceptance test for the repair. Nothing in the fixture has been run against ARIES.",
+      "why_codex_should_care": "Do not accept a fixture result from us until raw/oracle_validation.json shows zero BLIND_TO_INACTION cases among the pass/partial classes."
+    },
+    {
+      "id": "L5-1-provenance",
+      "kind": "our own ledger",
+      "wrong": "The previous revision of acceptance.json justified L5-1 PASS with 'demonstrated by fault_injected 15/15'.",
+      "right": "That figure traces to no file under raw/ and to no measured block in findings.json. It is not reproduced in this revision. L5-1 keeps PASS on raw/review_verifier_integrity.json's executed classification of system.service_control, and the fault-injection number should be re-derived or dropped.",
+      "why_codex_should_care": "If you cited 15/15 anywhere on our authority, stop until an artifact exists."
+    },
+    {
+      "id": "F-16-correction",
+      "kind": "a parallel reviewer of ours, corrected",
+      "wrong": "raw/review_voice_path.json VOICE-03 reported that media_control, set_volume and set_brightness escape even the operator.enabled check and the operator.max_actions_per_hour budget.",
+      "right": "findings.json F-16 checked it: aries/operator/service.py around line 298 checks operator.enabled and returns early telling the user to enable it, and a grep for those three names in that file returns nothing. 'The operator.enabled claim is NOT confirmed and I do not report it.'",
+      "resolution": "The adjacent true fact was recorded instead: aries/operator/service.py:303, 'A guess is proposed; an exact match is performed.' Deterministic matches run without the model-plan gate, which F-16 calls defensible design.",
+      "why_codex_should_care": "The two reviewers traced different gates — capabilities.py:1028 versus operator/service.py:298 — and neither traced both. Do not act on the escapes-operator.enabled claim without re-checking it yourself."
+    },
+    {
+      "id": "F-14-correction",
+      "kind": "a parallel reviewer of ours, corrected",
+      "wrong": "raw/review_learning_loop.json finding L9-01 states that 'SettingsService.clear and its API route hardcode Layer.USER'.",
+      "right": "findings.json F-14: service.py:157 takes `layer: Layer = Layer.USER` as a PARAMETER, so LEARNED is expressible. It is unreachable in practice — the only HTTP route, routes.py:261, passes layer=Layer.USER explicitly and no caller anywhere passes LEARNED — but 'hardcoded' is the wrong word.",
+      "resolution": "The finding stands with the corrected wording. The route docstring makes the intent explicit: it clears the USER value so that 'possibly something ARIES learned takes over again'. Clearing the LEARNED layer was never a case anyone wrote.",
+      "why_codex_should_care": "The fix is smaller than the original wording implies: a route that passes Layer.LEARNED, not a new parameter."
+    },
+    {
+      "id": "C-03",
+      "kind": "our own architecture analysis",
+      "wrong": "old-docs/architecture/CURRENT_GAPS.md §5: 'the rollback architecture the owner requires as a precondition largely exists', and 'Reversibility in the data model. Nothing is deleted; invalid_at / superseded_by / expired_at make every change one UPDATE from being undone.'",
+      "right": "The learning loop has none of that. It has strong guards on FORMING a conclusion — Wilson gating, asymmetric reversal thresholds, learned-layer-only writes — and no guard and no mechanism for UNDOING one.",
+      "how_the_error_was_made": "Two different subsystems' safety properties were read and merged. aries/workspace/memory/store.py genuinely has arbitrate, expire, review_replacement and superseded_by, and a memory really can be withdrawn. The reviewer generalised from the subsystem read closely to the one not read.",
+      "where_it_propagated": "old-docs/architecture/CURRENT_GAPS.md §5, old-docs/architecture/IMPLEMENTATION_ORDER.md stage 7-8 gate, old-docs/architecture/NEXT_AI_ARCHITECTURE.md §8.",
+      "why_codex_should_care": "The owner's Level 9 precondition was reported as met. It is not met. That is the single most consequential thing we got wrong about your system."
+    },
+    {
+      "id": "R-01",
+      "kind": "our own instrument, now repaired",
+      "wrong": "F-12: the 57-case held-out fixture shipped with 19 oracles that passed against a record in which ARIES did nothing, and 2 setups that did not execute.",
+      "right": "All 19 and both setups were repaired and the validator re-run: DISCRIMINATING 49, BLIND_TO_INACTION 0, SETUP_FAILED 0, SKIPPED_NEEDS_CONSENT 8.",
+      "resolution": "findings.json R-01: 'I re-ran validate_oracles.py myself after the repair rather than accepting the repairer's tally.' The three root causes are recorded in the R-01 entry of findings_ranked because they are the shape any future oracle bug will take.",
+      "why_codex_should_care": "The earlier instruction to distrust our fixture results is lifted for falsifiability-against-inaction. It is not lifted for anything else: nothing in the fixture has been run against ARIES."
+    },
+    {
+      "id": "L5-3-provenance",
+      "kind": "our own ledger",
+      "wrong": "The previous ledger revision recorded L5-3 PASS on '325/381 = 85.3% from the live analytics endpoint'.",
+      "right": "raw/verification_truth.json computes it over every goal: 1006 of 8276 steps (12.2%) reached a verifier, the all-time contradiction rate is 2/1006 = 0.20% with a Wilson 95% interval of [0.05%, 0.72%], and the published figure moved from 325/381 = 85.3% to 290/377 = 76.9% in two days on the same endpoint with the same window parameter.",
+      "resolution": "L5-3 moved from PASS to FAIL and L5-10 was added. findings.json verification_numbers_that_survive_checking carries the replacement sentence verbatim.",
+      "why_codex_should_care": "We certified a number of yours with the wrong denominator, the same error class as C-01. Both of our count errors were in your favour and both were ours."
+    }
+  ],
+  "disagreements_between_raw_reports": [
+    {
+      "id": "D-1",
+      "subject": "how many capabilities have a verifier verdict that cannot return met=False",
+      "positions": [
+        "findings.json F-06: exactly 6, all effect=read, scoped to the verify_probe factory.",
+        "raw/review_evidence_recovery.json EVR-3 title: 'seven capabilities'; its body lists 6 verify_probe bindings plus desktop.observe/desktop.windows on verify_observe, i.e. 8.",
+        "raw/review_evidence_recovery.json EVR-7: 'Three of the 58 verifiers are unconditional (verify_probe x6 bindings, verify_observe, verify_tabs)' — 3 functions over 8 bindings.",
+        "raw/review_verifier_integrity.json: TRIVIAL = 12 of 58, named in full.",
+        "raw/review_verifier_integrity.json refuted_hypotheses[0] adjudicates the sub-count: '6 capabilities, not 7'."
+      ],
+      "resolution": "RECONCILABLE BY SCOPE AND RECORDED, NOT SILENTLY PICKED. 6 = verify_probe bindings. 12 = all capability verdicts that cannot fail. EVR-3's 'seven' and EVR-7's 'three verifiers' are both wrong as stated. One further internal inconsistency: raw/review_verifier_integrity.json F1 says '3 more are hand-written met:True' and then names 5 and says '5 in total'; 6 + 5 + system.services = 12, so '3 more' is the bad number."
+    },
+    {
+      "id": "D-2",
+      "subject": "the capability effect histogram and the size of the non-read surface",
+      "positions": [
+        "raw/repo_facts.json (live-object enumeration): read 29, open 10, desktop 7, file_mutation 5, input 2, create 1, display 1, network 1, notify 1, service 1 — 29 read and 29 non-read of 58; requires_approval_true 12, requires_approval_false 46.",
+        "findings.json C-01/F-05 and raw/replay_guard.json: 29 non-read, 12 requiring approval, 17 mutating without approval. Agrees with repo_facts.json.",
+        "raw/review_evidence_recovery.json EVR-7: histogram read 26, open 8, desktop 7, file_mutation 4, input 2, five effects at 1 each — summing to 26 non-read — while its prose says 32 non-read."
+      ],
+      "resolution": "UNRESOLVED IN THE SOURCES AND FLAGGED. EVR-7 contradicts itself (26 versus 32) and both figures contradict the live enumeration (29). The ledger uses 29/29/12/46 from raw/repo_facts.json because its method is an import-and-count. Codex should re-run the enumeration before quoting any of these."
+    },
+    {
+      "id": "D-3",
+      "subject": "whether this machine has a usable microphone",
+      "positions": [
+        "fixtures_README.md: 'This machine has no working microphone — every analog jack reports available: no'; the barge-in fixture class was dropped on that basis.",
+        "raw/access_probe.json: AVAILABLE — two Audio/Source nodes, and the live pw-record targets one of them. Separately OCCUPIED by pw-record pid 97906 on behalf of aries-voice.",
+        "raw/review_voice_path.json refuted_hypotheses: 'There is no microphone on this machine; ARIES is hearing the output sink's monitor' -> REFUTED, verified independently, with live pw-dump, pw-metadata and journal evidence."
+      ],
+      "resolution": "RESOLVED BY THREE INDEPENDENT PROBES (raw/access_probe.json, raw/review_voice_path.json, findings.json C-02). fixtures_README.md still carries the refuted premise and is in next_actions_for_the_reviewer."
+    },
+    {
+      "id": "D-4",
+      "subject": "whether the ARIES services run under systemd",
+      "positions": [
+        "raw/access_probe.json: aries-core, aries-voice and aries-local-model all return active to systemctl --user is-active.",
+        "raw/review_proactive_gates.json: systemctl --user is-active aries.service -> inactive, is-enabled -> not-found, while the API is served by uvicorn PID 86078 and the intelligence server by PID 2098, both outside systemd, with var/aries.db mtime advancing continuously.",
+        "raw/review_voice_path.json live_state_read_only: 'aries-voice.service: active, enabled, MainPID 2120 ... started 2026-10-06 10:42:41 CEST' and 'aries-core.service: active; the API is ALSO reachable as uvicorn PID 86078 ... and the local model server as PID 2098 on 11435'."
+      ],
+      "resolution": "RESOLVED. Both readings are true at once: the units ARE active and the API is ADDITIONALLY served by processes outside them. raw/review_proactive_gates.json read aries.service, which raw/repo_facts.json systemd_units confirms this repository does not ship. No action left beyond recording it."
+    },
+    {
+      "id": "D-5",
+      "subject": "how many of the 58 verifiers were executed in the verifier review",
+      "positions": [
+        "raw/review_verifier_integrity.json method: '56 of 58 were EXECUTED'.",
+        "raw/review_verifier_integrity.json capabilities[]: evidence_kind executed on 57, source on 1 (desktop.launch).",
+        "findings.json F-11: '57 of 58 with EXECUTED proof'."
+      ],
+      "resolution": "INTERNAL INCONSISTENCY IN ONE FILE. The per-capability field is the more granular record and is what the ledger cites. Not material to any verdict; recorded so it is not relied on."
+    },
+    {
+      "id": "D-6",
+      "subject": "the number of Python files under tests/",
+      "positions": [
+        "raw/count_discrepancies.json: tests 103.",
+        "raw/repo_facts.json source_size.tests.files: 104 (all .py); tests.test_files: 94 and test_files_top_level_only: 93 (only test_*.py)."
+      ],
+      "resolution": "DRIFT OR SURFACE MISMATCH, NOT ADJUDICATED. raw/count_discrepancies.json's own volatility_warning records the tree changing mid-audit, which is the likely cause. Both numbers kept."
+    },
+    {
+      "id": "D-7",
+      "subject": "which verification-coverage denominator is the real one",
+      "positions": [
+        "The previous acceptance ledger: 325/381 = 85.3% from the live analytics endpoint.",
+        "findings.json F-06: all-time 1004 verified steps, 47 of them by a verifier that cannot fail = 4.7%, 957 by one that can.",
+        "findings.json F-13: 325/381 is the newest 500 of 8025 goals = 6.2%, drifting to 290/377 = 76.9% two days later; all-time contradictions 2/1006 = 0.20%.",
+        "raw/repo_facts.json: the generated verification table's line 'capabilities in the registry' reports 54, which is the SPOKEN catalogue, not the typed registry.",
+        "raw/verification_truth.json (EVERY goal, not a capped sample): goals 8025, steps 8276, steps_that_reached_a_verifier 1006 = 12.2%, contradiction_rate 2/1006 = 0.00199 with wilson_95 [0.0005, 0.0072], drift_observed 2026-10-04 '325/381 = 85.3%' against 2026-10-06 '290/377 = 76.9%'."
+      ],
+      "resolution": "RESOLVED AGAINST THE OLD FIGURE. L5-3 moved from PASS to FAIL. All four denominators are kept separately and none is combined with another anywhere in these two files. raw/verification_truth.json is now the one uncapped computation to cite, and findings.json verification_numbers_that_survive_checking states the replacement sentence verbatim."
+    },
+    {
+      "id": "D-8",
+      "subject": "whether media_control, set_volume and set_brightness escape the operator.enabled check and the hourly action budget",
+      "positions": [
+        "raw/review_voice_path.json VOICE-03 (high): they 'return before capabilities.py:1028, so they get no operator.enabled check, no operator.max_actions_per_hour budget and no approval - only the wake gate and the runaway guard.'",
+        "findings.json F-16 (informational): 'aries/operator/service.py around line 298 checks operator.enabled and returns early with a message telling the user to enable it. grep for those three names in that file returns nothing.' Verdict: 'The operator.enabled claim is NOT confirmed and I do not report it.'"
+      ],
+      "resolution": "ADJUDICATED AGAINST THE SUB-CLAIM by findings.json F-16, which checked it specifically. The reviewers traced different gates - capabilities.py:1028 versus operator/service.py:298 - and neither traced both, so one trace through both files settles it. The parent criterion L2-4 fails regardless, on the branch asymmetry at operator/service.py:303 that BOTH reviewers agree on: 'A guess is proposed; an exact match is performed.' Do not act on the escapes-operator.enabled claim without re-checking it.",
+      "affects": "L2-4"
+    },
+    {
+      "id": "D-9",
+      "subject": "registry-path step counts, 241 versus 243",
+      "positions": [
+        "findings.json F-11: steps_through_the_registry 241, INDEPENDENT '98 of 241 = 40.7%', non-independent '143 of 241 = 59.3%'.",
+        "raw/verification_truth.json by_verifier_class: INDEPENDENT total 99, SELF_REPORT total 60, TRIVIAL total 84 - 243 in all."
+      ],
+      "resolution": "RECONCILED BY ARITHMETIC FROM BOTH SOURCES: 241 counts VERIFIED steps (98 + 59 + 84); 243 counts steps that REACHED a verifier, i.e. those 241 plus the 2 contradicted; and 143 = 59 + 84. Neither is wrong; they have different subjects and must be labelled. ONE OPEN QUESTION left open rather than guessed: raw/verification_truth.json has no PLANNER_SUPPLIED row although raw/review_verifier_integrity.json classifies browser.click as PLANNER_SUPPLIED, so either no browser.click step is in the ledger or those steps were folded into another class.",
+      "affects": "L5-4, L5-9"
+    },
+    {
+      "id": "D-10",
+      "subject": "the step-status totals in raw/verification_truth.json do not sum to the step total",
+      "positions": [
+        "raw/verification_truth.json totals.steps: 8276.",
+        "raw/verification_truth.json totals.steps_by_verification_status: verified 1004, pending 136, verification_failed 2, unverifiable 151, not_run 88 - 1381 in all."
+      ],
+      "resolution": "NOT A DISAGREEMENT BETWEEN REVIEWS, AND NOT RESOLVED. The five named statuses account for 1381 of 8276 steps and the file does not say what the rest carry. Flagged because every denominator at L5-3, L5-9 and L5-10 comes from this file, and because inferring the remainder would be exactly the unsourced arithmetic this review exists to catch. One GROUP BY settles it.",
+      "affects": "L5-3, L5-10"
+    }
+  ],
+  "what_was_not_examined": {
+    "note": "Union of every not_examined, unobtainable, blocked_checks and explicit non-coverage statement across all raw reports and fixtures_README.md, deduplicated. Only raw/review_goalgraph_termination.json and raw/review_evidence_recovery.json carried a literal not_examined list; raw/review_voice_path.json carried a literal blocked_checks list; the other reports' equivalents were taken from their what_is_missing_to_measure, unobtainable and method sections. Each item is labelled with its source.",
+    "no_model_and_no_live_loop": [
+      "goal_graph.propose() and its prompt: no model call was made, so nothing is claimed about what a real planner proposes, only about what validate() will accept. [goalgraph]",
+      "The planner loop end to end (agent._run's while loop), including the fail->answered branch of CR-05 as an executed path — every claim about the loop is source inspection. [goalgraph]",
+      "Real LLM planner behaviour: whether a planner actually proposes the duplicate mutating step EVR-1 permits is untested; only that nothing in the code stops it and that agent_planner.py:425 invites it. [evidence_recovery]",
+      "End-to-end execution of any mutating capability — file.write, file.edit, file.move, file.copy, browser.download, input.type_text, input.clipboard_write, network.wifi_connect, system.service_control, display.set_brightness, desktop.close — forbidden by the no-services rule. [evidence_recovery]",
+      "An actual process restart, kill -9 or cancellation against a live goal. All cancellation and restart conclusions are source inspection plus the save() CAS semantics, not a demonstrated crash. [evidence_recovery]",
+      "No automation was run, started, stopped or triggered. [proactive_gates method]"
+    ],
+    "code_surfaces_not_read_or_not_read_in_full": [
+      "The static fan-out path in orchestration.py beyond claim() and roll_up(): attempt(), the five declared alternatives, lanes_for/admit/release and capacity(). [goalgraph]",
+      "aries/workspace/capabilities.py install_app, which is the actual oo-02 fixture case argued in eval/agent_suite/FIXTURE-DEFECTS.md to be a fixture defect rather than a code defect; the argument was not adjudicated. [goalgraph]",
+      "browser.*, desktop.* and input.* verifiers were out of scope for the goalgraph review; only the file and probe verifiers were examined there. [goalgraph]",
+      "The approval/proposed resume path (agent.py:357-366) and whether a stored approved flag can be replayed against changed policy. [goalgraph]",
+      "The verifiers in screen_capabilities.py, input_capabilities.py, network_capabilities.py, system_capabilities.py and file_capabilities.py were enumerated (names, effect, approval) but not read line by line in the evidence-recovery review: verify_capture, verify_read (screen), verify_clipboard_write, verify_control, verify_connect, verify_edit, verify_copy, verify_move and verify_metadata are unreviewed there for the stale-read question. [evidence_recovery]",
+      "Whether screen.capture, screen.screenshot and file.semantic_search, all registered effect='read', write files or build indexes on disk. If they do, the 'read' classification that EVR-1 and route() both key on is itself inaccurate for them. [evidence_recovery]",
+      "aries/workspace/writer.write_session locking and the WAL/busy-timeout claims in the orchestration docstring. [evidence_recovery]",
+      "goal_graph.synthesize and the dynamic_team roll-up path, and aries/workspace/scopes.py Grant enforcement, were out of scope for the evidence-recovery review (covered by the goalgraph review instead). [evidence_recovery]",
+      "desktop.launch's verifier: source-only, because it needs a live GNOME session. The one non-executed entry of 58. [verifier_integrity]"
+    ],
+    "concurrency_and_load": [
+      "Concurrency under real load: the writer lock, the two-second poll, and the CR-01 window measured rather than reasoned about. [goalgraph]",
+      "The goal_graph.persist CAS-loss race (CR-07): not reproduced, because it requires driving concurrent writers against a live queue. [goalgraph]"
+    ],
+    "user_facing_surfaces": [
+      "How the API, UI and voice layers present 'partial', 'answered' and 'held' to the user. [goalgraph]",
+      "The API and UI surfaces (aries/api/routes.py, aries_ui): whether EVR-3's 'verified' label reaches the user as a corroboration claim is unverified. [evidence_recovery]"
+    ],
+    "privacy_and_egress": [
+      "No outbound network request was made and no provider, model or test suite was executed in the privacy review. [privacy method]",
+      "tests/test_inference_egress.py was read and NOT run; it is adapter-boundary unit evidence with mocked providers, not a measured leak rate. [privacy F6]",
+      "An aggregation of existing events by data class — the denominator — does not exist anywhere. [privacy what_is_missing_to_measure 1]",
+      "A content-level oracle independent of the label — the numerator — does not exist anywhere in the repository. [privacy what_is_missing_to_measure 2]",
+      "A single transport-boundary interception point that sees the final serialized request body for both the OpenAICompatibleProvider HTTP path and the CLI subprocess stdin path. Without one, the two paths must be instrumented separately and cannot be pooled without an argument. [privacy what_is_missing_to_measure 3]",
+      "Labelling accuracy of the assemblers, separately from the gate: no confusion matrix, no false-'public' rate, and request_classes' recall against personal goals is unmeasured (9 English stems, 2 Macedonian). [privacy what_is_missing_to_measure 4]",
+      "A coverage inventory of outbound paths: aries/workspace/memory/embedding.py, aries/workspace/memory/calibration.py and aries/news/fetch.py are not enumerated as gated or out of scope. [privacy what_is_missing_to_measure 5]",
+      "Whether any deployment actually sets ARIES_OLLAMA off-machine: UNDETERMINED, needs the real service environment, which was not inspected. [privacy F8]"
+    ],
+    "measurement_and_test_suite": [
+      "The project test suite was not run in any review; test file contents were read only to establish what is and is not covered. [goalgraph, evidence_recovery]",
+      "The installed-system product path required by the repository's two-levels-of-done rule: every review is source-level plus isolated probes. [evidence_recovery, privacy what_is_missing_to_measure 6]",
+      "Runtime test-check totals per file: UNOBTAINABLE — no pytest in .venv, each test file self-runs via run_module(), and obtaining them means executing the suite, which writes to the database. Static AST counts (783 test functions, 2,936 check sites) reported instead. [count_discrepancies unobtainable, repo_facts tests]",
+      "Book parts and chapters (7 / 49): UNOBTAINABLE — old-docs/book/source.py exposes no enumerable marker and confirming would require running the book generator, which writes files. [count_discrepancies unobtainable]",
+      "The CURRENT versus SUPERSEDED split of the 15 indexed suite runs: UNOBTAINABLE — no top-level status key in old-docs/research_package/processed_results/suite_runs.json. [count_discrepancies unobtainable]",
+      "Whether all four systemd .service units are currently running: UNOBTAINABLE under the read-only constraint; unit FILES were counted instead. [count_discrepancies unobtainable]",
+      "The remainder of the step population in raw/verification_truth.json: the five verification statuses sum to 1381 of 8276 steps and the file does not account for the rest. Flagged as D-10 rather than inferred.",
+      "Whether any browser.click step exists in the ledger: raw/verification_truth.json has no PLANNER_SUPPLIED row although raw/review_verifier_integrity.json classifies browser.click that way. Flagged as D-9."
+    ],
+    "the_fixture_itself": [
+      "Nothing in fixtures.jsonl has been run against ARIES. The repair does not change that: raw/oracle_validation.json tests the oracles against a null record, not against the system. [fixtures_README, findings.json R-01]",
+      "8 cases still could not be validated even against the null record because they need consent or an absent world: pz-09, ab-02, ij-04, df-02, ix-01, ix-02, ix-03, ix-04. [raw/oracle_validation.json]",
+      "The barge-in class is still unwritten. It was dropped on the microphone premise that findings.json C-02 and raw/review_voice_path.json both refute. [fixtures_README limit 2]",
+      "Barge-in — the user interrupting by speaking over ARIES — was dropped as a class because no sound oracle could be given, on the microphone premise that findings.json C-02 refutes. [fixtures_README limit 2]",
+      "Capability choice is never scored: a different route to the same verified end state passes, so the fixture says nothing about planning quality. [fixtures_README limit 4]",
+      "Nobody spoke any of the 57 goals; they are written English. [fixtures_README limit 5]",
+      "un-07's calendar oracle is the least specific in the file and goes blind if ARIES ever writes a calendar artefact somewhere else. [fixtures_README limit 6]"
+    ],
+    "process": [
+      "Per the reviewing agent.md these reviews should be acknowledged in COORDINATION.md. It was deliberately NOT written, in the evidence-recovery review and again in this consolidation, because each task permitted a fixed set of output files. [evidence_recovery not_examined, and this consolidation]"
+    ],
+    "the_voice_path": [
+      "Speaking a wake word followed by a mutating command and observing whether it executes without approval - the executed proof for VOICE-03. The task forbids speaking to the system, opening a competing capture, or stopping the service that holds the microphone, and `scripts/aries-voice say` would NOT substitute because say mode calls route() to /api/aries/command, which resolves meaning and executes nothing. [voice_path blocked_checks]",
+      "Proving the 6-second follow-up window acts on a third party's sentence: needs two speakers in the room and a spoken utterance. Even the cheaper substitute - playing a 6-second recording of unrelated speech after the name - is audio playback, also forbidden. [voice_path blocked_checks]",
+      "Measuring the false-wake rate of 'ара' and 'harry' on real room audio, and the missed-wake COST of removing them. Needs the capture device the running service holds, plus playback of test material. [voice_path blocked_checks]",
+      "Feeding a third-language utterance (German, Serbian, Turkish) through the live model to confirm empirically which of mk/en it is forced into and at what probability: needs a capture or a second copy of large-v3 against the GPU the daemon holds (~3 GB VRAM; the live read showed 4214/12288 MB used). The source result - forced, never rejected - is stated as already conclusive. [voice_path blocked_checks]",
+      "Observing audio_is_playing()'s value at the moment of a capture, to confirm empirically that the echo guard is inert (VOICE-04): the value is neither logged nor exposed. [voice_path blocked_checks]",
+      "Tripping the runaway guard to confirm the 429, the pause and the notification fire as written: tripping it is a mutation and would leave the voice source paused for 600 seconds on a live system. [voice_path blocked_checks]",
+      "A mistranscription actually driving a mutating capability end to end: VOICE-03 marks this NOT executed and rests on the source trace plus the 80 journal actions. [voice_path VOICE-03]"
+    ],
+    "the_learning_loop": [
+      "aries.db was never opened by the learning review: all five proof scripts ran against DATABASE_URL=sqlite+aiosqlite:////tmp/aries_rev_proof{1..5}.db with APP_ENV=test. No conclusion there rests on production learning state. [learning_loop method]",
+      "Whether the loop has in fact ratcheted any real interest weight on this machine: the ratcheting was demonstrated on a synthetic 30-day fixture, not read out of the live ledger. [learning_loop finding L9-02]",
+      "The _CONTEXT id-reuse hazard was not reproduced; it is a source argument about id() lifetime, not an observed cross-request mix. [learning_loop finding L9-12]",
+      "Whether any user has ever needed to remove a learned value, which would show whether the missing surface has bitten yet. [learning_loop finding L9-01]"
+    ]
+  },
+  "blocked_on_a_window": [
+    {
+      "id": "W-1",
+      "check": "A spoken goal reaching the same outcome as the same goal typed (acceptance L2-2), and the barge-in fixture class that was dropped",
+      "needs": "A measurement window in which aries-voice releases the capture device. pw-record pid 97906 is currently capturing from alsa_input.usb-046d_081d_EE25F9C0-00.mono-fallback on its behalf; a live acoustic test cannot simply be started because it would compete for the device. raw/review_voice_path.json enumerates what the window must contain: the owner, present at the machine, speaking one scripted utterance per capability class (e.g. 'Ari, volume 30', 'Ari, create folder ~/aries-review-probe') while the reviewer watches `journalctl --user -u aries-voice -f` and the goal's state in the dashboard, with a named teardown per probe.",
+      "owner_consent": "Required — the window has to be agreed in COORDINATION.md, not taken.",
+      "source": "raw/access_probe.json, findings.json C-02, raw/review_voice_path.json blocked_checks",
+      "not_a_hardware_block": "Two Audio/Source nodes exist and the capture target is correctly a source, not a sink monitor."
+    },
+    {
+      "id": "W-2",
+      "check": "Any desktop capability measurement (acceptance L1-3), and the desktop fixture cases",
+      "needs": "The run must be wrapped in `gnome-session-inhibit --inhibit idle`, because org.gnome.desktop.session idle-delay = 60 and screenshot and input-synthesis capabilities refuse on a blanked session. Without the inhibitor the result moves with session state rather than with the manipulation — this is the exact confound that invalidated runs B1b/B2b, where 11 goals moved with session state.",
+      "owner_consent": "Not strictly required, but the session is the owner's and the inhibitor changes its behaviour for the duration.",
+      "source": "raw/access_probe.json",
+      "also": "fixtures_README.md records that on 2026-10-06 the session bus did not answer org.aries.Shell.Windows at all, so ab-02 would have skipped. That needs fixing or declaring before a desktop run counts."
+    },
+    {
+      "id": "W-3",
+      "check": "The four interrupted_execution fixture cases ix-01 … ix-04",
+      "needs": "A SIGKILL to aries-core.service mid-goal, four times. Each case carries requires: ['service_restart','operator_consent'] and its first setup step says so.",
+      "owner_consent": "REQUIRED AND MUST BE RECORDED IN THE RUN LOG. Teardown deliberately does not restart the unit back to a previous state; it records the restart, because reversing somebody else's deployment is worse than reporting it.",
+      "source": "fixtures_README.md, fixtures.jsonl, raw/oracle_validation.json (all four currently SKIPPED_NEEDS_CONSENT)"
+    },
+    {
+      "id": "W-4",
+      "check": "The privacy leak rate with a denominator (acceptance L10-3)",
+      "needs": "An executed run on the INSTALLED system with real settings — privacy.mode off, cloud_enabled on, a real cloud provider configured — and real goals, with the resulting 'generation' and 'egress' events read back out of the event store. Plus the two instruments that do not exist yet: by-class aggregation in tracking.py (the denominator) and a canary fixture with a transport-boundary hook (the numerator).",
+      "owner_consent": "Required: it means enabling cloud inference on the owner's machine with the owner's data, and it will emit outbound requests.",
+      "source": "raw/review_privacy_boundary.json what_is_missing_to_measure items 1, 2, 3 and 6",
+      "do_not_shortcut": "A leak rate computed from today's data would be structurally 0/N and would mean nothing, because the gate compares labels to labels. Do not publish 0% as a result."
+    },
+    {
+      "id": "W-5",
+      "check": "Verification contradiction rate with falsifiable verifiers (the experiment findings.json F-11 calls for)",
+      "needs": "A suite re-run with the 23 non-independent verifiers replaced by falsifiable ones, on the installed system, with the contradiction rate measured against a stated denominator. Today's baseline to beat: all-time 2/1006 = 0.20%, and the capped window's 0/290.",
+      "owner_consent": "Required: replacing verifiers changes ARIES's behaviour, and the run writes to var/aries.db.",
+      "source": "findings.json F-11 suggested_experiment, findings.json F-13"
+    },
+    {
+      "id": "W-6",
+      "check": "Any fixture run at all (acceptance L2-1, L4-1, L10-1)",
+      "needs": "The fixture repair is DONE and independently re-verified (findings.json R-01, raw/oracle_validation.json: 49 DISCRIMINATING, 0 BLIND_TO_INACTION, 0 SETUP_FAILED). What remains is the measurement window itself: the fixture writes under /home/stamenovmartin/Documents/ARIES-CIA-01, opens var/aries.db read-only (mode=ro) throughout, and submits to POST /api/aries/workspace, which contends with whatever else is running.",
+      "owner_consent": "Required for the four service-restart cases (W-3); otherwise a scheduling matter.",
+      "source": "fixtures_README.md, raw/oracle_validation.json, findings.json F-12"
+    },
+    {
+      "id": "W-7",
+      "check": "Whether the three ARIES units or the out-of-systemd uvicorn processes are the real deployment (disagreement D-4)",
+      "needs": "One run of `systemctl --user is-active aries-core.service aries-voice.service aries-local-model.service` alongside `pgrep -a uvicorn`, in the same minute, recorded together. Read-only; no window needed beyond being on the machine.",
+      "owner_consent": "Not required.",
+      "source": "raw/access_probe.json versus raw/review_proactive_gates.json"
+    },
+    {
+      "id": "W-8",
+      "check": "The scope-coverage counter (acceptance L0-3)",
+      "needs": "An instrumented run — a counter of capability invocations that ran with grant=None — over real traffic, so the uncovered surface is measured rather than assumed. findings.json F-01 offers to add it as a probe in the reviewer's own directory if you want it.",
+      "owner_consent": "Required if the counter is added to aries/ rather than to the experiment directory, because aries/workspace is not the reviewer's to edit.",
+      "source": "findings.json F-01"
+    },
+    {
+      "id": "W-9",
+      "check": "The false-wake rate of 'ара' and 'harry' on real room audio, and the missed-wake cost of removing them (acceptance L2-3)",
+      "needs": "Either a recorded corpus decoded offline in a second process with its own model instance, or the owner stopping aries-voice for a measurement window. raw/review_voice_path.json names the repository's own precedent for the method: the measurement at experiments/voice/voice.py:84-86, 'false wakes, one 155 s recording through both versions, 12 utterances'.",
+      "owner_consent": "Required either way: stopping the service releases the device the owner is using, and a second model instance competes for the GPU the daemon holds.",
+      "source": "raw/review_voice_path.json blocked_checks",
+      "do_not_shortcut": "Removing a wake token without measuring the missed-wake cost trades one error for the other blind. The denominator already exists in the journal: 1372 lines, 641 '· not addressed', 241 '· dropped', highest counter '[80 acted / 165 utterances]'."
+    },
+    {
+      "id": "W-10",
+      "check": "Whether a mistranscribed deterministic command actually executes a mutating capability without approval (acceptance L2-4)",
+      "needs": "The owner speaking one scripted utterance per capability class while the reviewer watches the journal and the goal state, each with a named teardown. raw/review_voice_path.json states that `scripts/aries-voice say --text ...` would NOT substitute, because say mode calls route() to /api/aries/command, which only resolves meaning and executes nothing.",
+      "owner_consent": "REQUIRED. The probe is, by construction, an attempt to make the system change something without being asked.",
+      "source": "raw/review_voice_path.json blocked_checks and VOICE-03"
+    },
+    {
+      "id": "W-11",
+      "check": "That the runaway guard's 429, pause and notification fire as written (acceptance L2-9)",
+      "needs": "Either owner consent to trip it and then resume - which pauses the voice source for 600 seconds on a live system - or, the cheaper route the reviewer prefers, a unit test against runaway.check with an injected `now`, whose signature already accepts one (aries/workspace/runaway.py:53) and which needs no live system at all.",
+      "owner_consent": "Required for the live route; not required for the unit test.",
+      "source": "raw/review_voice_path.json blocked_checks and question 6"
+    },
+    {
+      "id": "W-12",
+      "check": "Whether the learning loop has ratcheted any real value on this machine (acceptance L9-6)",
+      "needs": "A read-only query over the live aries_learning_changes and AriesInterest rows. raw/review_learning_loop.json states its five proof scripts ran against temp databases with APP_ENV=test and that aries.db was never opened, so the ratcheting is demonstrated on a synthetic 30-day fixture and not yet observed in production.",
+      "owner_consent": "Not required - it is a read-only query with mode=ro, the same access raw/verification_truth.json already used.",
+      "source": "raw/review_learning_loop.json method and finding L9-02"
+    },
+    {
+      "id": "W-13",
+      "check": "The two open arithmetic questions behind every verification denominator (D-9 and D-10)",
+      "needs": "Two read-only GROUP BY queries over var/aries.db: one for the statuses of the steps not covered by the five in raw/verification_truth.json (1381 of 8276), and one for whether any browser.click step exists, which would explain the missing PLANNER_SUPPLIED row.",
+      "owner_consent": "Not required - read-only, mode=ro.",
+      "source": "raw/verification_truth.json, findings.json F-11, raw/review_verifier_integrity.json"
+    }
+  ],
+  "next_actions_for_codex": [
+    {
+      "priority": 1,
+      "action": "Add the cap.effect term to the duplicate-step predicate so a repeat of a non-read capability is refused regardless of the retryable flag.",
+      "file": "aries/workspace/agent.py, lines 367-369; mirror the test already applied at aries/workspace/agent.py:86",
+      "verify_with": "Extend tests/test_orchestration.py's test_uncertain_mutation_is_not_repeated_or_rerouted to cover the agent.py predicate, not only orchestration.route(); re-run experiments/product/independent-acceptance/test_replay_guard.py and expect repeat_after_timeout_allowed to fall from 29 to 0.",
+      "closes": "F-05 / EVR-1, acceptance L3-5"
+    },
+    {
+      "priority": 2,
+      "action": "Emit truncated, plus the scanned and available counts, from the integrity metrics, so verification_honesty and verification_contradictions stop reporting a 500-goal sample as a window total.",
+      "file": "aries/analytics/integrity.py — copy the pattern already at aries/analytics/outcomes.py:135",
+      "verify_with": "Call GET /api/aries/analytics and confirm both metrics carry truncated plus the counts; the figure to compare against is 500 of 8025 goals and 576 of 8276 steps.",
+      "closes": "F-13, acceptance L5-8; makes L5-3 re-decidable"
+    },
+    {
+      "priority": 3,
+      "action": "Split reported verification coverage by whether the verifier is falsifiable, grouping on the capability name the ledger already carries.",
+      "file": "aries/analytics/integrity.py, with the classification in raw/review_verifier_integrity.json as the input list (TRIVIAL 12, SELF_REPORT 10, PLANNER_SUPPLIED 1, INDEPENDENT 35)",
+      "verify_with": "The all-time figures to reproduce: 1004 verified steps, 47 by a verifier that cannot fail = 4.7%, 957 by one that can; and on the registry path 98 of 241 = 40.7% independent.",
+      "closes": "F-06, F-11, acceptance L5-4"
+    },
+    {
+      "priority": 4,
+      "action": "Put the memory subsystem's outbound endpoint behind the same loopback validation every inference adapter already uses.",
+      "file": "aries/workspace/memory/embedding.py:39, aries/workspace/memory/extraction.py:51, aries/workspace/memory/calibration.py:67 — call loopback_url() from aries/intelligence/providers.py:9, which is already applied at providers.py:36 and :59",
+      "verify_with": "Export ARIES_OLLAMA to a non-loopback host and confirm import-time refusal; then add an inventory test that fails when a new module gains an un-labelled outbound client.",
+      "closes": "F-04, privacy F8, acceptance L6-6"
+    },
+    {
+      "priority": 5,
+      "action": "Make the thermal condition fail closed when the workload class watches temperature and the sensor cannot be read, and add a plausibility bound on the readings that do arrive.",
+      "file": "aries/power/governor.py:364 (and :372, :380 for the CPU and GPU guards; the caveat builder is at :385-391; the max-over-zones read is at :194-197)",
+      "verify_with": "Re-run the proactive-gates harness with probe_thermal raising OSError and expect allowed=false; the current result to invert is allowed=true with reason 'within the limits that could be read; temperature unknown'.",
+      "closes": "F-07 / PG-02, acceptance L7-5"
+    },
+    {
+      "priority": 6,
+      "action": "Declare the real workload class on the automations that invoke the local model, and make an unrecognised class name refuse or log loudly instead of silently becoming 'light'.",
+      "file": "aries/power/workload.py:95-105 for the vocabulary and the silent default; aries/automations/genome.py:100 for the default; the specs to fix are the five that leave the field unset (aries.dashboards, aries.attention, aries.brief, aries.news, aries.health). The unused class is INFERENCE_LIGHT.",
+      "verify_with": "Confirm may_run returns a non-empty measurement for at least one automation; today all 7 return allowed=true, measurement {}.",
+      "closes": "F-08 / PG-01, PG-08, acceptance L7-1, L7-7"
+    },
+    {
+      "priority": 7,
+      "action": "Pass origin into the capability policy gate and require approval for a mutating capability whose origin is not a user request, independently of operator.enabled and operator.confirm_model_plans.",
+      "file": "aries/workspace/registry.py:96 for the signature, aries/workspace/orchestration.py:334 and aries/workspace/agent.py:357 for the call sites; the origin already exists and is persisted at aries/workspace/service.py:154-156",
+      "verify_with": "A test that submits a mutating capability with an automation origin and asserts the approval requirement, with the 17 requires_approval=False names from raw/replay_guard.json as the fixture set.",
+      "closes": "F-09 / PG-05, acceptance L7-3"
+    },
+    {
+      "priority": 8,
+      "action": "Stop 'degraded' from breaking the circuit-breaker failure streak, and decide whether threshold=0 should still mean disabled.",
+      "file": "aries/automations/breaker.py:108 and 112-119; the body-chosen status is set at aries/automations/runner.py:190",
+      "verify_with": "Record 3 failures then 1 degraded and expect the breaker to stay open; today it returns to closed with streak 0.",
+      "closes": "F-10 / PG-06, acceptance L7-4"
+    },
+    {
+      "priority": 9,
+      "action": "Release a hold by the condition that created it, and require at least the clear-check streak before releasing on an unreadable sensor.",
+      "file": "aries/power/governor.py:261-268 (active_hold), :279-312 (release_holds, which evaluates only temperature), :288-299 (the blind-release branch), :442-470 (check_budgets, which writes the over_budget rows)",
+      "verify_with": "Create an over_budget hold with the thermal probe pinned at 40 degC and expect it NOT to be released on tick 2.",
+      "closes": "PG-03, PG-04, acceptance L7-6"
+    },
+    {
+      "priority": 10,
+      "action": "Check the parent's state in claim() before promoting a queued child.",
+      "file": "aries/workspace/orchestration.py:718-762 (claim, which never reads the parent); related: :794-805 (roll_up-then-claim ordering), aries/workspace/service.py:267-277 (cancel touches one row and does not take service._lock)",
+      "verify_with": "A test for a child admitted AFTER cancellation; tests/test_goal_graph.py:109 covers only the pre-creation case.",
+      "closes": "CR-01, acceptance L8-6"
+    },
+    {
+      "priority": 11,
+      "action": "Make node order and specialist grants derive from the validated contract rather than from the model's declaration: order the concatenated steps by the root contract, derive each grant from that node's own requirements, and run the root cross-check even when the root contract is unsupported.",
+      "file": "aries/workspace/goal_graph.py:79-85 (membership-only validation and the supported-guard), :63-64 (goal-wide path set), :66-82 (grant construction), :182-191 (step concatenation); the ordered cursor it must agree with is aries/workspace/agent.py:58-64",
+      "verify_with": "Declare a two-node plan in reverse requirement order and expect either a validate refusal or a completion met=True; and confirm a node asking for all of SAFE_READS on a single-read requirement is refused.",
+      "closes": "CR-02, CR-03, acceptance L4-4, L8-7"
+    },
+    {
+      "priority": 12,
+      "action": "Give the browser and screen verifiers a reference the planner cannot choose: compare the fresh url to args['url'] for browser.open, read a before-state for back/forward/scroll/wait, make _titles_found() load-bearing on met for screen.read, compare active_state for system.service, and mark browser.elements evidence as uncorroborated.",
+      "file": "aries/workspace/browser_capabilities.py:11-13, 38-42, 45-50, 60; aries/workspace/screen_capabilities.py:710-712; aries/workspace/system_capabilities.py:354-356; aries/workspace/registry.py:280",
+      "verify_with": "Re-run the verifier enumeration and expect PLANNER_SUPPLIED to fall to 0 and SELF_REPORT below 10; the current baseline is INDEPENDENT 35, SELF_REPORT 10, TRIVIAL 12, PLANNER_SUPPLIED 1.",
+      "closes": "verifier-integrity F2 … F7, EVR-2, EVR-4, acceptance L5-5, L5-6"
+    },
+    {
+      "priority": 13,
+      "action": "Stop bucketing a zero-step, zero-evidence 'answered' goal as a success, and base the partial-versus-failed label on goal progress rather than on the presence of any verified evidence row.",
+      "file": "aries/analytics/outcomes.py:56 (BUCKETS); aries/workspace/agent.py:304-311 (the fail->answered branch), :431 and :297-302, :433-434 (the partial-versus-failed predicate); aries/workspace/registry.py:187-189 (verify_exists, whose met=True on a missing file drives the mislabel)",
+      "verify_with": "tests/test_terminal_failure.py already exists; add a case asserting 'failed' for a read goal whose only file is missing, and an analytics case asserting a zero-evidence 'answered' is not counted as succeeded.",
+      "closes": "CR-05, CR-06, acceptance L4-5, L4-6"
+    },
+    {
+      "priority": 14,
+      "action": "Add by-data-class aggregation to the inference stats so a privacy denominator exists: cloud-dispatched calls per data-class set, local calls per set, and 'egress' refusals per set and per blocked_reason, declaring the 10000-event window.",
+      "file": "aries/intelligence/tracking.py:11-35 (stats, which today buckets only by execution_level) and aries/api/routes.py:1696-1699 (the single consumer). The data is already persisted at aries/intelligence/generation.py:116-122 and :63-65.",
+      "verify_with": "Confirm GET /intelligence/stats exposes the per-class counts and states the window; then build the canary fixture that gives the numerator, which is the separate W-4 experiment.",
+      "closes": "privacy F3, F4, acceptance L10-6"
+    },
+    {
+      "priority": 15,
+      "action": "Close the small residues: snapshot data before mutating it in persist and restore on rollback; keep completion's summary on the team success path and mirror 'answered' for measurement contracts; align orchestration._interrupt's predicate with agent.mark_interrupted; apply the browser ownership test to task.inspect; record a 'skipped' row for the maintenance return; signal when a second budgets.create would have tightened a cap.",
+      "file": "aries/workspace/goal_graph.py:151-157 and :195-209; aries/workspace/orchestration.py:655-666 versus aries/workspace/agent.py:39-47; aries/workspace/registry.py:365-372; aries/automations/runner.py:130-133; aries/intelligence/budgets.py create()",
+      "verify_with": "Each is a single-assertion test; raw/budgets_concurrent.json and raw/context_provenance.json are the existing harnesses for the last one.",
+      "closes": "CR-07, CR-08, EVR-5, EVR-6, PG-11, F-02, acceptance L8-8, L8-9, L5-7, L3-6, L7-11, L8-10"
+    },
+    {
+      "priority": 16,
+      "action": "Regenerate every published count from the live objects and stamp the snapshot date, then fix the 34 wrong located claims — starting with the 14 occurrences of the 15-capability figure, one of which is an audit line that certifies the wrong number.",
+      "file": "old-docs/thesis/03_SYSTEM.md, old-docs/thesis/01_INTRODUCTION.md, old-docs/thesis/00_ABSTRACT*.md, old-docs/docs-mk/*.md, old-docs/thesis/doc_figures.py, old-docs/README.md:92; the generator to use is experiments/product/independent-acceptance/repo_facts.py and the per-claim list is raw/count_discrepancies.json",
+      "verify_with": "Re-run repo_facts.py and diff; note that the generated docs/verification_table.md line 'capabilities in the registry' reports 54, the SPOKEN catalogue size, not the registry's 58 — that line needs relabelling, not just a new number.",
+      "closes": "C-01, raw/count_discrepancies.json, acceptance L0-4"
+    },
+    {
+      "priority": 17,
+      "action": "Close the wake gate: remove 'ара' and 'ary' from the wake vocabulary, and require the bare-name follow-up capture to parse as a command before it is submitted.",
+      "file": "experiments/voice/voice.py:334-335 (WAKE) and :340-342 (_WAKE_RE) for the tokens; :861-887 for the follow-up window, with its defaults at :949-950",
+      "verify_with": "Re-run the wake_match() probe from findings.json F-15 and expect 'ара, што правиш' and 'Harry, close the door' to stop waking while 'арамија' still does not wake; then measure the missed-wake cost, which is window W-9 and must not be skipped.",
+      "closes": "findings.json F-15, raw/review_voice_path.json VOICE-01 and VOICE-02, acceptance L2-3",
+      "note": "This is the one finding that contradicts an explicit standing rule of the owner's, quoted in findings.json F-15: 'ако не го повикам Ари, нека не се јавува'."
+    },
+    {
+      "priority": 18,
+      "action": "Set a real API key, or make the shared-key fallback refuse rather than elevate when the key is empty.",
+      "file": "/home/stamenovmartin/aries/.env (API_KEY is empty) and vendor/agentic-core/agentic_core/api/main.py:103-104",
+      "verify_with": "Repeat the executed probe: GET /api/aries/shell/guard with no X-API-Key, and expect a refusal instead of HTTP 200 {\"paused\":{}}. Then confirm the voice daemon still works, because it currently sends no credential.",
+      "closes": "raw/review_voice_path.json live_state_read_only.api_auth, acceptance L1-4",
+      "note": "This is the precondition that makes VOICE-11's ungated resume reachable, so it is cheaper to fix here than there."
+    },
+    {
+      "priority": 19,
+      "action": "Give the learning loop a revert: expose clear() at Layer.LEARNED through a route, add clear_learned() for AriesInterest.learned_weight, and give history.release() a caller.",
+      "file": "aries/settings/service.py:157-168 and the route at aries/api/routes.py:256-264; aries/interests/service.py (no clear_learned exists); aries/learning/history.py:212-224",
+      "verify_with": "Write a learned value, remove it, and confirm the row is gone rather than shadowed. The owner's Level 9 precondition is an evaluation AND rollback architecture; this is the rollback half.",
+      "closes": "findings.json F-14 and C-03, raw/review_learning_loop.json finding L9-01, acceptance L9-2 and L9-5"
+    },
+    {
+      "priority": 20,
+      "action": "Bound learned values per unit time, not only per pass: make propose() check what has already been applied from the same evidence window, and bring the FATIGUE path under min_observations, the confirmation count and the max_step/damping cap.",
+      "file": "aries/learning/loop.py:93-257 (no applied-state check) and :179-188; aries/learning/reversal.py:267-273 (the FATIGUE write); aries/learning/statistics.py:81-98; the knobs at aries/learning/settings.py:116-118,138-141",
+      "verify_with": "Re-run the learning review's proof with one fixed 30-day fixture and expect the topic weight to stop short of 0.998 and the threshold to stop short of its 0.95 ceiling. Current baseline: four passes and five passes respectively, on no new data.",
+      "closes": "raw/review_learning_loop.json findings L9-02 and L9-03, acceptance L9-6 and L9-7"
+    },
+    {
+      "priority": 21,
+      "action": "Make authorship and the user_only guard structural rather than string-based: derive author_is_human from an authenticated principal, make learn() refuse a user_only key regardless of set_by, mark the loop's own knobs user_only, and gate interests.update() on its author while deriving actor_type from it.",
+      "file": "aries/settings/service.py:55,129-136,170-177; aries/learning/settings.py:106-177 (only :112-115 is user_only today); aries/interests/service.py:105-135; the legitimate 'user:feedback' caller to preserve is aries/learning/feedback.py:364,398",
+      "verify_with": "Repeat the three executed writes and expect refusals: set_by='user:learning' on news.relevance_threshold, and learn(set_by='user') on learning.apply_changes, autonomy.level and autonomy.max_actions_per_hour (which reached False, 'automated' and 999).",
+      "closes": "raw/review_learning_loop.json findings L9-05, L9-06, L9-07 and L9-08, acceptance L9-9, L9-10 and L9-11"
+    },
+    {
+      "priority": 22,
+      "action": "Align the voice service's language policy with aries.flags, and give the echo guard a precondition that is actually true in the normal flow.",
+      "file": "systemd/aries-voice.service:31-35 (remove --languages) against aries/flags.py:194-204 and experiments/voice/voice.py:974-987; the echo guard at voice.py:90-93, :515-523, :560, :573-575; the unreachable third-language branch at :108-110 and :563-568; the caption pattern at :545-552",
+      "verify_with": "Confirm the journal stops showing [mk 0.06]-class decodes on an English-only policy; re-run caption_hallucination('Subtitles by the Amara.org community') and expect True; add the one log line in decode_command() recording `playing`, which is also what unblocks the VOICE-04 check.",
+      "closes": "raw/review_voice_path.json VOICE-04, VOICE-06, VOICE-08 and VOICE-09, findings.json F-17, acceptance L2-6, L2-7, L2-8 and L2-11"
+    },
+    {
+      "priority": 23,
+      "action": "Confirm spoken interpretation before a non-read effect, surface a frozen voice goal persistently, and make the runaway pause durable and its resume authenticated and audited.",
+      "file": "experiments/voice/voice.py:890 against aries/api/routes.py:1081-1083 and :1163 (present=not voice); aries/speech/replies.py:73,:207-208; aries/workspace/runaway.py:18-19,:34-36,:83-88 and aries/api/routes.py:1118,:1128-1132",
+      "verify_with": "A unit test against runaway.check with an injected `now` (the signature already accepts one, runaway.py:53) for the guard, and a spoken-origin goal that freezes at `proposed` and appears on the dashboard for the rest.",
+      "closes": "raw/review_voice_path.json VOICE-10 and VOICE-11, acceptance L2-5 and L2-9"
+    },
+    {
+      "priority": 24,
+      "action": "Close the learning loop's smaller residues: split a pure read path out of propose(), stop committing when apply_changes is off, replace the id()-keyed module dict, pass the scope through propose()/apply(), count distinct items rather than per-topic slices, and measure engagement on a held-out slice the learned weight does not gate.",
+      "file": "aries/learning/loop.py:94,:173-175,:256,:260-271,:284-288,:339-353; aries/learning/evidence.py:143-161,:167-177; aries/learning/reversal.py:341-360; aries/news/automation.py:217,:229-240",
+      "verify_with": "Each is a single-assertion test. The one with a number to beat is the double-count: 10 real aries_news_items rows currently yield shown 30 / dismissed 30 and a confidence of 0.886 where 0.722 is correct.",
+      "closes": "raw/review_learning_loop.json findings L9-04, L9-09, L9-10, L9-11, L9-12 and L9-13, acceptance L9-8, L9-12, L9-13, L9-14, L9-15 and L9-16",
+      "preserve": "raw/review_learning_loop.json finding L9-14 lists what is genuinely well built and must survive these changes: the weight/learned_weight column split, the USER 60 > LEARNED 30 layer stack, the two learn() entry points with no reachable user-value parameter, the pending-reversal state machine, and hysteresis-as-confidence."
+    }
+  ],
+  "next_actions_for_the_reviewer": [
+    {
+      "id": "R-1",
+      "action": "Repair the 19 blind fixture oracles before any fixture result is reported: a nonce-digest check for pz-05, pz-07, st-04, mc-01 and mc-04, and one structural check on an enumerated field for un-02, un-04, un-05, un-06, un-07, un-08, rv-02, rv-03, rv-04, rv-05, rv-06, rv-07, df-05 and df-06.",
+      "file": "fixtures.jsonl, with validate_oracles.py as the acceptance test and raw/oracle_validation.json as the before-state",
+      "why": "A fixture is a measuring device and an unfalsifiable measurement is not evidence, whoever built it. Six of the 19 are held-out ids.",
+      "status": "DONE. findings.json R-01 records the repair and the independent re-run: raw/oracle_validation.json now reports DISCRIMINATING 49, BLIND_TO_INACTION 0, SETUP_FAILED 0, SKIPPED_NEEDS_CONSENT 8. No action left."
+    },
+    {
+      "id": "R-2",
+      "action": "Fix the two fixture setups that do not execute — ab-01 ('NOTE:: command not found') and df-03 ('confirm,: command not found') — where prose leaked into a shell step.",
+      "file": "fixtures.jsonl cases ab-01 and df-03",
+      "why": "df-03 is a held-out case, so it cannot be silently repaired after seeing a result.",
+      "status": "DONE. findings.json R-01 records the repair and the independent re-run: raw/oracle_validation.json now reports DISCRIMINATING 49, BLIND_TO_INACTION 0, SETUP_FAILED 0, SKIPPED_NEEDS_CONSENT 8. No action left."
+    },
+    {
+      "id": "R-3",
+      "action": "Correct the two refuted premises still in the fixture README: 'there are fifteen capabilities' (the registry holds 58) and 'This machine has no working microphone — every analog jack reports available: no' (two Audio/Source nodes exist). Then write the barge-in class that was dropped on the second premise.",
+      "file": "fixtures_README.md, then fixtures.jsonl",
+      "why": "C-01 and C-02. Neither premise affects an existing oracle, but both are wrong in a document that explains the instrument."
+    },
+    {
+      "id": "R-4",
+      "action": "Settle disagreement D-2 by re-running the capability effect enumeration from the live object and publishing one histogram, instead of leaving 26, 29 and 32 in circulation.",
+      "file": "raw/repo_facts.json is the live-object baseline (read 29, non-read 29); raw/review_evidence_recovery.json EVR-7 is the outlier to retract or defend",
+      "why": "We corrected Codex's documents for a count error. We now have one of our own in the same family."
+    },
+    {
+      "id": "R-5",
+      "action": "Settle disagreement D-4 with one read: systemctl --user is-active for the three ARIES units alongside pgrep -a uvicorn, recorded in the same minute.",
+      "file": "a new entry in raw/access_probe.json",
+      "why": "Acceptance L1-1 is a PASS that rests on it, and the two probes currently describe different deployments."
+    },
+    {
+      "id": "R-6",
+      "action": "Resolve the '56 of 58' versus '57 of 58' executed count inside the verifier review (D-5) and re-derive or drop the 'fault_injected 15/15' figure that the previous ledger revision cited for L5-1 and that traces to no artifact.",
+      "file": "raw/review_verifier_integrity.json method; acceptance.json L5-1 note",
+      "why": "Both are small, and both are exactly the kind of unsourced number this review exists to catch."
+    },
+    {
+      "id": "R-7",
+      "action": "Request the measurement windows W-1 through W-6 in COORDINATION.md, with the consent requirement for W-3, W-4 and W-5 stated explicitly, and acknowledge these reviews there as the reviewing agent.md requires.",
+      "file": "COORDINATION.md",
+      "why": "the reviewing agent.md requires the acknowledgment and this consolidation did not write it, because the task permitted exactly two output files — acceptance.json and handoff.json. The same omission is recorded in raw/review_evidence_recovery.json's not_examined list. It is owed, not waived."
+    },
+    {
+      "id": "R-8",
+      "action": "Build the two privacy instruments before claiming anything about the partition: the by-class aggregation (which is Codex's priority 14) and the canary fixture with a transport-boundary hook that records which planted canaries appear in the bytes dispatched to a cloud provider.",
+      "file": "a new experiments/privacy directory — raw/review_privacy_boundary.json F7 confirms none exists",
+      "why": "Leak rate = canary-bearing cloud dispatches / cloud dispatches, with the fixture size as the stated population. Without the content oracle, any rate we publish is a tautology."
+    },
+    {
+      "id": "R-9",
+      "action": "Re-score the acceptance ledger after each of Codex's first three priorities land, rather than in one pass at the end, and keep the four-way BUILT/ENABLED/VERIFIED/GENERALLY_VALIDATED distinction when doing so.",
+      "file": "acceptance.json",
+      "why": "36 of 69 criteria are FAIL and 16 are UNTESTED. Nothing is GENERALLY_VALIDATED, and nothing can be until the held-out set runs on a repaired instrument."
+    },
+    {
+      "id": "R-10",
+      "action": "Settle D-8 with one trace through both gates - aries/workspace/capabilities.py:1028 and aries/operator/service.py:298 - and retract or confirm the claim that media_control, set_volume and set_brightness escape operator.enabled and the hourly budget.",
+      "file": "a new entry in raw/review_voice_path.json or a note in findings.json beside F-16",
+      "why": "Two of our reviewers traced different files and neither traced both. Codex has been told not to act on the claim until this is done, which is a cost we are imposing on him."
+    },
+    {
+      "id": "R-11",
+      "action": "Run the two read-only GROUP BY queries that close D-9 and D-10: the statuses of the steps not covered by the five in raw/verification_truth.json (1381 of 8276), and whether any browser.click step exists in the ledger.",
+      "file": "verification_truth.py, extending raw/verification_truth.json",
+      "why": "Every verification denominator we are asking Codex to publish comes from that file, and two of its arithmetic edges are currently unexplained."
+    },
+    {
+      "id": "R-12",
+      "action": "Request windows W-9 through W-13 in COORDINATION.md, naming the consent requirement for W-9, W-10 and W-11 explicitly, and record the wake-token measurement method the repository itself established at experiments/voice/voice.py:84-86.",
+      "file": "COORDINATION.md",
+      "why": "The highest-severity finding in this handoff (the wake gate) cannot be measured without the owner, and we must not ask him to change a token on source inspection alone when his own precedent is a recorded measurement."
+    },
+    {
+      "id": "R-13",
+      "action": "Read the live learning state read-only and say whether the ratchet has actually moved anything on this machine, then update acceptance L9-6 with the real numbers or with an explicit 'not observed in production'.",
+      "file": "a new raw/ artifact plus acceptance.json L9-6",
+      "why": "raw/review_learning_loop.json demonstrated the ratchet on a synthetic fixture and never opened aries.db. Reporting a synthetic result as a deployment fact is the exact error we charged the thesis with at F-13."
+    }
+  ]
+}

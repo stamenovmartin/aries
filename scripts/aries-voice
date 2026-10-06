@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Speech in, ARIES action out.
+#
+#   ./scripts/aries-voice listen                 speak a command; it acts
+#   ./scripts/aries-voice listen --language mk   force Macedonian
+#   ./scripts/aries-voice say --text "open news" route text, no microphone
+#   ./scripts/aries-voice bench                  decode latency only
+#
+# WHY A WRAPPER RATHER THAN CALLING PYTHON
+# ----------------------------------------
+# CTranslate2 links against CUDA 12 while this machine's driver is CUDA 13, so
+# the runtime libraries come from pip wheels inside .venv. The loader reads
+# LD_LIBRARY_PATH once, before the process starts — setting it from inside
+# Python is too late and fails with "libcublas.so.12 is not found". Anything
+# that runs this (a systemd unit, a keybinding) must go through here.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+# The daemon now imports `aries.speech` to answer out loud, so it needs the same
+# import path the service unit sets. Exported here too, so running this by hand
+# behaves identically to running it under systemd.
+export PYTHONPATH="$PWD/vendor/agentic-core:$PWD/vendor:$PWD${PYTHONPATH:+:$PYTHONPATH}"
+SITE="$PWD/.venv/lib/python3.12/site-packages/nvidia"
+export LD_LIBRARY_PATH="$SITE/cublas/lib:$SITE/cudnn/lib:${LD_LIBRARY_PATH:-}"
+# large-v3 if it has finished downloading, base otherwise. Whisper's small
+# models score 65% WER on Macedonian and misreport the language as Croatian,
+# so on this machine "which model" is a correctness question, not a speed one.
+MODEL="${ARIES_VOICE_MODEL:-}"
+if [ -z "$MODEL" ]; then
+  if [ -s var/models/faster-whisper-large-v3/model.bin ]; then MODEL=var/models/faster-whisper-large-v3
+  else MODEL=var/models/faster-whisper-base; fi
+fi
+exec .venv/bin/python experiments/voice/voice.py "$@" --model "$MODEL"

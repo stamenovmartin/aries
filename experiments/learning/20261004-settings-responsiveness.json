@@ -1,0 +1,34 @@
+{
+  "recorded_at": "2026-10-04T09:45:37.550051+00:00",
+  "problem": "Opening Settings painted181 controls and waited for optional power probes before showing editable controls.",
+  "change": "Default to General, search across all sections, instantiate advanced controls only on expansion, and fetch visible power status independently with a3s ceiling and generation guard. Optional status updates replace only their own panel.",
+  "validation": {
+    "artifact": "experiments/ui/settings-performance.json",
+    "live_first_paint_before": {
+      "n": 3,
+      "min_s": 3.610844160997658,
+      "median_s": 3.905932321998989,
+      "max_s": 4.0236545390071115,
+      "initial_visible_controls": [
+        181
+      ]
+    },
+    "live_first_paint_after": {
+      "n": 3,
+      "min_s": 0.047623270002077334,
+      "median_s": 0.04840712501027156,
+      "max_s": 0.2244001329963794,
+      "initial_visible_controls": [
+        5
+      ]
+    },
+    "interaction_checks": 13,
+    "async_checks": 3
+  },
+  "limitations": [
+    "Three observations per condition, not a p95 estimate or randomized performance study.",
+    "Initial view now displays General (5 controls); all181 public controls remain available through sections, All sections and global search.",
+    "After-delay initial view does not call the optional power endpoint; dedicated asynchronous tests exercise slow, stale and timed-out probes.",
+    "Already running UI processes retain old Python modules until restarted; existing user windows were preserved."
+  ]
+}

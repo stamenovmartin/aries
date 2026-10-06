@@ -1,0 +1,58 @@
+{
+  "recorded_at": "2026-10-04T09:45:37.550051+00:00",
+  "metric": "time to first editable Settings content paint on mapped owned GTK window against live API",
+  "measurements": {
+    "before": {
+      "n": 3,
+      "min_s": 3.610844160997658,
+      "median_s": 3.905932321998989,
+      "max_s": 4.0236545390071115,
+      "initial_visible_controls": [
+        181
+      ]
+    },
+    "after": {
+      "n": 3,
+      "min_s": 0.047623270002077334,
+      "median_s": 0.04840712501027156,
+      "max_s": 0.2244001329963794,
+      "initial_visible_controls": [
+        5
+      ]
+    },
+    "before-slow-power": {
+      "n": 3,
+      "min_s": 2.715391609002836,
+      "median_s": 2.8729728660109686,
+      "max_s": 4.128960680987802,
+      "initial_visible_controls": [
+        181
+      ]
+    },
+    "after-slow-power": {
+      "n": 3,
+      "min_s": 0.06997952199890278,
+      "median_s": 0.07559841200418305,
+      "max_s": 0.6597186290018726,
+      "initial_visible_controls": [
+        5
+      ]
+    }
+  },
+  "checks": {
+    "settings_interaction_passed": 13,
+    "async_loading_passed": 3
+  },
+  "limits": [
+    "Three observations per condition, not a p95 estimate or randomized performance study.",
+    "Initial view now displays General (5 controls); all181 public controls remain available through sections, All sections and global search.",
+    "After-delay initial view does not call the optional power endpoint; dedicated asynchronous tests exercise slow, stale and timed-out probes.",
+    "Already running UI processes retain old Python modules until restarted; existing user windows were preserved."
+  ],
+  "deployment": {
+    "source_updated": true,
+    "backend_restarted": false,
+    "existing_ui_restarted": false,
+    "restart_question_pending": true
+  }
+}

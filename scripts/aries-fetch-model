@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Fetch a faster-whisper model into var/models/, in parallel.
+#
+# WHY THIS EXISTS
+# ---------------
+# huggingface.co throttles a single connection to ~83 KB/s from here, and the
+# hub client's own downloader stalled a 145 MB blob at zero bytes while small
+# files sailed through. Eight parallel range requests get ~605 KB/s from the
+# same host, so the limit is per-connection, not bandwidth. This fetches the
+# large tensor blob in parallel chunks and the small metadata files normally.
+#
+#   ./scripts/aries-fetch-model small
+set -euo pipefail
+SIZE="${1:-base}"
+PARTS="${PARTS:-8}"
+REPO="Systran/faster-whisper-$SIZE"
+BASE="https://huggingface.co/$REPO/resolve/main"
+cd "$(dirname "$0")/.."
+DEST="var/models/faster-whisper-$SIZE"
+mkdir -p "$DEST"
+
+for f in config.json tokenizer.json vocabulary.txt vocabulary.json preprocessor_config.json; do
+  if [ ! -s "$DEST/$f" ]; then
+    curl -sfL "$BASE/$f" -o "$DEST/$f" && echo "  $f" || echo "  $f (absent upstream, skipped)"
+  fi
+done
+
+BIN="$DEST/model.bin"
+if [ -s "$BIN" ]; then echo "model.bin already present"; exit 0; fi
+
+SIZE_B=$(curl -sIL "$BASE/model.bin" | awk 'BEGIN{IGNORECASE=1}/^content-length:/{v=$2}END{gsub(/\r/,"",v);print v}')
+[ -n "$SIZE_B" ] || { echo "could not determine model.bin size" >&2; exit 1; }
+echo "model.bin: $SIZE_B bytes over $PARTS connections"
+
+CHUNK=$(( (SIZE_B + PARTS - 1) / PARTS ))
+TMP="$DEST/.parts"; mkdir -p "$TMP"; rm -f "$TMP"/part.*
+pids=()
+for i in $(seq 0 $((PARTS-1))); do
+  s=$((i*CHUNK)); e=$((s+CHUNK-1)); [ $e -ge $SIZE_B ] && e=$((SIZE_B-1))
+  [ $s -gt $e ] && continue
+  ( curl -sfL --retry 5 --retry-delay 2 -r "$s-$e" -o "$TMP/part.$(printf '%03d' $i)" "$BASE/model.bin" ) &
+  pids+=($!)
+done
+fail=0; for p in "${pids[@]}"; do wait "$p" || fail=1; done
+[ $fail -eq 0 ] || { echo "a chunk failed; leaving parts for retry" >&2; exit 1; }
+
+cat "$TMP"/part.* > "$BIN"
+GOT=$(stat -c%s "$BIN")
+if [ "$GOT" != "$SIZE_B" ]; then
+  echo "size mismatch: got $GOT expected $SIZE_B" >&2; rm -f "$BIN"; exit 1
+fi
+rm -rf "$TMP"
+echo "wrote $BIN ($GOT bytes)"

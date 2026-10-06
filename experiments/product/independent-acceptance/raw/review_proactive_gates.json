@@ -1,0 +1,364 @@
+{
+  "review": "Independent adversarial review of the ARIES proactive gates (PERMISSION + CONDITION)",
+  "reviewer": "independent agent, read-only",
+  "date": "2026-10-06",
+  "method": {
+    "source_inspection": "aries/power/governor.py, aries/power/workload.py, aries/power/settings.py, aries/power/state.py, aries/automations/{runner,worker,breaker,genome}.py, aries/lifecycle/{policy,automation}.py, aries/health/automation.py, aries/workspace/{registry,orchestration,service,automation,capabilities}.py, aries/operator/settings.py",
+    "executed_proof": "two throwaway harnesses on a temp DB (DATABASE_URL=sqlite+aiosqlite:////tmp/claude-rev-gates-{1,3}.db, APP_ENV=test, venv /home/stamenovmartin/aries/.venv/bin/python). Nothing was started, stopped or triggered; aries/var/aries.db was opened read-only (mode=ro) for live settings only. No automation was run.",
+    "live_state_read": "systemctl --user is-active aries.service -> inactive, is-enabled -> not-found, BUT the API is in fact running outside systemd: pgrep shows PID 86078 `uvicorn aries.api.app:app --host 127.0.0.1 --port 8000` plus PID 2098 `uvicorn aries.intelligence.server:app --port 11435`, and aries/var/aries.db mtime advances continuously, so the automations dispatcher IS live and ticking right now. aries_settings read read-only (mode=ro, nothing written): automations.worker_enabled=true, power.background_mode=true, power.allow_suspend=false, power.display_off_after_minutes=1, operator.enabled=true, workspace.dashboard_enabled=true, operator.settle_seconds=8.0. operator.confirm_model_plans, power.allow_heavy_cpu, power.allow_gpu_jobs, data.enabled, data.cleaning_enabled are ABSENT from the table, i.e. at their defaults True / False / False / False / False."
+  },
+  "questions": [
+    {
+      "question": "Can an automation invoke a MUTATING capability (effect != 'read') without the same approval a user-requested action needs?",
+      "answer": "Not in the shipped code, because no shipped automation ever reaches registry.policy with a mutating capability. But the gate it would meet is TRIGGER-BLIND: registry.policy() receives no actor, origin or trigger, so an automation-origin step and a user-typed step are judged by exactly the same two global settings. The automation therefore gets no LESS authority than a user, and nothing in the gate can grant it less. The only thing standing between the live configuration and unattended mutating execution is operator.confirm_model_plans defaulting to True. This is live, not hypothetical: the dispatcher is ticking on this machine now (uvicorn PID 86078, outside systemd).",
+      "status": "PARTIAL",
+      "source": "aries/workspace/registry.py:96-127; aries/workspace/orchestration.py:334; aries/workspace/agent.py:357; aries/workspace/automation.py:28; aries/workspace/service.py:86-144,498-545,556-566; aries/workspace/capabilities.py:71,1195-1213; aries/operator/settings.py:19,24",
+      "detail": "TRACED CALL PATH (source inspection): worker.dispatch_pass (aries/automations/worker.py:117) -> runner.run_due (runner.py:246) -> runner.run_automation (runner.py:71) -> governor.may_run (runner.py:96) -> breaker (runner.py:112) -> lock (runner.py:122) -> _run_directly / _run_through_lifecycle. The ONLY registered automation that touches the capability authority is aries.dashboards (aries/workspace/automation.py:40-47), whose body calls service.submit(db, \"\", capability=\"research\", args={\"query\": topic}) at aries/workspace/automation.py:28. validate_action (capabilities.py:1213) maps 'research' to kind='research', NOT kind='capability'. service.py:498-545 dispatches research steps through research()/summarize() and service.py:543 explicitly `continue`s past research steps in the capability loop. So the scheduler never reaches capabilities.prepare/execute nor registry.policy today. REFUTED as an exploitable path in the shipped build. WHAT IS REAL: registry.policy(db, cap, args, goal, *, approved=False) has no actor/origin/trigger parameter (registry.py:96). Both call sites (orchestration.py:334, agent.py:357) pass only step['approved']. The gate for a non-read effect is therefore (a) operator.enabled must be True (registry.py:101-102, default False at operator/settings.py:19 but LIVE VALUE IS TRUE), (b) cap.requires_approval (registry.py:123-124), (c) operator.confirm_model_plans (registry.py:125-126, default True at operator/settings.py:24, absent from the live DB so still True). Executed proof enumerated 29 mutating capabilities; 17 of them carry requires_approval=False: file.write, browser.open, browser.search, browser.navigate, browser.click, browser.type, browser.scroll, browser.back, browser.forward, desktop.launch, desktop.focus, desktop.move, desktop.resize, desktop.maximize, desktop.unmaximize, desktop.minimize, desktop.tile. For those 17, flipping operator.confirm_model_plans to False is the single switch that turns any origin -- interactive or scheduled -- into unapproved execution. The secondary gate in service.py:556-560 (capabilities.SENSITIVE, capabilities.py:71) covers only 9 legacy names (trash_file, install_app, move_file, browser_fill, ui_action, wifi_connect, service_control, clipboard_write, type_text) and none of the 17 above. CONCLUSION: there is no 'unattended origin needs more approval' rule anywhere in the stack. The design currently relies on no automation ever submitting a capability step."
+    },
+    {
+      "question": "Can an automation invoke a mutating effect OUTSIDE the capability registry without approval?",
+      "answer": "Yes. aries.data (Data Lifecycle) deletes rows from the user's database on a schedule with no per-action approval and no ActionProposal. It is gated only by two default-off settings and is audited.",
+      "status": "PARTIAL",
+      "source": "aries/lifecycle/automation.py:26-49,57-77; aries/lifecycle/policy.py:1-40; aries/automations/runner.py:137-139,227-243",
+      "detail": "aries.data has task_kind=None (lifecycle/automation.py:70), so runner.py:139 takes _run_directly and the engine's task lifecycle -- with its evaluation, ActionProposal and escalation -- is bypassed by design ('the escape hatch for work that is pure bookkeeping', runner.py:17-18). Its body calls lifecycle.service.apply(db), which deletes. risk='medium' is declared honestly (lifecycle/automation.py:74 'it deletes; that is not a low-risk verb') and the two gates are data.enabled (default False, lifecycle/automation.py:20-23) and data.cleaning_enabled. Neither is in the live DB, so deletion is currently off. This is a PERMISSION gate by setting, not an approval gate per action: once data.enabled and data.cleaning_enabled are on, deletion happens unattended with no further confirmation. aries/lifecycle/policy.py itself schedules nothing -- it is a declarative retention table (Retention dataclass, policy.py:77-303)."
+    },
+    {
+      "question": "Can the condition gate be bypassed when sensors are unreadable? Does measure() fail open or closed?",
+      "answer": "It FAILS OPEN, on every one of the three sensors, and this is proven by execution, not inferred.",
+      "status": "ABSENT",
+      "source": "aries/power/governor.py:364,372,380,385-391; aries/power/governor.py:188-220",
+      "detail": "Each condition test is guarded by `is not None`: governor.py:364 `if workload.TEMPERATURE in cls.watches and m.temperature_c is not None`, :372 `and m.cpu_pct is not None`, :380 `and m.gpu_pct is not None`. An unreadable sensor therefore SKIPS its own check. EXECUTED PROOF: with probes.probe_thermal and probes.probe_gpu monkeypatched to raise OSError, measure() returned {temperature_celsius: null, temperature_unavailable: 'OSError: sensor gone', gpu_pct: null, gpu_unavailable: 'OSError: no gpu'}, and may_run for a synthetic heavy_cpu spec (with power.allow_heavy_cpu=True, so the permission half was satisfied and the condition half isolated) returned allowed=true, code='ok', reason='within the limits that could be read; temperature unknown'. The refusal is honest in its wording (governor.py:385-391 builds the caveat list) but it is still a GRANT. There is no setting to make an unreadable thermal sensor refuse heavy work. Given this project's own memory note 'ARIES has no microphone -- it was hearing the sink monitor', a sensor that reports a plausible wrong value rather than None would be worse still and is not detected at all: measure() takes max() over whatever thermal zones exist (governor.py:194-197) with no sanity bound, so a stuck-at-0 zone cannot be distinguished from a cool machine."
+    },
+    {
+      "question": "Can a held automation resume while the hold condition still applies?",
+      "answer": "Yes, by two distinct mechanisms, both proven by execution.",
+      "status": "ABSENT",
+      "source": "aries/power/governor.py:261-268,288-299,300-311,442-470",
+      "detail": "MECHANISM 1 -- blind release. governor.py:288-299: if temperature cannot be read, the hold is released immediately with the reason recorded, bypassing both the resume margin and the clear-check streak. The comment calls this deliberate ('holding forever on a blind sensor would be the unreachable rule again'). EXECUTED PROOF: a synthetic 'deferred' hold on heavy_cpu was released on the very first release_holds() tick with probes raising OSError -> [{'workload':'heavy_cpu','why':'temperature unreadable'}], active_hold afterwards = null. The hot machine that caused the hold is still hot; only the sensor went away. MECHANISM 2 -- wrong release criterion for budget holds. active_hold (governor.py:266) treats BOTH 'deferred' and 'over_budget' as an active hold, but release_holds (governor.py:279-312) only ever evaluates TEMPERATURE. So an 'over_budget' hold -- written by check_budgets (governor.py:464) because a stateful job has outstayed its 20-minute budget and is still running -- is released purely because the machine is cool, while the over-budget job is still running. EXECUTED PROOF: an 'over_budget' hold on heavy_cpu with a fake thermal probe pinned at 40 degC was released on tick 2 (clear_checks=2) -> [{'workload':'heavy_cpu','temperature_celsius':40.0}]. At the 60 s dispatcher cadence that is ~2 minutes, after which the whole heavy_cpu class is free again although nothing checked whether the over-budget job had stopped. WHAT IS CORRECT: the hysteresis itself works. EXECUTED PROOF at a steady 74 degC against a ceiling of 80-5=75: tick 1 streak=1 no release, tick 2 streak=2 released. Also holds only ever apply to heavy classes -- may_run returns at governor.py:342-343 before the hold check at :357 for light work -- so no shipped automation can be held at all (see next question)."
+    },
+    {
+      "question": "Is the condition gate reachable at all in the shipped build?",
+      "answer": "No. All seven registered automations resolve to workload class 'light', so may_run returns allowed=True before any sensor is read. Both gates are dead code in production.",
+      "status": "ABSENT",
+      "source": "aries/power/governor.py:340-343; aries/power/workload.py:59-69,86-105; aries/power/settings.py:31-36",
+      "detail": "EXECUTED PROOF: all 7 registered automations (aries.attention, aries.brief, aries.dashboards, aries.data, aries.health, aries.learning, aries.news) resolve to class 'light' (heavy=false, watches=[], budgeted=false), and may_run returned allowed=true, code='ok', reason='lightweight work always runs', measurement={} -- i.e. `measured: false` -- for every one of them. Four declare workload='light' explicitly; aries.dashboards, aries.attention, aries.brief, aries.news, aries.health leave the field at its default 'light' (genome.py:100). The project is half-aware of this: power/settings.py:33-35 states 'Nothing in ARIES declares GPU work today, so nothing is being refused yet'. It does not say the same about heavy_cpu, which is equally undeclared. MISDECLARATION RISK: aries.attention runs the LOCAL MODEL over every item in the user's mail (connect/automation.py:300-312 '_understood_enough', 'the local model answered for none of the items') and aries.news/aries.dashboards call reader.summarize (service.py:534-541). The vocabulary has a class for exactly this -- INFERENCE_LIGHT (workload.py:65-69) -- and none of them use it. If any of that work is in fact sustained, it is running wholly outside the thermal policy. SILENT DOWNGRADE: workload.get() falls back to LIGHT on an unrecognised name (workload.py:95-105). EXECUTED PROOF: a spec declaring workload='heavy_gpu_typo' produced allowed=true, code='ok', reason='lightweight work always runs', workload='light'. A typo in a genome silently removes the automation from the gate; nothing logs or warns. The docstring argues this 'only fails to restrict something that was never restricted before', which is true for a NEW field but false for a spec that was correctly declared heavy and then edited."
+    },
+    {
+      "question": "Does the permission gate behave as documented (default-closed for heavy work)?",
+      "answer": "Yes, where it is reachable. Proven by execution for all four display states and for force.",
+      "status": "ENFORCED",
+      "source": "aries/power/governor.py:332-355; aries/power/state.py:89-109; aries/power/settings.py:31-42",
+      "detail": "EXECUTED PROOF with a synthetic heavy_cpu spec and power.allow_heavy_cpu=False: display='off' -> allowed=false, code='not_enabled', reason names the exact setting to change. display='unknown' -> allowed=false, same code (governor.py:348 'unknown counts as away: the safe reading' -- correct fail-closed, and state.display_state returns 'unknown' whenever gdbus is missing or the GNOME ScreenSaver interface is absent, state.py:96-107). display='on' -> allowed=true: the permission gate is scoped to unattended operation only and is skipped entirely while the screen is awake, which matches the documented intent but means the heavy-work permission is NOT a general consent gate. force=True with display='off' -> allowed=true, code='ok': force carries the permission half, as documented at governor.py:334-338, but the thermal half is still evaluated (the verdict carried a real measurement). Live config: power.allow_heavy_cpu and power.allow_gpu_jobs are absent from aries_settings, so both are at their False defaults. Note that power.display_off_after_minutes is set to 1 in the live DB with power.background_mode=true, so this machine spends most of its time in the 'unattended' reading."
+    },
+    {
+      "question": "Is there any unbounded loop or retry in the automation runner?",
+      "answer": "No unbounded loop in the automation runner itself. One unrecorded retry-every-tick path exists (maintenance), and one correctness problem in the opposite direction: a refusal resets the pacing clock.",
+      "status": "ENFORCED",
+      "source": "aries/automations/runner.py:130-133,246-267; aries/automations/genome.py:213-217,284-320; aries/workspace/orchestration.py:79-83,281-302,391-429; aries/workspace/automation.py:13,26; aries/workspace/service.py:21,146-148,486-488",
+      "detail": "run_due (runner.py:246-267) is a single bounded `for` over all_automations() -- 7 entries -- once per 60 s tick. run_automation contains no retry loop at all. The only `while True` in the proactive path is orchestration.attempt (orchestration.py:391), and it is bounded by route() at orchestration.py:281-302: ATTEMPT_CAP=4 total invocations, RETRY_CAP=2 repeats of one strategy (transient codes only), ALTERNATIVE_CAP=2 distinct alternatives, backoff (1.0, 3.0) s, and a wall-clock budget at orchestration.py:690. GAP 1 (unrecorded retry): runner.py:130-133 returns {'reason':'maintenance'} from inside the lock WITHOUT calling record_run. Because due() is paced by the last recorded run (genome.py:293), an automation blocked by a 4-minute update lease (runtime/maintenance.py:19) is re-attempted on every 60 s tick with no history row. Cheap, but invisible. The same is true of the 'disabled' early return at runner.py:85-88. GAP 2 (opposite failure): every other refusal DOES write a row with status='skipped' (runner.py:100-103, 115-118, 125-127), and last_run (genome.py:213-217) applies no status filter, so a skipped row RESETS the pacing clock. EXECUTED PROOF: after recording a 'skipped' row for aries.news, due() returned (False, 'ran 0 min ago (every 120 min)'). A single transient cpu_busy or too_hot refusal therefore costs the automation a FULL interval -- up to 120 minutes for aries.news -- rather than being retried on the next tick. That bounds the loop, but it is not what 'it is re-asked on the next tick' at governor.py:373-375 claims."
+    },
+    {
+      "question": "Does the circuit breaker actually stop a repeatedly failing automation, and after how many failures?",
+      "answer": "Yes. It opens at exactly 3 consecutive 'failed' runs (default automations.breaker_threshold=3) and refuses the run. Proven by execution. Two real holes: status='degraded' resets the streak, and threshold=0 disables it entirely.",
+      "status": "PARTIAL",
+      "source": "aries/automations/breaker.py:56-63,105-129,132-134; aries/automations/runner.py:111-120; aries/automations/genome.py:190",
+      "detail": "EXECUTED PROOF, recording synthetic failed runs for aries.news one at a time: 1 failure -> closed/allows_run=true; 2 -> closed/true; 3 -> OPEN/allows_run=false; 4 -> open; 5 -> open. runner.py:113-120 then records status='skipped' and returns reason='circuit_breaker_open' without attempting the pass, and force=True does NOT bypass it (runner.py:107-110). Cooldown proven: with now advanced by 31 minutes the state became half_open/allows_run=true (default automations.breaker_cooldown_minutes=30). A 'skipped' row proven not to break the streak (state stayed open, streak 5) -- correct, and documented at breaker.py:36-38. HOLE 1: breaker.py:112-119 breaks the streak on ANY row whose status is not 'failed', and 'degraded' is in the queried set (breaker.py:108). EXECUTED PROOF: one 'degraded' row after 5 failures reset the breaker to closed, streak 0. runner.py:190 lets an automation body choose its own status and names System Health as using 'degraded' when a probe could not run, so an automation that is permanently half-broken and honest about it is NEVER paused -- it is retried on its schedule forever, which is precisely the Entry 004 debt the breaker was written to settle. HOLE 2: threshold=0 is a legal user setting (breaker.py:59 minimum=0, 'Set to 0 to never pause a failing automation'). EXECUTED PROOF: state(threshold=0) returned closed/allows_run=true with streak 4. That is a documented choice, not a bug, but it is a single integer that removes the only backstop. WINDOW: the history query reads max(1, threshold)*4 rows (breaker.py:109) = 12 at the default, which is ample for a threshold-3 streak."
+    },
+    {
+      "question": "Is the heavy-job budget enforceable?",
+      "answer": "Only cooperatively, and only within one process. Source inspection; not reachable today because nothing declares a budgeted class.",
+      "status": "PARTIAL",
+      "source": "aries/power/governor.py:396-432,442-470; aries/automations/worker.py:99-111; aries/cli.py:386-395,440,683,696-702,1255-1257",
+      "detail": "check_budgets (governor.py:442) sets job.stop_requested on a non-stateful job past power.heavy_job_max_minutes (default 20 min, settings.py:65-69) and records an 'over_budget' row; a stateful job is never asked to stop at all (governor.py:455-459). stop_requested (governor.py:421-432) is a flag a cooperating job must poll; the docstring is explicit that 'a job that ignores the flag keeps running'. Grep found no caller of governor.stop_requested anywhere in aries/, so no automation polls it today -- consistent with nothing declaring a budgeted class. The register _running (governor.py:406) is a module-level dict, so it is PROCESS-LOCAL: aries/cli.py calls run_automation in a separate process (cli.py:395, 683, 702, 1257), and a heavy job started from the CLI would be invisible to the API process's check_budgets and would never be budgeted or held. An API restart also empties _running, silently un-budgeting anything still running. Only governor.note_finish in runner.py:148-152 (correctly in `finally`) keeps the register from leaking on exceptions."
+    }
+  ],
+  "caps_and_limits": [
+    {
+      "name": "automations.check_interval_seconds (dispatcher cadence)",
+      "value": "60 s default, min 10, max 3600, restart_required",
+      "source": "aries/automations/worker.py:50-54"
+    },
+    {
+      "name": "automations.worker_enabled",
+      "value": "default False; LIVE VALUE = true",
+      "source": "aries/automations/worker.py:46-49; aries_settings (read-only)"
+    },
+    {
+      "name": "automations.breaker_threshold",
+      "value": "3 consecutive failures, min 0 (= disabled), max 100",
+      "source": "aries/automations/breaker.py:56-59"
+    },
+    {
+      "name": "automations.breaker_cooldown_minutes",
+      "value": "30 min, min 1, max 1440",
+      "source": "aries/automations/breaker.py:60-63"
+    },
+    {
+      "name": "breaker history window",
+      "value": "max(1, threshold) * 4 rows = 12 at default",
+      "source": "aries/automations/breaker.py:109"
+    },
+    {
+      "name": "power.temperature_limit_celsius",
+      "value": "80 degC, min 40, max 105",
+      "source": "aries/power/settings.py:50-54"
+    },
+    {
+      "name": "power.cpu_limit_pct",
+      "value": "70 %, min 10, max 100",
+      "source": "aries/power/settings.py:56-59"
+    },
+    {
+      "name": "power.gpu_limit_pct",
+      "value": "70 %, min 10, max 100",
+      "source": "aries/power/settings.py:61-63"
+    },
+    {
+      "name": "power.heavy_job_max_minutes",
+      "value": "20 min, min 1, max 720",
+      "source": "aries/power/settings.py:65-69"
+    },
+    {
+      "name": "power.thermal_resume_margin_celsius",
+      "value": "5 degC, min 0 (!), max 30",
+      "source": "aries/power/settings.py:71-75"
+    },
+    {
+      "name": "power.thermal_clear_checks",
+      "value": "2 consecutive cool checks, min 1, max 20",
+      "source": "aries/power/settings.py:77-80"
+    },
+    {
+      "name": "power.allow_heavy_cpu",
+      "value": "default False; absent from live DB",
+      "source": "aries/power/settings.py:38-42"
+    },
+    {
+      "name": "power.allow_gpu_jobs",
+      "value": "default False; absent from live DB",
+      "source": "aries/power/settings.py:31-36"
+    },
+    {
+      "name": "MEASUREMENT_TTL_S",
+      "value": "5.0 s measurement cache",
+      "source": "aries/power/governor.py:74"
+    },
+    {
+      "name": "first-sample CPU window",
+      "value": "0.25 s sleep when no previous /proc/stat sample",
+      "source": "aries/power/governor.py:164"
+    },
+    {
+      "name": "AriesResourceEvent.reason truncation",
+      "value": "400 chars",
+      "source": "aries/power/governor.py:97,251"
+    },
+    {
+      "name": "operator.enabled",
+      "value": "default False; LIVE VALUE = true",
+      "source": "aries/operator/settings.py:19"
+    },
+    {
+      "name": "operator.confirm_model_plans",
+      "value": "default True; absent from live DB so still True",
+      "source": "aries/operator/settings.py:24"
+    },
+    {
+      "name": "ATTEMPT_CAP",
+      "value": "4 capability invocations per sub-goal",
+      "source": "aries/workspace/orchestration.py:79,281"
+    },
+    {
+      "name": "RETRY_CAP",
+      "value": "2 repeats of one strategy, transient codes only",
+      "source": "aries/workspace/orchestration.py:80,289"
+    },
+    {
+      "name": "ALTERNATIVE_CAP",
+      "value": "2 distinct alternative strategies",
+      "source": "aries/workspace/orchestration.py:81,300"
+    },
+    {
+      "name": "RETRY_BACKOFF_S",
+      "value": "(1.0, 3.0) s",
+      "source": "aries/workspace/orchestration.py:82,414"
+    },
+    {
+      "name": "MAX_SUBGOALS",
+      "value": "4 sub-goals per request",
+      "source": "aries/workspace/orchestration.py:83,514"
+    },
+    {
+      "name": "AGING_DEFERRALS",
+      "value": "3 deferrals before a goal reserves its lanes",
+      "source": "aries/workspace/orchestration.py:88"
+    },
+    {
+      "name": "CEILING (concurrent goals)",
+      "value": "4, derived from the governor; never 0, floor 1",
+      "source": "aries/workspace/orchestration.py:76,135-149"
+    },
+    {
+      "name": "MAX_CONCURRENT (goal supervisors)",
+      "value": "3",
+      "source": "aries/workspace/service.py:21,743"
+    },
+    {
+      "name": "goal queue depth",
+      "value": "20 active rows -> submit refuses",
+      "source": "aries/workspace/service.py:146-148"
+    },
+    {
+      "name": "dashboards automation self-limits",
+      "value": "topics[:6] per pass; stops queueing at 17 active goals to leave room for the user",
+      "source": "aries/workspace/automation.py:13,26"
+    },
+    {
+      "name": "interpreted plan action budget",
+      "value": "6 steps, 8 for an agent goal",
+      "source": "aries/workspace/service.py:486-488"
+    },
+    {
+      "name": "maintenance lease",
+      "value": "240 s, expires if the updater disappears",
+      "source": "aries/runtime/maintenance.py:19"
+    },
+    {
+      "name": "mutating capabilities with requires_approval=False",
+      "value": "17 of 29 (file.write, browser.open/search/navigate/click/type/scroll/back/forward, desktop.launch/focus/move/resize/maximize/unmaximize/minimize/tile)",
+      "source": "executed enumeration of aries.workspace.registry.registry"
+    },
+    {
+      "name": "capabilities.SENSITIVE (second approval gate)",
+      "value": "9 legacy names, none of them among the 17 above",
+      "source": "aries/workspace/capabilities.py:71; aries/workspace/service.py:556-560"
+    }
+  ],
+  "findings": [
+    {
+      "id": "PG-01",
+      "severity": "high",
+      "title": "Both proactive gates are unreachable: every shipped automation is classified 'light'",
+      "status": "executed proof",
+      "source": "aries/power/governor.py:340-343; aries/power/workload.py:59-69,86-88",
+      "detail": "All 7 registered automations resolve to workload class 'light'. may_run returns allowed=true with an empty measurement for every one of them, so no temperature, CPU or GPU reading is ever taken on the automation path, and no hold can ever apply to a real automation. The permission gate is equally unreachable (LIGHT.permission_setting is None). The gates are tested code that governs nothing. aries.attention and aries.news/aries.dashboards all invoke the local model, and the vocabulary's INFERENCE_LIGHT class exists for exactly that and is used by nobody."
+    },
+    {
+      "id": "PG-02",
+      "severity": "high",
+      "title": "The condition gate fails open on every unreadable sensor",
+      "status": "executed proof",
+      "source": "aries/power/governor.py:364,372,380,385-391",
+      "detail": "`is not None` guards mean an unreadable sensor skips its own check. With thermal and GPU probes raising, a heavy_cpu verdict came back allowed=true, 'within the limits that could be read; temperature unknown'. There is no setting that makes a blind thermal sensor refuse heavy work, and no plausibility bound on the readings that DO arrive (max() over whatever zones exist, governor.py:194-197), so a stuck sensor reading 0 degC is indistinguishable from a cool machine. Compare this project's own 'ARIES has no microphone' finding: a plausible wrong value, not a None, was the failure mode there too."
+    },
+    {
+      "id": "PG-03",
+      "severity": "high",
+      "title": "An 'over_budget' hold is released by a thermal criterion that has nothing to do with it",
+      "status": "executed proof",
+      "source": "aries/power/governor.py:261-268,279-312,442-470",
+      "detail": "active_hold treats 'over_budget' as an active hold (governor.py:266) but release_holds only ever examines temperature (governor.py:286-311). A stateful job recorded as over budget and deliberately 'left to finish' (governor.py:455-458) has its class-wide hold released after clear_checks=2 cool ticks -- ~2 minutes at the 60 s cadence -- while the job is still running past its budget. Proven: an over_budget hold on heavy_cpu with the thermal probe pinned at 40 degC was released on tick 2. A hold should be released by the condition that created it; release_holds knows only one condition."
+    },
+    {
+      "id": "PG-04",
+      "severity": "medium",
+      "title": "A blind thermal sensor releases an existing hold immediately, with no margin and no streak",
+      "status": "executed proof",
+      "source": "aries/power/governor.py:288-299",
+      "detail": "Proven: a 'deferred' hold on heavy_cpu was released on the FIRST release_holds tick once probe_thermal raised, bypassing both the 5 degC resume margin and the 2-check streak. The reasoning in the comment ('heavy work is opt-in, and the user asked for it') is defensible but it makes losing a sensor the fastest possible way to clear a thermal hold -- and the machine that caused the hold is still hot."
+    },
+    {
+      "id": "PG-05",
+      "severity": "medium",
+      "title": "registry.policy is trigger-blind: nothing distinguishes a scheduled actor from the user",
+      "status": "source inspection",
+      "source": "aries/workspace/registry.py:96-127; aries/workspace/orchestration.py:334; aries/workspace/agent.py:357",
+      "detail": "policy(db, cap, args, goal, *, approved=False) has no actor, origin or trigger parameter, and neither call site supplies one, although service.submit already carries `origin` and persists it (service.py:154-156). The safety of unattended mutating work therefore rests entirely on no automation ever submitting a capability step -- an invariant nothing enforces and nothing tests. With the live configuration (operator.enabled=true, workspace.dashboard_enabled=true, automations.worker_enabled=true, and the dispatcher actually ticking under PID 86078), the single remaining obstacle is operator.confirm_model_plans still being at its default True. 17 of 29 mutating capabilities carry requires_approval=False and would execute unattended the moment that one toggle is turned off for interactive convenience."
+    },
+    {
+      "id": "PG-06",
+      "severity": "medium",
+      "title": "status='degraded' resets the circuit breaker, so a permanently half-broken automation is never paused",
+      "status": "executed proof",
+      "source": "aries/automations/breaker.py:108,112-119; aries/automations/runner.py:190",
+      "detail": "'degraded' is queried alongside 'ok' and 'failed' but breaks the failure streak like a success. Proven: one 'degraded' row after 5 consecutive failures returned the breaker to closed with streak 0. runner.py:188-190 explicitly hands the automation body control of its own status and names System Health as reporting 'degraded' when a probe could not run. An automation whose dependency is permanently gone and which honestly says 'degraded' every pass is retried on schedule forever -- the exact Entry 004 debt the breaker was written to settle."
+    },
+    {
+      "id": "PG-07",
+      "severity": "medium",
+      "title": "A resource-policy or breaker refusal resets the pacing clock, costing a full interval",
+      "status": "executed proof",
+      "source": "aries/automations/runner.py:100-103,115-118,125-127; aries/automations/genome.py:213-217,293,314-320",
+      "detail": "Refusals are recorded as status='skipped' rows, and last_run()/due() apply no status filter. Proven: after a 'skipped' row, due() for aries.news returned (False, 'ran 0 min ago (every 120 min)'). A transient cpu_busy refusal therefore delays the automation by up to its full 120-minute interval, contradicting governor.py:373-375 ('It is re-asked on the next tick'). For time-of-day automations (genome.py:295-312) a skipped row recorded after the target time marks the day 'already ran' and the Morning Brief is silently lost for that day."
+    },
+    {
+      "id": "PG-08",
+      "severity": "medium",
+      "title": "An unrecognised workload name silently downgrades an automation to 'light'",
+      "status": "executed proof",
+      "source": "aries/power/workload.py:95-105; aries/power/governor.py:340",
+      "detail": "Proven: workload='heavy_gpu_typo' produced allowed=true, 'lightweight work always runs', workload='light'. Nothing logs or warns. The docstring's argument ('it only fails to restrict something that was never restricted before') holds for a newly added field but not for a spec that was once correctly declared heavy and is later edited. A gate whose vocabulary is a free-form string with a silent default is a gate a typo removes."
+    },
+    {
+      "id": "PG-09",
+      "severity": "low",
+      "title": "The heavy-job budget register is process-local and the stop flag has no reader",
+      "status": "source inspection",
+      "source": "aries/power/governor.py:406,421-432; aries/cli.py:395,683,702,1257",
+      "detail": "governor._running is a module-level dict, so a heavy automation started by the CLI (a separate process) is invisible to the API process's check_budgets and is never budgeted. An API restart silently empties the register. Separately, no code anywhere in aries/ calls governor.stop_requested, so the 'ask it to stop at its next checkpoint' half of the budget has no implementation on the other side. Both are consistent with nothing declaring a budgeted class today, but both are latent."
+    },
+    {
+      "id": "PG-10",
+      "severity": "low",
+      "title": "aries.data deletes user data unattended through the no-task-kind escape hatch",
+      "status": "source inspection",
+      "source": "aries/lifecycle/automation.py:26-49,70,74; aries/automations/runner.py:139,227-243",
+      "detail": "task_kind=None routes it through _run_directly, bypassing the engine's task lifecycle -- evaluation, ActionProposal, escalation. Deletion is gated by two default-off settings (data.enabled, data.cleaning_enabled, neither present in the live DB) and is audited, and the spec is honest about risk='medium'. But once both are on, deletion happens on a 24-hour schedule with no per-pass approval. aries/lifecycle/policy.py itself schedules nothing; it is a declarative retention table whose minimum_days protections look sound."
+    },
+    {
+      "id": "PG-11",
+      "severity": "low",
+      "title": "The maintenance early return retries every tick with no recorded run",
+      "status": "source inspection",
+      "source": "aries/automations/runner.py:130-133; aries/runtime/maintenance.py:19",
+      "detail": "Returning from inside the lock without record_run means an automation blocked by the 4-minute update lease is re-attempted every 60 s with no history row and no visibility. Bounded and cheap, but it is the one refusal in run_automation that is silent -- every other one writes a 'skipped' row precisely so it is 'visible rather than silent' (runner.py:38-39). The formatting of that block (no spaces around '=' or ':') also marks it as a later patch that did not get the surrounding file's treatment."
+    }
+  ],
+  "refuted_hypotheses": [
+    {
+      "hypothesis": "A scheduled automation can drive a mutating workspace capability (file.write, desktop.launch, browser.click, input.type_text) with no approval.",
+      "verdict": "REFUTED for the shipped build",
+      "what_was_checked": "Grepped every AutomationSpec in aries/ (7 found). Only aries.dashboards touches the workspace, via service.submit(capability='research'). validate_action maps 'research' to kind='research' (capabilities.py:1213), the research branch (service.py:498-545) handles it with research()/summarize(), and service.py:543 skips research steps in the capability loop. No automation calls call_tool, capabilities.prepare/execute, operator.run or approvals.propose (grep over aries/ excluding aries/workspace and tests). registry.policy is therefore never reached from the scheduler today. The REAL finding is the trigger-blind gate itself -- see PG-05."
+    },
+    {
+      "hypothesis": "The CONDITION gate can be defeated by sending a crafted workload value that maps to a heavy class with no sensors.",
+      "verdict": "REFUTED as unnecessary",
+      "what_was_checked": "No crafting is needed. Every real automation is already 'light' (PG-01), which skips the gate outright at governor.py:342-343, and an unrecognised value also lands on 'light' (PG-08). There is no path that reaches a heavy class in production, so there is nothing to defeat."
+    },
+    {
+      "hypothesis": "may_run's hysteresis is the Entry 010 trap again -- a resume threshold that can never be reached.",
+      "verdict": "REFUTED",
+      "what_was_checked": "Executed: at a steady 74 degC with ceiling 80-5=75 and clear_checks=2, release_holds incremented the streak on tick 1 and released on tick 2. The margin is measured downward from a user-chosen limit (governor.py:287) and both halves are bounded settings with reachable ranges (settings.py:71-80). The resume path is correct; its problems are PG-03 and PG-04, which are about the wrong condition being consulted, not an unreachable one."
+    },
+    {
+      "hypothesis": "The automation runner retries a failing automation without bound.",
+      "verdict": "REFUTED",
+      "what_was_checked": "run_due is one bounded for-loop over 7 specs per tick; run_automation has no retry loop; the only while True (orchestration.py:391) is capped by ATTEMPT_CAP=4 / RETRY_CAP=2 / ALTERNATIVE_CAP=2 plus a wall-clock budget; task-kind automations use LifecyclePolicy(max_retries=0 or 1, max_replans=0). The breaker opens at 3 consecutive failures (executed proof). The genuine problems are the opposite shape -- PG-06 (degraded never opens the breaker) and PG-07 (a refusal over-delays the next attempt)."
+    },
+    {
+      "hypothesis": "A held automation resumes on the first reading under the limit (no margin, no streak).",
+      "verdict": "REFUTED for the normal path, CONFIRMED for the blind path",
+      "what_was_checked": "With a readable sensor the margin and the 2-check streak are both honoured (executed proof above). With an unreadable sensor the hold is released on the first tick with neither (PG-04)."
+    },
+    {
+      "hypothesis": "governor.may_run is skipped on the 'Run now' / API / CLI paths, so only the scheduler is gated.",
+      "verdict": "REFUTED",
+      "what_was_checked": "runner.run_automation:95-105 calls governor.may_run before the breaker and before the lock, and it is the single entry point used by the worker (worker.py:117 -> run_due), the API (routes.py:152, 1174, 1557) and the CLI (cli.py:395, 683, 702, 1257). force=True carries only the permission half (governor.py:349) and the thermal half is still evaluated -- executed proof: force with display='off' returned a verdict carrying a real measurement. The dispatcher also runs release_holds and check_budgets BEFORE the enabled check (worker.py:99-116), so a hold taken during a hand-started job is still released when the dispatcher is switched off."
+    },
+    {
+      "hypothesis": "The worker starts automations even when automations.worker_enabled is off.",
+      "verdict": "REFUTED",
+      "what_was_checked": "worker.py:113-116 returns before run_due when the refreshed setting is false. Only reconcile(), release_holds() and check_budgets() run before that check, and worker.py:99-103 documents why. The worker's enabled=lambda: True (worker.py:145) grants only the right to TICK, which is what reads the switch, and the DB-backed value is cached and refreshed at the end of each pass (worker.py:63-77) so the cost is a one-tick delay. Note the live DB has automations.worker_enabled=true AND the API is running outside systemd (PID 86078), so the dispatcher is ticking every 60 s on this machine right now."
+    }
+  ]
+}

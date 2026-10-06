@@ -1,0 +1,15 @@
+[Unit]
+# The handle that means "ARIES is running".
+#
+# One service sits beneath it today (ADR-0005: the overlap lock is per-process and
+# SQLite has one writer, so splitting would be less correct rather than more
+# robust). The target exists anyway, because it is the central lifecycle control
+# the runtime model needs: start and stop ARIES as a whole, and attach a second
+# service later with WantedBy=aries.target without changing how it is operated.
+Description=ARIES — personal AI environment
+Documentation=file://%h/aries/docs/RUNTIME.md
+
+[Install]
+# Started as part of the login session. Deliberately NOT lingering: ARIES runs
+# while you are logged in and stops when you log out.
+WantedBy=default.target

@@ -1,0 +1,167 @@
+{
+  "checks": {
+    "original_failure_preserved": true,
+    "child_completed": true,
+    "duplicate_returns_same_child": true,
+    "folder_inherited_not_executed": true,
+    "folder_identity_unchanged": true,
+    "fresh_read_verified": true
+  },
+  "folder": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77",
+  "parent": {
+    "id": "ff82ff7a49014ee7a3f2e06d1540f5c4",
+    "request": "create folder /home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77 then read file /home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77/followup.txt",
+    "state": "failed",
+    "updated_at": "2026-09-14T23:00:45.317975",
+    "created_at": "2026-09-14T23:00:43.532955",
+    "steps": [
+      {
+        "kind": "capability",
+        "request": "create folder /home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77",
+        "capability": "create_folder",
+        "args": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77"
+        },
+        "prepared": true,
+        "state": "done",
+        "goal_id": "ff82ff7a49014ee7a3f2e06d1540f5c4",
+        "result": {
+          "state": "done",
+          "summary": "Folder exists on disk",
+          "verification": {
+            "met": true,
+            "evidence": "Folder exists on disk"
+          },
+          "cards": [
+            {
+              "title": "Create Folder",
+              "text": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77",
+              "evidence": "Folder exists on disk"
+            }
+          ],
+          "elapsed_seconds": 0.053
+        }
+      },
+      {
+        "kind": "capability",
+        "request": "read file /home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77/followup.txt",
+        "capability": "read_file",
+        "args": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77/followup.txt"
+        },
+        "prepared": true,
+        "state": "running",
+        "goal_id": "ff82ff7a49014ee7a3f2e06d1540f5c4"
+      }
+    ],
+    "cards": [
+      {
+        "title": "Create Folder",
+        "text": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77",
+        "evidence": "Folder exists on disk"
+      }
+    ],
+    "gaps": [
+      "Read accepts a regular UTF-8 text file up to 100 KB"
+    ],
+    "context": [],
+    "related": [],
+    "collected_at": "2026-09-14T23:00:45.201394",
+    "review": null
+  },
+  "child": {
+    "id": "65f34f07af734a1cafd89e72a5f8420a",
+    "request": "create folder /home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77 then read file /home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77/followup.txt",
+    "state": "done",
+    "updated_at": "2026-09-14T23:00:47.333337",
+    "created_at": "2026-09-14T23:00:45.818907",
+    "steps": [
+      {
+        "kind": "capability",
+        "request": "create folder /home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77",
+        "capability": "create_folder",
+        "args": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77"
+        },
+        "prepared": true,
+        "state": "done",
+        "goal_id": "ff82ff7a49014ee7a3f2e06d1540f5c4",
+        "result": {
+          "state": "done",
+          "summary": "Folder exists on disk",
+          "verification": {
+            "met": true,
+            "evidence": "Folder exists on disk"
+          },
+          "cards": [
+            {
+              "title": "Create Folder",
+              "text": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77",
+              "evidence": "Folder exists on disk"
+            }
+          ],
+          "elapsed_seconds": 0.053
+        },
+        "inherited": true,
+        "recovery_verification": {
+          "met": true,
+          "evidence": "Folder exists on disk"
+        }
+      },
+      {
+        "kind": "capability",
+        "capability": "read_file",
+        "args": {
+          "path": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77/followup.txt"
+        },
+        "request": "Read a text file: /home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77/followup.txt",
+        "prepared": true,
+        "state": "done",
+        "goal_id": "65f34f07af734a1cafd89e72a5f8420a",
+        "result": {
+          "state": "done",
+          "summary": "1 results",
+          "cards": [
+            {
+              "title": "followup.txt",
+              "text": "Dependency now available",
+              "source": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77/followup.txt",
+              "evidence": "Read from disk"
+            }
+          ],
+          "elapsed_seconds": 0.001
+        }
+      }
+    ],
+    "cards": [
+      {
+        "title": "Prior change verified",
+        "text": "create folder /home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77",
+        "evidence": "Folder exists on disk"
+      },
+      {
+        "title": "followup.txt",
+        "text": "Dependency now available",
+        "source": "/home/stamenovmartin/Documents/ARIES-Recovery-a10f220b77/followup.txt",
+        "evidence": "Read from disk"
+      }
+    ],
+    "gaps": [],
+    "recovery": {
+      "parent_id": "ff82ff7a49014ee7a3f2e06d1540f5c4",
+      "parent_state": "failed",
+      "checks": [
+        {
+          "step": 0,
+          "capability": "create_folder",
+          "met": true,
+          "evidence": "Folder exists on disk"
+        }
+      ]
+    },
+    "context": [],
+    "related": [],
+    "collected_at": "2026-09-14T23:00:47.291607",
+    "review": null
+  }
+}

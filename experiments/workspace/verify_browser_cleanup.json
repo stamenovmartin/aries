@@ -1,0 +1,589 @@
+{
+  "checks": {
+    "goal_done": true,
+    "observed_title": true,
+    "closed_owned_browser": true,
+    "no_live_owned_session": true,
+    "result_retained": true
+  },
+  "goal": {
+    "id": "4830bb52c1314ea2966274285a89813a",
+    "request": "Plan and execute a goal using observed results: Open https://www.kernel.org and report the page title.",
+    "state": "done",
+    "updated_at": "2026-09-14T21:53:22.277971",
+    "created_at": "2026-09-14T21:53:15.449843",
+    "steps": [
+      {
+        "kind": "capability",
+        "capability": "browser_open",
+        "args": {
+          "url": "https://www.kernel.org"
+        },
+        "request": "browse https://www.kernel.org",
+        "planner_reason": "Open the specified website to report the page title.",
+        "planner_usage": {
+          "eval_count": 44,
+          "prompt_eval_count": 1535,
+          "total_duration": 5065309438,
+          "planning_attempts": 1
+        },
+        "prepared": true,
+        "state": "done",
+        "goal_id": "4830bb52c1314ea2966274285a89813a",
+        "result": {
+          "state": "done",
+          "summary": "Destination and rendered document verified",
+          "browser": {
+            "title": "The Linux Kernel Archives",
+            "url": "https://www.kernel.org/",
+            "text": "The Linux Kernel Archives\nAbout\nContact us\nFAQ\nReleases\nSignatures\nSite news\nThe Linux Kernel Archives\n \nAbout\nContact us\nFAQ\nReleases\nSignatures\nSite news\nProtocol\tLocation\nHTTP\thttps://www.kernel.org/pub/\nGIT\thttps://git.kernel.org/\nRSYNC\trsync://rsync.kernel.org/pub/\nLatest Release\n7.2.6\t\nmainline:\t7.3-rc3\t2026-09-13\t[tarball]\t\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t\nstable:\t7.2.6\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nstable:\t7.1.13 [EOL]\t2026-09-02\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.18.52\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.12.110\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.6.157\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.1.188\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t5.15.221\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t5.10.270\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlinux-next:\tnext-20260914\t2026-09-14\t\t\t\t\t\t[browse]\t\nOther resources\nGit Trees\nDocumentation\nKernel Mailing Lists\nPatchwork\nWikis\nBugzilla\nMirrors\nLinux.com\nLinux Foundation\nSocial\nSite Atom feed\nReleases Atom Feed\nKernel Planet\nThis site is operated by the Linux Kernel Organization, a 501(c)3 nonprofit corporation, with support from the following sponsors.\n         \n   \n \n",
+            "links": [
+              {
+                "name": "The Linux Kernel Archives",
+                "url": "https://www.kernel.org/"
+              },
+              {
+                "name": "About",
+                "url": "https://www.kernel.org/category/about.html"
+              },
+              {
+                "name": "Contact us",
+                "url": "https://www.kernel.org/category/contact-us.html"
+              },
+              {
+                "name": "FAQ",
+                "url": "https://www.kernel.org/category/faq.html"
+              },
+              {
+                "name": "Releases",
+                "url": "https://www.kernel.org/category/releases.html"
+              },
+              {
+                "name": "Signatures",
+                "url": "https://www.kernel.org/category/signatures.html"
+              },
+              {
+                "name": "Site news",
+                "url": "https://www.kernel.org/category/site-news.html"
+              },
+              {
+                "name": "The Linux Kernel Archives",
+                "url": "https://www.kernel.org/"
+              },
+              {
+                "name": "About",
+                "url": "https://www.kernel.org/category/about.html"
+              },
+              {
+                "name": "Contact us",
+                "url": "https://www.kernel.org/category/contact-us.html"
+              },
+              {
+                "name": "FAQ",
+                "url": "https://www.kernel.org/category/faq.html"
+              },
+              {
+                "name": "Releases",
+                "url": "https://www.kernel.org/category/releases.html"
+              },
+              {
+                "name": "Signatures",
+                "url": "https://www.kernel.org/category/signatures.html"
+              },
+              {
+                "name": "Site news",
+                "url": "https://www.kernel.org/category/site-news.html"
+              },
+              {
+                "name": "HTTP",
+                "url": "https://www.ietf.org/rfc/rfc2616.txt"
+              },
+              {
+                "name": "https://www.kernel.org/pub/",
+                "url": "https://www.kernel.org/pub/"
+              },
+              {
+                "name": "GIT",
+                "url": "https://git-scm.com/"
+              },
+              {
+                "name": "https://git.kernel.org/",
+                "url": "https://git.kernel.org/"
+              },
+              {
+                "name": "RSYNC",
+                "url": "https://rsync.samba.org/"
+              },
+              {
+                "name": "7.2.6",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.6.tar.xz"
+              },
+              {
+                "name": "tarball",
+                "url": "https://git.kernel.org/torvalds/t/linux-7.3-rc3.tar.gz"
+              },
+              {
+                "name": "patch",
+                "url": "https://git.kernel.org/torvalds/p/v7.3-rc3/v7.2"
+              },
+              {
+                "name": "inc. patch",
+                "url": "https://git.kernel.org/torvalds/p/v7.3-rc3/v7.3-rc2"
+              },
+              {
+                "name": "view diff",
+                "url": "https://git.kernel.org/torvalds/ds/v7.3-rc3/v7.3-rc2"
+              },
+              {
+                "name": "browse",
+                "url": "https://git.kernel.org/torvalds/h/v7.3-rc3"
+              },
+              {
+                "name": "tarball",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.6.tar.xz"
+              },
+              {
+                "name": "pgp",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.6.tar.sign"
+              },
+              {
+                "name": "patch",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/patch-7.2.6.xz"
+              },
+              {
+                "name": "inc. patch",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/incr/patch-7.2.5-6.xz"
+              },
+              {
+                "name": "view diff",
+                "url": "https://git.kernel.org/stable/ds/v7.2.6/v7.2.5"
+              },
+              {
+                "name": "browse",
+                "url": "https://git.kernel.org/stable/h/v7.2.6"
+              },
+              {
+                "name": "changelog",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.2.6"
+              },
+              {
+                "name": "tarball",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.1.13.tar.xz"
+              },
+              {
+                "name": "pgp",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.1.13.tar.sign"
+              },
+              {
+                "name": "patch",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/patch-7.1.13.xz"
+              },
+              {
+                "name": "inc. patch",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/incr/patch-7.1.12-13.xz"
+              },
+              {
+                "name": "view diff",
+                "url": "https://git.kernel.org/stable/ds/v7.1.13/v7.1.12"
+              },
+              {
+                "name": "browse",
+                "url": "https://git.kernel.org/stable/h/v7.1.13"
+              },
+              {
+                "name": "changelog",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v7.x/ChangeLog-7.1.13"
+              },
+              {
+                "name": "tarball",
+                "url": "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.52.tar.xz"
+              }
+            ],
+            "fields": [
+              {
+                "label": "Navigation menu",
+                "type": "checkbox"
+              }
+            ],
+            "session": "f0e22ddb3186",
+            "blocked_resources": 0,
+            "requests": 10,
+            "evidence": "Actual URL and rendered DOM from the dedicated public browser; body preview capped at 10,000 characters"
+          },
+          "cards": [
+            {
+              "title": "The Linux Kernel Archives",
+              "text": "The Linux Kernel Archives\nAbout\nContact us\nFAQ\nReleases\nSignatures\nSite news\nThe Linux Kernel Archives\n \nAbout\nContact us\nFAQ\nReleases\nSignatures\nSite news\nProtocol\tLocation\nHTTP\thttps://www.kernel.org/pub/\nGIT\thttps://git.kernel.org/\nRSYNC\trsync://rsync.kernel.org/pub/\nLatest Release\n7.2.6\t\nmainline:\t7.3-rc3\t2026-09-13\t[tarball]\t\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t\nstable:\t7.2.6\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nstable:\t7.1.13 [EOL]\t2026-09-02\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.18.52\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.12.110\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.6.157\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.1.188\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t5.15.221\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t5.10.270\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlinux-next:\tnext-20260914\t2026-09-14\t\t\t\t\t\t[browse]\t\nOther resources\nGit Trees\nDocumentation\nKernel Mailing Lists\nPatchwork\nWikis\nBugzilla\nMirrors\nLinux.com\nLinux Foundation\nSocial\nSite Atom feed\nReleases Atom Feed\nKernel Planet\nThis site is operated by the Linux Kernel Organization, a 501(c)3 nonprofit corporation, with support from the following sponsors.\n         \n   \n \n",
+              "url": "https://www.kernel.org/",
+              "browser_session": "f0e22ddb3186",
+              "evidence": "Actual URL and rendered DOM from the dedicated public browser; body preview capped at 10,000 characters"
+            },
+            {
+              "title": "The Linux Kernel Archives",
+              "text": "https://www.kernel.org/",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "The Linux Kernel Archives",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "About",
+              "text": "https://www.kernel.org/category/about.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "About",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "Contact us",
+              "text": "https://www.kernel.org/category/contact-us.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "Contact us",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "FAQ",
+              "text": "https://www.kernel.org/category/faq.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "FAQ",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "Releases",
+              "text": "https://www.kernel.org/category/releases.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "Releases",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "Signatures",
+              "text": "https://www.kernel.org/category/signatures.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "Signatures",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "Site news",
+              "text": "https://www.kernel.org/category/site-news.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "Site news",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "The Linux Kernel Archives",
+              "text": "https://www.kernel.org/",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "The Linux Kernel Archives",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "About",
+              "text": "https://www.kernel.org/category/about.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "About",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "Contact us",
+              "text": "https://www.kernel.org/category/contact-us.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "Contact us",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "FAQ",
+              "text": "https://www.kernel.org/category/faq.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "FAQ",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "Releases",
+              "text": "https://www.kernel.org/category/releases.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "Releases",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "Signatures",
+              "text": "https://www.kernel.org/category/signatures.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "Signatures",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "Site news",
+              "text": "https://www.kernel.org/category/site-news.html",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "Site news",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "HTTP",
+              "text": "https://www.ietf.org/rfc/rfc2616.txt",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "HTTP",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "https://www.kernel.org/pub/",
+              "text": "https://www.kernel.org/pub/",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "https://www.kernel.org/pub/",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "GIT",
+              "text": "https://git-scm.com/",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "GIT",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "https://git.kernel.org/",
+              "text": "https://git.kernel.org/",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "https://git.kernel.org/",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "RSYNC",
+              "text": "https://rsync.samba.org/",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "RSYNC",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "7.2.6",
+              "text": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.6.tar.xz",
+              "browser_session": "f0e22ddb3186",
+              "browser_link": "7.2.6",
+              "evidence": "Link observed in the rendered document"
+            },
+            {
+              "title": "Field: Navigation menu",
+              "text": "checkbox",
+              "browser_session": "f0e22ddb3186",
+              "browser_field": "Navigation menu",
+              "evidence": "Input label observed in the current DOM"
+            }
+          ],
+          "verification": {
+            "met": true,
+            "evidence": "Observed browser context state after the requested action"
+          },
+          "elapsed_seconds": 1.53
+        }
+      }
+    ],
+    "cards": [
+      {
+        "title": "Goal report",
+        "text": "The Linux Kernel Archives — https://www.kernel.org/",
+        "evidence": "Local model summary of recorded tool results; per-step evidence follows"
+      },
+      {
+        "title": "The Linux Kernel Archives",
+        "text": "The Linux Kernel Archives\nAbout\nContact us\nFAQ\nReleases\nSignatures\nSite news\nThe Linux Kernel Archives\n \nAbout\nContact us\nFAQ\nReleases\nSignatures\nSite news\nProtocol\tLocation\nHTTP\thttps://www.kernel.org/pub/\nGIT\thttps://git.kernel.org/\nRSYNC\trsync://rsync.kernel.org/pub/\nLatest Release\n7.2.6\t\nmainline:\t7.3-rc3\t2026-09-13\t[tarball]\t\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t\nstable:\t7.2.6\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nstable:\t7.1.13 [EOL]\t2026-09-02\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.18.52\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.12.110\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.6.157\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t6.1.188\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t5.15.221\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlongterm:\t5.10.270\t2026-09-14\t[tarball]\t[pgp]\t[patch]\t[inc. patch]\t[view diff]\t[browse]\t[changelog]\nlinux-next:\tnext-20260914\t2026-09-14\t\t\t\t\t\t[browse]\t\nOther resources\nGit Trees\nDocumentation\nKernel Mailing Lists\nPatchwork\nWikis\nBugzilla\nMirrors\nLinux.com\nLinux Foundation\nSocial\nSite Atom feed\nReleases Atom Feed\nKernel Planet\nThis site is operated by the Linux Kernel Organization, a 501(c)3 nonprofit corporation, with support from the following sponsors.\n         \n   \n \n",
+        "url": "https://www.kernel.org/",
+        "browser_session": "f0e22ddb3186",
+        "evidence": "Actual URL and rendered DOM from the dedicated public browser; body preview capped at 10,000 characters",
+        "browser_closed": true
+      },
+      {
+        "title": "The Linux Kernel Archives",
+        "text": "https://www.kernel.org/",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "The Linux Kernel Archives",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "About",
+        "text": "https://www.kernel.org/category/about.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "About",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "Contact us",
+        "text": "https://www.kernel.org/category/contact-us.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "Contact us",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "FAQ",
+        "text": "https://www.kernel.org/category/faq.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "FAQ",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "Releases",
+        "text": "https://www.kernel.org/category/releases.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "Releases",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "Signatures",
+        "text": "https://www.kernel.org/category/signatures.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "Signatures",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "Site news",
+        "text": "https://www.kernel.org/category/site-news.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "Site news",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "The Linux Kernel Archives",
+        "text": "https://www.kernel.org/",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "The Linux Kernel Archives",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "About",
+        "text": "https://www.kernel.org/category/about.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "About",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "Contact us",
+        "text": "https://www.kernel.org/category/contact-us.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "Contact us",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "FAQ",
+        "text": "https://www.kernel.org/category/faq.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "FAQ",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "Releases",
+        "text": "https://www.kernel.org/category/releases.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "Releases",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "Signatures",
+        "text": "https://www.kernel.org/category/signatures.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "Signatures",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "Site news",
+        "text": "https://www.kernel.org/category/site-news.html",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "Site news",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "HTTP",
+        "text": "https://www.ietf.org/rfc/rfc2616.txt",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "HTTP",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "https://www.kernel.org/pub/",
+        "text": "https://www.kernel.org/pub/",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "https://www.kernel.org/pub/",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "GIT",
+        "text": "https://git-scm.com/",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "GIT",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "https://git.kernel.org/",
+        "text": "https://git.kernel.org/",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "https://git.kernel.org/",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "RSYNC",
+        "text": "https://rsync.samba.org/",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "RSYNC",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "7.2.6",
+        "text": "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.2.6.tar.xz",
+        "browser_session": "f0e22ddb3186",
+        "browser_link": "7.2.6",
+        "evidence": "Link observed in the rendered document",
+        "browser_closed": true
+      },
+      {
+        "title": "Field: Navigation menu",
+        "text": "checkbox",
+        "browser_session": "f0e22ddb3186",
+        "browser_field": "Navigation menu",
+        "evidence": "Input label observed in the current DOM",
+        "browser_closed": true
+      }
+    ],
+    "gaps": [],
+    "context": [],
+    "related": [],
+    "collected_at": "2026-09-14T21:53:15.554884",
+    "agent": {
+      "request": "Open https://www.kernel.org and report the page title.",
+      "finished": true,
+      "model_usage": [
+        {
+          "eval_count": 44,
+          "prompt_eval_count": 1535,
+          "total_duration": 5065309438,
+          "planning_attempts": 1
+        },
+        {
+          "eval_count": 0,
+          "contract_checks": 1
+        }
+      ],
+      "summary": "The Linux Kernel Archives — https://www.kernel.org/"
+    },
+    "window_cleanup": [
+      {
+        "session": "f0e22ddb3186",
+        "closed": true,
+        "reason": "Agent finished; result retained"
+      }
+    ]
+  }
+}

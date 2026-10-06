@@ -1,0 +1,162 @@
+{
+  "method": "Static source inspection only (read-only). No service, model, provider, test suite or database was executed; var/aries.db untouched; no outbound network request made. Every claim below is SOURCE-INSPECTED unless explicitly marked EXECUTED (none are).",
+  "questions": [
+    {
+      "question": "Is there any code path that COUNTS or LOGS outbound provider calls by data class?",
+      "answer": "LOGS: yes, per call. COUNTS/aggregates: no.",
+      "status": "PARTIAL",
+      "source": "aries/intelligence/generation.py:116",
+      "detail": "Every generation attempt, local or cloud, succeeded or failed, writes an IntelligenceEvent of kind 'generation' carrying data_classes=sorted(classes), level=which ('cloud'|'local'), provider, model, task_type, reason, ok, error (aries/intelligence/generation.py:116-122, via aries/intelligence/tracking.py:5 record()). A privacy refusal additionally writes kind 'egress' with data_classes and blocked_reason (aries/intelligence/generation.py:63-65). The per-call record therefore already contains both the label set and the realised transport level. What is ABSENT is any aggregation: aries/intelligence/tracking.py:11 stats() parses 'route', 'generation' and 'outcome' events and buckets only by execution_level ('code','local','cloud') and tokens/cost; it never reads data_classes, and it never reads 'egress' events at all. The single consumer, GET /intelligence/stats (aries/api/routes.py:1696-1699), exposes only that aggregate. Exact names of the instrument that exists: aries.intelligence.tracking.record with kind='generation' (field data_classes) and kind='egress' (fields data_classes, blocked_reason). Exact name of the missing instrument: no function anywhere groups, counts or rates calls by data class."
+    },
+    {
+      "question": "Is there any code path that BLOCKS an outbound call because the payload contains personal data? Or is the partition purely a provider-selection setting?",
+      "answer": "Yes, there is a real block. It is not purely provider selection. But it blocks on LABELS attached to the payload, not on payload CONTENT.",
+      "status": "ENFORCED",
+      "source": "aries/intelligence/egress.py:42-51",
+      "detail": "cloud_block(classes, privacy_mode, send_file_contents) returns a refusal string when privacy.mode is on, when classes intersect {'secret','personal','unknown'}, or when 'file_content' is present without ai.send_file_contents. It is called at aries/intelligence/generation.py:59-69, BEFORE any provider object is constructed (OpenAICompatibleProvider / CLIDecisionProvider are only instantiated at lines 95-99 inside attempt('cloud')), so a blocked payload never reaches an HTTP client or a CLI subprocess. On block: an 'egress' event is recorded, then either level is downgraded to 'local' (if allow_fallback and intelligence.cloud_local_fallback) or ValueError('PRIVACY_BLOCKED: ...') is raised. The gate also fails closed on policy unavailability: cloud_block raises ValueError('Inference privacy policy is unavailable') if either setting is not a bool (egress.py:43-44). Labels cannot be supplied by the routing model: classify() (egress.py:33-39) recomputes sha256 over [messages, schema] and accepts the Provenance only if the digest matches; any mismatch, absent provenance, or unknown label collapses to {'unknown'}, which cloud_block refuses. A route dict's own 'data_classes' key is never read by the gate. Honest limit, stated in the module docstring (egress.py:1-5): 'This is a transport policy, not a semantic PII detector.' The only content-derived labelling is a keyword regex, request_classes (egress.py:54-58), matching private/confidential/secret/password/credential/calendar/mail/email/medical and two Macedonian stems. Nothing inspects a payload for names, addresses, phone numbers, tokens or paths."
+    },
+    {
+      "question": "Can context items labelled `personal` reach a cloud provider?",
+      "answer": "On the generate() path: no — blocked, by source inspection, through a complete and unbroken label chain. On the memory-embedding path: outside the gate entirely; sendability depends on one unvalidated environment variable.",
+      "status": "ENFORCED",
+      "source": "aries/workspace/context_engine.py:15 -> aries/workspace/agent.py:207 -> aries/intelligence/egress.py:77 -> aries/workspace/agent_planner.py:451 -> aries/intelligence/generation.py:59-69",
+      "detail": "Traced chain: (1) context_engine.Item.data_class defaults to 'personal' (context_engine.py:15) and no current source overrides it — memory items (context_engine.py:86-88) and both collect() adapters, tasks (context_sources.py:62) and news (context_sources.py:97), all take the default; select() drops any item whose data_class is outside a known set (context_engine.py:50-51) and returns data_classes = sorted set of the SELECTED items' classes (context_engine.py:70). (2) agent.py:207 copies packet['data_classes'] into data['agent']['context_data_classes'] from the PRE-truncation packet, so planner_context()'s later dropping of memories (context_engine.py:110) cannot declassify. (3) egress.planner_classes merges context_data_classes (egress.py:77), independently adds 'personal' whenever agent.context holds anything meaningful (egress.py:70-76), adds 'personal' for any executed step whose capability is not file.read/file.write (egress.py:78-84), adds 'file_content' for those two, adds request_classes(goal), and adds 'personal' when environment carries 'windows' or 'audio'. (4) agent_planner.py:451 binds those classes to the exact messages+schema being sent and passes the Provenance to structured() -> generate(). (5) generate() re-derives classes by digest and calls cloud_block, which refuses 'personal'. The same discipline holds at the only two other cloud-capable call sites: aries/workspace/goal_graph.py:102-105 (classes include packet['data_classes']) and aries/intelligence/router.py:141-143 (CloudDecisionProvider, allow_fallback=False). Every other model call in the codebase goes through local_structured(), which sets force_local=True (aries/intelligence/__init__.py:71-75). There is NO call site that reaches a cloud provider without a bound Provenance. PRODUCT-LEVEL CONSEQUENCE, not a safety hole: because ARIES_CONTEXT_ENGINE defaults True (aries/flags.py:57) and every non-file step adds 'personal', the force-escalation at aries/workspace/agent_planner.py:400-403 (which rewrites execution_level to 'cloud' whenever the deterministic router declined a goal) is in practice almost always overridden back to local by the egress gate. So the cloud planner is largely unreachable for real multi-step goals, and the 'egress' blocked events are expected to be the common case rather than the exception. Nobody has counted them. SEPARATE UNGATED PATH: aries/workspace/memory/embedding.py:146-154 POSTs memory and query text (data_class 'personal' by the same convention) to os.environ.get('ARIES_OLLAMA', 'http://127.0.0.1:11434') (embedding.py:39) using urllib, with no loopback_url() validation (contrast aries/intelligence/providers.py:9-17, which is enforced for every inference adapter), no data-class labelling, and no record() event. The default is loopback, so the shipped default is local; an exported ARIES_OLLAMA pointing off-machine would send personal memory text with no block and no log. This is a gap in coverage of the gate, not a defeat of it."
+    },
+    {
+      "question": "What exactly would have to be added to make a leak rate measurable with a denominator?",
+      "answer": "See what_is_missing_to_measure. The short form: the denominator is nearly free from existing events; the numerator does not exist, because the system can only compare labels to labels.",
+      "status": "ABSENT",
+      "source": "aries/intelligence/tracking.py:11-35",
+      "detail": "A leak rate computed from today's data would be structurally 0/N and would mean nothing: cloud_block refuses every payload whose own label says 'personal', so 'cloud calls whose recorded data_classes contain personal' is provably empty by construction, and reporting that as a 0% leak rate would be a tautology, not a measurement. A real leak rate needs ground truth about payload CONTENT that is independent of the label the assembler chose, and that oracle does not exist anywhere in the repository."
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "claim": "The local/cloud privacy partition is enforced in code at the final inference boundary, not merely configured.",
+      "status": "ENFORCED (source-inspected)",
+      "source": "aries/intelligence/egress.py:42, aries/intelligence/generation.py:59-69",
+      "detail": "The gate runs before any provider is instantiated, fails closed on missing provenance, on a digest mismatch, on an unknown label and on unavailable policy settings, and the failure mode is a refusal (ValueError 'PRIVACY_BLOCKED:') or a downgrade to local, never a silent send."
+    },
+    {
+      "id": "F2",
+      "claim": "Labels are origin-based, assembler-supplied and cryptographically bound to the exact payload; a model's routing decision cannot declassify anything.",
+      "status": "ENFORCED (source-inspected)",
+      "source": "aries/intelligence/egress.py:26-39",
+      "detail": "bind() rejects an empty or unknown label set. classify() recomputes sha256 over json.dumps([messages, schema], sort_keys=True) and degrades to {'unknown'} on any mismatch, so appending a message or mutating the schema after binding invalidates the authorization. The 'data_classes' key a caller may put in a route dict is read by nothing in the gate."
+    },
+    {
+      "id": "F3",
+      "claim": "There is exactly one measurement instrument today, and it is per-call logging, not counting.",
+      "status": "PARTIAL",
+      "source": "aries/intelligence/generation.py:116, aries/intelligence/tracking.py:11",
+      "detail": "data_classes is persisted on every 'generation' event and on every 'egress' refusal. No code reads it back. stats() aggregates only execution_level, tokens and cost; its 'routed_by_level' / 'cloud_requests' fields are the closest thing to a denominator and they are blind to data class."
+    },
+    {
+      "id": "F4",
+      "claim": "The event store cannot be queried by data class without a full scan.",
+      "status": "ABSENT",
+      "source": "aries/intelligence/models.py:6-11",
+      "detail": "IntelligenceEvent has indexed columns only for created_at and kind; data_classes lives inside the data_json Text blob. stats() reads a fixed window of the newest 10000 events (tracking.py:13) and parses each JSON in Python, so any by-class rate would inherit that window bound and would have to state it."
+    },
+    {
+      "id": "F5",
+      "claim": "No content-level verification exists at the transport boundary.",
+      "status": "ABSENT",
+      "source": "aries/intelligence/egress.py:1-5, aries/intelligence/egress.py:54-58",
+      "detail": "The module docstring disclaims being a PII detector. request_classes is a keyword regex over the goal string only; it does not look at history, observations, file contents, environment snapshots or context item text. An item an assembler labels 'public' or 'synthetic' is sendable without any check that its text is in fact non-personal. Today no source emits such an item (all Items default to 'personal'), so this is latent rather than active."
+    },
+    {
+      "id": "F6",
+      "claim": "A relevant test suite exists and asserts transport dispatch, not route labels. It was NOT executed in this review.",
+      "status": "SOURCE-INSPECTED ONLY",
+      "source": "tests/test_inference_egress.py:39-102",
+      "detail": "test_transport_partition_and_task_lineage patches local_generate and CLIDecisionProvider.generate and asserts cloud.await_count changes only for {'public','synthetic'}, that ai.send_file_contents permits 'file_content' but does not declassify a mixed {'file_content','personal'} payload, and that privacy.mode overrides a 'public' route. test_missing_or_tampered_provenance_cannot_authorize_cloud covers absent provenance, an appended message and a mutated schema, and asserts zero cloud dispatch plus a PRIVACY_BLOCKED refusal under allow_fallback=False. test_label_origin_survives_history_and_context exercises planner_classes. It also asserts canary payload text never appears in the audit rows. This is adapter-boundary unit evidence with mocked providers; it is not a measured leak rate, not a rate over a fixture population, and per this review's rules it remains unexecuted claim, not executed proof."
+    },
+    {
+      "id": "F7",
+      "claim": "No experiment in the repository measures the privacy partition.",
+      "status": "ABSENT",
+      "source": "experiments/",
+      "detail": "There is no experiments/privacy or experiments/egress directory and no result file reporting a leak rate, a by-class call count, or an egress-block count. The nearest artefacts are a design expectation in experiments/architecture/20261006/document-review.json:12 and a 'routing and egress' area note in experiments/architecture/20261006/findings.json:65 — statements of intent, not measurements."
+    },
+    {
+      "id": "F8",
+      "claim": "The memory embedding path bypasses the gate and its logging.",
+      "status": "PARTIAL / coverage gap",
+      "source": "aries/workspace/memory/embedding.py:39, aries/workspace/memory/embedding.py:146-154",
+      "detail": "Memory and query text is POSTed to ARIES_OLLAMA (env-overridable, default loopback) via urllib with no loopback_url() validation, no data-class label and no record() event. aries/workspace/memory/calibration.py:67 uses urlopen similarly. Every inference adapter in aries/intelligence/providers.py does enforce loopback for local URLs, so this is an inconsistency specific to the memory subsystem. UNDETERMINED whether any deployment sets ARIES_OLLAMA off-machine; determining it needs the actual service environment, which this review did not inspect."
+    },
+    {
+      "id": "F9",
+      "claim": "The force-escalation at agent_planner.py:380-403 escalates a ROUTING REQUEST, and has no privacy authority.",
+      "status": "ENFORCED (source-inspected)",
+      "source": "aries/workspace/agent_planner.py:400-403",
+      "detail": "When the deterministic router declined a goal, plan() overwrites decision['execution_level'] to 'cloud' with requires_cloud=True. That dict becomes data['routing'] and is passed as route= to structured(). generate() treats it only as 'requested' (generation.py:55) and still applies cloud_block to the bound classes. So the escalation cannot carry personal context to a provider; it can only produce an 'egress' block event and a local fallback."
+    }
+  ],
+  "what_is_missing_to_measure": [
+    {
+      "need": "An aggregation of existing events by data class — the denominator.",
+      "where": "aries/intelligence/tracking.py stats() (or a new reporter beside it)",
+      "detail": "Cheapest missing piece. Every 'generation' event already carries data_classes + level + ok. Add counts of cloud-dispatched calls per data-class set, local calls per set, and 'egress' refusals per set and per blocked_reason, and surface them on GET /intelligence/stats. Must declare the 10000-event window the way stats() already declares its other scopes. Without this, nobody can even state how many cloud calls happened at all by class, let alone a rate."
+    },
+    {
+      "need": "A content-level oracle independent of the label — the numerator.",
+      "where": "new; nothing in the repository does this",
+      "detail": "The gate compares labels to labels, so leak rate against labels is tautologically zero. A real numerator requires inspecting the serialized payload actually handed to the cloud adapter and deciding, independently of planner_classes, whether it contains personal content. Minimum viable form: a fixture of goals each seeded with unique canary strings whose true data class is known by construction (a planted phone number, a planted path under $HOME, a planted calendar entry), then a transport-boundary hook that records which canaries appear in the bytes dispatched to a cloud provider. Leak rate = canary-bearing cloud dispatches / cloud dispatches, with the fixture size as the stated population."
+    },
+    {
+      "need": "A transport-boundary interception point that is not a mocked provider method.",
+      "where": "aries/intelligence/generation.py:94-101 (the attempt('cloud') branch) and aries/intelligence/providers.py:68-84",
+      "detail": "Today the only way to observe what would be sent is to patch local_generate / CLIDecisionProvider.generate, as tests/test_inference_egress.py does. There is no single hook that sees the final serialized request body for both the OpenAICompatibleProvider HTTP path and the CLI subprocess stdin path. An experiment needs one, otherwise the CLI path (which writes to a subprocess, not httpx) and the HTTP path must be instrumented separately and the two numbers cannot be pooled without an argument."
+    },
+    {
+      "need": "A labelling-accuracy measurement for the assemblers, separate from the gate.",
+      "where": "aries/intelligence/egress.py:54-58 request_classes, egress.py:61-87 planner_classes, aries/workspace/context_engine.py:15 Item.data_class",
+      "detail": "The partition's whole correctness rests on assemblers labelling conservatively. That assumption is currently guaranteed by a default ('personal') and by three enumerated rules, and its accuracy has never been scored. Needs a labelled fixture with per-item ground truth and a reported confusion matrix, specifically the false-'public' rate — the only cell that can produce a leak. request_classes' recall against personal goals is likewise unmeasured; the regex has 9 English stems and 2 Macedonian ones."
+    },
+    {
+      "need": "Coverage accounting: which outbound paths the gate does and does not see.",
+      "where": "aries/workspace/memory/embedding.py, aries/workspace/memory/calibration.py, aries/news/fetch.py",
+      "detail": "A leak rate over generate() calls is not a leak rate for the product unless the set of outbound paths is enumerated and each is either gated or declared out of scope. The embedding path (F8) is currently neither. Needs an explicit inventory assertion, ideally a test that fails when a new module gains an un-labelled outbound client."
+    },
+    {
+      "need": "An executed run on the installed system, not unit tests.",
+      "where": "experiments/ (no privacy directory exists)",
+      "detail": "Per the project's own two-levels-of-done rule, the acceptance evidence has to come from the installed service with real settings (privacy.mode off, cloud_enabled on, a real cloud provider configured) and real goals, with the resulting 'generation' and 'egress' events read back out of the event store. Everything established in this review is source inspection of unexecuted code."
+    }
+  ],
+  "refuted_hypotheses": [
+    {
+      "hypothesis": "The local/cloud partition is purely a provider-selection setting, with no payload-level enforcement.",
+      "verdict": "REFUTED (source-inspected)",
+      "source": "aries/intelligence/egress.py:42-51, aries/intelligence/generation.py:59-69",
+      "detail": "A per-payload gate runs before provider construction and can refuse a call that routing explicitly asked to send to cloud."
+    },
+    {
+      "hypothesis": "A routing decision (including the forced escalation near agent_planner.py:380) can send personal context to a cloud provider.",
+      "verdict": "REFUTED (source-inspected)",
+      "source": "aries/workspace/agent_planner.py:400-403, aries/intelligence/generation.py:55-69",
+      "detail": "Routing only supplies a requested level and a reason. Labels come from the bound Provenance; route-supplied data_classes are ignored by classify() and cloud_block()."
+    },
+    {
+      "hypothesis": "'Nobody has measured whether this holds' means there is no evidence at all.",
+      "verdict": "PARTIALLY REFUTED",
+      "source": "tests/test_inference_egress.py",
+      "detail": "A dedicated suite asserts actual cloud dispatch counts per label, tamper resistance, and absence of payload text in the audit trail. That is unit-level evidence at the adapter boundary with mocked providers, and I did not run it. It is not a leak rate and it is not a measurement over a population, so the original claim stands for 'measured'; it is wrong for 'unenforced' and wrong for 'untested'."
+    },
+    {
+      "hypothesis": "aries/intelligence/inference.py contains the privacy validation.",
+      "verdict": "REFUTED — the file does not exist.",
+      "source": "aries/intelligence/",
+      "detail": "The directory contains __init__.py, budgets.py, cli.py, context.py, egress.py, generation.py, models.py, providers.py, router.py, schemas.py, server.py, settings.py, tracking.py. The privacy validation reported as living in inference.py is in egress.py (policy) and generation.py:59-69 (enforcement point)."
+    },
+    {
+      "hypothesis": "The data_class field on context items is decorative metadata that never gates egress.",
+      "verdict": "REFUTED (source-inspected)",
+      "source": "aries/workspace/context_engine.py:70 -> aries/workspace/agent.py:207 -> aries/intelligence/egress.py:77",
+      "detail": "The chain from Item.data_class to cloud_block is complete and carries the pre-truncation label set, so truncating the displayed context cannot declassify the payload."
+    }
+  ]
+}

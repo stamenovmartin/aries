@@ -1,0 +1,75 @@
+I made no edits, restarts or test runs and didn't open the live DB. Everything below comes from reading the current code. I didn't write a learning record, since nothing changed. `service.py` was edited while I was reading it, so its line numbers are from my last grep.
+
+Paste-ready for `COORDINATION.md`:
+
+---
+
+## from the reviewing agent/read-only-lock-audit → codex · 2026-10-01 · P2.1 SQLite writers
+
+**Scope:** static read only. I made no edits, ran no tests or restarts, and read no live DB rows or journal. So I cannot say whether any lock failures happened after your 2026-09-30 22:35Z deploy.
+
+### Who writes to `var/aries.db`
+- **One engine config for every production writer.** `vendor/agentic-core/agentic_core/database/base.py:21,28-39` sets driver `timeout=15`, `journal_mode=WAL`, `synchronous=NORMAL` and `busy_timeout=15000` on every pooled connection.
+- **Processes that use it:**
+  - `aries-core`: the API plus every in-process worker (`systemd/aries-core.service:26`).
+  - `aries-local-model`: `aries/intelligence/server.py:114-119`, one short tracking insert per legacy chat.
+  - Manual CLI runs: `scripts/aries` → `aries/cli.py`, and `scripts/init_db.py`.
+- **Not writers:** voice and endurance go over HTTP. The `experiments/locking/*` and `experiments/verification/probe.py` scripts open the DB with `mode=ro`.
+- **Nothing changes transaction mode.** A grep for `isolation_level`, BEGIN hooks or `BEGIN IMMEDIATE` finds nothing. pysqlite therefore starts a transaction only at the first write statement; reads run outside one.
+  - That makes SQLITE_BUSY_SNAPSHOT unexpected on the dispatch path, which fits your measured `sqlite_errorcode=5`.
+  - What it means: when a writer fails, some other connection held the write lock for at least 15 s.
+
+### Already fixed, don't repeat
+- Lifecycle commit boundaries: `lifecycle.py:122,139,164,242`.
+- News fetches now finish before any write: `news/automation.py:88-93,128-130`.
+- `call_tool` commits before every side-effecting call: `calling.py:114`.
+- The scheduler's `process_due` commits before `run_fn`: `scheduled.py:115`.
+- Operator, router and memory `touch` all commit right away.
+
+### Confirmed remaining risk: the write lock is held during local model inference
+In `aries/intelligence/generation.py`:
+1. `:61` records a `fallback` event when the cloud is unavailable. `tracking.record` flushes (`tracking.py:7`), which takes the write lock.
+2. Then `attempt('local')` runs the local model (`:74`). The lock is held for that whole call; the first commit is in the `finally` at `:90`.
+3. `:94` does the same after a cloud `HTTPError`, `RuntimeError` or `TimeoutError`, followed by `:95` `attempt('local')`.
+
+The agent planner now escalates to cloud. So every cloud CLI timeout or failure, with fallback enabled, holds the writer for the full local generation.
+
+**Minimal fix:** `await db.commit()` right after each fallback `record` (`:61` and `:94`), before the local attempt. Nothing is awaited while the lock is held.
+
+**Regression test (scratch DB):** stub the cloud to raise `RuntimeError` and stub the local model to sleep 20 s. A second connection's UPDATE must finish in under 1 s.
+
+### Confirmed, lower severity: extra lock traffic on every poll
+- `agentic_core/memory/recovery.py:24-46` (`recover_stuck`) runs four UPDATEs on every scheduler pass, even when nothing matches. Each one still takes the write lock.
+- Its `task_runs` UPDATE is the second statement `experiments/locking/waited.py` sees failing.
+- **Fix:** check with a SELECT first and only UPDATE when there are matches, the same guard `service.dispatch` already has (`service.py:682`).
+
+### Latent: sessions stay open across executor I/O
+These places pass a live session to executors as `ctx['db']` and keep it open while external work runs:
+- `agent.py:221-263` (executor `:241`, verifier `:251`)
+- `orchestration.py:331-381` (`:340` rolls back after `policy`, then executor `:350`, verifier `:366`)
+- `service.py:~490-517` (`capabilities.execute(db…)` at `:511`)
+
+The executors I checked are fine: `registry.py:376-378` emits then commits immediately, and `call_tool` commits first. But nothing enforces it; the next executor that flushes and then awaits will hold the lock.
+
+**Minimal boundary:** add `await db.commit()` (or a rollback) right before each executor and verifier await. That's `agent.py` before `:241` and `:251`, and `orchestration.py` before `:366`. Optionally, in tests, assert that the raw aiosqlite connection's `in_transaction` is False at those points.
+
+### Parallel sub-goal writes
+- **Locking is already serialised correctly.** Each child writes only its own row, through `service.save` (`service.py:223-228`): open, UPDATE with `WHERE state='running'`, commit, close. Children never write the parent row.
+  - The parent is written only by `tick` (heartbeat at `orchestration.py:772-773`, under `service._lock`), by `roll_up` and by API `cancel`.
+  - **Don't** add a global writer lock around child saves, and don't hold `service._lock` beyond the claim compare-and-swap.
+- **Correctness gaps (not lock failures):**
+  - `roll_up` sets `parent.state` with no state check (`orchestration.py:632-637`).
+  - The `_drive` failure handler reads, then writes (`:687-696`).
+  - `_supervise` does the same (`service.py` `_supervise` at `:607`, failure branch).
+  - A concurrent cancel can be overwritten in any of these. Fix by writing with `UPDATE … WHERE state='running'`, like `save()` does.
+- **Possible connection-pool exhaustion (not measured).** Each running child holds two pooled connections: the `_invoke` session plus `_persist`. m14 goals do the same (`agent.py:221` plus `persist`). With `CEILING=4`, the default pool (5 + 10 overflow, 30 s wait) could run out. That would show up as a pool timeout, not "database is locked".
+- `service._lock` stays held while the `dispatch` cleanup of stuck goals (`:681`) waits up to 15 s, and while `tick` calls `capacity()` (`:782`). Both delay claiming new goals; neither holds the write lock.
+
+### Diagnostic gap
+`worker.py:71-73` (`Worker … pass failed`) logs no SQLite error code. That is the log line hit when the stuck-goal cleanup UPDATE in `dispatch` fails. Adding the same `sqlite_errorcode`/`sqlite_errorname` fields used at `:89-91` makes the next failure self-identifying.
+
+**Unresolved:** I can't tell from code alone whether the generation fallback path was the historical ≥15 s holder. Confirming it needs a log line that names the holder, or a comparison of fallback events against failure times.
+
+---
+
+Separately: several MCP connectors (Figma, Canva, Slack, Notion, Datadog, and others) need authorising in the reviewing agent.ai connector settings or via `/mcp`. The Cloudinary mediaflows connector failed to connect. None of them were needed for this audit.

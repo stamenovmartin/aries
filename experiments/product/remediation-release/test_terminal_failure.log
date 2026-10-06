@@ -1,0 +1,25 @@
+{"ts": "2026-10-06T11:30:37.621099+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T11:30:37.621390+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_missing_target_stops_after_actual_read_only
+PASS  missing target is never reported successful 0
+PASS  control really repeats planning
+PASS  missing target is never reported successful 1
+PASS  exact missing read stops after one model call
+PASS  typed failure and observation retained
+PASS  reason visible separately from exhausted budget
+--- test_narrow_terminal_condition
+PASS  actual exact missing-read evidence stops repeats
+PASS  keep planner control: wrong-path
+PASS  keep planner control: transient
+PASS  keep planner control: permission
+PASS  keep planner control: no-attempt
+PASS  keep planner control: no-observation
+PASS  keep planner control: wrong-observation
+PASS  keep planner control: unrelated-error
+PASS  keep planner control: compound
+PASS  keep planner control: unsupported
+PASS  ablation restores old loop
+--- test_wrong_target_and_compound_goal_keep_recovery
+PASS  wrong target can be corrected
+PASS  compound goal retains useful remaining work
+ALL PASSED

@@ -1,0 +1,78 @@
+/tmp/aries-learning-rollback-k6qragg0/tests/test_reversal.py:37: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now = datetime.utcnow()
+/tmp/aries-learning-rollback-k6qragg0/tests/test_reversal.py:137: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  AriesNewsItem.first_seen_at >= datetime.utcnow() - timedelta(days=12)))).scalars().all()
+--- test_alternating_evidence_never_reverses
+PASS  a contradiction opens a pending reversal
+PASS  the pending reversal is withdrawn when the contradiction stops
+PASS  the withdrawal records why
+PASS  and the learned value never moved
+--- test_an_explicit_user_weight_is_immutable
+PASS  the user's weight is untouched by a reversal
+PASS  and it is still what applies
+PASS  while ARIES records its own, reversed, opinion
+PASS  clearing the override reveals the reversed learned value
+--- test_contextual_collapse_blames_the_source_not_the_topic
+PASS  a one-sided collapse is classified as contextual
+PASS  and the reason names both sources
+PASS  the topic's weight is left alone
+PASS  and no reversal is opened
+--- test_every_change_carries_its_provenance
+PASS  the change records 'from'
+PASS  the change records 'to'
+PASS  the change records 'direction'
+PASS  the change records 'confidence'
+PASS  the change records 'rationale'
+PASS  the change records 'scope'
+PASS  the change records 'policy_version'
+PASS  the change records 'window_days'
+PASS  the change records 'interval'
+PASS  the change records 'at'
+PASS  the change records 'classification'
+PASS  the policy version is stamped
+PASS  the interval it decided from is kept
+PASS  the reversal records 'established'
+PASS  the reversal records 'proposed'
+PASS  the reversal records 'classification'
+PASS  the reversal records 'confidence'
+PASS  the reversal records 'window_days'
+PASS  the reversal records 'observations'
+PASS  the reversal records 'interval'
+PASS  the reversal records 'evidence'
+PASS  the reversal records 'reason'
+PASS  the reversal records 'status'
+PASS  the reversal records 'confirmations'
+PASS  the reversal records 'policy_version'
+PASS  the reversal records 'first_seen'
+PASS  and it is marked applied
+--- test_fading_interest_decays_rather_than_inverting
+PASS  a steady decline is fatigue, not a reversal
+PASS  and the reason says it is fading rather than gone
+PASS  the weight decays by a small step
+PASS  rather than jumping toward zero
+PASS  and the change is labelled fatigue
+--- test_recovery_after_a_reversal
+PASS  the topic is reversed downward
+PASS  it recovers when the evidence turns back
+PASS  and the turn is recorded as a reversal of the previous change
+--- test_reversal_rate_is_honest_before_any_data
+PASS  with nothing recorded the rate is null
+PASS  and it says why
+--- test_reversing_needs_stricter_evidence_than_continuing
+PASS  with no established position, that evidence moves the weight down
+PASS  against an established preference the same evidence is not enough
+--- test_strong_sustained_contradiction_reverses_after_confirmation
+PASS  a strong, sustained contradiction is classified as such
+PASS  the first pass does not reverse — it opens a pending reversal
+PASS  and changes nothing yet
+PASS  no proposal was made on the first pass
+PASS  the second confirming pass applies it
+PASS  the learned value moves down
+PASS  the proposal is marked as a reversal
+PASS  and says so in words
+--- test_weak_contradiction_changes_nothing
+PASS  a thin contradiction is not a reversal
+PASS  and it says how much evidence reversing would need
+PASS  the learned value is untouched
+PASS  and nothing is pending
+ALL PASSED

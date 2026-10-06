@@ -1,0 +1,68 @@
+{
+  "recorded_at": "2026-10-04T08:06:29.183557+00:00",
+  "n": 12,
+  "passed": 12,
+  "scope": "Deterministic authored answer adjudication; not LLM success",
+  "checks": [
+    {
+      "case": "exact transcript",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "case": "whitespace equivalent",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "case": "explicit negation",
+      "expected": null,
+      "actual": null
+    },
+    {
+      "case": "empty",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "structured correct",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "case": "wrong value",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "changed correct",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "case": "changed false",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "changed numeric",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "frames reversed",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "extra claim",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "case": "arbitrary prose",
+      "expected": null,
+      "actual": null
+    }
+  ]
+}

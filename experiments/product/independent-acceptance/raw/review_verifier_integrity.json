@@ -1,0 +1,580 @@
+{
+  "method": "Enumerated the 58 capabilities from the LIVE aries.workspace.registry.registry object (registry._items) and resolved each Capability.verifier to its defining file and line with inspect. Every verifier was then read in source, and 56 of 58 were EXECUTED directly with synthetic arguments - no database, no services, no models, nothing written under aries/ except this file. Where a verifier needed a collaborator (browser_read, desktop observe, the AT-SPI worker, systemctl show, nmcli, the screenshot re-inspect, path_for) that collaborator was replaced in the module namespace with a stub returning a known state; the file verifiers ran against real temporary files in the session scratchpad. Five read verifiers (file.list, file.search, system.status, system.storage, system.processes) were executed through the LIVE registered closure itself. Classification rule, applied mechanically to the `met` predicate: TRIVIAL = no reachable world state in which a wrong answer yields met=False (constant True, or a predicate that never touches the claim); PLANNER_SUPPLIED = the reference value is a free field of the model's arguments that it could set to the pre-action state; SELF_REPORT = met's only reference is the executor's own returned payload, so a no-op or an unchecked payload field passes; INDEPENDENT = met is a predicate over freshly re-read state compared against the request/goal arguments, a before/after invariant, or a digest of the returned content. Separately noted per capability: whose data becomes the stored evidence, because agent.py:74 records verifier['data'] (not the executor's result) and contracts.answer builds the user-facing answer from it.",
+  "capabilities": [
+    {
+      "name": "file.read",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "registry.py:160 met=fresh['sha256']==result.get('sha256') and fresh['path']==result.get('path')",
+      "evidence_kind": "executed",
+      "detail": "File re-opened with open_nofollow and re-hashed. EXECUTED: real temp file + result claiming sha256='0'*64 -> met=False; true hash -> met=True."
+    },
+    {
+      "name": "file.write",
+      "effect": "create",
+      "verifier_class": "INDEPENDENT",
+      "source": "registry.py:179 met=fresh['size']>0 and fresh['sha256']==hashlib.sha256(args['content'].encode()).hexdigest()",
+      "evidence_kind": "executed",
+      "detail": "Reference is a digest of the requested content (and policy() already bound that content to the user goal), not the executor's claim. EXECUTED: matching content -> met=True; differing content -> met=False."
+    },
+    {
+      "name": "file.list",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "registry.py:251-255 verify_probe(executor,evidence_type) -> {'met':True,'type':evidence_type,'data':fresh}",
+      "evidence_kind": "executed",
+      "detail": "Factory returns a closure whose met is the literal constant True; it does re-run the executor and stores that fresh probe as the evidence data, so the ANSWER is independent, but the met verdict carries no information. EXECUTED on the live registry object: registry.get('file.list').verifier(args, {'FABRICATED': ...}) -> met=True."
+    },
+    {
+      "name": "file.search",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "registry.py:251-255 verify_probe(executor,evidence_type) -> {'met':True,'type':evidence_type,'data':fresh}",
+      "evidence_kind": "executed",
+      "detail": "Factory returns a closure whose met is the literal constant True; it does re-run the executor and stores that fresh probe as the evidence data, so the ANSWER is independent, but the met verdict carries no information. EXECUTED on the live registry object: registry.get('file.search').verifier(args, {'FABRICATED': ...}) -> met=True."
+    },
+    {
+      "name": "file.exists",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "registry.py:189 met=fresh['exists']==result.get('exists')",
+      "evidence_kind": "executed",
+      "detail": "Second stat of the path. EXECUTED: existing file with result {'exists':False} -> met=False."
+    },
+    {
+      "name": "browser.open",
+      "effect": "open",
+      "verifier_class": "SELF_REPORT",
+      "source": "registry.py:280 met=bool(fresh.get('title') and fresh.get('url') and fresh['url']==result.get('url'))",
+      "evidence_kind": "executed",
+      "detail": "The reference is the executor's own post-navigation url; args['url'] is NEVER compared, so any redirect or wrong page verifies. EXECUTED: args url 'https://requested.test/login', fresh+result url 'https://example.com/page' -> met=True. The evidence data is the fresh browser observation, and contracts.evidence_matches (contracts.py:130-136) does compare the goal url at finish time for goals the contract compiler supports."
+    },
+    {
+      "name": "browser.read",
+      "effect": "read",
+      "verifier_class": "SELF_REPORT",
+      "source": "registry.py:280 (verify_browser) met=... and fresh['url']==result.get('url')",
+      "evidence_kind": "executed",
+      "detail": "Re-observes through the Playwright DOM, but only url identity and a non-empty title are checked; the page text and link list this capability returns are never re-checked. Same function object as browser.open, executed above."
+    },
+    {
+      "name": "browser.search",
+      "effect": "open",
+      "verifier_class": "INDEPENDENT",
+      "source": "registry.py:283 met=met and parsed.hostname==(...) and parse_qs(parsed.query).get('q'/'search_query')==[args['query']]",
+      "evidence_kind": "executed",
+      "detail": "The live url's host, path and query parameter are compared with the requested query. EXECUTED: query 'weather' vs fresh '?q=weather' -> met=True; query 'something else' -> met=False."
+    },
+    {
+      "name": "desktop.launch",
+      "effect": "open",
+      "verifier_class": "INDEPENDENT",
+      "source": "registry.py:356-358 verdict,_ = await _watch('open_app',args,ctx['db'],seconds=settle) ; met=verdict.met",
+      "evidence_kind": "source",
+      "detail": "operator/service.py:371-392 _watch polls desktop_mod.observe() and goals.verify('open_app'), whose _verify_open_app (operator/goals.py:232-263) requires a process named for the app AND a visible non-minimised window from the compositor. NOT EXECUTED: this path needs a live db, the operator arm and a GNOME session, which this review may not start."
+    },
+    {
+      "name": "desktop.focus",
+      "effect": "open",
+      "verifier_class": "INDEPENDENT",
+      "source": "registry.py:350-351 delegates to desktop_capabilities.verifier('focus') -> line 109 met=target['focused'] and not target['minimized']",
+      "evidence_kind": "executed",
+      "detail": "Compositor window list re-read (up to 10 polls). EXECUTED with a patched observe(): window focused=False,minimized=True -> met=False; focused=True,minimized=False -> met=True."
+    },
+    {
+      "name": "system.status",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "registry.py:251-255 verify_probe(executor,evidence_type) -> {'met':True,'type':evidence_type,'data':fresh}",
+      "evidence_kind": "executed",
+      "detail": "Factory returns a closure whose met is the literal constant True; it does re-run the executor and stores that fresh probe as the evidence data, so the ANSWER is independent, but the met verdict carries no information. EXECUTED on the live registry object: registry.get('system.status').verifier(args, {'FABRICATED': ...}) -> met=True."
+    },
+    {
+      "name": "system.storage",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "registry.py:251-255 verify_probe(executor,evidence_type) -> {'met':True,'type':evidence_type,'data':fresh}",
+      "evidence_kind": "executed",
+      "detail": "Factory returns a closure whose met is the literal constant True; it does re-run the executor and stores that fresh probe as the evidence data, so the ANSWER is independent, but the met verdict carries no information. EXECUTED on the live registry object: registry.get('system.storage').verifier(args, {'FABRICATED': ...}) -> met=True."
+    },
+    {
+      "name": "system.processes",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "registry.py:251-255 verify_probe(executor,evidence_type) -> {'met':True,'type':evidence_type,'data':fresh}",
+      "evidence_kind": "executed",
+      "detail": "Factory returns a closure whose met is the literal constant True; it does re-run the executor and stores that fresh probe as the evidence data, so the ANSWER is independent, but the met verdict carries no information. EXECUTED on the live registry object: registry.get('system.processes').verifier(args, {'FABRICATED': ...}) -> met=True."
+    },
+    {
+      "name": "task.inspect",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "registry.py:251-255 verify_probe(executor,evidence_type) -> {'met':True,'type':evidence_type,'data':fresh}",
+      "evidence_kind": "executed",
+      "detail": "Same constant-True closure; EXECUTED via verify_probe(fake_executor,'task_state') with a fabricated result -> met=True (the registered closure needs a db, so the identical code object was driven with a synthetic executor)."
+    },
+    {
+      "name": "notification.send",
+      "effect": "notify",
+      "verifier_class": "INDEPENDENT",
+      "source": "registry.py:387 met=bool(row and row.title==args['title'] and row.body==args['body'] and row.key=='m14:'+ctx['task_id'])",
+      "evidence_kind": "executed",
+      "detail": "The persisted AriesNotification row is re-fetched with populate_existing=True and compared with the request. EXECUTED with a fake db: matching row -> met=True; row.title differing -> met=False. Its own data says 'not proof the user saw it'."
+    },
+    {
+      "name": "desktop.windows",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "desktop_capabilities.py:59 return {'met':True,'type':'desktop_state','data':await observe(args,ctx)}",
+      "evidence_kind": "executed",
+      "detail": "Constant True. Evidence is a fresh compositor read, so the answer is independent; the verdict is not. EXECUTED with result {'windows':'FABRICATED'} -> met=True."
+    },
+    {
+      "name": "desktop.observe",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "desktop_capabilities.py:59 return {'met':True,...}",
+      "evidence_kind": "executed",
+      "detail": "Same function as desktop.windows; EXECUTED -> met=True with a fabricated result."
+    },
+    {
+      "name": "desktop.close",
+      "effect": "desktop",
+      "verifier_class": "INDEPENDENT",
+      "source": "desktop_capabilities.py:101-126 verifier(action): re-reads observe() up to 10x and tests a per-action predicate on the live window row | line 105 met = not rows if action=='close' else False",
+      "evidence_kind": "executed",
+      "detail": "Window geometry/state re-read from GNOME/Mutter, which the executor does not mediate; the code comments say trusting accepted=true would verify that we asked. EXECUTED: window still listed -> met=False."
+    },
+    {
+      "name": "desktop.move",
+      "effect": "desktop",
+      "verifier_class": "INDEPENDENT",
+      "source": "desktop_capabilities.py:101-126 verifier(action): re-reads observe() up to 10x and tests a per-action predicate on the live window row | line 110-112 met=all(target['geometry'][k]==args[k] for k in ('x','y'))",
+      "evidence_kind": "executed",
+      "detail": "Window geometry/state re-read from GNOME/Mutter, which the executor does not mediate; the code comments say trusting accepted=true would verify that we asked. EXECUTED: geometry (0,0) vs requested (100,100) -> met=False; vs requested (0,0) -> met=True."
+    },
+    {
+      "name": "desktop.resize",
+      "effect": "desktop",
+      "verifier_class": "INDEPENDENT",
+      "source": "desktop_capabilities.py:101-126 verifier(action): re-reads observe() up to 10x and tests a per-action predicate on the live window row | line 110-112 met=all(target['geometry'][k]==args[k] for k in ('width','height'))",
+      "evidence_kind": "executed",
+      "detail": "Window geometry/state re-read from GNOME/Mutter, which the executor does not mediate; the code comments say trusting accepted=true would verify that we asked. EXECUTED: 800x600 observed vs 800x600 requested -> met=True; vs 100x100 -> met=False."
+    },
+    {
+      "name": "desktop.maximize",
+      "effect": "desktop",
+      "verifier_class": "INDEPENDENT",
+      "source": "desktop_capabilities.py:101-126 verifier(action): re-reads observe() up to 10x and tests a per-action predicate on the live window row | line 108 met=target.get('maximized') is True",
+      "evidence_kind": "executed",
+      "detail": "Window geometry/state re-read from GNOME/Mutter, which the executor does not mediate; the code comments say trusting accepted=true would verify that we asked. EXECUTED: maximized True -> met=True, False -> met=False."
+    },
+    {
+      "name": "desktop.unmaximize",
+      "effect": "desktop",
+      "verifier_class": "INDEPENDENT",
+      "source": "desktop_capabilities.py:101-126 verifier(action): re-reads observe() up to 10x and tests a per-action predicate on the live window row | line 109 met=target.get('maximized') is False",
+      "evidence_kind": "executed",
+      "detail": "Window geometry/state re-read from GNOME/Mutter, which the executor does not mediate; the code comments say trusting accepted=true would verify that we asked. EXECUTED: maximized False -> met=True, True -> met=False."
+    },
+    {
+      "name": "desktop.minimize",
+      "effect": "desktop",
+      "verifier_class": "INDEPENDENT",
+      "source": "desktop_capabilities.py:101-126 verifier(action): re-reads observe() up to 10x and tests a per-action predicate on the live window row | line 107 met=target['minimized']",
+      "evidence_kind": "executed",
+      "detail": "Window geometry/state re-read from GNOME/Mutter, which the executor does not mediate; the code comments say trusting accepted=true would verify that we asked. EXECUTED: minimized True -> met=True, False -> met=False."
+    },
+    {
+      "name": "desktop.tile",
+      "effect": "desktop",
+      "verifier_class": "INDEPENDENT",
+      "source": "desktop_capabilities.py:101-126 verifier(action): re-reads observe() up to 10x and tests a per-action predicate on the live window row | line 122-125 met=any(all(target['geometry'][k]==r[k] for k in ('x','y','width','height')) for r in wanted)",
+      "evidence_kind": "executed",
+      "detail": "Window geometry/state re-read from GNOME/Mutter, which the executor does not mediate; the code comments say trusting accepted=true would verify that we asked. Reference rectangles come from the GNOME shell's own reply ('expected') and from desktop.tile_expectation, not from the planner. EXECUTED: matching rect -> met=True; differing rect -> met=False; shell reply with no 'expected' rect -> met=False."
+    },
+    {
+      "name": "browser.tabs",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "browser_capabilities.py:31 return {'met':True,'type':'browser_inventory','data':await tabs(args,ctx)}",
+      "evidence_kind": "executed",
+      "detail": "Constant True; data is a fresh task-scoped inventory. EXECUTED with result {'tabs':'whatever'} -> met=True."
+    },
+    {
+      "name": "browser.observe",
+      "effect": "read",
+      "verifier_class": "SELF_REPORT",
+      "source": "browser_capabilities.py:40-44 verify_state: expected=args.get('expected_url',args.get('url',result.get('url'))); met=bool(fresh['title']) and fresh['url']==expected",
+      "evidence_kind": "executed",
+      "detail": "With no url argument the reference falls through to result['url'], the executor's own observation; the returned page text/links/elements are never re-checked. EXECUTED: args without url, result url == fresh url -> met=True."
+    },
+    {
+      "name": "browser.elements",
+      "effect": "read",
+      "verifier_class": "SELF_REPORT",
+      "source": "browser_capabilities.py:46-50 verify_elements: met=fresh['url']==result['url']; data={**result,'observed_page':fresh}",
+      "evidence_kind": "executed",
+      "detail": "met checks only that the url still matches; the element list itself is copied out of the executor's return value into the evidence. EXECUTED: result with a ghost element [{'id':'ghost','text':'Buy now (never existed)'}] and a fresh read that contains a different element -> met=True AND verdict['data']['elements'] == the ghost list. The code comment gives the reason (re-enumerating would invalidate the handles), which explains but does not remove the dependence."
+    },
+    {
+      "name": "browser.navigate",
+      "effect": "open",
+      "verifier_class": "INDEPENDENT",
+      "source": "browser_capabilities.py:43 expected=args.get('expected_url',args.get('url',...)) -> args['url'] for Navigate",
+      "evidence_kind": "executed",
+      "detail": "The reference is the requested url, which the planner cannot satisfy without the page actually being there. EXECUTED: requested 'https://a.test/' reached -> met=True; requested 'https://b.test/' with fresh 'https://a.test/' -> met=False."
+    },
+    {
+      "name": "browser.click",
+      "effect": "open",
+      "verifier_class": "PLANNER_SUPPLIED",
+      "source": "browser_capabilities.py:12 Click.expected_url (planner-supplied) + line 43 expected=args.get('expected_url',...) ; met=bool(fresh['title']) and fresh['url']==expected",
+      "evidence_kind": "executed",
+      "detail": "expected_url is a free field of the model's arguments (agent_planner.py:24 only runs registry.validate, i.e. pydantic). If the planner supplies the url the page is already on, a click that did nothing verifies. EXECUTED: expected_url == current url, result unchanged -> met=True; expected_url different -> met=False. Nothing else in the registry constrains the field; capabilities.py:469 sets expected_url=state['url'] but that is the older browser_fill staleness guard, not this verifier."
+    },
+    {
+      "name": "browser.type",
+      "effect": "open",
+      "verifier_class": "INDEPENDENT",
+      "source": "browser_capabilities.py:52-56 met=fresh['observed_value']==args['value'] via browser.element_value(session,element_id)",
+      "evidence_kind": "executed",
+      "detail": "The control's value is re-read and compared with the requested text. EXECUTED: matching value -> met=True; differing -> met=False."
+    },
+    {
+      "name": "browser.scroll",
+      "effect": "open",
+      "verifier_class": "SELF_REPORT",
+      "source": "browser_capabilities.py:58-61 met=fresh['url']==result['url'] and fresh['scroll']==result['scroll']",
+      "evidence_kind": "executed",
+      "detail": "The reference is the executor's own post-action scroll offset, so a scroll that moved nothing passes. args['pixels'] is never used. EXECUTED: args pixels=800, result scroll=0, fresh scroll=0 -> met=True."
+    },
+    {
+      "name": "browser.back",
+      "effect": "open",
+      "verifier_class": "SELF_REPORT",
+      "source": "browser_capabilities.py:43 expected falls through to result.get('url') (Session schema has no url)",
+      "evidence_kind": "executed",
+      "detail": "No before/after url comparison exists, so a back that did not move in history verifies against the unchanged url. EXECUTED: args {'session':...}, result url == fresh url -> met=True."
+    },
+    {
+      "name": "browser.forward",
+      "effect": "open",
+      "verifier_class": "SELF_REPORT",
+      "source": "browser_capabilities.py:43 expected falls through to result.get('url')",
+      "evidence_kind": "executed",
+      "detail": "Same function object as browser.back, executed above; no history position is read."
+    },
+    {
+      "name": "browser.wait",
+      "effect": "read",
+      "verifier_class": "SELF_REPORT",
+      "source": "browser_capabilities.py:43 expected falls through to result.get('url')",
+      "evidence_kind": "executed",
+      "detail": "Same verify_state fall-through; args['milliseconds'] is not checked against anything. Executed above."
+    },
+    {
+      "name": "browser.download",
+      "effect": "file_mutation",
+      "verifier_class": "INDEPENDENT",
+      "source": "browser_capabilities.py:101-104 met=fresh['sha256']==result['sha256'] and fresh['size']==result['size'] (fresh=file_capabilities.metadata of args['path'])",
+      "evidence_kind": "executed",
+      "detail": "The file is re-opened from disk and re-hashed; the digest is of the bytes the pinned GET actually returned. EXECUTED: disk hash matching -> met=True; differing -> met=False."
+    },
+    {
+      "name": "file.metadata",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "file_capabilities.py:44 met=fresh['sha256']==result['sha256']",
+      "evidence_kind": "executed",
+      "detail": "Re-stat + re-hash. EXECUTED on a real temp file: true hash -> met=True; '0'*64 -> met=False."
+    },
+    {
+      "name": "file.copy",
+      "effect": "file_mutation",
+      "verifier_class": "INDEPENDENT",
+      "source": "file_capabilities.py:66 met=fresh['sha256']==args['expected_sha256'] (metadata of args['destination'])",
+      "evidence_kind": "executed",
+      "detail": "The reference is an argument, but not a free one: copy_bytes refuses unless the SOURCE hashes to the same value, so passing requires bytes with that digest to really exist at the destination. EXECUTED: destination hash matching -> met=True; '1'*64 -> met=False."
+    },
+    {
+      "name": "file.semantic_search",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "file_capabilities.py:105-113 every returned candidate is re-stat'ed; met=False with reason 'Candidate changed after extraction' if size or mtime differs, else met=True",
+      "evidence_kind": "executed",
+      "detail": "Weak but not vacuous: a fabricated or stale path fails. Relevance/ranking is explicitly not verified (the executor itself labels the method 'not calibrated semantic confidence'). EXECUTED: unchanged candidate -> met=True; size tampered to 99 -> met=False."
+    },
+    {
+      "name": "file.edit",
+      "effect": "file_mutation",
+      "verifier_class": "INDEPENDENT",
+      "source": "file_capabilities.py:145 met=fresh['sha256']==result['expected_result_sha256']",
+      "evidence_kind": "executed",
+      "detail": "Disk is re-read and re-hashed; the reference is a digest predicted from the approved args (expected_sha256 + old_text/new_text), so a write that did not land fails. EXECUTED: predicted hash wrong -> met=False; correct -> met=True."
+    },
+    {
+      "name": "file.move",
+      "effect": "file_mutation",
+      "verifier_class": "INDEPENDENT",
+      "source": "file_capabilities.py:172-174 met=not source.exists() and fresh['sha256']==args['expected_sha256']",
+      "evidence_kind": "executed",
+      "detail": "Both halves re-read from disk. EXECUTED: source still present -> met=False; after a real move -> met=True."
+    },
+    {
+      "name": "file.rename",
+      "effect": "file_mutation",
+      "verifier_class": "INDEPENDENT",
+      "source": "file_capabilities.py:172-174 (same verify_move)",
+      "evidence_kind": "executed",
+      "detail": "Same function object as file.move, executed above."
+    },
+    {
+      "name": "network.status",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "network_capabilities.py:703-706 met=fresh['internet_reachable']==result['internet_reachable'] and fresh['link_up']==result['link_up']",
+      "evidence_kind": "executed",
+      "detail": "A second independent probe of exactly the claim being made. EXECUTED: agreeing -> met=True; result claiming internet_reachable=False against a reachable probe -> met=False."
+    },
+    {
+      "name": "network.wifi_list",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "network_capabilities.py:719-722 met = {saved ssids reported} == {saved ssids on rescan}",
+      "evidence_kind": "executed",
+      "detail": "Only the saved-profile subset is compared; the code says why (visible SSIDs move between scans). EXECUTED: same saved set -> met=True; a reported saved ssid absent -> met=False."
+    },
+    {
+      "name": "network.wifi_connect",
+      "effect": "network",
+      "verifier_class": "INDEPENDENT",
+      "source": "network_capabilities.py:730-737 state,_=connection_state(result['profile']['uuid']); met=bool(state) and state['state']=='activated'",
+      "evidence_kind": "executed",
+      "detail": "nmcli's exit code is explicitly not the evidence; the connection is re-read. EXECUTED: state 'activated' -> met=True; 'deactivated' -> met=False."
+    },
+    {
+      "name": "display.brightness",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "network_capabilities.py:745-746 return {'met': True,'type':'display_state','data':fresh}",
+      "evidence_kind": "executed",
+      "detail": "Constant True; data is a fresh backlight read. EXECUTED with result {'brightness':'FABRICATED'} -> met=True."
+    },
+    {
+      "name": "display.set_brightness",
+      "effect": "display",
+      "verifier_class": "INDEPENDENT",
+      "source": "network_capabilities.py:755-756 met=fresh['brightness'] is not None and abs(fresh['brightness']-args['level'])<=5",
+      "evidence_kind": "executed",
+      "detail": "Backlight re-read and compared with the requested level (5-point tolerance). EXECUTED: hardware at 40 with level=90 -> met=False; level=42 -> met=True."
+    },
+    {
+      "name": "screen.capture",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "screen_capabilities.py:698-701 met = (not fresh['content']['uniform'] and fresh['sha256']==result['sha256'] and (w,h,bytes) match)",
+      "evidence_kind": "executed",
+      "detail": "The stored PNG is re-read and re-decoded, and a uniform (blanked) frame is a failure, not a result. EXECUTED: matching PNG -> met=True; hash differing -> met=False; uniform frame -> met=False."
+    },
+    {
+      "name": "screen.screenshot",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "screen_capabilities.py:698-701 met = (not fresh['content']['uniform'] and fresh['sha256']==result['sha256'] and (w,h,bytes) match)",
+      "evidence_kind": "executed",
+      "detail": "The stored PNG is re-read and re-decoded, and a uniform (blanked) frame is a failure, not a result. EXECUTED: matching PNG -> met=True; hash differing -> met=False; uniform frame -> met=False."
+    },
+    {
+      "name": "screen.read",
+      "effect": "read",
+      "verifier_class": "SELF_REPORT",
+      "source": "screen_capabilities.py:710-712 met=bool(not fresh['content']['uniform'] and result['characters'] and result['mean_confidence']>0)",
+      "evidence_kind": "executed",
+      "detail": "The PNG is re-decoded independently, but the recovered TEXT - the capability's actual claim - is tested only through the executor's own character count and mean confidence. _titles_found() cross-checks the text against observed window titles and the result is placed in data but excluded from met. EXECUTED: result text 'TOTALLY FABRICATED OCR' with characters=21, mean_confidence=77 -> met=True; mean_confidence=0 -> met=False."
+    },
+    {
+      "name": "system.services",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "system_capabilities.py:320-324 fresh=await services(args,ctx); met=not fresh['unavailable']",
+      "evidence_kind": "executed",
+      "detail": "Not literally constant, but information-free about the claim: the reported unit list is never compared with anything, so met only says the second systemctl query was answerable. EXECUTED: result {'units':'FABRICATED'} with a healthy re-probe -> met=True; re-probe reporting unavailable -> met=False. Borderline between TRIVIAL and INDEPENDENT; bucketed TRIVIAL because no wrong unit list can make it fail."
+    },
+    {
+      "name": "system.service",
+      "effect": "read",
+      "verifier_class": "SELF_REPORT",
+      "source": "system_capabilities.py:354-356 met=fresh['unit']==result['unit'] and fresh['load_state']!='not-found'",
+      "evidence_kind": "executed",
+      "detail": "Only the unit's identity is re-checked; active_state/sub_state - the answer the user asked for - is never compared. EXECUTED: fresh active_state='inactive' against result active_state='active' -> met=True. The fresh row does become the evidence data."
+    },
+    {
+      "name": "system.service_control",
+      "effect": "service",
+      "verifier_class": "INDEPENDENT",
+      "source": "system_capabilities.py:406-424 settled(): changed=bool(after['invocation']) and after['invocation']!=before['invocation']; verify_control re-reads systemctl show until settled or the window closes",
+      "evidence_kind": "executed",
+      "detail": "The strongest verifier in the registry: a restart that kept its InvocationID is reported unmet with a reason. EXECUTED: settled('restart',AAA,AAA) -> (False,'the InvocationID is unchanged: nothing actually restarted'); settled('restart',AAA,BBB) -> (True,...); settled('start',inactive/AAA,active/AAA) -> (False,'it reports active but the InvocationID never changed'); verify_control on a no-op restart -> met=False. Caveat: 'before' is the executor's own pre-read (control() line 393), so the before/after invariant trusts that recorded baseline."
+    },
+    {
+      "name": "system.disk",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "system_capabilities.py:586-591 met = all reported mountpoints present in a fresh statvfs AND os.path.isdir() for every reported largest directory",
+      "evidence_kind": "executed",
+      "detail": "Fresh statvfs + existence checks; the code states the usage figures move between reads and are not compared. EXECUTED: fabricated used_pct 99.9 -> met=True (usage not checked); a reported directory that does not exist -> met=False."
+    },
+    {
+      "name": "system.packages",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "system_capabilities.py:653-657 met=fresh['installed']==result['installed'] and sorted(source,name,version,installed) tuples match",
+      "evidence_kind": "executed",
+      "detail": "A full second dpkg/snap query compared field by field. EXECUTED: identical entries -> met=True; version '2' vs '1' -> met=False."
+    },
+    {
+      "name": "input.clipboard_read",
+      "effect": "read",
+      "verifier_class": "INDEPENDENT",
+      "source": "input_capabilities.py:555-560 met=fresh['sha256']==result.get('sha256'), and data records changed_since_read",
+      "evidence_kind": "executed",
+      "detail": "A second GNOME selection session re-reads the slot and compares digests. EXECUTED: same hash -> met=True; differing -> met=False."
+    },
+    {
+      "name": "input.clipboard_write",
+      "effect": "input",
+      "verifier_class": "INDEPENDENT",
+      "source": "input_capabilities.py:586-596 loop: fresh=clipboard_read(); met = fresh['sha256']==result['sha256'] (digest of the bytes written)",
+      "evidence_kind": "executed",
+      "detail": "Read back through a fresh worker process, i.e. what the next application to paste will be handed. EXECUTED: read-back hash matching -> met=True; differing after 5 attempts -> met=False."
+    },
+    {
+      "name": "input.editable_targets",
+      "effect": "read",
+      "verifier_class": "TRIVIAL",
+      "source": "input_capabilities.py:603-605 return {'met': True,'type':'editable_targets','data':await editable_targets(args,ctx)}",
+      "evidence_kind": "executed",
+      "detail": "Constant True; the comment says the evidence is a second independent observation rather than a claim that nothing moved. EXECUTED with result {'targets':'FABRICATED'} -> met=True."
+    },
+    {
+      "name": "input.type_text",
+      "effect": "input",
+      "verifier_class": "INDEPENDENT",
+      "source": "input_capabilities.py:638-648 fresh=await worker('read_node',identity); met=fresh['sha256']==result['expected_sha256'] (up to 6 polls)",
+      "evidence_kind": "executed",
+      "detail": "The control is re-read over a SECOND AT-SPI connection in a separate /usr/bin/python3 -I subprocess - a path the executor does not hold open. EXECUTED: control hash differing from expected -> met=False; matching -> met=True."
+    }
+  ],
+  "summary": {
+    "INDEPENDENT": 35,
+    "SELF_REPORT": 10,
+    "TRIVIAL": 12,
+    "PLANNER_SUPPLIED": 1,
+    "UNDETERMINED": 0
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "high",
+      "claim": "12 of 58 capabilities have a met verdict that cannot fail on a wrong answer.",
+      "detail": "6 come from the verify_probe factory (file.list, file.search, system.status, system.storage, system.processes, task.inspect, registry.py:251-255), 3 more are hand-written met:True (desktop.windows, desktop.observe at desktop_capabilities.py:59; browser.tabs at browser_capabilities.py:31; display.brightness at network_capabilities.py:745; input.editable_targets at input_capabilities.py:603 - 5 in total), and system.services (system_capabilities.py:324) has a predicate that never touches the reported units. Executed proof for all of them. Mitigation that matters: every one of these re-runs the observation and stores the FRESH probe as the evidence data, so a fabricating executor cannot inject a false answer through them - what is missing is the verdict, not the independence of the answer.",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "F2",
+      "severity": "high",
+      "claim": "browser.click is the one capability whose verification reference is a value the planner picks freely.",
+      "detail": "Click.expected_url (browser_capabilities.py:12) is model-supplied and validated only by pydantic (agent_planner.py:24). verify_state (line 43) uses it as the expected url. EXECUTED: expected_url == the url the page is already on, result unchanged -> met=True. A click that did nothing therefore verifies. The planner also has no reason to be right: it must predict the post-click url before clicking, so a non-navigating button forces it to supply the current url, which is exactly the tautological case.",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "F3",
+      "severity": "high",
+      "claim": "browser.elements puts the executor's own element list into the verified evidence record.",
+      "detail": "verify_elements (browser_capabilities.py:46-50) returns data={**result,'observed_page':fresh}; met only compares urls. EXECUTED: a result containing a ghost element verified met=True and the verdict's data['elements'] was byte-identical to the fabricated list. This is the one place where the trivial verifiers' saving grace (fresh data) does not apply. The code's reason - re-enumerating would invalidate the element handles the next action needs - is real, so the fix is a second channel (e.g. re-assert each handle's text at use time), not a second enumeration.",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "F4",
+      "severity": "medium",
+      "claim": "Six browser action verifiers compare against the executor's own post-action observation, so a no-op action verifies.",
+      "detail": "browser.back, browser.forward, browser.wait and browser.observe all fall through verify_state's expected chain to result['url'] (browser_capabilities.py:43); browser.scroll compares result['scroll'] with the fresh scroll offset and never looks at args['pixels'] (line 60). EXECUTED: args pixels=800 with result scroll=0 and fresh scroll=0 -> met=True. None of these verifiers reads a before-state, so 'went back in history' and 'scrolled 800px' are not propositions the system can currently falsify.",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "F5",
+      "severity": "medium",
+      "claim": "browser.open never compares the url that was requested.",
+      "detail": "verify_browser (registry.py:280) compares the fresh url with result['url'], the executor's own post-navigation url. EXECUTED: args url 'https://requested.test/login' with both result and fresh url 'https://example.com/page' -> met=True. browser.search, by contrast, does check args['query'] against the live query string, which is why it classifies INDEPENDENT. At finish time contracts.evidence_matches (contracts.py:130-136) does compare the goal's url, so the gap is in the per-step verdict, for goals the contract compiler supports.",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "F6",
+      "severity": "medium",
+      "claim": "screen.read verifies the picture, not the text.",
+      "detail": "screen_capabilities.py:710-712: met requires a non-uniform re-decoded PNG plus result['characters'] and result['mean_confidence']>0, both reported by the executor. _titles_found() computes a real cross-check of the recovered text against observed window titles and then stores it in data without letting it affect met. EXECUTED: text 'TOTALLY FABRICATED OCR' with characters=21 and mean_confidence=77 -> met=True. Making the existing title cross-check load-bearing would move this capability to INDEPENDENT with no new machinery.",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "F7",
+      "severity": "low",
+      "claim": "system.service answers about a unit's state and verifies only the unit's name.",
+      "detail": "system_capabilities.py:354-356: met=fresh['unit']==result['unit'] and fresh['load_state']!='not-found'. EXECUTED: a fresh row saying active_state='inactive' verified a result claiming 'active'. The fresh row is what reaches the evidence, so the final answer is still the re-read one; the verdict just does not notice the contradiction.",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "F8",
+      "severity": "low",
+      "claim": "The independence of a read verifier is usually a second call of the SAME function, not a second mechanism.",
+      "detail": "verify_probe, verify_services, verify_packages, verify_status, verify_wifi, verify_metadata and the desktop/browser read verifiers all re-invoke the executor's own code path. That catches staleness, a lying model and a transient, and it cannot catch a systematic bug in the probe itself. The genuinely two-mechanism verifiers are system.service_control (InvocationID before/after), input.type_text and input.clipboard_write (a second AT-SPI/selection session in a separate subprocess), desktop.* (compositor geometry vs the shell's accepted reply) and the file/digest family. The thesis claim should be stated at that resolution.",
+      "evidence_kind": "source"
+    },
+    {
+      "id": "F9",
+      "severity": "low",
+      "claim": "system.service_control's before/after invariant rests on a baseline the executor recorded.",
+      "detail": "control() (system_capabilities.py:393) reads `before` itself and verify_control (line 426) takes it from result['before']. The verifier re-reads only the after-state. The executor here is trusted Python rather than model output, so this is a structural note, not a live hole - but it is the one place where the strongest verifier in the registry is not a closed loop.",
+      "evidence_kind": "source"
+    },
+    {
+      "id": "F10",
+      "severity": "info",
+      "claim": "met=False is consequential, which is why the trivial verdicts matter.",
+      "detail": "agent.py:74 records evidence with verified=bool(fresh['met']); completion() (agent.py:53-58) refuses to finish without verified evidence ids and re-runs the verifier at finish time; capabilities.py maps met is not True to state 'unconfirmed'. So a constant-True verdict is not inert - it is what lets a step and then a task be declared done.",
+      "evidence_kind": "source"
+    }
+  ],
+  "refuted_hypotheses": [
+    {
+      "hypothesis": "verify_probe returns met:True unconditionally for about 7 capabilities (previous reviewer, claim 1)",
+      "verdict": "CONFIRMED with a corrected count and an important qualification",
+      "detail": "The constant is real: registry.py:254 returns {'met':True,...}, executed on the live registry for file.list, file.search, system.status, system.storage and system.processes plus the identical closure for task.inspect - 6 capabilities, not 7. It does NOT 'verify nothing': line 253 re-runs the bounded probe and line 254 stores that fresh observation as the evidence data, which agent.py:74 and contracts.answer then use to build the user-facing answer. So the executor's claimed result never becomes the answer; what is absent is a verdict that can fail. Counting all information-free verdicts in the registry, not just this factory, the number is 12."
+    },
+    {
+      "hypothesis": "browser.click is verified against a planner-supplied expected_url, so a click that did nothing still verifies (claim 2)",
+      "verdict": "CONFIRMED, executed",
+      "detail": "browser_capabilities.py:12 + 43. EXECUTED: met=True when expected_url equals the unchanged current url; met=False when it differs. One related sub-claim is refuted: capabilities.py:469's `args['expected_url']=state['url']` is NOT this path - it belongs to the older browser_fill capability, where it is a review-staleness guard, not a verification reference."
+    },
+    {
+      "hypothesis": "verify_elements records the executor's own element list as verified evidence (claim 3)",
+      "verdict": "CONFIRMED on the evidence, PARTIALLY REFUTED on the verdict",
+      "detail": "data={**result,'observed_page':fresh} - executed proof that a fabricated element list is carried through verbatim. But met is not unconditional: it is fresh['url']==result['url'], a real (if weak) re-read, so the verifier does fail when the page moved under the enumeration. The accurate statement is 'the element evidence is self-reported', not 'the verifier is a no-op'."
+    },
+    {
+      "hypothesis": "The desktop window capabilities trust the GNOME shell's accepted=true reply",
+      "verdict": "REFUTED, executed",
+      "detail": "desktop_capabilities.py:101-126 re-reads the compositor's window list up to 10 times and tests geometry/maximized/minimized/focused per action; the tile branch compares two exact rectangles and accepts no tolerance. EXECUTED: every action returned met=False for a window that did not reach the requested state, including a tile whose shell reply carried no rectangle."
+    },
+    {
+      "hypothesis": "All file mutations are verified only against hashes the planner supplied",
+      "verdict": "REFUTED, executed",
+      "detail": "file.copy and file.move do compare against args['expected_sha256'], but that argument is not free: copy_bytes/move_bytes refuse unless the source itself hashes to it, so passing requires bytes with that digest to really exist at the destination. EXECUTED: wrong destination hash -> met=False; file.move with the source still present -> met=False; file.edit against a hash the disk does not have -> met=False; file.write against content that differs -> met=False."
+    },
+    {
+      "hypothesis": "'Every capability has an independent verifier' as written in the project's claim",
+      "verdict": "REFUTED, executed",
+      "detail": "35 of 58 hold up as INDEPENDENT, 10 are SELF_REPORT, 12 are TRIVIAL and 1 is PLANNER_SUPPLIED. The defensible version of the claim is narrower and still strong: every capability re-reads system state after acting, and for all but browser.elements the stored evidence is that fresh re-read rather than the executor's claim - but 23 of 58 verdicts cannot fail on a wrong answer, and the mutating ones among them (browser.click, browser.back/forward/scroll) are where it costs most."
+    }
+  ]
+}

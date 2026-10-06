@@ -1,0 +1,33 @@
+{
+  "probe": "what can actually be exercised on this machine, checked rather than assumed",
+  "when": "2026-10-06",
+  "method": "read-only probes; nothing started, nothing stopped, no capture opened",
+  "results": [
+    {"check": "real audio input exists",
+     "status": "AVAILABLE",
+     "evidence": "pw-dump reports 2 nodes with media.class=Audio/Source: alsa_input.usb-046d_081d_EE25F9C0-00.mono-fallback (HD Webcam C510 Mono, default) and alsa_input.pci-0000_00_1f.3.analog-stereo",
+     "note": "This CORRECTS an earlier statement of mine. In a previous session the owner reported having no microphone and capture was coming from a sink monitor. A real Audio/Source is present now."},
+    {"check": "capture target is a source, not a sink monitor",
+     "status": "CORRECT",
+     "evidence": "the live pw-record process targets alsa_input.usb-046d_081d_EE25F9C0-00.mono-fallback, which is an Audio/Source node"},
+    {"check": "aries-core / aries-voice / aries-local-model",
+     "status": "ALL ACTIVE",
+     "evidence": "systemctl --user is-active returns active for all three"},
+    {"check": "HTTP API reachable",
+     "status": "AVAILABLE",
+     "evidence": "GET /api/aries/analytics?days=1 returned HTTP 200 in 0.62 s"},
+    {"check": "desktop session locked or blanked",
+     "status": "UNLOCKED",
+     "evidence": "org.gnome.ScreenSaver.GetActive returned false"},
+    {"check": "idle blanking configured",
+     "status": "HAZARD PRESENT",
+     "evidence": "org.gnome.desktop.session idle-delay = 60",
+     "note": "This is the exact confound that invalidated runs B1b/B2b: screenshot and input-synthesis capabilities refuse on a blanked session, so 11 goals moved with session state rather than with the manipulation. Any desktop measurement must run under `gnome-session-inhibit --inhibit idle`."},
+    {"check": "microphone currently held by another process",
+     "status": "OCCUPIED",
+     "evidence": "pw-record pid 97906 is capturing from the webcam source on behalf of aries-voice",
+     "consequence": "A live acoustic test cannot simply be started; it would compete for the device. It needs a measurement window agreed in COORDINATION.md, not a second capture."}
+  ],
+  "conclusion": "Desktop and voice acceptance are POSSIBLE on this machine, which I previously told Codex they might not be. They are not BLOCKED by hardware. They are blocked only by scheduling: the microphone is in use by the running voice service, and idle-delay=60 means any desktop run needs the inhibitor.",
+  "not_claimed": "No voice or desktop acceptance check has been EXECUTED yet. Availability of the hardware is not evidence that the end-to-end path works."
+}

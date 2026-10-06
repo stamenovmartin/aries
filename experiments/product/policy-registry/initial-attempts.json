@@ -1,0 +1,7 @@
+{
+  "attempts": [
+    {"command": "python -B -m unittest tests.test_policy_artifacts -v", "exit_code": 127, "failure": "python executable not found"},
+    {"command": "python3 -B -m unittest tests.test_policy_artifacts -v", "exit_code": 1, "failure": "System interpreter lacks sqlalchemy; test import failed"}
+  ],
+  "correction": "Use repository .venv/bin/python and isolated tests._bootstrap before importing ARIES. No package installation or runtime changes."
+}

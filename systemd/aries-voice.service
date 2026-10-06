@@ -1,0 +1,48 @@
+[Unit]
+Description=ARIES voice — always listening, acts only when addressed
+Documentation=file://%h/aries/docs/RUNTIME.md
+PartOf=aries.target
+After=aries-core.service
+Wants=aries-core.service
+
+# PipeWire owns the microphone. Without it there is no capture device at all, so
+# starting before it means pw-record exits immediately and the service spins.
+After=pipewire.service
+Wants=pipewire.service
+
+# Same reasoning as aries-core: five failures in five minutes is a real fault,
+# and a real fault should end as a stopped service, not a machine holding the
+# microphone open in a restart loop.
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=exec
+WorkingDirectory=%h/aries
+
+Environment=PYTHONPATH=%h/aries/vendor/agentic-core:%h/aries/vendor:%h/aries
+Environment=PYTHONUNBUFFERED=1
+EnvironmentFile=-%h/aries/.env
+
+# Through the wrapper, not python directly. CTranslate2 links CUDA 12 while this
+# driver is CUDA 13, so cuBLAS and cuDNN come from wheels inside .venv, and the
+# loader reads LD_LIBRARY_PATH once before the process starts. Setting it from
+# inside Python is too late and fails with "libcublas.so.12 is not found".
+# --languages mk,en: detection still runs, but only gets to choose between the
+# two languages this person actually speaks. Left to all ninety-nine it picked
+# Italian, Romanian and Urdu on consecutive Macedonian commands; forcing one
+# language instead would mangle the other.
+ExecStart=%h/aries/scripts/aries-voice serve --silence-ms 400 --languages mk,en
+
+# The model is loaded once and held: large-v3 costs about six seconds to load and
+# roughly 3 GB of VRAM. Reloading it per utterance would make every command feel
+# broken, so the cost is paid at start and never again.
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=120
+TimeoutStopSec=15
+
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=aries.target

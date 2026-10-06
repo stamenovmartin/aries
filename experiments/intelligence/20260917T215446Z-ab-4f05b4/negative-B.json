@@ -1,0 +1,243 @@
+{
+  "id": "8be81d46db9c4c91b19dbaf261bc457f",
+  "request": "Read /this/path/does/not/exist/aries.txt",
+  "state": "failed",
+  "updated_at": "2026-09-17T21:55:05.148937",
+  "created_at": "2026-09-17T21:54:50.854863",
+  "steps": [
+    {
+      "step_id": "ffc16939ecb046c3af1ffc0cc52a046d",
+      "task_id": "8be81d46db9c4c91b19dbaf261bc457f",
+      "step_index": 0,
+      "kind": "capability",
+      "request": "file.read",
+      "planner_decision": {
+        "action": "execute",
+        "capability": "file.read",
+        "arguments": {
+          "path": "/this/path/does/not/exist/aries.txt"
+        },
+        "reason": "",
+        "summary": "",
+        "evidence_refs": []
+      },
+      "capability": "file.read",
+      "args": {
+        "path": "/this/path/does/not/exist/aries.txt"
+      },
+      "started_at": "2026-09-17T21:55:04.043089+00:00",
+      "finished_at": "2026-09-17T21:55:04.052728+00:00",
+      "execution_status": "failed",
+      "verification_status": "pending",
+      "observation": {
+        "capability": "file.read",
+        "status": "failed",
+        "error_type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: 'this'",
+        "retryable": false
+      },
+      "error": {
+        "error_type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: 'this'",
+        "retryable": false
+      },
+      "evidence_refs": [],
+      "model_usage": {
+        "measured": {
+          "input_tokens": 2740,
+          "output_tokens": 41,
+          "total_tokens": 2781
+        },
+        "native": {
+          "prompt_eval_count": 2740,
+          "eval_count": 41,
+          "provider": "ollama",
+          "model": "qwen2.5:7b",
+          "execution_level": "local"
+        },
+        "estimated": {
+          "input_tokens": 2478,
+          "output_tokens": 32,
+          "method": "character-count / 4 heuristic; not tokenizer measurement"
+        }
+      },
+      "state": "failed",
+      "transitions": [
+        {
+          "state": "planned",
+          "timestamp": "2026-09-17T21:55:04.031429+00:00"
+        },
+        {
+          "state": "executing",
+          "timestamp": "2026-09-17T21:55:04.043096+00:00"
+        },
+        {
+          "state": "failed",
+          "timestamp": "2026-09-17T21:55:04.052689+00:00"
+        }
+      ],
+      "observation_ref": "3eafa0f7a6564fc89613219e74c835a4",
+      "seconds": 0.0112,
+      "result": {
+        "state": "failed",
+        "summary": "[Errno 2] No such file or directory: 'this'",
+        "elapsed_seconds": 0.0112
+      }
+    }
+  ],
+  "cards": [
+    {
+      "title": "Goal outcome",
+      "text": "Planner stopped: The file /this/path/does/not/exist/aries.txt does not exist and cannot be read. \u2014 see observed step results",
+      "evidence": "See persisted step observations and failures"
+    }
+  ],
+  "gaps": [
+    "Planner stopped: The file /this/path/does/not/exist/aries.txt does not exist and cannot be read. \u2014 see observed step results"
+  ],
+  "agent_engine": "m14",
+  "collected_at": "2026-09-17T21:55:01.963542",
+  "evidence": [
+    {
+      "evidence_id": "3eafa0f7a6564fc89613219e74c835a4",
+      "type": "execution_error",
+      "source": "file.read",
+      "timestamp": "2026-09-17T21:55:04.052706+00:00",
+      "step_id": "ffc16939ecb046c3af1ffc0cc52a046d",
+      "verified": false,
+      "data": {
+        "error_type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: 'this'",
+        "retryable": false
+      }
+    }
+  ],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "Read /this/path/does/not/exist/aries.txt",
+    "finished": false,
+    "max_steps": 8,
+    "contract": {
+      "supported": true,
+      "requirements": [
+        {
+          "capability": "file.read",
+          "path": "/this/path/does/not/exist/aries.txt"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-09-17T21:55:01.976728+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2740,
+            "output_tokens": 41,
+            "total_tokens": 2781
+          },
+          "native": {
+            "prompt_eval_count": 2740,
+            "eval_count": 41,
+            "provider": "ollama",
+            "model": "qwen2.5:7b",
+            "execution_level": "local"
+          },
+          "estimated": {
+            "input_tokens": 2478,
+            "output_tokens": 32,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"file.read\",\n  \"arguments\": {\n    \"path\": \"/this/path/does/not/exist/aries.txt\"\n  }\n}",
+        "decision": {
+          "action": "execute",
+          "capability": "file.read",
+          "arguments": {
+            "path": "/this/path/does/not/exist/aries.txt"
+          },
+          "reason": "",
+          "summary": "",
+          "evidence_refs": []
+        },
+        "seconds": 2.0436
+      },
+      {
+        "index": 1,
+        "timestamp": "2026-09-17T21:55:04.060560+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2875,
+            "output_tokens": 36,
+            "total_tokens": 2911
+          },
+          "native": {
+            "prompt_eval_count": 2875,
+            "eval_count": 36,
+            "provider": "ollama",
+            "model": "qwen2.5:7b",
+            "execution_level": "local"
+          },
+          "estimated": {
+            "input_tokens": 2573,
+            "output_tokens": 30,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\n  \"action\": \"fail\",\n  \"reason\": \"The file /this/path/does/not/exist/aries.txt does not exist and cannot be read.\"\n}",
+        "decision": {
+          "action": "fail",
+          "capability": null,
+          "arguments": {},
+          "reason": "The file /this/path/does/not/exist/aries.txt does not exist and cannot be read.",
+          "summary": "",
+          "evidence_refs": []
+        },
+        "seconds": 1.0808
+      }
+    ],
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-09-17T21:55:01.967709+00:00"
+    },
+    "metrics": {
+      "planner_calls": 2,
+      "number_of_steps": 1,
+      "execution_time": 0.0112,
+      "planner_time": 3.124437329999637,
+      "capability_failures": 1,
+      "verification_failures": 0,
+      "retries": 0,
+      "invalid_decisions": 0,
+      "wrong_capability_selections": 0,
+      "input_tokens": 5615,
+      "output_tokens": 77,
+      "total_tokens": 5692,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 5051,
+      "estimated_output_tokens": 62,
+      "task_final_status": "failed",
+      "wall_seconds": 3.185,
+      "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+    },
+    "summary": "Planner stopped: The file /this/path/does/not/exist/aries.txt does not exist and cannot be read. \u2014 see observed step results"
+  },
+  "routing": {
+    "intent": "UNKNOWN",
+    "tool": "workspace",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "moderate",
+    "reason": "Known independently verifiable goal; bounded local planner suffices",
+    "execution_level": "local",
+    "source": "rule",
+    "blocked_reason": "",
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "final_evidence_refs": []
+}

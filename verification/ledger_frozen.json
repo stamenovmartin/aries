@@ -1,0 +1,125 @@
+{
+  "verification": {
+    "classification": {
+      "INDEPENDENT": 35,
+      "SELF_REPORT": 10,
+      "TRIVIAL": 12,
+      "PLANNER_SUPPLIED": 1,
+      "UNDETERMINED": 0
+    },
+    "classification_method": "Enumerated the 58 capabilities from the LIVE aries.workspace.registry.registry object (registry._items) and resolved each Capability.verifier to its defining file and line with inspect. Every verifier was then read in source, and 56 of 58 were EXECUTED directly with synthetic arguments - no database",
+    "raw_file": "experiments/product/independent-acceptance/raw/review_verifier_integrity.json",
+    "ledger": {
+      "goals": 8032,
+      "steps": 8285,
+      "steps_by_status": {
+        "verified": 1008,
+        "pending": 137,
+        "verification_failed": 2,
+        "unverifiable": 154,
+        "not_run": 88
+      },
+      "reached_a_verifier": {
+        "k": 1010,
+        "n": 8285,
+        "value": 0.1219
+      },
+      "contradictions": {
+        "k": 2,
+        "n": 1010,
+        "value": 0.00198,
+        "wilson_95": [
+          0.0005,
+          0.0072
+        ]
+      },
+      "by_class": {
+        "INDEPENDENT": {
+          "verified": 102,
+          "contradicted": 1,
+          "total": 103
+        },
+        "OUTSIDE_REGISTRY": {
+          "verified": 763,
+          "contradicted": 0,
+          "total": 763
+        },
+        "SELF_REPORT": {
+          "verified": 59,
+          "contradicted": 1,
+          "total": 60
+        },
+        "TRIVIAL": {
+          "verified": 84,
+          "contradicted": 0,
+          "total": 84
+        }
+      }
+    },
+    "published_figure_is_a_sample": {
+      "analytics_cap": 500,
+      "goals_available": 8032,
+      "share": 0.0623,
+      "previously_published": {
+        "coverage": "325/381",
+        "contradictions": "0/325",
+        "quoted_as": "бројки за работата на системот",
+        "actually": "подвижен примерок од најновите 500 цели"
+      },
+      "drift": {
+        "2026-10-04": "325/381 = 0.853",
+        "2026-10-06": "290/377 = 0.769"
+      },
+      "truncated_flag_emitted_by": "во моментот на мерењето: само aries/analytics/outcomes.py:135, не и integrity.py. Поправено по снимокот — види post_snapshot_repairs, наод F-13."
+    }
+  },
+  "system": {
+    "capabilities": {
+      "total": 58,
+      "read": 29,
+      "mutating": 29,
+      "require_approval": 12,
+      "mutating_without_approval": 17,
+      "effects": [
+        "create",
+        "desktop",
+        "display",
+        "file_mutation",
+        "input",
+        "network",
+        "notify",
+        "open",
+        "read",
+        "service"
+      ],
+      "method": "import aries.workspace.registry; len(registry._items)"
+    },
+    "spoken_vocabulary": {
+      "entries": 54,
+      "method": "len(aries.workspace.capabilities.CATALOGUE)"
+    },
+    "flags": {
+      "total": 14,
+      "method": "len(aries.flags.FLAGS)"
+    },
+    "systemd_units": {
+      "service": 4,
+      "timer": 1,
+      "target": 1
+    },
+    "python_files": 484,
+    "lines_aries": 46401,
+    "scripts": 46,
+    "volatility": "Пребројувањата на фајлови и редови се менуваат со секој commit. Важат за commit-от наведен горе.",
+    "database_tables": 45,
+    "api_routes": {
+      "total": 156,
+      "aries_prefixed": 104,
+      "method": "import aries.api.app; len(app.routes)"
+    },
+    "desktop": {
+      "idle_delay": "uint32 60",
+      "why_it_matters": "Способностите за слика од екран и за внес одбиваат на изгасната сесија. Тоа ја поништи серијата B1b/B2b."
+    }
+  }
+}

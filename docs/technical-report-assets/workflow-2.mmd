@@ -1,0 +1,16 @@
+flowchart TD
+    START[Goal и bounded context] --> PLAN[Structured planner decision]
+    PLAN --> VALID{Schema и registry валидни?}
+    VALID -->|Не| ERROR[Запиши грешка / bounded retry]
+    ERROR --> PLAN
+    VALID -->|execute| POLICY[Policy и approval]
+    POLICY --> EXEC[Executor]
+    EXEC --> OBS[Реална observation]
+    OBS --> VERIFY[Независен verifier]
+    VERIFY --> SAVE[Persist step и evidence]
+    SAVE --> PLAN
+    VALID -->|finish| CHECK{Goal conditions проверени?}
+    CHECK -->|Да| DONE[done]
+    CHECK -->|Не, има budget| PLAN
+    CHECK -->|Нема budget| PARTIAL[partial / failed]
+    VALID -->|fail| PARTIAL

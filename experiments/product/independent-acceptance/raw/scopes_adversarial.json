@@ -1,0 +1,105 @@
+{
+  "n": 14,
+  "passed": 14,
+  "failed": 0,
+  "results": [
+    {
+      "case": "no grant: enforce is inert",
+      "expected": "allow",
+      "observed": "allow",
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "granted path allowed",
+      "expected": "allow",
+      "observed": "allow",
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "sibling path refused",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "Path outside specialist grant"
+    },
+    {
+      "case": "symlink to ungranted target refused",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "Path outside specialist grant"
+    },
+    {
+      "case": ".. traversal refused",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "Path outside specialist grant"
+    },
+    {
+      "case": "expired grant refused",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "Specialist grant expired"
+    },
+    {
+      "case": "empty paths is fail-closed",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "Path outside specialist grant"
+    },
+    {
+      "case": "foreign task_id refused",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "Task outside specialist grant"
+    },
+    {
+      "case": "child cannot widen capabilities",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "A specialist cannot widen inherited authority"
+    },
+    {
+      "case": "child cannot extend expiry",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "A specialist cannot widen inherited authority"
+    },
+    {
+      "case": "child cannot drop read_only",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "A specialist cannot widen inherited authority"
+    },
+    {
+      "case": "read-only grant rejects file.write",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "A read-only specialist cannot receive file.write"
+    },
+    {
+      "case": "url under file grant refused",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": "Capability outside specialist grant"
+    },
+    {
+      "case": "grant does not leak past its block",
+      "expected": "allow",
+      "observed": "allow",
+      "verdict": "PASS",
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "n": 9,
+  "passed": 8,
+  "failed": 1,
+  "results": [
+    {
+      "case": "внесена содржина носи authority",
+      "expected": "untrusted_cached_source",
+      "observed": "untrusted_cached_source",
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "внесената не станува user_statement",
+      "expected": false,
+      "observed": false,
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "секоја ставка носи sha256",
+      "expected": true,
+      "observed": true,
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "истечена ставка отфрлена",
+      "expected": false,
+      "observed": false,
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "текстот не е тивко изменет",
+      "expected": true,
+      "observed": true,
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "недостасувачки извори се именувани",
+      "expected": true,
+      "observed": true,
+      "verdict": "PASS",
+      "detail": "['calendar', 'messages', 'news', 'projects', 'tasks']"
+    },
+    {
+      "case": "испуштен историски дел е именуван",
+      "expected": [
+        "huge"
+      ],
+      "observed": [
+        "huge"
+      ],
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "отфрлени ставки од контекст се именувани",
+      "expected": true,
+      "observed": false,
+      "verdict": "FAIL",
+      "detail": "1 ставки отпаднаа; omitted_sections=['huge']"
+    },
+    {
+      "case": "select го почитува max_chars",
+      "expected": true,
+      "observed": true,
+      "verdict": "PASS",
+      "detail": "654"
+    }
+  ]
+}

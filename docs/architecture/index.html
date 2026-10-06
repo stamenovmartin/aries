@@ -1,0 +1,64 @@
+<!doctype html><html lang="mk"><meta charset="utf-8"><title>ARIES · Architecture</title><style>body{background:#07121b;color:#dcebf3;font:16px system-ui;margin:0;padding:32px}header{display:flex;align-items:center;gap:18px;flex-wrap:wrap}h1{font-size:25px;letter-spacing:3px}button,a{background:#152a36;color:#e5fff8;border:1px solid #345563;border-radius:8px;padding:10px;cursor:pointer}p{color:#adc1cd}.diagram{overflow:auto;border:1px solid #284250;border-radius:16px;padding:24px;margin-top:20px}.mermaid svg{max-width:none!important;width:1600px;height:auto}pre{font-family:system-ui}</style><header><h1>ARIES / SYSTEM ARCHITECTURE</h1><button onclick="zoom(1.2)">＋</button><button onclick="zoom(0.8333)">−</button><a href="jarvis.mmd" download>Mermaid source</a></header><p>Зелено: изградено · Жолто: делумно / тековна интеграција · Виолетово: планирано</p><p>Целна архитектура. Learning зачувува правила и резултати; RL тренирањето на моделот е идна фаза.</p><div class="diagram"><pre class="mermaid">flowchart TB
+  U[&quot;ТИ · текст / команди / повратни информации&quot;]
+  subgraph SURFACE[&quot;01 · ARIES DESKTOP&quot;]
+    direction LR
+    TOP[&quot;ARIES + мали икони горе&lt;br/&gt;без sidebar / долна лента&quot;]
+    CMD[&quot;Command palette&lt;br/&gt;што сакаш да направи&quot;]
+    WIN[&quot;Посебен прозорец по задача&lt;br/&gt;резиме · слика · извори · задржи отворено&quot;]
+    MON[&quot;Monitor&lt;br/&gt;ред · чекори · отворени прозорци · резултати&quot;]
+    LEARN[&quot;Learning&lt;br/&gt;корекции · трајни правила · историја&quot;]
+    VOICE[&quot;Глас / wake word / разговор&quot;]
+  end
+  subgraph CONTROL[&quot;02 · КОНТРОЛА И ПЛАНИРАЊЕ&quot;]
+    direction LR
+    API[&quot;Локален ARIES API&lt;br/&gt;авторизација · поставки · валидација&quot;]
+    QUEUE[&quot;Траен ред на задачи&lt;br/&gt;идентификатор · статус · откажување&quot;]
+    PLAN[&quot;Goal planner + локален модел&lt;br/&gt;цел → чекор → набљудување → следен чекор&quot;]
+    RES[&quot;Scheduler&lt;br/&gt;3 независни задачи · брави за заеднички ресурси&quot;]
+    GATE[&quot;Дозволи и точни цели&lt;br/&gt;проверка пред чувствителна промена&quot;]
+    LIFE[&quot;Животен циклус на прозорци&lt;br/&gt;создаден од која задача · затвори по крај · pin&quot;]
+  end
+  subgraph TOOLS[&quot;03 · ИЗВРШУВАЊЕ&quot;]
+    WEB[&quot;Контролиран browser&lt;br/&gt;јавни страни · DOM · линкови · полиња&quot;]
+    DESK[&quot;Desktop / AT-SPI&lt;br/&gt;апликации · прозорци · достапни контроли&quot;]
+    FILE[&quot;Датотеки и инсталации&lt;br/&gt;пребарај · создај · премести · Trash · пакети&quot;]
+    CODE[&quot;Развојни задачи&lt;br/&gt;генерирај Python · sandbox · тест · поправка · VS Code&quot;]
+    NEWS[&quot;Вести и читање&lt;br/&gt;реални извори · извлечен текст · AI резиме · слика&quot;]
+    ACC[&quot;Најавени сервиси и конектори&lt;br/&gt;пошта · календар · GitHub · други сметки&quot;]
+    WIDE[&quot;Широка контрола на апликации&lt;br/&gt;посложени цели и сигурно закрепнување&quot;]
+  end
+  subgraph EVIDENCE[&quot;04 · НАБЉУДУВАЊЕ И ПРОВЕРКА&quot;]
+    direction LR
+    OBS[&quot;Свежа состојба&lt;br/&gt;отворено / затворено / фокус / недостапно&quot;]
+    CHECK[&quot;Независна проверка&lt;br/&gt;DOM · датотеки · излез · нов UI елемент&quot;]
+    STORE[(&quot;Локална трајна база&lt;br/&gt;задачи · докази · преференции · audit&quot;)]
+    EVAL[&quot;Евалуација&lt;br/&gt;успех · неуспех · време · токени · поправки&quot;]
+  end
+  subgraph IMPROVE[&quot;05 · УЧЕЊЕ И ЦЕЛНА ЕВОЛУЦИЈА&quot;]
+    PREF[&quot;Експлицитни правила&lt;br/&gt;достапни поставки + контекст за идни планови&quot;]
+    MEM[&quot;Долгорочен личен контекст&lt;br/&gt;проектна и разговорна меморија&quot;]
+    DATA[&quot;Оценети задачи&lt;br/&gt;цел · чекори · докази · твоја корекција&quot;]
+    COMP[&quot;Споредба на retrieval верзии&lt;br/&gt;фиксни случаи · регресии · избор · враќање&quot;]
+    TRAIN[&quot;Идна RL / подобрување на политика&lt;br/&gt;кандидат → offline eval → регресии&quot;]
+    RELEASE[&quot;Контролирано унапредување&lt;br/&gt;мерено подобрување · верзија · rollback&quot;]
+  end
+  U --&gt; SURFACE --&gt; CONTROL --&gt; TOOLS --&gt; EVIDENCE --&gt; IMPROVE
+  TOP --&gt; CMD --&gt; WIN
+  TOP --&gt; MON --&gt; LEARN
+  VOICE -.-&gt; CMD
+  API --&gt; QUEUE --&gt; RES --&gt; PLAN --&gt; GATE --&gt; LIFE
+  WEB --- DESK --- FILE
+  CODE --- NEWS
+  ACC --- WIDE
+  OBS --&gt; CHECK --&gt; STORE --&gt; EVAL
+  PREF --&gt; MEM
+  DATA --&gt; COMP
+  COMP -.-&gt; TRAIN -.-&gt; RELEASE
+  classDef working fill:#102d31,stroke:#48d9ba,color:#e5fff8,stroke-width:2px
+  classDef partial fill:#302918,stroke:#e8b95b,color:#fff4d8,stroke-width:2px
+  classDef future fill:#252039,stroke:#b09ae8,color:#f1eaff,stroke-dasharray:5 4
+  class U,API,QUEUE,RES,GATE,WEB,FILE,NEWS,CHECK,STORE,EVAL,CMD,WIN,MON,LEARN working
+  class TOP,PLAN,LIFE,DESK,CODE,OBS,PREF,MEM partial
+  class VOICE,ACC,WIDE,TRAIN,RELEASE future
+  class DATA,COMP working
+</pre></div><script src="mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:'dark',flowchart:{curve:'basis',nodeSpacing:28,rankSpacing:55},themeVariables:{fontFamily:'system-ui',fontSize:'15px',primaryColor:'#122937',lineColor:'#678799',clusterBkg:'#0b1924',clusterBorder:'#315263'}});function zoom(f){const s=document.querySelector('.mermaid svg');if(s)s.style.width=(s.getBoundingClientRect().width*f)+'px'}</script></html>

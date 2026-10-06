@@ -1,0 +1,21 @@
+{"ts": "2026-10-06T11:42:59.425977+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T11:42:59.426275+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_actual_background_agent_stops_before_side_effect
+PASS  actual planner-driven unattended mutation is proposed, not executed
+--- test_origin_gate_preserves_review_and_other_policy_gates
+PASS  None mutation requires review despite relaxed user preference
+PASS  'automation:aries.dashboards' mutation requires review despite relaxed user preference
+PASS  'scheduler' mutation requires review despite relaxed user preference
+PASS  'unknown' mutation requires review despite relaxed user preference
+PASS  {} mutation requires review despite relaxed user preference
+PASS  '' mutation requires review despite relaxed user preference
+FAIL  explicit interactive request retains configured confirmation choice
+PASS  reviewed frozen background step can proceed
+PASS  background observation remains available
+PASS  review never overrides disabled operator policy
+--- test_submission_persists_origin_without_inventing_user_memory
+PASS  background origin reaches durable goal
+PASS  automation text is never observed as a user statement
+PASS  interactive API has explicit durable user provenance
+PASS  user learning observation retains legitimate source
+FAILURES

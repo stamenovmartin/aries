@@ -1,0 +1,19 @@
+
+=== ARIES Shell in a headless nested GNOME Shell (25s) ===
+
+PASS  the extension loaded and reached ENABLED
+PASS  no ARIES component reported a build failure
+PASS  no JavaScript exception at all while the extension was loaded
+PASS  disable() ran and tore everything down cleanly — the fallback works
+      GNOME also confirms it is INACTIVE
+PASS  every surface was built, not merely the extension loaded
+PASS  and none of them reported a failure
+PASS  ARIES Search opens when asked over D-Bus
+PASS  the launcher opens when asked
+PASS  existing window restores and focuses; wrong identity and stale IDs refused
+PASS  it enables cleanly a SECOND time — nothing leaked on teardown
+PASS  with no failure on the second run either
+PASS  the extension's own log shows it starting
+      [ARIES] enabling 1 on GNOME user
+
+ALL PASSED

@@ -1,0 +1,37 @@
+--- test_changed_file_between_queue_and_execute_stops_recovery
+PASS  queued target change blocks all continuation actions
+PASS  user edit is preserved
+--- test_completed_mutation_not_replayed_and_parent_retained
+PASS  repeated resume returns the same child
+PASS  parent failure remains unchanged
+PASS  child completes after fresh read
+PASS  create file was never executed again
+PASS  inherited mutation is not counted as a second execution
+--- test_dynamic_continuation_runs_through_the_real_queue
+PASS  real dynamic parent records a partial attempt
+PASS  dynamic continuation finishes with freshly verified file contents
+PASS  recovery does not need to replay or add a file action
+PASS  real parent retains its original state and observation
+--- test_dynamic_read_reobserves_changed_state
+PASS  dynamic read refreshed after restart
+PASS  parent observations retained
+PASS  fresh recovery evidence persisted in child state
+--- test_recovery_discards_stale_proof_on_failed_refresh
+PASS  continuation exposes no old final answer or planning context
+PASS  failed refresh cannot retain old verified evidence
+PASS  failed refresh removes stale execution result and verifier payload
+PASS  fresh failed observation belongs to the continuation
+PASS  original evidence remains inspectable without being reused
+--- test_recovery_obeys_a_current_approval_requirement
+PASS  read-only classification cannot bypass a newly required approval
+--- test_recovery_rejects_removed_capability_and_exhausted_planner
+PASS  removed capability is a recoverability refusal, not a server error
+PASS  exhausted planner budget does not create an unusable continuation
+--- test_recovery_requires_boolean_verifier_success
+PASS  truthy malformed verifier output never becomes verified
+--- test_uncertain_mutation_only_reconciles_if_effect_is_present
+PASS  uncertain missing mutation is never replayed
+PASS  uncertain effect can be reconciled from exact bytes
+--- test_unsupported_agent_plan_is_not_silently_restarted
+PASS  dynamic agent recovery is explicitly unavailable
+ALL PASSED

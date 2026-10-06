@@ -1,0 +1,136 @@
+#!/usr/bin/env bash
+# Which dock the desktop uses — switched explicitly, recorded, and reversible.
+#
+#   ./scripts/aries-dock status
+#   ./scripts/aries-dock aries     stand Ubuntu's dock down, use the ARIES dock
+#   ./scripts/aries-dock ubuntu    put it back exactly as it was
+#
+# WHY THIS IS NOT JUST `gnome-extensions disable`
+# -----------------------------------------------
+# Two reasons. `gnome-extensions disable` also adds the uuid to
+# `disabled-extensions`, which is the key that silently overrides a session mode
+# — a heavier change than asked for, and one that bites later. And a uuid
+# removed from `enabled-extensions` loses its POSITION in that list; extension
+# order is load order, so restoring it to the end is not restoring it.
+#
+# So this records the exact list membership and index, touches nothing else, and
+# puts it back where it was.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+API="http://127.0.0.1:8000"
+DOCKS=(ubuntu-dock@ubuntu.com dash-to-dock@micxgx.gmail.com dash-to-panel@jderose9.github.com)
+
+bold() { printf '\033[1m%s\033[0m\n' "$*"; }
+dim()  { printf '\033[2m%s\033[0m\n' "$*"; }
+good() { printf '\033[32m%s\033[0m\n' "$*"; }
+warn() { printf '\033[33m%s\033[0m\n' "$*"; }
+
+case "${1:-status}" in
+  aries)
+    python3 - "$API" <<'PYEOF'
+import ast, json, subprocess, sys, urllib.request
+api = sys.argv[1]
+DOCKS = ["ubuntu-dock@ubuntu.com", "dash-to-dock@micxgx.gmail.com",
+         "dash-to-panel@jderose9.github.com"]
+
+def get(schema, key):
+    raw = subprocess.check_output(["gsettings", "get", schema, key], text=True).strip()
+    return [] if raw in ("@as []", "[]") else ast.literal_eval(raw)
+
+enabled = get("org.gnome.shell", "enabled-extensions")
+disabled = get("org.gnome.shell", "disabled-extensions")
+found = [(i, u) for i, u in enumerate(enabled) if u in DOCKS]
+if not found:
+    print("no other dock is enabled — the ARIES dock is already the only one")
+    sys.exit(0)
+
+# Record BEFORE writing: the uuid, the index it occupied — extension order is
+# load order, so putting it back at the end is not putting it back — AND the
+# whole `disabled-extensions` list. A rollback that restores one key while
+# something else has written the other is not a rollback, and that is exactly
+# what happened: a uuid appeared in `disabled-extensions` and the first version
+# of this script would have left it there for ever.
+record = json.dumps({"enabled": enabled, "disabled": disabled,
+                     "docks": [{"index": i, "uuid": u} for i, u in found]})
+req = urllib.request.Request(f"{api}/api/aries/settings/shell.restore_dock",
+                             data=json.dumps({"value": record}).encode(),
+                             headers={"Content-Type": "application/json"}, method="PUT")
+with urllib.request.urlopen(req, timeout=10) as r:
+    json.loads(r.read())
+print("recorded the previous dock state in ARIES")
+
+# Touch ONLY the dock entries in ONLY this one key.
+remaining = [u for u in enabled if u not in DOCKS]
+subprocess.run(["gsettings", "set", "org.gnome.shell", "enabled-extensions", str(remaining)],
+               check=True)
+for _, uuid in found:
+    print(f"stood down: {uuid}")
+PYEOF
+    echo
+    good "the ARIES dock is now the desktop's dock"
+    dim "Rollback, exactly as it was:  ./scripts/aries-dock ubuntu"
+    ;;
+
+  ubuntu|restore)
+    python3 - "$API" <<'PYEOF'
+import ast, json, subprocess, sys, urllib.request
+api = sys.argv[1]
+with urllib.request.urlopen(f"{api}/api/aries/settings/shell.restore_dock", timeout=10) as r:
+    recorded = json.loads(r.read()).get("value") or ""
+if not recorded:
+    print("nothing recorded — ARIES has not stood a dock down")
+    sys.exit(0)
+state = json.loads(recorded)
+
+raw = subprocess.check_output(
+    ["gsettings", "get", "org.gnome.shell", "enabled-extensions"], text=True).strip()
+current = [] if raw in ("@as []", "[]") else ast.literal_eval(raw)
+
+# Reinsert each dock at the index it held, so load order is restored too.
+for entry in state["docks"]:
+    if entry["uuid"] not in current:
+        current.insert(min(entry["index"], len(current)), entry["uuid"])
+subprocess.run(["gsettings", "set", "org.gnome.shell", "enabled-extensions", str(current)],
+               check=True)
+
+# And clear the dock out of `disabled-extensions`, which overrides everything
+# else — leaving it there would restore the list and not the dock.
+raw = subprocess.check_output(
+    ["gsettings", "get", "org.gnome.shell", "disabled-extensions"], text=True).strip()
+now_disabled = [] if raw in ("@as []", "[]") else ast.literal_eval(raw)
+docked = {e["uuid"] for e in state["docks"]}
+cleared = [u for u in now_disabled if u not in docked]
+if cleared != now_disabled:
+    subprocess.run(["gsettings", "set", "org.gnome.shell", "disabled-extensions", str(cleared)],
+                   check=True)
+    print("cleared from disabled-extensions:", ", ".join(sorted(docked & set(now_disabled))))
+print("restored:", ", ".join(e["uuid"] for e in state["docks"]))
+
+req = urllib.request.Request(f"{api}/api/aries/settings/shell.restore_dock",
+                             data=json.dumps({"value": ""}).encode(),
+                             headers={"Content-Type": "application/json"}, method="PUT")
+urllib.request.urlopen(req, timeout=10).read()
+PYEOF
+    good "your previous dock is back, in the position it held"
+    ;;
+
+  status)
+    bold "Docks"
+    for u in "${DOCKS[@]}"; do
+      state=$(gnome-extensions info "$u" 2>/dev/null | sed -n 's/^ *State: *//p' || true)
+      [ -n "$state" ] && printf '  %-36s %s\n' "$u" "$state"
+    done
+    aries=$(gdbus call --session --dest org.aries.Shell --object-path /org/aries/Shell \
+              --method org.aries.Shell.Ping 2>/dev/null | grep -c '"dock"' || true)
+    printf '  %-36s %s\n' "ARIES dock" \
+      "$([ "${aries:-0}" != "0" ] && echo 'drawn' || echo 'not drawn')"
+    recorded=$(curl -s -m 3 "$API/api/aries/settings/shell.restore_dock" 2>/dev/null \
+               | python3 -c "import json,sys;print(json.load(sys.stdin).get('value') or '')" 2>/dev/null || true)
+    echo
+    if [ -n "$recorded" ]; then
+      dim "ARIES stood a dock down; rollback available: ./scripts/aries-dock ubuntu"
+    else
+      dim "nothing recorded — no dock has been stood down by ARIES"
+    fi
+    ;;
+esac

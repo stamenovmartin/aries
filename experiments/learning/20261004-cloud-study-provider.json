@@ -1,0 +1,13 @@
+{
+  "problem": "Research adapter forced local inference although owner intends cloud intelligence for non-private tasks.",
+  "change": "Explicit local/codex-cli/claude-cli study provider, cloud limited to owned synthetic scenes, no cloud-to-local fallback; reroute_verified null/unmeasurable. Production routing unchanged.",
+  "validation": {
+    "artifact": "eval/research_feedback/runs/20261004T101818Z-f3c3ae/result.json",
+    "normal_goal_completed": "1/1",
+    "oracle_met": true,
+    "source_stable": true,
+    "cloud_surface_checks": "eval/research_feedback/cloud_surface_checks.json",
+    "calls": 3
+  },
+  "limitations": "Only Codex normal synthetic-file smoke tested, not the reviewing agent, fault comparison or600 study. Model is CLI default until explicitly pinned; native host observations blocked from cloud pending privacy-safe fixtures. No intelligence improvement claim."
+}

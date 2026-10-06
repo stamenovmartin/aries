@@ -1,0 +1,404 @@
+{
+  "captured_at": "2026-10-03T15:14:44.604056+00:00",
+  "window": {
+    "window_days": 7,
+    "goal_scan_cap": 3000,
+    "cutoff_utc": "2026-09-26 15:14:44.599995"
+  },
+  "verification": {
+    "n": 856,
+    "buckets": {
+      "accepted": 176,
+      "no_outcome_recorded": 94,
+      "verified": 485,
+      "pending": 7,
+      "withheld": 3,
+      "failed": 80,
+      "unconfirmed": 6,
+      "unclassified": 5
+    },
+    "looks_successful": 667,
+    "unverified": 182,
+    "coverage": {
+      "successes": 485,
+      "trials": 667,
+      "rate": 0.727,
+      "lower": 0.692,
+      "upper": 0.76,
+      "width": 0.067,
+      "of": "steps that look successful (verified + accepted + unconfirmed)",
+      "confident": true
+    },
+    "failed": 80,
+    "no_outcome_recorded": 94,
+    "by_capability": [
+      {
+        "capability": "research",
+        "buckets": {
+          "accepted": 104
+        },
+        "unverified": 104,
+        "coverage": {
+          "successes": 0,
+          "trials": 104,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.036,
+          "width": 0.036,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": true
+        }
+      },
+      {
+        "capability": "system",
+        "buckets": {
+          "accepted": 9
+        },
+        "unverified": 9,
+        "coverage": {
+          "successes": 0,
+          "trials": 9,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.299,
+          "width": 0.299,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "find_files",
+        "buckets": {
+          "accepted": 6
+        },
+        "unverified": 6,
+        "coverage": {
+          "successes": 0,
+          "trials": 6,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.39,
+          "width": 0.39,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "create_file",
+        "buckets": {
+          "accepted": 3,
+          "no_outcome_recorded": 1,
+          "withheld": 1
+        },
+        "unverified": 3,
+        "coverage": {
+          "successes": 0,
+          "trials": 3,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.561,
+          "width": 0.561,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "create_folder",
+        "buckets": {
+          "accepted": 3
+        },
+        "unverified": 3,
+        "coverage": {
+          "successes": 0,
+          "trials": 3,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.561,
+          "width": 0.561,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "can_you",
+        "buckets": {
+          "accepted": 2
+        },
+        "unverified": 2,
+        "coverage": {
+          "successes": 0,
+          "trials": 2,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.658,
+          "width": 0.658,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "evaluation",
+        "buckets": {
+          "accepted": 2
+        },
+        "unverified": 2,
+        "coverage": {
+          "successes": 0,
+          "trials": 2,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.658,
+          "width": 0.658,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "learning_eval",
+        "buckets": {
+          "accepted": 2
+        },
+        "unverified": 2,
+        "coverage": {
+          "successes": 0,
+          "trials": 2,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.658,
+          "width": 0.658,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "processes",
+        "buckets": {
+          "accepted": 2
+        },
+        "unverified": 2,
+        "coverage": {
+          "successes": 0,
+          "trials": 2,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.658,
+          "width": 0.658,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "brief",
+        "buckets": {
+          "accepted": 1
+        },
+        "unverified": 1,
+        "coverage": {
+          "successes": 0,
+          "trials": 1,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.793,
+          "width": 0.793,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "open_url",
+        "buckets": {
+          "unconfirmed": 1,
+          "withheld": 2
+        },
+        "unverified": 1,
+        "coverage": {
+          "successes": 0,
+          "trials": 1,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.793,
+          "width": 0.793,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "refresh_news",
+        "buckets": {
+          "accepted": 1
+        },
+        "unverified": 1,
+        "coverage": {
+          "successes": 0,
+          "trials": 1,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.793,
+          "width": 0.793,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "search_web",
+        "buckets": {
+          "unconfirmed": 1
+        },
+        "unverified": 1,
+        "coverage": {
+          "successes": 0,
+          "trials": 1,
+          "rate": 0.0,
+          "lower": 0.0,
+          "upper": 0.793,
+          "width": 0.793,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "play_music",
+        "buckets": {
+          "accepted": 9,
+          "no_outcome_recorded": 2,
+          "unconfirmed": 3,
+          "verified": 4
+        },
+        "unverified": 12,
+        "coverage": {
+          "successes": 4,
+          "trials": 16,
+          "rate": 0.25,
+          "lower": 0.102,
+          "upper": 0.495,
+          "width": 0.393,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "disk",
+        "buckets": {
+          "accepted": 4,
+          "verified": 4
+        },
+        "unverified": 4,
+        "coverage": {
+          "successes": 4,
+          "trials": 8,
+          "rate": 0.5,
+          "lower": 0.215,
+          "upper": 0.785,
+          "width": 0.57,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "services",
+        "buckets": {
+          "accepted": 4,
+          "verified": 6
+        },
+        "unverified": 4,
+        "coverage": {
+          "successes": 6,
+          "trials": 10,
+          "rate": 0.6,
+          "lower": 0.313,
+          "upper": 0.832,
+          "width": 0.519,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "abilities",
+        "buckets": {
+          "accepted": 3,
+          "no_outcome_recorded": 1,
+          "verified": 8
+        },
+        "unverified": 3,
+        "coverage": {
+          "successes": 8,
+          "trials": 11,
+          "rate": 0.727,
+          "lower": 0.434,
+          "upper": 0.903,
+          "width": 0.468,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "open_app",
+        "buckets": {
+          "accepted": 3,
+          "failed": 15,
+          "no_outcome_recorded": 7,
+          "unconfirmed": 1,
+          "verified": 12
+        },
+        "unverified": 4,
+        "coverage": {
+          "successes": 12,
+          "trials": 16,
+          "rate": 0.75,
+          "lower": 0.505,
+          "upper": 0.898,
+          "width": 0.393,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": false
+        }
+      },
+      {
+        "capability": "list_folder",
+        "buckets": {
+          "accepted": 7,
+          "no_outcome_recorded": 5,
+          "verified": 61
+        },
+        "unverified": 7,
+        "coverage": {
+          "successes": 61,
+          "trials": 68,
+          "rate": 0.897,
+          "lower": 0.802,
+          "upper": 0.949,
+          "width": 0.147,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": true
+        }
+      },
+      {
+        "capability": "package_info",
+        "buckets": {
+          "accepted": 4,
+          "unclassified": 1,
+          "verified": 59
+        },
+        "unverified": 4,
+        "coverage": {
+          "successes": 59,
+          "trials": 63,
+          "rate": 0.937,
+          "lower": 0.848,
+          "upper": 0.975,
+          "width": 0.127,
+          "of": "steps that look successful (verified + accepted + unconfirmed)",
+          "confident": true
+        }
+      }
+    ],
+    "capability_count": 43,
+    "means": "coverage is the share of apparently-successful steps that an independent verifier actually confirmed. The remainder is ARIES taking its own word for it \u2014 not necessarily wrong, but not evidence either",
+    "metric": "verification_honesty",
+    "source": "aries_workspace_goals.result_json (steps)",
+    "cost": "one capped result_json parse, shared shape with outcomes_by_capability; ~27 ms / 600 goals measured",
+    "query_ms": 54.5,
+    "window_days": 7,
+    "goal_scan_cap": 3000,
+    "cutoff_utc": "2026-09-26 15:14:44.450213"
+  }
+}

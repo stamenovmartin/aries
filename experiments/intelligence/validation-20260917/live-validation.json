@@ -1,0 +1,111 @@
+{
+  "services": "active\nactive\nactive\n",
+  "linger": "Linger=yes\n",
+  "listeners": "State  Recv-Q Send-Q Local Address:Port  Peer Address:Port\nLISTEN 0      4096       127.0.0.1:11434      0.0.0.0:*   \nLISTEN 0      2048       127.0.0.1:11435      0.0.0.0:*   \n",
+  "health": {
+    "service": "aries-local-model",
+    "backend": {
+      "reachable": true,
+      "model_available": true,
+      "models": [
+        "qwen2.5:7b"
+      ]
+    }
+  },
+  "deterministic": {
+    "intent": "OPEN_URL",
+    "tool": "browser.open",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "Existing validated deterministic command mapping",
+    "execution_level": "code",
+    "source": "rule",
+    "blocked_reason": "",
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "local_classification": {
+    "decision": {
+      "category": "urgent",
+      "should_notify": true,
+      "should_execute": false,
+      "confidence": 0.95,
+      "reason": "Production database issue affecting customer login"
+    },
+    "usage": {
+      "estimated_cost_usd": null,
+      "prompt_eval_count": 50,
+      "eval_count": 49,
+      "provider": "ollama",
+      "model": "qwen2.5:7b",
+      "execution_level": "local"
+    }
+  },
+  "cloud_recommendation": {
+    "intent": "RESEARCH",
+    "tool": "none",
+    "confidence": 1.0,
+    "requires_cloud": true,
+    "estimated_complexity": "complex",
+    "reason": "The request involves comparing multiple research papers and evaluating their methodologies.",
+    "execution_level": "cloud",
+    "source": "local",
+    "blocked_reason": "",
+    "input_tokens": 237,
+    "output_tokens": 53
+  },
+  "external_cloud": {
+    "status": 409,
+    "body": {
+      "detail": "Cloud disabled by policy"
+    },
+    "note": "No external cloud response measured."
+  },
+  "gateway_down_health": {
+    "gateway_live": false,
+    "error": "ConnectError",
+    "core_available": true
+  },
+  "gateway_down_code": {
+    "intent": "SYSTEM_ACTION",
+    "tool": "system.status",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "Existing validated deterministic command mapping",
+    "execution_level": "code",
+    "source": "rule",
+    "blocked_reason": "",
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "gateway_down_local_fallback": {
+    "decision": {
+      "category": "low",
+      "should_notify": true,
+      "should_execute": false,
+      "confidence": 0.85,
+      "reason": "Backup operations are routine and successful outcomes are expected."
+    },
+    "usage": {
+      "estimated_cost_usd": null,
+      "prompt_eval_count": 45,
+      "eval_count": 43,
+      "provider": "ollama",
+      "model": "qwen2.5:7b",
+      "execution_level": "local"
+    }
+  },
+  "restored_health": {
+    "service": "aries-local-model",
+    "backend": {
+      "reachable": true,
+      "model_available": true,
+      "models": [
+        "qwen2.5:7b"
+      ]
+    }
+  },
+  "background_cloud_requests_delta": 0
+}

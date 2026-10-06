@@ -1,0 +1,21 @@
+{"ts": "2026-10-06T12:07:41.940390+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T12:07:41.940672+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_measurement_questions_use_the_production_tick
+PASS  one explicit compound request creates durable child goals
+PASS  legacy dispatcher never claims empty orchestration plans
+PASS  production tick uses the shared one-slot budget
+PASS  both real independently verified probes roll up to the parent
+PASS  parent answers both questions with measurements
+PASS  every child retains independent verification evidence
+PASS  completed parent reports are not appended again on later ticks
+--- test_parallel_submission_cannot_bypass_authority
+PASS  fan-out requires the same permission as ordinary submission
+PASS  parallel input cannot authorise mutations or self-approve
+PASS  parallel input cannot authorise mutations or self-approve
+--- test_voice_receipt_counts_each_utterance_once
+{"ts": "2026-10-06T12:07:42.548508+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-06T12:07:42.560090+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-06T12:07:42.569417+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 429 Too Many Requests\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  single measurements return the normal serializable voice receipt
+PASS  fan-out never double-charges the shell loop guard
+ALL PASSED

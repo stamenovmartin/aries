@@ -1,0 +1,38 @@
+--- test_file_path_boundaries
+PASS  read file /tmp/fajl
+PASS  read file "/tmp/fajl"
+PASS  read file ~/Documents/белешки.txt
+PASS  read file "~/Documents/белешки.txt"
+PASS  read file /tmp/фајл со празни места.txt
+PASS  read file "/tmp/фајл со празни места.txt"
+PASS  прочитај фајл /tmp/fajl
+PASS  прочитај фајл "/tmp/fajl"
+PASS  прочитај фајл ~/Documents/белешки.txt
+PASS  прочитај фајл "~/Documents/белешки.txt"
+PASS  прочитај фајл /tmp/фајл со празни места.txt
+PASS  прочитај фајл "/tmp/фајл со празни места.txt"
+PASS  прочитај /tmp/fajl
+PASS  прочитај "/tmp/fajl"
+PASS  прочитај ~/Documents/белешки.txt
+PASS  прочитај "~/Documents/белешки.txt"
+PASS  прочитај /tmp/фајл со празни места.txt
+PASS  прочитај "/tmp/фајл со празни места.txt"
+PASS  procitaj fajl /tmp/fajl
+PASS  procitaj fajl "/tmp/fajl"
+PASS  procitaj fajl ~/Documents/белешки.txt
+PASS  procitaj fajl "~/Documents/белешки.txt"
+PASS  procitaj fajl /tmp/фајл со празни места.txt
+PASS  procitaj fajl "/tmp/фајл со празни места.txt"
+PASS  procitaj /tmp/fajl
+PASS  procitaj "/tmp/fajl"
+PASS  procitaj ~/Documents/белешки.txt
+PASS  procitaj "~/Documents/белешки.txt"
+PASS  procitaj /tmp/фајл со празни места.txt
+PASS  procitaj "/tmp/фајл со празни места.txt"
+--- test_screen_and_policy_targets_remain_distinct
+PASS  screen stays screen: прочитај го екранот
+PASS  screen stays screen: procitaj ekranot
+PASS  screen stays screen: read screen
+PASS  policy receives the unchanged protected target: прочитај фајл
+PASS  policy receives the unchanged protected target: procitaj fajl
+ALL PASSED

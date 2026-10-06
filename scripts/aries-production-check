@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+"""Read-only readiness evidence. Exit nonzero while a required surface is missing."""
+import json,subprocess,urllib.request
+from datetime import datetime,timezone
+from pathlib import Path
+root=Path(__file__).resolve().parents[1]
+out=root/'experiments/readiness'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ');out.mkdir(parents=True,exist_ok=True)
+def get(url):
+    try:
+        with urllib.request.urlopen(url,timeout=15) as r:return {'ok':True,'data':json.load(r)}
+    except Exception as exc:return {'ok':False,'error':str(exc)[:300]}
+base='http://127.0.0.1:8000/api/aries'
+data={k:get(base+path) for k,path in [('desktop','/desktop/capabilities'),('automations','/automations'),('power','/power'),('maintenance','/maintenance')]}
+data['local_model']=get('http://127.0.0.1:11435/health')
+checks={'core_api':data['automations']['ok'],'local_inference_health':data['local_model']['ok'],
+        'desktop_protocol':data['desktop']['ok'] and data['desktop']['data'].get('full_desktop_support') is True,
+        'not_in_maintenance':data['maintenance']['ok'] and not data['maintenance']['data'].get('active',True)}
+for unit in ['aries-core','aries-local-model']:
+    result=subprocess.run(['systemctl','--user','is-active',unit],capture_output=True,text=True,timeout=10)
+    checks[unit]=result.returncode==0 and result.stdout.strip()=='active'
+power=data['power'].get('data',{})
+checks['background_inhibitor']=power.get('background_mode') is True and power.get('inhibitor',{}).get('active') is True
+failures=[a['automation_id'] for a in data['automations'].get('data',{}).get('automations',[]) if a.get('enabled') and (a.get('last_run') or {}).get('status')=='failed']
+checks['no_latest_automation_failure']=not failures and data['automations']['ok']
+result={'checks':checks,'passed':all(checks.values()),'failed_automations':failures,'observations':data,
+        'scope':'Current service/desktop readiness, not proof of general agent reliability, translation accuracy, or 24-hour uptime.'}
+(out/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+(out/'report.md').write_text('# ARIES readiness\n\n'+'\n'.join(f'- {k}: {v}' for k,v in checks.items())+'\n\n'+result['scope']+'\n')
+print(json.dumps(checks));print(out)
+raise SystemExit(0 if result['passed'] else 1)

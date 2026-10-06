@@ -1,0 +1,23 @@
+[Unit]
+Description=ARIES persistent localhost inference gateway
+PartOf=aries.target
+Before=aries-core.service
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=exec
+WorkingDirectory=%h/aries
+Environment=PYTHONPATH=%h/aries/vendor/agentic-core:%h/aries/vendor:%h/aries
+Environment=DATABASE_URL=sqlite+aiosqlite:///%h/aries/var/aries.db
+Environment=DATA_DIR=%h/aries/var
+Environment=PYTHONUNBUFFERED=1
+ExecStart=%h/aries/.venv/bin/python -m uvicorn aries.intelligence.server:app --host 127.0.0.1 --port 11435 --log-level info
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=aries.target

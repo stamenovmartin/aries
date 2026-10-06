@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+"""Build the Macedonian report as offline HTML/PDF. Requires markdown and playwright.
+Existing Mermaid SVGs are reused; --mermaid-js enables rendering from local bundle.
+"""
+import argparse,asyncio,hashlib,json,re
+from pathlib import Path
+import markdown
+from playwright.async_api import async_playwright
+ROOT=Path(__file__).resolve().parents[1]
+DOC=ROOT/'docs/ARIES_TECHNICAL_REPORT_MK.md'
+ASSETS=ROOT/'docs/technical-report-assets'
+CSS='''@page { size: A4; margin: 16mm 15mm 17mm; }
+body{font-family:"DejaVu Sans",Arial,sans-serif;color:#182737;line-height:1.5;font-size:10.2pt;max-width:1000px;margin:36px auto;padding:0 28px}
+h1{font-size:26pt;color:#123e54;line-height:1.2}h2{font-size:16pt;color:#123e54;border-bottom:1px solid #c6dce1;padding-bottom:5px;margin-top:28px}h3{font-size:12pt;color:#155e67}
+h1,h2,h3{break-after:avoid}p{orphans:3;widows:3}a{color:#176376;overflow-wrap:anywhere}table{width:100%;border-collapse:collapse;font-size:9pt;margin:14px 0}thead{display:table-header-group}th{background:#e7f1f3;text-align:left}td,th{border:1px solid #cad5dc;padding:7px;vertical-align:top;overflow-wrap:anywhere}tr{break-inside:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f0f4f6;padding:12px;font-size:8.5pt}code{font-family:"DejaVu Sans Mono",monospace;font-size:.88em}blockquote{border-left:4px solid #247d85;margin:14px 0;padding:8px 16px;background:#eef6f5}figure{text-align:center;break-inside:avoid;margin:20px 0}figure svg{max-width:100%;max-height:630px;height:auto}.toc{background:#f0f4f6;padding:16px 25px}.toc ul{padding-left:20px}@media print{body{max-width:none;margin:0;padding:0}a{text-decoration:none}pre{border:1px solid #cad5dc}.toc{font-size:9pt}}'''
+async def build(bundle):
+    text=DOC.read_text();ASSETS.mkdir(exist_ok=True)
+    # Verify repository-relative evidence links before exporting.
+    missing=[]
+    for target in re.findall(r'\]\(([^)]+)\)',text):
+        if not target.startswith(('https:','http:','#')) and not (DOC.parent/target.split('#')[0]).exists():missing.append(target)
+    if missing:raise ValueError('Broken links: '+str(missing))
+    diagrams=re.findall(r'```mermaid\n(.*?)\n```',text,re.S)
+    async with async_playwright() as p:
+        browser=await p.chromium.launch(headless=True)
+        page=await browser.new_page(viewport={'width':1000,'height':1300})
+        if bundle:
+            await page.set_content('<html><body></body></html>')
+            await page.add_script_tag(path=str(bundle))
+            await page.evaluate("mermaid.initialize({startOnLoad:false,theme:'neutral',securityLevel:'strict',fontFamily:'DejaVu Sans',flowchart:{htmlLabels:false}})")
+        for i,diagram in enumerate(diagrams,1):
+            svgfile=ASSETS/f'workflow-{i}.svg'
+            if bundle:
+                svg=await page.evaluate("async a => (await mermaid.render(a.id,a.text)).svg",{'id':f'ariesReport{i}','text':diagram})
+                svgfile.write_text(svg)
+                (ASSETS/f'workflow-{i}.mmd').write_text(diagram+'\n')
+            text=text.replace('```mermaid\n'+diagram+'\n```','<figure>'+svgfile.read_text()+'</figure>',1)
+        body=markdown.markdown(text,extensions=['tables','fenced_code','toc'])
+        html='<!doctype html><html lang="mk"><head><meta charset="utf-8"><title>ARIES — технички извештај</title><style>'+CSS+'</style></head><body>'+body+'</body></html>'
+        target=DOC.with_suffix('.html');target.write_text(html)
+        await page.goto(target.as_uri(),wait_until='load')
+        await page.evaluate('document.fonts.ready')
+        assert await page.locator('figure svg').count()==len(diagrams)
+        assert await page.locator('h2').count()==18
+        overflow=await page.evaluate('document.documentElement.scrollWidth > window.innerWidth')
+        assert not overflow,'Horizontal overflow'
+        await page.screenshot(path=str(ASSETS/'preview.png'))
+        await page.pdf(path=str(DOC.with_suffix('.pdf')),print_background=True,prefer_css_page_size=True,
+                       display_header_footer=True,header_template='<span></span>',
+                       footer_template='<div style="font-size:8px;width:100%;text-align:center;color:#667">ARIES · 19.09.2026 · <span class="pageNumber"></span> / <span class="totalPages"></span></div>')
+        await browser.close()
+    evidence={'source_sha256':hashlib.sha256(DOC.read_bytes()).hexdigest(),'sections':18,'rendered_diagrams':len(diagrams),'broken_links':missing,'horizontal_overflow':overflow,
+              'artifacts':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in [DOC.with_suffix('.html'),DOC.with_suffix('.pdf')]}}
+    (ROOT/'experiments/documentation/20260919/build-validation.json').write_text(json.dumps(evidence,indent=2)+'\n')
+    print(json.dumps(evidence));print(DOC.with_suffix('.pdf'))
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--mermaid-js',type=Path);a=parser.parse_args()
+    asyncio.run(build(a.mermaid_js))

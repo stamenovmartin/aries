@@ -1,0 +1,73 @@
+{
+  "worker": {
+    "name": "aries.automations",
+    "state": "running",
+    "alive": true,
+    "last_tick": "2026-09-17T18:53:27.295002",
+    "every_seconds": 60,
+    "check_every_s": 60,
+    "enabled": true,
+    "error": null,
+    "enabled_setting": "automations.worker_enabled",
+    "switch_on": true,
+    "means": "'switch_on' is the user's setting; 'state' is whether the dispatcher task is alive in this process."
+  },
+  "automations": [
+    {
+      "id": "aries.attention",
+      "enabled": true,
+      "interval_minutes": 60,
+      "last_status": "ok",
+      "last_summary": "nothing to read from 1 source(s)",
+      "next_run": "2026-09-17T21:18:24"
+    },
+    {
+      "id": "aries.brief",
+      "enabled": true,
+      "interval_minutes": 1440,
+      "last_status": "ok",
+      "last_summary": "14 item(s) across 5 section(s): 2 decision(s) waiting for you",
+      "next_run": "2026-09-18T07:30:00"
+    },
+    {
+      "id": "aries.dashboards",
+      "enabled": true,
+      "interval_minutes": 60,
+      "last_status": "ok",
+      "last_summary": "Queued 3 topic dashboards; reused 0 pending",
+      "next_run": "2026-09-17T19:47:03"
+    },
+    {
+      "id": "aries.data",
+      "enabled": false,
+      "interval_minutes": 1440,
+      "last_status": null,
+      "last_summary": null,
+      "next_run": null
+    },
+    {
+      "id": "aries.health",
+      "enabled": true,
+      "interval_minutes": 15,
+      "last_status": "ok",
+      "last_summary": "healthy \u2014 17 checks, nothing above threshold",
+      "next_run": "2026-09-17T19:08:46"
+    },
+    {
+      "id": "aries.learning",
+      "enabled": true,
+      "interval_minutes": 1440,
+      "last_status": "ok",
+      "last_summary": "no change \u2014 the evidence is not yet decisive; 1 left to you (ai)",
+      "next_run": "2026-09-18T18:53:27"
+    },
+    {
+      "id": "aries.news",
+      "enabled": true,
+      "interval_minutes": 120,
+      "last_status": "ok",
+      "last_summary": "0 delivered from 0 source(s), 0 held, 4 duplicates merged, 33 rejected, 14 sources, 2 source(s) failed",
+      "next_run": "2026-09-17T20:50:32"
+    }
+  ]
+}

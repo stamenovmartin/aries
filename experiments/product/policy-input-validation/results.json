@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-06T10:30:04.898574+00:00",
+  "passes": 37,
+  "suite": "tests/test_policy_evaluation.py",
+  "scope": "isolated artifact-validator regression, not a live promotion or general quality experiment",
+  "before": {
+    "boolean_cost_admitted_as_saving": true,
+    "null_latency_accepted": true,
+    "boolean_seed_accepted": true,
+    "empty_case_id_accepted": true
+  },
+  "after": "strict trial and assignment identities; finite non-boolean numeric measurements; unknown cost remains None; reject aggregate overflow; finite median",
+  "source_hashes": {
+    "aries/workspace/policy_evaluation.py": "4723bd7bbbdf48d3f471de1998a64cb9b6fad42eab67112ed9cb1290efe9ad5a",
+    "tests/test_policy_evaluation.py": "8611eebd8600c0eadc7247fd3cea53c6c5eef9ec9d5417e19cb750c95a9e0d36"
+  },
+  "deployed": false,
+  "live_services_restarted": false
+}

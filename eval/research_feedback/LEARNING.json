@@ -1,0 +1,50 @@
+{
+  "problem": "Research presentation variants were not connected to a real LLM execution loop.",
+  "change": "Added run_loop.py connecting a common four-condition planner adapter to actual local LLM inference, Decision parsing, production agent execution/verifier/completion/persistence, scratch DB and two owned file fixtures.",
+  "validation": {
+    "at": "2026-10-03T16:16:50.875264+00:00",
+    "built": "Four feedback presentations wired to real production agent loop in an isolated process",
+    "smoke_condition": "structured only",
+    "n_smoke_goals": 2,
+    "rows": [
+      {
+        "artifact": "eval/research_feedback/runs/20261003T161441Z-d91afe/result.json",
+        "condition": "structured",
+        "fault": "none",
+        "final_state": "done",
+        "oracle_met": true,
+        "planner_calls": 3,
+        "executed_steps": 2,
+        "invalid_decisions": 0,
+        "unsupported_model_claims": 0,
+        "user_visible_false_success": false,
+        "completed_recovery": false,
+        "outcome": "completed",
+        "source_stable": true
+      },
+      {
+        "artifact": "eval/research_feedback/runs/20261003T161533Z-bed940/result.json",
+        "condition": "structured",
+        "fault": "stale_read",
+        "final_state": "partial",
+        "oracle_met": false,
+        "planner_calls": 10,
+        "executed_steps": 2,
+        "invalid_decisions": 0,
+        "unsupported_model_claims": 8,
+        "user_visible_false_success": false,
+        "completed_recovery": false,
+        "outcome": "exhausted_or_blocked",
+        "source_stable": true
+      }
+    ],
+    "improvement_claim": false,
+    "production_api_integration": false,
+    "remaining": [
+      "Resolve repeated unsupported finish proposals with the main executor/planner owner; preserve negative trace.",
+      "Extend isolated runner to focused fault corpus and other conditions before comparative claims.",
+      "Main thread integrates/reviews production deployment separately."
+    ]
+  },
+  "limitations": "Only structured condition smoke-executed; real qwen2.5:7b, two goals, not full suite or comparative study. Fault run yielded eight unsupported finish proposals blocked by unchanged runtime guard. No production source edits/deployment. Early invalid-decision trace retained. Submission to live Learning deferred to main owner."
+}

@@ -1,0 +1,10 @@
+{
+  "problem": "Failed bounded workflows had no verified continuation and users risked repeating already completed changes.",
+  "change": "Added Check and continue with an idempotent linked child task. Verify existing effects before queueing and again before execution, refresh supported reads, preserve original failures, and distinguish inherited actions in the dashboard, evaluations and historical review context. Exact-file verification now bounds file reads.",
+  "validation": [
+    "Standard suite passed: /tmp/aries-recovery-suite.log, including 10 recovery checks and 419 UI client checks.",
+    "Focused task-review suite passed after adding inherited-effect context: /tmp/aries-recovery-reviews.log.",
+    "Installed-system workflow passed 6/6 checks: experiments/workspace/verify_recovery.json. Original failed attempt retained, child completed, duplicate reused, folder not re-executed or replaced, fresh contents read."
+  ],
+  "limitations": "Explicit recovery supports saved bounded plans only. Dynamic agents, opaque desktop actions and browser sessions are not reconstructed. No mutations are replayed; uncertain effects refuse continuation. Rechecks are not a transaction against concurrent manual edits. This is an implementation note, not model-weight RL or a human reward. Login and display-timeout suites were not rerun."
+}

@@ -1,0 +1,32 @@
+--- test_a_demonstrative_plus_a_common_noun_names_nothing
+PASS  declined: пушти ја онаа песна
+PASS  declined: отвори ја таа папка
+PASS  a demonstrative with real content still resolves
+--- test_an_argument_made_only_of_pronouns_is_declined
+PASS  declined so it can be asked about: отвори го
+PASS  declined so it can be asked about: избриши го
+PASS  declined so it can be asked about: прочитај ми го
+PASS  declined so it can be asked about: инсталирај го
+PASS  declined so it can be asked about: отвори ги двете
+PASS  declined so it can be asked about: пушти ја другата
+PASS  declined so it can be asked about: open that one
+PASS  declined so it can be asked about: install it
+PASS  declined so it can be asked about: open both
+--- test_free_text_arguments_are_left_alone
+PASS  file content may be a pronoun
+--- test_the_guard_costs_nothing_that_names_something
+PASS  'open the calculator' still recognised as open_app
+PASS  'вклучи го firefox' still recognised as open_app
+PASS  'отвори го youtube' still recognised as open_url
+PASS  'прочитај го фајлот ~/Documents/proba.txt' still recognised as read_file
+PASS  'намали го звукот' still recognised as set_volume
+PASS  'избриши ја папката ~/Documents' still recognised as trash_file
+--- test_the_judgement_is_about_naming_not_about_word_lists
+PASS  an empty argument is not a pronoun argument
+PASS  a path is not a pronoun argument
+PASS  a bare clitic is
+PASS  two clitics are
+PASS  a demonstrative and a common noun are
+PASS  three words are not caught by the demonstrative clause
+PASS  digits and punctuation alone do not qualify
+ALL PASSED

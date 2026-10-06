@@ -1,0 +1,35 @@
+{"ts": "2026-10-06T11:11:58.026702+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T11:11:58.026966+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_file_workflow_and_persistent_api
+PASS  file scenario completes only with OS verified bytes
+PASS  model completion prose is not the final answer
+PASS  each executed step has execution and verification evidence
+PASS  explicit lifecycle persisted
+PASS  measured tokens and calls persist
+{"ts": "2026-10-06T11:11:59.419845+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  persisted API 
+{"ts": "2026-10-06T11:11:59.424154+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  persisted API /steps
+{"ts": "2026-10-06T11:11:59.428310+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  persisted API /evidence
+{"ts": "2026-10-06T11:11:59.432449+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 404 Not Found\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  missing task returns 404
+--- test_policy_and_approval_are_before_execution
+PASS  file create without user intent is rejected
+PASS  system path write rejected
+PASS  approval request persists frozen inputs without executing
+--- test_restart_keeps_history_and_never_replays_uncertain_write
+PASS  restart cannot replay uncertain create
+PASS  dynamic recovery explicitly refuses automatic replay
+--- test_user_write_target_and_confirmation_policy
+PASS  known user target enforced before write
+PASS  known user content enforced before write
+PASS  existing model confirmation setting is honored
+PASS  concurrent approval queues exactly one frozen proposal
+PASS  approved frozen write executes once and verifies
+PASS  active elapsed time accumulates across approval resume
+--- test_verification_failure_and_later_recovery
+PASS  executor success is not verification success
+PASS  verification failures counted separately
+PASS  planner may change arguments after failure and complete
+ALL PASSED

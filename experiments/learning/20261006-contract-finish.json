@@ -1,0 +1,19 @@
+{
+  "problem": "ARIES spent a final model call proposing finish after every required condition already had verified evidence. A failed fresh recheck also left old proof marked current, preventing safe rereads.",
+  "change": [
+    "Added ordered proof-based finish proposals with separate ablation flag, one attempt per step count, current policy and fresh independent completion still mandatory.",
+    "Invalidate stale step status after failed fresh verification; retry only safe reads, never automatically replay writes. Preserve historical proof.",
+    "Enabled measured optimization in live backend; independent checks and budget accounting retained."
+  ],
+  "validation": [
+    "2026-10-06:287 passing assertions across9 suite configurations; experiments/product/finish-v1/checks.json.",
+    "Native paired run12/12 oracle outcomes;4 verified positives+2correct missing-file failures per arm.24vs28model calls,45881vs53729tokens(14.61%lower),20tool/verifier calls in each arm; source stable.",
+    "Live task54a76d381c0f4b51a628866f5c20c1c4 done with1model call,2verifier calls,1final proof; live-smoke.json.",
+    "Initial state eligibility error, aborted run and legacy fixture mismatches retained; tests corrected to actual observed state and explicit model/automatic modes."
+  ],
+  "limitations": [
+    "Narrow local filesystem fixture, no general reliability or billed-cost claim. Missing-file cases still need9model calls.",
+    "No adaptive model learning or autonomous self-evolution. Rollback CONTRACT_FINISH=0 retains verification/privacy/budgets.",
+    "Thesis verification-feedback comparisons must pin new flagOFF in both arms unless explicitly studying interaction."
+  ]
+}

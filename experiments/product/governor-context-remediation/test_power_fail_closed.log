@@ -1,0 +1,51 @@
+--- test_hold_survives_blindness_and_unrelated_block_events
+PASS  one cool reading does not release
+PASS  unrelated block cannot erase thermal hold
+PASS  blind sensor preserves hold
+PASS  blind sample resets consecutive cooling checks
+PASS  recovery requires a new full cool streak
+PASS  two actual cool samples release
+PASS  release is durable
+--- test_missing_invalid_and_unwatched_sensors
+PASS  heavy_cpu cpu_pct=None cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_cpu cpu_pct=nan cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_cpu cpu_pct=inf cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_cpu cpu_pct=True cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_cpu temperature_c=None cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_cpu temperature_c=nan cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_cpu temperature_c=inf cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_cpu temperature_c=True cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_gpu gpu_pct=None cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_gpu gpu_pct=nan cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_gpu gpu_pct=inf cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_gpu gpu_pct=True cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_gpu temperature_c=None cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_gpu temperature_c=nan cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_gpu temperature_c=inf cannot pass even with force
+PASS  panel agrees with admission
+PASS  heavy_gpu temperature_c=True cannot pass even with force
+PASS  panel agrees with admission
+PASS  CPU work does not need a GPU
+PASS  a numeric but explicitly unavailable reading is rejected
+PASS  health/light work remains available
+--- test_unknown_declaration_cannot_become_light
+PASS  invalid declaration 'heavy_typo' is refused
+PASS  invalid declaration '' is refused
+PASS  invalid declaration [] is refused
+PASS  invalid declaration 42 is refused
+PASS  missing legacy declaration retains explicit compatibility default
+ALL PASSED

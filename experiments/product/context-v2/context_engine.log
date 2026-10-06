@@ -1,0 +1,21 @@
+--- test_budget_retains_provenance_and_privacy
+PASS  relevant source survives within packet budget
+PASS  serialized evidence including metadata fits bound
+PASS  personal class and origin survive selection
+PASS  expiry irrelevant and oversize exclusions explained
+PASS  missing project evidence stays explicit
+PASS  estimated tokens are labelled
+--- test_no_context_is_not_a_claim_about_tomorrow
+PASS  calendar tasks messages and projects are required
+PASS  empty set never invents user facts
+PASS  simple system probe does not require memory
+PASS  duplicate source IDs and duplicate content not repeated
+--- test_planner_does_not_flatten_source_metadata
+PASS  planner preserves structured source identity
+PASS  planner envelope fits actual bound
+PASS  oversize historical sections are disclosed
+--- test_prompt_rechecks_expiry_and_retains_user_preferences
+PASS  expired task text cannot survive into a later prompt
+PASS  expired domain becomes missing again
+PASS  user preferences survive context selection
+ALL PASSED

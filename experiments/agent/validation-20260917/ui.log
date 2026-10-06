@@ -1,0 +1,18 @@
+
+[1mARIES end-to-end journeys[0m
+[2mReal processes, real windows, on the installed system.[0m
+
+[1mCold start — the Control Centre is not running[0m
+  [32mPASS[0m  nothing is running to begin with
+  [32mPASS[0m  asking for a section starts the Control Centre
+  [32mPASS[0m  and it lands on the section that was asked for   [2mlanded on: news[0m
+
+[1mWarm start — the Control Centre is already running[0m
+  [32mPASS[0m  it is already running
+  [32mPASS[0m  asking for 'system' navigates the existing window   [2mlanded on: system[0m
+  [32mPASS[0m  asking for 'brief' navigates the existing window   [2mlanded on: brief[0m
+  [32mPASS[0m  asking for 'learning' navigates the existing window   [2mlanded on: learning[0m
+  [32mPASS[0m  asking for 'news' navigates the existing window   [2mlanded on: news[0m
+
+8 passed, 0 failed
+

@@ -1,0 +1,21 @@
+{
+  "problem": "Local versus cloud planner needed current same-fixture measurement; voice changes lacked durable negative evidence.",
+  "change": "Added daily live-model driver with isolated tracking DB, frozen payloads, explicit backend/no fallback and incremental raw results; generated reports. Preserved the reviewing agent voice artifacts with hashes and reported regression.",
+  "validation": {
+    "planner": "experiments/planner/20261003T130053Z-daily-local-cloud/REPORT.md",
+    "local_plausible": "22/23",
+    "cloud_plausible": "23/23",
+    "valid_json_schema": "23/23 each",
+    "median_latency_seconds": {
+      "local": 5.838,
+      "cloud": 5.987
+    },
+    "voice_gate_acceptance": "3/10 to7/10",
+    "voice_false_wakes": "2/12 to3/12; worse",
+    "voice_evidence": "experiments/voice/20261003-review-evidence/REPORT.md"
+  },
+  "limitations": [
+    "Planner decisions only, no goal execution; arguments not fully semantically scored. Synthetic prior observations. No production routing change.",
+    "Voice replay155s is not required10minute live acceptance. Missing after artifact and unconfirmed physical microphone. No closure of self-listening item."
+  ]
+}

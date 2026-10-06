@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+# The privileged half of the ARIES session install. Runs as root, once.
+#
+# WHY IT IS A SEPARATE FILE
+# -------------------------
+# The installer used to make eight separate `sudo` calls. That meant eight
+# authentications, and — worse — a privileged surface spread across a script
+# that also does argument parsing, prompting and status reporting. Everything
+# that runs as root is here, in fifty lines you can read in one sitting before
+# deciding to run it.
+#
+# It also makes graphical authentication possible: `pkexec` runs ONE program as
+# root, which is what a desktop session can prompt for.
+#
+# It takes exactly two arguments and trusts neither.
+#
+#   $1  the ARIES repository root
+#   $2  copy | link
+set -euo pipefail
+
+[ "$(id -u)" = "0" ] || { echo "aries-session-root must run as root" >&2; exit 1; }
+
+ROOT="${1:-}"
+MODE="${2:-copy}"
+UUID="aries@aries.local"
+
+# ── validate before writing anything ────────────────────────────────────────
+case "$ROOT" in
+  /*) ;;
+  *) echo "the repository root must be an absolute path" >&2; exit 2 ;;
+esac
+[ -d "$ROOT/session" ] || { echo "$ROOT/session is missing" >&2; exit 2; }
+[ -f "$ROOT/session/aries.desktop" ] || { echo "aries.desktop is missing" >&2; exit 2; }
+[ -f "$ROOT/session/modes/aries.json" ] || { echo "aries.json is missing" >&2; exit 2; }
+[ -f "$ROOT/shell/$UUID/metadata.json" ] || { echo "the extension is missing" >&2; exit 2; }
+[ -f "$ROOT/shell/$UUID/schemas/gschemas.compiled" ] || \
+  { echo "the extension's schema is not compiled" >&2; exit 2; }
+case "$MODE" in copy|link) ;; *) echo "mode must be copy or link" >&2; exit 2 ;; esac
+
+# Refuse to write a mode that does not parse. A malformed JSON here is a session
+# that does not start, and the login screen is the worst place to discover it.
+python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$ROOT/session/modes/aries.json" \
+  || { echo "aries.json does not parse" >&2; exit 2; }
+
+SESSION_ENTRY="/usr/share/wayland-sessions/aries.desktop"
+SESSION_FILE="/usr/local/share/gnome-session/sessions/aries.session"
+SHELL_MODE="/usr/local/share/gnome-shell/modes/aries.json"
+SYS_EXT="/usr/local/share/gnome-shell/extensions/$UUID"
+UNIT_DROPIN="/etc/systemd/user/gnome-session@aries.target.d/aries.session.conf"
+
+install -d /usr/share/wayland-sessions \
+           /usr/local/share/gnome-session/sessions \
+           /usr/local/share/gnome-shell/modes \
+           /usr/local/share/gnome-shell/extensions \
+           /etc/systemd/user/gnome-session@aries.target.d
+
+install -m 0644 "$ROOT/session/aries.desktop" "$SESSION_ENTRY"
+install -m 0644 "$ROOT/session/aries.session" "$SESSION_FILE"
+install -m 0644 "$ROOT/session/modes/aries.json" "$SHELL_MODE"
+install -m 0644 "$ROOT/session/gnome-session@aries.target.d/aries.session.conf" "$UNIT_DROPIN"
+
+rm -rf "$SYS_EXT"
+if [ "$MODE" = "link" ]; then
+  ln -s "$ROOT/shell/$UUID" "$SYS_EXT"
+else
+  cp -rL "$ROOT/shell/$UUID" "$SYS_EXT"
+  chown -R root:root "$SYS_EXT"
+  chmod -R go-w "$SYS_EXT"
+fi
+
+echo "wrote:"
+for f in "$SESSION_ENTRY" "$SESSION_FILE" "$SHELL_MODE" "$SYS_EXT" "$UNIT_DROPIN"; do
+  echo "  $f"
+done

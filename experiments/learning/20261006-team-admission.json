@@ -1,0 +1,17 @@
+{
+  "problem": "CR-01 admitted children after parent cancellation; CR-02 accepted root requirement order incompatible with completion; CR-03 granted siblings resources and unnecessary capabilities.",
+  "change": "Atomic child running transition requires a running parent; missing or terminal parent cancels queued child. Contracts determine per-node grants. Reject unsupported root delegation and reordered/duplicated requirements; ordinary planner remains fallback.",
+  "validation": {
+    "date": "2026-10-06T11:22:31.681687+00:00",
+    "passed": 171,
+    "total": 171,
+    "checks": "experiments/product/team-admission-remediation/checks.json",
+    "source_stable": true
+  },
+  "limitations": [
+    "Source tested only, not deployed.",
+    "Default runtime team flag remains OFF.",
+    "No cancellation guarantee for an effect already in flight; covers admission.",
+    "Synthetic planners and isolated DB, not held-out real model results."
+  ]
+}

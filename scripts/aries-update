@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+"""Drain existing core queues and restart backend without logging out."""
+import argparse,json,subprocess,time,urllib.request
+p=argparse.ArgumentParser(description=__doc__)
+p.add_argument('--local-model',action='store_true',help='Also restart local-model gateway')
+a=p.parse_args()
+def request(path,method='GET',data=None):
+    req=urllib.request.Request('http://127.0.0.1:8000/api/aries'+path,method=method,
+        data=json.dumps(data).encode() if data is not None else None,headers={'Content-Type':'application/json'})
+    with urllib.request.urlopen(req,timeout=5) as r:return json.load(r)
+lease=request('/maintenance','POST')['token']
+restarted=False
+try:
+    for _ in range(240):
+        if request('/maintenance')['ready_to_restart']:break
+        time.sleep(.5)
+    else:raise SystemExit('Active tasks have not drained; update deferred without cancelling them')
+    units=['aries-core.service']
+    if a.local_model:units.insert(0,'aries-local-model.service')
+    subprocess.run(['systemctl','--user','restart',*units],check=True,timeout=60)
+    restarted=True
+    for _ in range(60):
+        try:
+            state=request('/maintenance')
+            if state['active']:raise RuntimeError('Old process still responding')
+            print('Backend updated after queued work drained; desktop session remains running.')
+            print(json.dumps(request('/desktop/capabilities'),ensure_ascii=False))
+            break
+        except Exception:time.sleep(.5)
+    else:raise SystemExit('Backend did not become ready within 30 seconds')
+finally:
+    if not restarted:
+        try:request('/maintenance','DELETE',{'token':lease})
+        except Exception:pass # Lease also expires automatically if the service is unavailable.

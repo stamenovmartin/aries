@@ -1,0 +1,18 @@
+{
+  "problem": "F-07 missing resource sensors allowed heavy jobs and released thermal holds; F-08 invalid workload declarations became light; F-03 planner budget trimming lost item provenance. Unrelated block events also erased thermal holds.",
+  "change": "Reject invalid explicit workload declarations, fail closed on missing/nonfinite/unavailable watched sensors even with force, retain holds until consecutive observed cooling, ignore unrelated events in hold state; record planner omissions with item identity, source and reason.",
+  "validation": {
+    "date": "2026-10-06T11:20:09.040144+00:00",
+    "passed": 298,
+    "total": 298,
+    "source_stable": true,
+    "checks": "experiments/product/governor-context-remediation/checks.json",
+    "before": "experiments/product/governor-context-remediation/before.json"
+  },
+  "limitations": [
+    "Source validation only; running services have not reloaded these changes.",
+    "Sensor tests are synthetic and isolated; no physical overheating experiment.",
+    "Legitimate lightweight checks remain exempt. Automation cost declarations require separate review.",
+    "Does not establish whole-product maturity."
+  ]
+}

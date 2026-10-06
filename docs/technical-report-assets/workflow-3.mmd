@@ -1,0 +1,11 @@
+stateDiagram-v2
+    [*] --> planned
+    planned --> executing
+    planned --> proposed: approval
+    proposed --> planned: exact approval
+    executing --> observed
+    observed --> verified
+    observed --> verification_failed
+    executing --> failed
+    executing --> interrupted
+    observed --> interrupted

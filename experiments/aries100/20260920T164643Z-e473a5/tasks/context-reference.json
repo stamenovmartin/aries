@@ -1,0 +1,118 @@
+{
+  "id": "b20bfcaf9c9b4d03aa754ff9e37ec4f7",
+  "request": "Read /home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt",
+  "state": "failed",
+  "updated_at": "2026-09-20T16:47:38.409363",
+  "created_at": "2026-09-20T16:47:37.020574",
+  "steps": [],
+  "cards": [
+    {
+      "title": "Goal outcome",
+      "text": "Planner decision retry/call budget exhausted; invalid attempts are recorded",
+      "evidence": "See persisted step observations and failures"
+    }
+  ],
+  "gaps": [
+    "Planner decision retry/call budget exhausted; invalid attempts are recorded"
+  ],
+  "agent_engine": "m14",
+  "working_reference": {
+    "original": "Read it.",
+    "resolved": {
+      "kind": "file",
+      "value": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt",
+      "task_id": "e9e7a10c92c4426193ba96b6398b96c8",
+      "evidence_id": "281dd1e238924a2db48ab69a0b1feafe",
+      "observed_at": "2026-09-20T16:47:11.633868+00:00",
+      "label": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt"
+    },
+    "ttl_minutes": 30
+  },
+  "collected_at": "2026-09-20T16:47:38.142700",
+  "evidence": [],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "Read /home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt",
+    "finished": false,
+    "max_steps": 8,
+    "contract": {
+      "supported": true,
+      "requirements": [
+        {
+          "capability": "file.read",
+          "path": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-09-20T16:47:38.164714+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "code": "NON_RETRYABLE",
+          "message": "Server error '503 Service Unavailable' for url 'http://127.0.0.1:11435/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+          "retryable": false
+        },
+        "seconds": 0.1156
+      },
+      {
+        "index": 1,
+        "timestamp": "2026-09-20T16:47:38.288911+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "code": "NON_RETRYABLE",
+          "message": "Server error '503 Service Unavailable' for url 'http://127.0.0.1:11435/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+          "retryable": false
+        },
+        "seconds": 0.1112
+      }
+    ],
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-09-20T16:47:38.155198+00:00"
+    },
+    "metrics": {
+      "planner_calls": 2,
+      "number_of_steps": 0,
+      "execution_time": 0.0,
+      "planner_time": 0.22688161599216983,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 1,
+      "invalid_decisions": 2,
+      "wrong_capability_selections": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 0,
+      "estimated_output_tokens": 0,
+      "task_final_status": "failed",
+      "wall_seconds": 0.266,
+      "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+    },
+    "completion_feedback": "Invalid decision: Server error '503 Service Unavailable' for url 'http://127.0.0.1:11435/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+    "summary": "Planner decision retry/call budget exhausted; invalid attempts are recorded"
+  },
+  "routing": {
+    "intent": "UNKNOWN",
+    "tool": "workspace",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "moderate",
+    "reason": "Known independently verifiable goal; bounded local planner suffices",
+    "execution_level": "local",
+    "source": "rule",
+    "blocked_reason": "",
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "final_evidence_refs": []
+}

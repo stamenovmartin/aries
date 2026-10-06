@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$(readlink -f "$0")")/.."
+export PYTHONPATH="$PWD/vendor/agentic-core:$PWD/vendor:$PWD:${PYTHONPATH:-}"
+exec .venv/bin/python - <<'PY'
+from datetime import datetime, timezone
+import json
+from pathlib import Path
+from aries.workspace.learning_eval import compare
+report = compare()
+out = Path('experiments/learning') / ('comparison-' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ') + '.json')
+out.write_text(json.dumps(report, indent=2, ensure_ascii=False))
+for version, result in report['versions'].items():
+    print(f"{version}: {result['passed']}/{result['total']}")
+print(json.dumps(report['statistics'], indent=2))
+print('Evidence:', out)
+PY

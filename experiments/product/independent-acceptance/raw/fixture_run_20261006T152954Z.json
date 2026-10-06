@@ -1,0 +1,113 @@
+{
+  "fixture_sha256": "23d358f65665955ed2f70c97ec2de6c9fd977d7b60fc5e93b1e89f08c3ac087b",
+  "conditions": {
+    "screensaver_active": "(false,)",
+    "idle_delay": "uint32 60",
+    "aries_core": "active",
+    "api": 200,
+    "commit": "694b032",
+    "dirty_paths": 260,
+    "flags": {
+      "primary_language": "en",
+      "listen_languages": [
+        "en"
+      ],
+      "whisper_model": "large-v3",
+      "override_file": "/home/stamenovmartin/aries/var/flags.env",
+      "flags": {
+        "ARIES_CAP_TOPK": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "the planner is sent the most relevant capabilities, not all of them"
+        },
+        "ARIES_COMPLETION_PROGRESS_GUARD": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "stop after two rejected completion proposals without an intervening action; preserve one correction opportunity"
+        },
+        "ARIES_CONTEXT_ENGINE": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "select memory, recent task history and permitted cached news with provenance, expiry and explicit missing-source coverage"
+        },
+        "ARIES_CONTRACT_FINISH": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "propose completion without another model call when every ordered goal condition has verified evidence; fresh independent recheck still required"
+        },
+        "ARIES_GOAL_TEAMS": {
+          "on": false,
+          "default": false,
+          "source": "default",
+          "governs": "decompose eligible goals into scoped temporary read-only runtime agents in the existing queue"
+        },
+        "ARIES_MK_FROZEN": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "Macedonian is frozen: it keeps working and keeps being tested, and nothing new is built on it"
+        },
+        "ARIES_PLAN_MEMORY": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "relevant remembered facts are injected into planning"
+        },
+        "ARIES_ROUTER_ABSTAIN": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "the router may answer ASK or OUT_OF_SCOPE rather than choosing the nearest action; off restores the pre-2026-10-03 instruction to pick the nearest one regardless"
+        },
+        "ARIES_STATE_SNAPSHOT": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "the planner is given the current desktop state before it plans"
+        },
+        "ARIES_TERMINAL_READ_FAILURE": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "stop repeated model planning after an actual nonretryable missing-file error for the exact single requested read"
+        },
+        "ARIES_TILE_HIDPI": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "desktop.tile reads the monitor's scale factor from Mutter and expects the device-pixel-aligned rectangle, so a correct tile on a fractionally scaled display is not reported unverified"
+        },
+        "ARIES_TRACE_FEWSHOT": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "similar past successful plans are offered to the planner"
+        },
+        "ARIES_TYPE_STRICT": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "input.type_text refuses any case that would silently lose characters — a NUL, a filtered control character, a line break into a single-line control, a rejected or partially landed write — instead of returning a success carrying landed=false"
+        },
+        "ARIES_VERIFY_FEEDBACK": {
+          "on": true,
+          "default": true,
+          "source": "default",
+          "governs": "the planner is told whether each past step's effect was INDEPENDENTLY OBSERVED, not merely whether the tool returned. Off leaves the loop, the retry policy and the step history untouched and removes only that — the one variable in the state-verification-feedback experiment"
+        }
+      }
+    }
+  },
+  "cases_run": 1,
+  "results": [
+    {
+      "id": "pz-01",
+      "verdict": "SUBMIT_FAILED",
+      "detail": "HTTP Error 405: Method Not Allowed"
+    }
+  ]
+}

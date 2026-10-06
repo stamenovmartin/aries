@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+"""Render a Macedonian ARIES report to offline HTML/PDF.
+
+Same pipeline as `scripts/aries-build-technical-report` — the stylesheet is
+imported from it rather than copied, so there is one source of truth for the
+page geometry, the fonts and the PDF footer. What this adds is parameters: the
+document, its asset directory and its evidence file, instead of one hardcoded
+path and a hardcoded section count.
+
+    ./scripts/aries-build-report --mermaid-js docs/architecture/mermaid.min.js
+
+Mermaid blocks are rendered to inline SVG, so the exported HTML needs neither
+JavaScript nor a network. Without --mermaid-js the existing SVGs are reused.
+"""
+import argparse
+import asyncio
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import re
+from pathlib import Path
+
+import markdown
+from playwright.async_api import async_playwright
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def house_css():
+    """The stylesheet of the existing report builder, imported not duplicated."""
+    path = ROOT / 'scripts/aries-build-technical-report'
+    loader = importlib.machinery.SourceFileLoader('aries_report_style', str(path))
+    spec = importlib.util.spec_from_loader(loader.name, loader)
+    module = importlib.util.module_from_spec(spec)
+    loader.exec_module(module)
+    return module.CSS
+
+
+async def build(doc: Path, assets: Path, evidence: Path, bundle: Path | None, footer_date: str):
+    text = doc.read_text()
+    assets.mkdir(parents=True, exist_ok=True)
+
+    # A link that does not resolve is a broken claim, so refuse to export.
+    missing = []
+    for target in re.findall(r'\]\(([^)]+)\)', text):
+        if target.startswith(('https:', 'http:', '#', 'mailto:')):
+            continue
+        if not (doc.parent / target.split('#')[0]).exists():
+            missing.append(target)
+    if missing:
+        raise ValueError('Broken links: ' + str(missing))
+
+    diagrams = re.findall(r'```mermaid\n(.*?)\n```', text, re.S)
+    headings = len(re.findall(r'^## ', text, re.M))
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        page = await browser.new_page(viewport={'width': 1000, 'height': 1300})
+        if bundle:
+            await page.set_content('<html><body></body></html>')
+            await page.add_script_tag(path=str(bundle))
+            await page.evaluate(
+                "mermaid.initialize({startOnLoad:false,theme:'neutral',securityLevel:'strict',"
+                "fontFamily:'DejaVu Sans',flowchart:{htmlLabels:false}})")
+        for i, diagram in enumerate(diagrams, 1):
+            svgfile = assets / f'diagram-{i}.svg'
+            if bundle:
+                svg = await page.evaluate(
+                    "async a => (await mermaid.render(a.id, a.text)).svg",
+                    {'id': f'ariesReport{i}', 'text': diagram})
+                svgfile.write_text(svg)
+                (assets / f'diagram-{i}.mmd').write_text(diagram + '\n')
+            text = text.replace('```mermaid\n' + diagram + '\n```',
+                                '<figure>' + svgfile.read_text() + '</figure>', 1)
+
+        body = markdown.markdown(text, extensions=['tables', 'fenced_code', 'toc'])
+        html = ('<!doctype html><html lang="mk"><head><meta charset="utf-8">'
+                '<title>ARIES — технички извештај</title><style>' + house_css()
+                + '</style></head><body>' + body + '</body></html>')
+        target = doc.with_suffix('.html')
+        target.write_text(html)
+
+        await page.goto(target.as_uri(), wait_until='load')
+        await page.evaluate('document.fonts.ready')
+        rendered = await page.locator('figure svg').count()
+        assert rendered == len(diagrams), f'{rendered} figures for {len(diagrams)} diagrams'
+        assert await page.locator('h2').count() == headings, 'heading count changed in render'
+        overflow = await page.evaluate('document.documentElement.scrollWidth > window.innerWidth')
+        assert not overflow, 'Horizontal overflow'
+        await page.screenshot(path=str(assets / 'preview.png'))
+        pdf = doc.with_suffix('.pdf')
+        await page.pdf(path=str(pdf), print_background=True, prefer_css_page_size=True,
+                       display_header_footer=True, header_template='<span></span>',
+                       footer_template='<div style="font-size:8px;width:100%;text-align:center;'
+                       f'color:#667">ARIES · {footer_date} · '
+                       '<span class="pageNumber"></span> / <span class="totalPages"></span></div>')
+        await browser.close()
+
+    pages = len(re.findall(rb'/Type\s*/Page[^s]', pdf.read_bytes()))
+    report = {
+        'source': str(doc.relative_to(ROOT)) if doc.is_relative_to(ROOT) else str(doc),
+        'source_sha256': hashlib.sha256(doc.read_bytes()).hexdigest(),
+        'sections': headings,
+        'rendered_diagrams': len(diagrams),
+        'pdf_pages': pages,
+        'broken_links': missing,
+        'horizontal_overflow': overflow,
+        'artifacts': {f.name: hashlib.sha256(f.read_bytes()).hexdigest()
+                      for f in [doc.with_suffix('.html'), pdf]},
+    }
+    evidence.parent.mkdir(parents=True, exist_ok=True)
+    evidence.write_text(json.dumps(report, indent=2) + '\n')
+    print(json.dumps(report, indent=2))
+    print(pdf)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--doc', type=Path, default=ROOT / 'docs/ARIES_REPORT.md')
+    parser.add_argument('--assets', type=Path, default=ROOT / 'docs/report-assets')
+    parser.add_argument('--evidence', type=Path,
+                        default=ROOT / 'experiments/documentation/20260930/build-validation.json')
+    parser.add_argument('--mermaid-js', type=Path)
+    parser.add_argument('--date', default='30.09.2026')
+    a = parser.parse_args()
+    asyncio.run(build(a.doc, a.assets, a.evidence, a.mermaid_js, a.date))

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/tmp/aries-learning-rollback-k6qragg0/tests/test_learning_controls.py", line 6, in <module>
+    from tests._bootstrap import bootstrap,check,reset_db,run_module
+  File "/tmp/aries-learning-rollback-k6qragg0/tests/_bootstrap.py", line 17, in <module>
+    from tests._harness_shim import bootstrap, check, run_module  # noqa: E402,F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/aries-learning-rollback-k6qragg0/tests/_harness_shim.py", line 10, in <module>
+    from _harness import bootstrap, check, run_module  # noqa: E402,F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named '_harness'

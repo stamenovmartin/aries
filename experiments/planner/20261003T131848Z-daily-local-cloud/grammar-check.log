@@ -1,0 +1,26 @@
+--- test_grammar_safe_neutralises_the_forms_that_broke_it
+PASS  bare string: bounded
+PASS  bare string: no refused keyword
+PASS  titled: bounded
+PASS  titled: no refused keyword
+PASS  oversized: bounded
+PASS  oversized: no refused keyword
+PASS  patterned: bounded
+PASS  patterned: no refused keyword
+PASS  an enum keeps its choices
+PASS  an integer keeps its bounds
+PASS  a boolean is left alone
+PASS  an array's items are bounded too
+PASS  a non-dict is not a crash
+--- test_no_keyword_the_compiler_refuses
+PASS  no refused keyword survives into the grammar: none
+--- test_no_string_in_the_planner_schema_is_unbounded
+PASS  every string is bounded, or an enum: all bounded
+PASS  no bound exceeds GRAMMAR_STRING_MAX=512: none
+--- test_the_planner_can_still_name_every_capability_it_may_use
+PASS  every allowed capability is offered (58 of 58)
+PASS  the action verbs survive
+PASS  finish and fail can still be withheld
+--- test_the_schema_stays_small_enough_to_expand
+PASS  schema is 4236 chars, under 16000
+ALL PASSED

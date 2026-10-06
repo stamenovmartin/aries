@@ -1,0 +1,105 @@
+{
+  "id": "d776660373f24451aae6bf7d3677a77d",
+  "request": "List running processes.",
+  "state": "failed",
+  "updated_at": "2026-09-20T16:47:26.269217",
+  "created_at": "2026-09-20T16:47:24.444834",
+  "steps": [],
+  "cards": [
+    {
+      "title": "Goal outcome",
+      "text": "Planner decision retry/call budget exhausted; invalid attempts are recorded",
+      "evidence": "See persisted step observations and failures"
+    }
+  ],
+  "gaps": [
+    "Planner decision retry/call budget exhausted; invalid attempts are recorded"
+  ],
+  "agent_engine": "m14",
+  "collected_at": "2026-09-20T16:47:25.944770",
+  "evidence": [],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "List running processes.",
+    "finished": false,
+    "max_steps": 8,
+    "contract": {
+      "supported": true,
+      "requirements": [
+        {
+          "capability": "system.processes"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-09-20T16:47:25.968968+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "code": "NON_RETRYABLE",
+          "message": "Server error '503 Service Unavailable' for url 'http://127.0.0.1:11435/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+          "retryable": false
+        },
+        "seconds": 0.1665
+      },
+      {
+        "index": 1,
+        "timestamp": "2026-09-20T16:47:26.146424+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "code": "NON_RETRYABLE",
+          "message": "Server error '503 Service Unavailable' for url 'http://127.0.0.1:11435/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+          "retryable": false
+        },
+        "seconds": 0.1116
+      }
+    ],
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-09-20T16:47:25.957551+00:00"
+    },
+    "metrics": {
+      "planner_calls": 2,
+      "number_of_steps": 0,
+      "execution_time": 0.0,
+      "planner_time": 0.278140808979515,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 1,
+      "invalid_decisions": 2,
+      "wrong_capability_selections": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 0,
+      "estimated_output_tokens": 0,
+      "task_final_status": "failed",
+      "wall_seconds": 0.324,
+      "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+    },
+    "completion_feedback": "Invalid decision: Server error '503 Service Unavailable' for url 'http://127.0.0.1:11435/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+    "summary": "Planner decision retry/call budget exhausted; invalid attempts are recorded"
+  },
+  "routing": {
+    "intent": "UNKNOWN",
+    "tool": "workspace",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "moderate",
+    "reason": "Known independently verifiable goal; bounded local planner suffices",
+    "execution_level": "local",
+    "source": "rule",
+    "blocked_reason": "",
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "final_evidence_refs": []
+}

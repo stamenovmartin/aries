@@ -1,0 +1,229 @@
+{"ts": "2026-09-17T18:53:42.052747+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-09-17T18:53:42.053095+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_a_dead_holder_is_noticed_not_assumed
+{"ts": "2026-09-17T18:53:42.654038+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor taken (pid 31659): test", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 135, "func": "acquire"}}
+PASS  held
+{"ts": "2026-09-17T18:53:42.655313+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "The sleep inhibitor's holder exited unexpectedly (pid 31659)", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 103, "func": "held"}}
+PASS  ARIES notices it is no longer held rather than trusting a flag
+PASS  and logind agrees it is gone
+--- test_a_hold_is_released_when_the_sensor_goes_blind
+{"ts": "2026-09-17T18:53:42.796923+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy deferred for heavy_cpu: x86_pkg_temp is at 90.0 °C, at or above the 80 °C limit", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+{"ts": "2026-09-17T18:53:42.802049+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy resumed for heavy_cpu: released: temperature can no longer be read (sensor disappeared)", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+PASS  a hold is not held forever by a sensor that stopped answering
+PASS  and the release says so honestly rather than claiming it cooled
+--- test_a_lightweight_automation_measures_nothing
+PASS  deciding about lightweight work reads no sensor
+--- test_a_lost_inhibitor_is_retaken_on_the_next_tick
+{"ts": "2026-09-17T18:53:43.566556+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor taken (pid 31693): ARIES Background Mode is on — automations keep running while the display is off", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 135, "func": "acquire"}}
+{"ts": "2026-09-17T18:53:43.586998+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (test): took the sleep inhibitor (taken); recorded the previous display timeout (0s); display timeout set to 600s", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+PASS  held after the first reconcile
+{"ts": "2026-09-17T18:53:43.589515+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "The sleep inhibitor's holder exited unexpectedly (pid 31693)", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 103, "func": "held"}}
+PASS  and lost when its holder dies
+{"ts": "2026-09-17T18:53:44.200711+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor taken (pid 31704): ARIES Background Mode is on — automations keep running while the display is off", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 135, "func": "acquire"}}
+{"ts": "2026-09-17T18:53:44.203346+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (tick): took the sleep inhibitor (taken)", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+PASS  the next tick takes it again
+{"ts": "2026-09-17T18:53:44.207800+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor released", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 160, "func": "release"}}
+--- test_a_person_pressing_run_now_is_the_explicit_consent
+PASS  Run now runs heavy work that is not enabled for unattended use
+{"ts": "2026-09-17T18:53:44.452694+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy deferred for heavy_gpu: x86_pkg_temp is at 88.0 °C, at or above the 80 °C limit", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+PASS  but Run now does not run it on an overheating machine
+PASS  and says which limit stopped it
+PASS  naming the temperature and the limit
+--- test_a_thermal_deferral_takes_a_hold_that_survives_the_reading_dropping
+{"ts": "2026-09-17T18:53:44.570477+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy deferred for heavy_cpu: x86_pkg_temp is at 84.0 °C, at or above the 80 °C limit", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+PASS  84 °C defers heavy CPU work
+PASS  78 °C is under the 80 °C limit but not under the 75 °C margin — still held
+PASS  so the work is still refused
+PASS  as held rather than as newly too hot
+PASS  one cool reading is not enough — a sensor can blink
+{"ts": "2026-09-17T18:53:44.589901+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy resumed for heavy_cpu: 70.0 °C, back under 75 °C for 2 checks", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+PASS  two in a row is a trend, and the hold is released
+PASS  and the work runs again
+PASS  the release is recorded as well as the deferral
+PASS  with the evidence that released it
+--- test_allow_suspend_means_no_inhibitor
+{"ts": "2026-09-17T18:53:44.697138+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (test): recorded the previous display timeout (0s); display timeout set to 600s", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+PASS  Background Mode with 'allow normal suspend' holds nothing back
+PASS  but Background Mode is still on
+--- test_an_unreadable_sensor_is_not_a_zero_and_not_a_prison
+PASS  work runs when the temperature cannot be read
+PASS  but the verdict says the guard could not check
+PASS  and the measurement carries the reason, not a zero
+--- test_background_mode_is_user_only
+PASS  power.background_mode can only be set by a person
+PASS  power.allow_suspend can only be set by a person
+PASS  power.allow_gpu_jobs can only be set by a person
+--- test_changing_power_needs_more_than_edit_permission
+PASS  reading the power panel needs only view_data
+PASS  stopping the machine sleeping is a system control, not a content edit
+--- test_every_shipped_automation_declares_its_cost
+PASS  aries.attention declares a workload class ARIES knows
+PASS  aries.brief declares a workload class ARIES knows
+PASS  aries.dashboards declares a workload class ARIES knows
+PASS  aries.data declares a workload class ARIES knows
+PASS  aries.health declares a workload class ARIES knows
+PASS  aries.learning declares a workload class ARIES knows
+PASS  aries.news declares a workload class ARIES knows
+PASS  and nothing shipped today is heavy, so nothing is being refused yet
+--- test_gsettings_type_prefix_is_not_read_as_a_value
+PASS  'uint32 0' reads as 0, not 320
+PASS  'uint32 1800' reads as 1800
+PASS  a bare number still reads
+PASS  an unreadable setting is None, not a guess
+--- test_heavy_work_is_blocked_unattended_until_it_is_enabled
+{"ts": "2026-09-17T18:53:44.869090+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy blocked for heavy_cpu: sustained high cpu work is not enabled for while the display is off — turn on “power.allow_heavy_cpu” to allow it", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+PASS  sustained CPU work is refused while the display is off
+PASS  with the reason 'not enabled', not a threshold
+PASS  and names the setting that would allow it
+{"ts": "2026-09-17T18:53:44.870812+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy blocked for heavy_gpu: sustained gpu work is not enabled for while the display is off — turn on “power.allow_gpu_jobs” to allow it", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+PASS  GPU work is refused for the same reason
+PASS  and names its own setting
+PASS  enabling it lets CPU work through
+{"ts": "2026-09-17T18:53:44.879289+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy blocked for heavy_gpu: sustained gpu work is not enabled for while the display is off — turn on “power.allow_gpu_jobs” to allow it", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+PASS  and does not let GPU work through — the gates are separate
+PASS  every refusal is recorded
+PASS  with the workload it was about
+--- test_heavy_work_permissions_are_user_only
+PASS  power.allow_heavy_cpu can only be set by a person
+PASS  power.allow_gpu_jobs can only be set by a person
+--- test_it_does_not_claim_credit_it_has_not_earned
+PASS  it says the inhibitor changes nothing on mains power
+PASS  and that it still matters on battery
+--- test_lightweight_work_is_never_deferred
+PASS  light work runs at 99 °C and 99 % CPU
+PASS  and says why: lightweight work always runs
+PASS  inference_light work runs at 99 °C and 99 % CPU
+PASS  and says why: lightweight inference work always runs
+PASS  nothing was recorded, because nothing was refused
+--- test_measuring_the_real_machine
+PASS  CPU utilisation reads as a percentage, or says why not
+PASS  and it is a plausible number (3.7 %)
+PASS  the hottest sensor is plausible (50.0 °C, pch_cannonlake)
+PASS  the GPU reads as a percentage (0.0 %)
+PASS  a second reading inside the cache window is the same one
+--- test_only_heavy_work_is_budgeted_at_all
+PASS  lightweight work is not in the budget register
+PASS  heavy work is
+PASS  and leaves when it finishes
+--- test_reconcile_is_idempotent
+{"ts": "2026-09-17T18:53:46.369653+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor taken (pid 31829): ARIES Background Mode is on — automations keep running while the display is off", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 135, "func": "acquire"}}
+{"ts": "2026-09-17T18:53:46.373178+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (test): took the sleep inhibitor (taken); recorded the previous display timeout (0s); display timeout set to 600s", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+PASS  the first pass does the work
+PASS  the second does nothing, so it is safe on every tick
+{"ts": "2026-09-17T18:53:46.376238+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor released", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 160, "func": "release"}}
+--- test_reconcile_takes_and_releases_with_the_setting
+{"ts": "2026-09-17T18:53:47.079833+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor taken (pid 31872): ARIES Background Mode is on — automations keep running while the display is off", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 135, "func": "acquire"}}
+{"ts": "2026-09-17T18:53:47.098655+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (test): took the sleep inhibitor (taken); recorded the previous display timeout (0s); display timeout set to 600s", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+PASS  switching Background Mode on takes the inhibitor
+PASS  and says so
+PASS  the display timeout is applied
+{"ts": "2026-09-17T18:53:47.142920+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor released", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 160, "func": "release"}}
+{"ts": "2026-09-17T18:53:47.161542+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (test): released the sleep inhibitor (released); display timeout restored to 0s", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+PASS  switching it off releases the inhibitor
+PASS  and restores the display timeout
+--- test_taking_and_releasing_is_visible_to_logind
+PASS  nothing is held to begin with
+{"ts": "2026-09-17T18:53:47.765338+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor taken (pid 31883): test", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 135, "func": "acquire"}}
+PASS  the inhibitor can be taken (taken)
+PASS  ARIES believes it holds it
+PASS  and logind agrees it is held
+PASS  as a sleep/block inhibitor
+PASS  taking it again is idempotent
+{"ts": "2026-09-17T18:53:47.769993+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor released", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 160, "func": "release"}}
+PASS  releasing works
+PASS  ARIES no longer believes it holds it
+PASS  and logind no longer lists it
+PASS  releasing again is harmless
+--- test_the_api_toggles_and_reconciles_at_once
+{"ts": "2026-09-17T18:53:48.171613+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the power endpoint answers
+PASS  with Background Mode off to begin with
+{"ts": "2026-09-17T18:53:48.780997+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor taken (pid 31939): ARIES Background Mode is on — automations keep running while the display is off", "env": "test", "correlation_id": "461076ab-5187-431a-98fd-415593cdf4cd", "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 135, "func": "acquire"}}
+{"ts": "2026-09-17T18:53:48.800184+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (user changed it): took the sleep inhibitor (taken); recorded the previous display timeout (0s); display timeout set to 600s", "env": "test", "correlation_id": "461076ab-5187-431a-98fd-415593cdf4cd", "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+{"ts": "2026-09-17T18:53:48.849450+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  it can be switched on over the API
+PASS  and reconciled in the same request, not on the next tick
+PASS  so the inhibitor is already held when the call returns
+{"ts": "2026-09-17T18:53:48.857604+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor released", "env": "test", "correlation_id": "c624ebf8-e3a8-4e54-ad69-280156d79e81", "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 160, "func": "release"}}
+{"ts": "2026-09-17T18:53:48.860817+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (user changed it): released the sleep inhibitor (released); display timeout restored to 0s", "env": "test", "correlation_id": "c624ebf8-e3a8-4e54-ad69-280156d79e81", "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+{"ts": "2026-09-17T18:53:48.900011+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  and switched off again
+{"ts": "2026-09-17T18:53:48.904502+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an empty change is refused rather than silently doing nothing
+{"ts": "2026-09-17T18:53:48.908574+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an impossible display timeout is refused
+--- test_the_budget_never_silently_kills_stateful_work
+PASS  both are being watched
+PASS  neither is over budget yet
+{"ts": "2026-09-17T18:53:48.996439+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy over_budget for heavy_cpu: a.stateless has run 2 min, past its 1 min budget. Asked to stop at its next checkpoint.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+{"ts": "2026-09-17T18:53:48.996613+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy over_budget for heavy_cpu: a.stateful has run 2 min, past its 1 min budget. It holds state, so it is being left to finish — its next run waits instead.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+PASS  both are found over budget
+PASS  the stateless one is asked to stop
+PASS  the stateful one is NOT — it would lose work
+PASS  and the record says which was left to finish, and why
+PASS  nothing was cancelled — stopping is a flag a job reads, not a signal
+PASS  and it is recorded once, not on every tick afterwards
+--- test_the_inhibitor_is_a_sleep_block_never_an_idle_one
+PASS  ARIES inhibits sleep
+PASS  and never idle, which would stop the display blanking
+PASS  in block mode, so the suspend does not happen rather than being delayed
+--- test_the_margin_is_reachable
+PASS  the coolest limit minus the widest margin is still a temperature a machine reaches
+PASS  and the margin may be zero, for someone who wants no hysteresis at all
+--- test_the_previous_display_timeout_is_recorded_before_it_is_changed
+{"ts": "2026-09-17T18:53:49.688358+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor taken (pid 32034): ARIES Background Mode is on — automations keep running while the display is off", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 135, "func": "acquire"}}
+{"ts": "2026-09-17T18:53:49.708211+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (test): took the sleep inhibitor (taken); recorded the previous display timeout (1800s); display timeout set to 300s", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+PASS  what was there before is written down first
+PASS  before the new value is applied
+{"ts": "2026-09-17T18:53:49.749014+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.inhibit", "msg": "Sleep inhibitor released", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "inhibit.py", "line": 160, "func": "release"}}
+{"ts": "2026-09-17T18:53:49.754872+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.service", "msg": "Background Mode reconciled (test): released the sleep inhibitor (released); display timeout restored to 1800s", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "service.py", "line": 78, "func": "reconcile"}}
+PASS  and put back exactly on the way out
+PASS  with nothing left to restore afterwards
+--- test_the_resource_panel_is_served_and_predicts_the_gate
+{"ts": "2026-09-17T18:53:49.887371+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the power endpoint carries the resource policy
+PASS  with the measurement
+PASS  and the limits
+PASS  every workload class is listed, including the ones nothing uses
+PASS  light work shows as allowed
+PASS  and heavy CPU work shows what the gate would actually do
+PASS  with the same reason the gate would give
+{"ts": "2026-09-17T18:53:49.888864+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the vocabulary is served, so the UI hard-codes nothing
+{"ts": "2026-09-17T18:53:49.892040+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  and the decisions are queryable
+--- test_the_runner_refuses_and_records_rather_than_running
+{"ts": "2026-09-17T18:53:49.975911+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.power.governor", "msg": "resource policy blocked for heavy_gpu: sustained gpu work is not enabled for while the display is off — turn on “power.allow_gpu_jobs” to allow it", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "governor.py", "line": 257, "func": "_record"}}
+PASS  a heavy automation does not run while the policy refuses it
+PASS  and the reason names the policy
+PASS  the refusal is recorded as a run, so it is visible rather than silent
+PASS  with the policy's own words
+--- test_the_snapshot_is_measured_not_remembered
+PASS  the snapshot reports 'background_mode'
+PASS  the snapshot reports 'allow_suspend'
+PASS  the snapshot reports 'display'
+PASS  the snapshot reports 'system'
+PASS  the snapshot reports 'inhibitor'
+PASS  the snapshot reports 'suspend_policy'
+PASS  the snapshot reports 'effect'
+PASS  the display state is one of three honest answers
+PASS  the inhibitor section names what and how
+PASS  and whether it is actually active
+PASS  the GPU note distinguishes 'the gate is not built' from 'nothing meets it yet' — only the second is true now
+--- test_thresholds_are_changeable_from_the_power_screen
+{"ts": "2026-09-17T18:53:50.510767+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the thresholds are writable through the power route
+PASS  temperature
+PASS  CPU
+PASS  budget
+PASS  and the permission switch
+{"ts": "2026-09-17T18:53:50.515138+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an impossible temperature limit is refused by the schema
+--- test_utilisation_defers_without_taking_a_hold
+PASS  a busy processor defers sustained CPU work
+PASS  with its own code
+PASS  no hold is taken
+PASS  and the GPU gate is not affected by the processor
+PASS  a busy GPU defers GPU work
+PASS  and a quiet machine takes it immediately, with nothing to release
+ALL PASSED

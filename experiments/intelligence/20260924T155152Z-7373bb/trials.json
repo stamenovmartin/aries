@@ -1,0 +1,721 @@
+{
+  "B": [
+    {
+      "goal": "open YouTube",
+      "expected_level": "code",
+      "expected_intent": "OPEN_URL",
+      "repeat": 0,
+      "route": {
+        "intent": "OPEN_URL",
+        "tool": "browser.open",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.0225
+    },
+    {
+      "goal": "open Gmail",
+      "expected_level": "code",
+      "expected_intent": "OPEN_URL",
+      "repeat": 0,
+      "route": {
+        "intent": "OPEN_URL",
+        "tool": "browser.open",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.0421
+    },
+    {
+      "goal": "show system status",
+      "expected_level": "code",
+      "expected_intent": "SYSTEM_ACTION",
+      "repeat": 0,
+      "route": {
+        "intent": "SYSTEM_ACTION",
+        "tool": "system.status",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.02
+    },
+    {
+      "goal": "open Downloads",
+      "expected_level": "code",
+      "expected_intent": "FILE_ACTION",
+      "repeat": 0,
+      "route": {
+        "intent": "FILE_ACTION",
+        "tool": "workspace",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.0286
+    },
+    {
+      "goal": "run system health",
+      "expected_level": "code",
+      "expected_intent": "SYSTEM_ACTION",
+      "repeat": 0,
+      "route": {
+        "intent": "SYSTEM_ACTION",
+        "tool": "system.status",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.0258
+    },
+    {
+      "goal": "show me something interesting from today's tech news",
+      "expected_level": "local",
+      "expected_intent": "SEARCH_WEB",
+      "repeat": 0,
+      "route": {
+        "intent": "SEARCH_WEB",
+        "tool": "none",
+        "confidence": 0.95,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "The request is asking to find or browse news/information.",
+        "execution_level": "local",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 236,
+        "output_tokens": 50
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 3.5832
+    },
+    {
+      "goal": "Classify this email priority: maintenance completed successfully.",
+      "expected_level": "local",
+      "expected_intent": "CLASSIFY",
+      "repeat": 0,
+      "route": {
+        "intent": "CLASSIFY",
+        "tool": "none",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Determining the priority of an email based on its content",
+        "execution_level": "local",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 237,
+        "output_tokens": 60
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 1.1699
+    },
+    {
+      "goal": "Decide whether to notify me about a routine backup completion.",
+      "expected_level": "local",
+      "expected_intent": "CLASSIFY",
+      "repeat": 0,
+      "route": {
+        "intent": "CLASSIFY",
+        "tool": "none",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Determining notification importance for a routine task",
+        "execution_level": "local",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 239,
+        "output_tokens": 57
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 1.0877
+    },
+    {
+      "goal": "Extract dates from: the meeting is on 2026-10-05.",
+      "expected_level": "local",
+      "expected_intent": "EXTRACT",
+      "repeat": 0,
+      "route": {
+        "intent": "EXTRACT",
+        "tool": "extractor",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "The request is specifically asking to pull out dates from a given text.",
+        "execution_level": "local",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 247,
+        "output_tokens": 64
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 1.2915
+    },
+    {
+      "goal": "Compare three research papers and evaluate their conflicting methodologies.",
+      "expected_level": "cloud",
+      "expected_intent": "RESEARCH",
+      "repeat": 0,
+      "route": {
+        "intent": "RESEARCH",
+        "tool": "none",
+        "confidence": 1.0,
+        "requires_cloud": true,
+        "estimated_complexity": "complex",
+        "reason": "The request involves comparing multiple research papers and evaluating their methodologies.",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 237,
+        "output_tokens": 53
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 1.1167
+    },
+    {
+      "goal": "Analyze the architecture of a large codebase and identify dependency cycles.",
+      "expected_level": "cloud",
+      "expected_intent": "CODING",
+      "repeat": 0,
+      "route": {
+        "intent": "CODING",
+        "tool": "none",
+        "confidence": 1.0,
+        "requires_cloud": true,
+        "estimated_complexity": "complex",
+        "reason": "The request involves analyzing the architecture of a codebase and identifying dependency cycles, which falls under the category of code analysis and debugging.",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 241,
+        "output_tokens": 67
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 1.2693
+    },
+    {
+      "goal": "Produce a research synthesis from conflicting experimental studies.",
+      "expected_level": "cloud",
+      "expected_intent": "RESEARCH",
+      "repeat": 0,
+      "route": {
+        "intent": "RESEARCH",
+        "tool": "none",
+        "confidence": 1.0,
+        "requires_cloud": true,
+        "estimated_complexity": "complex",
+        "reason": "Requires comparing and synthesizing multiple studies",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 237,
+        "output_tokens": 49
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.9303
+    },
+    {
+      "goal": "Solve a complex debugging problem involving an intermittent distributed race condition.",
+      "expected_level": "cloud",
+      "expected_intent": "CODING",
+      "repeat": 0,
+      "route": {
+        "intent": "CODING",
+        "tool": "none",
+        "confidence": 1.0,
+        "requires_cloud": true,
+        "estimated_complexity": "complex",
+        "reason": "The request involves solving a coding problem specifically related to debugging.",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 240,
+        "output_tokens": 53
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.9847
+    }
+  ],
+  "A": [
+    {
+      "goal": "open YouTube",
+      "expected_intent": "OPEN_URL",
+      "response": {
+        "decision": {
+          "intent": "OPEN_URL",
+          "tool": "browser.open",
+          "confidence": 0.99,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "The user wants to open the YouTube website."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9556,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 45,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9556,
+          "eval_count": 45,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 9.3003
+    },
+    {
+      "goal": "open Gmail",
+      "expected_intent": "OPEN_URL",
+      "response": {
+        "decision": {
+          "intent": "OPEN_APP",
+          "tool": "desktop.launch",
+          "confidence": 0.98,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "The user requests opening the Gmail application."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9555,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 43,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9555,
+          "eval_count": 43,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": false,
+      "seconds": 8.8504
+    },
+    {
+      "goal": "show system status",
+      "expected_intent": "SYSTEM_ACTION",
+      "response": {
+        "decision": {
+          "intent": "SYSTEM_ACTION",
+          "tool": "system.status",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "The user requests the current system status."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9558,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 41,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9558,
+          "eval_count": 41,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 7.9215
+    },
+    {
+      "goal": "open Downloads",
+      "expected_intent": "FILE_ACTION",
+      "response": {
+        "decision": {
+          "intent": "FILE_ACTION",
+          "tool": "file.list",
+          "confidence": 0.96,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "The user wants to open the local Downloads folder."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9559,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 45,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9559,
+          "eval_count": 45,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 9.0889
+    },
+    {
+      "goal": "run system health",
+      "expected_intent": "SYSTEM_ACTION",
+      "response": {
+        "decision": {
+          "intent": "SYSTEM_ACTION",
+          "tool": "system.status",
+          "confidence": 0.98,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "The request asks to check system health, which maps to system status."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9556,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 49,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9556,
+          "eval_count": 49,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 8.9422
+    },
+    {
+      "goal": "show me something interesting from today's tech news",
+      "expected_intent": "SEARCH_WEB",
+      "response": {
+        "decision": {
+          "intent": "SEARCH_WEB",
+          "tool": "browser.search",
+          "confidence": 0.97,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "The user wants an interesting item from today's technology news, requiring a search for current coverage."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9561,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 53,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9561,
+          "eval_count": 53,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 9.3542
+    },
+    {
+      "goal": "Classify this email priority: maintenance completed successfully.",
+      "expected_intent": "CLASSIFY",
+      "response": {
+        "decision": {
+          "intent": "CLASSIFY",
+          "tool": "classifier",
+          "confidence": 0.99,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "The request asks to classify an email's priority based on a brief maintenance completion message."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9562,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 51,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9562,
+          "eval_count": 51,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 9.2629
+    },
+    {
+      "goal": "Decide whether to notify me about a routine backup completion.",
+      "expected_intent": "CLASSIFY",
+      "response": {
+        "decision": {
+          "intent": "CLASSIFY",
+          "tool": "classifier",
+          "confidence": 0.96,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "The request asks for a notification decision about a routine backup completion, not for execution of an action."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9568,
+            "cached_input_tokens": 3328,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 54,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9568,
+          "eval_count": 54,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 7.5587
+    },
+    {
+      "goal": "Extract dates from: the meeting is on 2026-10-05.",
+      "expected_intent": "EXTRACT",
+      "response": {
+        "decision": {
+          "intent": "EXTRACT",
+          "tool": "extractor",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "The request asks to extract a date from supplied text."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9572,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 44,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9572,
+          "eval_count": 44,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 9.2319
+    },
+    {
+      "goal": "Compare three research papers and evaluate their conflicting methodologies.",
+      "expected_intent": "RESEARCH",
+      "response": {
+        "decision": {
+          "intent": "RESEARCH",
+          "tool": "workspace",
+          "confidence": 0.99,
+          "requires_cloud": true,
+          "estimated_complexity": "complex",
+          "reason": "Requires comparing three research papers, analyzing methodological differences, and evaluating conflicting approaches."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9562,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 49,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9562,
+          "eval_count": 49,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 8.6337
+    },
+    {
+      "goal": "Analyze the architecture of a large codebase and identify dependency cycles.",
+      "expected_intent": "CODING",
+      "response": {
+        "decision": {
+          "intent": "CODING",
+          "tool": "workspace",
+          "confidence": 0.98,
+          "requires_cloud": true,
+          "estimated_complexity": "complex",
+          "reason": "Requires inspecting a large codebase, mapping architectural dependencies, and detecting dependency cycles."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9567,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 50,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9567,
+          "eval_count": 50,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 8.373
+    },
+    {
+      "goal": "Produce a research synthesis from conflicting experimental studies.",
+      "expected_intent": "RESEARCH",
+      "response": {
+        "decision": {
+          "intent": "RESEARCH",
+          "tool": "workspace",
+          "confidence": 0.99,
+          "requires_cloud": true,
+          "estimated_complexity": "complex",
+          "reason": "Synthesizing conflicting experimental studies requires evaluating methods, evidence quality, and sources of disagreement to form a supported conclusion."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9561,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 57,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9561,
+          "eval_count": 57,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 8.4969
+    },
+    {
+      "goal": "Solve a complex debugging problem involving an intermittent distributed race condition.",
+      "expected_intent": "CODING",
+      "response": {
+        "decision": {
+          "intent": "CODING",
+          "tool": "workspace",
+          "confidence": 0.99,
+          "requires_cloud": true,
+          "estimated_complexity": "complex",
+          "reason": "Debugging an intermittent distributed race condition requires detailed code analysis, concurrency reasoning, and investigation across system components."
+        },
+        "usage": {
+          "usage_details": {
+            "input_tokens": 9564,
+            "cached_input_tokens": 7424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 55,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 9564,
+          "eval_count": 55,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "scope": "Explicit cloud classification baseline; not tool completion"
+      },
+      "intent_correct": true,
+      "seconds": 9.6363
+    }
+  ]
+}

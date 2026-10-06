@@ -1,0 +1,96 @@
+{
+  "id": "e014f98e693546508ea708b338bcb033",
+  "request": "Create a file called aries-m14-test.txt in /home/stamenovmartin/Documents/ARIES-Demo/20260917T203400Z-51901a containing:\nARIES M14 verified execution\nThen read it back.",
+  "state": "failed",
+  "updated_at": "2026-09-17T20:34:03.431110",
+  "created_at": "2026-09-17T20:34:00.297450",
+  "steps": [],
+  "cards": [
+    {
+      "title": "Goal outcome",
+      "text": "Planner output remained invalid after two recorded attempts",
+      "evidence": "See persisted step observations and failures"
+    }
+  ],
+  "gaps": [
+    "Planner output remained invalid after two recorded attempts"
+  ],
+  "agent_engine": "m14",
+  "collected_at": "2026-09-17T20:34:00.754788",
+  "evidence": [],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "Create a file called aries-m14-test.txt in /home/stamenovmartin/Documents/ARIES-Demo/20260917T203400Z-51901a containing:\nARIES M14 verified execution\nThen read it back.",
+    "finished": false,
+    "max_steps": 8,
+    "contract": {
+      "supported": true,
+      "requirements": [
+        {
+          "capability": "file.write",
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T203400Z-51901a/aries-m14-test.txt",
+          "content_sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616"
+        },
+        {
+          "capability": "file.read",
+          "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T203400Z-51901a/aries-m14-test.txt",
+          "content_sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-09-17T20:34:00.778330+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "message": "Client error '400 Bad Request' for url 'http://127.0.0.1:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
+          "retryable": false
+        },
+        "seconds": 2.5644
+      },
+      {
+        "index": 1,
+        "timestamp": "2026-09-17T20:34:03.353965+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "message": "Client error '400 Bad Request' for url 'http://127.0.0.1:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
+          "retryable": false
+        },
+        "seconds": 0.0543
+      }
+    ],
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-09-17T20:34:00.767918+00:00"
+    },
+    "metrics": {
+      "planner_calls": 2,
+      "number_of_steps": 0,
+      "execution_time": 0.0,
+      "planner_time": 2.6187008890010475,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 1,
+      "invalid_decisions": 2,
+      "wrong_capability_selections": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 0,
+      "estimated_output_tokens": 0,
+      "task_final_status": "failed",
+      "wall_seconds": 2.67
+    },
+    "completion_feedback": "Invalid decision: Client error '400 Bad Request' for url 'http://127.0.0.1:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
+    "summary": "Planner output remained invalid after two recorded attempts"
+  },
+  "final_evidence_refs": []
+}

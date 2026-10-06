@@ -1,0 +1,81 @@
+{
+  "scope": "Developer-labelled routing fixture. Not a held-out task-completion or energy benchmark.",
+  "cases": 13,
+  "routing_accuracy": 1.0,
+  "intent_accuracy": 1.0,
+  "local_intent_accuracy": 1.0,
+  "cloud_escalation_rate": 0.3076923076923077,
+  "false_escalation_rate": 0.0,
+  "missed_escalation_rate": 0.0,
+  "mean_routing_seconds": 0.8901769230769231,
+  "native_local_input_tokens": 1914,
+  "native_local_output_tokens": 453,
+  "B_scope": "Routing decision only; cloud recommendations do not execute cloud work in this fixture.",
+  "A_scope": "Actual all-cloud classification only",
+  "A": {
+    "requests": 13,
+    "successful_responses": 13,
+    "native_input_tokens": 124301,
+    "native_output_tokens": 636
+  },
+  "paired_task_success_delta": null,
+  "estimated_token_savings": null,
+  "estimated_cost_savings": null,
+  "task_completion_probe": {
+    "task_id": "c5ce20f3425147e59e98b42618da3923",
+    "state": "done",
+    "verified_live_system_observation": true
+  },
+  "all_task_completion_success_rate": null,
+  "all_tool_execution_success_rate": null,
+  "all_verification_success_rate": null,
+  "completion_note": "Routing labels do not prove task completion. One real system probe is reported separately; use aries-agent-demo for four execution controls.",
+  "background_probe": {
+    "intent": "SYSTEM_ACTION",
+    "tool": "system.status",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "Existing validated deterministic command mapping",
+    "execution_level": "code",
+    "source": "rule",
+    "blocked_reason": "",
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "stats_snapshot": {
+    "window_events": 1052,
+    "window_limit": 10000,
+    "total_requests": 137,
+    "requests_scope": "Router invocations, including previews; not distinct completed tasks",
+    "usage_scope": "ARIES-initiated requests in retained events only; excludes other terminal sessions, applications and account-wide usage",
+    "account_usage_available": false,
+    "account_remaining_quota": null,
+    "token_subtotals_note": "Measured fields sum available per-request reports only; incomplete coverage is not total consumption. Cached input may be included.",
+    "cloud_input_tokens_total": null,
+    "cloud_output_tokens_total": null,
+    "routed_by_level": {
+      "code": 63,
+      "local": 45,
+      "cloud": 29
+    },
+    "completed_by_level": {
+      "code": 16,
+      "local": 12,
+      "cloud": 2
+    },
+    "unattributed_completed_tasks": 285,
+    "cloud_escalation_percent": 21.16788321167883,
+    "cloud_requests": 27,
+    "local_requests": 538,
+    "cloud_successful_responses": 21,
+    "measured_cloud_input_tokens": 227847,
+    "measured_cloud_output_tokens": 1058,
+    "cloud_usage_unknown": 6,
+    "estimated_api_cost_usd": null,
+    "priced_requests_cost_usd": 0,
+    "unpriced_cloud_requests": 27,
+    "estimated_token_savings": null,
+    "savings_note": "Requires measured matched all-cloud baseline; not inferred from routing."
+  }
+}

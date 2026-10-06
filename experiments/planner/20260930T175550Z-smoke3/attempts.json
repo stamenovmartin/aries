@@ -1,0 +1,110 @@
+{
+  "label": "smoke3",
+  "repeats": 3,
+  "config": {
+    "location": "local",
+    "local_backend": "ollama",
+    "local_model": "qwen2.5:7b",
+    "gateway_enabled": true,
+    "gateway_url": "http://127.0.0.1:11435",
+    "ai.temperature": 0.1,
+    "ai.top_p": 0.9,
+    "ai.context_tokens": 8192,
+    "ai.max_output_tokens": 4096
+  },
+  "rows": [
+    {
+      "returned": true,
+      "json": true,
+      "capability": true,
+      "args": true,
+      "plausible": true,
+      "parses": true,
+      "chose": "browser.read",
+      "action": "execute",
+      "arg_keys": [
+        "session"
+      ],
+      "unknown_args": [],
+      "detail": "",
+      "usable": true,
+      "payload_chars": 13915,
+      "seconds": 1.873,
+      "supported": true,
+      "failure": null,
+      "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"browser.read\",\n  \"arguments\": {\n    \"session\": \"sess-7f3a\"\n  }\n}",
+      "input_tokens": 4243,
+      "output_tokens": 37,
+      "goal": "cont.long.next",
+      "lang": "en",
+      "text": "Open https://www.python.org and report the page title.",
+      "repeat": 0,
+      "expected": [
+        "browser.observe",
+        "browser.read"
+      ]
+    },
+    {
+      "returned": true,
+      "json": true,
+      "capability": true,
+      "args": true,
+      "plausible": true,
+      "parses": true,
+      "chose": "browser.read",
+      "action": "execute",
+      "arg_keys": [
+        "session"
+      ],
+      "unknown_args": [],
+      "detail": "",
+      "usable": true,
+      "payload_chars": 13915,
+      "seconds": 1.791,
+      "supported": true,
+      "failure": null,
+      "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"browser.read\",\n  \"arguments\": {\n    \"session\": \"sess-7f3a\"\n  }\n}",
+      "input_tokens": 4243,
+      "output_tokens": 37,
+      "goal": "cont.long.next",
+      "lang": "en",
+      "text": "Open https://www.python.org and report the page title.",
+      "repeat": 1,
+      "expected": [
+        "browser.observe",
+        "browser.read"
+      ]
+    },
+    {
+      "returned": true,
+      "json": true,
+      "capability": true,
+      "args": true,
+      "plausible": true,
+      "parses": true,
+      "chose": "browser.read",
+      "action": "execute",
+      "arg_keys": [
+        "session"
+      ],
+      "unknown_args": [],
+      "detail": "",
+      "usable": true,
+      "payload_chars": 13915,
+      "seconds": 1.782,
+      "supported": true,
+      "failure": null,
+      "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"browser.read\",\n  \"arguments\": {\n    \"session\": \"sess-7f3a\"\n  }\n}",
+      "input_tokens": 4243,
+      "output_tokens": 37,
+      "goal": "cont.long.next",
+      "lang": "en",
+      "text": "Open https://www.python.org and report the page title.",
+      "repeat": 2,
+      "expected": [
+        "browser.observe",
+        "browser.read"
+      ]
+    }
+  ]
+}

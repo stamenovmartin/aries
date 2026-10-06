@@ -1,0 +1,143 @@
+{
+  "evidence": [
+    {
+      "evidence_id": "9121f2fa75c54196a72e4ae55bb30649",
+      "type": "execution_observation",
+      "source": "file.write",
+      "timestamp": "2026-09-17T20:35:47.884324+00:00",
+      "step_id": "19ea61a661d847d099ead4ef5bb870c7",
+      "verified": false,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T203544Z-497bea/aries-m14-test.txt",
+        "write_call_completed": true
+      }
+    },
+    {
+      "evidence_id": "7e2f3c7f95bd46ddb4a46011bbb72743",
+      "type": "file_state",
+      "source": "file.write",
+      "timestamp": "2026-09-17T20:35:47.893492+00:00",
+      "step_id": "19ea61a661d847d099ead4ef5bb870c7",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T203544Z-497bea/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19662532,
+        "observed_at": "2026-09-17T20:35:47.893388+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "90d600b8205f407c9a2b981beea34161",
+      "type": "execution_observation",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:35:50.702216+00:00",
+      "step_id": "90ae4357b1b44cbba487179129285287",
+      "verified": false,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T203544Z-497bea/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19662532,
+        "observed_at": "2026-09-17T20:35:50.702125+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "4a59f4af42e046faa52f8bc18ca41c44",
+      "type": "file_state",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:35:50.713747+00:00",
+      "step_id": "90ae4357b1b44cbba487179129285287",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T203544Z-497bea/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19662532,
+        "observed_at": "2026-09-17T20:35:50.713681+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "c8c447292d1f476397eee44e190f4339",
+      "type": "execution_error",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:35:54.059583+00:00",
+      "step_id": "27bfce198ae94fad82be9347b4749081",
+      "verified": false,
+      "data": {
+        "error_type": "ValueError",
+        "message": "Duplicate verified or non-retryable action rejected",
+        "retryable": false
+      }
+    },
+    {
+      "evidence_id": "2015fbcaddd748bf99c5bfcecab41371",
+      "type": "execution_error",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:35:56.947550+00:00",
+      "step_id": "28d258d0c2194a198ac2873e5afc9eb9",
+      "verified": false,
+      "data": {
+        "error_type": "ValueError",
+        "message": "Duplicate verified or non-retryable action rejected",
+        "retryable": false
+      }
+    },
+    {
+      "evidence_id": "12ed3e7577ca4768a52682e2d7c1ea36",
+      "type": "execution_error",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:35:58.678842+00:00",
+      "step_id": "ffd9e8a96dc44098aa30f334f5bd705a",
+      "verified": false,
+      "data": {
+        "error_type": "ValueError",
+        "message": "Duplicate verified or non-retryable action rejected",
+        "retryable": false
+      }
+    },
+    {
+      "evidence_id": "9e7ad143de794554867cd713000def27",
+      "type": "execution_error",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:36:00.396365+00:00",
+      "step_id": "0bdd5a1a43714ead886115789d4b9eae",
+      "verified": false,
+      "data": {
+        "error_type": "ValueError",
+        "message": "Duplicate verified or non-retryable action rejected",
+        "retryable": false
+      }
+    },
+    {
+      "evidence_id": "0ea7c68a027f4e30bf45b7a81f57f5d0",
+      "type": "execution_error",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:36:02.127612+00:00",
+      "step_id": "e68ae974d3254d529fe34a89ebe99092",
+      "verified": false,
+      "data": {
+        "error_type": "ValueError",
+        "message": "Duplicate verified or non-retryable action rejected",
+        "retryable": false
+      }
+    },
+    {
+      "evidence_id": "30e47380a10a4c12a125f307a6e8ebe4",
+      "type": "execution_error",
+      "source": "file.read",
+      "timestamp": "2026-09-17T20:36:03.874624+00:00",
+      "step_id": "ed5a0773b7b24205ae09a87a6edddfb7",
+      "verified": false,
+      "data": {
+        "error_type": "ValueError",
+        "message": "Duplicate verified or non-retryable action rejected",
+        "retryable": false
+      }
+    }
+  ],
+  "final_refs": []
+}

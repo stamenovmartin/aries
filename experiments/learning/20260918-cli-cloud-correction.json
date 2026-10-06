@@ -1,0 +1,18 @@
+{
+  "problem": "Cloud integration incorrectly required a separate HTTP API key although the intended ARIES providers are authenticated terminal reviewer and implementer.",
+  "change": [
+    "Added CLI adapters with existing login, fixed argv/stdin, disabled model tools, bounded output/timeout and process-group cleanup.",
+    "Configured cloud_enabled=true and cloud_provider=codex-cli after actual success; provider selection remains configurable. No hidden alternative CLI retry.",
+    "Preserved code/local routing and existing tool validation/evidence verification. CLI native usage and nominal reported cost remain separate from billed API estimates."
+  ],
+  "validation": [
+    "Full regression ALL SUITES PASSED; 63 intelligence checks.",
+    "Real Codex CLI decision succeeded. Real paired execution A 3/3 and B 3/3: experiments/intelligence/20260917T222712Z-ab-f2e66d.",
+    "A used 6 cloud CLI calls; B used zero cloud calls and 4 local calls. Missing-file task failed correctly in both."
+  ],
+  "limitations": [
+    "the reviewing agent initial invocation returned provider session-limit 429; not falsely recorded as successful.",
+    "Three-case development comparison does not establish general task equivalence or monetary savings.",
+    "CLI model token limit is advisory; process timeout and output-byte bounds are enforced."
+  ]
+}

@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+# Install, remove or inspect ARIES as a systemd --user service.
+#
+# No sudo anywhere: user units live in ~/.config/systemd/user and are owned by
+# the login session. ARIES starts when you log in and stops when you log out.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+ROOT="$PWD"
+UNIT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"
+# aries-voice.service is INSTALLED here but deliberately NOT in the enable line
+# below: it holds the microphone open for as long as it runs, and that is a
+# choice to make on purpose rather than to inherit from running an installer.
+#   systemctl --user enable --now aries-voice.service
+UNITS=(aries.target aries-local-model.service aries-core.service aries-voice.service)
+
+usage() {
+  cat <<'USAGE'
+ARIES service management
+
+  aries-service install     install the units, enable at login, and start now
+  aries-service uninstall   stop, disable and remove the units
+  aries-service status      systemd's view of the units
+  aries-service logs [n]    the last n journal lines from aries-core
+  aries-service reinstall   re-copy the units and reload (after editing them)
+
+ARIES runs while you are logged in. To keep it running after logout:
+  loginctl enable-linger $USER
+USAGE
+}
+
+require_systemd() {
+  command -v systemctl >/dev/null || { echo "systemctl is not installed."; exit 1; }
+  [ -n "${XDG_RUNTIME_DIR:-}" ] || { echo "No user session (XDG_RUNTIME_DIR unset)."; exit 1; }
+}
+
+install_units() {
+  [ -x "$ROOT/.venv/bin/python" ] || { echo "No virtual environment at $ROOT/.venv — see docs/INSTALLATION.md"; exit 1; }
+  mkdir -p "$UNIT_DIR" "$ROOT/var"
+  for u in "${UNITS[@]}"; do
+    install -m 0644 "$ROOT/systemd/$u" "$UNIT_DIR/$u"
+    echo "  installed $UNIT_DIR/$u"
+  done
+  systemctl --user daemon-reload
+}
+
+case "${1:-}" in
+  install|reinstall)
+    require_systemd
+    install_units
+    if [ "${1}" = "install" ]; then
+      # BOTH, and the order of reasoning matters:
+      #   aries-core.service is WantedBy=aries.target — enabling it creates the
+      #     symlink in aries.target.wants/, which is what makes the target pull
+      #     it in. Without this the target starts and pulls in NOTHING.
+      #   aries.target is WantedBy=default.target — enabling it is what makes
+      #     ARIES start at login.
+      systemctl --user enable aries-local-model.service aries-core.service >/dev/null
+      systemctl --user enable aries.target >/dev/null
+      echo "  enabled at login"
+    fi
+    systemctl --user restart aries.target
+    echo "  started"
+    echo
+    sleep 2
+    "$ROOT/scripts/aries" status || true
+    ;;
+  uninstall)
+    require_systemd
+    systemctl --user stop aries.target 2>/dev/null || true
+    systemctl --user disable aries.target aries-local-model.service aries-core.service 2>/dev/null || true
+    for u in "${UNITS[@]}"; do rm -f "$UNIT_DIR/$u" && echo "  removed $UNIT_DIR/$u"; done
+    systemctl --user daemon-reload
+    systemctl --user reset-failed 2>/dev/null || true
+    echo "ARIES will no longer start at login. Your data in var/ is untouched."
+    ;;
+  status)
+    require_systemd
+    systemctl --user status aries.target aries-core.service --no-pager || true
+    ;;
+  logs)
+    journalctl --user -u aries-core.service -n "${2:-60}" --no-pager
+    ;;
+  *)
+    usage
+    ;;
+esac

@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+"""Start the reviewing agent in the ARIES project so its project resume hook is loaded."""
+import os
+from pathlib import Path
+import sys
+
+os.chdir(Path(__file__).resolve().parents[1])
+os.execvp('the reviewing agent', ['the reviewing agent', *sys.argv[1:]])

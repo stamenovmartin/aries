@@ -1,0 +1,104 @@
+{
+  "started_at": "2026-10-03T22:24:32.694091+00:00",
+  "surface": "isolated_real_agent_loop_local_llm",
+  "production_deployment": false,
+  "comparative_result": false,
+  "source_before": {
+    "aries/workspace/agent.py": "ed38bbc7afced48a1ec980f565d6561906132cd13b2bcaa3b6a14cdf896a6c70",
+    "aries/workspace/agent_planner.py": "d15a9bf1238e688fd5f5e2a3bfcc2ef397c3dbe969e97963d9784e1a4dcd7404",
+    "aries/workspace/completion_progress.py": "dfbfda792099dbc8047cc9fb6a057fd09f86076ab3237bec422a283c4d40997c",
+    "aries/flags.py": "7f408b8162956088d4484dbe1d0c0ce64be503e92bc74a14a76ad52f7ca5ddbd",
+    "aries/workspace/registry.py": "d7b8f9458afaa7622d79be964b4247da463b8ee46e742376db98fa9b7d6fc6d0",
+    "aries/workspace/contracts.py": "ffd281bd6e7eb6f2c6ff8926bd4b7fa90689cee9ad9974e17816ace9733d8cc7",
+    "aries/workspace/service.py": "3d21ba7a51b35f055cfa3be48766e7bf71a413ea87fb9de437b0fc2e20acf514",
+    "aries/intelligence/generation.py": "4b6f8f8ca2bd7268025470d28293bde891ed8d8fb743ec59cf6597665469470c",
+    "eval/research_feedback/feedback.py": "f3f84650ba6e5e25973b14f69ea55f6666f5aad03f17266761b70dc3a5f487f1",
+    "eval/research_feedback/run_loop.py": "a1bf743893b1df741cd62aacfc8ee7dcebb44469f7ac5528e02b2a607b436a7f",
+    "eval/research_feedback/case_tools.py": "ae3bcb7c574bf1cef374b7badd07e96e40820bbdd2e113d70302ec7870dbca75",
+    "eval/research_feedback/controlled_screen.py": "32ebe22fa5bb7fe229b2511b303d29ecd33f12013355fdcb893080878d7866e1",
+    "aries/workspace/screen_capabilities.py": "566b0ff3300d14f171599d9bc0cc1315491089690679ed8dd7e8b0cbed6da904",
+    "eval/agent_suite/faults.py": "5b671c4bbbc425bd42a78f07ccd169391c2873ef610841da9d1c4fd3adb7c324",
+    "experiments/verification-feedback/fixture.jsonl": "a53d6ae11dfc34bbbf4a09b22493d17e8817e40c24ab8f27d6b45d1d7b3a3052",
+    "aries/workspace/system_capabilities.py": "a1b06cb011edf51fca896e8aa724ade9ce2d06ec69a33942aa9613d9ecf41fc6",
+    "aries/workspace/network_capabilities.py": "7044a2538b3587724d6fd800a1eec10c4af538809c33baadd7656542f8d59dfe"
+  },
+  "completion_progress_guard": true,
+  "settings": {
+    "intelligence.location": "local",
+    "intelligence.local_backend": "ollama",
+    "intelligence.local_url": "http://127.0.0.1:11434",
+    "intelligence.local_model": "qwen2.5:7b",
+    "intelligence.gateway_url": "http://127.0.0.1:11435",
+    "intelligence.gateway_enabled": true,
+    "ai.temperature": 0.1,
+    "ai.top_p": 0.9,
+    "ai.context_tokens": 8192,
+    "ai.max_output_tokens": 4096
+  },
+  "case_id": "vf-10",
+  "fixture_fault": "portal_uniform_grey_png",
+  "injection_events": [
+    {
+      "tool": "controlled_image_return",
+      "frame": "fixture-frame-1",
+      "fault": "portal_uniform_grey_png"
+    }
+  ],
+  "oracle_reads": [
+    {
+      "frame": "fixture-frame-1",
+      "met": false,
+      "predicate": "obtained authored scene image"
+    }
+  ],
+  "case_surface": "controlled_screen_fixture",
+  "production_capture_path": false,
+  "fault_layer": "returned_artifact_after_capture_defences",
+  "comparison_admission": false,
+  "limitation": "Artifact validity is checked; final visual-description correctness is not scored. Do not pool with native portal intervention or launch the study from preflight alone.",
+  "preflight_passed": true,
+  "controlled_scene_checks": [
+    {
+      "frame": "fixture-frame-1",
+      "valid_accepted": true,
+      "corrupt_rejected": true,
+      "expected_sha256": "1dc4326a7079bed0c4b09e022e44f93e7d41f6dda12fa995689e2ecbd7dda013"
+    }
+  ],
+  "preflight_scope": "Image decoding, OCR where applicable, and verifier discrimination; no planner",
+  "fault_reached": true,
+  "controlled_executor_checks": [
+    {
+      "frame": "fixture-frame-1",
+      "verifier_met": false,
+      "oracle_met": false,
+      "executor_returned": true
+    }
+  ],
+  "outcome": "fixture_smoke_ready",
+  "condition": "structured",
+  "integration_exercised": false,
+  "inference_started": false,
+  "finished_at": "2026-10-03T22:24:33.769811+00:00",
+  "latency_s": 1.076,
+  "source_after": {
+    "aries/workspace/agent.py": "ed38bbc7afced48a1ec980f565d6561906132cd13b2bcaa3b6a14cdf896a6c70",
+    "aries/workspace/agent_planner.py": "d15a9bf1238e688fd5f5e2a3bfcc2ef397c3dbe969e97963d9784e1a4dcd7404",
+    "aries/workspace/completion_progress.py": "dfbfda792099dbc8047cc9fb6a057fd09f86076ab3237bec422a283c4d40997c",
+    "aries/flags.py": "7f408b8162956088d4484dbe1d0c0ce64be503e92bc74a14a76ad52f7ca5ddbd",
+    "aries/workspace/registry.py": "d7b8f9458afaa7622d79be964b4247da463b8ee46e742376db98fa9b7d6fc6d0",
+    "aries/workspace/contracts.py": "ffd281bd6e7eb6f2c6ff8926bd4b7fa90689cee9ad9974e17816ace9733d8cc7",
+    "aries/workspace/service.py": "3d21ba7a51b35f055cfa3be48766e7bf71a413ea87fb9de437b0fc2e20acf514",
+    "aries/intelligence/generation.py": "4b6f8f8ca2bd7268025470d28293bde891ed8d8fb743ec59cf6597665469470c",
+    "eval/research_feedback/feedback.py": "f3f84650ba6e5e25973b14f69ea55f6666f5aad03f17266761b70dc3a5f487f1",
+    "eval/research_feedback/run_loop.py": "a1bf743893b1df741cd62aacfc8ee7dcebb44469f7ac5528e02b2a607b436a7f",
+    "eval/research_feedback/case_tools.py": "ae3bcb7c574bf1cef374b7badd07e96e40820bbdd2e113d70302ec7870dbca75",
+    "eval/research_feedback/controlled_screen.py": "32ebe22fa5bb7fe229b2511b303d29ecd33f12013355fdcb893080878d7866e1",
+    "aries/workspace/screen_capabilities.py": "566b0ff3300d14f171599d9bc0cc1315491089690679ed8dd7e8b0cbed6da904",
+    "eval/agent_suite/faults.py": "5b671c4bbbc425bd42a78f07ccd169391c2873ef610841da9d1c4fd3adb7c324",
+    "experiments/verification-feedback/fixture.jsonl": "a53d6ae11dfc34bbbf4a09b22493d17e8817e40c24ab8f27d6b45d1d7b3a3052",
+    "aries/workspace/system_capabilities.py": "a1b06cb011edf51fca896e8aa724ade9ce2d06ec69a33942aa9613d9ecf41fc6",
+    "aries/workspace/network_capabilities.py": "7044a2538b3587724d6fd800a1eec10c4af538809c33baadd7656542f8d59dfe"
+  },
+  "source_stable": true
+}

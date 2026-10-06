@@ -1,0 +1,10 @@
+{"ts": "2026-10-06T10:13:05.068869+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T10:13:05.069165+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_action_after_rejection_can_establish_evidence
+FAIL  new action gives a fresh correction opportunity
+--- test_corrected_reference_can_complete
+FAIL  a corrected finish is validated before the guard
+--- test_rejected_finish_is_bounded_and_flag_off_keeps_old_loop
+PASS  two rejected finishes stop without false success
+PASS  flag off retains previous call-budget path
+FAILURES

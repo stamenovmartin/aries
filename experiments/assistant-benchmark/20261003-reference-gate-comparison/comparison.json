@@ -1,0 +1,117 @@
+{
+  "before": {
+    "artifact": "experiments/assistant-benchmark/20261003T131001Z-clarification-final/results.json",
+    "artifact_sha256": "2126abe07266ef1b1b2f8f63da6740d38339140f4dc951db16dd400c80246319",
+    "started_at": "2026-10-03T13:10:01.740059+00:00",
+    "finished_at": "2026-10-03T13:11:53.553596+00:00",
+    "fixture_sha256": "7607c0b1dbf06bd72485e5c33ed15e081585d5fe1445b471d45df21a7cd47193",
+    "complete": true,
+    "runtime_changed": false,
+    "paused_for_approval": null,
+    "groups": {
+      "all": {
+        "passed": 54,
+        "n": 60
+      },
+      "category:single_read": {
+        "passed": 12,
+        "n": 12
+      },
+      "language:en": {
+        "passed": 27,
+        "n": 30
+      },
+      "language:mk": {
+        "passed": 27,
+        "n": 30
+      },
+      "category:multi_step": {
+        "passed": 16,
+        "n": 16
+      },
+      "category:directory": {
+        "passed": 4,
+        "n": 4
+      },
+      "category:package": {
+        "passed": 8,
+        "n": 8
+      },
+      "category:ambiguous": {
+        "passed": 8,
+        "n": 8
+      },
+      "category:refusal": {
+        "passed": 6,
+        "n": 8
+      },
+      "category:desktop": {
+        "passed": 0,
+        "n": 4
+      }
+    }
+  },
+  "after": {
+    "artifact": "experiments/assistant-benchmark/20261003T135450Z-after-reference-gate/results.json",
+    "artifact_sha256": "260c31535a253494404d5c546ada4085d898a318d1e8d877ec586c87347d24fb",
+    "started_at": "2026-10-03T13:54:50.870803+00:00",
+    "finished_at": "2026-10-03T13:56:39.506993+00:00",
+    "fixture_sha256": "7607c0b1dbf06bd72485e5c33ed15e081585d5fe1445b471d45df21a7cd47193",
+    "complete": true,
+    "runtime_changed": false,
+    "paused_for_approval": null,
+    "groups": {
+      "all": {
+        "passed": 54,
+        "n": 60
+      },
+      "category:single_read": {
+        "passed": 12,
+        "n": 12
+      },
+      "language:en": {
+        "passed": 27,
+        "n": 30
+      },
+      "language:mk": {
+        "passed": 27,
+        "n": 30
+      },
+      "category:multi_step": {
+        "passed": 16,
+        "n": 16
+      },
+      "category:directory": {
+        "passed": 4,
+        "n": 4
+      },
+      "category:package": {
+        "passed": 8,
+        "n": 8
+      },
+      "category:ambiguous": {
+        "passed": 8,
+        "n": 8
+      },
+      "category:refusal": {
+        "passed": 6,
+        "n": 8
+      },
+      "category:desktop": {
+        "passed": 0,
+        "n": 4
+      }
+    }
+  },
+  "paired_fixture_complete": true,
+  "comparable": true,
+  "environment_changed": false,
+  "limitations": [
+    "60 scoped trials, not overall assistant maturity.",
+    "Generic HTTP refusal and unstructured clarification are not credited.",
+    "File and package cases do not test adaptive planning or ASR.",
+    "Runtime stability covers the recorded core invocation and source hashes only; other clients are not isolated. No causal latency claim.",
+    "No 48-hour stability or acoustic playback acceptance claim.",
+    "Reference submit path measured separately1/8 to8/8. Router candidate was incidentally deployed by the reviewing agent and remains rejected/pending coordinated rollback. All60 retain locked desktop and two missing-file refusal failures."
+  ]
+}

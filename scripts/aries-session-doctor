@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+# Why isn't the ARIES session working? — checks every link in the chain.
+#
+# The chain from the login screen to an ARIES desktop has six links, and five of
+# them fail silently. This walks all of them and says which one is broken,
+# because "it didn't work" is not a diagnosis and the journal only records the
+# links that were actually reached.
+set -uo pipefail
+cd "$(dirname "$0")/.."
+UUID="aries@aries.local"
+bad=0
+
+ok()   { printf '  \033[32m✓\033[0m %s\n' "$*"; }
+no()   { printf '  \033[31m✗\033[0m %s\n' "$*"; bad=$((bad+1)); }
+hint() { printf '      \033[2m%s\033[0m\n' "$*"; }
+
+echo
+printf '\033[1m%s\033[0m\n' "ARIES session — every link from the login screen to the desktop"
+echo
+
+# 1 ── GDM must find an entry to offer ──────────────────────────────────────
+if [ -r /usr/share/wayland-sessions/aries.desktop ]; then
+  ok "1. the login screen has an ARIES entry to offer"
+  name=$(sed -n 's/^Name=//p' /usr/share/wayland-sessions/aries.desktop)
+  hint "it will be listed as: $name"
+else
+  no "1. no session entry — the login screen cannot offer ARIES"
+  hint "./scripts/aries-session install"
+fi
+
+# 2 ── gnome-session must accept the name ───────────────────────────────────
+exec_line=$(sed -n 's/^Exec=//p' /usr/share/wayland-sessions/aries.desktop 2>/dev/null)
+session_name=${exec_line##*--session=}
+if [ "$session_name" = "aries" ]; then
+  ok "2. it asks gnome-session for the 'aries' session"
+else
+  no "2. the entry asks for '$session_name', not 'aries'"
+fi
+
+# 3 ── the systemd target must actually contain the shell ───────────────────
+# The link that broke first: the drop-in was on disk but systemd had not
+# re-read it, so gnome-session@aries.target would have started EMPTY — a
+# session with no shell, which looks like a black screen or a bounce back to
+# the login screen, and logs almost nothing.
+systemctl --user daemon-reload 2>/dev/null || true
+if systemctl --user cat gnome-session@aries.target 2>/dev/null \
+     | grep -q "Requires=org.gnome.Shell@aries.service"; then
+  ok "3. the session target starts gnome-shell --mode=aries"
+else
+  no "3. the session target does NOT start a shell — it would open an empty session"
+  hint "the drop-in is missing or systemd has not re-read it:"
+  hint "  /etc/systemd/user/gnome-session@aries.target.d/aries.session.conf"
+  hint "  systemctl --user daemon-reload"
+fi
+
+# 4 ── the shell mode must exist and parse ──────────────────────────────────
+mode=""
+for dir in $(echo "${XDG_DATA_DIRS:-/usr/local/share:/usr/share}" | tr ':' ' ') /usr/share; do
+  [ -f "$dir/gnome-shell/modes/aries.json" ] && { mode="$dir/gnome-shell/modes/aries.json"; break; }
+done
+if [ -n "$mode" ] && python3 -c "import json,sys;json.load(open(sys.argv[1]))" "$mode" 2>/dev/null; then
+  ok "4. the shell mode exists and parses"
+  hint "$mode"
+else
+  no "4. no readable shell mode — the session would start plain GNOME"
+fi
+
+# 5 ── the extension must be a SYSTEM one, or a mode may not load it ────────
+sys_ext=""
+for dir in $(echo "${XDG_DATA_DIRS:-/usr/local/share:/usr/share}" | tr ':' ' ') /usr/share; do
+  [ -e "$dir/gnome-shell/extensions/$UUID" ] && { sys_ext="$dir/gnome-shell/extensions/$UUID"; break; }
+done
+if [ -n "$sys_ext" ]; then
+  ok "5. the ARIES shell is installed system-wide"
+  hint "$sys_ext"
+else
+  no "5. the shell is not installed system-wide"
+  hint "GNOME refuses to load a per-user extension as part of a session mode"
+fi
+
+# 6 ── nothing may override the mode ────────────────────────────────────────
+disabled=$(gsettings get org.gnome.shell disabled-extensions 2>/dev/null || echo "[]")
+if [[ "$disabled" == *"$UUID"* ]]; then
+  no "6. '$UUID' is in disabled-extensions"
+  hint "that key OVERRIDES the session mode — ARIES would not load, silently"
+  hint "  gnome-extensions reset $UUID"
+else
+  ok "6. nothing overrides the session mode"
+fi
+
+# ── and where you are right now ─────────────────────────────────────────────
+echo
+if [ "${DESKTOP_SESSION:-}" = "aries" ]; then
+  ok "you are logged into the ARIES session right now"
+else
+  printf '  \033[33m•\033[0m you are in the "%s" session, not ARIES\n' "${DESKTOP_SESSION:-unknown}"
+  hint "log out, then on the login screen click your name, and use the"
+  hint "gear / ⚙ button near the password box to choose ARIES before logging in."
+  hint "GDM remembers your last choice, so it defaults to Ubuntu until you change it."
+fi
+
+echo
+if [ "$bad" = "0" ]; then
+  printf '\033[32m%s\033[0m\n' "every link is sound — the session will work when you select it"
+else
+  printf '\033[31m%s\033[0m\n' "$bad link(s) broken — fix those and log out"
+fi
+exit 0

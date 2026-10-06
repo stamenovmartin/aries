@@ -1,0 +1,133 @@
+/tmp/aries-learning-rollback-k6qragg0/tests/test_orchestration.py:97: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)
+/tmp/aries-learning-rollback-k6qragg0/tests/test_orchestration.py:97: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)
+/tmp/aries-learning-rollback-k6qragg0/tests/test_orchestration.py:97: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)
+/tmp/aries-learning-rollback-k6qragg0/tests/test_orchestration.py:97: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)
+/tmp/aries-learning-rollback-k6qragg0/tests/test_orchestration.py:542: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)
+--- test_a_cancelled_parent_does_not_leave_children_running
+PASS  cancelling the request cancels its queued sub-goals
+--- test_a_failed_capability_is_rerouted_to_a_declared_alternative
+PASS  the primary mechanism was tried first
+PASS  its failure was typed CAPABILITY_UNAVAILABLE
+PASS  the declared alternative was tried second
+PASS  the alternative really ran
+PASS  and the record says which capability it stood in for
+PASS  the reason a person reads names the code and the mechanism: CAPABILITY_UNAVAILABLE on test.missing: this mechanism is missing on this machine; a declared alternative may exist — the stand-in mechanism is present
+PASS  the sub-goal is done (done)
+PASS  and it does NOT claim a clean first attempt: Verified on strategy 2 of 2 — test.standin after test.missing → CAPABILITY_UNAVAILABLE.
+PASS  a genuine first-attempt success does say so
+--- test_a_policy_freeze_is_never_rerouted
+PASS  an unapproved action freezes rather than failing (proposed)
+PASS  exactly one strategy was recorded — no alternative was sought
+PASS  nothing was executed
+--- test_a_real_registry_failure_produces_a_real_typed_decision
+PASS  the probe path really does not exist
+PASS  a missing file is typed TARGET_NOT_FOUND, not a guess: {'error_type': 'FileNotFoundError', 'code': 'TARGET_NOT_FOUND', 'message': "[Errno 2] No such file or directory: 'no-such-file-aries-orchestration-test.txt'", 'retryable': False}
+PASS  and with nothing declared for file.read it stops and names the code
+--- test_a_transient_failure_retries_the_same_road_then_changes_it
+PASS  the flaky road was retried, not abandoned: ['test.flaky', 'test.flaky', 'test.flaky', 'test.standin']
+PASS  it really ran that many times (3)
+PASS  the backoff was actually waited
+PASS  then the different road was taken within the attempt budget
+PASS  and the sub-goal ends done (done)
+PASS  the trail records every decision in order, for a person to read afterwards
+--- test_a_weaker_route_is_partial_and_never_done
+PASS  the weaker alternative really ran after the primary failed
+PASS  the weaker route verified, so the row is not failed
+PASS  but a weaker end is partial, never done (partial)
+PASS  and the summary says the end is weaker than the one asked for: Partly done on strategy 2 of 2 — test.standin after test.weak → CAPABILITY_UNAVAILABLE. That route reaches a weaker end than the one asked for, so this is not reported as done.
+--- test_aging_stops_a_younger_goal_starving_an_older_one
+PASS  the older goal is passed over while the lane is busy
+PASS  the older goal is passed over while the lane is busy
+PASS  the older goal is passed over while the lane is busy
+PASS  after 3 deferrals it reserves what it waits for
+PASS  a younger goal may not take the reserved lane even though it is free
+PASS  a younger goal wanting a different lane still runs — the machine stays busy
+PASS  the starved goal itself does not reserve against itself
+PASS  admission clears the record
+--- test_an_alternative_can_never_be_a_way_round_a_gate
+PASS  an alternative that needs approval the original did not is refused at declaration
+PASS  re-registering the same alternative twice is refused
+PASS  an alternative naming a capability that does not exist is refused
+--- test_an_interrupted_sub_goal_is_not_replayed
+PASS  an effect whose verification never happened is not repeated (interrupted)
+PASS  and the uncertainty is on the record
+--- test_capacity_is_read_out_of_the_resource_policy
+PASS  the live machine reports 4 slot(s): 4 goals — the processor is at 7 % of the 70 % limit, 90 % of it free
+PASS  an idle processor affords more goals (4) than a busy one (1)
+PASS  a machine the governor has deferred runs one at a time, and says why
+PASS  capacity is never zero, so a queued goal is never unreachable
+PASS  an unreadable processor is one at a time, not a guess
+PASS  the ceiling bounds the arithmetic and is never exceeded
+--- test_capacity_writes_nothing_because_it_runs_on_a_two_second_poll
+PASS  five capacity reads wrote no resource-policy rows (0 -> 0)
+--- test_concurrent_writers_do_not_hit_database_is_locked
+PASS  4 goals each wrote a 4-strategy trail (16 steps, 4.34s)
+PASS  no sub-goal recorded a database lock: none
+PASS  each reached a final state rather than dying mid-write
+PASS  measured against WAL and a 15000 ms busy timeout, which is what production runs
+--- test_every_typed_code_has_one_decision_and_a_reason
+PASS  every code agent.error can produce is routed
+PASS  TRANSIENT and NETWORK_ERROR retry the same road
+PASS  CAPABILITY_UNAVAILABLE and PERMISSION_REQUIRED look for a different road
+PASS  NON_RETRYABLE, AMBIGUOUS, AUTH_REQUIRED and VERIFICATION_FAILED stop
+PASS  an unrecognised code stops rather than improvising
+PASS  and says which code it did not recognise
+--- test_fan_out_asks_the_loop_guard_once_and_caps_its_width
+PASS  more than 4 sub-goals in one request is refused
+PASS  a fan-out creates one parent row and one child row per sub-goal
+PASS  the parent is running and each child is queued on the one goal table
+PASS  a repeated spoken request is refused by the existing loop guard, not by a new one
+PASS  and the refused fan-out created no rows at all
+--- test_four_sub_goals_really_run_at_the_same_time
+PASS  the governor gave 4 slots: 4 goals — the processor is at 1 % of the 70 % limit, 99 % of it free
+PASS  all 4 sub-goals were launched in one pass
+PASS  all 4 executed (4 calls)
+PASS  4 of 4 were provably running at one instant, from their own durable rows
+PASS  wall clock 0.41s against 1.40s serial — concurrency is real, not claimed
+PASS  every sub-goal reached done
+PASS  each keeps its OWN evidence, with no id shared between them
+PASS  and its own row, steps and audit trail
+--- test_parent_cancellation_stops_an_inflight_child
+PASS  cancelling the parent stops the child that already started
+PASS  cancelled child releases its task and resource reservations
+--- test_partial_across_sub_goals_is_never_done
+PASS  all done is done
+PASS  one failure makes the whole thing partial
+PASS  a degraded sub-goal makes it partial
+PASS  nothing succeeded is failed
+PASS  a pending approval surfaces as proposed
+PASS  no sub-goals at all is failed, not done
+--- test_reads_take_no_lane_so_questions_are_actually_parallel
+PASS  a read-only capability reserves nothing
+PASS  typing is scoped to the focused window, which is a singleton
+PASS  a browser action takes the browser lane
+PASS  only genuine singletons are exclusive
+--- test_repeated_alternative_counts_as_one_distinct_approach
+PASS  retrying one alternative does not consume two distinct alternative slots
+--- test_routing_is_bounded_in_all_three_directions
+PASS  a transient failure retries the same capability
+PASS  the same road is not retried past 2 repeats
+PASS  retry exhaustion without a declared alternative still stops
+PASS  at most 2 different approaches are tried
+PASS  4 attempts is the hard budget for one sub-goal
+PASS  a code with no declared alternative stops and says so
+--- test_the_five_production_alternatives_are_real_and_do_not_widen_authority
+PASS  5 declared alternatives over 5 capabilities
+PASS  every one maps arguments its alternative actually accepts: none
+PASS  a weaker route is marked degraded so it can never report done
+PASS  launch and focus are alternatives of each other
+--- test_the_parent_reports_which_strategies_were_needed
+PASS  two of three sub-goals verified and one did not, so the request is partial (partial)
+PASS  the parent card counts them honestly: 2 of 3 sub-goals verified; sub test.missing needed 2 strategies (test.missing → test.standin), sub test.flaky needed 3 strategies (test.flaky → test.flaky → test.flaky)
+PASS  and names the sub-goal that needed a different strategy
+PASS  the failure is carried into gaps rather than swallowed
+PASS  every sub-goal is still addressable by its own row id
+--- test_uncertain_mutation_is_not_repeated_or_rerouted
+PASS  TRANSIENT after a mutation needs verification, not another effect
+PASS  NETWORK_ERROR after a mutation needs verification, not another effect
+ALL PASSED

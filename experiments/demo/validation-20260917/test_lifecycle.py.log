@@ -1,0 +1,166 @@
+Executor raised on task 1 attempt 1
+Traceback (most recent call last):
+  File "/home/stamenovmartin/aries/vendor/agentic-core/agentic_core/orchestrator/lifecycle.py", line 122, in run_cycle
+    result = await executor(task, ctx)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_lifecycle.py", line 265, in _execute
+    raise RuntimeError("the network went away mid-task")
+RuntimeError: the network went away mid-task
+--- test_a_dead_task_leaves_nothing_behind_for_long
+PASS  the abandoned context is collected
+PASS  naming the task it belonged to
+PASS  and live work is left alone
+--- test_a_real_run_releases_its_working_set_even_when_it_fails
+PASS  the run did not succeed (status: failed)
+PASS  and it is holding nothing afterwards (0 row(s) left behind)
+--- test_a_window_below_the_minimum_is_refused_at_the_door
+PASS  a window below the minimum is refused
+PASS  naming the minimum (30 days): data.keep_automation_runs_days: 1 is below the minimum 30
+--- test_audit_is_never_deleted_automatically
+PASS  audit_events is classed as audit
+PASS  and has no window at all
+PASS  audit_events is never on a timer
+--- test_every_operational_window_declares_who_reads_it
+PASS  aries_workspace_goals names its dependants
+PASS  aries_workspace_goals declares a minimum window
+PASS  aries_workspace_goals's default is at or above its own minimum
+PASS  automation_logs names its dependants
+PASS  automation_logs declares a minimum window
+PASS  automation_logs's default is at or above its own minimum
+PASS  aries_health_samples names its dependants
+PASS  aries_health_samples declares a minimum window
+PASS  aries_health_samples's default is at or above its own minimum
+PASS  aries_news_items names its dependants
+PASS  aries_news_items declares a minimum window
+PASS  aries_news_items's default is at or above its own minimum
+PASS  aries_notifications names its dependants
+PASS  aries_notifications declares a minimum window
+PASS  aries_notifications's default is at or above its own minimum
+PASS  aries_automation_runs names its dependants
+PASS  aries_automation_runs declares a minimum window
+PASS  aries_automation_runs's default is at or above its own minimum
+PASS  aries_resource_events names its dependants
+PASS  aries_resource_events declares a minimum window
+PASS  aries_resource_events's default is at or above its own minimum
+PASS  tasks names its dependants
+PASS  tasks declares a minimum window
+PASS  tasks's default is at or above its own minimum
+PASS  task_runs names its dependants
+PASS  task_runs declares a minimum window
+PASS  task_runs's default is at or above its own minimum
+PASS  agent_steps names its dependants
+PASS  agent_steps declares a minimum window
+PASS  agent_steps's default is at or above its own minimum
+PASS  action_proposals names its dependants
+PASS  action_proposals declares a minimum window
+PASS  action_proposals's default is at or above its own minimum
+PASS  approval_requests names its dependants
+PASS  approval_requests declares a minimum window
+PASS  approval_requests's default is at or above its own minimum
+PASS  scheduled_tasks names its dependants
+PASS  scheduled_tasks declares a minimum window
+PASS  scheduled_tasks's default is at or above its own minimum
+PASS  execution_plans names its dependants
+PASS  execution_plans declares a minimum window
+PASS  execution_plans's default is at or above its own minimum
+PASS  execution_steps names its dependants
+PASS  execution_steps declares a minimum window
+PASS  execution_steps's default is at or above its own minimum
+PASS  execution_operations names its dependants
+PASS  execution_operations declares a minimum window
+PASS  execution_operations's default is at or above its own minimum
+PASS  artifacts names its dependants
+PASS  artifacts declares a minimum window
+PASS  artifacts's default is at or above its own minimum
+PASS  chat_messages names its dependants
+PASS  chat_messages declares a minimum window
+PASS  chat_messages's default is at or above its own minimum
+PASS  eval_runs names its dependants
+PASS  eval_runs declares a minimum window
+PASS  eval_runs's default is at or above its own minimum
+PASS  eval_results names its dependants
+PASS  eval_results declares a minimum window
+PASS  eval_results's default is at or above its own minimum
+--- test_every_policy_names_a_column_that_exists
+PASS  aries_workspace_goals.created_at exists
+PASS  aries_workspace_memories.created_at exists
+PASS  aries_working_set.created_at exists
+PASS  automation_logs.created_at exists
+PASS  aries_health_samples.recorded_at exists
+PASS  aries_news_items.first_seen_at exists
+PASS  aries_notifications.created_at exists
+PASS  aries_automation_runs.started_at exists
+PASS  aries_resource_events.at exists
+PASS  tasks.created_at exists
+PASS  task_runs.started_at exists
+PASS  agent_steps.at exists
+PASS  aries_settings.created_at exists
+PASS  aries_interests.created_at exists
+PASS  aries_sources.created_at exists
+PASS  aries_learning_changes.created_at exists
+PASS  aries_reversals.first_seen_at exists
+PASS  aries_feedback.created_at exists
+PASS  aries_briefs.created_at exists
+PASS  stored_credentials.created_at exists
+PASS  memory_items.created_at exists
+PASS  learned_rules.created_at exists
+PASS  feedback.created_at exists
+PASS  users.created_at exists
+PASS  api_tokens.created_at exists
+PASS  eval_cases.created_at exists
+PASS  action_proposals.created_at exists
+PASS  approval_requests.requested_at exists
+PASS  scheduled_tasks.created_at exists
+PASS  execution_plans.created_at exists
+PASS  execution_steps.created_at exists
+PASS  execution_operations.created_at exists
+PASS  artifacts.created_at exists
+PASS  chat_messages.created_at exists
+PASS  eval_runs.created_at exists
+PASS  eval_results.created_at exists
+PASS  audit_events.at exists
+--- test_memory_is_not_on_a_timer
+PASS  aries_settings is kept until the user removes it
+PASS  aries_interests is kept until the user removes it
+PASS  aries_feedback is kept until the user removes it
+PASS  aries_learning_changes is kept until the user removes it
+--- test_no_table_is_left_undecided
+PASS  every table has a retention policy
+--- test_nothing_is_deleted_while_cleaning_is_off
+PASS  the pass runs
+PASS  and removes nothing while automatic deletion is off
+PASS  the old row is still there
+PASS  and it says why
+--- test_old_rows_are_removed_and_recent_ones_are_not
+PASS  the old row is gone
+PASS  the recent row is kept
+PASS  and the pass reports what it removed
+PASS  the deletion is audited
+--- test_preview_touches_nothing
+PASS  a preview is a rehearsal, not a pass
+--- test_the_cleaner_is_a_declared_automation_and_ships_off
+PASS  it exists as an automation
+PASS  with a purpose a person can read
+PASS  it is classed as medium risk — it deletes
+PASS  it ships disabled, like every automation (§11)
+PASS  and deleting at all is a separate switch again
+PASS  only a person may turn that on
+--- test_the_first_real_pass_only_rehearses
+PASS  nothing is removed on the first pass
+PASS  and it says it rehearsed
+PASS  the rehearsal is in the audit log
+--- test_the_service_defends_the_minimum_too
+PASS  the cleaner uses the minimum, not the stored value (used 30)
+PASS  and says what reads it: 1 days is below the 30-day minimum (the circuit breaker, aut
+--- test_the_working_set_governs_itself_not_by_a_window
+PASS  the working set is in the register
+PASS  classed as working
+PASS  with no window in days
+PASS  its sweep is measured in hours instead
+--- test_the_working_set_is_released_when_the_task_ends
+PASS  context is held while the task runs
+PASS  and sensitive items are counted
+PASS  finishing a task releases exactly its own context
+PASS  another task's context is untouched
+PASS  and nothing of the finished task remains
+ALL PASSED

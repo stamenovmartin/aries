@@ -1,0 +1,104 @@
+--- test_accepted_is_not_verified
+PASS  a restart that kept its InvocationID did not restart anything
+PASS  a restart with a new InvocationID is proven
+PASS  a restart that came back failed is not success
+PASS  a unit that stopped existing is not success
+PASS  stop is proven by inactive, not by exit 0
+PASS  start on an already-running unit is honestly a no-op that met the goal
+PASS  start from inactive needs a new InvocationID
+PASS  start from inactive with a new InvocationID is proven
+PASS  the executor reports the request as accepted
+PASS  the verifier refuses to call that success
+PASS  the evidence names what was compared
+--- test_disk_is_bounded_and_honest
+PASS  statvfs measured at least the root filesystem
+PASS  / usage adds up
+PASS  /boot/efi usage adds up
+PASS  no pseudo-filesystem is counted as storage
+PASS  the walk reported directories
+PASS  reported depth never exceeds the cap
+PASS  at most the configured number of rows
+PASS  rows are ordered largest first
+PASS  no child is reported larger than the whole tree
+PASS  an excluded path is never walked
+PASS  the time bound is honoured
+PASS  the bounds are reported with the answer
+PASS  truncation is stated, never hidden
+PASS  a walk that hit its entry cap reports truncated
+PASS  the fullest filesystem is the measured maximum, not a guess
+PASS  verification re-reads statvfs and re-stats what it reported
+PASS  verification does not claim to have repeated the walk
+PASS  privacy.excluded_paths is honoured with no database session
+--- test_listing_excludes_devices_and_puts_broken_first
+PASS  kernel .device units are never listed
+PASS  a failed unit is ranked first
+PASS  ARIES's own units outrank unrelated ones
+PASS  a cut list says so and reports the full count
+PASS  the scope that failed is named in unavailable
+PASS  the scope that answered still returns units
+PASS  both managers failing is CAPABILITY_UNAVAILABLE, not an empty desktop
+PASS  "nothing is failed" is a verified answer, not a failed verification
+--- test_live_control_opt_in
+PASS  skipped — restarting a real unit needs ARIES_SYSTEM_CONTROL_TEST=1
+--- test_live_reads_on_this_machine
+PASS  ARIES can see its own units
+PASS  each observed unit carries a real state
+PASS  the system manager answers read-only questions without authentication
+PASS  a single unit inspects with a unit file path on disk
+PASS  the inspection says whether ARIES may control it
+--- test_packages_query_only
+PASS  a package that is installed is reported installed
+PASS  every entry names where the answer came from
+PASS  a version is reported, not a bare yes
+PASS  the queried package managers are listed
+PASS  the answer says it does not install anything
+PASS  an independent second query agrees
+PASS  a package that is absent is reported absent, and that is not an error
+PASS  "not found" from dpkg or snap is not reported as a broken tool
+PASS  a capitalised spoken name is folded, not refused
+PASS  no package manager at all is CAPABILITY_UNAVAILABLE
+--- test_refusals_are_by_name
+PASS  pipewire.service is refused by name before any command runs
+PASS  dbus.service is refused by name before any command runs
+PASS  org.gnome.Shell@aries.service is refused by name before any command runs
+PASS  gnome-keyring-daemon.service is refused by name before any command runs
+PASS  at-spi-dbus-bus.service is refused by name before any command runs
+PASS  aries-endurance.service is refused by name before any command runs
+PASS  systemd-logind.service is refused by name before any command runs
+PASS  the allowlist is small and explicit
+PASS  every allowlisted unit is fully qualified
+PASS  system scope is AUTH_REQUIRED and explains why
+PASS  stop of the unit running this request is refused
+PASS  restart of the unit running this request is refused
+PASS  own_unit reads a real cgroup or honestly returns nothing
+--- test_registration_and_policy_shape
+PASS  system.services is registered
+PASS  system.service is registered
+PASS  system.service_control is registered
+PASS  system.disk is registered
+PASS  system.packages is registered
+PASS  changing a unit requires approval
+PASS  changing a unit is not a read effect
+PASS  system.services is read-only and needs no approval
+PASS  system.service is read-only and needs no approval
+PASS  system.disk is read-only and needs no approval
+PASS  system.packages is read-only and needs no approval
+PASS  a shell fragment is not a unit name
+PASS  an argument that looks like an option is not a unit name
+PASS  reload and enable are outside this capability
+PASS  a glob is not a package name
+PASS  the disk capability takes no arguments at all
+--- test_show_parses_real_output
+PASS  every captured block became one row
+PASS  ActiveState and SubState come from systemd, not from an exit code
+PASS  since is a real timestamp
+PASS  active_seconds is derived from it
+PASS  main PID and unit file are reported
+PASS  a oneshot that never "entered active" has no since, not a fake one
+PASS  a oneshot still reports its result
+PASS  a timer has no Type and no main PID, and neither is invented
+PASS  a timer reports SubState=waiting
+PASS  a name systemd does not know is marked not-found, not inactive
+PASS  an unknown unit is TARGET_NOT_FOUND, not an empty answer
+PASS  a bare name is qualified with .service
+ALL PASSED

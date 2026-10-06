@@ -1,0 +1,2334 @@
+{
+  "checks": {
+    "core_api": true,
+    "local_inference_health": true,
+    "desktop_protocol": false,
+    "not_in_maintenance": true,
+    "aries-core": true,
+    "aries-local-model": true,
+    "background_inhibitor": true,
+    "no_latest_automation_failure": true
+  },
+  "passed": false,
+  "failed_automations": [],
+  "observations": {
+    "desktop": {
+      "ok": true,
+      "data": {
+        "available": false,
+        "methods": [],
+        "missing": [
+          "FocusWindow",
+          "Ping",
+          "Windows"
+        ],
+        "core_requires_shell": false,
+        "full_desktop_support": false,
+        "error": "ValueError",
+        "session_locked": true
+      }
+    },
+    "automations": {
+      "ok": true,
+      "data": {
+        "automations": [
+          {
+            "automation_id": "aries.attention",
+            "name": "Attention Pass",
+            "version": "1.0.0",
+            "purpose": "Read the folders and mailboxes you connected, understand each item on the local model, and say what needs you. Reports only — it never replies, forwards, deletes or marks anything as read.",
+            "trigger": "schedule",
+            "enabled": true,
+            "running_now": false,
+            "due_now": false,
+            "due_reason": "ran 20 min ago (every 60 min)",
+            "interval_minutes": 60,
+            "next_run": "2026-09-30T23:19:42",
+            "last_run": {
+              "id": 1273,
+              "automation_id": "aries.attention",
+              "version": "1.0.0",
+              "trigger": "schedule",
+              "status": "ok",
+              "summary": "nothing to read from 1 source(s)",
+              "detail": {
+                "success": true,
+                "status": "ok",
+                "summary": "nothing to read from 1 source(s)",
+                "needs_you": [],
+                "can_wait": [],
+                "injection_attempts": 0,
+                "not_understood": 0,
+                "sources_considered": 1,
+                "failures": [],
+                "decisions": [
+                  {
+                    "node": "collect",
+                    "label": "Read the connected sources",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "understand",
+                    "label": "Understand each item, locally",
+                    "ran": false,
+                    "reason": "nothing was read from any source"
+                  },
+                  {
+                    "node": "weigh",
+                    "label": "Rank against my interests",
+                    "ran": false,
+                    "reason": "depends on skipped: understand"
+                  },
+                  {
+                    "node": "report",
+                    "label": "Say what needs me",
+                    "ran": true,
+                    "reason": "default"
+                  }
+                ]
+              },
+              "task_id": 1116,
+              "duration_ms": 33,
+              "started_at": "2026-09-30T22:19:42"
+            },
+            "health": {
+              "automation_id": "aries.attention",
+              "window_days": 7,
+              "runs": 50,
+              "success_rate": 1.0,
+              "reason": null,
+              "counts": {
+                "ok": 50
+              }
+            },
+            "risk": "medium",
+            "requires_approval": false,
+            "agents": [],
+            "tools": [],
+            "permissions": [
+              "view_data"
+            ],
+            "enabled_setting": "connect.attention_enabled",
+            "evolution_history": [],
+            "parent_version": null,
+            "rollback_version": null
+          },
+          {
+            "automation_id": "aries.brief",
+            "name": "Morning Brief",
+            "version": "1.0.0",
+            "purpose": "Once a morning, gather what needs the user's decision, what the machine is doing, what is worth reading and what ARIES has learned — in one page.",
+            "trigger": "schedule",
+            "enabled": true,
+            "running_now": false,
+            "due_now": false,
+            "due_reason": "scheduled for 07:30 today",
+            "interval_minutes": 1440,
+            "next_run": "2026-10-01T07:30:00",
+            "last_run": {
+              "id": 1279,
+              "automation_id": "aries.brief",
+              "version": "1.0.0",
+              "trigger": "operator",
+              "status": "ok",
+              "summary": "14 item(s) across 5 section(s): nothing needs you — 8 news, 1 aries itself, 5 what i learned",
+              "detail": {
+                "success": true,
+                "status": "ok",
+                "summary": "14 item(s) across 5 section(s): nothing needs you — 8 news, 1 aries itself, 5 what i learned",
+                "details": "nothing needs you — 8 news, 1 aries itself, 5 what i learned",
+                "brief_id": 52,
+                "headline": "nothing needs you — 8 news, 1 aries itself, 5 what i learned",
+                "length": "standard",
+                "severity": "notice",
+                "item_count": 14,
+                "sections": [
+                  {
+                    "name": "decisions",
+                    "title": "Waiting for you",
+                    "summary": "nothing needs a decision",
+                    "severity": "info",
+                    "unavailable": null,
+                    "duration_ms": 14,
+                    "items": []
+                  },
+                  {
+                    "name": "system",
+                    "title": "System",
+                    "summary": "everything healthy",
+                    "severity": "info",
+                    "unavailable": null,
+                    "duration_ms": 8,
+                    "items": []
+                  },
+                  {
+                    "name": "news",
+                    "title": "News",
+                    "summary": "8 worth your time, of 695 seen",
+                    "severity": "info",
+                    "unavailable": null,
+                    "duration_ms": 24751,
+                    "items": [
+                      {
+                        "text": "US regulator launches probe into AI companies",
+                        "detail": "al-jazeera · 2026-09-30T19:46:35 — FTC investigates AI firms amid concerns over rogue agents and potential threats to humanity within the next decade.",
+                        "link": "https://www.aljazeera.com/economy/2026/9/30/us-regulator-launches-probe-into-ai-companies?traffic_source=rss",
+                        "severity": "notice",
+                        "meta": {
+                          "relevance": 0.98,
+                          "source": "al-jazeera",
+                          "topics": [
+                            "ai",
+                            "agents"
+                          ],
+                          "published": "2026-09-30T19:46:35",
+                          "summary_status": "fallback",
+                          "summary_cached": false,
+                          "original_title": "US regulator launches probe into AI companies",
+                          "summary_source_digest": "fb1fd519bb1b8706a5102caa5fe73cb1455fbcd24a56b7950c90aebd28002179"
+                        }
+                      },
+                      {
+                        "text": "Almost Human, Except When It Matters: VoxParity and the Decisions a Voice Should Change",
+                        "detail": "Локално AI резиме (непроверено): VoxParity испитува дали агентите на гласови зборови работат коректно во 183 сценарија од 14 сектори, со променување на звукот без промена на текстот. Излазот покажува дека многу системи грешат кога гласот ги измени, особено кога има сигнали за заштита, и само 11 од 23 системи ги прашаат стандардите на VoxParity. — arxiv-cs-cl",
+                        "link": "https://arxiv.org/abs/2609.35922",
+                        "severity": "notice",
+                        "meta": {
+                          "relevance": 0.96,
+                          "source": "arxiv-cs-cl",
+                          "topics": [
+                            "agents",
+                            "security"
+                          ],
+                          "published": "2026-09-30T04:00:00",
+                          "summary_status": "generated",
+                          "summary_cached": false,
+                          "original_title": "Almost Human, Except When It Matters: VoxParity and the Decisions a Voice Should Change",
+                          "summary_source_digest": "331de726810189b4334c112f730246ff6214e552b21932673a51b2717866b016"
+                        }
+                      },
+                      {
+                        "text": "Saudi Arabia not to compromise on security as Houthis choose ‘chaos’: MBS",
+                        "detail": "Локално AI резиме (непроверено): Коронавишен Михаел бин Салман одбира дека крајдруга арабска држава ќе се компромитира на секуритетот, секоја угроза ќе биде тежоко одговорена од страна на крајдруга. — al-jazeera",
+                        "link": "https://www.aljazeera.com/news/2026/9/30/saudi-crown-prince-says-no-compromise-on-kingdoms-security-against-threats?traffic_source=rss",
+                        "severity": "info",
+                        "meta": {
+                          "relevance": 0.75,
+                          "source": "al-jazeera",
+                          "topics": [
+                            "security"
+                          ],
+                          "published": "2026-09-30T19:20:04",
+                          "summary_status": "generated",
+                          "summary_cached": false,
+                          "original_title": "Saudi Arabia not to compromise on security as Houthis choose ‘chaos’: MBS",
+                          "summary_source_digest": "f1fef7a93d0a10281456c5e38ad9ca3422e26101510c6c1bfcdac55bedc0f09e"
+                        }
+                      },
+                      {
+                        "text": "The AI Tamagotchis are coming",
+                        "detail": "the-verge · 2026-09-30T18:07:38 — While AI has made plenty of inroads on people's phones and computers, it's largely failed in dedicated devices. But over the next year, two major AI companies, Meta and OpenAI, will attempt to change that. And they're apparently betting on a similar path: testing appetites for physical hardware with their cutesy software agents. \"Hardware is […]",
+                        "link": "https://www.theverge.com/ai-artificial-intelligence/1002779/openai-dots-meta-muse-ai-agents-hardware-devices",
+                        "severity": "notice",
+                        "meta": {
+                          "relevance": 0.98,
+                          "source": "the-verge",
+                          "topics": [
+                            "ai",
+                            "agents"
+                          ],
+                          "published": "2026-09-30T18:07:38",
+                          "summary_status": "fallback",
+                          "summary_cached": false,
+                          "original_title": "The AI Tamagotchis are coming",
+                          "summary_source_digest": "8b6e2453c75e1e0633bfb4807ce918af3aec9f34b52839ab4e1f3fecacd640cc"
+                        }
+                      },
+                      {
+                        "text": "Sage: Formalization with Semantic Correction",
+                        "detail": "arxiv-cs-lg · 2026-09-30T04:00:00 — arXiv:2609.35790v1 Announce Type: new Abstract: While neural theorem provers have achieved impressive milestones in formal mathematics, they largely operate on the assumption that faithful Lean 4 formal statements are already provided. Translating informal natural language into a formal language is a critical data bottleneck plagued by an \"illusion",
+                        "link": "https://arxiv.org/abs/2609.35790",
+                        "severity": "info",
+                        "meta": {
+                          "relevance": 0.85,
+                          "source": "arxiv-cs-lg",
+                          "topics": [
+                            "agents"
+                          ],
+                          "published": "2026-09-30T04:00:00",
+                          "summary_status": "fallback",
+                          "summary_cached": false,
+                          "original_title": "Sage: Formalization with Semantic Correction",
+                          "summary_source_digest": "bee3881bb6176437e91fc61292867d28d6bb9e6d21931c515ff819f4fbf23597"
+                        }
+                      },
+                      {
+                        "text": "Asus won’t say how it escaped the US router ban",
+                        "detail": "Локално AI резиме (непроверено): Оваа година априлски, САД го забариле влезот на сите инострани производни роутери за консуматори, со услови дека производителите да покажат дека не се национална војна угроза и да предложат детален план за производство во САД. На 9 септември, Asus до момента не е дали како се справи со овој забарање. — the-verge",
+                        "link": "https://www.theverge.com/policy/1002504/asus-escape-us-router-ban-us-manufacturing",
+                        "severity": "info",
+                        "meta": {
+                          "relevance": 0.75,
+                          "source": "the-verge",
+                          "topics": [
+                            "security"
+                          ],
+                          "published": "2026-09-30T16:44:20",
+                          "summary_status": "generated",
+                          "summary_cached": false,
+                          "original_title": "Asus won’t say how it escaped the US router ban",
+                          "summary_source_digest": "79d1d91c1c8c1ac64d0c51ca47f4fe265d73ca78faac2271619c9d8eca042095"
+                        }
+                      },
+                      {
+                        "text": "Launch HN: Magnitude (YC S25) – Self-optimizing inference engine for agents",
+                        "detail": "Локално AI резиме (непроверено): Коментари за запусната страница на Magnitude, компанија од програмскиот креативен циклус С25, која го разви самооптимизираштето инференцијско моторче за агенти. — hacker-news",
+                        "link": "https://github.com/magnitudedev/magnitude",
+                        "severity": "notice",
+                        "meta": {
+                          "relevance": 0.98,
+                          "source": "hacker-news",
+                          "topics": [
+                            "ai",
+                            "agents"
+                          ],
+                          "published": "2026-09-30T17:37:40",
+                          "summary_status": "generated",
+                          "summary_cached": false,
+                          "original_title": "Launch HN: Magnitude (YC S25) – Self-optimizing inference engine for agents",
+                          "summary_source_digest": "9bf35a31d872cf78c0dbae198fc2a5c2c37f7e50b28eb0637cd741fc0a1ec96f"
+                        }
+                      },
+                      {
+                        "text": "Constructing Challenging Browser-Use Tasks by Controlled Environment Interventions",
+                        "detail": "arxiv-cs-cl · 2026-09-30T04:00:00 — arXiv:2609.35814v1 Announce Type: new Abstract: As browser-use agents improve, benchmarks keep pace by collecting new tasks, websites, and applications, often making tasks longer or more novel. This makes difficulty expensive to refresh and difficult to control: when many aspects change at once, it is unclear what actually makes a task challenging.",
+                        "link": "https://arxiv.org/abs/2609.35814",
+                        "severity": "info",
+                        "meta": {
+                          "relevance": 0.85,
+                          "source": "arxiv-cs-cl",
+                          "topics": [
+                            "agents"
+                          ],
+                          "published": "2026-09-30T04:00:00",
+                          "summary_status": "fallback",
+                          "summary_cached": false,
+                          "original_title": "Constructing Challenging Browser-Use Tasks by Controlled Environment Interventions",
+                          "summary_source_digest": "979c8277f82f141b9381fc9113441c4c40d5ffa28d6dd2f1f15f6cf688cdb31a"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "automations",
+                    "title": "ARIES itself",
+                    "summary": "1 thing(s) degraded",
+                    "severity": "warning",
+                    "unavailable": null,
+                    "duration_ms": 110,
+                    "items": [
+                      {
+                        "text": "Learning Loop succeeded 67% of the time this week",
+                        "detail": "3 runs",
+                        "link": "",
+                        "severity": "notice",
+                        "meta": {
+                          "automation_id": "aries.learning"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "learning",
+                    "title": "What I learned",
+                    "summary": "5 preference(s) adjusted",
+                    "severity": "info",
+                    "unavailable": null,
+                    "duration_ms": 12,
+                    "items": [
+                      {
+                        "text": "'ai' — I would weight it 0.71, but yours is 0.90",
+                        "detail": "interest in 'ai' is fading rather than gone — engagement has fallen in each part of the window but is still 83%",
+                        "link": "",
+                        "severity": "info",
+                        "meta": {
+                          "topic": "ai",
+                          "shadowed": true
+                        }
+                      },
+                      {
+                        "text": "'agents' — I would weight it 0.69, but yours is 0.85",
+                        "detail": "interest in 'agents' is fading rather than gone — engagement has fallen in each part of the window but is still 41%",
+                        "link": "",
+                        "severity": "info",
+                        "meta": {
+                          "topic": "agents",
+                          "shadowed": true
+                        }
+                      },
+                      {
+                        "text": "'security' — I would weight it 0.73, but yours is 0.75",
+                        "detail": "you opened 1 of 54 items about 'security' — even at the optimistic end that is 10%, below the 10% mark",
+                        "link": "",
+                        "severity": "info",
+                        "meta": {
+                          "topic": "security",
+                          "shadowed": true
+                        }
+                      },
+                      {
+                        "text": "'real madrid' — I would weight it 0.48",
+                        "detail": "you opened 0 of 39 items about 'real madrid' — even at the optimistic end that is 9%, below the 10% mark",
+                        "link": "",
+                        "severity": "info",
+                        "meta": {
+                          "topic": "real madrid",
+                          "shadowed": false
+                        }
+                      },
+                      {
+                        "text": "'macedonia news' — I would weight it 0.16",
+                        "detail": "you opened 0 of 50 items about 'macedonia news' — even at the optimistic end that is 7%, below the 10% mark",
+                        "link": "",
+                        "severity": "info",
+                        "meta": {
+                          "topic": "macedonia news",
+                          "shadowed": false
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "rendered": "Morning brief  Thu 01 Oct, 00:35\nnothing needs you — 8 news, 1 aries itself, 5 what i learned\n\nWaiting for you  nothing needs a decision\n\nSystem  everything healthy\n\nNews  8 worth your time, of 695 seen\n · US regulator launches probe into AI companies\n · Almost Human, Except When It Matters: VoxParity and the Decisions a Voice Should Change\n     Локално AI резиме (непроверено): VoxParity испитува дали агентите на гласови зборови работат коректно во 183 сценарија од 14 сектори, со променување на звукот без промена на текстот. Излазот покажува дека многу системи грешат кога гласот ги измени, особено кога има сигнали за заштита, и само 11 од 23 системи ги прашаат стандардите на VoxParity. — arxiv-cs-cl\n     https://arxiv.org/abs/2609.35922\n   Saudi Arabia not to compromise on security as Houthis choose ‘chaos’: MBS\n     Локално AI резиме (непроверено): Коронавишен Михаел бин Салман одбира дека крајдруга арабска држава ќе се компромитира на секуритетот, секоја угроза ќе биде тежоко одговорена од страна на крајдруга. — al-jazeera\n     https://www.aljazeera.com/news/2026/9/30/saudi-crown-prince-says-no-compromise-on-kingdoms-security-against-threats?traffic_source=rss\n · The AI Tamagotchis are coming\n   Sage: Formalization with Semantic Correction\n  … and 3 more\n\nARIES itself  1 thing(s) degraded\n · Learning Loop succeeded 67% of the time this week\n\nWhat I learned  5 preference(s) adjusted\n   'ai' — I would weight it 0.71, but yours is 0.90\n   'agents' — I would weight it 0.69, but yours is 0.85\n   'security' — I would weight it 0.73, but yours is 0.75\n   'real madrid' — I would weight it 0.48\n   'macedonia news' — I would weight it 0.16",
+                "delivery": {
+                  "level": "briefing",
+                  "disposition": "held_quiet_hours",
+                  "reason": "quiet hours — held for the next briefing; only critical interrupts",
+                  "delivered": false
+                },
+                "unknown_sections": [],
+                "decisions": [
+                  {
+                    "node": "prepare",
+                    "label": "Read the configuration",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "collect_calendar",
+                    "label": "Collect calendar",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "collect_email",
+                    "label": "Collect email",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "collect_projects",
+                    "label": "Collect projects",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "collect_system",
+                    "label": "Collect system",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "collect_learning",
+                    "label": "Collect learning",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "collect_decisions",
+                    "label": "Collect decisions",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "collect_automations",
+                    "label": "Collect automations",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "collect_news",
+                    "label": "Collect news",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "compose",
+                    "label": "Assemble the brief",
+                    "ran": true,
+                    "reason": "default"
+                  }
+                ]
+              },
+              "task_id": 1121,
+              "duration_ms": 24806,
+              "started_at": "2026-09-30T22:35:43"
+            },
+            "health": {
+              "automation_id": "aries.brief",
+              "window_days": 7,
+              "runs": 4,
+              "success_rate": 1.0,
+              "reason": null,
+              "counts": {
+                "ok": 4
+              }
+            },
+            "risk": "low",
+            "requires_approval": false,
+            "agents": [],
+            "tools": [],
+            "permissions": [
+              "view_data"
+            ],
+            "enabled_setting": "briefing.morning_enabled",
+            "evolution_history": [],
+            "parent_version": null,
+            "rollback_version": null
+          },
+          {
+            "automation_id": "aries.dashboards",
+            "name": "Topic Dashboards",
+            "version": "1.0.0",
+            "purpose": "Keep dashboards for your research topics fresh, with source links and visible gaps",
+            "trigger": "schedule",
+            "enabled": true,
+            "running_now": false,
+            "due_now": false,
+            "due_reason": "ran 20 min ago (every 60 min)",
+            "interval_minutes": 60,
+            "next_run": "2026-09-30T23:19:42",
+            "last_run": {
+              "id": 1274,
+              "automation_id": "aries.dashboards",
+              "version": "1.0.0",
+              "trigger": "schedule",
+              "status": "ok",
+              "summary": "Queued 3 topic dashboards; reused 0 pending",
+              "detail": {
+                "summary": "Queued 3 topic dashboards; reused 0 pending",
+                "goal_ids": [
+                  "c59334b887a74016921c27fb67701e09",
+                  "b5ca802440694cacad961f04dfa0a374",
+                  "41ed97af5eb2438f99bb7d6538a43c21"
+                ],
+                "reused_goal_ids": []
+              },
+              "task_id": null,
+              "duration_ms": 0,
+              "started_at": "2026-09-30T22:19:42"
+            },
+            "health": {
+              "automation_id": "aries.dashboards",
+              "window_days": 7,
+              "runs": 50,
+              "success_rate": 0.98,
+              "reason": null,
+              "counts": {
+                "failed": 1,
+                "ok": 49
+              }
+            },
+            "risk": "low",
+            "requires_approval": false,
+            "agents": [],
+            "tools": [],
+            "permissions": [],
+            "enabled_setting": "workspace.dashboard_enabled",
+            "evolution_history": [],
+            "parent_version": null,
+            "rollback_version": null
+          },
+          {
+            "automation_id": "aries.data",
+            "name": "Data Lifecycle",
+            "version": "1.0.0",
+            "purpose": "Release the context of finished work, and remove data that has passed the retention window the user set. Keeps ARIES from hoarding what it read.",
+            "trigger": "schedule",
+            "enabled": false,
+            "running_now": false,
+            "due_now": false,
+            "due_reason": "disabled",
+            "interval_minutes": 1440,
+            "next_run": null,
+            "last_run": null,
+            "health": {
+              "automation_id": "aries.data",
+              "window_days": 7,
+              "runs": 0,
+              "success_rate": null,
+              "reason": "no runs in the window",
+              "counts": {}
+            },
+            "risk": "medium",
+            "requires_approval": false,
+            "agents": [],
+            "tools": [],
+            "permissions": [],
+            "enabled_setting": "data.enabled",
+            "evolution_history": [],
+            "parent_version": null,
+            "rollback_version": null
+          },
+          {
+            "automation_id": "aries.health",
+            "name": "System Health Monitor",
+            "version": "1.0.0",
+            "purpose": "Watch CPU, memory, disk, temperature, GPU and systemd units; learn what is normal for this machine; tell the user only what is worth knowing.",
+            "trigger": "schedule",
+            "enabled": true,
+            "running_now": false,
+            "due_now": false,
+            "due_reason": "ran 2 min ago (every 15 min)",
+            "interval_minutes": 15,
+            "next_run": "2026-09-30T22:52:37",
+            "last_run": {
+              "id": 1281,
+              "automation_id": "aries.health",
+              "version": "1.0.0",
+              "trigger": "api",
+              "status": "ok",
+              "summary": "healthy — 17 checks, nothing above threshold",
+              "detail": {
+                "success": true,
+                "details": "healthy — 17 checks, nothing above threshold",
+                "summary": "healthy — 17 checks, nothing above threshold",
+                "status": "ok",
+                "severity": "ok",
+                "findings": [
+                  {
+                    "code": "cpu.load",
+                    "severity": "ok",
+                    "subject": null,
+                    "summary": "load 1.92 across 12 cores (0.16 per core)",
+                    "value": 0.16,
+                    "unit": "",
+                    "threshold": 2.0,
+                    "baseline": {
+                      "key": "cpu.load_per_core",
+                      "n": 539,
+                      "median": 0.01,
+                      "p05": 0.0,
+                      "p95": 0.08,
+                      "min": 0.0,
+                      "max": 6.48,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "cpu.load_per_core",
+                      "load1": 1.92,
+                      "cores": 12
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "cpu.pressure",
+                    "severity": "ok",
+                    "subject": null,
+                    "summary": "CPU pressure 0.08% of the last minute stalled",
+                    "value": 0.08,
+                    "unit": "%",
+                    "threshold": 20.0,
+                    "baseline": {
+                      "key": "cpu.pressure",
+                      "n": 539,
+                      "median": 0.0,
+                      "p05": 0.0,
+                      "p95": 0.0,
+                      "min": 0.0,
+                      "max": 49.88,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "cpu.pressure",
+                      "window": "60s"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "memory.high",
+                    "severity": "ok",
+                    "subject": null,
+                    "summary": "memory is 27.1% used (10.78 GiB available)",
+                    "value": 27.1,
+                    "unit": "%",
+                    "threshold": 88.0,
+                    "baseline": {
+                      "key": "memory.used_pct",
+                      "n": 539,
+                      "median": 26.1,
+                      "p05": 16.49,
+                      "p95": 31.61,
+                      "min": 11.9,
+                      "max": 83.5,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "memory.used_pct",
+                      "total_gib": 14.79,
+                      "available_gib": 10.78
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "memory.swapping",
+                    "severity": "ok",
+                    "subject": null,
+                    "summary": "swap is 4.6% used",
+                    "value": 4.6,
+                    "unit": "%",
+                    "threshold": 60.0,
+                    "baseline": {
+                      "key": "memory.swap_used_pct",
+                      "n": 539,
+                      "median": 0.1,
+                      "p05": 0.0,
+                      "p95": 47.7,
+                      "min": 0.0,
+                      "max": 50.5,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "memory.swap_used_pct",
+                      "total_gib": 4.0
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "memory.pressure",
+                    "severity": "ok",
+                    "subject": null,
+                    "summary": "memory pressure 0% of the last minute stalled",
+                    "value": 0.0,
+                    "unit": "%",
+                    "threshold": 20.0,
+                    "baseline": {
+                      "key": "memory.pressure",
+                      "n": 539,
+                      "median": 0.0,
+                      "p05": 0.0,
+                      "p95": 0.0,
+                      "min": 0.0,
+                      "max": 0.42,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "memory.pressure",
+                      "window": "60s"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "disk.full",
+                    "severity": "ok",
+                    "subject": "/",
+                    "summary": "/ is 8.5% full (396.23 GiB free)",
+                    "value": 8.5,
+                    "unit": "%",
+                    "threshold": 85.0,
+                    "baseline": {
+                      "key": "disk.used_pct:/",
+                      "n": 539,
+                      "median": 5.6,
+                      "p05": 5.4,
+                      "p95": 8.4,
+                      "min": 5.4,
+                      "max": 8.5,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "disk.used_pct",
+                      "free_gib": 396.23,
+                      "size_gib": 433.09,
+                      "fstype": "ext4",
+                      "device": "/dev/sdc1"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "disk.full",
+                    "severity": "ok",
+                    "subject": "/boot/efi",
+                    "summary": "/boot/efi is 0.6% full (1.04 GiB free)",
+                    "value": 0.6,
+                    "unit": "%",
+                    "threshold": 85.0,
+                    "baseline": {
+                      "key": "disk.used_pct:/boot/efi",
+                      "n": 539,
+                      "median": 0.6,
+                      "p05": 0.6,
+                      "p95": 0.6,
+                      "min": 0.6,
+                      "max": 0.6,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "disk.used_pct",
+                      "free_gib": 1.04,
+                      "size_gib": 1.05,
+                      "fstype": "vfat",
+                      "device": "/dev/sdc2"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "thermal.hot",
+                    "severity": "ok",
+                    "subject": "acpitz0",
+                    "summary": "acpitz0 at 16.8 °C",
+                    "value": 16.8,
+                    "unit": "°C",
+                    "threshold": 85.0,
+                    "baseline": {
+                      "key": "thermal.celsius:acpitz0",
+                      "n": 539,
+                      "median": 16.8,
+                      "p05": 16.8,
+                      "p95": 16.8,
+                      "min": 16.8,
+                      "max": 16.8,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "thermal.celsius",
+                      "zone": "thermal_zone0"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "thermal.hot",
+                    "severity": "ok",
+                    "subject": "acpitz1",
+                    "summary": "acpitz1 at 27.8 °C",
+                    "value": 27.8,
+                    "unit": "°C",
+                    "threshold": 85.0,
+                    "baseline": {
+                      "key": "thermal.celsius:acpitz1",
+                      "n": 539,
+                      "median": 27.8,
+                      "p05": 27.8,
+                      "p95": 27.8,
+                      "min": 27.8,
+                      "max": 27.8,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "thermal.celsius",
+                      "zone": "thermal_zone1"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "thermal.hot",
+                    "severity": "ok",
+                    "subject": "pch_cannonlake",
+                    "summary": "pch_cannonlake at 45 °C",
+                    "value": 45.0,
+                    "unit": "°C",
+                    "threshold": 85.0,
+                    "baseline": {
+                      "key": "thermal.celsius:pch_cannonlake",
+                      "n": 539,
+                      "median": 48.0,
+                      "p05": 45.0,
+                      "p95": 50.0,
+                      "min": 30.0,
+                      "max": 52.0,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "thermal.celsius",
+                      "zone": "thermal_zone2"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "thermal.hot",
+                    "severity": "ok",
+                    "subject": "x86_pkg_temp",
+                    "summary": "x86_pkg_temp at 39 °C",
+                    "value": 39.0,
+                    "unit": "°C",
+                    "threshold": 85.0,
+                    "baseline": {
+                      "key": "thermal.celsius:x86_pkg_temp",
+                      "n": 539,
+                      "median": 34.0,
+                      "p05": 30.0,
+                      "p95": 43.2,
+                      "min": 29.0,
+                      "max": 62.0,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "thermal.celsius",
+                      "zone": "thermal_zone3"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "gpu.hot",
+                    "severity": "ok",
+                    "subject": "gpu0",
+                    "summary": "NVIDIA GeForce RTX 3060 at 43 °C",
+                    "value": 43.0,
+                    "unit": "°C",
+                    "threshold": 83.0,
+                    "baseline": {
+                      "key": "gpu.temp_celsius:gpu0",
+                      "n": 539,
+                      "median": 40.0,
+                      "p05": 34.0,
+                      "p95": 43.0,
+                      "min": 27.0,
+                      "max": 56.0,
+                      "window_days": 14,
+                      "trusted": true
+                    },
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "gpu.temp_celsius",
+                      "name": "NVIDIA GeForce RTX 3060"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "gpu.usage",
+                    "severity": "ok",
+                    "subject": "gpu0",
+                    "summary": "NVIDIA GeForce RTX 3060 utilization_pct 2%",
+                    "value": 2.0,
+                    "unit": "%",
+                    "threshold": null,
+                    "baseline": null,
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "gpu.utilization_pct",
+                      "name": "NVIDIA GeForce RTX 3060"
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "gpu.usage",
+                    "severity": "ok",
+                    "subject": "gpu0",
+                    "summary": "NVIDIA GeForce RTX 3060 memory_used_pct 70.7%",
+                    "value": 70.7,
+                    "unit": "%",
+                    "threshold": null,
+                    "baseline": null,
+                    "suppressed": null,
+                    "evidence": {
+                      "metric": "gpu.memory_used_pct",
+                      "name": "NVIDIA GeForce RTX 3060",
+                      "used_mib": 8692.0,
+                      "total_mib": 12288.0
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "services.failed",
+                    "severity": "ok",
+                    "subject": "systemd",
+                    "summary": "no failed systemd units",
+                    "value": 0.0,
+                    "unit": "",
+                    "threshold": null,
+                    "baseline": null,
+                    "suppressed": null,
+                    "evidence": {
+                      "units": []
+                    },
+                    "advice": ""
+                  },
+                  {
+                    "code": "uptime.long",
+                    "severity": "ok",
+                    "subject": "system",
+                    "summary": "up for 0.01 days",
+                    "value": 0.01,
+                    "unit": "days",
+                    "threshold": null,
+                    "baseline": null,
+                    "suppressed": null,
+                    "evidence": {},
+                    "advice": ""
+                  },
+                  {
+                    "code": "uptime.reboot_required",
+                    "severity": "ok",
+                    "subject": "system",
+                    "summary": "no reboot pending",
+                    "value": 0.0,
+                    "unit": "",
+                    "threshold": null,
+                    "baseline": null,
+                    "suppressed": null,
+                    "evidence": {
+                      "packages": []
+                    },
+                    "advice": ""
+                  }
+                ],
+                "alerts": [],
+                "critical": [],
+                "notifications": [],
+                "probes_unavailable": [],
+                "samples_recorded": 18,
+                "duration_ms": 163,
+                "requires_approval": false,
+                "proposal_kind": null,
+                "risk": "low"
+              },
+              "task_id": 1123,
+              "duration_ms": 224,
+              "started_at": "2026-09-30T22:37:37"
+            },
+            "health": {
+              "automation_id": "aries.health",
+              "window_days": 7,
+              "runs": 199,
+              "success_rate": 0.995,
+              "reason": null,
+              "counts": {
+                "failed": 1,
+                "ok": 198
+              }
+            },
+            "risk": "low",
+            "requires_approval": false,
+            "agents": [],
+            "tools": [
+              "systemctl list-units",
+              "nvidia-smi"
+            ],
+            "permissions": [
+              "view_data"
+            ],
+            "enabled_setting": "health.enabled",
+            "evolution_history": [],
+            "parent_version": null,
+            "rollback_version": null
+          },
+          {
+            "automation_id": "aries.learning",
+            "name": "Learning Loop",
+            "version": "1.0.0",
+            "purpose": "Watch what the user opens and dismisses, and adjust topic weights and the relevance bar accordingly — slowly, with evidence, and never over an explicit preference.",
+            "trigger": "schedule",
+            "enabled": true,
+            "running_now": false,
+            "due_now": false,
+            "due_reason": "ran 413 min ago (every 1440 min)",
+            "interval_minutes": 1440,
+            "next_run": "2026-10-01T15:46:54",
+            "last_run": {
+              "id": 1259,
+              "automation_id": "aries.learning",
+              "version": "1.0.0",
+              "trigger": "schedule",
+              "status": "ok",
+              "summary": "2 change(s) applied: 0 up, 2 down; 1 left to you (ai)",
+              "detail": {
+                "success": true,
+                "summary": "2 change(s) applied: 0 up, 2 down; 1 left to you (ai)",
+                "details": "2 change(s) applied: 0 up, 2 down; 1 left to you (ai)",
+                "status": "ok",
+                "proposals": [
+                  {
+                    "kind": "topic_weight",
+                    "target": "macedonia news",
+                    "current": 0.229,
+                    "proposed": 0.163,
+                    "direction": "down",
+                    "confidence": 0.287,
+                    "rationale": "you opened 0 of 50 items about 'macedonia news' — even at the optimistic end that is 7%, below the 10% mark",
+                    "evidence": {
+                      "topic": "macedonia news",
+                      "window_days": 30,
+                      "overall": {
+                        "label": "overall",
+                        "shown": 50,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 50,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.071,
+                        "width": 0.071
+                      },
+                      "recent": {
+                        "label": "recent",
+                        "shown": 6,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 6,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.39,
+                        "width": 0.39
+                      },
+                      "trend": "insufficient",
+                      "buckets": [
+                        {
+                          "label": "bucket0",
+                          "shown": 0,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 0,
+                          "rate": null,
+                          "lower": 0.0,
+                          "upper": 1.0,
+                          "width": 1.0
+                        },
+                        {
+                          "label": "bucket1",
+                          "shown": 0,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 0,
+                          "rate": null,
+                          "lower": 0.0,
+                          "upper": 1.0,
+                          "width": 1.0
+                        },
+                        {
+                          "label": "bucket2",
+                          "shown": 50,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 50,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.071,
+                          "width": 0.071
+                        },
+                        {
+                          "label": "bucket3",
+                          "shown": 0,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 0,
+                          "rate": null,
+                          "lower": 0.0,
+                          "upper": 1.0,
+                          "width": 1.0
+                        }
+                      ],
+                      "by_source": {
+                        "meta-mk": {
+                          "label": "meta-mk",
+                          "shown": 1,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 1,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.793,
+                          "width": 0.793
+                        },
+                        "makfax-makedonija": {
+                          "label": "makfax-makedonija",
+                          "shown": 29,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 29,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.117,
+                          "width": 0.117
+                        },
+                        "telma": {
+                          "label": "telma",
+                          "shown": 9,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 9,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.299,
+                          "width": 0.299
+                        },
+                        "sloboden-pecat": {
+                          "label": "sloboden-pecat",
+                          "shown": 11,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 11,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.259,
+                          "width": 0.259
+                        }
+                      },
+                      "best_source": {
+                        "label": "sloboden-pecat",
+                        "shown": 11,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 11,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.259,
+                        "width": 0.259
+                      },
+                      "worst_source": {
+                        "label": "makfax-makedonija",
+                        "shown": 29,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 29,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.117,
+                        "width": 0.117
+                      },
+                      "first_seen": "2026-09-18T18:00:02",
+                      "last_seen": "2026-09-20T18:17:59"
+                    },
+                    "applied": true,
+                    "shadowed": false,
+                    "note": null,
+                    "damping": 1.0,
+                    "reversals": 0,
+                    "scope": null,
+                    "classification": "ordinary",
+                    "window_days": 30,
+                    "interval": {
+                      "successes": 0,
+                      "trials": 50,
+                      "rate": 0.0,
+                      "lower": 0.0,
+                      "upper": 0.071,
+                      "width": 0.071
+                    },
+                    "reversal_id": null
+                  },
+                  {
+                    "kind": "topic_weight",
+                    "target": "real madrid",
+                    "current": 0.538,
+                    "proposed": 0.482,
+                    "direction": "down",
+                    "confidence": 0.103,
+                    "rationale": "you opened 0 of 39 items about 'real madrid' — even at the optimistic end that is 9%, below the 10% mark",
+                    "evidence": {
+                      "topic": "real madrid",
+                      "window_days": 30,
+                      "overall": {
+                        "label": "overall",
+                        "shown": 39,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 39,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.09,
+                        "width": 0.09
+                      },
+                      "recent": {
+                        "label": "recent",
+                        "shown": 20,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 20,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.161,
+                        "width": 0.161
+                      },
+                      "trend": "insufficient",
+                      "buckets": [
+                        {
+                          "label": "bucket0",
+                          "shown": 0,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 0,
+                          "rate": null,
+                          "lower": 0.0,
+                          "upper": 1.0,
+                          "width": 1.0
+                        },
+                        {
+                          "label": "bucket1",
+                          "shown": 0,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 0,
+                          "rate": null,
+                          "lower": 0.0,
+                          "upper": 1.0,
+                          "width": 1.0
+                        },
+                        {
+                          "label": "bucket2",
+                          "shown": 32,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 32,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.107,
+                          "width": 0.107
+                        },
+                        {
+                          "label": "bucket3",
+                          "shown": 7,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 7,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.354,
+                          "width": 0.354
+                        }
+                      ],
+                      "by_source": {
+                        "al-jazeera": {
+                          "label": "al-jazeera",
+                          "shown": 5,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 5,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.434,
+                          "width": 0.434
+                        },
+                        "managing-madrid": {
+                          "label": "managing-madrid",
+                          "shown": 26,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 26,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.129,
+                          "width": 0.129
+                        },
+                        "sloboden-pecat": {
+                          "label": "sloboden-pecat",
+                          "shown": 6,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 6,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.39,
+                          "width": 0.39
+                        },
+                        "bbc-news": {
+                          "label": "bbc-news",
+                          "shown": 2,
+                          "engaged": 0,
+                          "dismissed": 0,
+                          "successes": 0,
+                          "trials": 2,
+                          "rate": 0.0,
+                          "lower": 0.0,
+                          "upper": 0.658,
+                          "width": 0.658
+                        }
+                      },
+                      "best_source": {
+                        "label": "sloboden-pecat",
+                        "shown": 6,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 6,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.39,
+                        "width": 0.39
+                      },
+                      "worst_source": {
+                        "label": "al-jazeera",
+                        "shown": 5,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 5,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.434,
+                        "width": 0.434
+                      },
+                      "first_seen": "2026-09-18T15:09:45",
+                      "last_seen": "2026-09-24T19:58:14"
+                    },
+                    "applied": true,
+                    "shadowed": false,
+                    "note": null,
+                    "damping": 1.0,
+                    "reversals": 0,
+                    "scope": null,
+                    "classification": "ordinary",
+                    "window_days": 30,
+                    "interval": {
+                      "successes": 0,
+                      "trials": 39,
+                      "rate": 0.0,
+                      "lower": 0.0,
+                      "upper": 0.09,
+                      "width": 0.09
+                    },
+                    "reversal_id": null
+                  }
+                ],
+                "frozen": [
+                  {
+                    "target": "ai",
+                    "changes": 8,
+                    "reversals": 3,
+                    "last_direction": "down",
+                    "frozen": true,
+                    "damping": 0.125,
+                    "reason": "changed direction 3 times in the last 8 adjustments — the evidence is not settled, so ARIES has stopped adjusting this and left it to you"
+                  }
+                ],
+                "verdicts": [
+                  {
+                    "target": "agents",
+                    "scope": null,
+                    "classification": "none",
+                    "direction": "none",
+                    "confidence": 0.0,
+                    "reason": "no established position to contradict",
+                    "proposed": null,
+                    "evidence": {}
+                  },
+                  {
+                    "target": "macedonia news",
+                    "scope": null,
+                    "classification": "agrees",
+                    "direction": "down",
+                    "confidence": 0.5,
+                    "reason": "the evidence continues to support a 'down' preference",
+                    "proposed": null,
+                    "evidence": {
+                      "overall": {
+                        "label": "overall",
+                        "shown": 50,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 50,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.071,
+                        "width": 0.071
+                      },
+                      "recent": {
+                        "label": "recent",
+                        "shown": 6,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 6,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.39,
+                        "width": 0.39
+                      },
+                      "trend": "insufficient",
+                      "required_observations": 20,
+                      "threshold": 0.4,
+                      "position": "down",
+                      "reversal_interval": {
+                        "successes": 0,
+                        "trials": 50,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.11,
+                        "width": 0.11
+                      },
+                      "reversal_confidence_z": 2.492
+                    }
+                  },
+                  {
+                    "target": "real madrid",
+                    "scope": null,
+                    "classification": "none",
+                    "direction": "none",
+                    "confidence": 0.0,
+                    "reason": "no established position to contradict",
+                    "proposed": null,
+                    "evidence": {}
+                  },
+                  {
+                    "target": "security",
+                    "scope": null,
+                    "classification": "sustained",
+                    "direction": "down",
+                    "confidence": 0.537,
+                    "reason": "you engaged with 1 of 81 'security' items over 30 days, and 0 of 31 recently — the whole window clears 10% even at the higher confidence reversing requires, and the recent slice agrees",
+                    "proposed": null,
+                    "evidence": {
+                      "overall": {
+                        "label": "overall",
+                        "shown": 81,
+                        "engaged": 1,
+                        "dismissed": 0,
+                        "successes": 1,
+                        "trials": 81,
+                        "rate": 0.012,
+                        "lower": 0.002,
+                        "upper": 0.067,
+                        "width": 0.064
+                      },
+                      "recent": {
+                        "label": "recent",
+                        "shown": 31,
+                        "engaged": 0,
+                        "dismissed": 0,
+                        "successes": 0,
+                        "trials": 31,
+                        "rate": 0.0,
+                        "lower": 0.0,
+                        "upper": 0.11,
+                        "width": 0.11
+                      },
+                      "trend": "flat",
+                      "required_observations": 20,
+                      "threshold": 0.1,
+                      "position": "up",
+                      "reversal_interval": {
+                        "successes": 1,
+                        "trials": 81,
+                        "rate": 0.012,
+                        "lower": 0.002,
+                        "upper": 0.093,
+                        "width": 0.091
+                      },
+                      "reversal_confidence_z": 2.492
+                    }
+                  }
+                ],
+                "reversals_applied": [],
+                "applied": true
+              },
+              "task_id": null,
+              "duration_ms": 55,
+              "started_at": "2026-09-30T15:46:54"
+            },
+            "health": {
+              "automation_id": "aries.learning",
+              "window_days": 7,
+              "runs": 3,
+              "success_rate": 0.667,
+              "reason": null,
+              "counts": {
+                "failed": 1,
+                "ok": 2
+              }
+            },
+            "risk": "low",
+            "requires_approval": false,
+            "agents": [],
+            "tools": [],
+            "permissions": [
+              "view_data"
+            ],
+            "enabled_setting": "learning.enabled",
+            "evolution_history": [],
+            "parent_version": null,
+            "rollback_version": null
+          },
+          {
+            "automation_id": "aries.news",
+            "name": "News Radar",
+            "version": "1.0.0",
+            "purpose": "Read the sources the user chose, merge duplicate stories, score what is left against their interests, and interrupt only when it is worth it.",
+            "trigger": "schedule",
+            "enabled": true,
+            "running_now": false,
+            "due_now": false,
+            "due_reason": "ran 5 min ago (every 120 min)",
+            "interval_minutes": 120,
+            "next_run": "2026-10-01T00:35:16",
+            "last_run": {
+              "id": 1278,
+              "automation_id": "aries.news",
+              "version": "1.0.0",
+              "trigger": "operator",
+              "status": "ok",
+              "summary": "0 delivered from 0 source(s), 0 held, 4 duplicates merged, 88 rejected, 20 sources, 1 source(s) failed",
+              "detail": {
+                "success": true,
+                "summary": "0 delivered from 0 source(s), 0 held, 4 duplicates merged, 88 rejected, 20 sources, 1 source(s) failed",
+                "details": "0 delivered from 0 source(s), 0 held, 4 duplicates merged, 88 rejected, 20 sources, 1 source(s) failed",
+                "stored": 7,
+                "clusters": 467,
+                "duplicates_merged": 4,
+                "rejected": [
+                  {
+                    "item_id": "92c1d54395e00a7523b615f2265fb108",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "ef000562136caad54f459bd5d6b68ff0",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "c9b1b4ffd597cdfbd363c1135cde5f43",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "e8018e93107f50a160ba9f69ce13450b",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "a01e63579615b74cddbbee64a1da96ad",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "791a768f994f6806a8ba19c14771ca4e",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "b80f163082e47222d809fdc1960344ce",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "1dda8eae3ecfd433752cf2c06ca32150",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "de111b42bccf0e043cb2571d81f58825",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "e4ffeb8873492a86670b4c6af98f561d",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "8ae01ba07b4cf08bcf55e156e7c85aee",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "271743060f196196ddc7d8aba484baf0",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "19fb9344f4832f6ee7dfd8fd1b6e3298",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "f6849853d5f69b6a9a978fed6457d5d9",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "b4105156596a6db4ee4d7e21a0b8dd33",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "615a3bfdbfa7c63b353ef8aeab3d53de",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "ac790b95f8dd149450f352e6882fbea0",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "56e02285c0fdf85d96daf1200796abad",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "97f68453719c9467deaaf48749a69e05",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "0f3a45e6b75c3450223e2fc41e2742d9",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "98469a5c000ba1826b76ed0f0d97ba0b",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "0f52a91b7c4102ba38cf27f1ea9ab524",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "c90a7618b82b5fb3cca1e929b3651153",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "ba1d04f99ccf2ca8004ebb2d258182ea",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "b9b83b4ed7fbb59cb40d240d55729dad",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "34dd86aaa14c10fb7a58c4058c3e95b5",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "ced416ee7683db221e8ade54e1cdcf03",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "fd8009b074af3a4ea90438fe1aab7de8",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "a44e96a43f58f1b98a6671ee91a121fa",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "501b5a849ab3b9dbdd423ff176cb854e",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "404213ca163e635b106a6143618c1c59",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "0e49a9b908d6ac177f62e250383730fc",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "7f559d3d9b20062a802d47cc839eb5bf",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "13402e9d5cf42d8460bb085193948542",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "34c8b07a0badfcb764586d8cbe480d91",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "90955ff92d5dabe90e6dc869970822da",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "66c1df87df57404565aca316d50718c2",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "e45a9ca5d9cdb94d9cb399c6f93e0d0f",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "e7065816d8fe656a49be302aa0cc41b2",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "a91df8e03f32656fde4328024efc6eab",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "97a45a481ff4d576612398eede4637de",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "64f8d8f15698692683efc6954b959184",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "6202ab6853d0ca4afa86d1463f782697",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "65b9ac0c60cd410c31711df53e25e75d",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "8cc28ad5f85019ce99c3cc9e5682b5fd",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "54856de07e067515563640860a12a9e1",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "77e053d6f6b930e970471fed2c1f00ad",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "17702465665cf65c30fd3ef0b586bf4e",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "12188ebdbba4e5b189a5b32bdca9ba80",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "7b189a7dfadf218ab73d58de122b42da",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "3630e4ea400c01a35b92c2a581bb7f0d",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "a0f48d43e91874f082bd179c4f824a43",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "23209cafcbf2cb15a03913968781b081",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "5c24faff6c5f00d00bc1688fdf09f8fa",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "07ec20ecbec90a72672f7a263a1dfe3d",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "595fabee5093e089f82526301d15ea24",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "b6e33791f3e5a424c3a85a28d3f507ef",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "d6188ff499a4c71b6fec31e5505d4515",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "8b46a4b4004d8a72f2782e3a3ca5475b",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "c7ab2db8726bb10a7c8cc95270e2807d",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "e8cde80a3b736d0e0fd9eeca47e9a97a",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "26a4e5ec2a5cad24a3565bf5a3964c99",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "815268f08258c2ddf76a51c420cd4336",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "bf15fd28d7d1c89aef29b81391fb7abe",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "f22858c4d68fa4df2470b479f9d1941b",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "e5fee1620296bfdf1f08e4ecad62e090",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "40c643084cd9b7d6e841fdb6f858b664",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "6cdd61463477d694bc193c592740ebcd",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "f37dfbf1385a631765113840a74485d3",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "f98c2895f949e2a01dbdf8de31a2407e",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "eb9819f674b5e57c8baa3b57300e8ea3",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "98723f314fa4361a631da1665a9e4e55",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "92ef61de7c1cc3e224887c284dcb60e6",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "b64d20caa5cd82923780a428bcb887f9",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "cbd0cea85222e24bfe39b3a664de9607",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "3e6e35a375fe3a37ea0aa4dfdfd7cc20",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "771430abc09d377e65b70a6cb6c13fb7",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "c12bc2e179897ba40194d0545810380f",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "f975beb3d050eef87d73a7559af5140f",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "afdc7ebabf88e9ce779e1f3f5f6e4bdc",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "f54537d2c5c8f7ab1b107318708f4722",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "14f573b5d7f48a22f142a4b57250566e",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "9b9e3d44a9e6a1339f5e8436d11d2f6f",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "298f793577b02faf46babef25068bf3d",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "b9accab691f4181ec3625e6141110779",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "bd1c11e853a7f406575b77cbcdbed51a",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "43729ac92f7d3cea8025240944c99b04",
+                    "why": "older than 72h"
+                  },
+                  {
+                    "item_id": "2749c06b69fd097da6cf9b326afceb0d",
+                    "why": "older than 72h"
+                  }
+                ],
+                "per_source": [
+                  {
+                    "source_id": "hacker-news",
+                    "items": 30,
+                    "ms": 633,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "arxiv-cs-ai",
+                    "items": 50,
+                    "ms": 1093,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "arxiv-cs-cl",
+                    "items": 50,
+                    "ms": 514,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "arxiv-cs-lg",
+                    "items": 50,
+                    "ms": 926,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "bbc-news",
+                    "items": 36,
+                    "ms": 235,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "schneier",
+                    "items": 10,
+                    "ms": 188,
+                    "feed": "atom"
+                  },
+                  {
+                    "source_id": "krebs",
+                    "items": 10,
+                    "ms": 330,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "makfax-makedonija",
+                    "items": 10,
+                    "ms": 455,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "managing-madrid",
+                    "items": 10,
+                    "ms": 196,
+                    "feed": "atom"
+                  },
+                  {
+                    "source_id": "the-verge",
+                    "items": 10,
+                    "ms": 142,
+                    "feed": "atom"
+                  },
+                  {
+                    "source_id": "sloboden-pecat",
+                    "items": 10,
+                    "ms": 934,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "telma",
+                    "items": 10,
+                    "ms": 194,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "al-jazeera",
+                    "items": 25,
+                    "ms": 208,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "ars-technica",
+                    "items": 20,
+                    "ms": 106,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "mit-tr-ai",
+                    "items": 10,
+                    "ms": 240,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "meta-mk",
+                    "items": 20,
+                    "ms": 460,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "dw",
+                    "items": 50,
+                    "ms": 258,
+                    "feed": "rdf"
+                  },
+                  {
+                    "source_id": "huggingface",
+                    "items": 50,
+                    "ms": 290,
+                    "feed": "rss"
+                  },
+                  {
+                    "source_id": "github-blog",
+                    "items": 10,
+                    "ms": 240,
+                    "feed": "rss"
+                  }
+                ],
+                "fetch_failures": [
+                  {
+                    "source_id": "google-ai",
+                    "error": "could not fetch https://blog.google/technology/ai/rss/: ConnectError: All connection attempts failed"
+                  }
+                ],
+                "sources_considered": 20,
+                "decisions": [
+                  {
+                    "node": "collect",
+                    "label": "Read the sources",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "cluster",
+                    "label": "Merge duplicate stories",
+                    "ran": true,
+                    "reason": "471 items collected"
+                  },
+                  {
+                    "node": "verify",
+                    "label": "Discard the implausible",
+                    "ran": true,
+                    "reason": "default"
+                  },
+                  {
+                    "node": "rank",
+                    "label": "Score against my interests",
+                    "ran": true,
+                    "reason": "379 stories to rank"
+                  },
+                  {
+                    "node": "deliver",
+                    "label": "Decide who needs to know",
+                    "ran": true,
+                    "reason": "default"
+                  }
+                ]
+              },
+              "task_id": 1120,
+              "duration_ms": 10636,
+              "started_at": "2026-09-30T22:35:16"
+            },
+            "health": {
+              "automation_id": "aries.news",
+              "window_days": 7,
+              "runs": 26,
+              "success_rate": 1.0,
+              "reason": null,
+              "counts": {
+                "ok": 26
+              }
+            },
+            "risk": "low",
+            "requires_approval": false,
+            "agents": [],
+            "tools": [
+              "https fetch (guarded)"
+            ],
+            "permissions": [
+              "view_data"
+            ],
+            "enabled_setting": "news.enabled",
+            "evolution_history": [],
+            "parent_version": null,
+            "rollback_version": null
+          }
+        ],
+        "worker": {
+          "name": "aries.automations",
+          "state": "running",
+          "alive": true,
+          "last_tick": "2026-09-30T22:39:40.331827",
+          "every_seconds": 60,
+          "check_every_s": 60,
+          "enabled": true,
+          "error": null,
+          "enabled_setting": "automations.worker_enabled",
+          "switch_on": true,
+          "means": "'switch_on' is the user's setting; 'state' is whether the dispatcher task is alive in this process."
+        }
+      }
+    },
+    "power": {
+      "ok": true,
+      "data": {
+        "background_mode": true,
+        "allow_suspend": false,
+        "allow_gpu_jobs": false,
+        "gpu_jobs_note": "the gate is live: any automation declaring heavy GPU work meets it. No automation declares heavy GPU work yet, so nothing is being refused today.",
+        "display": {
+          "state": "off",
+          "detail": "the screen is blanked",
+          "off_after_seconds": 60,
+          "configured_minutes": 1,
+          "will_restore_to": 0
+        },
+        "system": {
+          "awake": true,
+          "session": {
+            "available": true,
+            "id": "2",
+            "type": "wayland",
+            "active": true,
+            "idle": true,
+            "state": "active"
+          }
+        },
+        "inhibitor": {
+          "available": true,
+          "unavailable_reason": null,
+          "active": true,
+          "what": "sleep",
+          "mode": "block",
+          "held_by_aries": [
+            {
+              "who": "ARIES",
+              "uid": "1000",
+              "pid": "30328",
+              "what": "sleep",
+              "mode": "block",
+              "line": "ARIES 1000 stamenovmartin 30328 systemd-inhibit sleep ARIES Background Mode is on — automations keep running while the display is off block"
+            }
+          ],
+          "other_sleep_blockers": []
+        },
+        "suspend_policy": {
+          "sleep-inactive-ac-type": "nothing",
+          "sleep-inactive-ac-timeout": "3600",
+          "sleep-inactive-battery-type": "suspend",
+          "sleep-inactive-battery-timeout": "900"
+        },
+        "effect": "this machine is already set never to suspend on mains power, so the inhibitor changes nothing while it is plugged in — it matters on battery",
+        "resources": {
+          "measurement": {
+            "cpu_pct": 3.7,
+            "cpu_unavailable": null,
+            "cpu_window": "since the previous check",
+            "gpu_pct": 0.0,
+            "gpu_subject": "gpu0",
+            "gpu_unavailable": null,
+            "temperature_celsius": 46.0,
+            "temperature_subject": "pch_cannonlake",
+            "temperature_unavailable": null,
+            "measured_at": "2026-10-01T00:40:06.368713"
+          },
+          "limits": {
+            "temperature_celsius": 80,
+            "cpu_pct": 70,
+            "gpu_pct": 70,
+            "heavy_job_max_minutes": 20,
+            "resume_margin_celsius": 5,
+            "clear_checks": 2,
+            "allow_heavy_cpu": false,
+            "allow_gpu_jobs": false
+          },
+          "classes": [
+            {
+              "name": "light",
+              "title": "Lightweight",
+              "description": "Reading files, fetching feeds, arithmetic over rows. Costs a fraction of one core for seconds. Always allowed, including while the display is off.",
+              "heavy": false,
+              "permission_setting": null,
+              "watches": [],
+              "budgeted": false,
+              "status": "allowed",
+              "why": "always runs, including while the display is off"
+            },
+            {
+              "name": "inference_light",
+              "title": "Lightweight inference",
+              "description": "A model answering a bounded question — classification, a short summary. Allowed while the display is off; it is not a sustained load.",
+              "heavy": false,
+              "permission_setting": null,
+              "watches": [],
+              "budgeted": false,
+              "status": "allowed",
+              "why": "always runs, including while the display is off"
+            },
+            {
+              "name": "heavy_cpu",
+              "title": "Sustained high CPU",
+              "description": "Work that will hold several cores busy for minutes — indexing, a large local model, a full repository analysis. Blocked while the display is off unless enabled, and budgeted when it is.",
+              "heavy": true,
+              "permission_setting": "power.allow_heavy_cpu",
+              "watches": [
+                "cpu",
+                "temperature"
+              ],
+              "budgeted": true,
+              "status": "blocked",
+              "why": "not enabled for while the display is off"
+            },
+            {
+              "name": "heavy_gpu",
+              "title": "Sustained GPU",
+              "description": "Work that will hold the GPU busy — local model inference or training. Blocked while the display is off unless enabled, and budgeted when it is.",
+              "heavy": true,
+              "permission_setting": "power.allow_gpu_jobs",
+              "watches": [
+                "gpu",
+                "temperature"
+              ],
+              "budgeted": true,
+              "status": "blocked",
+              "why": "not enabled for while the display is off"
+            }
+          ],
+          "display_off": true,
+          "running_heavy": [],
+          "events": []
+        }
+      }
+    },
+    "maintenance": {
+      "ok": true,
+      "data": {
+        "active": false,
+        "expires_in_seconds": 0,
+        "workspace_running": [],
+        "automations_running": [],
+        "ready_to_restart": false,
+        "scope": "Workspace queue and automation runner; existing single core process"
+      }
+    },
+    "local_model": {
+      "ok": true,
+      "data": {
+        "service": "aries-local-model",
+        "backend": {
+          "reachable": true,
+          "model_available": true,
+          "models": [
+            "bge-m3:latest",
+            "qwen2.5:1.5b",
+            "qwen2.5:7b"
+          ]
+        }
+      }
+    }
+  },
+  "scope": "Current service/desktop readiness, not proof of general agent reliability, translation accuracy, or 24-hour uptime."
+}

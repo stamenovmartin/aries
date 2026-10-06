@@ -1,0 +1,94 @@
+Refused a non-loopback request from 192.168.1.50: no API_KEY is configured
+Refused a non-loopback request from 8.8.8.8: no API_KEY is configured
+Refused a non-loopback request from 10.0.0.2: no API_KEY is configured
+Refused a non-loopback request from None: no API_KEY is configured
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 48696)
+Traceback (most recent call last):
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/socketserver.py", line 766, in __init__
+    self.handle()
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/http/server.py", line 440, in handle
+    self.handle_one_request()
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/http/server.py", line 428, in handle_one_request
+    method()
+  File "/tmp/aries-learning-rollback-k6qragg0/tests/test_security.py", line 63, in do_GET
+    self.wfile.write(b"x" * 8192)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+--- test_a_long_term_cannot_reach_the_regex_compiler
+PASS  a huge term is truncated before compilation
+--- test_address_classification
+PASS  127.0.0.1 classified as loopback
+PASS  ::1 classified as loopback
+PASS  10.0.0.1 classified as private
+PASS  192.168.1.1 classified as private
+PASS  172.16.0.1 classified as private
+PASS  169.254.169.254 classified as link-local (the cloud metadata range)
+PASS  224.0.0.1 classified as reserved
+PASS  8.8.8.8 classified as public
+PASS  1.1.1.1 classified as public
+--- test_audit_records_the_principal
+PASS  the actor is derived from the principal
+PASS  and keeps the user: prefix the write rules require
+PASS  the audit event names that principal
+--- test_feed_content_is_data_not_markup
+PASS  tags are stripped
+PASS  entities are unescaped after stripping, not before
+PASS  a very long field is bounded
+PASS  nothing empty crashes it
+--- test_feed_refuses_dtd
+PASS  a feed declaring a DOCTYPE is refused
+PASS  and says why
+--- test_fetch_happy_path
+PASS  a permitted fetch succeeds
+PASS  the body comes back
+PASS  the content type is recorded
+PASS  the address actually connected to is recorded
+PASS  and it parses as a feed
+--- test_fetch_refuses_before_connecting
+PASS  a loopback target is refused before any connection
+PASS  a metadata target is refused before any connection
+PASS  a private target is refused before any connection
+PASS  a scheme target is refused before any connection
+PASS  a credentials target is refused before any connection
+--- test_input_bounds
+PASS  an oversized field is refused
+PASS  too many list entries are refused
+PASS  an oversized list entry is refused
+PASS  normal input passes
+--- test_no_api_key_means_loopback_only
+PASS  a request from 127.0.0.1 is served
+PASS  a request from ::1 is served
+PASS  a request from localhost is served
+PASS  a request from testclient is served
+PASS  a request from 192.168.1.50 is refused with no API key
+PASS  a request from 8.8.8.8 is refused with no API key
+PASS  a request from 10.0.0.2 is refused with no API key
+PASS  an unknown client address fails closed
+PASS  with an API key configured, remote requests reach authentication
+--- test_redirect_limit
+PASS  an endless redirect loop is stopped
+--- test_redirect_to_metadata_is_refused
+PASS  a redirect into the metadata endpoint is refused
+PASS  and names what it refused
+--- test_redirect_to_metadata_refused_even_when_private_is_allowed_elsewhere
+PASS  refused with allow_private off
+--- test_redirects_are_followed_and_re_validated
+PASS  a safe redirect is followed
+PASS  and every hop is recorded
+--- test_size_cap_is_enforced_while_streaming
+PASS  a large response is truncated, not swallowed whole
+PASS  and never exceeds the cap
+--- test_startup_report_is_honest
+PASS  the posture says it serves loopback only
+PASS  and that secret storage is unavailable without a key
+PASS  and that side effects are simulated
+ALL PASSED

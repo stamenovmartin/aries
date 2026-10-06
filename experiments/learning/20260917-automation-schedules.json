@@ -1,0 +1,15 @@
+{
+  "problem": "Direct bookkeeping automations could run without history; hour-based intervals were interpreted as minutes, and dispatcher polling could stall on future checkpoints.",
+  "change": "Added missing history recording without duplicating self-recorded runs; convert declared hour units to minutes; dispatcher polling independent of wall-clock checkpoints.",
+  "validation": [
+    "Automation regression suite passed including hour conversion, history, no duplicate runs and poll cadence.",
+    "API, learning, lifecycle, power and runtime suites passed after final changes.",
+    "Live core demo 7/7: experiments/demo/20260917T185338Z-04f0a5.",
+    "Live scheduled learning now has an ok run and 1440-minute interval; all six enabled automations have ok last status."
+  ],
+  "limitations": [
+    "Data cleanup remains disabled according to existing user setting.",
+    "Current GNOME session still requires fresh login for the newer focus method.",
+    "Full test suite passed before final schedule changes; impacted suites and live core run repeated afterwards."
+  ]
+}

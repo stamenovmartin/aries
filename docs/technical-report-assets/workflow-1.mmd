@@ -1,0 +1,17 @@
+flowchart TD
+    U[Корисник / GNOME / GTK] --> API[Локален HTTP API]
+    API --> D[ARIES domain services]
+    D --> IR[Intelligence Router]
+    IR --> CODE[Deterministic code]
+    IR --> LOCAL[Локален модел]
+    IR --> CLOUD[the reviewing agent / Codex CLI]
+    CODE --> Q[Постојна workspace queue]
+    LOCAL --> Q
+    CLOUD --> Q
+    Q --> P[Capability policy и validation]
+    P --> EX[Executor]
+    EX --> OS[Linux / датотеки / browser / desktop]
+    OS --> OBS[Набљудување]
+    OBS --> V[Независна verification]
+    V --> DB[Task state / evidence / audit]
+    DB --> API

@@ -1,0 +1,102 @@
+{
+  "as_of": "2026-10-06T10:24:28.576109+00:00",
+  "kind": "subjective architecture implementation estimate requested by user",
+  "not_a_metric": [
+    "not measured intelligence",
+    "not benchmark success rate",
+    "not test coverage",
+    "not deployment readiness probability"
+  ],
+  "uncertainty": "Approximate; no calibrated acceptance denominator, allow roughly5\u201310 percentage points of judgment. Levels0/1 refer only to original foundation scope.",
+  "levels": [
+    {
+      "level": 0,
+      "name": "Foundation / Agent Engine",
+      "previous_estimate": 100,
+      "current_estimate": 100,
+      "basis_and_limits": "Original foundational scope implemented; not defect-free or full long-term acceptance."
+    },
+    {
+      "level": 1,
+      "name": "Desktop + Runtime",
+      "previous_estimate": 100,
+      "current_estimate": 100,
+      "basis_and_limits": "Original Linux desktop/runtime foundation; voice/desktop endurance not freshly certified."
+    },
+    {
+      "level": 2,
+      "name": "Voice/Text \u2192 AI \u2192 Actions",
+      "previous_estimate": 90,
+      "current_estimate": 90,
+      "basis_and_limits": "No new voice or general action coverage in these batches."
+    },
+    {
+      "level": 3,
+      "name": "Safe Typed Capabilities",
+      "previous_estimate": 90,
+      "current_estimate": 95,
+      "basis_and_limits": "Added scoped grants, final egress policy and shared durable budgets; not all legacy paths covered."
+    },
+    {
+      "level": 4,
+      "name": "Planning + Multi-step Agent",
+      "previous_estimate": 80,
+      "current_estimate": 85,
+      "basis_and_limits": "Goal graph foundations and bounded verified termination improved; general long-horizon planning absent."
+    },
+    {
+      "level": 5,
+      "name": "Verification / Evidence",
+      "previous_estimate": 70,
+      "current_estimate": 80,
+      "basis_and_limits": "Independent root checks, stale-proof invalidation and better attribution; no fresh all-capability coverage denominator."
+    },
+    {
+      "level": 6,
+      "name": "Memory + Personal Adaptation",
+      "previous_estimate": 60,
+      "current_estimate": 70,
+      "basis_and_limits": "Active structured context from memory, task history and permitted cached news; project/calendar/message engine incomplete."
+    },
+    {
+      "level": 7,
+      "name": "Proactive Automation",
+      "previous_estimate": 70,
+      "current_estimate": 70,
+      "basis_and_limits": "No new general proactive reasoning mechanism implemented in recent batches."
+    },
+    {
+      "level": 8,
+      "name": "Dynamic Multi-Agent Intelligence",
+      "previous_estimate": 20,
+      "current_estimate": 45,
+      "basis_and_limits": "Actual temporary runtime planners, read-only scoped DAGs, budgets and root verification built; default disabled; limited fixture validation."
+    },
+    {
+      "level": 9,
+      "name": "Self-improvement / Evolution",
+      "previous_estimate": 0,
+      "current_estimate": 0,
+      "basis_and_limits": "No autonomous candidate generation/evaluation/promotion/rollback loop. Evaluation infrastructure and engineering notes are prerequisites only."
+    },
+    {
+      "level": 10,
+      "name": "Mature Personal AI Operating Environment",
+      "previous_estimate": null,
+      "current_estimate": 60,
+      "basis_and_limits": "Holistic target estimate, not a separate module or arithmetic average. Broad integrations, sustained autonomy and evolution incomplete."
+    }
+  ],
+  "evidence": [
+    "experiments/product/20261006/OPERATIONS.md",
+    "experiments/product/context-v2/summary.json",
+    "experiments/product/finish-v1/summary.json",
+    "experiments/product/missing-read-v1/evaluation.json"
+  ],
+  "active_flags": {
+    "ARIES_CONTEXT_ENGINE": true,
+    "ARIES_CONTRACT_FINISH": true,
+    "ARIES_TERMINAL_READ_FAILURE": true,
+    "ARIES_GOAL_TEAMS": false
+  }
+}

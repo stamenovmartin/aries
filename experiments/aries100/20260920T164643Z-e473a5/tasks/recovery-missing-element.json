@@ -1,0 +1,48 @@
+{
+  "id": "5839e2bc507649ff806f82ef6d0b5b92",
+  "request": "Open https://www.python.org, find a link called ARIES nonexistent link, and if absent report that it is not found.",
+  "state": "partial",
+  "updated_at": "2026-09-20T16:47:40.429976",
+  "created_at": "2026-09-20T16:47:38.618456",
+  "steps": [
+    {
+      "kind": "capability",
+      "request": "Open https://www.python.org, find a link called ARIES nonexistent link, and if absent report that it is not found.",
+      "capability": "open_url",
+      "args": {
+        "url": "https://www.python.org, find a link called ARIES nonexistent link, and if absent report that it is not found."
+      },
+      "prepared": true,
+      "state": "failed",
+      "goal_id": "5839e2bc507649ff806f82ef6d0b5b92",
+      "result": {
+        "state": "failed",
+        "summary": "ValueError: label empty or too long",
+        "report": {
+          "success": false,
+          "details": "ValueError: label empty or too long",
+          "error_class": "validation",
+          "action": "replan",
+          "duration_ms": 114
+        },
+        "elapsed_seconds": 0.149
+      }
+    }
+  ],
+  "cards": [],
+  "gaps": [
+    "ValueError: label empty or too long"
+  ],
+  "agent_engine": null,
+  "routing": {
+    "execution_level": "code",
+    "source": "rule",
+    "intent": "OPEN_URL",
+    "tool": "browser.open",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "Existing deterministic workspace plan"
+  },
+  "collected_at": "2026-09-20T16:47:40.234895"
+}

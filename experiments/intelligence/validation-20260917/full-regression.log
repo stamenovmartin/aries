@@ -1,0 +1,76 @@
+=== engine (agentic_core) ===
+[ 1/13] test_api.py                    passed   0.8s
+[ 2/13] test_errors.py                 passed   0.1s
+[ 3/13] test_evaluators.py             passed   0.1s
+[ 4/13] test_graph.py                  passed   0.2s
+[ 5/13] test_lifecycle.py              passed   0.8s
+[ 6/13] test_memory.py                 passed   0.5s
+[ 7/13] test_operations_dag.py         passed   0.6s
+[ 8/13] test_router.py                 passed   0.2s
+[ 9/13] test_scheduler.py              passed   0.6s
+[10/13] test_security.py               passed   0.5s
+[11/13] test_states.py                 passed   0.1s
+[12/13] test_tools.py                  passed   1.0s
+[13/13] test_workflow_agents.py        passed   0.5s
+
+passed 13 · failed 0 · 6s
+
+=== engine reference example (linux_agent) ===
+PASS  linux agents registered
+PASS  linux tools registered
+PASS  disk usage reads real mounts
+PASS  inspector cannot run a dangerous command
+PASS  inspector runs allowlisted reads
+PASS  mutation is dry-run by default
+PASS  inspect task passes
+PASS  repair with no model → planner needs_human → escalated to a proposal
+PASS  disk event → linux.repair task
+PASS  escalation proposal recorded
+linux example: all passed
+
+=== aries ===
+test_accessibility.py                       passed  (12 checks)
+test_agent_execution.py                     passed  (58 checks)
+test_api.py                                 passed  (95 checks)
+test_automations.py                         passed  (62 checks)
+test_brief.py                               passed  (44 checks)
+test_browser.py                             passed  (7 checks)
+test_coding.py                              passed  (7 checks)
+test_connect.py                             passed  (120 checks)
+test_feedback.py                            passed  (73 checks)
+test_goal_planner.py                        passed  (9 checks)
+test_health.py                              passed  (33 checks)
+test_intelligence.py                        passed  (52 checks)
+test_interests.py                           passed  (73 checks)
+test_learning.py                            passed  (39 checks)
+test_learning_eval.py                       passed  (18 checks)
+test_lifecycle.py                           passed  (149 checks)
+test_news.py                                passed  (42 checks)
+test_notify.py                              passed  (22 checks)
+test_operator.py                            passed  (106 checks)
+test_power.py                               passed  (148 checks)
+test_reversal.py                            passed  (63 checks)
+test_runtime.py                             passed  (49 checks)
+test_security.py                            passed  (53 checks)
+test_session.py                             passed  (67 checks)
+test_settings.py                            passed  (32 checks)
+test_shell.py                               passed  (176 checks)
+test_sources.py                             passed  (89 checks)
+test_task_reviews.py                        passed  (21 checks)
+test_ui_contract.py                         passed  (135 checks)
+test_ui_render.py                           passed  (2 checks)
+test_window_lifecycle.py                    passed  (17 checks)
+test_workspace.py                           passed  (120 checks)
+test_workspace_recovery.py                  passed  (10 checks)
+
+=== shell HTTP layer (gjs, against a deliberately broken ARIES) ===
+test_api.js                                 passed  (28 checks)
+
+=== control centre (system python: GTK bindings live there, not in .venv) ===
+test_ui_client.py                           passed  (419 checks)
+
+not run here: ./scripts/test-background-mode.sh  (real elapsed time, touches the display timeout)
+not run here: ./scripts/test-shell.sh              (starts a nested GNOME Shell, ~50s)
+not run here: ./scripts/test-session.sh            (proves the login session, ~45s)
+
+ALL SUITES PASSED

@@ -1,0 +1,383 @@
+{
+ "measured_at": "2026-10-03T14:43:09.316241+00:00",
+ "ruler": {
+  "voice": "en_US-ryan-medium",
+  "engine": "piper en_US-ryan-medium",
+  "sample_rate": 22050,
+  "whisper_model": "var/models/faster-whisper-large-v3",
+  "device": "cpu",
+  "compute_type": "int8",
+  "beam_size": 5,
+  "language": "en",
+  "sentences": 20,
+  "sentences_sha256": "a19f20a4732f1ebfd66e7ce118c89fdd12e83f73801c3a626f129976a97b33d3",
+  "normaliser": "eval/surfaces/tts_wer.normalise v1"
+ },
+ "mean_wer": 0.0321,
+ "corpus_wer": 0.0279,
+ "worst_wer": 0.5,
+ "perfect_sentences": 18,
+ "total_edits": 5,
+ "total_reference_words": 179,
+ "piper_load_ms": 1023.8,
+ "whisper_load_ms": 10372.2,
+ "audio_seconds": 48.49,
+ "licence": "MIT (piper voice weights); piper-tts runtime is GPL-3.0",
+ "flags": {
+  "primary_language": "en",
+  "listen_languages": [
+   "en"
+  ],
+  "whisper_model": "large-v3",
+  "flags": {
+   "ARIES_CAP_TOPK": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "the planner is sent the most relevant capabilities, not all of them"
+   },
+   "ARIES_CLARIFY": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "an underspecified request produces one short question"
+   },
+   "ARIES_MK_FROZEN": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "Macedonian is frozen: it keeps working and keeps being tested, and nothing new is built on it"
+   },
+   "ARIES_PLAN_MEMORY": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "relevant remembered facts are injected into planning"
+   },
+   "ARIES_REACT_LOOP": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "plan one step, execute, read the verifier, then decide the next step, instead of committing to a whole plan up front"
+   },
+   "ARIES_ROUTER_ABSTAIN": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "the router may answer ASK or OUT_OF_SCOPE rather than choosing the nearest action"
+   },
+   "ARIES_STATE_SNAPSHOT": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "the planner is given the current desktop state before it plans"
+   },
+   "ARIES_TILE_HIDPI": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "desktop.tile reads the monitor's scale factor from Mutter and expects the device-pixel-aligned rectangle, so a correct tile on a fractionally scaled display is not reported unverified"
+   },
+   "ARIES_TRACE_FEWSHOT": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "similar past successful plans are offered to the planner"
+   },
+   "ARIES_TYPE_STRICT": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "input.type_text refuses any case that would silently lose characters — a NUL, a filtered control character, a line break into a single-line control, a rejected or partially landed write — instead of returning a success carrying landed=false"
+   },
+   "ARIES_VERIFY_ALL": {
+    "on": true,
+    "default": true,
+    "explicit": false,
+    "governs": "every capability that can re-read state does, and one that cannot returns UNVERIFIABLE instead of claiming success"
+   }
+  }
+ },
+ "rows": [
+  {
+   "index": 0,
+   "text": "Done.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/00.wav",
+   "bytes": 16896,
+   "audio_seconds": 0.383,
+   "synthesis_ms": 59.4,
+   "heard": "DONE",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 1,
+   "transcribe_ms": 6176.6,
+   "language_probability": 1.0
+  },
+  {
+   "index": 1,
+   "text": "Opening Firefox.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/01.wav",
+   "bytes": 51200,
+   "audio_seconds": 1.161,
+   "synthesis_ms": 45.3,
+   "heard": "Opening Firefox.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 2,
+   "transcribe_ms": 6230.6,
+   "language_probability": 1.0
+  },
+  {
+   "index": 2,
+   "text": "Volume is now thirty percent.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/02.wav",
+   "bytes": 67584,
+   "audio_seconds": 1.533,
+   "synthesis_ms": 49.7,
+   "heard": "Volume is now 30%.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 5,
+   "transcribe_ms": 6220.3,
+   "language_probability": 1.0
+  },
+  {
+   "index": 3,
+   "text": "I found twelve stories about artificial intelligence.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/03.wav",
+   "bytes": 118784,
+   "audio_seconds": 2.694,
+   "synthesis_ms": 82.3,
+   "heard": "I found 12 stories about artificial intelligence.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 7,
+   "transcribe_ms": 6470.9,
+   "language_probability": 1.0
+  },
+  {
+   "index": 4,
+   "text": "I could not do that, and here is why.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/04.wav",
+   "bytes": 76288,
+   "audio_seconds": 1.73,
+   "synthesis_ms": 54.0,
+   "heard": "I could not do that and here is why.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 9,
+   "transcribe_ms": 6697.6,
+   "language_probability": 1.0
+  },
+  {
+   "index": 5,
+   "text": "Which of the two files did you mean?",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/05.wav",
+   "bytes": 64512,
+   "audio_seconds": 1.463,
+   "synthesis_ms": 48.2,
+   "heard": "Which of the two files did you mean?",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 8,
+   "transcribe_ms": 6669.9,
+   "language_probability": 1.0
+  },
+  {
+   "index": 6,
+   "text": "The disk is ninety six percent full.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/06.wav",
+   "bytes": 90112,
+   "audio_seconds": 2.043,
+   "synthesis_ms": 59.9,
+   "heard": "The disc is 96% full.",
+   "wer": 0.1429,
+   "edits": 1,
+   "reference_words": 7,
+   "transcribe_ms": 6597.2,
+   "language_probability": 1.0
+  },
+  {
+   "index": 7,
+   "text": "Your home folder holds forty one gigabytes in sixty one thousand files.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/07.wav",
+   "bytes": 163840,
+   "audio_seconds": 3.715,
+   "synthesis_ms": 115.6,
+   "heard": "Your home folder holds 41 gigabytes in 61,000 files.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 12,
+   "transcribe_ms": 7061.2,
+   "language_probability": 1.0
+  },
+  {
+   "index": 8,
+   "text": "I restarted the voice service and it came back active.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/08.wav",
+   "bytes": 120320,
+   "audio_seconds": 2.728,
+   "synthesis_ms": 82.5,
+   "heard": "I restarted the voice service and it came back active.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 10,
+   "transcribe_ms": 6945.7,
+   "language_probability": 1.0
+  },
+  {
+   "index": 9,
+   "text": "There is nothing on the clipboard.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/09.wav",
+   "bytes": 60928,
+   "audio_seconds": 1.382,
+   "synthesis_ms": 41.5,
+   "heard": "There is nothing on the clipboard.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 6,
+   "transcribe_ms": 6624.4,
+   "language_probability": 1.0
+  },
+  {
+   "index": 10,
+   "text": "I tiled the editor to the left half of the screen.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/10.wav",
+   "bytes": 103424,
+   "audio_seconds": 2.345,
+   "synthesis_ms": 70.8,
+   "heard": "I tiled the editor to the left half of the screen.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 11,
+   "transcribe_ms": 6647.1,
+   "language_probability": 1.0
+  },
+  {
+   "index": 11,
+   "text": "That control is not a text field, so I did not type into it.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/11.wav",
+   "bytes": 132608,
+   "audio_seconds": 3.007,
+   "synthesis_ms": 95.5,
+   "heard": "That control is not a text field, so I did not type into it.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 14,
+   "transcribe_ms": 6697.9,
+   "language_probability": 1.0
+  },
+  {
+   "index": 12,
+   "text": "Brightness is at seventy percent and the battery is charging.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/12.wav",
+   "bytes": 141240,
+   "audio_seconds": 3.203,
+   "synthesis_ms": 97.0,
+   "heard": "Brightness is at 70% and the battery is charging.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 10,
+   "transcribe_ms": 6555.3,
+   "language_probability": 1.0
+  },
+  {
+   "index": 13,
+   "text": "I need your approval before changing a background service.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/13.wav",
+   "bytes": 121344,
+   "audio_seconds": 2.752,
+   "synthesis_ms": 82.0,
+   "heard": "I need your approval before changing a background service.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 9,
+   "transcribe_ms": 6356.8,
+   "language_probability": 1.0
+  },
+  {
+   "index": 14,
+   "text": "The window you asked about is not on a monitor yet.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/14.wav",
+   "bytes": 102400,
+   "audio_seconds": 2.322,
+   "synthesis_ms": 70.3,
+   "heard": "The window you asked about is not on a monitor yet.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 11,
+   "transcribe_ms": 6560.1,
+   "language_probability": 1.0
+  },
+  {
+   "index": 15,
+   "text": "I read the file and it holds four hundred and twelve lines.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/15.wav",
+   "bytes": 128000,
+   "audio_seconds": 2.902,
+   "synthesis_ms": 90.9,
+   "heard": "I read the file and it holds 412 lines.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 12,
+   "transcribe_ms": 6444.2,
+   "language_probability": 1.0
+  },
+  {
+   "index": 16,
+   "text": "Wifi is connected to the five gigahertz network.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/16.wav",
+   "bytes": 117248,
+   "audio_seconds": 2.659,
+   "synthesis_ms": 79.3,
+   "heard": "Wi-Fi is connected to the 5GHz network.",
+   "wer": 0.5,
+   "edits": 4,
+   "reference_words": 8,
+   "transcribe_ms": 6366.6,
+   "language_probability": 1.0
+  },
+  {
+   "index": 17,
+   "text": "I cannot hear you, because this machine has no microphone.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/17.wav",
+   "bytes": 126976,
+   "audio_seconds": 2.879,
+   "synthesis_ms": 87.8,
+   "heard": "I cannot hear you because this machine has no microphone.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 10,
+   "transcribe_ms": 6651.5,
+   "language_probability": 1.0
+  },
+  {
+   "index": 18,
+   "text": "The task finished, but I could not verify it, so I am not calling it done.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/18.wav",
+   "bytes": 167936,
+   "audio_seconds": 3.808,
+   "synthesis_ms": 116.3,
+   "heard": "The task finished, but I could not verify it, so I am not calling it done.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 16,
+   "transcribe_ms": 7013.0,
+   "language_probability": 1.0
+  },
+  {
+   "index": 19,
+   "text": "Macedonian is frozen, and English is the primary language from today.",
+   "wav": "var/measurements/tts-regression/20261003T144043Z/19.wav",
+   "bytes": 166912,
+   "audio_seconds": 3.785,
+   "synthesis_ms": 115.5,
+   "heard": "Macedonian is frozen and English is the primary language from today.",
+   "wer": 0.0,
+   "edits": 0,
+   "reference_words": 11,
+   "transcribe_ms": 6836.1,
+   "language_probability": 1.0
+  }
+ ]
+}

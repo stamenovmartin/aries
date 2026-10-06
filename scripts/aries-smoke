@@ -1,0 +1,222 @@
+#!/usr/bin/env bash
+# "Can I actually use ARIES right now?"
+#
+#   ./scripts/aries-smoke          the answer, in about five seconds
+#   ./scripts/aries-smoke --deep   also start the Control Centre and prove it draws
+#
+# WHY THIS EXISTS
+# ---------------
+# The suite was green for a week while the Control Centre could not open at all:
+# `scripts/aries-ui` exec'd itself, so every navigate action in ARIES Search,
+# every notification click and every dock press was a silent no-op. Nothing in
+# 1500 assertions touched the launcher, because the launcher is not a component
+# — it is the seam between them, and seams are what component tests skip.
+#
+# So this checks the seams. It is deliberately not a test suite: it asks the
+# small number of questions whose answer is "the product is broken", and exits
+# non-zero if any user-facing path is.
+set -uo pipefail
+cd "$(dirname "$0")/.."
+ROOT="$PWD"
+UUID="aries@aries.local"
+API="${ARIES_API:-http://127.0.0.1:8000}"
+PY=.venv/bin/python
+DEEP=""
+[ "${1:-}" = "--deep" ] && DEEP="yes"
+bad=0
+
+ok()   { printf '  \033[32m✓\033[0m %s\n' "$*"; }
+no()   { printf '  \033[31m✗\033[0m %s\n' "$*"; bad=$((bad+1)); }
+warn() { printf '  \033[33m!\033[0m %s\n' "$*"; }
+hint() { printf '      \033[2m%s\033[0m\n' "$*"; }
+
+echo
+printf '\033[1m%s\033[0m\n' "ARIES smoke test"
+echo
+
+# ── 1. the runtime ──────────────────────────────────────────────────────────
+if systemctl --user is-active --quiet aries-core.service; then
+  ok "the ARIES service is running"
+else
+  no "aries-core.service is not active"; hint "aries start"
+fi
+
+# ── 2. the API, and the database behind it ──────────────────────────────────
+status=$(curl -sf -m 5 "$API/api/aries/shell/status" 2>/dev/null || true)
+if [ -n "$status" ]; then
+  ok "the API answers"
+  if curl -sf -m 5 "$API/api/aries/runtime/components" 2>/dev/null \
+       | grep -q '"database":{"ok":true'; then
+    ok "the database answers"
+  else
+    no "the database is not answering"
+  fi
+else
+  no "the API is not answering on $API"; hint "aries status"
+fi
+
+# ── 3. THE LAUNCHER — the thing that was broken ─────────────────────────────
+# Checked as a chain, because every link failed silently: the shim resolves to a
+# real file, that file is not itself, it names an interpreter that exists, and
+# the module it runs can actually be imported.
+launcher=$(command -v aries-ui 2>/dev/null || true)
+if [ -z "$launcher" ]; then
+  no "aries-ui is not on PATH — nothing the shell offers can open"
+else
+  ok "aries-ui is on PATH  ($launcher)"
+  target=$(sed -n 's/^exec "\{0,1\}\([^"]*\)".*/\1/p' "$launcher" 2>/dev/null | head -1)
+  target="${target/\$HOME/$HOME}"
+  if [ -n "$target" ] && [ "$(readlink -f "$target" 2>/dev/null)" = "$(readlink -f "$launcher")" ]; then
+    no "the launcher execs ITSELF — an infinite loop, no window ever opens"
+    hint "this is the M13 regression; scripts/aries-ui must run python, not itself"
+  else
+    ok "the launcher does not exec itself"
+  fi
+  real="$ROOT/scripts/aries-ui"
+  if grep -q "python3 -m aries_ui" "$real" 2>/dev/null; then
+    ok "it runs the Control Centre module"
+  else
+    no "$real does not run 'python3 -m aries_ui'"
+  fi
+  if /usr/bin/python3 -c "import sys; sys.path.insert(0, '$ROOT'); import aries_ui" 2>/dev/null; then
+    ok "the Control Centre imports on the system interpreter"
+  else
+    no "aries_ui cannot be imported by /usr/bin/python3 (GTK lives there — ADR-0004)"
+  fi
+  # RUN IT, BY NAME. Everything above reads the file; this crosses the seam the
+  # shell actually crosses — PATH lookup, symlink resolution, PYTHONPATH, the
+  # import. The launcher once computed its own location from `$0`, which is the
+  # symlink when invoked by name, so PYTHONPATH became ~/.local and every launch
+  # from the desktop died while every check that read the file passed.
+  if out=$(aries-ui --help 2>&1) && ! printf '%s' "$out" | grep -q "No module named"; then
+    ok "running 'aries-ui' by name actually starts the Control Centre"
+  else
+    no "running 'aries-ui' by name fails: $(printf '%s' "$out" | head -1)"
+    hint "the shell launches it by name, not by path — this breaks every navigate action"
+  fi
+fi
+
+# ── 4. the shell, installed and running ─────────────────────────────────────
+installed=""
+for d in "$HOME/.local/share/gnome-shell/extensions" /usr/local/share/gnome-shell/extensions \
+         /usr/share/gnome-shell/extensions; do
+  [ -e "$d/$UUID" ] && installed="$d/$UUID" && break
+done
+if [ -n "$installed" ]; then
+  ok "the ARIES shell is installed  ($installed)"
+else
+  no "the ARIES shell is not installed"; hint "./scripts/aries-shell install"
+fi
+
+ping=$(gdbus call --session --dest org.aries.Shell --object-path /org/aries/Shell \
+         --method org.aries.Shell.Ping 2>/dev/null || true)
+if [ -n "$ping" ]; then
+  ok "the shell is running and answering"
+  case "$ping" in
+    *'"failures":[]'*) ok "with no component failures" ;;
+    *) no "a shell component has failed"
+       echo "$ping" | head -c 200 | sed 's/^/      /' ;;
+  esac
+  for surface in "aries mark" "ARIES Search" launcher dock notifications; do
+    case "$ping" in
+      *"$surface"*) ;;
+      *) no "the '$surface' surface is not up" ;;
+    esac
+  done
+else
+  # WHY the shell is silent matters, and the three reasons need three different
+  # actions. Reporting them as one message sent a whole afternoon's diagnosis in
+  # the wrong direction: the extension had been switched off for two hours,
+  # Super+Space did nothing, and the only thing anything said was "are you in
+  # the ARIES session?" — which the user was.
+  disabled=$(gsettings get org.gnome.shell disabled-extensions 2>/dev/null || echo "")
+  enabled_state=$(gnome-extensions info "$UUID" 2>/dev/null | sed -n 's/^ *State: *//p')
+  case "$disabled" in
+    *"$UUID"*)
+      no "the ARIES shell is DISABLED — that key overrides the session mode"
+      hint "gnome-extensions enable $UUID" ;;
+    *)
+      case "${DESKTOP_SESSION:-}:${enabled_state:-}" in
+        aries:*ENABLED*)
+          no "you are in the ARIES session and the shell is enabled, but it is not answering"
+          hint "check session lock state and desktop capabilities; core remains independent" ;;
+        aries:*)
+          no "you are in the ARIES session but the shell is ${enabled_state:-not enabled}"
+          hint "gnome-extensions enable $UUID; a locked desktop suspends the bridge" ;;
+        *)
+          warn "the shell is not answering — this is not the ARIES session"
+          hint "current session: ${DESKTOP_SESSION:-unknown}; desktop integration unavailable" ;;
+      esac ;;
+  esac
+fi
+
+# ── 5. STALE CODE — is what is running what is checked out? ─────────────────
+running_build=$(printf '%s' "$ping" | sed -n 's/.*"build":"\([^"]*\)".*/\1/p')
+source_build=$(PYTHONPATH="$ROOT/vendor/agentic-core:$ROOT/vendor:$ROOT" \
+  "$PY" -c "from aries.runtime.version import source; print(source()['shell_build'])" 2>/dev/null || true)
+if [ -n "$running_build" ] && [ -n "$source_build" ]; then
+  if [ "$running_build" = "$source_build" ]; then
+    ok "the running shell is the source revision  ($running_build)"
+  else
+    warn "desktop build differs from source; checking actual capabilities"
+    hint "running $running_build · source $source_build"
+    hint "backend updates are independent: ./scripts/aries-update"
+  fi
+elif [ -n "$source_build" ]; then
+  # No build id from a shell, while an installed copy HAS one, is not an
+  # unknown — it is proof the running shell predates the install. That is the
+  # exact situation this tool exists to catch, and reporting it as a warning
+  # once let a whole round of verification run against stale code.
+  stamped=""
+  for d in /usr/local/share/gnome-shell/extensions "$HOME/.local/share/gnome-shell/extensions" \
+           /usr/share/gnome-shell/extensions; do
+    [ -f "$d/$UUID/BUILD" ] && stamped="$d/$UUID/BUILD" && break
+  done
+  if [ -n "$stamped" ] && [ -n "$ping" ]; then
+    warn "desktop build identity differs or is unavailable"
+    hint "it reports no build id, but the installed copy is stamped $(head -1 "$stamped")"
+    hint "shell started: $(ps -o lstart= -p "$(pgrep -f 'gnome-shell --mode' | head -1)" 2>/dev/null | xargs)"
+    hint "stamp written: $(stat -c '%y' "$stamped" 2>/dev/null | cut -d. -f1)"
+    hint "backend updates do not require replacing the desktop bridge"
+  else
+    warn "the running shell did not report a build id"
+  fi
+fi
+
+# Check the feature the desktop actually needs, independently of revision hashes.
+bridge=$(PYTHONPATH="$ROOT/vendor/agentic-core:$ROOT/vendor:$ROOT" "$PY" -c '
+from aries.operator.desktop import capabilities
+c=capabilities()
+print(", ".join(c["missing"]))' 2>/dev/null || echo "probe failed")
+if [ -n "$bridge" ]; then
+  no "desktop capabilities unavailable: $bridge (core background services remain independent)"
+else
+  ok "desktop observation and focus protocol available"
+fi
+
+# ── 6. command routing actually resolves ────────────────────────────────────
+if [ -n "$status" ]; then
+  routed=$(curl -sf -m 5 -X POST "$API/api/aries/command" \
+            -H 'Content-Type: application/json' -d '{"text":"news"}' 2>/dev/null || true)
+  if printf '%s' "$routed" | grep -q '"kind":"navigate"'; then
+    ok "typing 'news' resolves to a navigate action"
+  else
+    no "the command router did not resolve 'news' to anything usable"
+  fi
+fi
+
+# ── 7. --deep: does the Control Centre actually draw? ───────────────────────
+if [ -n "$DEEP" ]; then
+  echo
+  printf '\033[1m%s\033[0m\n' "deep: starting the Control Centre"
+  "$ROOT/scripts/aries-e2e" section-check 2>&1 | sed 's/^/  /'
+  [ "${PIPESTATUS[0]}" = "0" ] || bad=$((bad+1))
+fi
+
+echo
+if [ "$bad" = "0" ]; then
+  printf '\033[32m%s\033[0m\n' "ARIES is usable"
+  exit 0
+fi
+printf '\033[31m%s\033[0m\n' "$bad critical path(s) broken — ARIES is NOT usable"
+exit 1

@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-06T11:44:18.273910+00:00",
+  "scratch": "/tmp/aries-learning-rollback-k6qragg0",
+  "results": [
+    {
+      "suite": "test_goal_origin",
+      "exit_code": 0,
+      "passed": 15,
+      "failed": 0
+    },
+    {
+      "suite": "test_agent_execution",
+      "exit_code": 0,
+      "passed": 65,
+      "failed": 0
+    },
+    {
+      "suite": "test_agent_replay",
+      "exit_code": 0,
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "suite": "test_orchestration",
+      "exit_code": 0,
+      "passed": 99,
+      "failed": 0
+    },
+    {
+      "suite": "test_goal_graph",
+      "exit_code": 0,
+      "passed": 28,
+      "failed": 0
+    },
+    {
+      "suite": "test_finish_proposal",
+      "exit_code": 0,
+      "passed": 18,
+      "failed": 0
+    },
+    {
+      "suite": "test_learning_controls",
+      "exit_code": 0,
+      "passed": 19,
+      "failed": 0
+    }
+  ],
+  "source_before": {
+    "aries/workspace/registry.py": "28c44e110d691906b353c9fa2de5a4a3a551243fc8cb73dfaad812d5f40ea72c",
+    "aries/workspace/service.py": "335ef257ae6d9c954133afd0754d412857db23198732e0d3af4f0c9abe663da6",
+    "aries/workspace/agent.py": "266d723a6b33e71e5ea944fa959098d74e09a72a31e24491246618b283975988",
+    "aries/workspace/orchestration.py": "52f635f3fdf96c94265a55a6abbe502b38883d92457d86465b0c4d3b313dbd8c",
+    "aries/workspace/goal_graph.py": "ec148a1f9a79151e409578f7891244ca6c7ed655aa7426cd535a702581cdcda7",
+    "aries/workspace/automation.py": "279073c8f650fd23667191abfdb47d1ddac22d3c98af66363ac5cf9801c10be5"
+  },
+  "source_after": {
+    "aries/workspace/registry.py": "28c44e110d691906b353c9fa2de5a4a3a551243fc8cb73dfaad812d5f40ea72c",
+    "aries/workspace/service.py": "335ef257ae6d9c954133afd0754d412857db23198732e0d3af4f0c9abe663da6",
+    "aries/workspace/agent.py": "266d723a6b33e71e5ea944fa959098d74e09a72a31e24491246618b283975988",
+    "aries/workspace/orchestration.py": "52f635f3fdf96c94265a55a6abbe502b38883d92457d86465b0c4d3b313dbd8c",
+    "aries/workspace/goal_graph.py": "ec148a1f9a79151e409578f7891244ca6c7ed655aa7426cd535a702581cdcda7",
+    "aries/workspace/automation.py": "279073c8f650fd23667191abfdb47d1ddac22d3c98af66363ac5cf9801c10be5"
+  },
+  "source_stable": true
+}

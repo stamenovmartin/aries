@@ -1,0 +1,15 @@
+{
+  "problem": "F-10 degraded passes reset failure streak; failed half-open trials inherited oldest failure timestamp and could retry without fresh cooldown.",
+  "change": "Default count degraded as unsuccessful, with explicit visible diagnostic exemption for health. Exempt degraded is neutral, not success. Cooldown anchors to most recent unsuccessful run. Threshold0 remains an explicit user disable.",
+  "validation": {
+    "date": "2026-10-06T11:24:37.858455+00:00",
+    "passed": 174,
+    "total": 174,
+    "checks": "experiments/product/breaker-remediation/checks.json",
+    "source_stable": true
+  },
+  "limitations": [
+    "Source validation only; not deployed.",
+    "Synthetic durable run history and existing news/runtime suites, not long-horizon production evidence."
+  ]
+}

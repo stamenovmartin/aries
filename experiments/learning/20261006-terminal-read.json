@@ -1,0 +1,18 @@
+{
+  "problem": "A single requested read of an absent file used9model calls despite a real nonretryable missing-target observation.",
+  "change": [
+    "Added exact-contract terminal missing-read rule, with its own rollback/ablation flag.",
+    "Require actual executor start, exact requested path, typed nonretryable FileNotFoundError and matching persisted error evidence. Wrong targets and compound/transient/permission cases remain planner-controlled.",
+    "Enabled after controlled comparison; user-requested architecture estimates saved separately from research metrics."
+  ],
+  "validation": [
+    "2026-10-06:129 passing assertions in4suites; experiments/product/missing-read-v1/checks.json.",
+    "Native paired12/12 oracle outcomes, each arm4verified positive reads+2correct negative failures.24\u21928model calls;46663\u219212208tokens;20executor/verifier calls in each arm.",
+    "Live goal3da43fc0e8734838b5a1c93322014944 correctly failed with REQUESTED_FILE_NOT_FOUND,1model call/1read/0success proofs, fixture independently absent."
+  ],
+  "limitations": [
+    "Reused narrow synthetic fixture, not held-out generalization. Most savings come from missing-file cases.",
+    "Live wall time20.49s; one model call does not guarantee low latency. No monetary-cost or general intelligence gain claimed.",
+    "Rollback ARIES_TERMINAL_READ_FAILURE=0. No autonomous evolution; maturity percentages are subjective architectural estimates."
+  ]
+}

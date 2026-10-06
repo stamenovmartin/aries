@@ -1,0 +1,6 @@
+{
+  "problem": "User requested local Macedonian summaries and continuous background operation with real validation, not an unverified completion claim.",
+  "change": "Added bounded strict-schema local-only summaries with seven-day content cache, one-hour failure cooldown and original-text fallback. Enabled Background Mode and existing scheduled services. Added persistent five-minute sampling timer with 24h gap-aware verdict. Fixed power tests to inspect their own inhibitor PID while real ARIES stays active. Updated API/architecture/publication addendum.",
+  "validation": "Full scripts/test.sh ALL SUITES PASSED after fixing power test isolation. Isolated shell passed; section-check 8/8. Agent demo 4/4. News/brief 8/8; real local summaries 2 generated, 4 fallback, 2 original Macedonian; repeated brief cached all attempted items. Core/local/timer active and inference/API listeners loopback-only. Initial endurance samples healthy.",
+  "limitations": "Full product demo 10/11 and smoke build mismatch: cached GNOME requires user logout/login, not forced. Local qwen2.5:7b Macedonian quality limited; accepted output remains labelled unverified. Endurance RUNNING, no completed 24h claim. No account-wide cloud/billing metrics."
+}

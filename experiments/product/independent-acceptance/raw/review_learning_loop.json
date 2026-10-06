@@ -1,0 +1,335 @@
+{
+  "review": "Independent adversarial review of aries/learning/ (the medium/slow loop, section 16) and aries/interests/",
+  "reviewed_at": "2026-10-06",
+  "method": {
+    "read_only": true,
+    "files_modified": ["experiments/product/independent-acceptance/raw/review_learning_loop.json"],
+    "execution_env": "DATABASE_URL=sqlite+aiosqlite:////tmp/aries_rev_proof{1..5}.db, APP_ENV=test, PYTHONPATH=vendor/agentic-core:vendor:. , .venv/bin/python; aries.db never opened",
+    "proof_scripts": [
+      "/tmp/claude-1000/-home-stamenovmartin/dc3eb2cb-6b81-4c4c-9601-41f12d0750c0/scratchpad/proof1.py (user-layer write attacks)",
+      "proof2.py (minimum evidence, step bounds, fatigue bypass, double counting)",
+      "proof3.py (reversal asymmetry, confirmations, rollback, circularity)",
+      "proof4.py (per-pass cap vs cumulative bound)",
+      "proof5.py (self-governance: are the loop's own knobs machine-writable)"
+    ]
+  },
+
+  "questions": [
+    {
+      "question": "1. The loop claims it 'proposes into the learned layer, never the user's', and that interests.learn() and SettingsService.learn() PHYSICALLY CANNOT write a user value. Verify; find a path that writes a user-layer value through them.",
+      "answer": "ENFORCED for the two named entry points, and I could not find a path through either of them. interests.learn() has no parameter that reaches AriesInterest.weight and its body assigns only learned_weight/learned_confidence/learned_rationale. SettingsService.learn() has no `layer` parameter at all: it hardcodes layer=Layer.LEARNED. The guarantee is structural, not procedural. HOWEVER the guarantee is scoped to those two functions, and three adjacent paths defeat the same property without going through them: (a) interests.update() has no author gate whatsoever, writes AriesInterest.weight, and hardcodes actor_type='human' in the audit event; (b) SettingsService.set() derives authorship from a caller-supplied free-text string (set_by.split(':')[0] in HUMAN_AUTHORS), so any caller naming itself 'user:<anything>' obtains USER-layer authority; (c) SettingsService.learn(..., set_by='user') bypasses the user_only guard entirely and writes a user_only key at the LEARNED layer, which beats DEFAULT. loop.apply() as shipped uses only the two safe entry points, so the loop's own claim is true; the module boundary, not the data model, is what makes it true.",
+      "status": "ENFORCED",
+      "source": "aries/learning/loop.py:11-15 (claim); aries/learning/loop.py:311,316 (the only two write calls); aries/interests/service.py:203-228 (learn, assignment at :217); aries/settings/service.py:170-177 (learn, layer hardcoded at :176); aries/settings/service.py:129-136 (write rules); aries/settings/layers.py:77 (MACHINE_WRITABLE); aries/interests/models.py:101-108 (effective_weight precedence). Holes: aries/interests/service.py:105-135 (update: no author gate, row.weight at :115, actor_type='human' hardcoded at :130); aries/settings/service.py:55,129 (authorship by string); aries/settings/service.py:135 (user_only gate skipped when author_is_human)",
+      "evidence_kind": "executed",
+      "detail": "EXECUTED (proof1.py): user weight 0.9, then interests.learn(topic,0.10) -> weight=0.9 learned_weight=0.1 shadowed=True effective=0.9. inspect.signature(interests.learn) = (db, topic, weight, confidence, rationale, scope, commit); body contains no 'row.weight =' assignment. SettingsService.learn('news.relevance_threshold',0.95) over a user 0.5 -> rows {USER:(0.5,'user'), LEARNED:(0.95,'learning')}, effective 0.5, shadowed True. set(layer=USER) refused for set_by in {'learning','system','aries.learning','learning:loop'}. ACCEPTED for set_by='user:learning' -> effective 0.99 at the USER layer. learn('learning.apply_changes',False,set_by='learning') refused (user_only); learn('learning.apply_changes',False,set_by='user') ACCEPTED -> effective False; same for autonomy.level -> 'automated' and autonomy.max_actions_per_hour -> 999, all at the LEARNED layer. interests.update(db,'ai',weight=0.05,actor='learning') ACCEPTED -> user weight 0.05, audit actor_type='human', actor='learning'."
+    },
+    {
+      "question": "2. What exactly can the loop change? Every setting key and every weight. Can any of them alter planning, capability selection, context assembly, routing, or approval?",
+      "answer": "Four things, and nothing else. (i) AriesInterest.learned_weight (+learned_confidence, learned_rationale) for topics ALREADY in the profile, global scope only; (ii) the setting news.relevance_threshold at the LEARNED layer, upward only, hard ceiling 0.95; (iii) its own aries_reversals state machine rows; (iv) its own append-only aries_learning_changes log (plus audit_events). It is strictly content preference: what news/mail you see and in what order. It does NOT touch planning, capability selection, context assembly, routing or approval. The workspace planner reads aries.learning.feedback.standing_rules()/implementation_notes() -- that is the FAST loop, driven by user utterances, a different component -- and grep finds no reference to aries.interests anywhere under aries/workspace/. The automation declares task_kind=None, agents=[], tools=[], permissions=[VIEW_DATA]. Reach of what it does change: interest weights feed interests.profile() -> news relevance score -> the `delivered | held | below_threshold` disposition gate, and -> connect (mail/message) triage ORDERING (the needs_you/can_wait split is by category, not by interest); plus the brief's 'What I learned' section. A project-scoped interest row is unreachable: propose() calls interests.get(db, topic) with no scope and apply() calls interests.learn(db, target, ...) with no scope, so Proposal.scope is cosmetic and always ''.",
+      "status": "ENFORCED",
+      "source": "aries/learning/loop.py:305-336 (apply: the complete write surface); aries/learning/loop.py:60 (the two kinds); aries/learning/automation.py:248-254 (task_kind=None, agents=[], tools=[], permissions=[VIEW_DATA], writes_settings declared); aries/interests/service.py:163-176 (profile); aries/news/automation.py:217,229-240 (threshold gate); aries/connect/automation.py:143-152 (triage ordering); aries/brief/sections.py:267-289 (transparency surface); aries/workspace/planner.py:79-82 (planner reads feedback, not interests)",
+      "evidence_kind": "executed",
+      "detail": "EXECUTED (proof5.py): interests.get(db,'scoped') with the loop's own call shape returns None for a project:x-scoped row, while interests.get(db,'scoped',scope='project:x') returns it -- the loop can never touch scoped interests. Source grep: `grep -rn interests aries/workspace/ aries/context* aries/agents* aries/intelligence*` returns only two docstring mentions, no code path. See what_the_loop_can_change for the key-by-key table."
+    },
+    {
+      "question": "3. Is there a bound on how far a value can move in one pass, and per unit time? Exact constants.",
+      "answer": "PER PASS: yes, and it is real. A topic weight moves by delta = clamp((target-current)*confidence, +/- learning.max_step * damping), result clamped to [0,1] and rounded to 3dp. Defaults: learning.max_step = 0.15 (range 0.01-0.5); damping = learning.damping ** reversals = 0.5 ** reversals; target is 0.0 or 1.0. The relevance threshold moves by exactly learning.max_step / 2 = 0.075, with a hard ceiling of 0.95, upward only. The FATIGUE path is the exception: it writes learned - learning.fatigue_step (default 0.05, range 0.01-0.3) DIRECTLY, bypassing step_toward, so neither max_step nor damping bounds it -- with fatigue_step at its maximum 0.3 and max_step at its minimum 0.01, fatigue moves 30x the declared cap. PER UNIT TIME: ABSENT. There is no cumulative bound and no per-evidence idempotence. Each pass re-reads the same 30-day window and applies another full step to the same unchanged evidence. The cadence is learning.interval_hours (default 24, minimum 1, maximum 720) and that key is NOT user_only, i.e. machine-writable at the LEARNED layer. So the worst case is max_step * (24/interval_hours) = 0.15 * 24 = 3.6 per day, which saturates [0,1] in a single day.",
+      "status": "PARTIAL",
+      "source": "aries/learning/statistics.py:81-98 (step_toward); aries/learning/settings.py:138-141 (max_step 0.15, 0.01-0.5); aries/learning/settings.py:148-152 (damping 0.5); aries/learning/history.py:161-187 (damping = base ** reversals); aries/learning/loop.py:196-198,234-235 (where the cap is applied); aries/learning/loop.py:293 (threshold step = max_step/2, ceiling 0.95); aries/learning/loop.py:179-188 + aries/learning/reversal.py:267-273 (fatigue bypasses step_toward); aries/learning/settings.py:174-177 (fatigue_step 0.05, 0.01-0.3); aries/learning/settings.py:116-118 (interval_hours 24, 1-720, not user_only)",
+      "evidence_kind": "executed",
+      "detail": "EXECUTED (proof2.py): step_toward(0.90->0.0, conf=1.0, max_step=0.15) = 0.75 (delta exactly 0.15); conf=0.2 with max_step=0.5 gives delta 0.10; clamps to 0.0 and 1.0. EXECUTED (proof4.py) -- the ratchet: with ONE fixed fixture of 40 delivered / 40 engaged items and no new data at all, twelve consecutive passes took learned_weight 0.6 -> 0.75 -> 0.90 -> 0.985 -> 0.998 (saturated). Same fixture for the threshold: 0.6 -> 0.675 -> 0.75 -> 0.825 -> 0.90 -> 0.95 (ceiling) in five passes. Stability after twelve passes: reversals=0, damping=1.0, frozen=false -- the oscillation guards never engage, because the direction never changes. EXECUTED (proof3.py): after a bad 0/35 change, five further passes with zero new evidence walked the weight further down 0.593 -> 0.586 -> 0.580 -> 0.574 -> 0.568 -> 0.562."
+    },
+    {
+      "question": "4. statistics.py is said to use Wilson intervals so the loop cannot act on '1 of 3'. What is the minimum evidence before any change is made?",
+      "answer": "Three different answers, and the headline claim is only true for one of the three paths. ORDINARY path: the binding gate is learning.min_observations = 10 (loop.py:214), not the interval. Wilson on its own would already permit a rise at n=3: wilson(3,3).lower = 0.4385 >= learning.engaged_threshold 0.40. Going down, Wilson IS binding and is stricter than min_observations: 0 engaged needs n=35 before upper <= learning.ignored_threshold 0.10. THRESHOLD proposal: needs min_observations * 2 = 20 (loop.py:286), but the denominator is sum(e.shown) over TOPICS, so an item matching k topics is counted k times -- 7 real items with 3 topics each clear the '20 observations' bar, and the Wilson interval is computed on the inflated n, so the stated confidence is overstated too. FATIGUE path: NO minimum-observations check at all, and it does not use an interval -- TopicEvidence.trend compares raw per-bucket POINT RATES with a 0.05 delta over buckets of as few as 3 observations each. That is literally the '1 of 3' the module says it refuses, used as a decision input. I executed a real weight change at shown = 9, below min_observations.",
+      "status": "PARTIAL",
+      "source": "aries/learning/statistics.py:67-78 (wilson), :38 (Z_95 = 1.959963984540054); aries/learning/loop.py:214 (min_obs gate, ordinary path only); aries/learning/settings.py:122-125 (min_observations 10, 3-1000); aries/learning/loop.py:286 (threshold needs min_observations*2); aries/learning/loop.py:284-285 + aries/learning/evidence.py:167-177 (the per-topic double count); aries/learning/evidence.py:105-116 (trend from raw rates, bucket floor shown>=3); aries/learning/reversal.py:267-273 (fatigue, no obs check); aries/learning/statistics.py:1-28 (the claim)",
+      "evidence_kind": "executed",
+      "detail": "EXECUTED (proof2.py). wilson(1,3) = [0.0615, 0.7923], point 0.333 -> neither test fires; with 1 engaged of 3 delivered, propose() returned 0 proposals. 9 engaged of 9: wilson(9,9).lower = 0.701 clears 0.40, yet 0 proposals (min_observations blocks it). 10 of 10: first change, 0.6 -> 0.75, confidence 0.537. Minimum n for the ordinary DOWN test with 0 engaged: n=35 (upper 0.0989; at n=34 upper 0.1015). Minimum n for the ordinary UP test with all engaged: n=3 (lower 0.4385) -- so the interval is NOT what stops small n upward. FATIGUE: established learned 0.80, three buckets of three items with rates [1.0, 0.667, 0.333], one source, shown=9 -> trend=monotone_down, verdict=fatigue, applied change 0.80 -> 0.75, damping 1.0. DOUBLE COUNT: 10 real aries_news_items rows each matching 3 topics, all dismissed -> sum(e.shown)=30, sum(e.dismissed)=30; wilson(10,10).lower=0.722 vs wilson(30,30).lower=0.886; a relevance_threshold proposal 0.6 -> 0.675 was produced carrying evidence {'shown': 30, 'dismissed': 30}."
+    },
+    {
+      "question": "5. reversal.py claims asymmetric thresholds. Exact numbers for both directions.",
+      "answer": "The asymmetry is real, and it is NOT in the threshold -- the same engaged/ignored thresholds are used in both directions. It is in four other currencies at once. FORMING (ordinary path): confidence level Z_95 = 1.959963984540054 (95% two-sided); engaged_threshold 0.40 / ignored_threshold 0.10; min_observations 10; ONE pass; no corroboration required; minimum n for a 0-engaged downward move = 35. REVERSING an established position (|learned - neutral| >= learning.established_margin 0.10): z = Z_95 + (Z_999 - Z_95) * learning.reversal_hysteresis = 1.959963984540054 + (3.290526731491999 - 1.959963984540054) * 0.4 = 2.492189 (hysteresis 0.0 -> 1.9600, 0.9 -> 3.1575); required observations = min_observations * learning.reversal_min_observations_factor = 10 * 2.0 = 20; the recent third of the window must point the same way (point estimate, by design, as a corroboration not a second test); and learning.reversal_confirmations = 2 CONSECUTIVE passes. Minimum n for a 0-engaged reversal at the strict z = 56 versus 35 ordinary. So: 35 observations and 1 pass to form, 56 observations and 2 passes plus a corroborating recent slice to undo. The reversal step is still bounded by max_step * damping. BUT the FATIGUE classification escapes the entire asymmetry: it fires against an established position with no required_obs, no higher z and no confirmations -- executed at n=9 in a single pass.",
+      "status": "PARTIAL",
+      "source": "aries/learning/reversal.py:214 (z_reverse formula), :77 (Z_999 = 3.290526731491999), :235 (required_obs), :217-233 (the three bounds), :289-292 (TEMPORARY when short of required_obs), :296-304 (SUSTAINED), :362-368 (confirmations gate); aries/learning/statistics.py:38 (Z_95); aries/learning/settings.py:155-177 (hysteresis 0.4 / factor 2.0 / confirmations 2 / established_margin 0.1 / fatigue_step 0.05); aries/learning/reversal.py:173-178 (_position, established margin); aries/learning/reversal.py:267-273 (fatigue, unguarded)",
+      "evidence_kind": "executed",
+      "detail": "EXECUTED (proof3.py). Ordinary down, no established position, 0 of 35: applied on the FIRST pass, 0.6 -> 0.593. Against an established learned 0.80 with 0 of 60 (40 old + 20 recent): classify -> sustained, direction down, confidence 0.531, required_observations 20, reversal_confidence_z 2.492, reversal_interval upper 0.094 (<= 0.10 at the strict z). Pass 1: 0 proposals, one aries_reversals row ('ai','pending',1,2). Pass 2: applied, 0.80 -> 0.65, rationale 'REVERSAL after 2 consecutive passes'. Abandonment: after the pending row was opened, adding 30 engaged items flipped the verdict to 'noise' and the row moved to status 'abandoned' with 0 proposals -- alternating evidence reverses nothing, as claimed. Computed minima: 35 (z=1.9600) vs 56 (z=2.4922) vs 90 (z=3.1575 at hysteresis 0.9)."
+    },
+    {
+      "question": "6. Is there ANY rollback that reverts a learned change automatically when a metric regresses? Or is reverting purely manual?",
+      "answer": "ABSENT. There is no automatic rollback of any kind, and reverting is not even fully manual -- there is no surface that deletes a learned value at all. Specifics: (1) No code anywhere outside aries/learning/ references AriesLearningChange or AriesReversal; nothing reads the loop's history to judge it. (2) The automation's declared evaluation_metrics (proposals_per_pass, shadowed_rate, reversal_rate, topics_with_enough_evidence) and reward_signals are DECLARATIONS consumed by no controller -- no code compares them across passes or acts on a decline. (3) The circuit breaker trips on consecutive run FAILURES (exceptions) and only pauses the automation; it never undoes an applied change. (4) The only self-correction is evidence-driven and it only STOPS movement, never restores a value: damping 0.5**reversals and freezing at learning.max_reversals = 3. Both are computed from the loop's own change log, not from any external metric. (5) history.release() deletes a target's change log to lift a freeze -- and has ZERO callers in aries/ (no CLI command, no API route). (6) SettingsService.clear() and the API route hardcode Layer.USER; nothing clears Layer.LEARNED. (7) There is no clear_learned() for AriesInterest.learned_weight; interests.update() writes only `weight`. A user can SHADOW a learned weight by setting their own, but the learned value cannot be deleted through any shipped surface. The nearest existing rollback precondition is a different subsystem: aries/workspace/learning_eval.py runs a paired baseline/candidate comparison, reports regressions and improvements, hardcodes promoted=False, and leaves promotion/rollback to the user_only setting workspace.review_retrieval. That is the shape Level 9 needs -- and the medium loop does not have it.",
+      "status": "ABSENT",
+      "source": "aries/learning/history.py:212-224 (release, no callers); aries/learning/history.py:161-187 (damping/freeze -- stops, does not restore); aries/learning/settings.py:143-152 (max_reversals 3, damping 0.5); aries/settings/service.py:157-168 + aries/api/routes.py:256-264 (clear is Layer.USER only); aries/interests/service.py:105-135 (update writes `weight` only, no learned_weight reset); aries/learning/automation.py:257-262 (metrics and reward signals, declarative); aries/automations/breaker.py:56-60 + aries/automations/runner.py:112-113 (breaker gates runs, not values); aries/workspace/learning_eval.py:47,89-90 + aries/workspace/settings.py:44-46 (the paired-comparison + manual-switch pattern that does exist, elsewhere)",
+      "evidence_kind": "executed",
+      "detail": "EXECUTED (proof3.py): a 0-of-35 fixture drove learned_weight to 0.593; five further passes with no new evidence produced (pass, proposals, learned_weight) = [(0,1,0.586),(1,1,0.580),(2,1,0.574),(3,1,0.568),(4,1,0.562)] -- the value moved only further in the same direction. SOURCE: `grep -rn 'AriesLearningChange|AriesReversal' aries/ | grep -v aries/learning/` returns zero hits. `grep -rn release aries/learning/ aries/cli.py aries/api/routes.py tests/test_learning*.py` finds history.release's definition and its docstring and no call site."
+    },
+    {
+      "question": "7. Can the loop's own evaluation data be influenced by the loop's own past changes (a feedback loop that optimises its own test)?",
+      "answer": "YES -- two closed loops, both structural. (a) WEIGHT LOOP: learned_weight enters interests.profile(), which produces the relevance score, which gates the item's disposition at news/automation.py:217 (score < news.relevance_threshold -> 'below_threshold'), and evidence.gather() counts ONLY disposition in ('delivered','held'). So lowering a topic's weight removes that topic's future items from the loop's own evidence set. (b) THRESHOLD LOOP: raising news.relevance_threshold reduces how many items are delivered at all, shrinking both the evidence available per topic (making learning.min_observations harder to reach) and the denominator of the very test that raises the threshold. The mitigation that IS present is explicit and genuine: gather() excludes below_threshold and excluded items precisely so the loop cannot count an item the user never saw as 'not engaged', which blocks the loop from CONFIRMING its own guess. It does not and cannot remove the selection effect: the surviving sample is the sample the loop's own weights selected, so the loop evaluates itself on data it curated. Three aggravating factors: the threshold moves upward only (loop.py:274-282), so the suppression is one-way and only the user can reverse it; the ratchet of question 3 means the suppression compounds on unchanged evidence; and the freeze/damping guard is itself computed from the loop's own change log, not from any independent signal. Classification: the loop cannot manufacture positive evidence for itself, but it can silence the evidence that would contradict it.",
+      "status": "PARTIAL",
+      "source": "aries/learning/evidence.py:143-161 (gather; the disposition filter at :159-160 and the circularity note at :146-151); aries/news/automation.py:181-188 (score from the profile), :217 (threshold read), :229-240 (disposition assignment); aries/interests/service.py:163-176 (profile) and aries/interests/models.py:101-108 (effective_weight); aries/learning/loop.py:274-282 (upward only); aries/learning/loop.py:28-35 (the 'evidence from the items, not counters' rationale); aries/learning/history.py:190-195 (the guard reads the loop's own log)",
+      "evidence_kind": "executed",
+      "detail": "EXECUTED (proof3.py): for a topic 'ai' with no user weight, score_text('a story about ai and chips') = 0.6 before learning, and 0.2 after interests.learn('ai', 0.20). news.relevance_threshold is 0.6. 0.6 >= 0.6 -> 'delivered' (counted by gather); 0.2 < 0.6 -> 'below_threshold' (invisible to gather). One learned step therefore removes the topic from its own future evidence. The threshold loop is source-inspected, not executed end-to-end, because that would require running the news pipeline."
+    }
+  ],
+
+  "what_the_loop_can_change": [
+    {
+      "key": "AriesInterest.learned_weight (per topic, global scope only)",
+      "type": "float in [0.0, 1.0], 3dp",
+      "bounds": "per pass: |delta| <= learning.max_step (0.15, range 0.01-0.5) * damping (0.5 ** reversals), scaled by confidence, toward 0.0 or 1.0, clamped to [0,1]. FATIGUE path instead writes learned - learning.fatigue_step (0.05, range 0.01-0.3) with NO max_step/damping cap. No cumulative or per-unit-time bound: identical evidence moves it again every pass (executed 0.6 -> 0.998 in four passes). Topic must already exist in the profile; refused otherwise.",
+      "affects_behaviour": true,
+      "source": "aries/learning/loop.py:311 -> aries/interests/service.py:203-228; cap at aries/learning/loop.py:196-198,234-235; fatigue at aries/learning/loop.py:179-188; reach via aries/interests/service.py:163-176 -> aries/news/automation.py:181-188,217,229-240 and aries/connect/automation.py:143-152"
+    },
+    {
+      "key": "AriesInterest.learned_confidence",
+      "type": "float in [0.0, 1.0]",
+      "bounds": "Proposal.confidence, clamped 0-1. Provenance only.",
+      "affects_behaviour": false,
+      "source": "aries/interests/service.py:218"
+    },
+    {
+      "key": "AriesInterest.learned_rationale",
+      "type": "text",
+      "bounds": "free text generated by the loop; surfaced in the brief, CLI and API",
+      "affects_behaviour": false,
+      "source": "aries/interests/service.py:219; aries/brief/sections.py:284-287"
+    },
+    {
+      "key": "news.relevance_threshold (settings key, Layer.LEARNED, global scope)",
+      "type": "float in [0.0, 1.0]",
+      "bounds": "UPWARD ONLY. step = +learning.max_step / 2 = +0.075; hard ceiling min(0.95, ...); refused if proposed <= current. Requires sum-of-per-topic shown >= learning.min_observations * 2 = 20 and wilson(dismissed, shown).lower >= learning.noisy_threshold 0.30. No cumulative bound: executed 0.6 -> 0.95 in five passes on one fixture.",
+      "affects_behaviour": true,
+      "source": "aries/learning/loop.py:274-302 (step at :293), :316 -> aries/settings/service.py:170-177; consumed at aries/news/automation.py:217,229-240"
+    },
+    {
+      "key": "aries_reversals rows (target, status, confirmations, evidence, policy_version)",
+      "type": "table rows, state machine pending -> applied | abandoned",
+      "bounds": "one PENDING row per (target, scope); confirmations increment once per pass; required_confirmations = learning.reversal_confirmations (2). Written even when learning.apply_changes is off, and run_pass commits in that mode.",
+      "affects_behaviour": true,
+      "source": "aries/learning/reversal.py:313-371; aries/learning/loop.py:173-175, 348-353"
+    },
+    {
+      "key": "aries_learning_changes rows (append-only change log)",
+      "type": "table rows",
+      "bounds": "append-only; one row per proposal, written whether or not the change was shadowed. Feeds damping and freezing, which are the loop's only self-restraint.",
+      "affects_behaviour": true,
+      "source": "aries/learning/history.py:121-144; read by aries/learning/history.py:161-195"
+    },
+    {
+      "key": "audit_events (setting.changed) for the threshold write",
+      "type": "table rows",
+      "bounds": "actor_type='system', actor='learning'",
+      "affects_behaviour": false,
+      "source": "aries/settings/service.py:143-147"
+    },
+    {
+      "key": "NOT WRITABLE: AriesInterest.weight (the user's column)",
+      "type": "-",
+      "bounds": "no parameter and no assignment in interests.learn; verified executed",
+      "affects_behaviour": false,
+      "source": "aries/interests/service.py:203-228"
+    },
+    {
+      "key": "NOT WRITABLE: any Layer >= PROJECT (40) for any setting",
+      "type": "-",
+      "bounds": "SettingsService.learn hardcodes Layer.LEARNED (30) and has no layer parameter; set() refuses a machine author above MACHINE_WRITABLE = {DEFAULT, HISTORICAL, LEARNED}",
+      "affects_behaviour": false,
+      "source": "aries/settings/service.py:131-134,176; aries/settings/layers.py:77"
+    },
+    {
+      "key": "NOT WRITABLE: project-scoped interest rows",
+      "type": "-",
+      "bounds": "propose()/apply() never pass a scope, so only scope='' rows are read or written; Proposal.scope is always ''",
+      "affects_behaviour": false,
+      "source": "aries/learning/loop.py:129,311; aries/interests/service.py:99-102,214"
+    },
+    {
+      "key": "NOT WRITABLE: anything in planning, capability selection, context assembly, routing or approval",
+      "type": "-",
+      "bounds": "no write path exists; the automation declares task_kind=None, agents=[], tools=[], permissions=[VIEW_DATA]",
+      "affects_behaviour": false,
+      "source": "aries/learning/loop.py:305-336; aries/learning/automation.py:248-251; grep: no aries.interests reference under aries/workspace/"
+    }
+  ],
+
+  "findings": [
+    {
+      "id": "L9-01",
+      "severity": "high",
+      "title": "No automatic rollback exists, and no manual one either: a learned value cannot be deleted through any shipped surface",
+      "detail": "Nothing observes a metric and reverts a learned change. Worse, there is no surface that removes a learned value at all: SettingsService.clear and its API route hardcode Layer.USER, there is no clear_learned() for AriesInterest.learned_weight, and history.release() (which only deletes the change log to lift a freeze) has zero callers. A user's only recourse is to SHADOW the learned value by setting their own. The automation's evaluation_metrics and reward_signals are declarations no controller reads. This is the missing precondition for Level 9: the loop can change behaviour over days with no closed-loop evaluation of whether the change helped.",
+      "source": "aries/learning/history.py:212-224; aries/settings/service.py:157-168; aries/api/routes.py:256-264; aries/interests/service.py:105-135; aries/learning/automation.py:257-262",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-02",
+      "severity": "high",
+      "title": "The per-pass cap is not a bound per unit time: identical evidence is re-applied every pass",
+      "detail": "propose() is stateless with respect to what has already been applied from the same evidence. A single fixed 30-day fixture drove a topic weight 0.6 -> 0.998 in four passes and the relevance threshold 0.6 -> 0.95 (its ceiling) in five, with no new data. The oscillation guards never engage, because the direction never changes, so damping stays 1.0 and the freeze never trips. learning.interval_hours has a minimum of 1 and is not user_only, so the theoretical ceiling is max_step * 24 = 3.6 per day, i.e. full saturation of [0,1] within a day. 'A bug in the evidence should cost the user a nudge, not their configuration' (statistics.py:84-87) is true per pass and false per week.",
+      "source": "aries/learning/loop.py:93-257 (no applied-state check); aries/learning/statistics.py:81-98; aries/learning/settings.py:116-118,138-141; aries/learning/history.py:175-177",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-03",
+      "severity": "high",
+      "title": "The FATIGUE path escapes every stated safety property at once",
+      "detail": "A FATIGUE verdict (reversal.py:267-273) fires against an established position with (a) no learning.min_observations check, (b) no reversal_min_observations_factor, (c) no higher confidence level, (d) no reversal_confirmations, and (e) no max_step or damping cap -- it writes learned - learning.fatigue_step directly. Its only input is TopicEvidence.trend, which compares raw per-bucket POINT RATES with a 0.05 delta over buckets of as few as 3 observations. That is the '1 of 3' statistics.py is written to refuse, used as the sole decision input. I executed a real 0.80 -> 0.75 change at shown = 9, below min_observations = 10, in one pass.",
+      "source": "aries/learning/reversal.py:267-273; aries/learning/evidence.py:105-116; aries/learning/loop.py:179-188",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-04",
+      "severity": "medium",
+      "title": "_propose_threshold double-counts multi-topic items, inflating n and overstating confidence",
+      "detail": "shown = sum(e.shown for e in evidence.values()) and dismissed likewise sum PER-TOPIC slices, and gather() increments one slice per topic per item. An item matching k topics contributes k. Executed: 10 real aries_news_items rows -> shown 30, dismissed 30. Consequences: the declared minimum of min_observations*2 = 20 observations can be met by 7 real items at k=3; and the Wilson interval is computed on the inflated n, so Proposal.confidence (= interval.lower) is overstated -- 0.886 instead of 0.722 in the executed case. The interval width narrows as sqrt(k), which is exactly the overreaction the module exists to prevent.",
+      "source": "aries/learning/loop.py:284-288; aries/learning/evidence.py:167-177",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-05",
+      "severity": "medium",
+      "title": "The loop's own governing knobs, including its master switch, are machine-writable at the LEARNED layer",
+      "detail": "Only learning.apply_changes carries user_only=True. learning.enabled, learning.interval_hours, learning.max_step, learning.min_observations, learning.reversal_confirmations, learning.reversal_hysteresis, learning.max_reversals, learning.fatigue_step, learning.window_days, learning.engaged_threshold, learning.ignored_threshold, learning.noisy_threshold, news.relevance_threshold and interests.default_weight are all writable by a machine author at Layer.LEARNED, which beats DEFAULT. Executed: SettingsService.learn('learning.enabled', True, set_by='learning') succeeds and the effective value becomes True; same for interval_hours=1, max_step=0.5, min_observations=3, reversal_confirmations=1, max_reversals=0, reversal_hysteresis=0.0, fatigue_step=0.3, interests.default_weight=0.0. The loop as shipped does not write these -- but every constant this review quotes is machine-reachable from elsewhere in the process, so they are conventions, not invariants. interests.default_weight is the sharpest: it is both the starting point for every unlearned topic and the `neutral` against which reversal.classify decides what counts as established.",
+      "source": "aries/learning/settings.py:106-177 (only :112-115 is user_only); aries/settings/service.py:135; aries/settings/layers.py:77; aries/interests/settings.py:9-12",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-06",
+      "severity": "medium",
+      "title": "Human authorship is a caller-supplied string, so 'user:<anything>' obtains USER-layer authority",
+      "detail": "author_is_human = set_by.split(':')[0] in HUMAN_AUTHORS. Executed: set('news.relevance_threshold', 0.99, layer=Layer.USER, set_by='user:learning') is ACCEPTED and becomes the effective user value, while set_by='learning', 'system', 'aries.learning' and 'learning:loop' are all correctly refused. aries/learning/feedback.py:364,398 legitimately uses 'user:feedback' for this purpose, which is why the prefix rule exists; the cost is that the guarantee rests on every caller naming itself honestly rather than on a capability. The learning loop does not exploit it.",
+      "source": "aries/settings/service.py:55,129-136; aries/learning/feedback.py:364,398",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-07",
+      "severity": "medium",
+      "title": "SettingsService.learn(..., set_by='user') bypasses the user_only guard and writes a user_only key at the LEARNED layer",
+      "detail": "The user_only check is `d.user_only and layer in MACHINE_WRITABLE and not author_is_human`. Because learn() accepts set_by from the caller, passing a human-looking author skips the check while the layer stays LEARNED -- which still beats DEFAULT, so the value takes effect wherever the user has set nothing. Executed on three user_only keys: learning.apply_changes -> False, autonomy.level -> 'automated', autonomy.max_actions_per_hour -> 999. The guard's stated purpose is 'knobs where even a suggestion is inappropriate -- security posture, autonomy level' (service.py:25-28), and autonomy.level is the system's own 'single most consequential setting' (defaults.py:35).",
+      "source": "aries/settings/service.py:135,170-177; aries/settings/defaults.py:35-41",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-08",
+      "severity": "medium",
+      "title": "interests.update() has no author gate and records every actor as human",
+      "detail": "update() validates the range of `weight` and nothing about who is writing it; it then logs actor_type='human' unconditionally while passing the caller's `actor` string straight through. Executed: interests.update(db, 'ai', weight=0.05, actor='learning') writes the USER column and produces an audit event reading actor_type='human', actor='learning'. The interests module's docstring states 'weight is written only by the user, learned_weight only by the learning loop' (models.py:19-21) -- the first half is a convention of which function callers choose, not an enforced property, and the audit trail would not reveal a violation.",
+      "source": "aries/interests/service.py:105-135 (row.weight at :115, audit at :130-132); aries/interests/models.py:19-21",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-09",
+      "severity": "medium",
+      "title": "The loop can silence the evidence that would contradict it",
+      "detail": "A lowered topic weight pushes that topic's future items below news.relevance_threshold, and gather() counts only delivered/held items -- so the topic disappears from its own evidence. A raised threshold shrinks the evidence base globally and is UPWARD ONLY, so the loop cannot undo its own quieting; only the user can. The deliberate mitigation (excluding never-shown items so the loop cannot confirm a guess with manufactured zero-engagement) is real and correctly implemented, but it addresses the opposite direction. Combined with L9-01 and L9-02: a change that suppresses a topic compounds on unchanged evidence, cannot be auto-reverted, and removes the signal that would have argued against it.",
+      "source": "aries/learning/evidence.py:143-161; aries/news/automation.py:217,229-240; aries/learning/loop.py:274-282",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-10",
+      "severity": "low",
+      "title": "'Nothing here writes' is true only because the HTTP session never commits",
+      "detail": "GET /learning/proposals documents 'Nothing here writes', and GET /learning/reversals and the CLI `learning reversals` also call propose(). propose() calls reversal.observe() for every established target, which db.add()s a new PENDING row or increments confirmations, and flushes. Nothing is persisted only because get_db() yields a session and never commits (vendor/agentic-core/.../base.py:101-103) and the CLI paths return without committing. The read-only property is an accident of transaction scope, not a property of propose(): any caller that commits for an unrelated reason in the same session advances the reversal state machine, and two such reads would satisfy learning.reversal_confirmations=2 without a single learning pass.",
+      "source": "aries/api/routes.py:728-733,696-715; aries/cli.py:588-593; aries/learning/loop.py:94,173-175; aries/learning/reversal.py:341-360; vendor/agentic-core/agentic_core/database/base.py:101-103",
+      "evidence_kind": "source"
+    },
+    {
+      "id": "L9-11",
+      "severity": "low",
+      "title": "'Observe only' mode is not read-only and accumulates reversal confirmations",
+      "detail": "When learning.apply_changes is off, run_pass skips apply() but still commits, persisting the pending-reversal rows and confirmation counts propose() created. Watching the loop for a fortnight before trusting it therefore leaves a primed state machine: enabling apply_changes can apply a reversal on the very next pass, on confirmations gathered while the user believed nothing was happening.",
+      "source": "aries/learning/loop.py:93-94 (docstring), :339-353 (commit at :353)",
+      "evidence_kind": "source"
+    },
+    {
+      "id": "L9-12",
+      "severity": "low",
+      "title": "_CONTEXT is an unbounded module-level dict keyed on id(list)",
+      "detail": "propose() stashes the frozen/verdicts side-channel in a process-global dict keyed by id(proposals) and never evicts. Two consequences: an unbounded leak, one entry per propose() call for the process lifetime; and id reuse -- once a proposals list is garbage-collected, a later list can be allocated at the same address and frozen_for()/verdicts_for() will return the earlier pass's data for it. In a long-lived API process serving GET /learning/reversals, that is a cross-request data-mixing hazard in a user-facing explanation surface.",
+      "source": "aries/learning/loop.py:256,260-271",
+      "evidence_kind": "source"
+    },
+    {
+      "id": "L9-13",
+      "severity": "low",
+      "title": "Proposal.scope is cosmetic; project-scoped interests are silently unreachable",
+      "detail": "propose() resolves rows with interests.get(db, topic) and apply() writes with interests.learn(db, target, ...), both at the default scope '', so row.scope is always '' and the scope recorded in Proposal, AriesLearningChange and AriesReversal is always empty. A topic the user follows only inside a project is never learned about and never reported as skipped. Executed.",
+      "source": "aries/learning/loop.py:129,160,311; aries/interests/service.py:99-102,214",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-14",
+      "severity": "info",
+      "title": "What is genuinely well built here",
+      "detail": "The column split (weight vs learned_weight) and the layer stack (USER 60 > LEARNED 30) make the precedence claim structural, and the two learn() entry points really do have no reachable parameter for a user value -- I attacked both and failed. The pending-reversal state machine behaves exactly as documented: alternating evidence opened a PENDING row and withdrew it as 'abandoned' with no change applied. The hysteresis-as-confidence design (a wider interval against the same threshold, rather than a moved threshold) is the right choice and the comment at reversal.py:201-215 explains why the obvious alternative was unreachable. Excluding never-shown items from the evidence (evidence.py:159) closes the self-confirmation loop that would otherwise be the worst failure here. Every applied change carries a rationale, a policy_version, the interval it was decided from and its window. learning.enabled defaults to False.",
+      "source": "aries/interests/models.py:60-115; aries/settings/layers.py:36-77; aries/learning/reversal.py:201-215,313-371; aries/learning/evidence.py:143-161; aries/learning/history.py:121-144",
+      "evidence_kind": "executed"
+    },
+    {
+      "id": "L9-15",
+      "severity": "info",
+      "title": "Level 9 assessment",
+      "detail": "The '0%' claim is wrong as stated and right in substance. Wrong: a scheduled loop does autonomously change system behaviour over days, with durable state, hysteresis and a change log -- that is not nothing. Right: it is not self-improvement, because self-improvement requires a measured objective and the ability to undo a change that worsens it, and neither exists. The loop optimises a proxy (engagement) it also controls (delivery), has no baseline, no held-out evaluation and no revert. The pattern Level 9 needs already exists in the repository one directory away -- aries/workspace/learning_eval.py runs a paired baseline/candidate comparison on a fixed 20-case fixture, reports regressions explicitly, hardcodes promoted=False and routes promotion through a user_only setting. Applying that shape to the medium loop (a frozen evidence fixture, a metric that is not engagement, and a clear_learned() surface) is the concrete gap.",
+      "source": "aries/learning/automation.py:236-263; aries/workspace/learning_eval.py:47,74-90; aries/workspace/settings.py:44-46",
+      "evidence_kind": "source"
+    }
+  ],
+
+  "refuted_hypotheses": [
+    {
+      "hypothesis": "interests.learn() can be coaxed into writing AriesInterest.weight (the user's column) via a keyword, a scope trick, or an ORM side effect.",
+      "verdict": "REFUTED",
+      "checked": "inspect.signature(interests.learn) = (db, topic, weight, confidence, rationale, scope, commit) -- the positional `weight` is assigned to row.learned_weight only. The function body contains no 'row.weight =' assignment (verified by inspect.getsource on the loaded object, not by reading the file). Executed with a user weight of 0.9 present: weight stayed 0.9, learned_weight became 0.1, shadowed=True, effective=0.9.",
+      "source": "aries/interests/service.py:203-228"
+    },
+    {
+      "hypothesis": "SettingsService.learn() can be pointed at a stronger layer (USER, PROJECT, INSTRUCTION) by a parameter or by `scope`.",
+      "verdict": "REFUTED",
+      "checked": "learn() has no `layer` parameter; it calls set(layer=Layer.LEARNED) unconditionally. `scope` is orthogonal to layer: store.read ranks scopes only WITHIN a layer and the winner is then max() over layers, so a project-scoped LEARNED row (30) still loses to a global USER row (60). Executed layer stack after a learn() over a user value: [('user', 0.9), ('learned', 0.95)], effective 0.9, source 'user'.",
+      "source": "aries/settings/service.py:170-177,75-79; aries/settings/store.py:75-91"
+    },
+    {
+      "hypothesis": "The loop can create a topic it was never told about (rule 2 is only a comment).",
+      "verdict": "REFUTED",
+      "checked": "Two independent gates: loop.propose() skips any evidence topic whose interest row is None, and interests.learn() raises InterestError(\"'x' is not in the profile -- learning does not invent topics\") if called anyway. Both verified in source; the propose() gate exercised implicitly in every executed fixture (topics had to be added first or nothing happened).",
+      "source": "aries/learning/loop.py:129-131; aries/interests/service.py:215-216"
+    },
+    {
+      "hypothesis": "The loop can LOWER news.relevance_threshold, i.e. make itself louder.",
+      "verdict": "REFUTED",
+      "checked": "_propose_threshold only ever computes current + max_step/2 and returns None when `proposed <= current`; there is no downward branch and no other writer of that key in the learning package. Executed: every threshold proposal observed was upward, and the ratchet stopped dead at the 0.95 ceiling.",
+      "source": "aries/learning/loop.py:274-302"
+    },
+    {
+      "hypothesis": "The slow loop reaches planning, capability selection, context assembly, routing or approval.",
+      "verdict": "REFUTED",
+      "checked": "grep for aries.interests under aries/workspace/, aries/context*, aries/agents*, aries/intelligence* returns only two docstring mentions and no code path. The workspace planner's only learning import is aries.learning.feedback.standing_rules/implementation_notes -- the FAST loop, written from user utterances at the USER/PROJECT/INSTRUCTION layers, a different component with a different author model. The automation spec declares task_kind=None, agents=[], tools=[], permissions=[VIEW_DATA]. The one non-news consumer of interest weights is aries/connect/automation.py, where interest affects only sort order; the needs_you/can_wait split is decided by category and injection-suspicion, not by weight.",
+      "source": "aries/workspace/planner.py:79-82; aries/connect/automation.py:143-152; aries/learning/automation.py:248-251"
+    },
+    {
+      "hypothesis": "The read-only learning API endpoints persist reversal confirmations, so a user refreshing the UI could confirm a reversal.",
+      "verdict": "REFUTED (but only by transaction scope -- see finding L9-10)",
+      "checked": "propose() does flush AriesReversal inserts and confirmation increments. get_db() yields a session from async_session() and never commits, so the implicit rollback on close discards them; the CLI `learning reversals` path likewise returns without committing. The in-session write is real, so the property is accidental rather than designed.",
+      "source": "vendor/agentic-core/agentic_core/database/base.py:101-103; aries/api/routes.py:696-733; aries/learning/reversal.py:341-360"
+    },
+    {
+      "hypothesis": "The automation circuit breaker or the health automation reverts learned changes when something regresses.",
+      "verdict": "REFUTED",
+      "checked": "breaker.state() is computed purely from consecutive run FAILURES in aries_automation_runs against automations.breaker_threshold (3) and gates whether the automation may run (runner.py:112-113). It reads nothing about learned values and writes nothing to them. A learning pass that succeeds while making things worse is indistinguishable from one that helps, because no metric is compared across passes.",
+      "source": "aries/automations/breaker.py:56-101; aries/automations/runner.py:112-113"
+    },
+    {
+      "hypothesis": "Damping and freezing act as a rollback, restoring a previous value after instability.",
+      "verdict": "REFUTED",
+      "checked": "stability() computes damping = learning.damping ** reversals and frozen = reversals >= learning.max_reversals from the loop's own change log. Both only reduce or stop FUTURE movement; neither reads or restores a prior value. Executed: twelve passes on a unidirectional fixture produced reversals=0, damping=1.0, frozen=false -- a value can ratchet to saturation without either guard engaging, because the guards key on direction CHANGES, and a compounding drift never changes direction.",
+      "source": "aries/learning/history.py:161-195"
+    },
+    {
+      "hypothesis": "learning.apply_changes=False makes a learning pass read-only.",
+      "verdict": "REFUTED",
+      "checked": "run_pass skips apply() but calls await db.commit() on the else branch, persisting the AriesReversal rows and confirmation increments that propose() created. Source-inspected; the write itself was executed in proof3.py, where pass 1 of a reversal scenario produced zero proposals and a committed ('ai','pending',1,2) row.",
+      "source": "aries/learning/loop.py:348-353"
+    }
+  ]
+}

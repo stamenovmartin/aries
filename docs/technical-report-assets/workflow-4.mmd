@@ -1,0 +1,9 @@
+flowchart LR
+    A[Acquire update lease] --> B[Задржи нови извршувања]
+    B --> C{Активна работа завршена?}
+    C -->|Не| D[Bounded wait]
+    D --> C
+    C -->|Да| E[Рестарт на core]
+    E --> F[Реален API readiness check]
+    F --> G[Queue продолжува]
+    D -->|Timeout| H[Откажи update / ослободи lease]

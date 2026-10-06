@@ -1,0 +1,49 @@
+--- test_a_failed_goal_never_speaks_its_stale_measurements
+PASS  it says it failed: Не успеа. мрежата падна
+PASS  it gives the reason
+PASS  it does NOT speak the stale measurement
+PASS  failed reports failure, not readings: It failed. мрежата падна
+PASS  refused reports failure, not readings: It failed. мрежата падна
+PASS  interrupted reports failure, not readings: It failed. мрежата падна
+PASS  error reports failure, not readings: It failed. мрежата падна
+PASS  a process word is not offered as the reason
+PASS  a done goal still speaks the measurement: Дискот е на 8.5%. Слободни ти се 396 гигабајти од 433.
+--- test_a_mount_point_nobody_asked_about_is_not_read_aloud
+PASS  /boot/efi is left out: Дискот е на 8.5%. Слободни ти се 396 гигабајти од 433.
+PASS  the root filesystem is not read out as a slash
+--- test_a_real_summary_written_for_a_person_is_kept
+PASS  kept: Playing Bohemian Rhapsody.
+PASS  kept: Volume 0.30 to 0.40.
+PASS  kept: 8 networks visible, 1 already saved.
+--- test_process_language_is_never_spoken
+PASS  'Task queued' becomes a plain answer, not itself: Готово.
+PASS  'Independently verified' becomes a plain answer, not itself: Готово.
+PASS  '1 results' becomes a plain answer, not itself: Готово.
+PASS  '3 cards' becomes a plain answer, not itself: Готово.
+PASS  'accepted' becomes a plain answer, not itself: Готово.
+PASS  'unconfirmed' becomes a plain answer, not itself: Готово.
+PASS  '' becomes a plain answer, not itself: Готово.
+--- test_readings_are_found_wherever_they_sit
+PASS  a deeply nested reading is still spoken: Процесорот е на 61 степени.
+PASS  a trailing .0 is not read aloud
+--- test_states_a_person_needs_to_hear_about
+PASS  waiting for approval is said plainly
+PASS  a failure says it failed and why: Не успеа. нема мрежа
+PASS  an empty outcome is not silence
+PASS  a non-dict outcome is not a crash
+--- test_the_answer_carries_the_measurement_not_the_process
+PASS  [mk] the answer contains 8.5: Дискот е на 8.5%. Слободни ти се 396 гигабајти од 433.
+PASS  [mk] the answer contains 396: Дискот е на 8.5%. Слободни ти се 396 гигабајти од 433.
+PASS  [mk] the answer contains 433: Дискот е на 8.5%. Слободни ти се 396 гигабајти од 433.
+PASS  [mk] it does not say "Task queued"
+PASS  [mk] it does not say "Independently verified"
+PASS  [en] the answer contains 8.5: Disk is 8.5% full. You have 396 gigabytes free of 433.
+PASS  [en] the answer contains 396: Disk is 8.5% full. You have 396 gigabytes free of 433.
+PASS  [en] the answer contains 433: Disk is 8.5% full. You have 396 gigabytes free of 433.
+PASS  [en] it does not say "Task queued"
+PASS  [en] it does not say "Independently verified"
+--- test_the_answer_is_a_sentence_not_a_report
+PASS  bounded to a few facts (3 sentences)
+--- test_the_same_measurement_is_not_said_twice
+PASS  8.5 appears once: Дискот е на 8.5%. Слободни ти се 396 гигабајти од 433.
+ALL PASSED

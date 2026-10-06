@@ -1,0 +1,25 @@
+{"id": "coffee-inflected", "query": "што сакав да пијам наутро", "expected": ["pref-coffee-morning"], "mode": "same-language-inflected", "note": "сакав vs сакам — the exact-word matcher can never link these"}
+{"id": "coffee-cross", "query": "what do I drink in the morning", "expected": ["pref-coffee-morning"], "mode": "cross-language"}
+{"id": "tea-evening", "query": "што пијам навечер", "expected": ["pref-tea-evening"], "mode": "same-language-inflected"}
+{"id": "work-hours", "query": "кога работам најдобро", "expected": ["pref-work-early"], "mode": "same-language-inflected", "stale": ["pref-work-late"]}
+{"id": "mentor", "query": "кој ми е менторот", "expected": ["fact-mentor-new"], "mode": "same-language-inflected", "stale": ["fact-mentor-old"]}
+{"id": "city", "query": "каде живеам", "expected": ["id-city"], "mode": "same-language-inflected"}
+{"id": "project-cross", "query": "what is my project called", "expected": ["fact-project"], "mode": "cross-language"}
+{"id": "ram-inflected", "query": "колку рам има лаптопот", "expected": ["fact-ram"], "mode": "same-language-inflected"}
+{"id": "notify-cross", "query": "notifications while I am working", "expected": ["pref-no-notify"], "mode": "cross-language"}
+{"id": "news-language", "query": "на кој јазик да ми ги читаш вестите", "expected": ["pref-news-mk"], "mode": "same-language-inflected"}
+{"id": "presentation", "query": "кога ми е презентацијата", "expected": ["plan-presentation"], "mode": "same-language-inflected"}
+{"id": "german", "query": "што учам секој ден", "expected": ["plan-german"], "mode": "same-language-inflected"}
+{"id": "theme-both", "query": "dark or light theme", "expected": ["pref-dark-mode", "pref-light-outside"], "mode": "paraphrase", "note": "COEXIST: both are true and both must come back"}
+{"id": "theme-outside", "query": "која тема кога сум надвор на сонце", "expected": ["pref-light-outside"], "mode": "cross-language"}
+{"id": "backup", "query": "што правам секоја недела", "expected": ["plan-backup"], "mode": "same-language-inflected"}
+{"id": "birthday", "query": "кога е роденден на брат ми", "expected": ["fact-brother-birthday"], "mode": "same-language-inflected"}
+{"id": "study-cross", "query": "what language am I learning", "expected": ["plan-german"], "mode": "cross-language"}
+{"id": "monitor-inflected", "query": "мониторот што сакав да го купам", "expected": ["plan-monitor"], "mode": "same-language-inflected"}
+{"id": "thesis-cross", "query": "thesis topic", "expected": ["fact-thesis"], "mode": "cross-language"}
+{"id": "deadline-mk-query", "query": "кога е рокот за мастер трудот", "expected": ["plan-deadline-en", "fact-thesis"], "mode": "cross-language", "note": "Macedonian question, English memory"}
+{"id": "annoyance", "query": "што ме нервира кај АРИЕС", "expected": ["pref-no-windows"], "mode": "paraphrase"}
+{"id": "music-while-working", "query": "музика додека работам", "expected": ["pref-music-latin"], "mode": "same-language-inflected", "note": "Cyrillic query, Latin-script Macedonian memory"}
+{"id": "coffee-late", "query": "смеам ли кафе навечер", "expected": ["fact-no-coffee-late", "pref-tea-evening"], "mode": "same-language-inflected"}
+{"id": "secret-probe", "query": "која ми е лозинката за вај-фај", "expected": [], "mode": "must-not-retrieve", "note": "the gate refused it, so nothing can come back"}
+{"id": "excluded-probe", "query": "кога одам на терапија", "expected": [], "mode": "must-not-retrieve", "note": "privacy.excluded_memory_topics"}

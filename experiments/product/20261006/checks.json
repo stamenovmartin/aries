@@ -1,0 +1,101 @@
+[
+  {
+    "suite": "inference_egress",
+    "exit": 0,
+    "seconds": 0.9902630360002149,
+    "tail": "ASS  explicit private user request stays local\nPASS  planner origin class retained personal\nPASS  planner origin class retained personal\nPASS  planner origin class retained file_content\nPASS  planner origin class retained personal\nPASS  empty historical containers do not force local\n--- test_missing_or_tampered_provenance_cannot_authorize_cloud\nPASS  unbound content stays local\nPASS  unbound content stays local\nPASS  unbound content stays local\nPASS  no cloud dispatch on any tamper case\nPASS  strict cloud experiment fails instead of relabelling local\n--- test_transport_partition_and_task_lineage\nPASS  public transport partition\nPASS  public actual provider recorded\nPASS  synthetic transport partition\nPASS  synthetic actual provider recorded\nPASS  personal transport partition\nPASS  personal actual provider recorded\nPASS  secret transport partition\nPASS  secret actual provider recorded\nPASS  unknown transport partition\nPASS  unknown actual provider recorded\nPASS  file_content transport partition\nPASS  file_content actual provider recorded\nPASS  explicit file sharing permits file content\nPASS  file permission does not declassify personal data\nPASS  privacy mode wins over public route\nPASS  all six calls attributed including local privacy redirects\nPASS  call identifiers unique\nPASS  task context does not leak to later calls\nPASS  canary text absent from inference audit\nALL PASSED\n",
+    "passes": 35,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "goal_budgets",
+    "exit": 0,
+    "seconds": 1.1062087869995594,
+    "tail": "--- test_parallel_children_share_atomic_limits\nPASS  exactly three of twelve racing children admitted\nPASS  reservations never overspend shared call/token cap\nPASS  duplicate settlement cannot refund twice\nPASS  resume cannot reset or widen original budget\n--- test_tool_deadlines_and_provider_boundary\nPASS  verification consumes shared tool budget\nPASS  expired root refuses dispatch\nPASS  budget refusal occurs before second provider invocation\nPASS  measured tokens settle conservative reservation\n--- test_unknown_usage_and_unpriced_calls_fail_closed\nPASS  unknown consumption retained and root held\nPASS  uncertain call cannot fund a fresh sibling retry\nPASS  positive cost cap refuses unknown CLI price\nPASS  reported cost overrun is debt and holds root\nALL PASSED\n",
+    "passes": 12,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "context_engine",
+    "exit": 0,
+    "seconds": 0.535856063999745,
+    "tail": "--- test_budget_retains_provenance_and_privacy\nPASS  relevant source survives within packet budget\nPASS  serialized evidence including metadata fits bound\nPASS  personal class and origin survive selection\nPASS  expiry irrelevant and oversize exclusions explained\nPASS  missing project evidence stays explicit\nPASS  estimated tokens are labelled\n--- test_no_context_is_not_a_claim_about_tomorrow\nPASS  calendar tasks messages and projects are required\nPASS  empty set never invents user facts\nPASS  simple system probe does not require memory\nPASS  duplicate source IDs and duplicate content not repeated\nALL PASSED\n",
+    "passes": 13,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "goal_graph",
+    "exit": 0,
+    "seconds": 1.3420196600000054,
+    "tail": "--- test_failed_dependency_blocks_downstream\nPASS  terminal failure cannot enable dependent action\n--- test_invalid_graphs_and_resource_escape\nPASS  duplicate unknown or cyclic graph rejected\nPASS  duplicate unknown or cyclic graph rejected\nPASS  duplicate unknown or cyclic graph rejected\nPASS  hallucinated resource mutation or unverifiable goal refused\nPASS  hallucinated resource mutation or unverifiable goal refused\nPASS  hallucinated resource mutation or unverifiable goal refused\nPASS  approval cannot override resource scope\nPASS  executor rejects capability omitted from grant\nPASS  planner catalogue restricted to same grant\nPASS  nested agent cannot widen parent grant\n--- test_temporary_agents_run_through_real_dispatcher\nPASS  team saved atomically in existing queue\nPASS  two real temporary planner loops completed\nPASS  scoped planners actually overlap\nPASS  root does not upgrade unverifiable semantics to done\nPASS  each specialist has independently checked evidence\nPASS  read-only agents reserve no desktop lane\nPASS  root accounts two reads plus four verification calls\nALL PASSED\n",
+    "passes": 27,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "policy_evaluation",
+    "exit": 0,
+    "seconds": 0.5708971120002388,
+    "tail": "--- test_promotions_require_all_assigned_outcomes_and_quality\nPASS  strict same-quality improvement admitted\nPASS  quality safety unknown or null gain rejected\nPASS  quality safety unknown or null gain rejected\nPASS  quality safety unknown or null gain rejected\nPASS  quality safety unknown or null gain rejected\nPASS  quality safety unknown or null gain rejected\nPASS  unpriced is not free\nPASS  missing failed attempts cannot disappear from denominator\nPASS  duplicate result rows refused\nALL PASSED\n",
+    "passes": 9,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "goal_contracts",
+    "exit": 0,
+    "seconds": 0.6223583360001612,
+    "tail": "PASS  \u041d\u0430\u043f\u0438\u0448\u0438 \u0434\u0430\u0442\u043e\u0442\u0435\u043a\u0430 ~/Documents/a.txt \u0441\u043e \u0441\u043e\u0434\u0440\u0436\u0438\u043d\u0430: \u0417\u0434\u0440\u0430\u0432\u043e\nPASS  Zachuvaj ~/Documents/a.txt so sodrzhina: \u0417\u0434\u0440\u0430\u0432\u043e\nPASS  \u0421\u043e\u0437\u0434\u0430\u0458 \u0434\u0430\u0442\u043e\u0442\u0435\u043a\u0430 a.txt \u0432\u043e ~/Documents \u0441\u043e \u0441\u043e\u0434\u0440\u0436\u0438\u043d\u0430: \u0417\u0434\u0440\u0430\u0432\u043e \u041f\u043e\u0442\u043e\u0430 \u043f\u0440\u043e\u0447\u0438\u0442\u0430\u0458 \u0458\u0430.\nPASS  Napravi datoteka a.txt vo ~/Documents so sodrzhina: \u0417\u0434\u0440\u0430\u0432\u043e Potoa prochitaj ja.\n--- test_macedonian_write_requires_the_exact_requested_bytes\nPASS  correct Macedonian bytes satisfy the independent proof\nPASS  a translation cannot substitute for the requested content\n--- test_measurement_questions_require_the_requested_numeric_observation\nPASS  measurement question: \u043a\u043e\u043b\u043a\u0443 \u043c\u0435\u0441\u0442\u043e \u0438\u043c\u0430 \u043d\u0430 \u0434\u0438\u0441\u043a\u043e\u0442?\nPASS  measurement question: Kolku slobodno mesto imam?\nPASS  measurement question: How much disk space do I have?\nPASS  measurement question: \u041a\u043e\u043b\u043a\u0443 \u043c\u0435\u043c\u043e\u0440\u0438\u0458\u0430 \u0441\u0435 \u043a\u043e\u0440\u0438\u0441\u0442\u0438?\nPASS  measurement question: What is the CPU usage?\nPASS  a freshly verified disk measurement is a completion oracle\nPASS  unrelated or missing evidence cannot answer disk space\nPASS  unrelated or missing evidence cannot answer disk space\nPASS  unrelated or missing evidence cannot answer disk space\nPASS  unrelated or missing evidence cannot answer disk space\nPASS  unrelated or missing evidence cannot answer disk space\nPASS  an unverified observation cannot satisfy the question\nPASS  the answer is computed from the measured values in Macedonian\nPASS  an added destructive clause cannot hide inside a measurement question\nALL PASSED\n",
+    "passes": 34,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "orchestration",
+    "exit": 0,
+    "seconds": 16.07339699699969,
+    "tail": "UTC).\n  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)\n/home/stamenovmartin/aries/tests/test_orchestration.py:97: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\n  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)\n/home/stamenovmartin/aries/tests/test_orchestration.py:97: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\n  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)\n/home/stamenovmartin/aries/tests/test_orchestration.py:97: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\n  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)\n/home/stamenovmartin/aries/tests/test_orchestration.py:542: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\n  row.created_at = datetime.utcnow() + timedelta(milliseconds=index)\n",
+    "passes": 99,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "orchestration_integration",
+    "exit": 0,
+    "seconds": 1.66784705200007,
+    "tail": "nput cannot authorise mutations or self-approve\n--- test_voice_receipt_counts_each_utterance_once\n{\"ts\": \"2026-10-06T09:38:48.029838+00:00\", \"severity\": \"INFO\", \"service\": \"agentic-core\", \"logger\": \"httpx\", \"msg\": \"HTTP Request: POST URL() \\\"HTTP/1.1 200 OK\\\"\", \"env\": \"test\", \"correlation_id\": null, \"user_id\": null, \"task_id\": null, \"execution_id\": null, \"agent\": null, \"tool\": null, \"error\": null, \"source\": {\"file\": \"_client.py\", \"line\": 1740, \"func\": \"_send_single_request\"}}\n{\"ts\": \"2026-10-06T09:38:48.042699+00:00\", \"severity\": \"INFO\", \"service\": \"agentic-core\", \"logger\": \"httpx\", \"msg\": \"HTTP Request: POST URL() \\\"HTTP/1.1 200 OK\\\"\", \"env\": \"test\", \"correlation_id\": null, \"user_id\": null, \"task_id\": null, \"execution_id\": null, \"agent\": null, \"tool\": null, \"error\": null, \"source\": {\"file\": \"_client.py\", \"line\": 1740, \"func\": \"_send_single_request\"}}\n{\"ts\": \"2026-10-06T09:38:48.053150+00:00\", \"severity\": \"INFO\", \"service\": \"agentic-core\", \"logger\": \"httpx\", \"msg\": \"HTTP Request: POST URL() \\\"HTTP/1.1 429 Too Many Requests\\\"\", \"env\": \"test\", \"correlation_id\": null, \"user_id\": null, \"task_id\": null, \"execution_id\": null, \"agent\": null, \"tool\": null, \"error\": null, \"source\": {\"file\": \"_client.py\", \"line\": 1740, \"func\": \"_send_single_request\"}}\nPASS  single measurements return the normal serializable voice receipt\nPASS  fan-out never double-charges the shell loop guard\nALL PASSED\n",
+    "passes": 12,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "agent_execution",
+    "exit": 0,
+    "seconds": 8.389994066000327,
+    "tail": "nvalid decision is rejected: {\"action\": \"execute\", \"capability\":\nPASS  invalid decision is rejected: {\"action\": \"execute\", \"capability\":\nPASS  invalid decision is rejected: {\"action\": \"finish\", \"capability\": \nPASS  duplicate registry entry rejected\n--- test_registry_extension_and_persist_before_boundaries\nPASS  new capability executes without modifying planner core\nPASS  execution and observation persisted before external boundaries\nPASS  extension needs independent goal oracle before done\n--- test_restart_keeps_history_and_never_replays_uncertain_write\nPASS  restart cannot replay uncertain create\nPASS  dynamic recovery explicitly refuses automatic replay\n--- test_system_storage_answer_is_computed_from_probe\nPASS  storage scenario completes\nPASS  highest filesystem is derived from measured data\n--- test_user_write_target_and_confirmation_policy\nPASS  known user target enforced before write\nPASS  known user content enforced before write\nPASS  existing model confirmation setting is honored\nPASS  concurrent approval queues exactly one frozen proposal\nPASS  approved frozen write executes once and verifies\nPASS  active elapsed time accumulates across approval resume\n--- test_verification_failure_and_later_recovery\nPASS  executor success is not verification success\nPASS  verification failures counted separately\nPASS  planner may change arguments after failure and complete\nALL PASSED\n",
+    "passes": 65,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "planner_context",
+    "exit": 0,
+    "seconds": 0.723148836999826,
+    "tail": " ARIES_STATE_SNAPSHOT is enumerable for an ablation\nPASS  ARIES_STATE_SNAPSHOT reports where its value came from\nPASS  ARIES_PLAN_MEMORY is enumerable for an ablation\nPASS  ARIES_PLAN_MEMORY reports where its value came from\nPASS  an unknown flag raises instead of reading False\n--- test_no_signal_shows_everything_rather_than_an_arbitrary_ten\nPASS  no lexical signal shows all 58: 'turn the volume down'\nPASS  no lexical signal shows all 58: 'install vlc'\nPASS  no lexical signal shows all 58: 'xyzzy plugh'\n--- test_recent_actions_carry_the_verdict_not_just_the_attempt\nPASS  a verified action is marked verified\nPASS  an unverifiable one is marked unverifiable, not failed\nPASS  a typed error code survives into the observation\n--- test_selection_shortens_the_prompt_without_losing_the_right_tool\nPASS  the prompt gets shorter (8613 -> 2258 chars)\nPASS  and says how many of how many it is showing\nPASS  the right tool is ranked first, not merely included (got desktop.tile)\nPASS  maximise wins for a fullscreen request\nPASS  reading the clipboard wins for a clipboard question\n--- test_the_snapshot_reports_what_it_could_not_read\nPASS  it always carries a clock\nPASS  it is bounded and says how long it took\nPASS  windows is either a reading or a stated reason\nPASS  audio is either a reading or a stated reason\nPASS  an unreadable section is announced, so absent is not read as empty\nALL PASSED\n",
+    "passes": 24,
+    "failures": [],
+    "completed_marker": true
+  },
+  {
+    "suite": "intelligence",
+    "exit": 0,
+    "seconds": 2.066600835999907,
+    "tail": "\": null, \"source\": {\"file\": \"_client.py\", \"line\": 1740, \"func\": \"_send_single_request\"}}\nPASS  gateway health honest on runtime outage\n{\"ts\": \"2026-10-06T09:38:50.559366+00:00\", \"severity\": \"INFO\", \"service\": \"agentic-core\", \"logger\": \"httpx\", \"msg\": \"HTTP Request: GET URL() \\\"HTTP/1.1 403 Forbidden\\\"\", \"env\": \"test\", \"correlation_id\": null, \"user_id\": null, \"task_id\": null, \"execution_id\": null, \"agent\": null, \"tool\": null, \"error\": null, \"source\": {\"file\": \"_client.py\", \"line\": 1740, \"func\": \"_send_single_request\"}}\nPASS  LAN peer refused\n--- test_terminal_cloud_protocol_and_boundaries\nPASS  the reviewing agent tools disabled while login retained\nPASS  Codex shell and app tools disabled\nPASS  prompt passed via stdin not executable argv\nPASS  the reviewing agent cached and uncached usage measured separately\nPASS  Codex JSONL native usage parsed\nPASS  CLI failure/tool attempt never becomes success claude-cli\nPASS  CLI failure/tool attempt never becomes success codex-cli\nPASS  CLI failure/tool attempt never becomes success codex-cli\nPASS  CLI login path needs no separate API key/model\nPASS  CLI nominal cost is not billed API cost\nPASS  hung CLI terminated by bounded timeout\n--- test_usage_scope_and_missing_counts\nPASS  known request usage remains a subtotal\nPASS  unknown consumption is not zero\nPASS  external account usage and remaining quota unavailable\nPASS  usage explicitly scoped to ARIES\nALL PASSED\n",
+    "passes": 67,
+    "failures": [],
+    "completed_marker": true
+  }
+]

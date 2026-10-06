@@ -1,0 +1,23 @@
+{
+  "problem": [
+    "Orchestration tests contradicted each other on retry exhaustion; degraded fixture never exercised fallback; parent cancellation missed running children.",
+    "Voice spoke the queue receipt instead of the completed answer, forced near-zero-confidence language decisions, and retained known caption hallucinations.",
+    "Macedonian goals lacked independent completion contracts; large settings lists were difficult to navigate."
+  ],
+  "change": [
+    "Bounded read retries can choose an untried declared alternative; uncertain mutation retries stop; distinct alternatives and degraded outcomes are preserved; cancellation stops active children.",
+    "Voice waits for the submitted goal and speaks its real result; pending/failure/unknown outcomes stay explicit. Low-confidence language decodes without forced prompt, standalone caption echoes are rejected, bare wake name supports follow-up.",
+    "Added Macedonian Cyrillic/Latin completion contracts and searchable schema-driven settings with section and changed-only filters."
+  ],
+  "validation": [
+    "Full suite ALL SUITES PASSED before final cancellation/contracts/voice/UI changes; subsequent affected checks passed: orchestration 99, contracts 18, agent execution 62, workspace 148, voice 21, native settings interaction 10, UI client 419, real-payload UI rendering.",
+    "Live smoke passed. Read-only task 72abf88d94d24bef831c17bc46e0fe87 completed done and produced Macedonian disk measurements instead of Task queued.",
+    "aries-voice restarted and journal confirmed model load, Kiko warmup and ready state. Logs and source hashes retained in experiments/coordination/codex-validation."
+  ],
+  "limitations": [
+    "Orchestration production integration handed back to the reviewing agent through COORDINATION.md; tested module is not evidence of live integration.",
+    "New voice fixes have not yet had a fresh microphone-to-speaker user acceptance test; deterministic tests cover the actual serve-loop call into speech.",
+    "Existing Control Centre processes must be reopened to load changed Python UI modules. Core restart coordinated by the reviewing agent.",
+    "No claim of fully general Jarvis behavior or autonomous model-weight learning."
+  ]
+}

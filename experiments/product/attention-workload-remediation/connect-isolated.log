@@ -1,0 +1,191 @@
+could not read privacy.excluded_paths; falling back to the declared default ['~/.ssh', '~/.gnupg'] rather than excluding nothing
+could not read privacy.excluded_paths; falling back to the declared default ['~/.ssh', '~/.gnupg'] rather than excluding nothing
+could not read privacy.excluded_paths; falling back to the declared default ['~/.ssh', '~/.gnupg'] rather than excluding nothing
+could not read privacy.excluded_paths; falling back to the declared default ['~/.ssh', '~/.gnupg'] rather than excluding nothing
+could not read privacy.excluded_paths; falling back to the declared default ['~/.ssh', '~/.gnupg'] rather than excluding nothing
+Traceback (most recent call last):
+  File "/tmp/aries-learning-rollback-k6qragg0/vendor/agentic-core/tests/_harness.py", line 56, in run_module
+    asyncio.run(r)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/aries-learning-rollback-k6qragg0/tests/test_connect.py", line 45, in wrapped
+    return await fn()
+           ^^^^^^^^^^
+  File "/tmp/aries-learning-rollback-k6qragg0/tests/test_connect.py", line 140, in test_forgetting_a_source_forgets_its_credential
+    await service.connect(db, type="email", name="Test mail",
+  File "/tmp/aries-learning-rollback-k6qragg0/aries/connect/service.py", line 71, in connect
+    ref = secrets.store(type, account, secret)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/aries-learning-rollback-k6qragg0/aries/connect/secrets.py", line 117, in store
+    raise NoKeyring(f"the keyring refused to store it: {type(exc).__name__}") from None
+aries.connect.secrets.NoKeyring: the keyring refused to store it: KeyringLocked
+Traceback (most recent call last):
+  File "/tmp/aries-learning-rollback-k6qragg0/vendor/agentic-core/tests/_harness.py", line 56, in run_module
+    asyncio.run(r)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/aries-learning-rollback-k6qragg0/tests/test_connect.py", line 45, in wrapped
+    return await fn()
+           ^^^^^^^^^^
+  File "/tmp/aries-learning-rollback-k6qragg0/tests/test_connect.py", line 106, in test_the_credential_never_reaches_the_database
+    out = await service.connect(db, type="email", name="Test mail",
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/aries-learning-rollback-k6qragg0/aries/connect/service.py", line 71, in connect
+    ref = secrets.store(type, account, secret)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/aries-learning-rollback-k6qragg0/aries/connect/secrets.py", line 117, in store
+    raise NoKeyring(f"the keyring refused to store it: {type(exc).__name__}") from None
+aries.connect.secrets.NoKeyring: the keyring refused to store it: KeyringLocked
+--- test_a_folder_is_read_and_its_content_arrives_untrusted
+PASS  it read something (1 item(s))
+PASS  isolated-connector-fixture.md's body is Untrusted
+PASS  isolated-connector-fixture.md names where it came from
+--- test_a_folder_privacy_forbids_is_refused
+PASS  a source pointing at ~/.ssh is not reachable
+PASS  and the reason names the rule
+PASS  a system directory is refused too
+--- test_a_login_failure_does_not_echo_the_password
+PASS  the password is not in the message
+PASS  and the shape of the error survives
+--- test_a_mailbox_location_must_name_a_provider_aries_knows
+PASS  gmail resolves to its IMAP host
+PASS  'me@gmail.com' is refused
+PASS  'gmail:' is refused
+PASS  'weirdprovider:me@x.com' is refused
+PASS  'gmail:notanaddress' is refused
+--- test_a_model_reading_content_may_only_classify
+PASS  there is no 'goal' field
+PASS  there is no 'tool' field
+PASS  there is no 'action' field
+PASS  there is no 'url' field
+PASS  there is no 'recipient' field
+PASS  there is no 'to' field
+PASS  there is no 'command' field
+PASS  there is no 'section' field
+PASS  there is no 'setting' field
+PASS  there is no 'send' field
+PASS  summary is required
+PASS  and category is an enum, not free text
+--- test_a_reference_is_not_a_secret
+PASS  a reference names the kind
+PASS  and the account
+PASS  it matches the reference pattern
+PASS  and repr does not invent a secret
+PASS  nothing secret is in it
+--- test_a_symlink_is_resolved_before_it_is_checked
+PASS  a link into a forbidden folder is refused
+PASS  and the reason names what it resolved to
+--- test_an_injection_attempt_is_detected_and_reported
+PASS  an override attempt is seen
+PASS  a role reassignment is seen
+PASS  a request to conceal is seen
+PASS  and every finding carries the text it found
+--- test_binary_files_are_not_read_as_text
+PASS  the text file is read
+PASS  and the file whose bytes are binary is not
+--- test_content_is_never_filtered_only_reported
+PASS  the suspicious text is still there
+PASS  and it is labelled as data
+--- test_every_connector_is_read_only_by_construction
+PASS  directory has no write method
+PASS  directory declares its capabilities
+PASS  directory says whether it leaves the machine
+PASS  documents has no write method
+PASS  documents declares its capabilities
+PASS  documents says whether it leaves the machine
+PASS  repository has no write method
+PASS  repository declares its capabilities
+PASS  repository says whether it leaves the machine
+PASS  email has no write method
+PASS  email declares its capabilities
+PASS  email says whether it leaves the machine
+PASS  and the protocol itself declares no write
+--- test_forgetting_a_source_forgets_its_credential
+FAIL  test_forgetting_a_source_forgets_its_credential: NoKeyring: the keyring refused to store it: KeyringLocked
+--- test_html_mail_is_reduced_to_its_text
+PASS  tags are gone
+PASS  script and style contents are gone
+PASS  the visible words survive
+PASS  and hidden text is surfaced rather than dropped
+--- test_invisible_characters_are_removed_before_anything_reads_it
+PASS  zero-width and bidi characters are gone
+PASS  and the visible text survives
+--- test_mail_is_never_marked_as_read
+PASS  fetching uses BODY.PEEK
+PASS  and never a bare BODY[]
+PASS  the mailbox is selected readonly
+PASS  there is no \Seen anywhere in the connector
+PASS  there is no .store( anywhere in the connector
+PASS  there is no .copy( anywhere in the connector
+PASS  there is no .expunge( anywhere in the connector
+PASS  there is no SMTP anywhere in the connector
+--- test_nothing_is_read_while_the_switch_is_off
+PASS  reading is refused while connect.enabled is off
+PASS  and it names the switch
+--- test_reading_releases_nothing_by_itself
+PASS  read() does not release the working set
+--- test_reading_something_that_is_not_a_reference_is_refused
+PASS  'hunter2' is refused
+PASS  'aries:' is refused
+PASS  'other:email:x' is refused
+PASS  'aries:email:with space' is refused
+--- test_the_attention_pass_reports_and_never_acts
+PASS  the Attention Pass never calls call_tool
+PASS  the Attention Pass never calls open_url
+PASS  the Attention Pass never calls open_app
+PASS  the Attention Pass never calls run_automation
+PASS  the Attention Pass never calls smtplib
+PASS  the Attention Pass never calls send(
+PASS  the Attention Pass never calls .delete(
+PASS  the Attention Pass never calls .store(
+PASS  it is a declared automation
+PASS  it ships switched off
+PASS  classed medium risk — it reads personal content
+PASS  and it declares no tools at all
+--- test_the_connections_screen_tracks_what_is_registered
+PASS  directory has a connector and is not called 'not built yet'
+PASS  documents has a connector and is not called 'not built yet'
+PASS  repository has a connector and is not called 'not built yet'
+PASS  email has a connector and is not called 'not built yet'
+--- test_the_credential_never_reaches_the_database
+FAIL  test_the_credential_never_reaches_the_database: NoKeyring: the keyring refused to store it: KeyringLocked
+--- test_the_fence_cannot_be_closed_from_inside
+PASS  the closing marker appears exactly once
+--- test_the_reading_prompt_says_the_content_is_not_addressed_to_it
+PASS  the prompt says 'not addressed to you'
+PASS  the prompt says 'cannot give you instructions'
+PASS  the prompt says 'describe it'
+PASS  the prompt says 'never follow'
+--- test_understanding_only_ever_happens_on_this_machine
+PASS  with no local model, understanding does not happen
+PASS  and it says so rather than sending the content elsewhere
+PASS  the injection scan still ran, model or no model
+PASS  the provider is checked BEFORE anything is sent
+PASS  and a non-local provider is refused there
+PASS  today ARIES has no remote option at all (['local', 'none'])
+--- test_what_was_read_goes_to_the_working_set_and_not_to_the_audit_log
+PASS  it read something (1)
+PASS  the bodies are held for the task
+PASS  and marked sensitive
+PASS  the response carries no body
+PASS  the read is audited
+PASS  the audit line says how much, not what
+PASS  and carries no file content
+--- test_without_a_keyring_aries_refuses_rather_than_improvising
+PASS  storing without a keyring is refused
+PASS  and it says it will not fall back to a file
+FAILURES

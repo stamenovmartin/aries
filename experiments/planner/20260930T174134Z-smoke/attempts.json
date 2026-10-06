@@ -1,0 +1,109 @@
+{
+  "label": "smoke",
+  "repeats": 1,
+  "config": {
+    "location": "local",
+    "local_backend": "ollama",
+    "local_model": "qwen2.5:7b",
+    "gateway_enabled": true,
+    "gateway_url": "http://127.0.0.1:11435",
+    "ai.temperature": 0.1,
+    "ai.top_p": 0.9,
+    "ai.context_tokens": 8192,
+    "ai.max_output_tokens": 4096
+  },
+  "rows": [
+    {
+      "returned": true,
+      "json": true,
+      "capability": true,
+      "args": true,
+      "plausible": true,
+      "parses": true,
+      "chose": "system.storage",
+      "action": "execute",
+      "arg_keys": [],
+      "unknown_args": [],
+      "detail": "",
+      "usable": true,
+      "seconds": 0.744,
+      "supported": true,
+      "failure": null,
+      "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"system.storage\",\n  \"arguments\": {}\n}",
+      "input_tokens": 307,
+      "output_tokens": 23,
+      "goal": "disk.en",
+      "lang": "en",
+      "text": "How much disk space is free?",
+      "repeat": 0,
+      "expected": [
+        "system.disk",
+        "system.status",
+        "system.storage"
+      ]
+    },
+    {
+      "returned": true,
+      "json": true,
+      "capability": true,
+      "args": false,
+      "plausible": false,
+      "parses": false,
+      "chose": "system.processes",
+      "action": "execute",
+      "arg_keys": [
+        "action",
+        "pid"
+      ],
+      "unknown_args": [
+        "action",
+        "pid"
+      ],
+      "detail": "args: 2 validation errors for Empty",
+      "usable": false,
+      "seconds": 1.095,
+      "supported": false,
+      "failure": null,
+      "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"system.processes\",\n  \"arguments\": {\n    \"action\": \"restart\",\n    \"pid\": 1\n  }\n}",
+      "input_tokens": 243,
+      "output_tokens": 44,
+      "goal": "windows.mk",
+      "lang": "mk",
+      "text": "Кои прозорци се отворени сега?",
+      "repeat": 0,
+      "expected": [
+        "desktop.observe",
+        "desktop.windows"
+      ]
+    },
+    {
+      "returned": true,
+      "json": true,
+      "capability": true,
+      "args": true,
+      "plausible": true,
+      "parses": true,
+      "chose": "file.read",
+      "action": "execute",
+      "arg_keys": [
+        "path"
+      ],
+      "unknown_args": [],
+      "detail": "",
+      "usable": true,
+      "seconds": 0.862,
+      "supported": true,
+      "failure": null,
+      "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"file.read\",\n  \"arguments\": {\n    \"path\": \"/home/stamenovmartin/aries-demo/notes.txt\"\n  }\n}",
+      "input_tokens": 307,
+      "output_tokens": 43,
+      "goal": "read.en",
+      "lang": "en",
+      "text": "Read /home/stamenovmartin/aries-demo/notes.txt",
+      "repeat": 0,
+      "expected": [
+        "file.read"
+      ]
+    }
+  ]
+}

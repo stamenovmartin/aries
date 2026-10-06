@@ -1,0 +1,33 @@
+{
+  "evidence": [
+    {
+      "evidence_id": "cbb5b25e7a5148b59b50b215277bc845",
+      "type": "execution_observation",
+      "source": "file.exists",
+      "timestamp": "2026-09-17T20:37:49.173975+00:00",
+      "step_id": "d7844d55e84d4a3a82f000aaf6201e1d",
+      "verified": false,
+      "data": {
+        "path": "/this/path/does/not/exist/aries.txt",
+        "exists": false,
+        "is_file": false,
+        "observed_at": "2026-09-17T20:37:49.173918+00:00"
+      }
+    },
+    {
+      "evidence_id": "81827c65866b4c9c831faa9db357cce7",
+      "type": "file_state",
+      "source": "file.exists",
+      "timestamp": "2026-09-17T20:37:49.182452+00:00",
+      "step_id": "d7844d55e84d4a3a82f000aaf6201e1d",
+      "verified": true,
+      "data": {
+        "path": "/this/path/does/not/exist/aries.txt",
+        "exists": false,
+        "is_file": false,
+        "observed_at": "2026-09-17T20:37:49.182408+00:00"
+      }
+    }
+  ],
+  "final_refs": []
+}

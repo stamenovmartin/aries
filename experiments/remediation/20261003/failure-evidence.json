@@ -1,0 +1,36 @@
+{
+  "before_artifact": "experiments/assistant-benchmark/20261003T113052Z-after-file-parser/results.json",
+  "after_artifact": "experiments/assistant-benchmark/20261003T114058Z-after-failure-evidence-subset/results.json",
+  "before_started_at": "2026-10-03T11:30:52.457712+00:00",
+  "after_started_at": "2026-10-03T11:40:58.873438+00:00",
+  "before_passed_n": 0,
+  "after_passed_n": 6,
+  "n_each": 8,
+  "full60_after_pending": false,
+  "full60_after_artifact": "experiments/assistant-benchmark/20261003T131001Z-clarification-final/results.json",
+  "observed_errors": {
+    "before": {
+      "steps_n": 8,
+      "typed_error_n": 0,
+      "error_codes": {
+        "not_recorded": 8
+      },
+      "claimed_verified_n": 0
+    },
+    "after": {
+      "steps_n": 8,
+      "typed_error_n": 8,
+      "error_codes": {
+        "PROTECTED_PATH": 4,
+        "PATH_EXCLUDED": 2,
+        "INVALID_ARGUMENT": 2
+      },
+      "claimed_verified_n": 0
+    }
+  },
+  "limitations": [
+    "Same frozen8 subset, unchanged predicates. Full60 rerun completed; linked artifact retains all60 cases and separate clarification changes.",
+    "Six policy-blocked reads were blocked before and after; improvement is durable typed evidence, not broader access.",
+    "Two targets are missing files rather than explicit policy exclusions; kept as unmet refusal predicates. No metric relabeling."
+  ]
+}

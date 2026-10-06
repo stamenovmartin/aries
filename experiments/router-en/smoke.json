@@ -1,0 +1,126 @@
+{
+  "label": "smoke",
+  "n": 4,
+  "flags": {
+    "primary_language": "en",
+    "listen_languages": [
+      "en"
+    ],
+    "whisper_model": "large-v3",
+    "override_file": "/home/stamenovmartin/aries/var/flags.env",
+    "flags": {
+      "ARIES_CAP_TOPK": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "the planner is sent the most relevant capabilities, not all of them"
+      },
+      "ARIES_MK_FROZEN": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "Macedonian is frozen: it keeps working and keeps being tested, and nothing new is built on it"
+      },
+      "ARIES_PLAN_MEMORY": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "relevant remembered facts are injected into planning"
+      },
+      "ARIES_ROUTER_ABSTAIN": {
+        "on": true,
+        "default": true,
+        "source": "environment",
+        "governs": "the router may answer ASK or OUT_OF_SCOPE rather than choosing the nearest action; off restores the pre-2026-10-03 instruction to pick the nearest one regardless"
+      },
+      "ARIES_STATE_SNAPSHOT": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "the planner is given the current desktop state before it plans"
+      },
+      "ARIES_TILE_HIDPI": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "desktop.tile reads the monitor's scale factor from Mutter and expects the device-pixel-aligned rectangle, so a correct tile on a fractionally scaled display is not reported unverified"
+      },
+      "ARIES_TRACE_FEWSHOT": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "similar past successful plans are offered to the planner"
+      },
+      "ARIES_TYPE_STRICT": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "input.type_text refuses any case that would silently lose characters — a NUL, a filtered control character, a line break into a single-line control, a rejected or partially landed write — instead of returning a success carrying landed=false"
+      }
+    }
+  },
+  "settings": {
+    "intelligence.local_confidence_threshold": "0.82",
+    "intelligence.local_model": "qwen2.5:7b",
+    "workspace.agent_demo_directory": "~/Documents/ARIES-Demo",
+    "workspace.controlled_browser": "False"
+  },
+  "results": [
+    {
+      "id": "act-en-001",
+      "klass": "actionable",
+      "utterance": "launch firefox",
+      "intent": "OPEN_APP",
+      "tool": "desktop.launch",
+      "confidence": 1.0,
+      "complexity": "simple",
+      "level": "code",
+      "source": "rule",
+      "requires_cloud": false,
+      "reason": "Existing validated deterministic command mapping",
+      "seconds": 0.017
+    },
+    {
+      "id": "act-en-002",
+      "klass": "actionable",
+      "utterance": "can you open gedit for me",
+      "intent": "FILE_ACTION",
+      "tool": "workspace",
+      "confidence": 1.0,
+      "complexity": "simple",
+      "level": "code",
+      "source": "rule",
+      "requires_cloud": false,
+      "reason": "Existing validated deterministic command mapping",
+      "seconds": 0.002
+    },
+    {
+      "id": "act-en-003",
+      "klass": "actionable",
+      "utterance": "bring up the calculator",
+      "intent": "OPEN_APP",
+      "tool": "none",
+      "confidence": 1.0,
+      "complexity": "moderate",
+      "level": "local",
+      "source": "local",
+      "requires_cloud": false,
+      "reason": "The request is to launch a specific application (calculator).",
+      "seconds": 1.33
+    },
+    {
+      "id": "act-en-004",
+      "klass": "actionable",
+      "utterance": "start the text editor",
+      "intent": "OPEN_APP",
+      "tool": "none",
+      "confidence": 1.0,
+      "complexity": "moderate",
+      "level": "local",
+      "source": "local",
+      "requires_cloud": false,
+      "reason": "The request is to launch a specific application (text editor).",
+      "seconds": 0.853
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "run": "20260917T205349Z-bb1a48",
+  "mode": "live local model",
+  "cases": [
+    {
+      "scenario": "file-workflow",
+      "goal": "Create a file called aries-m14-test.txt in /home/stamenovmartin/Documents/ARIES-Demo/20260917T205349Z-bb1a48 containing:\nARIES M14 verified execution\nThen read it back.",
+      "passed": true,
+      "task_id": "68a9a1ea02eb49009f70b5420f237689",
+      "approvals": [
+        {
+          "step_id": "645171c90ff54175b02200a800b9a622",
+          "capability": "file.write",
+          "arguments": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T205349Z-bb1a48/aries-m14-test.txt",
+            "content": "ARIES M14 verified execution"
+          }
+        }
+      ],
+      "task_state": "done",
+      "steps": 2,
+      "planner_calls": 3,
+      "metrics": {
+        "planner_calls": 3,
+        "number_of_steps": 2,
+        "execution_time": 0.0796,
+        "planner_time": 6.875363220999134,
+        "capability_failures": 0,
+        "verification_failures": 0,
+        "retries": 0,
+        "invalid_decisions": 0,
+        "wrong_capability_selections": 0,
+        "input_tokens": 11211,
+        "output_tokens": 234,
+        "total_tokens": 11445,
+        "token_measurement_complete": true,
+        "estimated_input_tokens": 8721,
+        "estimated_output_tokens": 130,
+        "task_final_status": "done",
+        "wall_seconds": 7.052999999999999,
+        "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+      },
+      "local_model_observed": true,
+      "seconds": 10.243
+    },
+    {
+      "scenario": "system-inspection",
+      "goal": "Check disk usage and report which filesystem has the highest percentage used.",
+      "passed": true,
+      "task_id": "84ea04d18e554a51a5efe9b8f4d84938",
+      "task_state": "done",
+      "steps": 1,
+      "planner_calls": 2,
+      "metrics": {
+        "planner_calls": 2,
+        "number_of_steps": 1,
+        "execution_time": 0.0183,
+        "planner_time": 2.114922713000851,
+        "capability_failures": 0,
+        "verification_failures": 0,
+        "retries": 0,
+        "invalid_decisions": 0,
+        "wrong_capability_selections": 0,
+        "input_tokens": 5857,
+        "output_tokens": 70,
+        "total_tokens": 5927,
+        "token_measurement_complete": true,
+        "estimated_input_tokens": 5141,
+        "estimated_output_tokens": 41,
+        "task_final_status": "done",
+        "wall_seconds": 2.185,
+        "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+      },
+      "local_model_observed": true,
+      "seconds": 4.67
+    },
+    {
+      "scenario": "negative-control",
+      "goal": "Read /this/path/does/not/exist/aries.txt",
+      "passed": true,
+      "task_id": "b37dff0f908c4680b85364f2b0fb1b84",
+      "task_state": "failed",
+      "steps": 1,
+      "planner_calls": 2,
+      "metrics": {
+        "planner_calls": 2,
+        "number_of_steps": 1,
+        "execution_time": 0.0121,
+        "planner_time": 2.1366927130002296,
+        "capability_failures": 1,
+        "verification_failures": 0,
+        "retries": 0,
+        "invalid_decisions": 0,
+        "wrong_capability_selections": 0,
+        "input_tokens": 5617,
+        "output_tokens": 77,
+        "total_tokens": 5694,
+        "token_measurement_complete": true,
+        "estimated_input_tokens": 5051,
+        "estimated_output_tokens": 62,
+        "task_final_status": "failed",
+        "wall_seconds": 2.207,
+        "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+      },
+      "local_model_observed": true,
+      "seconds": 4.108
+    }
+  ],
+  "excluded": [],
+  "commit": "c1adb8041e2a1bd3acd1efd5f300a09a2b968967",
+  "dirty": true,
+  "source_sha256": "0459dac21da3e7ffc57fa9ea850e74f20ab2b91bfe63b11f88f79127c108cb3a",
+  "scope": "Engineering acceptance, not a held-out model benchmark; every attempt retained.",
+  "readiness_attempts": 1,
+  "passed": 3,
+  "total": 3
+}

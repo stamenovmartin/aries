@@ -1,0 +1,57 @@
+[Unit]
+Description=ARIES core — API, scheduler, automations dispatcher
+Documentation=file://%h/aries/docs/RUNTIME.md
+PartOf=aries.target
+Before=aries.target
+Wants=aries-local-model.service
+After=aries-local-model.service
+
+# The start limit belongs to the UNIT, not the service. Five failures within five
+# minutes and systemd gives up, so a genuine fault ends as a stopped service
+# rather than an endless restart loop.
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+# Deliberately no network dependency. ARIES tolerates being offline by design:
+# a source that cannot be fetched is recorded as a source failure, its health
+# degrades, and the circuit breaker pauses it. Waiting for the network would
+# delay the health monitor and the brief, which need no network at all.
+
+[Service]
+Type=exec
+WorkingDirectory=%h/aries
+
+# Absolute, because a service has no shell and no cwd assumptions.
+Environment=PYTHONPATH=%h/aries/vendor/agentic-core:%h/aries/vendor:%h/aries
+Environment=DATABASE_URL=sqlite+aiosqlite:///%h/aries/var/aries.db
+Environment=DATA_DIR=%h/aries/var
+Environment=PYTHONUNBUFFERED=1
+# The user manager starts this before the desktop session imports its PATH, so
+# at boot ~/.local/bin was missing and every "show the result" failed with
+# "aries-ui is not installed" until the service happened to be restarted.
+Environment=PATH=%h/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+# Optional: anything the user has configured wins over the defaults above.
+EnvironmentFile=-%h/aries/.env
+
+ExecStart=%h/aries/.venv/bin/python -m uvicorn aries.api.app:app \
+          --host 127.0.0.1 --port 8000 --log-level info
+
+# Safe restart policy: come back from a crash, but never spin.
+# Five failures inside five minutes and systemd stops trying, so a genuine fault
+# surfaces as a stopped service rather than as a machine burning CPU all night.
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=60
+TimeoutStopSec=20
+
+# SIGINT, because uvicorn treats it as a graceful shutdown: it stops accepting,
+# lets the lifespan run, and the lifespan stops every worker and disposes the
+# database engine. SIGTERM would also work; SIGINT is what uvicorn documents.
+KillSignal=SIGINT
+KillMode=mixed
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=aries.target

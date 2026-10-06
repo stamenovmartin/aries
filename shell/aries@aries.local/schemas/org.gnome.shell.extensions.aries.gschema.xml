@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The ARIES shell keeps its preferences in ARIES, not here. This schema exists
+  for exactly one reason: Mutter accepts a global keybinding only from a
+  GSettings key, so a shortcut cannot be registered from a value held anywhere
+  else. The VALUE is still ARIES's — `shell.command_shortcut` is written into
+  this key at startup — so there remains one place a person changes it.
+-->
+<schemalist gettext-domain="aries">
+  <schema id="org.gnome.shell.extensions.aries" path="/org/gnome/shell/extensions/aries/">
+    <key name="command-bar" type="as">
+      <default><![CDATA[['<Super>space']]]></default>
+      <summary>Open the ARIES command bar</summary>
+      <description>Mirrored from the ARIES setting shell.command_shortcut.</description>
+    </key>
+  </schema>
+</schemalist>

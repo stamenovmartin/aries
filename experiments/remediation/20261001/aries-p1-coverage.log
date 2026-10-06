@@ -1,0 +1,22 @@
+--- test_a_nested_verification_is_invisible_to_the_bucket
+PASS  a verdict nested in result.verification is counted as unverified
+PASS  only the lifted verdict is counted as verified
+PASS  so coverage is 1 of 3 while 3 of 3 were actually checked
+SKIP  capabilities.verdict() is not applied yet — see experiments/verification/analysis.md, patch P1
+--- test_a_verifier_with_no_failure_mode_is_declared
+PASS  no undeclared verifier that cannot return met=False: []
+PASS  the declared list has no stale entries: []
+      11 of 58 verifiers have no failure mode
+--- test_every_registered_capability_has_a_verifier
+PASS  no registered capability is missing a verifier
+PASS  and there are capabilities to check
+--- test_every_spoken_capability_has_a_verification_decision
+PASS  every catalogue capability is declared verified or unverified-with-a-reason: []
+PASS  and nothing is declared that is no longer in the catalogue: []
+PASS  the two sets do not overlap
+PASS  every unverified capability carries a reason
+      37 of 54 spoken capabilities attach a verification
+--- test_research_never_reaches_the_capability_executor
+PASS  a research action is routed by kind, not as a capability step
+PASS  and execute() has no research branch
+ALL PASSED

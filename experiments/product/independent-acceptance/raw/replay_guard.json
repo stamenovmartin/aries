@@ -1,0 +1,251 @@
+{
+  "claim": "F-05 — the replay guard has no cap.effect term, so a mutating step that timed out may be repeated while its effects are uncertain",
+  "method": "executed: the predicate from agent.py:367-368 copied verbatim and evaluated against synthetic steps. No agent run, no database, no capability executed.",
+  "timeout_classification": {
+    "error_type": "TimeoutError",
+    "code": "TRANSIENT",
+    "message": "capability timed out",
+    "retryable": true
+  },
+  "mutating_capabilities_examined": 29,
+  "repeat_after_timeout_allowed": 29,
+  "repeat_after_timeout_allowed_without_approval": 17,
+  "guard_does_work_for": {
+    "non_retryable_errors": 29,
+    "already_verified_steps": 29
+  },
+  "rows": [
+    {
+      "capability": "browser.back",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "browser.click",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "browser.forward",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "browser.navigate",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "browser.open",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "browser.scroll",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "browser.search",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "browser.type",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "desktop.focus",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "desktop.launch",
+      "effect": "open",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "desktop.maximize",
+      "effect": "desktop",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "desktop.minimize",
+      "effect": "desktop",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "desktop.move",
+      "effect": "desktop",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "desktop.resize",
+      "effect": "desktop",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "desktop.tile",
+      "effect": "desktop",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "desktop.unmaximize",
+      "effect": "desktop",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "file.write",
+      "effect": "create",
+      "requires_approval": false,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "browser.download",
+      "effect": "file_mutation",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "desktop.close",
+      "effect": "desktop",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "display.set_brightness",
+      "effect": "display",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "file.copy",
+      "effect": "file_mutation",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "file.edit",
+      "effect": "file_mutation",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "file.move",
+      "effect": "file_mutation",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "file.rename",
+      "effect": "file_mutation",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "input.clipboard_write",
+      "effect": "input",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "input.type_text",
+      "effect": "input",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "network.wifi_connect",
+      "effect": "network",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "notification.send",
+      "effect": "notify",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    },
+    {
+      "capability": "system.service_control",
+      "effect": "service",
+      "requires_approval": true,
+      "repeat_after_timeout_refused": false,
+      "repeat_after_nonretryable_refused": true,
+      "repeat_after_verified_refused": true
+    }
+  ]
+}

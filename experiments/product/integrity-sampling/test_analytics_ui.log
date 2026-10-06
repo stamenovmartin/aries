@@ -1,0 +1,10 @@
+PASS  empty windows never become 0% or 100% success
+PASS  missing rates remain unavailable
+PASS  unexpected missing-rate values do not crash
+PASS  small samples retain denominator and confidence interval
+PASS  latency uses quantiles and sample count
+PASS  partial and truncated measurements remain visible
+PASS  planner failures are shown with their denominator
+PASS  unknown cost is never displayed as free
+PASS  selected period bounds the existing read-only endpoint
+ALL PASSED

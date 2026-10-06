@@ -1,0 +1,189 @@
+analytics metric exploding failed: deliberate
+--- test_a_capability_that_always_fails_is_ranked_before_one_that_works
+PASS  the broken capability is listed first
+PASS  its landed rate is 0 of 4 with an honest upper bound
+PASS  the working one is not called certain on eight observations
+--- test_a_perfect_score_from_three_observations_is_not_reported_as_perfect
+PASS  the point estimate is still 1.0 — it is displayed, not decided on
+PASS  but the lower bound is well below it
+PASS  and the interval is explicitly not trusted
+PASS  300 of 300 narrows to something worth acting on
+PASS  and is marked confident
+--- test_a_registered_automation_that_stopped_running_is_still_listed
+PASS  an automation with no runs is listed rather than omitted
+PASS  and reports no success rate at all
+--- test_absent_and_rate_refuse_to_manufacture_a_number
+PASS  absent() reports n=0 with a reason
+PASS  a rate over zero trials is None, not 0.0
+PASS  and it says why
+--- test_accepted_is_never_counted_as_verified
+PASS  an independently verified step is `verified`
+PASS  a legacy 'done' is `accepted`, not `verified`
+PASS  'unconfirmed' keeps its own bucket
+PASS  a policy hold is `withheld`, not a failure
+PASS  a contradicted verification counts as failed
+PASS  a step with no status at all is named, not swept into pending
+PASS  nothing fell through to `unclassified`
+PASS  coverage counts only apparently-successful steps
+PASS  the unverified remainder is stated outright
+PASS  the verifier's one catch is counted
+PASS  against the steps that actually reached a verifier
+PASS  and attributed to the capability
+--- test_an_empty_distribution_reports_absence_not_a_row_of_nulls
+PASS  no samples means n=0 and a reason
+PASS  no percentile is invented
+--- test_cadence_is_not_characterised_from_too_few_gaps
+PASS  the median gap is used, not the mean
+PASS  an automation with no declared interval gets no verdict
+PASS  and says it has no interval to compare against
+PASS  a few gaps produce a ratio
+PASS  but no verdict from a window that clipped the pattern
+PASS  and a reason saying why
+PASS  enough gaps earn a reading
+--- test_cancelled_work_is_neither_a_success_nor_a_failure
+PASS  all eleven goals are counted
+PASS  cancelled and interrupted share one bucket
+PASS  a proposal awaiting a person is `withheld`
+PASS  the denominator excludes both
+PASS  partial counts against success, not for it
+PASS  and the denominator explains itself
+PASS  an unknown state would be reported rather than guessed at
+--- test_contradictions_say_nothing_when_no_verifier_ran
+PASS  a window with no verification reports absence, not a clean 0%
+FAIL  and says the engine that verifies did not run
+--- test_every_metric_reports_nothing_rather_than_zero_on_an_empty_database
+PASS  task_outcomes reports n=0 on an empty database
+PASS  task_outcomes gives a reason for the emptiness
+PASS  task_outcomes invents no rate from no data
+PASS  task_outcomes still reports what it cost
+PASS  task_outcomes left no transaction open
+PASS  engine_task_outcomes reports n=0 on an empty database
+PASS  engine_task_outcomes gives a reason for the emptiness
+PASS  engine_task_outcomes invents no rate from no data
+PASS  engine_task_outcomes still reports what it cost
+PASS  engine_task_outcomes left no transaction open
+PASS  latency reports n=0 on an empty database
+PASS  latency gives a reason for the emptiness
+PASS  latency invents no rate from no data
+PASS  latency still reports what it cost
+PASS  latency left no transaction open
+PASS  goal_elapsed reports n=0 on an empty database
+PASS  goal_elapsed gives a reason for the emptiness
+PASS  goal_elapsed invents no rate from no data
+PASS  goal_elapsed still reports what it cost
+PASS  goal_elapsed left no transaction open
+PASS  automation_health reports n=0 on an empty database
+PASS  automation_health gives a reason for the emptiness
+PASS  automation_health invents no rate from no data
+PASS  automation_health still reports what it cost
+PASS  automation_health left no transaction open
+PASS  model_usage reports n=0 on an empty database
+PASS  model_usage gives a reason for the emptiness
+PASS  model_usage invents no rate from no data
+PASS  model_usage still reports what it cost
+PASS  model_usage left no transaction open
+PASS  attention reports n=0 on an empty database
+PASS  attention gives a reason for the emptiness
+PASS  attention invents no rate from no data
+PASS  attention still reports what it cost
+PASS  attention left no transaction open
+PASS  locking_failures reports n=0 on an empty database
+PASS  locking_failures gives a reason for the emptiness
+PASS  locking_failures invents no rate from no data
+PASS  locking_failures still reports what it cost
+PASS  locking_failures left no transaction open
+PASS  outcomes_by_capability reports n=0 on an empty database
+PASS  outcomes_by_capability gives a reason for the emptiness
+PASS  outcomes_by_capability invents no rate from no data
+PASS  outcomes_by_capability still reports what it cost
+PASS  outcomes_by_capability left no transaction open
+PASS  verification_honesty reports n=0 on an empty database
+PASS  verification_honesty gives a reason for the emptiness
+PASS  verification_honesty invents no rate from no data
+PASS  verification_honesty still reports what it cost
+PASS  verification_honesty left no transaction open
+PASS  verification_contradictions reports n=0 on an empty database
+PASS  verification_contradictions gives a reason for the emptiness
+PASS  verification_contradictions invents no rate from no data
+PASS  verification_contradictions still reports what it cost
+PASS  verification_contradictions left no transaction open
+PASS  failure_shapes reports n=0 on an empty database
+PASS  failure_shapes gives a reason for the emptiness
+PASS  failure_shapes invents no rate from no data
+PASS  failure_shapes still reports what it cost
+PASS  failure_shapes left no transaction open
+PASS  capability_usage reports n=0 on an empty database
+PASS  capability_usage gives a reason for the emptiness
+PASS  capability_usage invents no rate from no data
+PASS  capability_usage still reports what it cost
+PASS  capability_usage left no transaction open
+PASS  approval_discipline reports n=0 on an empty database
+PASS  approval_discipline gives a reason for the emptiness
+PASS  approval_discipline invents no rate from no data
+PASS  approval_discipline still reports what it cost
+PASS  approval_discipline left no transaction open
+--- test_every_rate_in_a_real_dashboard_carries_its_denominator
+PASS  5 of 6 is reported with an interval, not as a bare 83%
+PASS  the denominator is named in the payload
+PASS  six observations are not called confident
+--- test_integrity_metrics_disclose_caps_even_when_sample_has_no_steps
+PASS  empty sample retains truthful population and scan size
+PASS  nonempty sample is explicitly capped
+PASS  sampling disclosure names the scope
+PASS  verified label is not sold as independent proof
+PASS  uncapped window reports actual full goal count
+PASS  empty sample retains truthful population and scan size
+PASS  nonempty sample is explicitly capped
+PASS  sampling disclosure names the scope
+PASS  verified label is not sold as independent proof
+PASS  uncapped window reports actual full goal count
+--- test_lock_failures_are_counted_per_hour_or_reported_absent
+PASS  a clean window says so rather than reporting zero incidents as health
+PASS  lock failures are counted
+PASS  an unrelated failure is not swept in
+PASS  and they are grouped by hour
+--- test_one_broken_metric_does_not_blank_the_dashboard
+PASS  the failure is named
+PASS  with the exception type kept rather than swallowed
+PASS  and the other metrics still reported
+PASS  the session is usable afterwards
+--- test_percentiles_are_computed_in_sql_and_match_a_hand_sorted_list
+PASS  n is right
+PASS  p50 is the value at ceil(0.5n)
+PASS  p90 is the value at ceil(0.9n)
+PASS  min and max are the ends
+PASS  the mean is reported too
+PASS  and the gap between mean and median is named
+--- test_the_cheap_subset_never_parses_the_expensive_column
+PASS  the cheap dashboard is a strict subset
+PASS  and it is flagged as partial
+PASS  no cheap metric names result_json as its source
+--- test_the_dashboard_runs_on_an_empty_database_and_says_so
+PASS  no metric raised
+PASS  every metric is present
+PASS  the dashboard reports its own total wall time
+PASS  every metric reported its own wall time
+PASS  an empty database produces no rate anywhere in the dashboard
+--- test_the_goal_scan_cap_is_reported_as_a_sample_not_as_a_total
+PASS  only the capped number of goals was parsed
+PASS  the window's real size is reported alongside
+PASS  and the result is flagged as truncated
+PASS  with a sentence saying it is a sample
+PASS  an uncapped window is not flagged
+--- test_the_whole_dashboard_writes_nothing
+PASS  no transaction is left open after the dashboard
+PASS  no row was added or removed by any metric
+PASS  no metric raised
+--- test_typed_error_codes_are_surfaced_with_what_aries_does_about_them
+PASS  the codes are counted
+PASS  and attributed to a capability
+PASS  each code carries what the router decided to do about it
+PASS  the engine's lowercase taxonomy is reported separately
+PASS  and the two vocabularies are not merged
+--- test_windows_clamp_rather_than_trusting_the_caller
+PASS  a decade is clamped to the ceiling
+PASS  a zero window becomes the minimum
+PASS  an unbounded goal scan is clamped
+PASS  a negative goal scan becomes the minimum
+PASS  the cutoff is a sortable SQLite datetime string
+FAILURES

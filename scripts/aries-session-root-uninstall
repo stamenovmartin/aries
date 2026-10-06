@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# The privileged half of the ARIES session uninstall. Removes exactly what
+# aries-session-root wrote, and nothing that belongs to a package.
+set -euo pipefail
+[ "$(id -u)" = "0" ] || { echo "must run as root" >&2; exit 1; }
+UUID="aries@aries.local"
+
+rm -f /usr/share/wayland-sessions/aries.desktop \
+      /usr/local/share/gnome-session/sessions/aries.session \
+      /usr/local/share/gnome-shell/modes/aries.json \
+      /etc/systemd/user/gnome-session@aries.target.d/aries.session.conf
+rm -rf "/usr/local/share/gnome-shell/extensions/$UUID"
+rmdir --ignore-fail-on-non-empty \
+  /etc/systemd/user/gnome-session@aries.target.d \
+  /usr/local/share/gnome-shell/modes \
+  /usr/local/share/gnome-shell/extensions \
+  /usr/local/share/gnome-session/sessions 2>/dev/null || true
+echo "removed the ARIES session"

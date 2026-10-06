@@ -1,0 +1,9 @@
+{
+  "problem": "Corrections in the development conversation were not available to later ARIES plans; implementation experience needed separate provenance.",
+  "change": "Explicit Remember for future tasks feedback persists in Learning. Supported rules apply settings, other rules guide bounded planning. Implementation notes store problem/change/validation/limitations without mutating settings. Planner consumes user rules separately from engineering lessons; explicit user instructions take priority. A local recording script and AGENTS.md preserve the recording workflow.",
+  "validation": [
+    "Regression tests verify explicit rule retrieval, unrelated conversation exclusion, planner delivery, no permission expansion, and no setting action from implementation-note text. tests/test_window_lifecycle.py",
+    "User feedback saved through live API; current desktop window observation available."
+  ],
+  "limitations": "Preference and experience memory is not model-weight reinforcement learning. No invented reward labels, no automatic training, no claim every stored lesson is an independently reverified truth. Context uses latest 12 explicit rules and 6 implementation lessons."
+}

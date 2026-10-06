@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Reproducible installed-system demonstration with inspectable evidence.
+set -euo pipefail
+cd "$(dirname "$(readlink -f "$0")")/.."
+exec .venv/bin/python experiments/workspace/demo.py "$@"

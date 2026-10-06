@@ -1,0 +1,795 @@
+{
+  "id": "5d6f00f20bb246d99a0ac9c035bcc36b",
+  "request": "Read /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt and read /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt",
+  "state": "done",
+  "updated_at": "2026-10-06T12:09:53.157996",
+  "created_at": "2026-10-06T12:09:34.655219",
+  "steps": [
+    {
+      "step_id": "3df28b476622484787026ee74b41ea8f",
+      "task_id": "5d6f00f20bb246d99a0ac9c035bcc36b",
+      "step_index": 0,
+      "kind": "capability",
+      "request": "file.read",
+      "planner_decision": {
+        "action": "execute",
+        "capability": "file.read",
+        "arguments": {
+          "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt"
+        },
+        "reason": "",
+        "summary": "",
+        "evidence_refs": []
+      },
+      "capability": "file.read",
+      "args": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt"
+      },
+      "started_at": "2026-10-06T12:09:43.998869+00:00",
+      "finished_at": "2026-10-06T12:09:44.023700+00:00",
+      "execution_status": "observed",
+      "verification_status": "verified",
+      "observation": {
+        "verification": {
+          "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt",
+          "size": 78,
+          "sha256": "65a572705019210c3fbc2205b34c03974c18e7390ed13c76491f38c5eda26d02",
+          "inode": 19820313,
+          "observed_at": "2026-10-06T12:09:44.019419+00:00",
+          "text": "Synthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa"
+        },
+        "evidence_id": "b71919e69ca649a88a5615260cba3bf1"
+      },
+      "error": null,
+      "evidence_refs": [
+        "b71919e69ca649a88a5615260cba3bf1"
+      ],
+      "model_usage": {
+        "measured": {
+          "input_tokens": 2896,
+          "output_tokens": 81,
+          "total_tokens": 2977
+        },
+        "native": {
+          "data_classes": [
+            "instruction",
+            "personal",
+            "user_request"
+          ],
+          "egress_blocked_reason": "Payload contains local-only or unclassified data",
+          "usage_details": null,
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 2896,
+          "eval_count": 81,
+          "provider": "ollama",
+          "model": "qwen2.5:7b",
+          "execution_level": "local"
+        },
+        "context": {
+          "estimated_tokens": 610,
+          "method": "character-count / 4 heuristic; not tokenizer measurement"
+        },
+        "estimated": {
+          "input_tokens": 2317,
+          "output_tokens": 52,
+          "method": "character-count / 4 heuristic; not tokenizer measurement"
+        }
+      },
+      "state": "verified",
+      "transitions": [
+        {
+          "state": "planned",
+          "timestamp": "2026-10-06T12:09:43.994247+00:00"
+        },
+        {
+          "state": "executing",
+          "timestamp": "2026-10-06T12:09:43.998877+00:00"
+        },
+        {
+          "state": "observed",
+          "timestamp": "2026-10-06T12:09:44.010691+00:00"
+        },
+        {
+          "state": "verified",
+          "timestamp": "2026-10-06T12:09:44.023331+00:00"
+        }
+      ],
+      "execution_result": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt",
+        "size": 78,
+        "sha256": "65a572705019210c3fbc2205b34c03974c18e7390ed13c76491f38c5eda26d02",
+        "inode": 19820313,
+        "observed_at": "2026-10-06T12:09:44.006576+00:00",
+        "text": "Synthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa"
+      },
+      "observation_ref": "d5edeabe538d48728494f851ff98a6c6",
+      "verification": {
+        "met": true,
+        "type": "file_state",
+        "data": {
+          "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt",
+          "size": 78,
+          "sha256": "65a572705019210c3fbc2205b34c03974c18e7390ed13c76491f38c5eda26d02",
+          "inode": 19820313,
+          "observed_at": "2026-10-06T12:09:44.019419+00:00",
+          "text": "Synthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa"
+        }
+      },
+      "executor_observation": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt",
+        "size": 78,
+        "sha256": "65a572705019210c3fbc2205b34c03974c18e7390ed13c76491f38c5eda26d02",
+        "inode": 19820313,
+        "observed_at": "2026-10-06T12:09:44.006576+00:00",
+        "text": "Synthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa"
+      },
+      "seconds": 0.027,
+      "result": {
+        "state": "done",
+        "summary": "Independently verified",
+        "elapsed_seconds": 0.027
+      }
+    },
+    {
+      "step_id": "7e5462ae5f7f415ca9a270938aa2ead2",
+      "task_id": "5d6f00f20bb246d99a0ac9c035bcc36b",
+      "step_index": 1,
+      "kind": "capability",
+      "request": "file.read",
+      "planner_decision": {
+        "action": "execute",
+        "capability": "file.read",
+        "arguments": {
+          "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt"
+        },
+        "reason": "",
+        "summary": "",
+        "evidence_refs": []
+      },
+      "capability": "file.read",
+      "args": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt"
+      },
+      "started_at": "2026-10-06T12:09:53.019223+00:00",
+      "finished_at": "2026-10-06T12:09:53.081754+00:00",
+      "execution_status": "observed",
+      "verification_status": "verified",
+      "observation": {
+        "verification": {
+          "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt",
+          "size": 78,
+          "sha256": "03368341d749ad1e5821fe826069d58a029d11b0df5d1bc280e487f8a133abf6",
+          "inode": 19820314,
+          "observed_at": "2026-10-06T12:09:53.071156+00:00",
+          "text": "Synthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa"
+        },
+        "evidence_id": "20ec17c25cb7402aadd7c9d74b87017b"
+      },
+      "error": null,
+      "evidence_refs": [
+        "20ec17c25cb7402aadd7c9d74b87017b"
+      ],
+      "model_usage": {
+        "measured": {
+          "input_tokens": 3291,
+          "output_tokens": 81,
+          "total_tokens": 3372
+        },
+        "native": {
+          "data_classes": [
+            "file_content",
+            "instruction",
+            "personal",
+            "user_request"
+          ],
+          "egress_blocked_reason": "Payload contains local-only or unclassified data",
+          "usage_details": null,
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 3291,
+          "eval_count": 81,
+          "provider": "ollama",
+          "model": "qwen2.5:7b",
+          "execution_level": "local"
+        },
+        "context": {
+          "estimated_tokens": 610,
+          "method": "character-count / 4 heuristic; not tokenizer measurement"
+        },
+        "estimated": {
+          "input_tokens": 2481,
+          "output_tokens": 52,
+          "method": "character-count / 4 heuristic; not tokenizer measurement"
+        }
+      },
+      "state": "verified",
+      "transitions": [
+        {
+          "state": "planned",
+          "timestamp": "2026-10-06T12:09:53.007025+00:00"
+        },
+        {
+          "state": "executing",
+          "timestamp": "2026-10-06T12:09:53.019234+00:00"
+        },
+        {
+          "state": "observed",
+          "timestamp": "2026-10-06T12:09:53.048554+00:00"
+        },
+        {
+          "state": "verified",
+          "timestamp": "2026-10-06T12:09:53.077589+00:00"
+        }
+      ],
+      "execution_result": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt",
+        "size": 78,
+        "sha256": "03368341d749ad1e5821fe826069d58a029d11b0df5d1bc280e487f8a133abf6",
+        "inode": 19820314,
+        "observed_at": "2026-10-06T12:09:53.041169+00:00",
+        "text": "Synthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa"
+      },
+      "observation_ref": "90743d27e4cc4d3a83b3f5a6122c8767",
+      "verification": {
+        "met": true,
+        "type": "file_state",
+        "data": {
+          "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt",
+          "size": 78,
+          "sha256": "03368341d749ad1e5821fe826069d58a029d11b0df5d1bc280e487f8a133abf6",
+          "inode": 19820314,
+          "observed_at": "2026-10-06T12:09:53.071156+00:00",
+          "text": "Synthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa"
+        }
+      },
+      "executor_observation": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt",
+        "size": 78,
+        "sha256": "03368341d749ad1e5821fe826069d58a029d11b0df5d1bc280e487f8a133abf6",
+        "inode": 19820314,
+        "observed_at": "2026-10-06T12:09:53.041169+00:00",
+        "text": "Synthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa"
+      },
+      "seconds": 0.0649,
+      "result": {
+        "state": "done",
+        "summary": "Independently verified",
+        "elapsed_seconds": 0.0649
+      }
+    }
+  ],
+  "cards": [
+    {
+      "title": "Verified goal result",
+      "text": "Verified file: /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt\nSynthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa\n\nVerified file: /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt\nSynthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa",
+      "evidence": "87dac7955f964e619054d4ed985db0d3, b58f3f21e05f4675ab0e60510f419614"
+    }
+  ],
+  "gaps": [],
+  "agent_engine": "m14",
+  "origin": "ui",
+  "context": [
+    {
+      "id": "0e82bf44059c400588406347c4441286"
+    },
+    {
+      "id": "d267221f8c5b4624b16e7eabcae188a0"
+    },
+    {
+      "id": "13d064b408a2425fa42aad3312c9c181"
+    },
+    {
+      "id": "666a00f8f0434b81ad920ccb9ef95b49"
+    },
+    {
+      "id": "548d995aa7284517919b39156eb67c49"
+    },
+    {
+      "id": "17a837cc1ef04f1b89bd8cbbac812cd2"
+    },
+    {
+      "id": "811d888bc00c42aab6e4a21362a7eb90"
+    }
+  ],
+  "conclusions": [
+    {
+      "id": "d449aba7168c4212953f8f4fd27c6ff5",
+      "confidence": 0.9992
+    }
+  ],
+  "related": [
+    {
+      "id": "3b3f530d8f6941849c455ec29954635a",
+      "request": "Read /home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/a.txt and read /home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/b.txt"
+    }
+  ],
+  "collected_at": "2026-10-06T12:09:36.897371",
+  "context_packet": {
+    "items": [
+      {
+        "id": "m:0e82bf44059c400588406347c4441286",
+        "source": "memory",
+        "text": "Read /home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/a.txt and read /home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/b.txt",
+        "data_class": "personal",
+        "authority": "user_statement",
+        "observed_at": 0.0,
+        "expires_at": null,
+        "relevance": 1.9799999966742958,
+        "sha256": "f37efdc96642dc3f496deeabc94340a2f8520ac40d1ac91864be4e76a9db825c"
+      },
+      {
+        "id": "m:d267221f8c5b4624b16e7eabcae188a0",
+        "source": "memory",
+        "text": "read file /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-07.txt; show the size and sha256 of /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-07.txt",
+        "data_class": "personal",
+        "authority": "user_statement",
+        "observed_at": 0.0,
+        "expires_at": null,
+        "relevance": 1.6894910276552122,
+        "sha256": "067975716910527507611b5a0184a1b5d141b6933367c62787702dafcf615cc3"
+      },
+      {
+        "id": "m:13d064b408a2425fa42aad3312c9c181",
+        "source": "memory",
+        "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Verification-20261001/fixture.txt",
+        "data_class": "personal",
+        "authority": "user_statement",
+        "observed_at": 0.0,
+        "expires_at": null,
+        "relevance": 1.6833573631307037,
+        "sha256": "e28c6bd74c69019d88a1f18b17e5f343d13700ecbae9e37601e34dfcaa02922c"
+      },
+      {
+        "id": "m:666a00f8f0434b81ad920ccb9ef95b49",
+        "source": "memory",
+        "text": "read file /home/stamenovmartin/aries/aries/workspace/capabilities.py",
+        "data_class": "personal",
+        "authority": "user_statement",
+        "observed_at": 0.0,
+        "expires_at": null,
+        "relevance": 1.61915296634033,
+        "sha256": "6602364cee4faa6556ce52b9a87fcf94aa28233bd8c85bcf01f712d14c9366ef"
+      }
+    ],
+    "omitted": [
+      {
+        "id": "c:d449aba7168c4212953f8f4fd27c6ff5",
+        "reason": "duplicate"
+      },
+      {
+        "id": "m:548d995aa7284517919b39156eb67c49",
+        "reason": "budget"
+      },
+      {
+        "id": "m:17a837cc1ef04f1b89bd8cbbac812cd2",
+        "reason": "budget"
+      },
+      {
+        "id": "m:811d888bc00c42aab6e4a21362a7eb90",
+        "reason": "budget"
+      },
+      {
+        "id": "m:bce18a6147424963bc60abbf584c2060",
+        "reason": "budget"
+      },
+      {
+        "id": "m:b3b7249d73da4a6ea99a6631d7b51601",
+        "reason": "budget"
+      },
+      {
+        "id": "m:3ac432a12567455a915549b8a3ef5c03",
+        "reason": "budget"
+      },
+      {
+        "id": "m:f7cd913eef0e4b38a8e06c09d9bbca96",
+        "reason": "budget"
+      }
+    ],
+    "data_classes": [
+      "personal"
+    ],
+    "context_chars": 1715,
+    "estimated_context_tokens": 429,
+    "token_method": "character-count / 4 estimate; not tokenizer measurement",
+    "required_sources": [],
+    "missing_sources": [],
+    "source_status": {}
+  },
+  "evidence": [
+    {
+      "evidence_id": "d5edeabe538d48728494f851ff98a6c6",
+      "type": "execution_observation",
+      "source": "file.read",
+      "timestamp": "2026-10-06T12:09:44.010709+00:00",
+      "step_id": "3df28b476622484787026ee74b41ea8f",
+      "verified": false,
+      "data": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt",
+        "size": 78,
+        "sha256": "65a572705019210c3fbc2205b34c03974c18e7390ed13c76491f38c5eda26d02",
+        "inode": 19820313,
+        "observed_at": "2026-10-06T12:09:44.006576+00:00",
+        "text": "Synthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa"
+      }
+    },
+    {
+      "evidence_id": "b71919e69ca649a88a5615260cba3bf1",
+      "type": "file_state",
+      "source": "file.read",
+      "timestamp": "2026-10-06T12:09:44.023263+00:00",
+      "step_id": "3df28b476622484787026ee74b41ea8f",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt",
+        "size": 78,
+        "sha256": "65a572705019210c3fbc2205b34c03974c18e7390ed13c76491f38c5eda26d02",
+        "inode": 19820313,
+        "observed_at": "2026-10-06T12:09:44.019419+00:00",
+        "text": "Synthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa"
+      }
+    },
+    {
+      "evidence_id": "90743d27e4cc4d3a83b3f5a6122c8767",
+      "type": "execution_observation",
+      "source": "file.read",
+      "timestamp": "2026-10-06T12:09:53.048578+00:00",
+      "step_id": "7e5462ae5f7f415ca9a270938aa2ead2",
+      "verified": false,
+      "data": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt",
+        "size": 78,
+        "sha256": "03368341d749ad1e5821fe826069d58a029d11b0df5d1bc280e487f8a133abf6",
+        "inode": 19820314,
+        "observed_at": "2026-10-06T12:09:53.041169+00:00",
+        "text": "Synthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa"
+      }
+    },
+    {
+      "evidence_id": "20ec17c25cb7402aadd7c9d74b87017b",
+      "type": "file_state",
+      "source": "file.read",
+      "timestamp": "2026-10-06T12:09:53.077525+00:00",
+      "step_id": "7e5462ae5f7f415ca9a270938aa2ead2",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt",
+        "size": 78,
+        "sha256": "03368341d749ad1e5821fe826069d58a029d11b0df5d1bc280e487f8a133abf6",
+        "inode": 19820314,
+        "observed_at": "2026-10-06T12:09:53.071156+00:00",
+        "text": "Synthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa"
+      }
+    },
+    {
+      "evidence_id": "87dac7955f964e619054d4ed985db0d3",
+      "type": "file_state",
+      "source": "file.read",
+      "timestamp": "2026-10-06T12:09:53.123119+00:00",
+      "step_id": "3df28b476622484787026ee74b41ea8f",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt",
+        "size": 78,
+        "sha256": "65a572705019210c3fbc2205b34c03974c18e7390ed13c76491f38c5eda26d02",
+        "inode": 19820313,
+        "observed_at": "2026-10-06T12:09:53.116783+00:00",
+        "text": "Synthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa"
+      }
+    },
+    {
+      "evidence_id": "b58f3f21e05f4675ab0e60510f419614",
+      "type": "file_state",
+      "source": "file.read",
+      "timestamp": "2026-10-06T12:09:53.147371+00:00",
+      "step_id": "7e5462ae5f7f415ca9a270938aa2ead2",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt",
+        "size": 78,
+        "sha256": "03368341d749ad1e5821fe826069d58a029d11b0df5d1bc280e487f8a133abf6",
+        "inode": 19820314,
+        "observed_at": "2026-10-06T12:09:53.140581+00:00",
+        "text": "Synthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa"
+      }
+    }
+  ],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "Read /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt and read /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt",
+    "finished": true,
+    "max_steps": 8,
+    "contract": {
+      "supported": true,
+      "requirements": [
+        {
+          "capability": "file.read",
+          "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt"
+        },
+        {
+          "capability": "file.read",
+          "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt"
+        }
+      ],
+      "answer": "compound_reads",
+      "parts": [
+        {
+          "supported": true,
+          "requirements": [
+            {
+              "capability": "file.read",
+              "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt"
+            }
+          ]
+        },
+        {
+          "supported": true,
+          "requirements": [
+            {
+              "capability": "file.read",
+              "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt"
+            }
+          ]
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-10-06T12:09:37.108078+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2896,
+            "output_tokens": 81,
+            "total_tokens": 2977
+          },
+          "native": {
+            "data_classes": [
+              "instruction",
+              "personal",
+              "user_request"
+            ],
+            "egress_blocked_reason": "Payload contains local-only or unclassified data",
+            "usage_details": null,
+            "reported_cost_usd": null,
+            "estimated_cost_usd": null,
+            "prompt_eval_count": 2896,
+            "eval_count": 81,
+            "provider": "ollama",
+            "model": "qwen2.5:7b",
+            "execution_level": "local"
+          },
+          "context": {
+            "estimated_tokens": 610,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          },
+          "estimated": {
+            "input_tokens": 2317,
+            "output_tokens": 52,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"file.read\",\n  \"arguments\": {\n    \"path\": \"/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt\"\n  }\n}",
+        "decision": {
+          "action": "execute",
+          "capability": "file.read",
+          "arguments": {
+            "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt"
+          },
+          "reason": "",
+          "summary": "",
+          "evidence_refs": []
+        },
+        "seconds": 6.8834
+      },
+      {
+        "index": 1,
+        "timestamp": "2026-10-06T12:09:44.026574+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 3291,
+            "output_tokens": 81,
+            "total_tokens": 3372
+          },
+          "native": {
+            "data_classes": [
+              "file_content",
+              "instruction",
+              "personal",
+              "user_request"
+            ],
+            "egress_blocked_reason": "Payload contains local-only or unclassified data",
+            "usage_details": null,
+            "reported_cost_usd": null,
+            "estimated_cost_usd": null,
+            "prompt_eval_count": 3291,
+            "eval_count": 81,
+            "provider": "ollama",
+            "model": "qwen2.5:7b",
+            "execution_level": "local"
+          },
+          "context": {
+            "estimated_tokens": 610,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          },
+          "estimated": {
+            "input_tokens": 2481,
+            "output_tokens": 52,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\n  \"action\": \"execute\",\n  \"capability\": \"file.read\",\n  \"arguments\": {\n    \"path\": \"/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt\"\n  }\n}",
+        "decision": {
+          "action": "execute",
+          "capability": "file.read",
+          "arguments": {
+            "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt"
+          },
+          "reason": "",
+          "summary": "",
+          "evidence_refs": []
+        },
+        "seconds": 8.9676
+      },
+      {
+        "index": 2,
+        "timestamp": "2026-10-06T12:09:53.091657+00:00",
+        "source": "contract-evidence",
+        "usage": {
+          "model_calls": 0
+        },
+        "valid": true,
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "b71919e69ca649a88a5615260cba3bf1",
+            "20ec17c25cb7402aadd7c9d74b87017b"
+          ]
+        }
+      }
+    ],
+    "context": {
+      "memories": [
+        {
+          "id": "m:0e82bf44059c400588406347c4441286",
+          "source": "memory",
+          "text": "Read /home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/a.txt and read /home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/b.txt",
+          "data_class": "personal",
+          "authority": "user_statement",
+          "observed_at": 0.0,
+          "expires_at": null,
+          "relevance": 1.9799999966742958,
+          "sha256": "f37efdc96642dc3f496deeabc94340a2f8520ac40d1ac91864be4e76a9db825c"
+        },
+        {
+          "id": "m:d267221f8c5b4624b16e7eabcae188a0",
+          "source": "memory",
+          "text": "read file /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-07.txt; show the size and sha256 of /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-07.txt",
+          "data_class": "personal",
+          "authority": "user_statement",
+          "observed_at": 0.0,
+          "expires_at": null,
+          "relevance": 1.6894910276552122,
+          "sha256": "067975716910527507611b5a0184a1b5d141b6933367c62787702dafcf615cc3"
+        },
+        {
+          "id": "m:13d064b408a2425fa42aad3312c9c181",
+          "source": "memory",
+          "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Verification-20261001/fixture.txt",
+          "data_class": "personal",
+          "authority": "user_statement",
+          "observed_at": 0.0,
+          "expires_at": null,
+          "relevance": 1.6833573631307037,
+          "sha256": "e28c6bd74c69019d88a1f18b17e5f343d13700ecbae9e37601e34dfcaa02922c"
+        }
+      ],
+      "context_coverage": {
+        "required_sources": [],
+        "missing_sources": [],
+        "token_method": "character-count / 4 estimate; not tokenizer measurement",
+        "omitted_items": [
+          {
+            "id": "m:666a00f8f0434b81ad920ccb9ef95b49",
+            "source": "memory",
+            "reason": "budget"
+          }
+        ]
+      },
+      "preferences": {
+        "preview": "[{\"id\": 11, \"text\": \"se sto poravas stavaj vo reinforcement learning za ponataka da znae\"}, {\"id\": 10, \"text\": \"sirenjeto na tabov areis ne ide na cel ekran ne mozes da skaliras na cel minimaniziras grdo raboti\"}, {\"id\": 9, \"text\": \"vakvi raboti sto gi kazuvam stavaj gi vo Learning kako tamu da pisuvam i da uci vo pozadina\"}, {\"id\": 8, \"text\": \"mora da znae sto ima otvoreno sto zatvoreno da e svesen\"}, {\"id\": 7, \"text\": \"plus primetiv celo vreme otvara prozori nikad ne zatvara koa ke zavrsi\"}, {\"id\": 6, \"text\": \"za sibear ti rekov neka nema gore neka stoi kako mali ikoni do ar",
+        "truncated": true,
+        "original_chars": 988,
+        "sha256": "58836424f7fa5ed768b730559fc110f63859179aef4c5e97f12ced385cf95e0e"
+      },
+      "omitted_sections": [
+        "reviews",
+        "working_context",
+        "worked_before"
+      ]
+    },
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-10-06T12:09:37.095380+00:00"
+    },
+    "metrics": {
+      "planner_calls": 2,
+      "number_of_steps": 2,
+      "execution_time": 0.0919,
+      "planner_time": 15.851074606000111,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 0,
+      "invalid_decisions": 0,
+      "wrong_capability_selections": 0,
+      "tool_calls": 2,
+      "verifier_calls": 4,
+      "replans": 0,
+      "input_tokens": 6187,
+      "output_tokens": 162,
+      "total_tokens": 6349,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 4798,
+      "estimated_output_tokens": 104,
+      "task_final_status": "done",
+      "estimated_context_tokens": 1220,
+      "automatic_finish_proposals": 1,
+      "resource_budget": {
+        "root_id": "5d6f00f20bb246d99a0ac9c035bcc36b",
+        "max_calls": 32,
+        "max_tokens": 250000,
+        "max_tools": 64,
+        "max_cost_micros": 0,
+        "deadline": 1791290376.9004395,
+        "calls": 2,
+        "tokens": 6349,
+        "tools": 6,
+        "cost_micros": 0,
+        "held": false,
+        "pending": 0,
+        "unknown": 0,
+        "token_policy": "conservative admission estimate; measured overrun holds root",
+        "unpriced_cost_is_unknown": true
+      },
+      "wall_seconds": 16.242,
+      "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+    },
+    "context_data_classes": [
+      "personal"
+    ],
+    "automatic_finish_step_count": 2,
+    "completion_checks": [
+      {
+        "at": "2026-10-06T12:09:53.151834+00:00",
+        "met": true,
+        "reason": "Verified file: /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt\nSynthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa\n\nVerified file: /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt\nSynthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa"
+      }
+    ],
+    "summary": "Verified file: /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/a.txt\nSynthetic learning/origin release smoke a.txt d1196489db2f40e9b7b29e2b79f909aa\n\nVerified file: /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/b.txt\nSynthetic learning/origin release smoke b.txt d1196489db2f40e9b7b29e2b79f909aa"
+  },
+  "routing": {
+    "intent": "UNKNOWN",
+    "tool": "workspace",
+    "confidence": 1.0,
+    "requires_cloud": true,
+    "estimated_complexity": "complex",
+    "reason": "Deterministic planning declined this request; multi-step planning is not a simple intent",
+    "execution_level": "cloud",
+    "source": "rule",
+    "blocked_reason": "",
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "final_evidence_refs": [
+    "87dac7955f964e619054d4ed985db0d3",
+    "b58f3f21e05f4675ab0e60510f419614"
+  ]
+}

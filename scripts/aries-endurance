@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+"""Read-only 24h sampling. Run --start once; systemd invokes samples every 5m."""
+import argparse, json, subprocess, time, urllib.request
+from datetime import datetime, timezone
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+STATE=ROOT/'var/endurance-active.json'
+def atomic(path,value):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    temp=path.with_suffix('.tmp');temp.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n');temp.replace(path)
+def probe(path):
+    try:
+        with urllib.request.urlopen('http://127.0.0.1:8000/api/aries'+path,timeout=15) as r:
+            return {'ok':True,'data':json.load(r)}
+    except Exception as e:return {'ok':False,'error':str(e)[:300]}
+def verdict(samples,started,now):
+    complete=now-started>=86400
+    times=[started]+[s['timestamp'] for s in samples]+[now]
+    gap=max((b-a for a,b in zip(times,times[1:])),default=0)
+    ordered=all(a<=b for a,b in zip(times,times[1:]))
+    healthy=all(s['services_ok'] and s['automations']['ok'] for s in samples)
+    coverage=len(samples)>=280 and gap<=900 and ordered
+    return {'state':('passed' if healthy and coverage else 'failed') if complete else 'running',
+            'elapsed_hours':round((now-started)/3600,3),'samples':len(samples),
+            'max_gap_seconds':round(gap,1),'sampled_services_healthy':healthy,
+            'scope':'Sampled service/API availability; not proof of uninterrupted availability or success of every task.'}
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--start',action='store_true');args=parser.parse_args()
+    if args.start:
+        if STATE.exists() and json.loads(STATE.read_text()).get('state')=='running':
+            print('Already monitoring:',json.loads(STATE.read_text())['directory']);return
+        now=time.time();directory=ROOT/'experiments/endurance'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+        atomic(STATE,{'state':'running','started':now,'directory':str(directory)})
+    if not STATE.exists():raise SystemExit('Run --start first')
+    state=json.loads(STATE.read_text());directory=Path(state['directory'])
+    if state['state']!='running':print(state);return
+    now=time.time();directory.mkdir(parents=True,exist_ok=True)
+    services={}
+    for unit in ['aries-core.service','aries-local-model.service']:
+        p=subprocess.run(['systemctl','--user','show',unit,'--property=ActiveState,SubState,NRestarts,MemoryCurrent,CPUUsageNSec'],capture_output=True,text=True,timeout=10)
+        services[unit]=dict(line.split('=',1) for line in p.stdout.splitlines() if '=' in line)
+    sample={'timestamp':now,'services':services,'services_ok':all(s.get('ActiveState')=='active' for s in services.values()),
+            'automations':probe('/automations'),'power':probe('/power'),
+            'intelligence_stats':probe('/intelligence/stats')}
+    path=directory/'samples.jsonl'
+    with path.open('a') as f:f.write(json.dumps(sample,ensure_ascii=False)+'\n')
+    samples=[json.loads(line) for line in path.read_text().splitlines()]
+    result=verdict(samples,state['started'],now);atomic(directory/'result.json',result)
+    (directory/'report.md').write_text('# ARIES 24-hour observation\n\n'+ '\n'.join(f'- {k}: {v}' for k,v in result.items())+'\n')
+    if result['state']!='running':
+        state['state']=result['state'];atomic(STATE,state)
+        subprocess.run(['systemctl','--user','stop','aries-endurance.timer'],timeout=10,check=False)
+    print(json.dumps(result));print(directory)
+if __name__=='__main__':main()

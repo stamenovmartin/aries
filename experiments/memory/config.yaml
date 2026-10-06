@@ -1,0 +1,82 @@
+# ARIES semantic memory v0.1 — experiment configuration
+# Reproduce with:  ./scripts/aries-memory-eval
+version: 1
+ran_with: ./scripts/aries-memory-eval
+
+question: >
+  Does deciding what is worth remembering beat remembering everything?
+  The comparison is against store-everything-verbatim with the SAME embedder,
+  not against "no memory", because "no memory" is not the honest alternative.
+
+hypothesis: >
+  Extraction will not improve retrieval. It can only remove rows, so at best it
+  removes noise from the top-k and at worst it removes the answer. What it
+  should improve is what comes back that should NOT have: a fact the user has
+  since contradicted, or something a privacy policy refused.
+
+failure_criteria:
+  - Stated before the run. The hypothesis is NOT supported if extraction loses
+    answers without cleaning anything, or if a false supersession destroys a
+    true memory at a rate the user would notice.
+  - "Hit@3 lower AND clean@3 not higher" would make the cascade pure cost.
+  - Any variant returning a credential is a defect, not a measurement.
+
+variants:
+  verbatim-exact-words:
+    what: every utterance stored; retrieval by whole words longer than three characters
+    why: the predicate ARIES actually shipped before 2026-09-29
+  verbatim-focused:
+    what: every utterance stored; retrieval by focused-v2 over the new stems
+    why: isolates what the inflection repair alone is worth
+  verbatim-semantic:
+    what: every utterance stored, no gate at all; retrieval by semantic-v3
+    why: the strict reading of store-everything-verbatim
+  verbatim-gated-semantic:
+    what: stage 1 (privacy/secrets/length) only; retrieval by semantic-v3
+    why: >
+      the baseline the statistics are run against. Stage 1 is a privacy policy,
+      not extraction, so withholding it from the baseline would be a straw man.
+  extracted-semantic:
+    what: the full three-stage cascade; retrieval by semantic-v3
+    why: the proposal
+
+task_set:
+  corpus: corpus.jsonl
+  probes: tasks.jsonl
+  provenance: >
+    15 utterances transcribed by this machine's own voice loop
+    (journalctl --user -u aries-voice.service, 2026-09-24 and 2026-09-29),
+    verbatim including the mis-transcriptions. 30 authored in the same register
+    and the same language mix, covering identity, preference, plan, fact and
+    episodic memory, plus a duplicate, two contradictions, two
+    circumstance-dependent preferences, two credentials and one excluded topic.
+  not_used:
+    LoCoMo: 6.4% of its answer key is wrong; tuning against it teaches its errors.
+
+metrics:
+  hit_at_3: the expected memory appears in the top three
+  clean_at_3: nothing superseded and nothing the privacy gate refused appears
+  mean_recall_at_3: share of expected memories returned
+  mean_reciprocal_rank: rank of the first correct memory
+  stored: rows the variant kept
+  model_calls: stage-3 escalations, i.e. the cost
+  supersessions_correct / supersessions_false: contradiction handling, against the fixture labels
+  median_embed_ms / median_search_ms: measured, not estimated
+
+environment:
+  machine: Intel i7-8700K, 12 threads, AVX2 (no AVX-512/VNNI), 15 GB RAM
+  embedder: intfloat/multilingual-e5-base, int8 ONNX, CPU, onnxruntime 1.30.0
+  second_arm: >
+    EMBEDDER=bge-m3-ollama — 1024 dimensions, served by ollama. Run and recorded
+    in summary-bge-m3.json. The stage-2 band is calibrated for e5 and is wrong
+    for bge-m3, under which the cascade escalated nothing; that arm therefore
+    answers the retrieval question and not the extraction question.
+  decision_model: qwen2.5:7b on ollama, logprobs + top_logprobs=20
+  openblas_num_threads: 1
+  k: 3
+
+statistics:
+  test: exact two-sided McNemar, via aries.workspace.learning_eval.paired_statistics
+  caveat: >
+    25 probes authored by the developer, on one user's corpus. Exploratory and
+    paired; it does not support a population claim.

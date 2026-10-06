@@ -1,0 +1,53 @@
+{"ts": "2026-10-03T13:16:00.153223+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-03T13:16:00.153683+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_missing_target_queue_and_speech
+{"ts": "2026-10-03T13:16:00.419872+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  durable question: пушти нешто
+PASS  no action: пушти нешто
+PASS  spoken question: пушти нешто
+{"ts": "2026-10-03T13:16:00.450135+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  durable question: play something
+PASS  no action: play something
+PASS  spoken question: play something
+{"ts": "2026-10-03T13:16:00.475996+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  durable question: премести го таму
+PASS  no action: премести го таму
+PASS  spoken question: премести го таму
+{"ts": "2026-10-03T13:16:00.499669+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  durable question: move it there
+PASS  no action: move it there
+PASS  spoken question: move it there
+{"ts": "2026-10-03T13:16:00.524299+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  durable question: отвори го
+PASS  no action: отвори го
+PASS  spoken question: отвори го
+{"ts": "2026-10-03T13:16:00.548923+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  durable question: open it
+PASS  no action: open it
+PASS  spoken question: open it
+{"ts": "2026-10-03T13:16:00.572674+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  durable question: среди го
+PASS  no action: среди го
+PASS  spoken question: среди го
+{"ts": "2026-10-03T13:16:00.594056+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  durable question: fix it
+PASS  no action: fix it
+PASS  spoken question: fix it
+--- test_named_requests_are_not_captured
+PASS  not consumed: play music Bohemian Rhapsody
+PASS  not consumed: пушти музика Лозано
+PASS  not consumed: open Firefox
+PASS  not consumed: read file ~/Documents/a.txt
+PASS  not consumed: play something by Mozart
+PASS  not consumed: move file /tmp/a to /tmp/b
+PASS  not consumed: fix it and delete everything
+PASS  not consumed: say play something
+PASS  not consumed: remember I enjoy something
+--- test_shell_envelope_does_not_claim_a_question_is_queued
+{"ts": "2026-10-03T13:16:00.735538+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  voice API returns actual question
+PASS  voice API dispatches no action
+--- test_unique_verified_reference_still_resolves
+{"ts": "2026-10-03T13:16:00.880580+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  verified reference not replaced by generic question
+ALL PASSED

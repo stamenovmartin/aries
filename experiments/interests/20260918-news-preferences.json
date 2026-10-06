@@ -1,0 +1,184 @@
+{
+  "origin": "explicit user preferences",
+  "saved_interests": [
+    {
+      "topic": "ai",
+      "label": "AI / ML",
+      "synonyms": [
+        "artificial intelligence",
+        "llm",
+        "machine learning",
+        "deep learning",
+        "generative ai",
+        "computer vision",
+        "robotics",
+        "multimodal",
+        "reinforcement learning",
+        "neural networks",
+        "вештачка интелигенција",
+        "машинско учење",
+        "ai research",
+        "local models",
+        "model training",
+        "inference"
+      ],
+      "stance": "want",
+      "scope": null,
+      "weight": 0.9,
+      "weight_source": "user",
+      "user_weight": 0.9,
+      "learned": {
+        "weight": 0.713,
+        "confidence": 0.5,
+        "rationale": "interest in 'ai' is fading rather than gone — engagement has fallen in each part of the window but is still 83%",
+        "shadowed": true
+      },
+      "preferred_sources": [],
+      "notification_level": null,
+      "engagement": {
+        "shown": 26,
+        "engaged": 0,
+        "dismissed": 0,
+        "rate": 0.0,
+        "means": "rate is null until items have actually been shown"
+      },
+      "created_by": "user",
+      "created_at": "2026-09-12T19:35:21"
+    },
+    {
+      "topic": "real madrid",
+      "label": "Реал Мадрид",
+      "synonyms": [
+        "реал мадрид",
+        "real madrid cf",
+        "los blancos"
+      ],
+      "stance": "want",
+      "scope": null,
+      "weight": 0.6,
+      "weight_source": "default",
+      "user_weight": null,
+      "learned": null,
+      "preferred_sources": [],
+      "notification_level": null,
+      "engagement": {
+        "shown": 0,
+        "engaged": 0,
+        "dismissed": 0,
+        "rate": null,
+        "means": "rate is null until items have actually been shown"
+      },
+      "created_by": "user:shared-key as owner",
+      "created_at": "2026-09-17T22:58:10"
+    },
+    {
+      "topic": "macedonia news",
+      "label": "Вести од Македонија",
+      "synonyms": [
+        "македонија",
+        "македонски вести",
+        "вести од македонија",
+        "north macedonia",
+        "makedonija",
+        "скопје"
+      ],
+      "stance": "want",
+      "scope": null,
+      "weight": 0.6,
+      "weight_source": "default",
+      "user_weight": null,
+      "learned": null,
+      "preferred_sources": [],
+      "notification_level": null,
+      "engagement": {
+        "shown": 0,
+        "engaged": 0,
+        "dismissed": 0,
+        "rate": null,
+        "means": "rate is null until items have actually been shown"
+      },
+      "created_by": "user:shared-key as owner",
+      "created_at": "2026-09-17T22:58:10"
+    }
+  ],
+  "relevance_checks": [
+    {
+      "expected_topic": "ai",
+      "result": {
+        "text": "New computer vision and reinforcement learning research",
+        "score": 0.9,
+        "matched": [
+          {
+            "topic": "ai",
+            "weight": 0.9,
+            "source": "user",
+            "hits": [
+              {
+                "term": "computer vision",
+                "occurrences": 1
+              },
+              {
+                "term": "reinforcement learning",
+                "occurrences": 1
+              }
+            ]
+          }
+        ],
+        "excluded_by": null,
+        "excluded": false,
+        "explanation": "matches 1 topic(s): ai (0.90)"
+      }
+    },
+    {
+      "expected_topic": "real madrid",
+      "result": {
+        "text": "Реал Мадрид: вести за клубот и натпреварите",
+        "score": 0.6,
+        "matched": [
+          {
+            "topic": "real madrid",
+            "weight": 0.6,
+            "source": "default",
+            "hits": [
+              {
+                "term": "реал мадрид",
+                "occurrences": 1
+              }
+            ]
+          }
+        ],
+        "excluded_by": null,
+        "excluded": false,
+        "explanation": "matches 1 topic(s): real madrid (0.60)"
+      }
+    },
+    {
+      "expected_topic": "macedonia news",
+      "result": {
+        "text": "Вести од Македонија: економија и општество",
+        "score": 0.6,
+        "matched": [
+          {
+            "topic": "macedonia news",
+            "weight": 0.6,
+            "source": "default",
+            "hits": [
+              {
+                "term": "македонија",
+                "occurrences": 1
+              },
+              {
+                "term": "вести од македонија",
+                "occurrences": 1
+              }
+            ]
+          }
+        ],
+        "excluded_by": null,
+        "excluded": false,
+        "explanation": "matches 1 topic(s): macedonia news (0.60)"
+      }
+    }
+  ],
+  "unrelated_preferences_preserved": true
+}

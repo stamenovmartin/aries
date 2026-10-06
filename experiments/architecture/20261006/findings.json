@@ -1,0 +1,136 @@
+{
+  "recorded_at": "2026-10-06T08:52:10.796728+00:00",
+  "finding_count": 7,
+  "source_changed_since_manifest": [],
+  "findings": [
+    {
+      "id": "G01",
+      "area": "goal orchestration",
+      "status": "partial",
+      "current": "Bounded step-observe-replan loop; deterministic completion contracts; durable WorkspaceGoal rows; read-only caller-supplied fanout up to four children.",
+      "absent": "Model-produced validated dependency graph, shared root budgets, general semantic acceptance contracts, long-horizon checkpoint/replan semantics.",
+      "evidence": [
+        "aries/workspace/agent.py",
+        "aries/workspace/contracts.py",
+        "aries/workspace/orchestration.py"
+      ],
+      "target": "Compile goal into requirements, source needs and dependency DAG; validate before persisting to existing queue; distinguish unavailable, needs_clarification, partial, verified completion.",
+      "blockers": [
+        "G02",
+        "G03",
+        "G04",
+        "G05"
+      ]
+    },
+    {
+      "id": "G02",
+      "area": "temporary runtime teams",
+      "status": "absent as requested",
+      "current": "Existing children execute one typed read capability with retry/reroute; development agents are external to ARIES runtime.",
+      "absent": "Per-role planner sessions, attenuated capability/path/source grants enforced at execution, shared root reservations, child lifecycle and evidence-based synthesis.",
+      "evidence": [
+        "aries/workspace/orchestration.py",
+        "aries/workspace/registry.py"
+      ],
+      "target": "Create ephemeral specialists only when a validated plan benefits; read-only first; revocable authority is intersected with user scope; specialists cannot delegate additional authority.",
+      "blockers": [
+        "G01",
+        "G03",
+        "G04",
+        "G05"
+      ]
+    },
+    {
+      "id": "G03",
+      "area": "context engine",
+      "status": "partial",
+      "current": "Layered user/learned memory, lexical/semantic retrieval, exclusions, recent verified references, prior verified plan shapes; bounded planner context. Read-only connectors exist separately.",
+      "absent": "Unified provenance/privacy/freshness envelope across memories, projects and connector content; goal-driven source acquisition; token-budget selection with explicit omitted/missing coverage.",
+      "evidence": [
+        "aries/workspace/memory/store.py",
+        "aries/workspace/retrieval.py",
+        "aries/workspace/working_context.py",
+        "aries/workspace/traces.py",
+        "aries/workspace/agent.py",
+        "aries/connect/service.py"
+      ],
+      "target": "Source-scoped context packets with origin, version, observed/expiry times, trust, privacy, resource scope, relevance and token estimate; select evidence before rendering, no opaque whole-context truncation.",
+      "blockers": [
+        "G04",
+        "G05"
+      ]
+    },
+    {
+      "id": "G04",
+      "area": "routing and egress",
+      "status": "partial; enforcement gap found",
+      "current": "Rule/local/cloud routing, provider adapters, per-call usage, resource governor. Planner escalates noncloud decisions after deterministic decline.",
+      "absent": "Final outbound payload data-class gate, privacy inheritance through summaries and observations, task-correlated budget reservations and measured adaptive optimization.",
+      "evidence": [
+        "aries/intelligence/generation.py",
+        "aries/intelligence/router.py",
+        "aries/intelligence/tracking.py",
+        "aries/workspace/agent_planner.py",
+        "aries/settings/defaults.py",
+        "aries/power/governor.py"
+      ],
+      "static_finding": "generation.config/generate do not read privacy.mode or ai.send_file_contents; planner payload includes context/history. This audit does not demonstrate an actual disclosure.",
+      "target": "Enforce privacy independently of model route recommendations; maintain owner policy cloud for nonprivate reasoning/local for private content. Unknown sensitivity stays local until classified or explicitly scoped. Unknown price is not zero cost.",
+      "blockers": [
+        "G05"
+      ]
+    },
+    {
+      "id": "G05",
+      "area": "evaluation and budgets",
+      "status": "partial",
+      "current": "Per-step evidence, planner token estimates and measured usage, separate global inference events, focused suites and raw historical goal fixtures.",
+      "absent": "Complete root/child/call correlation, context-token component accounting, durable shared token/cost reservations, repeated source-stable frozen end-to-end baseline.",
+      "evidence": [
+        "aries/workspace/agent.py",
+        "aries/intelligence/tracking.py",
+        "eval/agent_suite/20261004T095522Z-B8-final-full/results.json",
+        "eval/research_feedback/CLOUD_ADMISSION.json"
+      ],
+      "target": "Versioned run manifests, all-attempt denominators, measured/estimated/unknown usage separated, pinned providers, family-paired comparisons, independently checked goal outcomes and rollback rehearsal.",
+      "blockers": []
+    },
+    {
+      "id": "G06",
+      "area": "slow self-improvement",
+      "status": "absent as requested; reusable preference learning exists",
+      "current": "Medium loop adjusts content preferences in learned layer; review retrieval comparisons do not promote. Automation metadata has evolution_history and rollback_version fields.",
+      "absent": "Executable policy-candidate sandbox, held-out promotion gate, atomic version activation, canary and automatic rollback for agent policies.",
+      "evidence": [
+        "aries/learning/loop.py",
+        "aries/workspace/learning_eval.py",
+        "aries/automations/genome.py"
+      ],
+      "target": "After evaluation and rollback work: propose bounded context/routing/workflow policy versions; evaluate baseline/ablations; promote only quality/safety nonregressing efficient candidates. Never mutate grants, user preferences, or evaluator labels.",
+      "blockers": [
+        "G05",
+        "G04",
+        "G03",
+        "G01",
+        "G02"
+      ]
+    },
+    {
+      "id": "G07",
+      "area": "historical baseline provenance",
+      "status": "qualified",
+      "current": "B8 records 88 pass / 90 scored, 2 false_success, runtime_changed=true; system_capabilities.py hash changed, core invocation unchanged.",
+      "evidence": [
+        "eval/agent_suite/20261004T095522Z-B8-final-full/results.json"
+      ],
+      "target": "Preserve scores and fixture. Investigate ra-05 policy expectation and oo-02 already-installed semantics; document any new fixture version before rerunning, no retrospective relabelling."
+    }
+  ],
+  "not_claimed": [
+    "100 percent product maturity",
+    "privacy partition measured",
+    "dynamic agents implemented",
+    "600-run study launched",
+    "new mechanisms deployed"
+  ]
+}

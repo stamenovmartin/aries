@@ -1,0 +1,37 @@
+{
+  "problem": "Real local planner repeatedly proposed finish after rejected independent completion checks; original fault smoke consumed10calls and8unsupported finishes.",
+  "change": "Default-on ARIES_COMPLETION_PROGRESS_GUARD in production agent rejected-finish branch. Explicit feedback after first rejection; stop after second with no intervening action. Valid corrected completion remains allowed. State persisted for resume.",
+  "validation": {
+    "date": "2026-10-03T17:45:31.801406+00:00",
+    "n_per_condition": 1,
+    "scope": "Real local LLM, production agent loop, isolated file-read fault fixture. Integration smoke, not a full ablation.",
+    "rows": {
+      "before": {
+        "artifact": "eval/research_feedback/runs/20261003T161533Z-bed940/result.json",
+        "planner_calls": 10,
+        "unsupported_finish_proposals": 8,
+        "user_visible_false_success": false,
+        "completed_recovery": false,
+        "final_state": "partial",
+        "runtime_stop_reason": null,
+        "source_stable": true
+      },
+      "after": {
+        "artifact": "eval/research_feedback/runs/20261003T174421Z-db706d/result.json",
+        "planner_calls": 4,
+        "unsupported_finish_proposals": 2,
+        "user_visible_false_success": false,
+        "completed_recovery": false,
+        "final_state": "partial",
+        "runtime_stop_reason": "COMPLETION_NO_PROGRESS",
+        "source_stable": true
+      }
+    },
+    "regression_checks": {
+      "passed": 4,
+      "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python tests/test_agent_completion_progress.py"
+    },
+    "deployed": false
+  },
+  "limitations": "Runtime control, not improved model reasoning/recovery. One real local fault trial before/after;4focused checks. Production service deployment and Learning API submission left to main owner to avoid concurrent restart/state mutation."
+}

@@ -1,0 +1,149 @@
+--- test_a_browser_on_the_wrong_page_is_unmet_not_unverifiable
+PASS  a browser showing something else is unmet
+PASS  and ARIES says what it saw instead
+--- test_a_model_plan_is_proposed_and_an_exact_one_is_performed
+PASS  a model plan is proposed, not performed
+PASS  nothing was done
+PASS  and the outcome says so
+PASS  approving it performs the plan
+--- test_a_plan_longer_than_a_desktop_request_is_refused
+PASS  more steps than ARIES will run at once is refused
+PASS  and says how many it will run
+--- test_a_process_and_a_window_together_are_strong
+PASS  a process and its window is met
+PASS  graded strong — two independent observations
+--- test_a_process_with_no_window_is_not_success
+PASS  a running process with no window is unmet
+PASS  and the reason names what was actually seen
+--- test_a_url_is_only_ever_circumstantial
+PASS  a browser window titled for the site is met
+PASS  and it is graded circumstantial, never higher
+PASS  the check says what it looked at
+--- test_a_url_that_is_not_the_web_is_refused
+PASS  'file:///etc/passwd' is refused
+PASS  'javascript:alert(1)' is refused
+PASS  'data:text/html,<b>x' is refused
+PASS  '/etc/shadow' is refused
+PASS  a normal https address is not refused for its scheme
+--- test_an_automation_run_in_the_same_second_counts_as_this_run
+PASS  the health automation ran (ok)
+PASS  the run that just happened is recognised as this task's
+PASS  and it is proof, read from ARIES's own records
+--- test_an_enum_the_prompt_states_is_an_enum_the_validator_enforces
+PASS  a section ARIES does not have is refused
+PASS  and the real ones are named
+PASS  an automation ARIES does not have is refused
+PASS  and the real ones are named
+--- test_bridge_capabilities_are_not_build_identity
+PASS  older bridge reports specific missing focus capability
+PASS  core does not depend on shell revision
+PASS  complete protocol accepted without matching build stamp
+PASS  invalid desktop introspection fails closed
+--- test_desktop_observation_and_focus_are_verified
+PASS  malformed window list is not an empty desktop {}
+PASS  malformed window list is not an empty desktop []
+PASS  malformed window list is not an empty desktop {"windows":[{"id":"1","focused":"false"}]}
+PASS  accepted focus request without changed state fails
+PASS  focus succeeds only on independently observed target
+--- test_done_is_reserved_for_verified
+PASS  only a verified run is 'done'
+PASS  and the summary names the evidence grade
+--- test_every_goal_can_be_verified_and_attempted
+PASS  open_url has a verifier
+PASS  open_url has a tool
+PASS  open_url's tool desktop.open_url is registered
+PASS  open_app has a verifier
+PASS  open_app has a tool
+PASS  open_app's tool desktop.open_app is registered
+PASS  run_automation has a verifier
+PASS  run_automation has a tool
+PASS  run_automation's tool aries.run_automation is registered
+PASS  open_section has a verifier
+PASS  open_section has a tool
+PASS  open_section's tool aries.open_section is registered
+--- test_every_goal_declares_the_best_evidence_it_can_ever_get
+PASS  open_url declares a ceiling
+PASS  open_url says why it cannot do better
+PASS  open_app declares a ceiling
+PASS  open_app says why it cannot do better
+PASS  run_automation declares a ceiling
+PASS  run_automation says why it cannot do better
+PASS  open_section declares a ceiling
+PASS  open_section says why it cannot do better
+PASS  a web goal cannot claim more than circumstantial evidence
+PASS  and running an automation can be proved
+--- test_every_run_is_audited_with_both_numbers
+PASS  the run is in the audit log
+PASS  the audit line carries reported_success
+PASS  the audit line carries verified_success
+PASS  the audit line carries honesty_gap
+--- test_launching_a_gui_does_not_wait_for_it
+PASS  open_section detaches
+PASS  and does not wait
+PASS  it returns immediately (0.02s)
+--- test_locked_session_is_not_an_update_request
+PASS  locked desktop explicitly identified without logout advice
+--- test_no_window_list_means_unverifiable_not_failure_and_not_success
+PASS  with no window list the verdict is unverifiable
+PASS  the evidence grade is none
+PASS  and the reason is given
+PASS  including that a browser IS running, which proves nothing about the page
+--- test_only_an_exact_router_match_becomes_a_plan
+PASS  a keyword-only near match does not become a plan
+PASS  an exact pattern match does
+PASS  and it is the automation, not a screen
+--- test_open_app_requires_presentation
+PASS  minimised window is not a presented application
+PASS  background window is not a presented application
+PASS  a title alone cannot prove application identity
+PASS  VS Code alias verifies the actual editor identity
+--- test_open_app_reuses_identity_and_refuses_unknown_inventory
+PASS  existing minimised app is activated instead of launched
+PASS  already focused app needs no action
+PASS  stale window does not trigger duplicate launch
+PASS  unknown inventory is not treated as no open windows
+PASS  title matching never reuses another application
+--- test_service_launch_uses_desktop_lifetime
+PASS  service applications start in an independent desktop service
+PASS  the URL is passed as a literal argument
+--- test_shell_payload_preserves_unicode
+PASS  D-Bus Unicode and quotes survive decoding
+--- test_snap_application_identity_verification
+PASS  Snap Firefox verifies using installed desktop identity
+PASS  Snap identity alone cannot prove presentation
+PASS  Firefox title in unrelated app is not proof
+--- test_the_engine_gates_follow_the_aries_switch
+PASS  switched off, nothing is live
+PASS  and side effects are simulated
+PASS  switched on, exactly the operator's tools are live
+PASS  and nothing wider than that
+PASS  and the engine's own state was written, not just reported
+--- test_the_model_cannot_invent_a_step
+PASS  a goal ARIES does not have is rejected
+PASS  and the rejection names the real choices
+PASS  a step missing its parameter is rejected
+PASS  saying which parameter
+PASS  a valid step is accepted
+PASS  and carries the tool that attempts it
+--- test_the_operator_ships_switched_off
+PASS  with operator.enabled off, nothing is attempted
+PASS  and ARIES says which switch
+--- test_the_planner_refuses_rather_than_leaving_the_machine
+PASS  a non-local provider is refused when local is required
+PASS  and nothing was sent
+--- test_the_sections_the_planner_names_are_the_sections_that_exist
+PASS  the UI declares 15 sections
+PASS  the planner knows exactly those sections (missing: [], extra: [])
+--- test_the_verifier_never_reads_what_the_operator_did
+PASS  verification does not read 'reported'
+PASS  verification does not read 'report_detail'
+PASS  verification does not read 'tool_result'
+--- test_the_working_set_is_released_after_a_run
+PASS  nothing is held after the run (0 row(s))
+PASS  and the run happened at all
+--- test_unverifiable_is_not_counted_as_dishonesty
+PASS  reported + unverifiable is not an honesty gap
+PASS  and the outcome is 'unconfirmed', not 'done'
+PASS  reported + contradicted IS an honesty gap
+PASS  and the outcome is 'failed'
+ALL PASSED

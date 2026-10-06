@@ -1,0 +1,190 @@
+{"ts": "2026-09-17T20:40:53.803543+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-09-17T20:40:53.803816+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_accessibility_window_only_is_partial
+{"ts": "2026-09-17T20:40:53.958216+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  window-only accessibility does not claim inner application coverage
+--- test_cancel_pending_running_and_proposed
+{"ts": "2026-09-17T20:40:54.080410+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  cancelled queued work is never run
+{"ts": "2026-09-17T20:40:54.097471+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  cancel stops later side effects
+--- test_catalogue_understands_twenty_and_macedonian
+PASS  every catalogue capability has an argument contract
+PASS  open_app has a usable example
+PASS  agent_task has a usable example
+PASS  inspect_app has a usable example
+PASS  ui_action has a usable example
+PASS  browser_open has a usable example
+PASS  browser_inspect has a usable example
+PASS  browser_follow has a usable example
+PASS  browser_fill has a usable example
+PASS  browser_close has a usable example
+PASS  python_project has a usable example
+PASS  build_python has a usable example
+PASS  open_url has a usable example
+PASS  open_path has a usable example
+PASS  search_web has a usable example
+PASS  research has a usable example
+PASS  read_article has a usable example
+PASS  processes has a usable example
+PASS  refresh_news has a usable example
+PASS  brief has a usable example
+PASS  health has a usable example
+PASS  system has a usable example
+PASS  learning_eval has a usable example
+PASS  evaluation has a usable example
+PASS  list_apps has a usable example
+PASS  find_files has a usable example
+PASS  list_folder has a usable example
+PASS  read_file has a usable example
+PASS  create_folder has a usable example
+PASS  create_file has a usable example
+PASS  move_file has a usable example
+PASS  trash_file has a usable example
+PASS  install_app has a usable example
+PASS  remember has a usable example
+PASS  understands otvori YouTube
+PASS  understands отвори Firefox
+PASS  understands инсталирај PyCharm
+PASS  understands избриши ~/Documents/a.txt
+PASS  understands истражи Linux
+PASS  compound goal keeps separate research and action steps
+PASS  file content cannot become a second action
+--- test_changed_targets_and_privacy_are_refused
+{"ts": "2026-09-17T20:40:54.217857+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  trash waits for its exact target to be approved
+{"ts": "2026-09-17T20:40:54.270096+00:00", "severity": "ERROR", "service": "agentic-core", "logger": "agentic_core.tools.calling", "msg": "Tool workspace.trash_file raised", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": "workspace.trash_file", "error": {"type": "ValueError", "message": "The file changed after the proposal. Submit a new request", "class": "unknown", "action": "escalate"}, "source": {"file": "calling.py", "line": 131, "func": "call_tool"}, "traceback": "Traceback (most recent call last):\n  File \"/home/stamenovmartin/aries/vendor/agentic-core/agentic_core/tools/calling.py\", line 122, in call_tool\n    result = await (asyncio.wait_for(coro, timeout=spec.timeout_s) if spec.timeout_s else coro)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/stamenovmartin/aries/aries/workspace/capabilities.py\", line 276, in _mutate\n    raise ValueError(\"The file changed after the proposal. Submit a new request\")\nValueError: The file changed after the proposal. Submit a new request"}
+PASS  an approved but changed file is not trashed
+{"ts": "2026-09-17T20:40:54.296454+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  excluded files cannot be read into dashboards
+{"ts": "2026-09-17T20:40:54.321977+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  writes cannot escape the home boundary
+--- test_extractor_preserves_conclusion_and_excludes_custom_comments
+PASS  new extractor preserves final caveats
+PASS  custom comments remain excluded after extractor integration
+--- test_independent_goals_bypass_busy_desktop_and_shutdown_cancels
+{"ts": "2026-09-17T20:40:54.799306+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-09-17T20:40:54.841823+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-09-17T20:40:54.850603+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a later independent goal completes during desktop work
+PASS  competing desktop goals remain queued
+PASS  shutdown cancels and reaps live goals
+--- test_installation_approval_and_revision_verification
+{"ts": "2026-09-17T20:40:54.964420+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  installation resolves a concrete revision before approval
+PASS  no installer is invoked before approval
+PASS  installer gets an independent bounded desktop service
+PASS  approved installation verifies the package-manager database
+PASS  the approved revision and package are the ones passed to the installer
+{"ts": "2026-09-17T20:40:55.027796+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an already satisfied installation does not invoke the installer again
+--- test_legacy_saved_agent_uses_observations_and_preserves_proposal_boundary
+{"ts": "2026-09-17T20:40:55.144519+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  bounded agent completes through normal capability execution
+PASS  planner receives previous execution evidence
+PASS  read-only goal does not grant deletion or installation
+{"ts": "2026-09-17T20:40:55.191006+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  agent-produced destructive actions retain exact approval
+--- test_live_read_only_dashboards
+{"ts": "2026-09-17T20:40:55.317809+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  installed app dashboard uses real desktop entries
+{"ts": "2026-09-17T20:40:55.368812+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  system dashboard measures the machine
+--- test_memory_context_and_forgetting
+{"ts": "2026-09-17T20:40:55.516896+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an explicit fact is saved
+{"ts": "2026-09-17T20:40:55.553125+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+/home/stamenovmartin/aries/tests/test_workspace.py:266: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  db.add(WorkspaceGoal(id="old-pending", request="Review a change", state="proposed", created_at=datetime.utcnow()-timedelta(days=1)))
+PASS  relevant local context has explicit provenance
+PASS  forgotten context no longer appears in earlier dashboards
+PASS  excluded memory topics are enforced on write
+--- test_monitor_keeps_pending_work_outside_recent_history
+PASS  pending work cannot disappear behind completed history
+PASS  elapsed measurements have an actual end timestamp
+--- test_named_screens_are_navigation_not_imaginary_apps
+{"ts": "2026-09-17T20:40:55.831751+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  otvori vesti opens its actual screen
+PASS  otvori vesti reaches the same Operator destination
+{"ts": "2026-09-17T20:40:55.847164+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  otvori sistem opens its actual screen
+PASS  otvori sistem reaches the same Operator destination
+{"ts": "2026-09-17T20:40:55.863126+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  otvori fajlovi opens its actual screen
+PASS  otvori fajlovi reaches the same Operator destination
+{"ts": "2026-09-17T20:40:55.878845+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  otvori monitoring opens its actual screen
+PASS  otvori monitoring reaches the same Operator destination
+{"ts": "2026-09-17T20:40:55.894937+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  otvori evaluacija opens its actual screen
+PASS  otvori evaluacija reaches the same Operator destination
+{"ts": "2026-09-17T20:40:55.910785+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  otvori istrazuvanje opens its actual screen
+PASS  otvori istrazuvanje reaches the same Operator destination
+PASS  screen lookup does not enqueue actions
+--- test_news_sources_failure_and_content_is_not_action
+{"ts": "2026-09-17T20:40:56.015042+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  research keeps the source link and evidence limitation
+PASS  source instructions never generate action steps
+{"ts": "2026-09-17T20:40:56.049689+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  failed collection remains an explicit gap
+--- test_no_worker_privilege_escalation
+PASS  execute-only callers cannot delegate manage-tools work to the system worker
+--- test_python_project_journey_and_independent_artifacts
+{"ts": "2026-09-17T20:40:56.265514+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  project runs real isolated Python and verifies artifacts through queue
+PASS  execution evidence contains actual expected output
+{"ts": "2026-09-17T20:40:56.368437+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  existing project is never overwritten
+PASS  independent verifier rejects altered source
+{"ts": "2026-09-17T20:40:56.400457+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  Operator switch gates project creation and execution
+--- test_queue_poll_ignores_wall_clock_checkpoints
+PASS  queue polling continues after backward clock correction
+--- test_reader_extracts_article_without_comments_or_navigation
+PASS  reader retains the end of the article
+PASS  reader excludes visitor comments
+PASS  reader decodes the source title
+PASS  arbitrary image bytes do not reach the UI decoder
+--- test_reader_summary_is_generated_from_all_extracted_text
+PASS  reading uses the local model and labels generated text
+PASS  the full extracted text reaches summarization
+PASS  source material has no authority to issue actions
+--- test_real_file_journey_and_no_overwrite
+{"ts": "2026-09-17T20:40:56.614329+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  create folder is verified on disk
+{"ts": "2026-09-17T20:40:56.656891+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  create file verifies exact bytes
+{"ts": "2026-09-17T20:40:56.699363+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  read file appears on its dashboard
+{"ts": "2026-09-17T20:40:56.732864+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  folder dashboard contains the created file
+{"ts": "2026-09-17T20:40:56.766177+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  file search produces observable results
+{"ts": "2026-09-17T20:40:56.806510+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-09-17T20:40:56.826561+00:00", "severity": "ERROR", "service": "agentic-core", "logger": "agentic_core.tools.calling", "msg": "Tool workspace.create_file raised", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": "workspace.create_file", "error": {"type": "FileExistsError", "message": "[Errno 17] File exists: '/home/stamenovmartin/aries-workspace-test-ii8gy_i9/notes/hello.txt'", "class": "unknown", "action": "escalate"}, "source": {"file": "calling.py", "line": 131, "func": "call_tool"}, "traceback": "Traceback (most recent call last):\n  File \"/home/stamenovmartin/aries/vendor/agentic-core/agentic_core/tools/calling.py\", line 122, in call_tool\n    result = await (asyncio.wait_for(coro, timeout=spec.timeout_s) if spec.timeout_s else coro)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/home/stamenovmartin/aries/aries/workspace/capabilities.py\", line 290, in _mutate\n    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileExistsError: [Errno 17] File exists: '/home/stamenovmartin/aries-workspace-test-ii8gy_i9/notes/hello.txt'"}
+PASS  existing bytes are never overwritten
+{"ts": "2026-09-17T20:40:56.847085+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  move shows a proposal and leaves the source alone
+PASS  approved move verifies both paths and identity
+--- test_search_is_read_only_until_submission
+{"ts": "2026-09-17T20:40:57.011001+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  Search connects an open request to a goal
+PASS  keystrokes create no task or action
+{"ts": "2026-09-17T20:40:57.023161+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  Enter queues and opens the dashboard
+PASS  submission returns queued before doing work
+--- test_structured_input_and_off_switch
+{"ts": "2026-09-17T20:40:57.116020+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  invalid work is rejected before queueing: {'capability': 'shell', 'args': {'command': 'rm -rf /'}}
+{"ts": "2026-09-17T20:40:57.120364+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  invalid work is rejected before queueing: {'capability': 'open_url', 'args': {'url': 'file:///etc/passwd'}}
+{"ts": "2026-09-17T20:40:57.124512+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  invalid work is rejected before queueing: {'request': ''}
+{"ts": "2026-09-17T20:40:57.138565+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the Operator off switch prevents filesystem changes
+--- test_topic_automation_records_schedule_and_reuses_pending
+PASS  duplicate topic reuses one pending goal
+PASS  next refresh does not flood pending queue
+PASS  topic refresh persists run for interval pacing
+ALL PASSED

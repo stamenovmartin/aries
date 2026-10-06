@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-06T11:39:50.627990+00:00",
+  "scratch": "/tmp/aries-learning-rollback-k6qragg0",
+  "results": [
+    {
+      "suite": "test_learning_controls",
+      "exit_code": 0,
+      "passed": 19,
+      "failed": 0
+    },
+    {
+      "suite": "test_learning",
+      "exit_code": 0,
+      "passed": 39,
+      "failed": 0
+    },
+    {
+      "suite": "test_ui_render",
+      "exit_code": 0,
+      "passed": 2,
+      "failed": 0
+    }
+  ],
+  "source_before": {
+    "aries/learning/controls.py": "4ebf8ee6c67c5765c33ecb4aa996aab897e8584d873ca3fad117855f812dd4c8",
+    "aries/learning/__init__.py": "5acbbea8763a6223f6cff81cc1f7004f0b83a8ef5c29c48f8d715cfba059ef09",
+    "aries/api/permissions.py": "8d427abcfb8a19c8b23a9dcd5db6ad62453123458996b188253d1240b6e276c8",
+    "aries/api/routes.py": "166a7ac8310d6c02c27184233ad8f8317ea44ae4be46374fa8d309a07042a818",
+    "aries_ui/pages/learning.py": "9dc8bac38f978422f042816eb1df80fc7eef88038105e1c08fe216b364c5055b",
+    "aries_ui/contract.py": "2e51c019a0186d64f3b2662841a7a1081937f516906ba88a4d051b08e4edf53b"
+  },
+  "source_after": {
+    "aries/learning/controls.py": "4ebf8ee6c67c5765c33ecb4aa996aab897e8584d873ca3fad117855f812dd4c8",
+    "aries/learning/__init__.py": "5acbbea8763a6223f6cff81cc1f7004f0b83a8ef5c29c48f8d715cfba059ef09",
+    "aries/api/permissions.py": "8d427abcfb8a19c8b23a9dcd5db6ad62453123458996b188253d1240b6e276c8",
+    "aries/api/routes.py": "166a7ac8310d6c02c27184233ad8f8317ea44ae4be46374fa8d309a07042a818",
+    "aries_ui/pages/learning.py": "9dc8bac38f978422f042816eb1df80fc7eef88038105e1c08fe216b364c5055b",
+    "aries_ui/contract.py": "2e51c019a0186d64f3b2662841a7a1081937f516906ba88a4d051b08e4edf53b"
+  },
+  "source_stable": true
+}

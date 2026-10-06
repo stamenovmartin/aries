@@ -1,0 +1,22 @@
+{
+  "problem": "Declining a pronoun-only recognizer match still queued a guessing planner. Live submit clarified only1/8 read-only reference probes.",
+  "change": "Expose missing_reference from the capability recognizer and ask a target-specific durable clarification in service.submit after verified-context resolution, before planning or queuing.",
+  "validation": {
+    "live_before": "experiments/clarification-references/20261003T134120Z-before.json",
+    "live_after": "experiments/clarification-references/20261003T134940Z-after.json",
+    "live_clarifications": "1/8 to8/8",
+    "isolated_actual_submit": "4/55 to14/55 ambiguous; false questions0/100 to0/100",
+    "scoped_checks": {
+      "clarification": 62,
+      "pronoun": 26,
+      "workspace": 148,
+      "agent": 65,
+      "file": 35
+    }
+  },
+  "limitations": [
+    "41/55 broader ambiguous requests remain uncovered. No general OOD or short-choice continuation claim.",
+    "Full60 pending coordinated router rollback/restart. the reviewing agent restarted core between paired runs, deploying both my patch and his experimental router; neither8-case run interrupted. Question path does not invoke the router.",
+    "Live probes measure immediate response, not task execution; only own queued read probes cancelled. Supplemental225 runs isolated with no worker; memory observation disabled."
+  ]
+}

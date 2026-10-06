@@ -1,0 +1,13 @@
+# Macedonian coverage, frozen 2026-10-03. Format: path · kind · what it holds
+# kind `subject` = the whole file is about Macedonian
+# kind `bilingual` = tests one behaviour in two languages; the mk half is frozen,
+#                    the en half is live and may grow
+tests/test_goal_contracts.py · subject · Macedonian goals need the same independent proof as English
+tests/test_memory.py · bilingual · Macedonian utterances stored verbatim, never translated on write
+tests/test_replies.py · bilingual · spoken outcome sentences in Macedonian and English
+tests/test_spoken_requests.py · bilingual · natural Macedonian read-only questions and references
+tests/test_voice_flow.py · bilingual · wake word, language choice, echo rejection
+tests/test_pronoun_arguments.py · bilingual · Macedonian clitics го/ја/ги are not arguments
+tests/test_speech.py · bilingual · RHVoice Kiko is the Macedonian voice and the only one
+tests/test_clarification.py · bilingual · missing-target questions in both languages
+tests/test_read_file_language.py · bilingual · Macedonian file nouns are not part of a path

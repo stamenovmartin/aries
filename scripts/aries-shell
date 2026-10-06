@@ -1,0 +1,219 @@
+#!/usr/bin/env bash
+# The ARIES Shell: install it, test it safely, turn it on, and get out again.
+#
+#   ./scripts/aries-shell generate     regenerate the stylesheet from the tokens
+#   ./scripts/aries-shell install      link it into ~/.local/share/gnome-shell/extensions
+#   ./scripts/aries-shell icons        redraw the ARIES mark at every icon size
+#   ./scripts/aries-shell identity     application entry, icons and backgrounds
+#   ./scripts/aries-shell wallpaper    use the ARIES backgrounds
+#   ./scripts/aries-shell enable       switch it on in the live session
+#   ./scripts/aries-shell disable      switch it off  (the fallback, from anywhere)
+#   ./scripts/aries-shell status       is it installed, enabled, running, erroring
+#   ./scripts/aries-shell logs [n]     what the shell said about ARIES
+#   ./scripts/aries-shell test [secs]  run it in a HEADLESS nested GNOME Shell
+#   ./scripts/aries-shell uninstall    remove it entirely
+set -euo pipefail
+cd "$(dirname "$0")/.."
+ROOT="$PWD"
+UUID="aries@aries.local"
+SRC="$ROOT/shell/$UUID"
+DEST="$HOME/.local/share/gnome-shell/extensions/$UUID"
+PY="$ROOT/.venv/bin/python"
+
+bold() { printf '\033[1m%s\033[0m\n' "$*"; }
+dim()  { printf '\033[2m%s\033[0m\n' "$*"; }
+warn() { printf '\033[33m%s\033[0m\n' "$*"; }
+
+generate() {
+  PYTHONPATH="$ROOT/vendor/agentic-core:$ROOT/vendor:$ROOT" "$PY" - <<'PYEOF'
+import pathlib
+from aries.shell import tokens
+out = pathlib.Path("shell/aries@aries.local/stylesheet.css")
+out.write_text(tokens.shell_stylesheet())
+print(f"wrote {out} ({len(out.read_text().splitlines())} lines)")
+PYEOF
+  glib-compile-schemas "$SRC/schemas/"
+  dim "schemas compiled"
+  # Stamp the build identity into the extension, so the RUNNING shell can say
+  # which revision it is rather than only which one is on disk. Entry 016 was
+  # verified three times against a shell running code from hours earlier, and
+  # nothing in the system could have said so.
+  PYTHONPATH="$ROOT/vendor/agentic-core:$ROOT/vendor:$ROOT" "$PY" - <<'PYEOF'
+from pathlib import Path
+from aries.runtime.version import source
+build = source()
+stamp = Path("shell/aries@aries.local/BUILD")
+stamp.write_text(f"{build['shell_build']}\n{build['described']}\n")
+print(f"build {build['shell_build']} ({build['described']})")
+PYEOF
+}
+
+case "${1:-status}" in
+  generate) generate ;;
+
+  icons)
+    # PNGs, not just the SVG. This machine's gdk-pixbuf has no registered SVG
+    # loader, so an SVG icon resolves in the theme and renders as nothing — the
+    # dock showed a blank slot and the panel mark drew air, both silently.
+    /usr/bin/python3 - <<'PYEOF'
+import importlib.util, os, sys
+spec = importlib.util.spec_from_file_location("mark", "aries/shell/mark.py")
+mark = importlib.util.module_from_spec(spec); spec.loader.exec_module(mark)
+for size in mark.SIZES:
+    directory = f"share/icons/hicolor/{size}x{size}/apps"
+    os.makedirs(directory, exist_ok=True)
+    mark.png(f"{directory}/aries.png", size)
+os.makedirs("share/icons/hicolor/scalable/apps", exist_ok=True)
+with open("share/icons/hicolor/scalable/apps/aries.svg", "w") as fh:
+    fh.write(mark.svg())
+print(f"drew {len(mark.SIZES)} PNG sizes and the SVG, all from aries/shell/mark.py")
+PYEOF
+    ;;
+
+  identity)
+    # The ARIES identity in the session: an application entry so the Control
+    # Centre is a real application with a name, an icon and per-screen actions;
+    # the icon at every size; and the backgrounds. All in ~/.local — nothing
+    # system-wide, no sudo, and every one removable by `uninstall`.
+    "$0" icons
+    mkdir -p "$HOME/.local/share/applications" \
+             "$HOME/.local/share/gnome-background-properties"
+    ln -sf "$ROOT/share/applications/aries-control-centre.desktop" \
+           "$HOME/.local/share/applications/aries-control-centre.desktop"
+    ln -sf "$ROOT/share/backgrounds/aries.xml" \
+           "$HOME/.local/share/gnome-background-properties/aries.xml"
+
+    # Whether to install the SCALABLE icon is decided by asking this machine
+    # whether it can rasterise an SVG at all.
+    #
+    # GTK's icon theme PREFERS scalable when it is present. So on a system with
+    # no registered gdk-pixbuf SVG loader, shipping the SVG makes the icon
+    # resolve to a file that renders as nothing — and hides the PNGs that would
+    # have worked. That is exactly what happened here: the theme reported the
+    # icon found, and the dock drew a gap.
+    if /usr/bin/python3 -c "
+import gi, sys
+gi.require_version('GdkPixbuf', '2.0')
+from gi.repository import GdkPixbuf
+try:
+    GdkPixbuf.Pixbuf.new_from_file_at_size('$ROOT/share/icons/hicolor/scalable/apps/aries.svg', 16, 16)
+except Exception:
+    sys.exit(1)
+" 2>/dev/null; then
+      dim "this system can rasterise SVG — installing the scalable icon too"
+      svg_ok="yes"
+    else
+      warn "no registered SVG loader for gdk-pixbuf on this system"
+      dim  "installing PNG sizes only — a scalable icon would be preferred by the"
+      dim  "icon theme and would render as nothing"
+      svg_ok=""
+      rm -f "$HOME/.local/share/icons/hicolor/scalable/apps/aries.svg"
+    fi
+
+    for dir in "$ROOT"/share/icons/hicolor/*/apps; do
+      size="$(basename "$(dirname "$dir")")"
+      if [ "$size" = "scalable" ] && [ -z "$svg_ok" ]; then continue; fi
+      mkdir -p "$HOME/.local/share/icons/hicolor/$size/apps"
+      for icon in "$dir"/*; do
+        [ -e "$icon" ] && ln -sf "$icon" \
+          "$HOME/.local/share/icons/hicolor/$size/apps/$(basename "$icon")"
+      done
+    done
+
+    update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
+    gtk-update-icon-cache -f -t "$HOME/.local/share/icons/hicolor" 2>/dev/null || true
+    bold "identity installed"
+    dim "ARIES now appears as an application, with an icon and its backgrounds."
+    ;;
+
+  wallpaper)
+    case "${2:-aries}" in
+      system) warn "leaving your own wallpaper alone"; exit 0 ;;
+      *)
+        gsettings set org.gnome.desktop.background picture-uri           "file://$ROOT/share/backgrounds/aries-light.svg"
+        gsettings set org.gnome.desktop.background picture-uri-dark           "file://$ROOT/share/backgrounds/aries-dark.svg"
+        gsettings set org.gnome.desktop.background picture-options 'zoom'
+        gsettings set org.gnome.desktop.screensaver picture-uri           "file://$ROOT/share/backgrounds/aries-dark.svg"
+        bold "ARIES backgrounds set (light and dark follow your theme)"
+        dim  "Undo:  gsettings reset org.gnome.desktop.background picture-uri{,-dark}"
+        ;;
+    esac
+    ;;
+
+  install)
+    generate
+    mkdir -p "$(dirname "$DEST")"
+    # A symlink, not a copy: editing the repository IS editing the installed
+    # extension, so there is never a stale copy running while you debug the
+    # file you are looking at.
+    rm -rf "$DEST"
+    ln -s "$SRC" "$DEST"
+    bold "installed  $DEST -> $SRC"
+    dim "GNOME reads the extension list at session start."
+    dim "Next:  ./scripts/aries-shell test     (safe, headless)"
+    dim "Then:  ./scripts/aries-shell enable   (live session)"
+    ;;
+
+  enable)
+    [ -e "$DEST" ] || { warn "not installed — run: ./scripts/aries-shell install"; exit 1; }
+    if gnome-extensions list --enabled 2>/dev/null | grep -q "ubuntu-dock@ubuntu.com"; then
+      warn "ubuntu-dock is enabled; the ARIES dock will stay out of its way."
+      dim  "To use the ARIES dock instead:  gnome-extensions disable ubuntu-dock@ubuntu.com"
+    fi
+    gnome-extensions enable "$UUID" && bold "enabled"
+    dim "If the session was started before 'install', log out and back in first."
+    ;;
+
+  disable)
+    # The fallback. Works from a TTY too, which is the point: if the shell
+    # misbehaves, this is reachable without a working desktop.
+    gnome-extensions disable "$UUID" 2>/dev/null && bold "disabled" || warn "was not enabled"
+    ;;
+
+  uninstall)
+    gnome-extensions disable "$UUID" 2>/dev/null || true
+    rm -rf "$DEST"
+    rm -f "$HOME/.local/share/applications/aries-control-centre.desktop"           "$HOME/.local/share/icons/hicolor/scalable/apps/aries.svg"           "$HOME/.local/share/gnome-background-properties/aries.xml"
+    gsettings reset org.gnome.desktop.background picture-uri 2>/dev/null || true
+    gsettings reset org.gnome.desktop.background picture-uri-dark 2>/dev/null || true
+    bold "removed — the session is plain GNOME again"
+    ;;
+
+  status)
+    bold "ARIES Shell"
+    if [ -L "$DEST" ]; then echo "  installed    $DEST -> $(readlink "$DEST")"
+    elif [ -e "$DEST" ]; then echo "  installed    $DEST (copy)"
+    else echo "  installed    no"; fi
+    # `|| true` throughout: `status` is asked most urgently when something is
+    # wrong, and a status command that exits on the first thing it cannot read
+    # is useless exactly then. (The same lesson as `aries status`, Entry 012.)
+    state=$(gnome-extensions info "$UUID" 2>/dev/null | sed -n 's/^ *State: *//p' || true)
+    echo "  state        ${state:-not known to GNOME (log out and in after installing)}"
+    echo "  session      ${XDG_SESSION_TYPE:-?} · ${XDG_CURRENT_DESKTOP:-?} · GNOME $(gnome-shell --version 2>/dev/null | awk '{print $3}' || true)"
+    if [ -e "$HOME/.local/share/applications/aries-control-centre.desktop" ]; then
+      echo "  identity     application entry, icon and backgrounds installed"
+    else
+      echo "  identity     not installed — ./scripts/aries-shell identity"
+    fi
+    if curl -sf -m 3 http://127.0.0.1:8000/api/aries/shell/status >/dev/null 2>&1; then
+      echo "  ARIES        answering on 127.0.0.1:8000"
+    else
+      echo "  ARIES        not answering — the shell will show that and keep working"
+    fi
+    errs=$(journalctl --user -b --no-pager 2>/dev/null | grep -c "\[ARIES\]" || true)
+    echo "  log lines    ${errs:-0}   (./scripts/aries-shell logs)"
+    ;;
+
+  logs)
+    journalctl --user -b --no-pager 2>/dev/null | grep "\[ARIES\]" | tail -"${2:-40}" || \
+      dim "nothing from the ARIES shell in this boot's journal"
+    ;;
+
+  test)
+    exec "$ROOT/scripts/test-shell.sh" "${2:-25}"
+    ;;
+
+  *)
+    sed -n '2,12p' "$0" | sed 's/^# \{0,1\}//'
+    ;;
+esac

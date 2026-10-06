@@ -1,0 +1,153 @@
+{
+  "suite": "eval/agent_suite",
+  "label": "desktop-recheck",
+  "started_at": "2026-10-03T21:27:49.890456+00:00",
+  "fixture_sha256": "179612486c6f82030cae893b07e838c6f55aea0c23b5f26fb0e0c44f53de1fe9",
+  "seeds_sha256": "12c26ff61e7f5b28d0ffeffb2559d2d2809492848435052614ea1ccdfd5cf1bf",
+  "code_sha256": {
+    "run.py": "9664f9b9fa607c4011833ba15279b55bca9ddf5c581110c1227814ab24395eb8",
+    "checks.py": "551f78c6a760c50c95a19a73f8c703e93eb6ef436c3eb5be3798c02e987bf385",
+    "faults.py": "5b671c4bbbc425bd42a78f07ccd169391c2873ef610841da9d1c4fd3adb7c324",
+    "build_fixture.py": "850d37274a1567db2316c78615df25fa7248a628dbd0061a40dd0e01b2afed2e"
+  },
+  "source_hashes_start": {
+    "aries/workspace/service.py": "3d21ba7a51b35f055cfa3be48766e7bf71a413ea87fb9de437b0fc2e20acf514",
+    "aries/workspace/capabilities.py": "a463764bb31e09eb00aca08091533c55ebf2da2950470ff0aa1e1ad146f0e3af",
+    "aries/workspace/agent.py": "ed38bbc7afced48a1ec980f565d6561906132cd13b2bcaa3b6a14cdf896a6c70",
+    "aries/workspace/agent_planner.py": "d15a9bf1238e688fd5f5e2a3bfcc2ef397c3dbe969e97963d9784e1a4dcd7404",
+    "aries/workspace/verification.py": "d9dfb5174f10743cec343c2fa635012d1458557bc96176e7b28c3ea06e3f6cc9",
+    "aries/workspace/clarification.py": "a355e6811ad4f9e61e1130b6ee3aa55cfe4fb861a77598d1bbbffcc75c2c4f55",
+    "aries/workspace/registry.py": "d7b8f9458afaa7622d79be964b4247da463b8ee46e742376db98fa9b7d6fc6d0",
+    "aries/workspace/system_capabilities.py": "a1b06cb011edf51fca896e8aa724ade9ce2d06ec69a33942aa9613d9ecf41fc6",
+    "aries/workspace/network_capabilities.py": "7044a2538b3587724d6fd800a1eec10c4af538809c33baadd7656542f8d59dfe",
+    "aries/workspace/screen_capabilities.py": "566b0ff3300d14f171599d9bc0cc1315491089690679ed8dd7e8b0cbed6da904",
+    "aries/workspace/keyboard.py": "248b59d28a3a7c47b11b7becf028711dee9b94004716cb759889c6932e12595d",
+    "aries/workspace/media.py": "89e05aede018f97a0273b94c7c46961a3647175fbb68ff686431f299afa05f43",
+    "aries/intelligence/router.py": "70827a0352334b1824aee507a2414f8f62430137f0139abfa7967ea1eca8f382",
+    "aries/api/routes.py": "3ad087be1a914d64459bf1816895f64d615bcec3b8b24f37236a8f154f68ae7e"
+  },
+  "core_invocation_start": "ba7ed03699e84ddea82aa3657be8cdf0",
+  "flags": {
+    "requested": {
+      "ARIES_PRIMARY_LANG": "en",
+      "ARIES_MK_FROZEN": "1",
+      "ARIES_VERIFY_ALL": "1",
+      "ARIES_REACT_LOOP": "1",
+      "ARIES_STATE_SNAPSHOT": "1",
+      "ARIES_CAP_TOPK": "1",
+      "ARIES_PLAN_MEMORY": "1",
+      "ARIES_ROUTER_ABSTAIN": "1",
+      "ARIES_CLARIFY": "1",
+      "ARIES_TRACE_FEWSHOT": "1"
+    },
+    "aries_core_environment": {},
+    "applied_to_api_surface": false,
+    "note": "Flags are set in this process, so the in-process (fault_injected) goals really run with them. The API goals run inside aries-core, whose environment this harness does NOT change: restarting the service is not something an eval suite may do. aries_core_environment above is what the unit actually carries; when it does not match 'requested', treat the API half of this run as the service's own flag state, not as the requested one."
+  },
+  "selected_goal_ids": [],
+  "denominator": 0,
+  "fixture_total": 90,
+  "microphone": "none on this machine; every analog jack reads available: no. Goals were submitted as text to POST /api/aries/workspace, never spoken.",
+  "created_fixture_files": {
+    "root": "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3",
+    "files": [
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-01.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-02.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-03.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-04.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-05.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-06.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-07.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-08.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-09.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-10.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-11.txt",
+      "/home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-12.txt"
+    ]
+  },
+  "audio": {
+    "default_sink_resolves": true,
+    "note": "aries/workspace/media.py addresses @DEFAULT_AUDIO_SINK@. When WirePlumber has no default node, `wpctl get-volume @DEFAULT_AUDIO_SINK@` prints 'Translate ID error' and exits 0, so ARIES's volume path cannot act at all. Volume and mute goals are then a skipped precondition, not a failure."
+  },
+  "baseline": {
+    "volume": 0.4,
+    "muted": false,
+    "volume_source": "@DEFAULT_AUDIO_SINK@",
+    "installed_packages": 1675,
+    "unit_invocations": {}
+  },
+  "goals": [],
+  "models": {
+    "gateway": {
+      "gateway_live": true,
+      "gateway": {
+        "service": "aries-local-model",
+        "backend": {
+          "reachable": true,
+          "model_available": true,
+          "models": [
+            "bge-m3:latest",
+            "qwen2.5:1.5b",
+            "qwen2.5:7b"
+          ]
+        }
+      }
+    },
+    "settings": {
+      "intelligence.cloud_model": "",
+      "intelligence.local_model": "qwen2.5:7b",
+      "intelligence.location": "local",
+      "operator.confirm_model_plans": true,
+      "operator.model_location": "local",
+      "workspace.memory_model": "qwen2.5:7b"
+    }
+  },
+  "counts": {
+    "selected": 0,
+    "attempted": 0,
+    "scored": 0,
+    "pass": 0,
+    "fail": 0,
+    "false_success": 0,
+    "skip": 0,
+    "recovered": 0
+  },
+  "restoration": {
+    "restored": [
+      "volume already 0.40",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-01.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-02.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-03.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-04.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-05.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-06.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-07.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-08.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-09.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-10.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-11.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3/seed-12.txt",
+      "removed /home/stamenovmartin/Documents/ARIES-Agent-Suite-A3"
+    ],
+    "could_not_restore": []
+  },
+  "finished_at": "2026-10-03T21:27:49.957456+00:00",
+  "core_invocation_end": "ba7ed03699e84ddea82aa3657be8cdf0",
+  "source_hashes_end": {
+    "aries/workspace/service.py": "3d21ba7a51b35f055cfa3be48766e7bf71a413ea87fb9de437b0fc2e20acf514",
+    "aries/workspace/capabilities.py": "a463764bb31e09eb00aca08091533c55ebf2da2950470ff0aa1e1ad146f0e3af",
+    "aries/workspace/agent.py": "ed38bbc7afced48a1ec980f565d6561906132cd13b2bcaa3b6a14cdf896a6c70",
+    "aries/workspace/agent_planner.py": "d15a9bf1238e688fd5f5e2a3bfcc2ef397c3dbe969e97963d9784e1a4dcd7404",
+    "aries/workspace/verification.py": "d9dfb5174f10743cec343c2fa635012d1458557bc96176e7b28c3ea06e3f6cc9",
+    "aries/workspace/clarification.py": "a355e6811ad4f9e61e1130b6ee3aa55cfe4fb861a77598d1bbbffcc75c2c4f55",
+    "aries/workspace/registry.py": "d7b8f9458afaa7622d79be964b4247da463b8ee46e742376db98fa9b7d6fc6d0",
+    "aries/workspace/system_capabilities.py": "a1b06cb011edf51fca896e8aa724ade9ce2d06ec69a33942aa9613d9ecf41fc6",
+    "aries/workspace/network_capabilities.py": "7044a2538b3587724d6fd800a1eec10c4af538809c33baadd7656542f8d59dfe",
+    "aries/workspace/screen_capabilities.py": "566b0ff3300d14f171599d9bc0cc1315491089690679ed8dd7e8b0cbed6da904",
+    "aries/workspace/keyboard.py": "248b59d28a3a7c47b11b7becf028711dee9b94004716cb759889c6932e12595d",
+    "aries/workspace/media.py": "89e05aede018f97a0273b94c7c46961a3647175fbb68ff686431f299afa05f43",
+    "aries/intelligence/router.py": "70827a0352334b1824aee507a2414f8f62430137f0139abfa7967ea1eca8f382",
+    "aries/api/routes.py": "3ad087be1a914d64459bf1816895f64d615bcec3b8b24f37236a8f154f68ae7e"
+  },
+  "runtime_changed": false
+}

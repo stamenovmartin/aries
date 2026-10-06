@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+"""Real News Radar/Morning Brief validation; no model calls made by this script."""
+import json, os, sys, urllib.request
+from datetime import datetime, timezone
+from pathlib import Path
+base=os.environ.get('ARIES_API','http://127.0.0.1:8000')+'/api/aries'
+root=Path(__file__).resolve().parents[1]/'experiments/news'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+root.mkdir(parents=True,exist_ok=True)
+def call(path,data=None):
+    req=urllib.request.Request(base+path,data=json.dumps(data).encode() if data is not None else None,headers={'Content-Type':'application/json'})
+    with urllib.request.urlopen(req,timeout=240) as response:return json.load(response)
+def save(name,obj):
+    (root/(name+'.json')).write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n')
+try:
+    run=call('/automations/aries.news/run',{'force':True});save('news-run',run)
+    runs=call('/automations/aries.news/runs?limit=1');save('news-history',runs)
+    items=call('/news/briefing?limit=8')['items'];save('items',items)
+    brief_run=call('/automations/aries.brief/run',{'force':True});save('brief-run',brief_run)
+    brief=call('/brief');save('brief',brief)
+    topics={t for i in items for t in i['topics']}
+    news_section=next((s for s in brief.get('sections',[]) if s['name']=='news'),{})
+    brief_links={i['link'] for i in news_section.get('items',[])}
+    checks={'news_pass':run.get('verdict')=='pass',
+            'ai': 'ai' in topics,'real_madrid':'real madrid' in topics,
+            'macedonia':'macedonia news' in topics,
+            'links':bool(items) and all(i['link'].startswith(('https://','http://')) for i in items),
+            'unique_items':len({i['item_id'] for i in items})==len(items),
+            'brief_pass':brief_run.get('verdict')=='pass',
+            'brief_contains_all_three': all(any(topic in i['topics'] and i['link'] in brief_links for i in items) for topic in ['ai','real madrid','macedonia news'])}
+    result={'checks':checks,'passed':all(checks.values()),'note':'Feed metadata is observed, not independent factual verification. No claim about account-wide token consumption.'}
+    save('result',result)
+    lines=['# ARIES personalized news demo','',*[f'- {k}: {v}' for k,v in checks.items()],'','## Collected briefing','']
+    lines += [f"- [{i['title']}]({i['link']}) — {i['source_id']} — {i['published'] or 'unknown date'}" for i in items]
+    (root/'report.md').write_text('\n'.join(lines)+'\n')
+    print(json.dumps(result,ensure_ascii=False));print(root)
+    sys.exit(0 if result['passed'] else 1)
+except Exception as exc:
+    save('error',{'error':str(exc),'passed':False});print(str(exc),file=sys.stderr);sys.exit(1)

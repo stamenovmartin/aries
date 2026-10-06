@@ -1,0 +1,114 @@
+{
+  "before": {
+    "artifact": "experiments/assistant-benchmark/20261003T112625Z-baseline-today/results.json",
+    "artifact_sha256": "39fca880107d7a6f28f79f82c95942baf644c37aeb80746195bc169dfb52a58e",
+    "started_at": "2026-10-03T11:26:25.915304+00:00",
+    "finished_at": "2026-10-03T11:29:55.173689+00:00",
+    "fixture_sha256": "7607c0b1dbf06bd72485e5c33ed15e081585d5fe1445b471d45df21a7cd47193",
+    "complete": true,
+    "runtime_changed": false,
+    "paused_for_approval": null,
+    "groups": {
+      "all": {
+        "passed": 29,
+        "n": 60
+      },
+      "category:single_read": {
+        "passed": 6,
+        "n": 12
+      },
+      "language:en": {
+        "passed": 21,
+        "n": 30
+      },
+      "language:mk": {
+        "passed": 8,
+        "n": 30
+      },
+      "category:multi_step": {
+        "passed": 8,
+        "n": 16
+      },
+      "category:directory": {
+        "passed": 4,
+        "n": 4
+      },
+      "category:package": {
+        "passed": 8,
+        "n": 8
+      },
+      "category:ambiguous": {
+        "passed": 0,
+        "n": 8
+      },
+      "category:refusal": {
+        "passed": 0,
+        "n": 8
+      },
+      "category:desktop": {
+        "passed": 3,
+        "n": 4
+      }
+    }
+  },
+  "after": {
+    "artifact": "experiments/assistant-benchmark/20261003T113052Z-after-file-parser/results.json",
+    "artifact_sha256": "04a64b19fc6f96a1cd829fb0909e187c6aa29b492bf6491d77e7ffbc678d0e22",
+    "started_at": "2026-10-03T11:30:52.457712+00:00",
+    "finished_at": "2026-10-03T11:34:12.066937+00:00",
+    "fixture_sha256": "7607c0b1dbf06bd72485e5c33ed15e081585d5fe1445b471d45df21a7cd47193",
+    "complete": true,
+    "runtime_changed": false,
+    "paused_for_approval": null,
+    "groups": {
+      "all": {
+        "passed": 44,
+        "n": 60
+      },
+      "category:single_read": {
+        "passed": 12,
+        "n": 12
+      },
+      "language:en": {
+        "passed": 22,
+        "n": 30
+      },
+      "language:mk": {
+        "passed": 22,
+        "n": 30
+      },
+      "category:multi_step": {
+        "passed": 16,
+        "n": 16
+      },
+      "category:directory": {
+        "passed": 4,
+        "n": 4
+      },
+      "category:package": {
+        "passed": 8,
+        "n": 8
+      },
+      "category:ambiguous": {
+        "passed": 0,
+        "n": 8
+      },
+      "category:refusal": {
+        "passed": 0,
+        "n": 8
+      },
+      "category:desktop": {
+        "passed": 4,
+        "n": 4
+      }
+    }
+  },
+  "comparable": true,
+  "limitations": [
+    "60 scoped trials, not overall assistant maturity.",
+    "Generic HTTP refusal and unstructured clarification are not credited.",
+    "File and package cases do not test adaptive planning or ASR.",
+    "Runtime stability covers the recorded core invocation and source hashes only; other clients are not isolated. No causal latency claim.",
+    "No 48-hour stability or acoustic playback acceptance claim."
+  ]
+}

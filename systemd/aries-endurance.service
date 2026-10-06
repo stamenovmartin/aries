@@ -1,0 +1,8 @@
+[Unit]
+Description=ARIES bounded 24-hour evidence sample
+After=aries-core.service
+
+[Service]
+Type=oneshot
+ExecStart=%h/aries/scripts/aries-endurance
+TimeoutStartSec=90

@@ -1,0 +1,28 @@
+--- test_directory_and_search_compare_actual_snapshot
+PASS  directory_state identical independent contents pass
+PASS  directory_state vanished file falsifies the old claim
+PASS  directory_state wrong requested root fails
+PASS  directory_state malformed claim fails
+PASS  file_search identical independent contents pass
+PASS  file_search vanished file falsifies the old claim
+PASS  file_search wrong requested root fails
+PASS  file_search malformed claim fails
+--- test_registered_factory_rejects_empty_and_forged_results
+PASS  system_probe valid observation passes
+PASS  system_probe empty executor claim fails
+PASS  system_probe empty second read fails
+PASS  storage_probe valid observation passes
+PASS  storage_probe empty executor claim fails
+PASS  storage_probe empty second read fails
+PASS  process_probe valid observation passes
+PASS  process_probe empty executor claim fails
+PASS  process_probe empty second read fails
+PASS  task_state valid observation passes
+PASS  task_state empty executor claim fails
+PASS  task_state empty second read fails
+PASS  a real changing CPU sample is not a false disagreement
+PASS  nonfinite measurement cannot verify
+PASS  unobserved highest filesystem is rejected
+PASS  undisclosed truncated process set fails
+PASS  wrong task identity fails
+ALL PASSED

@@ -1,0 +1,78 @@
+Traceback (most recent call last):
+  File "/home/stamenovmartin/aries/vendor/agentic-core/tests/_harness.py", line 56, in run_module
+    asyncio.run(r)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_finish_proposal.py", line 88, in test_permission_revoked_before_finish
+    async def test_permission_revoked_before_finish():await exercise(deny=True)
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_finish_proposal.py", line 76, in exercise
+    check('rejected proposal falls back once to planner',calls==2 and data['agent']['metrics']['automatic_finish_proposals']==1)
+                                                                      ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'automatic_finish_proposals'
+Traceback (most recent call last):
+  File "/home/stamenovmartin/aries/vendor/agentic-core/tests/_harness.py", line 56, in run_module
+    asyncio.run(r)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_finish_proposal.py", line 86, in test_real_read_still_independently_rechecked
+    async def test_real_read_still_independently_rechecked():await exercise()
+                                                             ^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_finish_proposal.py", line 83, in exercise
+    check('automatic proposal is distinct from model telemetry',data['agent']['decisions'][-1]['source']=='contract-evidence')
+                                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'source'
+Traceback (most recent call last):
+  File "/home/stamenovmartin/aries/vendor/agentic-core/tests/_harness.py", line 56, in run_module
+    asyncio.run(r)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_finish_proposal.py", line 87, in test_state_change_requires_replan
+    async def test_state_change_requires_replan():await exercise(change=True)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_finish_proposal.py", line 78, in exercise
+    check('changed file causes failed independent recheck',data['agent']['completion_checks'][0]['met'] is False)
+                                                           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'completion_checks'
+--- test_permission_revoked_before_finish
+PASS  revoked permission prevents automatic success
+FAIL  test_permission_revoked_before_finish: KeyError: 'automatic_finish_proposals'
+--- test_proposal_requires_ordered_proof_not_tool_success
+PASS  ordered proof permits proposal
+PASS  no automatic proposal: order
+PASS  no automatic proposal: missing
+PASS  no automatic proposal: unverified
+PASS  no automatic proposal: wrong-source
+PASS  no automatic proposal: wrong-step
+PASS  no automatic proposal: wrong-path
+PASS  no automatic proposal: unsupported
+PASS  no automatic proposal: rejected
+PASS  rollback returns ordinary planner path
+--- test_real_read_still_independently_rechecked
+FAIL  verified goal finishes with one planner invocation
+FAIL  independent final recheck remains mandatory
+FAIL  test_real_read_still_independently_rechecked: KeyError: 'source'
+--- test_state_change_requires_replan
+FAIL  test_state_change_requires_replan: KeyError: 'completion_checks'
+FAILURES

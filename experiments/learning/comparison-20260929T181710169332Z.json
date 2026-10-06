@@ -1,0 +1,813 @@
+{
+  "fixture_version": "review-relevance-1",
+  "fixture_sha256": "af9ac64791ea65303fd965e96cb7d134cfd0c07271534cc382643f2306b5e65b",
+  "implementation_sha256": "708ccf7efeb015738d7bee3a4f9858002ac80d5b373d64561415aa481c35b808",
+  "scope": "Developer-labelled synthetic review relevance cases; not user judgments or end-to-end task execution.",
+  "versions": {
+    "overlap-v1": {
+      "passed": 15,
+      "total": 20,
+      "precision": 0.6363636363636364,
+      "recall": 1.0,
+      "extra_retrievals": 8,
+      "missed_retrievals": 0,
+      "cases": [
+        {
+          "id": "exact-median",
+          "query": "Build Python median statistics",
+          "expected": [
+            "median"
+          ],
+          "selected": [
+            "median",
+            "csv"
+          ],
+          "passed": false,
+          "elapsed_ms": 0.2004
+        },
+        {
+          "id": "exact-csv",
+          "query": "Build Python CSV parser",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv",
+            "median"
+          ],
+          "passed": false,
+          "elapsed_ms": 0.0185
+        },
+        {
+          "id": "short-median",
+          "query": "Python median",
+          "expected": [
+            "median"
+          ],
+          "selected": [
+            "median"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0157
+        },
+        {
+          "id": "short-csv",
+          "query": "Python CSV",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0145
+        },
+        {
+          "id": "parser-topic",
+          "query": "CSV parser",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.014
+        },
+        {
+          "id": "test-singular",
+          "query": "Python unit test",
+          "expected": [
+            "tests"
+          ],
+          "selected": [
+            "tests"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0144
+        },
+        {
+          "id": "test-plural",
+          "query": "Run Python unit tests",
+          "expected": [
+            "tests"
+          ],
+          "selected": [
+            "tests"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0146
+        },
+        {
+          "id": "generic-python",
+          "query": "Python",
+          "expected": [],
+          "selected": [
+            "median",
+            "csv",
+            "tests"
+          ],
+          "passed": false,
+          "elapsed_ms": 0.0142
+        },
+        {
+          "id": "unrelated-python",
+          "query": "Build Python weather forecast",
+          "expected": [],
+          "selected": [
+            "median",
+            "csv"
+          ],
+          "passed": false,
+          "elapsed_ms": 0.0149
+        },
+        {
+          "id": "climate",
+          "query": "Climate news",
+          "expected": [
+            "news"
+          ],
+          "selected": [
+            "news"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0143
+        },
+        {
+          "id": "new-summary",
+          "query": "Read climate news summary again",
+          "expected": [
+            "news"
+          ],
+          "selected": [
+            "news"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0156
+        },
+        {
+          "id": "unrelated-summary",
+          "query": "Read sports news summary",
+          "expected": [],
+          "selected": [
+            "news"
+          ],
+          "passed": false,
+          "elapsed_ms": 0.0147
+        },
+        {
+          "id": "browser-tab",
+          "query": "Firefox browser tab",
+          "expected": [
+            "browser"
+          ],
+          "selected": [
+            "browser"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0159
+        },
+        {
+          "id": "new-browser",
+          "query": "Open Chromium browser documentation",
+          "expected": [],
+          "selected": [],
+          "passed": true,
+          "elapsed_ms": 0.0144
+        },
+        {
+          "id": "singular-file",
+          "query": "Find duplicate image file",
+          "expected": [
+            "files"
+          ],
+          "selected": [
+            "files"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0145
+        },
+        {
+          "id": "vlc",
+          "query": "Install VLC media player",
+          "expected": [
+            "install"
+          ],
+          "selected": [
+            "install"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0144
+        },
+        {
+          "id": "wrong-app",
+          "query": "Install GIMP image editor",
+          "expected": [],
+          "selected": [],
+          "passed": true,
+          "elapsed_ms": 0.0144
+        },
+        {
+          "id": "calendar",
+          "query": "Calendar meeting agenda",
+          "expected": [
+            "calendar"
+          ],
+          "selected": [
+            "calendar"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.014
+        },
+        {
+          "id": "mk-command",
+          "query": "направи Python CSV parser",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0162
+        },
+        {
+          "id": "empty-request",
+          "query": "",
+          "expected": [],
+          "selected": [],
+          "passed": true,
+          "elapsed_ms": 0.0012
+        }
+      ]
+    },
+    "focused-v2": {
+      "passed": 19,
+      "total": 20,
+      "precision": 0.9333333333333333,
+      "recall": 1.0,
+      "extra_retrievals": 1,
+      "missed_retrievals": 0,
+      "cases": [
+        {
+          "id": "exact-median",
+          "query": "Build Python median statistics",
+          "expected": [
+            "median"
+          ],
+          "selected": [
+            "median"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0326
+        },
+        {
+          "id": "exact-csv",
+          "query": "Build Python CSV parser",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.024
+        },
+        {
+          "id": "short-median",
+          "query": "Python median",
+          "expected": [
+            "median"
+          ],
+          "selected": [
+            "median"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0305
+        },
+        {
+          "id": "short-csv",
+          "query": "Python CSV",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0206
+        },
+        {
+          "id": "parser-topic",
+          "query": "CSV parser",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0202
+        },
+        {
+          "id": "test-singular",
+          "query": "Python unit test",
+          "expected": [
+            "tests"
+          ],
+          "selected": [
+            "tests"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0207
+        },
+        {
+          "id": "test-plural",
+          "query": "Run Python unit tests",
+          "expected": [
+            "tests"
+          ],
+          "selected": [
+            "tests"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.021
+        },
+        {
+          "id": "generic-python",
+          "query": "Python",
+          "expected": [],
+          "selected": [],
+          "passed": true,
+          "elapsed_ms": 0.0321
+        },
+        {
+          "id": "unrelated-python",
+          "query": "Build Python weather forecast",
+          "expected": [],
+          "selected": [],
+          "passed": true,
+          "elapsed_ms": 0.0218
+        },
+        {
+          "id": "climate",
+          "query": "Climate news",
+          "expected": [
+            "news"
+          ],
+          "selected": [
+            "news"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0203
+        },
+        {
+          "id": "new-summary",
+          "query": "Read climate news summary again",
+          "expected": [
+            "news"
+          ],
+          "selected": [
+            "news"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0212
+        },
+        {
+          "id": "unrelated-summary",
+          "query": "Read sports news summary",
+          "expected": [],
+          "selected": [
+            "news"
+          ],
+          "passed": false,
+          "elapsed_ms": 0.0204
+        },
+        {
+          "id": "browser-tab",
+          "query": "Firefox browser tab",
+          "expected": [
+            "browser"
+          ],
+          "selected": [
+            "browser"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0204
+        },
+        {
+          "id": "new-browser",
+          "query": "Open Chromium browser documentation",
+          "expected": [],
+          "selected": [],
+          "passed": true,
+          "elapsed_ms": 0.02
+        },
+        {
+          "id": "singular-file",
+          "query": "Find duplicate image file",
+          "expected": [
+            "files"
+          ],
+          "selected": [
+            "files"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0201
+        },
+        {
+          "id": "vlc",
+          "query": "Install VLC media player",
+          "expected": [
+            "install"
+          ],
+          "selected": [
+            "install"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0206
+        },
+        {
+          "id": "wrong-app",
+          "query": "Install GIMP image editor",
+          "expected": [],
+          "selected": [],
+          "passed": true,
+          "elapsed_ms": 0.0205
+        },
+        {
+          "id": "calendar",
+          "query": "Calendar meeting agenda",
+          "expected": [
+            "calendar"
+          ],
+          "selected": [
+            "calendar"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.0205
+        },
+        {
+          "id": "mk-command",
+          "query": "направи Python CSV parser",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv"
+          ],
+          "passed": true,
+          "elapsed_ms": 0.022
+        },
+        {
+          "id": "empty-request",
+          "query": "",
+          "expected": [],
+          "selected": [],
+          "passed": true,
+          "elapsed_ms": 0.0016
+        }
+      ]
+    },
+    "semantic-v3": {
+      "passed": 8,
+      "total": 20,
+      "precision": 0.3888888888888889,
+      "recall": 1.0,
+      "extra_retrievals": 22,
+      "missed_retrievals": 0,
+      "cases": [
+        {
+          "id": "exact-median",
+          "query": "Build Python median statistics",
+          "expected": [
+            "median"
+          ],
+          "selected": [
+            "median",
+            "csv"
+          ],
+          "passed": false,
+          "elapsed_ms": 994.9789
+        },
+        {
+          "id": "exact-csv",
+          "query": "Build Python CSV parser",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv"
+          ],
+          "passed": true,
+          "elapsed_ms": 53.2443
+        },
+        {
+          "id": "short-median",
+          "query": "Python median",
+          "expected": [
+            "median"
+          ],
+          "selected": [
+            "median",
+            "csv"
+          ],
+          "passed": false,
+          "elapsed_ms": 49.362
+        },
+        {
+          "id": "short-csv",
+          "query": "Python CSV",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv",
+            "median"
+          ],
+          "passed": false,
+          "elapsed_ms": 50.5533
+        },
+        {
+          "id": "parser-topic",
+          "query": "CSV parser",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv"
+          ],
+          "passed": true,
+          "elapsed_ms": 51.4527
+        },
+        {
+          "id": "test-singular",
+          "query": "Python unit test",
+          "expected": [
+            "tests"
+          ],
+          "selected": [
+            "tests",
+            "csv"
+          ],
+          "passed": false,
+          "elapsed_ms": 49.8332
+        },
+        {
+          "id": "test-plural",
+          "query": "Run Python unit tests",
+          "expected": [
+            "tests"
+          ],
+          "selected": [
+            "tests",
+            "csv",
+            "median"
+          ],
+          "passed": false,
+          "elapsed_ms": 50.6717
+        },
+        {
+          "id": "generic-python",
+          "query": "Python",
+          "expected": [],
+          "selected": [
+            "csv",
+            "tests",
+            "median"
+          ],
+          "passed": false,
+          "elapsed_ms": 48.6944
+        },
+        {
+          "id": "unrelated-python",
+          "query": "Build Python weather forecast",
+          "expected": [],
+          "selected": [
+            "csv",
+            "tests",
+            "median"
+          ],
+          "passed": false,
+          "elapsed_ms": 50.0485
+        },
+        {
+          "id": "climate",
+          "query": "Climate news",
+          "expected": [
+            "news"
+          ],
+          "selected": [
+            "news"
+          ],
+          "passed": true,
+          "elapsed_ms": 49.4238
+        },
+        {
+          "id": "new-summary",
+          "query": "Read climate news summary again",
+          "expected": [
+            "news"
+          ],
+          "selected": [
+            "news"
+          ],
+          "passed": true,
+          "elapsed_ms": 50.1709
+        },
+        {
+          "id": "unrelated-summary",
+          "query": "Read sports news summary",
+          "expected": [],
+          "selected": [
+            "news"
+          ],
+          "passed": false,
+          "elapsed_ms": 49.3585
+        },
+        {
+          "id": "browser-tab",
+          "query": "Firefox browser tab",
+          "expected": [
+            "browser"
+          ],
+          "selected": [
+            "browser"
+          ],
+          "passed": true,
+          "elapsed_ms": 49.3702
+        },
+        {
+          "id": "new-browser",
+          "query": "Open Chromium browser documentation",
+          "expected": [],
+          "selected": [
+            "browser"
+          ],
+          "passed": false,
+          "elapsed_ms": 48.9662
+        },
+        {
+          "id": "singular-file",
+          "query": "Find duplicate image file",
+          "expected": [
+            "files"
+          ],
+          "selected": [
+            "files"
+          ],
+          "passed": true,
+          "elapsed_ms": 52.3025
+        },
+        {
+          "id": "vlc",
+          "query": "Install VLC media player",
+          "expected": [
+            "install"
+          ],
+          "selected": [
+            "install"
+          ],
+          "passed": true,
+          "elapsed_ms": 50.185
+        },
+        {
+          "id": "wrong-app",
+          "query": "Install GIMP image editor",
+          "expected": [],
+          "selected": [
+            "install",
+            "files",
+            "csv"
+          ],
+          "passed": false,
+          "elapsed_ms": 51.6509
+        },
+        {
+          "id": "calendar",
+          "query": "Calendar meeting agenda",
+          "expected": [
+            "calendar"
+          ],
+          "selected": [
+            "calendar"
+          ],
+          "passed": true,
+          "elapsed_ms": 49.2949
+        },
+        {
+          "id": "mk-command",
+          "query": "направи Python CSV parser",
+          "expected": [
+            "csv"
+          ],
+          "selected": [
+            "csv",
+            "tests",
+            "median"
+          ],
+          "passed": false,
+          "elapsed_ms": 49.7955
+        },
+        {
+          "id": "empty-request",
+          "query": "",
+          "expected": [],
+          "selected": [
+            "news",
+            "median",
+            "files"
+          ],
+          "passed": false,
+          "elapsed_ms": 61.8947
+        }
+      ]
+    }
+  },
+  "baseline": "overlap-v1",
+  "candidate": "focused-v2",
+  "regressions": [],
+  "improvements": [
+    "exact-median",
+    "exact-csv",
+    "generic-python",
+    "unrelated-python"
+  ],
+  "recommendation": "candidate_on_this_fixture",
+  "promoted": false,
+  "semantic_retrieval_available": true,
+  "against_baseline": {
+    "focused-v2": {
+      "regressions": [],
+      "improvements": [
+        "exact-median",
+        "exact-csv",
+        "generic-python",
+        "unrelated-python"
+      ],
+      "statistics": {
+        "pairs": 20,
+        "improved": 4,
+        "regressed": 0,
+        "accuracy_difference": 0.2,
+        "exact_mcnemar_two_sided_p": 0.125,
+        "baseline_wilson_95": [
+          0.531299122381256,
+          0.8881382985923343
+        ],
+        "candidate_wilson_95": [
+          0.763868806553258,
+          0.9911185511992047
+        ],
+        "interpretation": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+      }
+    },
+    "semantic-v3": {
+      "regressions": [
+        "short-median",
+        "short-csv",
+        "test-singular",
+        "test-plural",
+        "new-browser",
+        "wrong-app",
+        "mk-command",
+        "empty-request"
+      ],
+      "improvements": [
+        "exact-csv"
+      ],
+      "statistics": {
+        "pairs": 20,
+        "improved": 1,
+        "regressed": 8,
+        "accuracy_difference": -0.35,
+        "exact_mcnemar_two_sided_p": 0.0390625,
+        "baseline_wilson_95": [
+          0.531299122381256,
+          0.8881382985923343
+        ],
+        "candidate_wilson_95": [
+          0.21880653237281705,
+          0.6134184992377469
+        ],
+        "interpretation": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+      }
+    }
+  },
+  "statistics": {
+    "pairs": 20,
+    "improved": 4,
+    "regressed": 0,
+    "accuracy_difference": 0.2,
+    "exact_mcnemar_two_sided_p": 0.125,
+    "baseline_wilson_95": [
+      0.531299122381256,
+      0.8881382985923343
+    ],
+    "candidate_wilson_95": [
+      0.763868806553258,
+      0.9911185511992047
+    ],
+    "interpretation": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+  }
+}

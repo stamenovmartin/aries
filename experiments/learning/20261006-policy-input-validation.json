@@ -1,0 +1,6 @@
+{
+  "problem": "Artifact evaluation accepted boolean False as zero cost, null latency, boolean seeds and blank case IDs; a boolean cost candidate was actually admitted as savings in an isolated reproduction.",
+  "change": "Validated trial/assignment identities and finite numeric measurements, retained unknown cost as None, rejected overflowed aggregate efficiency and computed a finite median without overflowing. JSON array assignment pairs accepted explicitly.",
+  "validation": "37 passing assertions in tests/test_policy_evaluation.py; raw log and hashes in experiments/product/policy-input-validation/. git diff --check clean for the two edited files.",
+  "limitations": "Artifact validation only. No runtime deployment, live model calls, service restarts or automatic policy promotion. No claim of 100% maturity or general quality. Shared SESSION_STATE untouched because main Codex owns it."
+}

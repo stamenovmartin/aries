@@ -1,0 +1,18 @@
+
+[1mARIES smoke test[0m
+
+  [32m✓[0m the ARIES service is running
+  [32m✓[0m the API answers
+  [32m✓[0m the database answers
+  [32m✓[0m aries-ui is on PATH  (/home/stamenovmartin/.local/bin/aries-ui)
+  [32m✓[0m the launcher does not exec itself
+  [32m✓[0m it runs the Control Centre module
+  [32m✓[0m the Control Centre imports on the system interpreter
+  [32m✓[0m running 'aries-ui' by name actually starts the Control Centre
+  [32m✓[0m the ARIES shell is installed  (/home/stamenovmartin/.local/share/gnome-shell/extensions/aries@aries.local)
+  [31m✗[0m the ARIES shell is DISABLED — that key overrides the session mode
+      [2mgnome-extensions reset aries@aries.local   then log out and back in[0m
+  [33m![0m the running shell did not report a build id
+  [32m✓[0m typing 'news' resolves to a navigate action
+
+[31m1 critical path(s) broken — ARIES is NOT usable[0m

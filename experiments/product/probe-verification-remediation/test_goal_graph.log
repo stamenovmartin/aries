@@ -1,0 +1,35 @@
+--- test_cancellation_wins_before_graph_creation
+PASS  cancelled parent cannot spawn specialists
+PASS  cancelled expansion creates no orphan children
+--- test_failed_dependency_blocks_downstream
+PASS  terminal failure cannot enable dependent action
+--- test_invalid_graphs_and_resource_escape
+PASS  duplicate unknown or cyclic graph rejected
+PASS  duplicate unknown or cyclic graph rejected
+PASS  duplicate unknown or cyclic graph rejected
+PASS  hallucinated resource mutation or unverifiable goal refused
+PASS  hallucinated resource mutation or unverifiable goal refused
+PASS  hallucinated resource mutation or unverifiable goal refused
+PASS  approval cannot override resource scope
+PASS  executor rejects capability omitted from grant
+PASS  planner catalogue restricted to same grant
+PASS  nested agent cannot widen parent grant
+--- test_root_input_expands_and_verifies_compound_contract
+PASS  two real temporary planner loops completed
+PASS  scoped planners actually overlap
+PASS  root completion follows independent contract
+PASS  parent independently rechecks both requested files
+PASS  each specialist has independently checked evidence
+PASS  read-only agents reserve no desktop lane
+PASS  root accounts child and parent verification
+--- test_temporary_agents_run_through_real_dispatcher
+PASS  two real temporary planner loops completed
+PASS  scoped planners actually overlap
+PASS  root completion follows independent contract
+PASS  parent independently rechecks both requested files
+PASS  each specialist has independently checked evidence
+PASS  read-only agents reserve no desktop lane
+PASS  root accounts child and parent verification
+--- test_unsupported_root_cannot_delegate_unrequested_reads
+PASS  unsupported root stays with ordinary planner, without child authority
+ALL PASSED

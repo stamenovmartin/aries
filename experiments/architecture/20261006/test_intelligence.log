@@ -1,0 +1,89 @@
+--- test_cloud_usage_and_failure
+PASS  explicit cloud path observed
+PASS  native tokens and configured cost recorded
+PASS  no invented savings
+PASS  cloud outage falls back locally
+PASS  failed cloud attempts retained
+--- test_coding_routes_once_and_preserves_structured_boundary
+PASS  coding repair reuses route instead of reclassifying
+PASS  coding uses selected structured provider boundary
+--- test_confidence_background_and_schema
+PASS  high confidence stays local
+PASS  low confidence recommends cloud
+PASS  threshold configurable
+PASS  background cloud prohibited
+PASS  invalid schema rejected not json
+PASS  invalid schema rejected {"intent":"SHELL","c
+PASS  invalid schema rejected {"intent":"CODING","
+PASS  invalid schema rejected {"intent":"CODING","
+PASS  invalid decision fails closed
+PASS  classification cannot authorize execution
+PASS  low importance notification veto is deterministic
+--- test_http_provider_adapters_and_api
+{"ts": "2026-10-06T08:50:52.760958+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T08:50:52.761223+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+{"ts": "2026-10-06T08:50:52.838307+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  Ollama adapter preserves native counts
+PASS  Ollama requests reusable model residency
+{"ts": "2026-10-06T08:50:52.838704+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  alternative local runtime uses compatible protocol
+{"ts": "2026-10-06T08:50:52.854986+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  router integrated through existing API
+{"ts": "2026-10-06T08:50:52.858732+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  usage API available without UI database access
+{"ts": "2026-10-06T08:50:52.873248+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 409 Conflict\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  all-cloud baseline cannot silently become local
+{"ts": "2026-10-06T08:50:52.878509+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 422 Unprocessable Entity\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  API refuses extra executable fields
+PASS  model-off setting also prevents cloud
+--- test_provider_outage_and_loopback
+PASS  nonliteral/exposed URL rejected http://0.0.0.0:11434
+PASS  nonliteral/exposed URL rejected http://192.168.1.5:1
+PASS  nonliteral/exposed URL rejected http://127.0.0.1.evil.test
+PASS  nonliteral/exposed URL rejected https://127.0.0.1
+PASS  nonliteral/exposed URL rejected http://user:pass@127.0.0.1
+PASS  nonliteral/exposed URL rejected http://localhost:1
+PASS  literal loopback accepted
+PASS  outage records fallback recommendation
+PASS  disabled cloud falls back locally
+PASS  fallback can fail closed
+--- test_rules_no_model
+PASS  open YouTube code and intent
+PASS  open Gmail code and intent
+PASS  show system status code and intent
+PASS  open Downloads code and intent
+PASS  run system health code and intent
+PASS  deterministic requests zero LLM
+PASS  system status queue avoids agent
+PASS  no cloud consumption
+--- test_safe_cache_and_service_boundary
+PASS  unverified mapping not cached
+PASS  verified harmless hint cached
+PASS  cache avoids classifier
+PASS  sensitive mappings not learned
+{"ts": "2026-10-06T08:50:53.222386+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 403 Forbidden\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  web origin refused
+{"ts": "2026-10-06T08:50:53.224678+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 422 Unprocessable Entity\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  invalid local payload refused
+{"ts": "2026-10-06T08:50:53.225485+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 503 Service Unavailable\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  gateway health honest on runtime outage
+{"ts": "2026-10-06T08:50:53.225905+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 403 Forbidden\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  LAN peer refused
+--- test_terminal_cloud_protocol_and_boundaries
+PASS  the reviewing agent tools disabled while login retained
+PASS  Codex shell and app tools disabled
+PASS  prompt passed via stdin not executable argv
+PASS  the reviewing agent cached and uncached usage measured separately
+PASS  Codex JSONL native usage parsed
+PASS  CLI failure/tool attempt never becomes success claude-cli
+PASS  CLI failure/tool attempt never becomes success codex-cli
+PASS  CLI failure/tool attempt never becomes success codex-cli
+PASS  CLI login path needs no separate API key/model
+PASS  CLI nominal cost is not billed API cost
+PASS  hung CLI terminated by bounded timeout
+--- test_usage_scope_and_missing_counts
+PASS  known request usage remains a subtotal
+PASS  unknown consumption is not zero
+PASS  external account usage and remaining quota unavailable
+PASS  usage explicitly scoped to ARIES
+ALL PASSED

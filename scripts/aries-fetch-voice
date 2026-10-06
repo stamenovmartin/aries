@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# Fetch a Piper voice into var/models/piper/, in parallel.
+#
+# WHY THIS EXISTS
+# ---------------
+# Same reason as ./scripts/aries-fetch-model: huggingface.co throttles a single
+# connection to ~83 KB/s from here, so a 63 MB voice takes thirteen minutes on
+# one socket and under two over eight. The limit is per-connection, not
+# bandwidth. Piper voices live in a different repository with a different path
+# layout than the Whisper models, which is the only reason this is a second
+# script rather than a flag on the first.
+#
+#   ./scripts/aries-fetch-voice bg_BG-dimitar-medium
+#   ./scripts/aries-fetch-voice en_US-ryan-medium
+set -euo pipefail
+NAME="${1:?usage: aries-fetch-voice <voice-name>, e.g. bg_BG-dimitar-medium}"
+PARTS="${PARTS:-8}"
+BASE="https://huggingface.co/rhasspy/piper-voices/resolve/main"
+cd "$(dirname "$0")/.."
+
+# bg_BG-dimitar-medium -> bg/bg_BG/dimitar/medium
+LOCALE="${NAME%%-*}"; REST="${NAME#*-}"
+DIR="${LOCALE%%_*}/$LOCALE/${REST%-*}/${REST##*-}"
+DEST="var/models/piper/$NAME"
+mkdir -p "$DEST"
+
+if [ ! -s "$DEST/$NAME.onnx.json" ]; then
+  curl -sfL "$BASE/$DIR/$NAME.onnx.json" -o "$DEST/$NAME.onnx.json" || {
+    echo "no such voice upstream: $NAME ($DIR)" >&2; rm -f "$DEST/$NAME.onnx.json"; exit 1; }
+  echo "  $NAME.onnx.json"
+fi
+curl -sfL "$BASE/$DIR/MODEL_CARD" -o "$DEST/MODEL_CARD" 2>/dev/null || true
+
+BIN="$DEST/$NAME.onnx"
+if [ -s "$BIN" ]; then echo "$NAME.onnx already present"; exit 0; fi
+
+SIZE_B=$(curl -sIL "$BASE/$DIR/$NAME.onnx" | awk 'BEGIN{IGNORECASE=1}/^content-length:/{v=$2}END{gsub(/\r/,"",v);print v}')
+[ -n "$SIZE_B" ] || { echo "could not determine $NAME.onnx size" >&2; exit 1; }
+echo "$NAME.onnx: $SIZE_B bytes over $PARTS connections"
+
+CHUNK=$(( (SIZE_B + PARTS - 1) / PARTS ))
+TMP="$DEST/.parts"; mkdir -p "$TMP"; rm -f "$TMP"/part.*
+pids=()
+for i in $(seq 0 $((PARTS-1))); do
+  s=$((i*CHUNK)); e=$((s+CHUNK-1)); [ $e -ge $SIZE_B ] && e=$((SIZE_B-1))
+  [ $s -gt $e ] && continue
+  ( curl -sfL --retry 5 --retry-delay 2 -r "$s-$e" -o "$TMP/part.$(printf '%03d' $i)" "$BASE/$DIR/$NAME.onnx" ) &
+  pids+=($!)
+done
+fail=0; for p in "${pids[@]}"; do wait "$p" || fail=1; done
+[ $fail -eq 0 ] || { echo "a chunk failed; leaving parts for retry" >&2; exit 1; }
+
+cat "$TMP"/part.* > "$BIN"
+GOT=$(stat -c%s "$BIN")
+if [ "$GOT" != "$SIZE_B" ]; then
+  echo "size mismatch: got $GOT expected $SIZE_B" >&2; rm -f "$BIN"; exit 1
+fi
+rm -rf "$TMP"
+echo "wrote $BIN ($GOT bytes)"

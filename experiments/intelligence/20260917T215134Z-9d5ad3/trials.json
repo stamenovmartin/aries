@@ -1,0 +1,291 @@
+{
+  "B": [
+    {
+      "goal": "open YouTube",
+      "expected_level": "code",
+      "expected_intent": "OPEN_URL",
+      "repeat": 0,
+      "route": {
+        "intent": "OPEN_URL",
+        "tool": "browser.open",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.0277
+    },
+    {
+      "goal": "open Gmail",
+      "expected_level": "code",
+      "expected_intent": "OPEN_URL",
+      "repeat": 0,
+      "route": {
+        "intent": "OPEN_URL",
+        "tool": "browser.open",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.0214
+    },
+    {
+      "goal": "show system status",
+      "expected_level": "code",
+      "expected_intent": "SYSTEM_ACTION",
+      "repeat": 0,
+      "route": {
+        "intent": "SYSTEM_ACTION",
+        "tool": "system.status",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.0232
+    },
+    {
+      "goal": "open Downloads",
+      "expected_level": "code",
+      "expected_intent": "FILE_ACTION",
+      "repeat": 0,
+      "route": {
+        "intent": "FILE_ACTION",
+        "tool": "workspace",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.0299
+    },
+    {
+      "goal": "run system health",
+      "expected_level": "code",
+      "expected_intent": "SYSTEM_ACTION",
+      "repeat": 0,
+      "route": {
+        "intent": "SYSTEM_ACTION",
+        "tool": "system.status",
+        "confidence": 1.0,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Existing validated deterministic command mapping",
+        "execution_level": "code",
+        "source": "rule",
+        "blocked_reason": "",
+        "input_tokens": null,
+        "output_tokens": null
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 0.0382
+    },
+    {
+      "goal": "show me something interesting from today's tech news",
+      "expected_level": "local",
+      "expected_intent": "SEARCH_WEB",
+      "repeat": 0,
+      "route": {
+        "intent": "CALENDAR_ACTION",
+        "tool": "none",
+        "confidence": 0.7,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "The request is asking for information from a specific source (today's tech news) rather than a direct action or data extraction.",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 93,
+        "output_tokens": 72
+      },
+      "routing_correct": false,
+      "intent_correct": false,
+      "seconds": 1.4869
+    },
+    {
+      "goal": "Classify this email priority: maintenance completed successfully.",
+      "expected_level": "local",
+      "expected_intent": "CLASSIFY",
+      "repeat": 0,
+      "route": {
+        "intent": "CLASSIFY",
+        "tool": "classifier",
+        "confidence": 0.95,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "The email content indicates a routine update with no urgent issues.",
+        "execution_level": "local",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 94,
+        "output_tokens": 65
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 1.3268
+    },
+    {
+      "goal": "Decide whether to notify me about a routine backup completion.",
+      "expected_level": "local",
+      "expected_intent": "CLASSIFY",
+      "repeat": 0,
+      "route": {
+        "intent": "SEARCH_WEB",
+        "tool": "none",
+        "confidence": 0.7,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "The request is about a system event notification, not a direct action or complex task.",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 96,
+        "output_tokens": 62
+      },
+      "routing_correct": false,
+      "intent_correct": false,
+      "seconds": 1.2205
+    },
+    {
+      "goal": "Extract dates from: the meeting is on 2026-10-05.",
+      "expected_level": "local",
+      "expected_intent": "EXTRACT",
+      "repeat": 0,
+      "route": {
+        "intent": "EXTRACT",
+        "tool": "none",
+        "confidence": 0.95,
+        "requires_cloud": false,
+        "estimated_complexity": "simple",
+        "reason": "Clear request to find dates in the given text",
+        "execution_level": "local",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 104,
+        "output_tokens": 60
+      },
+      "routing_correct": true,
+      "intent_correct": true,
+      "seconds": 1.2
+    },
+    {
+      "goal": "Compare three research papers and evaluate their conflicting methodologies.",
+      "expected_level": "cloud",
+      "expected_intent": "RESEARCH",
+      "repeat": 0,
+      "route": {
+        "intent": "EXTRACT",
+        "tool": "none",
+        "confidence": 0.95,
+        "requires_cloud": true,
+        "estimated_complexity": "complex",
+        "reason": "The user wants to compare and evaluate methodologies of research papers.",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 94,
+        "output_tokens": 58
+      },
+      "routing_correct": true,
+      "intent_correct": false,
+      "seconds": 1.155
+    },
+    {
+      "goal": "Analyze the architecture of a large codebase and identify dependency cycles.",
+      "expected_level": "cloud",
+      "expected_intent": "CODING",
+      "repeat": 0,
+      "route": {
+        "intent": "AUTOMATION",
+        "tool": "none",
+        "confidence": 0.95,
+        "requires_cloud": true,
+        "estimated_complexity": "complex",
+        "reason": "The request involves analyzing a large codebase, which is a complex task requiring cloud resources and advanced tools.",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 98,
+        "output_tokens": 68
+      },
+      "routing_correct": true,
+      "intent_correct": false,
+      "seconds": 1.3053
+    },
+    {
+      "goal": "Produce a research synthesis from conflicting experimental studies.",
+      "expected_level": "cloud",
+      "expected_intent": "RESEARCH",
+      "repeat": 0,
+      "route": {
+        "intent": "SYSTEM_ACTION",
+        "tool": "none",
+        "confidence": 0.95,
+        "requires_cloud": true,
+        "estimated_complexity": "complex",
+        "reason": "The request involves comparing and synthesizing multiple research papers, which requires a comprehensive analysis and understanding of the studies involved.",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 94,
+        "output_tokens": 71
+      },
+      "routing_correct": true,
+      "intent_correct": false,
+      "seconds": 1.426
+    },
+    {
+      "goal": "Solve a complex debugging problem involving an intermittent distributed race condition.",
+      "expected_level": "cloud",
+      "expected_intent": "CODING",
+      "repeat": 0,
+      "route": {
+        "intent": "SEARCH_WEB",
+        "tool": "none",
+        "confidence": 0.95,
+        "requires_cloud": true,
+        "estimated_complexity": "complex",
+        "reason": "The request involves solving a complex technical issue, which typically requires up-to-date information and resources.",
+        "execution_level": "cloud",
+        "source": "local",
+        "blocked_reason": "",
+        "input_tokens": 97,
+        "output_tokens": 66
+      },
+      "routing_correct": true,
+      "intent_correct": false,
+      "seconds": 1.2965
+    }
+  ],
+  "A": []
+}

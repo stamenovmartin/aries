@@ -1,0 +1,10 @@
+--- test_background_memory_yields
+PASS  background decision is still honoured
+PASS  embedding and retrieval run outside the event-loop thread
+PASS  slow model classification runs outside the event-loop thread
+PASS  unrelated API work can progress throughout memory inference
+--- test_model_loading_yields
+PASS  cold model loading does not run on the event loop
+--- test_new_utterance_is_drained_during_inference
+PASS  speech arriving during inference is processed without another wakeup
+ALL PASSED

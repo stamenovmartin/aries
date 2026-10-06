@@ -1,0 +1,11 @@
+{
+  "problem": "Opening an application could create another window even when one already existed; a background or minimised window could be reported as successfully presented.",
+  "change": "Reuse exact shell application identity before launch, choose an already focused or visible window, and focus the same observed window through a separate identity-checked shell command. Unknown inventory and stale targets stop without duplicate launches. Independent verification requires focus and visible state and excludes title-only identity matches. VS Code aliases work in action and verification. Planner guidance distinguishes personal windows from owned browser sessions.",
+  "validation": [
+    "Nine added operator regression checks passed; final operator module passed 103 checks.",
+    "Isolated GNOME integration passed: actual minimised GTK window restored and focused without changing its ID or creating a duplicate; wrong app identity and stale IDs refused. /tmp/aries-window-reuse-shell.log",
+    "Current desktop observation confirmed 5 windows and confirmed the running shell does not yet expose FocusWindow. Backend updated; new shell code installed through the existing repository symlink.",
+    "Final standard suite passed: /tmp/aries-window-reuse-suite-final.log, including 103 operator and 419 UI client checks. Shell read-only observation guard remains enforced separately from focus; build stamp matches source."
+  ],
+  "limitations": "A new login is required to load FocusWindow; no logout was forced. Already-focused reuse works before then; focus requests against the old shell fail with a reason and never launch a replacement. Explicit URL opening remains separate. Exact app IDs may differ between unusual launchers and windows. Inventory is not atomic against a simultaneous manual launch. No personal windows are closed. This records engineering experience, not weight training or human reward."
+}

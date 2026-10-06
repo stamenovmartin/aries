@@ -1,0 +1,128 @@
+{
+  "background_mode": true,
+  "allow_suspend": false,
+  "allow_gpu_jobs": false,
+  "gpu_jobs_note": "the gate is live: any automation declaring heavy GPU work meets it. No automation declares heavy GPU work yet, so nothing is being refused today.",
+  "display": {
+    "state": "off",
+    "detail": "the screen is blanked",
+    "off_after_seconds": 60,
+    "configured_minutes": 1,
+    "will_restore_to": 0
+  },
+  "system": {
+    "awake": true,
+    "session": {
+      "available": true,
+      "id": "1",
+      "type": "wayland",
+      "active": true,
+      "idle": true,
+      "state": "active"
+    }
+  },
+  "inhibitor": {
+    "available": true,
+    "unavailable_reason": null,
+    "active": true,
+    "what": "sleep",
+    "mode": "block",
+    "held_by_aries": [
+      {
+        "who": "ARIES",
+        "uid": "1000",
+        "pid": "325913",
+        "what": "sleep",
+        "mode": "block",
+        "line": "ARIES 1000 stamenovmartin 325913 systemd-inhibit sleep ARIES Background Mode is on — automations keep running while the display is off block"
+      }
+    ],
+    "other_sleep_blockers": []
+  },
+  "suspend_policy": {
+    "sleep-inactive-ac-type": "nothing",
+    "sleep-inactive-ac-timeout": "3600",
+    "sleep-inactive-battery-type": "suspend",
+    "sleep-inactive-battery-timeout": "900"
+  },
+  "effect": "this machine is already set never to suspend on mains power, so the inhibitor changes nothing while it is plugged in — it matters on battery",
+  "resources": {
+    "measurement": {
+      "cpu_pct": 6.2,
+      "cpu_unavailable": null,
+      "cpu_window": "since the previous check",
+      "gpu_pct": 4.0,
+      "gpu_subject": "gpu0",
+      "gpu_unavailable": null,
+      "temperature_celsius": 48.0,
+      "temperature_subject": "pch_cannonlake",
+      "temperature_unavailable": null,
+      "measured_at": "2026-09-19T02:06:14.795883"
+    },
+    "limits": {
+      "temperature_celsius": 80,
+      "cpu_pct": 70,
+      "gpu_pct": 70,
+      "heavy_job_max_minutes": 20,
+      "resume_margin_celsius": 5,
+      "clear_checks": 2,
+      "allow_heavy_cpu": false,
+      "allow_gpu_jobs": false
+    },
+    "classes": [
+      {
+        "name": "light",
+        "title": "Lightweight",
+        "description": "Reading files, fetching feeds, arithmetic over rows. Costs a fraction of one core for seconds. Always allowed, including while the display is off.",
+        "heavy": false,
+        "permission_setting": null,
+        "watches": [],
+        "budgeted": false,
+        "status": "allowed",
+        "why": "always runs, including while the display is off"
+      },
+      {
+        "name": "inference_light",
+        "title": "Lightweight inference",
+        "description": "A model answering a bounded question — classification, a short summary. Allowed while the display is off; it is not a sustained load.",
+        "heavy": false,
+        "permission_setting": null,
+        "watches": [],
+        "budgeted": false,
+        "status": "allowed",
+        "why": "always runs, including while the display is off"
+      },
+      {
+        "name": "heavy_cpu",
+        "title": "Sustained high CPU",
+        "description": "Work that will hold several cores busy for minutes — indexing, a large local model, a full repository analysis. Blocked while the display is off unless enabled, and budgeted when it is.",
+        "heavy": true,
+        "permission_setting": "power.allow_heavy_cpu",
+        "watches": [
+          "cpu",
+          "temperature"
+        ],
+        "budgeted": true,
+        "status": "blocked",
+        "why": "not enabled for while the display is off"
+      },
+      {
+        "name": "heavy_gpu",
+        "title": "Sustained GPU",
+        "description": "Work that will hold the GPU busy — local model inference or training. Blocked while the display is off unless enabled, and budgeted when it is.",
+        "heavy": true,
+        "permission_setting": "power.allow_gpu_jobs",
+        "watches": [
+          "gpu",
+          "temperature"
+        ],
+        "budgeted": true,
+        "status": "blocked",
+        "why": "not enabled for while the display is off"
+      }
+    ],
+    "display_off": true,
+    "running_heavy": [],
+    "events": []
+  }
+}

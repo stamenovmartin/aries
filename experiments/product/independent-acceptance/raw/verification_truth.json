@@ -1,0 +1,70 @@
+{
+  "generated_from": "experiments/product/independent-acceptance/verification_truth.py",
+  "commit": "",
+  "scope": "EVERY goal in the ledger, not a capped sample",
+  "why_this_file_exists": "aries/analytics takes the newest Window.goal_scan=500 goals within the window (RECENT_GOALS ... LIMIT :cap). With 8,025 goals that is 6.2%. The two verification metrics do not emit the `truncated` flag the Window docstring promises; only analytics/outcomes.py:135 does. So the published figures are a moving sample reported as a total.",
+  "totals": {
+    "goals": 8109,
+    "steps": 8562,
+    "steps_by_verification_status": {
+      "verified": 1054,
+      "pending": 335,
+      "verification_failed": 2,
+      "unverifiable": 181,
+      "not_run": 88
+    }
+  },
+  "verification": {
+    "reached_a_verifier": 1056,
+    "verified": 1054,
+    "contradicted": 2,
+    "contradiction_rate": {
+      "numerator": 2,
+      "denominator": 1056,
+      "value": 0.00189,
+      "wilson_95": [
+        0.0005,
+        0.0069
+      ],
+      "of": "steps whose verifier returned a verdict"
+    }
+  },
+  "by_verifier_class": {
+    "INDEPENDENT": {
+      "verified": 126,
+      "contradicted": 1,
+      "total": 127,
+      "contradiction_rate": 0.00787
+    },
+    "OUTSIDE_REGISTRY": {
+      "verified": 763,
+      "contradicted": 0,
+      "total": 763,
+      "contradiction_rate": 0.0
+    },
+    "SELF_REPORT": {
+      "verified": 59,
+      "contradicted": 1,
+      "total": 60,
+      "contradiction_rate": 0.01667
+    },
+    "TRIVIAL": {
+      "verified": 106,
+      "contradicted": 0,
+      "total": 106,
+      "contradiction_rate": 0.0
+    }
+  },
+  "the_number_that_should_be_quoted": {
+    "statement": "Of steps whose verifier could structurally return a negative verdict, this share were contradicted.",
+    "falsifiable_steps": 127,
+    "unfalsifiable_steps": 166,
+    "outside_the_m14_registry": 763,
+    "caution": "OUTSIDE_REGISTRY steps ran through the older deterministic vocabulary and were NOT classified. No claim is made about them in either direction."
+  },
+  "drift_observed": {
+    "2026-10-04": "325/381 = 85.3%",
+    "2026-10-06": "290/377 = 76.9%",
+    "note": "same endpoint, same window parameter, two days apart"
+  }
+}

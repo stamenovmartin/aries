@@ -1,0 +1,10 @@
+stateDiagram-v2
+ [*] --> planned
+ planned --> executing
+ executing --> observed
+ executing --> failed
+ observed --> verified
+ observed --> verification_failed
+ verified --> [*]
+ failed --> [*]
+ verification_failed --> [*]

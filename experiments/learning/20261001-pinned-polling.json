@@ -1,0 +1,13 @@
+{
+  "problem": "Pinned task windows fetched the entire workspace every2seconds; live API timeout blocked the goal benchmark. Two read-only stack samples showed JSON serialization on core main thread.",
+  "change": "service.snapshot(goal_id) returns only the exact selected goal and its context/review, with no global desktop survey or unrelated history. Full dashboard path retained.",
+  "validation": [
+    "Same live selected-goal endpoint: before0/5 completed within8seconds; after5/5, median0.0078s,12147bytes. Exact selected result present in all5.",
+    "6focused polling assertions and existing workspace regression pass. Deployed via maintenance drain using extended request timeout, no forced interruption or closing user windows.",
+    "Interrupted60case benchmark retained;3identified owned active goals cancelled. New full baseline starts after the fix."
+  ],
+  "limitations": [
+    "Desktop relocked between phases, so change in offered load confounds causal latency attribution. Need unlocked comparable-load follow-up.",
+    "Does not close all benchmark, SQLite, voice or planner acceptance items."
+  ]
+}

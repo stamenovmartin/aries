@@ -1,0 +1,83 @@
+{
+  "n": 10,
+  "passed": 10,
+  "failed": 0,
+  "results": [
+    {
+      "case": "20 истовремени повици, таван 5",
+      "expected": 5,
+      "observed": 5,
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "10 истовремени по 300 токени, таван 1000",
+      "expected": 3,
+      "observed": 3,
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "подмирување двапати",
+      "expected": [
+        true,
+        false
+      ],
+      "observed": [
+        true,
+        false
+      ],
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "наплатено токени по подмирување",
+      "expected": 100,
+      "observed": 100,
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "непозната потрошувачка задржува",
+      "expected": true,
+      "observed": true,
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "задржан корен прима ново барање",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "измерено пречекорување задржува",
+      "expected": true,
+      "observed": true,
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "истечен рок",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "повик без цена под таван за цена",
+      "expected": "refuse",
+      "observed": "refuse",
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "повторен create ги менува лимитите",
+      "expected": 10,
+      "observed": 10,
+      "verdict": "PASS",
+      "detail": "on_conflict_do_nothing: вториот повик нема ефект"
+    }
+  ]
+}

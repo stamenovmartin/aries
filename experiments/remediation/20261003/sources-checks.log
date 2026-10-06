@@ -1,0 +1,109 @@
+/home/stamenovmartin/aries/tests/test_sources.py:282: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  r.last_sync_at = datetime.utcnow() - timedelta(minutes=r.poll_interval_minutes * 5)
+--- test_add_and_refuse
+PASS  a source gets a readable slug
+PASS  topics are normalised
+PASS  the type's default poll interval is applied
+PASS  a second source with the same name gets a distinct slug
+PASS  the same location cannot be registered twice
+PASS  a folder outside the exclusions is accepted
+PASS  a capability the type does not have is refused
+--- test_connector_form
+PASS  a connector source splits into connector and target
+PASS  a connector source without a target is refused
+PASS  and one without a connector is refused
+--- test_excluded_and_system_paths
+PASS  a path inside privacy.excluded_paths is refused
+PASS  traversal back into an excluded path is refused
+PASS  /etc is refused as a source
+PASS  /proc is refused as a source
+PASS  /sys is refused as a source
+PASS  a relative path is refused — it has no single meaning
+PASS  a path that does not exist is refused
+PASS  a file is not a folder
+PASS  a good folder is accepted
+--- test_feedback_signals
+PASS  engagement is counted
+PASS  a correction is counted
+PASS  feedback for an unknown source is reported, not raised
+--- test_for_agent_filters
+PASS  a blocked source is absent, not flagged
+PASS  a disabled source is absent
+PASS  a type whose connector does not exist yet is absent
+PASS  a source tagged with another topic is excluded
+PASS  a source tagged with the topic is included
+PASS  an untagged source is treated as general purpose
+PASS  a source not permitted for the capability is excluded
+PASS  filtering by type works
+--- test_health_states
+PASS  a source that has never been read is 'unused'
+PASS  and its reliability is unknown, not zero
+PASS  after a good read it is 'ok'
+PASS  the useful rate is computed
+PASS  the duplicate rate is computed
+PASS  three consecutive failures make it 'failing'
+PASS  the reason quotes the error
+PASS  reliability reflects the failures
+PASS  one success clears the failure streak
+PASS  a source not read for far longer than its interval is 'stale'
+--- test_max_sources
+PASS  the source limit is enforced
+--- test_observation_decides_ties_only
+PASS  among equally-ranked sources, the more useful one is preferred
+--- test_privacy_excluded_paths_are_enforced_by_the_registry
+PASS  a folder inside privacy.excluded_paths cannot be registered
+PASS  and can once the user removes the exclusion
+--- test_privacy_mode_keeps_work_local
+PASS  both are offered normally
+PASS  privacy mode removes every outbound source
+PASS  and a caller can still ask for local only explicitly
+--- test_summary
+PASS  the summary counts sources
+PASS  and says how many reach off the machine
+PASS  and groups by type
+--- test_symlink_is_resolved_before_it_is_judged
+PASS  a symlink into an excluded path is refused
+PASS  and a permitted symlink is stored resolved, not as the link
+--- test_types_are_declared
+PASS  the 'rss' source type exists
+PASS  the 'website' source type exists
+PASS  the 'api' source type exists
+PASS  the 'directory' source type exists
+PASS  the 'documents' source type exists
+PASS  the 'repository' source type exists
+PASS  the 'database' source type exists
+PASS  the 'email' source type exists
+PASS  the 'calendar' source type exists
+PASS  a local folder is not outbound
+PASS  an RSS feed is outbound
+PASS  types not yet usable say so rather than pretending
+PASS  an unknown type raises with the list of known ones
+--- test_unproven_sources_are_not_buried
+PASS  an unproven source outranks one with a proven bad record
+PASS  its useful rate is reported as unknown, not as zero
+--- test_update_and_remove
+PASS  priority can be changed
+PASS  topics can be changed
+PASS  a source can be disabled
+PASS  moving a source to a forbidden location is refused
+PASS  the location is unchanged after a refused move
+PASS  a source can be removed
+PASS  removing an unknown source reports false
+--- test_url_rules
+PASS  a normal https feed is accepted
+PASS  file:// is refused
+PASS  a URL with no scheme is refused
+PASS  credentials embedded in a URL are refused — they would be stored in plain text
+PASS  'localhost' is refused by default
+PASS  '127.0.0.1' is refused by default
+PASS  '192.168.1.5' is refused by default
+PASS  '10.0.0.1' is refused by default
+PASS  '169.254.169.254' is refused by default
+PASS  '[::1]' is refused by default
+PASS  the cloud metadata address is named as such
+PASS  but a private address is allowed when the user explicitly allows it
+PASS  a public hostname passes (it is not resolved here — see the docstring)
+--- test_user_priority_beats_observed_performance
+PASS  a source the user ranked HIGH comes first despite a terrible record
+PASS  and the excellent one the user ranked LOW comes second
+ALL PASSED

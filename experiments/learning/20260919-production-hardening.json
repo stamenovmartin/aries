@@ -1,0 +1,6 @@
+{
+  "problem": "Production hardening: updater could race queued work; desktop focus accepted requests as success; invalid window responses could appear as an empty desktop. User explicitly requested no automatic screen locking.",
+  "change": "Exclusive expiring maintenance lease gates workspace/automation execution, drains active work before core restart, and preserves queued tasks. Strict desktop observations and independent exact-window focus check. Read-only readiness command and documentation. Disabled GNOME automatic screen locking and Ubuntu lock-on-suspend.",
+  "validation": "Full scripts/test.sh ALL SUITES PASSED. Maintenance unit tests 6 checks. Real API run proved forced automation held and queued system task persisted across core restart then reached done. Actual update command passed. Readiness 7/8: desktop protocol remains unavailable. Both lock settings read back false. Services active; endurance still running with healthy sampled availability.",
+  "limitations": "Not production-complete or a literal general Jarvis. Current GNOME desktop bridge still lacks FocusWindow when unlocked and is unavailable while locked. Maintenance protects single-core queued workspace/automation paths, not every direct API interaction. General goal verification, dynamic-agent recovery, summary quality and independent benchmark remain unfinished."
+}

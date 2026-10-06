@@ -1,0 +1,35 @@
+{
+  "started_at": "2026-10-03T13:54:36.148965+00:00",
+  "requested_hours": 0.001,
+  "completed": true,
+  "records_n": 0,
+  "locked_records_n": 0,
+  "polls_n": 5,
+  "errors_n": 0,
+  "gaps_n": 0,
+  "max_poll_gap_seconds": 1.055318544000329,
+  "source_hashes_start": {
+    "vendor/agentic-core/agentic_core/database/base.py": "ec0f9fbe9a66579d643d12fe959f23815e4bfd840f292691ad054ae799e03972",
+    "aries/intelligence/generation.py": "4b6f8f8ca2bd7268025470d28293bde891ed8d8fb743ec59cf6597665469470c",
+    "aries/workspace/orchestration.py": "336db14fbcdf1a663e08296955698047b05f824d19091774f09770b3e4680dad"
+  },
+  "source_change_polls_n": 0,
+  "core_inactive_polls_n": 0,
+  "core_invocation_changes_n": 0,
+  "coverage_complete": false,
+  "lock_free_acceptance": false,
+  "limitations": [
+    "Counts matching journal records, not distinct incidents or SQL write attempts.",
+    "48-hour collection is not a repair before/after pair. Zero records, gaps or downtime cannot prove stability.",
+    "Only listed service journals observed; no intentionally induced production lock.",
+    "Collector must stay running; a new run is required after interruption."
+  ],
+  "last_poll_at": "2026-10-03T13:54:39.763788+00:00",
+  "elapsed_seconds": 3.615,
+  "finished_at": "2026-10-03T13:54:39.763967+00:00",
+  "source_hashes_end": {
+    "vendor/agentic-core/agentic_core/database/base.py": "ec0f9fbe9a66579d643d12fe959f23815e4bfd840f292691ad054ae799e03972",
+    "aries/intelligence/generation.py": "4b6f8f8ca2bd7268025470d28293bde891ed8d8fb743ec59cf6597665469470c",
+    "aries/workspace/orchestration.py": "336db14fbcdf1a663e08296955698047b05f824d19091774f09770b3e4680dad"
+  }
+}

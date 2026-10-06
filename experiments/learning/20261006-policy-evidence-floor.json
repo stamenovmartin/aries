@@ -1,0 +1,6 @@
+{
+  "problem": "An isolated reproduction showed the artifact gate admitted token savings even when every candidate trial failed or every success was unverified.",
+  "change": "Require at least one verified-success candidate record for admission and expose the missing-evidence reason. Real verified recovery can still qualify; failures remain in the paired denominator.",
+  "validation": "43 passing assertions in tests/test_policy_evaluation.py, including cheaper failures, unverified claims, verified recovery and mixed outcomes. Evidence experiments/product/policy-evidence-floor/results.json and checks.log. Edited files pass git diff --check.",
+  "limitations": "The evaluator trusts supplied trial records; this does not authenticate their evidence or provide a sufficient production-quality threshold. Artifact gate only, no model/service/deployment changes and no autonomous evolution. Main SESSION_STATE remains untouched."
+}

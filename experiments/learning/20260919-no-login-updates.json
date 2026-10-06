@@ -1,0 +1,6 @@
+{
+  "problem": "Repeated logout advice conflated cached extension versions, missing capabilities and a locked session; user wants uninterrupted updates.",
+  "change": "Added aries-update for backend restart/readiness without session restart, explicit desktop capability API, capability-based smoke check, and measured ScreenSaver lock diagnosis. Missing features still fail honestly.",
+  "validation": "Operator tests ALL PASSED including protocol negotiation and locked-session regressions; API tests ALL PASSED; live backend update succeeded without logout; actual API reports session_locked true.",
+  "limitations": "GNOME 50.1 rejects ReloadExtension and Eval is disabled; security settings unchanged. This does not provide live replacement of arbitrary GNOME extension code. Existing unlocked legacy bridge lacks FocusWindow. Background operation is independent; full desktop support is not claimed."
+}

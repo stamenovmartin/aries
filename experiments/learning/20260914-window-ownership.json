@@ -1,0 +1,9 @@
+{
+  "problem": "Temporary agent browsers accumulated after completion. Historical step output did not describe current open/closed state.",
+  "change": "Browser worker records originating goal. Supervisor closes agent-owned contexts on terminal outcomes, retains approval-paused sessions and direct user browsing. Monitor and planner observe live desktop/browser state. Temporary successful result windows dismiss after 45 seconds unless pinned; history retains evidence.",
+  "validation": [
+    "Real kernel.org goal 5/5: title verified, owned browser closed, no owned live session, source result retained. experiments/workspace/verify_browser_cleanup.json",
+    "Ownership tests: never close borrowed session, direct browser, or approval-paused browser; repeat cleanup does not close twice."
+  ],
+  "limitations": "Do not close personal apps or unsaved editors as cleanup. Window observation can be unavailable and must never be treated as all windows closed. Browser session ownership is not universal desktop app ownership."
+}

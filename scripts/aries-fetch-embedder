@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# Fetch the sentence embedder into var/models/, in parallel.
+#
+# WHY THIS EXISTS
+# ---------------
+# Same reason as ./scripts/aries-fetch-model: huggingface.co throttles a single
+# connection to ~83 KB/s from here, so a 279 MB blob over one socket is a
+# ~55-minute wait. Eight parallel range requests against the same host get
+# several hundred KB/s, which proves the limit is per-connection and not
+# bandwidth. Large files come down in ranges; small ones go over one socket.
+#
+#   ./scripts/aries-fetch-embedder                 # int8, what ARIES loads
+#   ./scripts/aries-fetch-embedder fp32            # the unquantised graph
+set -euo pipefail
+VARIANT="${1:-int8}"
+PARTS="${PARTS:-8}"
+REPO="intfloat/multilingual-e5-base"
+BASE="https://huggingface.co/$REPO/resolve/main"
+cd "$(dirname "$0")/.."
+DEST="var/models/multilingual-e5-base"
+mkdir -p "$DEST"
+
+case "$VARIANT" in
+  int8) GRAPH="onnx/model_qint8_avx512_vnni.onnx"; LOCAL="model_int8.onnx" ;;
+  fp32) GRAPH="onnx/model.onnx";                   LOCAL="model.onnx" ;;
+  *) echo "usage: $0 [int8|fp32]" >&2; exit 2 ;;
+esac
+
+# The tokenizer is 17 MB (a SentencePiece vocabulary inside a `tokenizers`
+# JSON), which is big enough to be worth ranging too.
+fetch_parallel() {  # $1 remote path, $2 local name
+  local remote="$1" local_name="$2" dest="$DEST/$2"
+  [ -s "$dest" ] && { echo "  $local_name already present"; return 0; }
+  local total
+  total=$(curl -sIL "$BASE/$remote" | awk 'BEGIN{IGNORECASE=1}/^content-length:/{v=$2}END{gsub(/\r/,"",v);print v}')
+  [ -n "$total" ] || { echo "could not size $remote" >&2; return 1; }
+  echo "  $local_name: $total bytes over $PARTS connections"
+  local chunk=$(( (total + PARTS - 1) / PARTS )) tmp="$DEST/.parts-$2"
+  mkdir -p "$tmp"; rm -f "$tmp"/part.*
+  local pids=() i s e
+  for i in $(seq 0 $((PARTS-1))); do
+    s=$((i*chunk)); e=$((s+chunk-1)); [ $e -ge $total ] && e=$((total-1))
+    [ $s -gt $e ] && continue
+    ( curl -sfL --retry 5 --retry-delay 2 -r "$s-$e" -o "$tmp/part.$(printf '%03d' $i)" "$BASE/$remote" ) &
+    pids+=($!)
+  done
+  local fail=0 p; for p in "${pids[@]}"; do wait "$p" || fail=1; done
+  [ $fail -eq 0 ] || { echo "  a chunk failed; parts kept for retry" >&2; return 1; }
+  cat "$tmp"/part.* > "$dest"
+  local got; got=$(stat -c%s "$dest")
+  [ "$got" = "$total" ] || { echo "  size mismatch: $got != $total" >&2; rm -f "$dest"; return 1; }
+  rm -rf "$tmp"; echo "  wrote $dest ($got bytes)"
+}
+
+for f in config.json tokenizer_config.json special_tokens_map.json; do
+  [ -s "$DEST/$f" ] || curl -sfL "$BASE/onnx/$f" -o "$DEST/$f"
+done
+fetch_parallel onnx/tokenizer.json tokenizer.json
+fetch_parallel "$GRAPH" "$LOCAL"
+echo "embedder ready in $DEST"

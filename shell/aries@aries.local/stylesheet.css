@@ -1,0 +1,337 @@
+        /* ARIES Shell — GENERATED from aries/shell/tokens.py. Do not edit.
+         *
+         * Regenerate with:  ./scripts/aries-shell generate
+         * A test asserts this file matches the tokens, so an edit here is
+         * reverted by the next generate and fails the suite in between.
+         *
+         * GNOME Shell's CSS is a subset: no variables, no calc(), no nesting.
+         * Everything below is resolved from the tokens at generation time.
+         */
+
+        /* ── the panel ─────────────────────────────────────────────────── */
+        .aries-panel-button {
+            -natural-hpadding: 12px;
+            -minimum-hpadding: 8px;
+            border-radius: 6px;
+            transition-duration: 90ms;
+        }
+        .aries-panel-label { font-size: 10pt; font-weight: 400; }
+        .aries-panel-dim   { font-size: 8.5pt; font-weight: 500; }
+        .aries-panel-dot {
+            width: 8px; height: 8px; border-radius: 999px;
+            margin-right: 8px;
+        }
+        .aries-workspace-pill {
+            width: 7px; height: 7px; border-radius: 999px;
+            margin: 0 3px;
+            transition-duration: 160ms;
+        }
+        .aries-workspace-pill-active { width: 18px; }
+
+        /* Compact application icons beside the ARIES mark. */
+.aries-top-apps { spacing: 2px; margin: 0 6px; }
+.aries-top-app { padding: 2px 5px; border-radius: 5px; }
+.aries-top-app:hover, .aries-top-app:focus { background-color: rgba(128,128,128,0.22); }
+
+/* ── the dock ──────────────────────────────────────────────────── */
+        .aries-dock {
+            padding: 8px;
+            border-radius: 18px;
+            border-width: 1px;
+            spacing: 4px;
+        }
+        .aries-dock-item {
+            padding: 4px;
+            border-radius: 12px;
+            transition-duration: 90ms;
+        }
+        .aries-dock-running {
+            width: 5px; height: 5px; border-radius: 999px;
+            margin-top: 3px;
+        }
+        .aries-dock-running-wide { width: 14px; }
+
+        /* ── command bar and launcher ──────────────────────────────────── */
+        .aries-command {
+            width: 680px;
+            border-radius: 18px;
+            border-width: 1px;
+            padding: 8px;
+        }
+        .aries-command-entry {
+            font-size: 12pt; font-weight: 600;
+            padding: 12px 18px;
+            border-radius: 12px;
+            border-width: 0;
+        }
+        .aries-command-entry StLabel.hint { font-size: 12pt; font-weight: 600; }
+        .aries-command-list { padding: 4px; }
+        .aries-command-row {
+            padding: 8px 12px;
+            border-radius: 12px;
+            spacing: 12px;
+            transition-duration: 90ms;
+        }
+        .aries-command-title { font-size: 10pt; font-weight: 600; }
+        .aries-command-detail { font-size: 8.5pt; font-weight: 500; }
+        .aries-command-kind {
+            font-size: 8.5pt; font-weight: 500;
+            padding: 1px 8px;
+            border-radius: 999px;
+        }
+        .aries-command-footer {
+            font-size: 8.5pt; font-weight: 500;
+            padding: 8px 12px;
+        }
+
+        /* ── panels shared by the notification centre and quick settings ── */
+        .aries-card {
+            border-radius: 12px;
+            border-width: 1px;
+            padding: 12px;
+            spacing: 8px;
+        }
+        .aries-card-title { font-size: 10pt; font-weight: 600; }
+        .aries-card-body  { font-size: 10pt; font-weight: 400; }
+        .aries-card-meta  { font-size: 8.5pt; font-weight: 500; }
+        .aries-empty      { font-size: 10pt; font-weight: 400; padding: 24px; }
+
+        /* ── focus: one ring, always visible ───────────────────────────── */
+        .aries-focusable:focus {
+            border-width: 2px;
+            border-radius: 12px;
+        }
+
+/* ── dark ──────────────────────────────────────────────────── */
+.aries-surface        { background-color: rgba(20, 22, 26, 0.800);
+                          border-color: rgba(255, 255, 255, 0.122);
+                          color: #f2f4f8; }
+.aries-raised         { background-color: rgba(27, 31, 39, 0.984);
+                          border-color: rgba(255, 255, 255, 0.122);
+                          color: #f2f4f8;
+                          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45); }
+.aries-panel-button:hover,
+.aries-dock-item:hover,
+.aries-command-row:hover { background-color: #262a32; }
+.aries-command-row:selected { background-color: #5b9dff;
+                                color: #0b1220; }
+.aries-command-row:selected .aries-command-detail {
+                                color: #0b1220; }
+.aries-command-entry   { background-color: #262a32;
+                          color: #f2f4f8; }
+.aries-command-kind    { background-color: #262a32;
+                          color: rgba(242, 244, 248, 0.600); }
+.aries-dim             { color: rgba(242, 244, 248, 0.600); }
+.aries-faint           { color: rgba(242, 244, 248, 0.349); }
+.aries-command-detail,
+.aries-command-footer,
+.aries-card-meta,
+.aries-panel-dim,
+.aries-empty           { color: rgba(242, 244, 248, 0.600); }
+.aries-focusable:focus { border-color: #5b9dff; }
+.aries-workspace-pill  { background-color: rgba(242, 244, 248, 0.349); }
+.aries-workspace-pill-active { background-color: #5b9dff; }
+.aries-dock-running    { background-color: rgba(242, 244, 248, 0.600); }
+.aries-dock-running-wide { background-color: #5b9dff; }
+.aries-sev-ok        { background-color: #4cc38a; }
+.aries-sev-info      { background-color: rgba(242, 244, 248, 0.349); }
+.aries-sev-notice    { background-color: #5b9dff; }
+.aries-sev-warning   { background-color: #f0b429; }
+.aries-sev-critical  { background-color: #ff6b6b; }
+.aries-text-ok       { color: #4cc38a; }
+.aries-text-notice   { color: #5b9dff; }
+.aries-text-warning  { color: #f0b429; }
+.aries-text-critical { color: #ff6b6b; }
+
+/* ── light ──────────────────────────────────────────────────── */
+.aries-light .aries-surface        { background-color: rgba(251, 252, 254, 0.855);
+                          border-color: rgba(10, 15, 26, 0.122);
+                          color: #12151b; }
+.aries-light .aries-raised         { background-color: rgba(253, 254, 255, 0.984);
+                          border-color: rgba(10, 15, 26, 0.122);
+                          color: #12151b;
+                          box-shadow: 0 8px 24px rgba(10, 15, 26, 0.18); }
+.aries-light .aries-panel-button:hover,
+.aries-light .aries-dock-item:hover,
+.aries-light .aries-command-row:hover { background-color: #eef1f6; }
+.aries-light .aries-command-row:selected { background-color: #1f6feb;
+                                color: #ffffff; }
+.aries-light .aries-command-row:selected .aries-command-detail {
+                                color: #ffffff; }
+.aries-light .aries-command-entry   { background-color: #eef1f6;
+                          color: #12151b; }
+.aries-light .aries-command-kind    { background-color: #eef1f6;
+                          color: rgba(18, 21, 27, 0.600); }
+.aries-light .aries-dim             { color: rgba(18, 21, 27, 0.600); }
+.aries-light .aries-faint           { color: rgba(18, 21, 27, 0.349); }
+.aries-light .aries-command-detail,
+.aries-light .aries-command-footer,
+.aries-light .aries-card-meta,
+.aries-light .aries-panel-dim,
+.aries-light .aries-empty           { color: rgba(18, 21, 27, 0.600); }
+.aries-light .aries-focusable:focus { border-color: #1f6feb; }
+.aries-light .aries-workspace-pill  { background-color: rgba(18, 21, 27, 0.349); }
+.aries-light .aries-workspace-pill-active { background-color: #1f6feb; }
+.aries-light .aries-dock-running    { background-color: rgba(18, 21, 27, 0.600); }
+.aries-light .aries-dock-running-wide { background-color: #1f6feb; }
+.aries-light .aries-sev-ok        { background-color: #1a7f4b; }
+.aries-light .aries-sev-info      { background-color: rgba(18, 21, 27, 0.349); }
+.aries-light .aries-sev-notice    { background-color: #1f6feb; }
+.aries-light .aries-sev-warning   { background-color: #a86b00; }
+.aries-light .aries-sev-critical  { background-color: #c62828; }
+.aries-light .aries-text-ok       { color: #1a7f4b; }
+.aries-light .aries-text-notice   { color: #1f6feb; }
+.aries-light .aries-text-warning  { color: #a86b00; }
+.aries-light .aries-text-critical { color: #c62828; }
+
+/* ══ ARIES over the session theme ═════════════════════════════════
+ * Styles widgets GNOME creates, not ones ARIES creates. `!important`
+ * is required here and only here: Yaru's own panel rules use it.
+ */
+
+/* ── the top bar ───────────────────────────────────────────────── */
+#panel {
+    background-color: #14161a !important;
+    height: 32px !important;
+    font-weight: 400 !important;
+    box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0.122) !important;
+}
+#panel:overview {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+#panel .panel-button {
+    border-radius: 6px !important;
+    border: 0 !important;
+    padding: 0 8px !important;
+    color: rgba(242, 244, 248, 0.600) !important;
+    font-weight: 400 !important;
+    transition-duration: 90ms !important;
+}
+#panel .panel-button:hover {
+    background-color: #262a32 !important;
+    color: #f2f4f8 !important;
+}
+#panel .panel-button:active,
+#panel .panel-button:checked,
+#panel .panel-button:focus {
+    background-color: #5b9dff !important;
+    color: #0b1220 !important;
+}
+/* The clock is the one thing on the bar everyone looks at. */
+#panel .clock-display,
+#panel .clock {
+    font-weight: 500 !important;
+    color: #f2f4f8 !important;
+}
+/* ── the ARIES mark ────────────────────────────────────────────
+ * The one thing on the bar that says whose desktop this is, so it is
+ * the one thing allowed to use the accent colour at rest. Everything
+ * else on the panel is foreground-dim until you touch it.
+ */
+#panel .aries-mark-button {
+    padding: 0 12px !important;
+}
+#panel .aries-mark-icon {
+    color: #5b9dff;
+    margin-right: 8px;
+}
+#panel .aries-mark {
+    font-weight: 600;
+    font-size: 10pt;
+    letter-spacing: 1.4px;
+    color: #5b9dff;
+}
+/* Pressed state you can actually see — the complaint that prompted it
+ * was "I can't tell when I've clicked it". */
+#panel .aries-mark-button:hover {
+    background-color: #262a32 !important;
+}
+#panel .aries-mark-button:active,
+#panel .aries-mark-button:checked {
+    background-color: #5b9dff !important;
+}
+#panel .aries-mark-button:active .aries-mark,
+#panel .aries-mark-button:active .aries-mark-icon,
+#panel .aries-mark-button:checked .aries-mark,
+#panel .aries-mark-button:checked .aries-mark-icon {
+    color: #0b1220;
+}
+/* GNOME 50 already draws workspace dots inside Activities. ARIES styles
+ * those rather than adding a second set beside them. */
+#panel #panelActivities .workspace-indicator {
+    background-color: rgba(242, 244, 248, 0.349);
+    border-radius: 999px;
+}
+#panel #panelActivities .workspace-indicator:active {
+    background-color: #5b9dff;
+}
+
+/* ── menus, popovers, quick settings ───────────────────────────── */
+.popup-menu-boxpointer,
+.quick-settings {
+    -arrow-border-radius: 18px;
+}
+.popup-menu .popup-menu-content,
+.quick-settings {
+    background-color: rgba(27, 31, 39, 0.984) !important;
+    border: 1px solid rgba(255, 255, 255, 0.122) !important;
+    border-radius: 18px !important;
+    padding: 8px !important;
+}
+.popup-menu-item {
+    border-radius: 6px !important;
+    padding: 8px 12px !important;
+}
+.popup-menu-item:focus,
+.popup-menu-item:hover {
+    background-color: #262a32 !important;
+    color: #f2f4f8 !important;
+}
+.quick-toggle, .quick-menu-toggle, .quick-slider {
+    border-radius: 12px !important;
+}
+
+/* ── notifications ─────────────────────────────────────────────── */
+.message {
+    border-radius: 12px !important;
+    background-color: rgba(27, 31, 39, 0.984) !important;
+    border: 1px solid rgba(255, 255, 255, 0.122) !important;
+}
+.message:hover { background-color: #262a32 !important; }
+.message-list-placeholder { color: rgba(242, 244, 248, 0.349) !important; }
+.notification-banner {
+    border-radius: 12px !important;
+    background-color: rgba(27, 31, 39, 0.984) !important;
+    border: 1px solid rgba(255, 255, 255, 0.122) !important;
+}
+
+/* ── the overview ──────────────────────────────────────────────── */
+#overview { spacing: 18px; }
+.search-entry {
+    border-radius: 999px !important;
+    background-color: rgba(27, 31, 39, 0.984) !important;
+    border: 1px solid rgba(255, 255, 255, 0.122) !important;
+    color: #f2f4f8 !important;
+}
+.search-entry:focus { border: 2px solid #5b9dff !important; }
+.search-section-content,
+.dash-background {
+    background-color: rgba(20, 22, 26, 0.800) !important;
+    border-radius: 18px !important;
+}
+.workspace-thumbnail-indicator {
+    border: 2px solid #5b9dff !important;
+    border-radius: 6px !important;
+}
+
+/* ── modal dialogs and the OSD ─────────────────────────────────── */
+.modal-dialog {
+    border-radius: 18px !important;
+    background-color: rgba(27, 31, 39, 0.984) !important;
+    border: 1px solid rgba(255, 255, 255, 0.122) !important;
+}
+.osd-window {
+    border-radius: 18px !important;
+    background-color: rgba(27, 31, 39, 0.984) !important;
+}

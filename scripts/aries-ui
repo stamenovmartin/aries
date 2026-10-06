@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# The ARIES Control Centre.
+#
+# Runs on the SYSTEM python, which is where PyGObject/GTK4 live — not in the
+# ARIES virtual environment (ADR-0004). It talks to ARIES over HTTP and imports
+# nothing from the `aries` package.
+#
+# RESOLVE THE SYMLINK BEFORE LOOKING FOR THE REPOSITORY.
+#
+# `~/.local/bin/aries-ui` is a SYMLINK to this file, so when it is run by name
+# — which is how the shell launches it, and how a person types it — `$0` is the
+# symlink's path and `dirname "$0"/..` is `~/.local`, not the repository. The
+# result was `No module named aries_ui` for every invocation through PATH,
+# while running this same file by its real path worked perfectly.
+#
+# That is the second time a launcher has failed at exactly this seam (Entry
+# 017), and the second time every test passed while it did: the suite called
+# the repository path, and the shell calls the name. A launcher must be tested
+# the way it is actually invoked.
+set -euo pipefail
+SELF="$(readlink -f "${BASH_SOURCE[0]}")"
+cd "$(dirname "$SELF")/.."
+export PYTHONPATH="$PWD:${PYTHONPATH:-}"
+export ARIES_API="${ARIES_API:-http://127.0.0.1:8000}"
+exec /usr/bin/python3 -m aries_ui "$@"

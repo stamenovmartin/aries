@@ -1,0 +1,10 @@
+{
+  "problem": "User feedback was saved as broad rules but was not bound to the concrete task outcome or available as relevant reviewed experience.",
+  "change": "Added explicit useful/needs_work task reviews with immutable bounded episode snapshots. Latest judgment per goal counts once; retirement does not revive older reviews. Learning can open or retire reviews. Similar future goals receive up to three lexical matches without replayable tool arguments. Dashboard review entry is pinned and protected from polling while typing. Human ratings stay separate from execution results; even-sample latency median is corrected.",
+  "validation": [
+    "Complete standard suite passed: /tmp/aries-task-review-suite.log (including 21 task-review checks and 418 UI client checks).",
+    "Populated task review rendered from real HTTP payloads in isolated test DB: /tmp/aries-populated-reviews-ui.log.",
+    "Live GET /learning/task-reviews returns actual stored counts; no fabricated human review was posted to production."
+  ],
+  "limitations": "No model-weight RL training or measured general performance improvement. Retrieval uses bounded lexical overlap, not semantic embeddings. Retained snapshots follow feedback retention; task deletion does not rewrite the historical review. Login-session and display-timeout integration suites were not rerun."
+}

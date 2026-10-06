@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-06T10:52:59.587521+00:00",
+  "passed": true,
+  "runs": [
+    {
+      "suite": "registry",
+      "command": [
+        "/home/stamenovmartin/aries/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_policy_artifacts",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "registry.log"
+    },
+    {
+      "suite": "evaluator",
+      "command": [
+        "/home/stamenovmartin/aries/.venv/bin/python",
+        "-B",
+        "tests/test_policy_evaluation.py"
+      ],
+      "exit_code": 0,
+      "log": "evaluator.log"
+    }
+  ],
+  "source_before": {
+    "aries/workspace/policy_artifacts.py": "b59ca3533078da51a3e8a16af6f32f5ba4e46f3c3b33dce5ee2d21cf21873bf0",
+    "aries/workspace/policy_evaluation.py": "0564faa9e45ddca6928d26bf6e14ced4746965d1e1b28c351c60a2ddc7be8893",
+    "tests/test_policy_artifacts.py": "489789bc3050e900beac0859cbab05792103c412ad66e6bd1106ee4361a33416",
+    "tests/test_policy_evaluation.py": "cfe36f85618a862f1f22074c210e5ac881cb6afd8b75aa8b90f639e4b6b02d7f"
+  },
+  "source_after": {
+    "aries/workspace/policy_artifacts.py": "b59ca3533078da51a3e8a16af6f32f5ba4e46f3c3b33dce5ee2d21cf21873bf0",
+    "aries/workspace/policy_evaluation.py": "0564faa9e45ddca6928d26bf6e14ced4746965d1e1b28c351c60a2ddc7be8893",
+    "tests/test_policy_artifacts.py": "489789bc3050e900beac0859cbab05792103c412ad66e6bd1106ee4361a33416",
+    "tests/test_policy_evaluation.py": "cfe36f85618a862f1f22074c210e5ac881cb6afd8b75aa8b90f639e4b6b02d7f"
+  },
+  "source_stable": true,
+  "scope": "Synthetic isolated offline-registry acceptance and numerical evaluator regression checks",
+  "runtime_deployed": false,
+  "model_calls": 0,
+  "model_policy_performance_measured": false,
+  "limitations": [
+    "Trusted producer; no authenticated raw observations",
+    "No held-out model-policy experiment or statistical efficiency claim",
+    "Offline pointer rollback only, no live state restoration"
+  ]
+}

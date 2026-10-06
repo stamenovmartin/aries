@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# The semantic-memory experiment, in one command (docs/EXPERIMENTS.md rule 8).
+#
+#   ./scripts/aries-memory-eval                  # e5-base-int8 + qwen2.5:7b
+#   EMBEDDER=bge-m3-ollama ./scripts/aries-memory-eval
+#
+# Writes results.jsonl (one line per variant per probe, carrying the commit),
+# summary.json and a timestamped raw artifact under experiments/memory/.
+set -euo pipefail
+cd "$(dirname "$(readlink -f "$0")")/.."
+export PYTHONPATH="$PWD/vendor/agentic-core:$PWD/vendor:$PWD:${PYTHONPATH:-}"
+# Set before numpy is imported anywhere; the cores belong to speech recognition.
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+exec .venv/bin/python - <<'PY'
+import json, os, subprocess
+from datetime import datetime, timezone
+from pathlib import Path
+from aries.workspace.memory_eval import BASELINE, CANDIDATE, compare
+
+report = compare(embedder_name=os.environ.get("EMBEDDER") or None,
+                 model=os.environ.get("MEMORY_MODEL") or None)
+try:
+    report["commit"] = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
+                                      text=True, check=True).stdout.strip()
+except Exception:
+    report["commit"] = "unknown"
+report["ran_at_utc"] = datetime.now(timezone.utc).isoformat()
+
+out = Path("experiments/memory")
+with (out / "results.jsonl").open("w") as fh:
+    for variant, score in report["variants"].items():
+        for case in score["cases"]:
+            fh.write(json.dumps({"commit": report["commit"], "ran_at_utc": report["ran_at_utc"],
+                                 "variant": variant, "embedder": report["embedder"], **case},
+                                ensure_ascii=False) + "\n")
+(out / "summary.json").write_text(json.dumps(report, indent=2, ensure_ascii=False, default=str))
+(out / ("run-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + ".json")).write_text(
+    json.dumps(report, indent=2, ensure_ascii=False, default=str))
+
+print(f"{report['corpus']} utterances · {report['probes']} probes · {report['embedder']} · k={report['k']}\n")
+head = f"{'variant':24s} {'hit@3':>7s} {'clean':>7s} {'MRR':>6s} {'rows':>5s} {'calls':>6s} {'search ms':>10s}"
+print(head); print("-" * len(head))
+for variant, s in report["variants"].items():
+    print(f"{variant:24s} {s['hit_at_k']:>3d}/{s['answerable']:<3d} {s['clean']:>3d}/{s['probes']:<3d} "
+          f"{s['mean_reciprocal_rank']:>6.3f} {s['stored']:>5d} {s['model_calls']:>6d} {s['median_search_ms']:>10.3f}")
+print(f"\n{CANDIDATE} vs {BASELINE}:")
+for name, stats in report["statistics"].items():
+    print(f"  {name:6s} {stats['accuracy_difference']:+.1%}  improved={stats['improved']} "
+          f"regressed={stats['regressed']}  exact two-sided McNemar p={stats['exact_mcnemar_two_sided_p']:.4f}")
+print("\nVERDICT: " + report["verdict"])
+print("\nEvidence: experiments/memory/summary.json · experiments/memory/results.jsonl")
+PY

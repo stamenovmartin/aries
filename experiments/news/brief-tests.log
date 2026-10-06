@@ -1,0 +1,67 @@
+/home/stamenovmartin/aries/tests/test_brief.py:204: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  row.started_at = datetime.utcnow() - timedelta(days=2)
+Brief section news failed
+Traceback (most recent call last):
+  File "/home/stamenovmartin/aries/aries/brief/automation.py", line 72, in _run
+    section = await fn(cfg)
+              ^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_brief.py", line 73, in _explode
+    raise RuntimeError("the feed table is on fire")
+RuntimeError: the feed table is on fire
+--- test_a_brief_is_produced_and_kept
+PASS  the pass succeeds
+PASS  the brief is stored, not only printed
+PASS  with its sections, so it can be re-rendered later
+PASS  and a one-line headline
+PASS  every node ran
+--- test_a_missed_morning_is_caught_up_not_skipped
+PASS  a brief that has not run today is due, not skipped
+--- test_absent_and_switched_off_are_different
+PASS  a section the user did not ask for is simply absent
+PASS  a section that cannot work yet IS shown, with the reason
+PASS  and the reason names what is missing
+--- test_an_unknown_section_is_reported
+PASS  a brief naming a section that does not exist still succeeds
+PASS  and the evaluation warns about it
+--- test_collection_is_a_parallel_graph
+PASS  the brief is a registered workflow
+PASS  that runs in parallel
+PASS  configuration is read once, before the fan-out
+PASS  every section is collected concurrently
+PASS  and assembly waits for all of them
+--- test_empty_sections_are_one_line
+PASS  an empty section states its summary instead of a heading plus 'nothing'
+PASS  an unavailable one still says why
+--- test_headline_leads_with_what_is_blocked
+PASS  a pending decision leads
+PASS  otherwise it says nothing needs you
+PASS  and still says what there is to read
+PASS  a truly empty brief says so
+--- test_lengths_answer_different_questions
+PASS  headlines keeps what needs the user
+PASS  and drops the quiet sections
+PASS  standard shows every requested section
+PASS  detailed carries the links
+PASS  headlines does not
+PASS  each is longer than the last
+--- test_one_broken_section_does_not_cost_the_brief
+PASS  the brief is still produced
+PASS  the broken section reports the failure rather than vanishing
+PASS  and the other sections are intact
+--- test_scheduled_by_time_of_day_not_interval
+PASS  before the hour it is not due
+PASS  after the hour, having never run, it is due
+PASS  and the next run is a real moment
+PASS  having run today, it is not due again
+PASS  the run is recorded
+--- test_the_automation_ships_off
+PASS  the brief is off by default
+PASS  it is scheduled by time of day
+PASS  it uses no model
+PASS  and the shipped sections all exist
+--- test_urgent_items_explain_themselves_at_every_length
+PASS  a critical item carries its explanation at 'headlines'
+PASS  a critical item carries its explanation at 'standard'
+PASS  a critical item carries its explanation at 'detailed'
+PASS  a news item does not, at standard length
+ALL PASSED

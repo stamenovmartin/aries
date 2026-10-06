@@ -1,0 +1,290 @@
+#!/usr/bin/env python3
+"""Generate docs/verification_table.md — which capabilities prove what they did.
+
+WHY THIS IS GENERATED AND NOT WRITTEN
+-------------------------------------
+A hand-written table of which capabilities are verified is a claim that ages badly
+and silently, and this project has already paid for one: "orchestration is imported
+by nothing" was true when written and repeated five times after it stopped being
+true. So every column here is derived, and `--check` fails if the committed file no
+longer matches the system, exactly as `aries-capability-docs --check` does.
+
+THREE COLUMNS, BECAUSE "IS IT VERIFIED" HAS THREE DIFFERENT ANSWERS
+-------------------------------------------------------------------
+  verifier      a branch in `capabilities.verify()` that re-reads the target. Found
+                by parsing the function, so a branch that is deleted shows up here.
+  route         how else the proof arrives: through `operator.run()`, which carries
+                its own `verified_success`; by declaring itself UNVERIFIABLE; or not
+                at all.
+  observed      what the live ledger actually recorded for this capability. This is
+                the only column that cannot be faked by writing code — a verifier
+                that exists and is never called reads `verifier yes / observed none`,
+                which is the row worth looking at.
+
+Usage:
+  scripts/aries-verification-table            write docs/verification_table.md
+  scripts/aries-verification-table --check     exit 1 if the committed file is stale
+  scripts/aries-verification-table --offline   skip the live ledger (CI, no server)
+"""
+from __future__ import annotations
+
+import ast
+import json
+import pathlib
+import sys
+import urllib.error
+import urllib.request
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+for p in (ROOT / 'vendor/agentic-core', ROOT / 'vendor', ROOT):
+    sys.path.insert(0, str(p))
+
+OUT = ROOT / 'docs/verification_table.md'
+SOURCE = ROOT / 'aries/workspace/capabilities.py'
+ANALYTICS = 'http://localhost:8000/api/aries/analytics?days=365'
+
+
+def kinds_compared_in(function: ast.AST) -> set[str]:
+    """Every literal the function compares `kind` against, == and `in` alike."""
+    found: set[str] = set()
+    for node in ast.walk(function):
+        if isinstance(node, ast.Compare) and isinstance(node.left, ast.Name) and node.left.id == 'kind':
+            for op, comparator in zip(node.ops, node.comparators):
+                if isinstance(op, ast.Eq) and isinstance(comparator, ast.Constant):
+                    found.add(comparator.value)
+                elif isinstance(op, ast.In) and isinstance(comparator, (ast.Set, ast.Tuple, ast.List)):
+                    found.update(e.value for e in comparator.elts if isinstance(e, ast.Constant))
+    return found
+
+
+def function_named(tree: ast.AST, name: str):
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == name:
+            return node
+    raise SystemExit(f'{SOURCE.name} has no function {name}() — the generator needs updating')
+
+
+def operator_kinds(execute_fn: ast.AST) -> set[str]:
+    """Kinds whose proof comes from operator.run() rather than from verify()."""
+    found: set[str] = set()
+    for node in ast.walk(execute_fn):
+        if (isinstance(node, ast.Compare) and isinstance(node.left, ast.Name)
+                and node.left.id == 'kind' and isinstance(node.comparators[0], (ast.Set, ast.Tuple, ast.List))):
+            members = {e.value for e in node.comparators[0].elts if isinstance(e, ast.Constant)}
+            # The operator branch is the one that mentions open_url alongside others.
+            if 'open_url' in members:
+                found |= members
+    return found
+
+
+def inline_kinds(execute_fn: ast.AST) -> set[str]:
+    """Kinds that build their own `verification` dict inside `execute()`.
+
+    The first version of this generator missed these and reported 38 of 54
+    capabilities as having no proof path — while the live ledger showed `abilities`
+    verified four times. The ledger disagreeing with the parser is what caught it,
+    which is the argument for keeping the observed column: a static reading of the
+    code can be wrong, and history cannot.
+    """
+    found: set[str] = set()
+
+    def kinds_in(test):
+        out = set()
+        for node in ast.walk(test):
+            if isinstance(node, ast.Compare) and isinstance(node.left, ast.Name) and node.left.id == 'kind':
+                for op, comparator in zip(node.ops, node.comparators):
+                    if isinstance(op, ast.Eq) and isinstance(comparator, ast.Constant):
+                        out.add(comparator.value)
+                    elif isinstance(op, ast.In) and isinstance(comparator, (ast.Set, ast.Tuple, ast.List)):
+                        out.update(e.value for e in comparator.elts if isinstance(e, ast.Constant))
+        return out
+
+    def mentions_verification(node):
+        return any(isinstance(n, ast.Constant) and n.value == 'verification' for n in ast.walk(node))
+
+    def walk(node, guard):
+        if isinstance(node, ast.If):
+            inner = guard | kinds_in(node.test)
+            for stmt in node.body:
+                walk(stmt, inner)
+            for stmt in node.orelse:
+                walk(stmt, guard)
+            return
+        if guard and mentions_verification(node):
+            found.update(guard)
+        for child in ast.iter_child_nodes(node):
+            walk(child, guard)
+
+    for stmt in execute_fn.body:
+        walk(stmt, frozenset())
+    return found
+
+
+DELEGATES = ('aries/workspace/input_capabilities.py', 'aries/workspace/browser_capabilities.py',
+             'aries/workspace/desktop_capabilities.py', 'aries/workspace/file_capabilities.py',
+             'aries/workspace/network_capabilities.py', 'aries/workspace/screen_capabilities.py',
+             'aries/workspace/system_capabilities.py', 'aries/workspace/keyboard.py')
+
+
+def delegated_verifiers(ids: set[str]) -> dict[str, str]:
+    """Capabilities whose proof is built in a delegate module, not in capabilities.py.
+
+    The first two versions of this generator read only `capabilities.py` and so
+    reported `clipboard_write` as changing state without proving it — while
+    `input_capabilities.verify_clipboard_write()` reads the clipboard back and the
+    result carries the verification. Two wrong numbers in a row from a static
+    reading is the argument for printing the method next to the table: this one
+    matches a `verify_*` function against the capability ids it names, which is a
+    heuristic, and a verifier whose name shares nothing with its capability will be
+    missed.
+    """
+    found: dict[str, str] = {}
+    for relative in DELEGATES:
+        path = ROOT / relative
+        if not path.is_file():
+            continue
+        try:
+            tree = ast.parse(path.read_text())
+        except SyntaxError:
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue
+            if not node.name.startswith('verify'):
+                continue
+            tail = node.name[len('verify'):].strip('_')
+            if not tail:
+                continue
+            for cid in ids:
+                # Exact, then prefix, then suffix. `verify_type` proves `type_text`,
+                # which the first three versions of this generator missed — the name
+                # is a prefix of the capability, not equal to it, and reporting
+                # type_text as unproven while `verify_type()` reads the field back
+                # would have been the fourth wrong number in a row.
+                if tail == cid or cid.startswith(tail + '_') or cid.endswith('_' + tail) \
+                        or cid.endswith(tail) or tail.endswith(cid):
+                    found.setdefault(cid, f'{path.name}:{node.name}()')
+    return found
+
+
+def observed() -> dict:
+    try:
+        with urllib.request.urlopen(ANALYTICS, timeout=30) as response:
+            metrics = json.load(response)['metrics']['verification_honesty']
+    except (urllib.error.URLError, OSError, KeyError, ValueError) as exc:
+        return {'_error': f'{type(exc).__name__}: {exc}'}
+    return {row['capability']: row['buckets'] for row in (metrics.get('by_capability') or [])}
+
+
+def build(skip_ledger: bool) -> str:
+    from aries.workspace.capabilities import SENSITIVE, WRITES, catalogue
+    tree = ast.parse(SOURCE.read_text())
+    execute_fn = function_named(tree, 'execute')
+    verifier_kinds = kinds_compared_in(function_named(tree, 'verify'))
+    via_operator = operator_kinds(execute_fn)
+    via_inline = inline_kinds(execute_fn)
+    via_delegate = delegated_verifiers({e['id'] for e in catalogue()})
+    ledger = {} if skip_ledger else observed()
+    ledger_error = ledger.pop('_error', None)
+
+    entries = catalogue()
+    # "Changes something" is WRITES plus the sensitive ones that mutate state outside
+    # the filesystem: `type_text` puts characters into another application and
+    # `clipboard_write` replaces the clipboard. Calling those read-only because they
+    # are not in WRITES would be the comfortable answer and the wrong one — and
+    # `type_text` is precisely the capability that loses Cyrillic silently.
+    mutates = set(WRITES) | (set(SENSITIVE) & {'type_text', 'clipboard_write'})
+    rows, no_proof, unproven_mutators = [], [], []
+    for entry in sorted(entries, key=lambda c: c['id']):
+        cid = entry['id']
+        has_verifier = cid in verifier_kinds
+        if has_verifier:
+            route = 'verify() re-reads the target'
+        elif cid in via_inline:
+            route = 'execute() re-reads and records its own verification'
+        elif cid in via_delegate:
+            route = f'delegated to `{via_delegate[cid]}`'
+        elif cid in via_operator:
+            route = 'operator.run() carries verified_success'
+        elif cid == 'research':
+            route = 'declares UNVERIFIABLE — no independent re-read can exist'
+        elif cid in mutates:
+            route = 'NOTHING — it changes state and does not prove it'
+            no_proof.append(cid)
+            unproven_mutators.append(cid)
+        else:
+            route = 'read-only: the answer it returns IS the observation'
+            no_proof.append(cid)
+        buckets = ledger.get(cid) or {}
+        seen = ', '.join(f'{k} {v}' for k, v in sorted(buckets.items())) if buckets else 'none recorded'
+        rows.append((cid, 'yes' if has_verifier else 'no', route, seen, entry['title']))
+
+    verified_in_practice = sum(1 for _, _, _, seen, _ in rows if 'verified' in seen)
+    lines = [
+        '# Which capabilities prove what they did',
+        '',
+        '**Generated by `scripts/aries-verification-table`. Do not edit.** `--check` fails if this',
+        'file no longer matches the system, for the same reason `docs/CAPABILITIES.md` is generated:',
+        'a hand-written claim about verification is the one most worth distrusting.',
+        '',
+        f'- capabilities in the registry: **{len(entries)}**',
+        f'- with a dedicated branch in `verify()`: **{len(verifier_kinds & {e["id"] for e in entries})}**',
+        f'- re-reading state inside `execute()` instead: **{len(via_inline & {e["id"] for e in entries})}**',
+        f'- proved in a delegate module: **{len(set(via_delegate) & {e["id"] for e in entries})}**',
+        f'- proof arriving through `operator.run()`: **{len(via_operator & {e["id"] for e in entries})}**',
+        f'- read-only, where the answer returned is itself the observation: '
+        f'**{len(no_proof) - len(unproven_mutators)}**',
+        f'- **changing state without proving it: {len(unproven_mutators)}** '
+        f'({", ".join("`" + c + "`" for c in unproven_mutators) or "none"})',
+        f'- that the live ledger has actually recorded as verified: **{verified_in_practice}**',
+        '',
+        'The last two numbers are the ones that matter. A capability with a verifier that has never',
+        'produced a verified step is not yet evidence of anything, and a capability with no proof',
+        'path is a capability whose success is its own word.',
+        '',
+    ]
+    if ledger_error:
+        lines += [f'> The live ledger could not be read ({ledger_error}), so the **observed** column is',
+                  '> empty rather than zero. Empty means unknown here, not none.', '']
+    lines += ['| capability | verifier | how proof arrives | observed in the ledger | what it does |',
+              '|---|---|---|---|---|']
+    for cid, has, route, seen, title in rows:
+        lines.append(f'| `{cid}` | {has} | {route} | {seen} | {title} |')
+    if unproven_mutators:
+        lines += ['', '## Capabilities that change state without proving it', '',
+                  'These are the rows that matter. Each one alters something and then reports',
+                  'success on its own authority, which is the exact shape of failure this project',
+                  'exists to refuse. A read-only capability is not in this list: the answer it',
+                  'returns is the observation, and there is nothing else to re-read.', '']
+        lines += [f'- `{cid}`' for cid in unproven_mutators]
+    lines += ['', '## How to regenerate', '', '```sh',
+              'scripts/aries-verification-table           # write this file',
+              'scripts/aries-verification-table --check   # exit 1 if it is stale', '```', '']
+    return '\n'.join(lines)
+
+
+def main() -> int:
+    skip_ledger = '--offline' in sys.argv
+    text = build(skip_ledger)
+    if '--check' in sys.argv:
+        if not OUT.is_file():
+            print(f'{OUT.relative_to(ROOT)} does not exist; run the generator')
+            return 1
+        current = OUT.read_text()
+        # The observed column moves with every goal, so --check compares the parts
+        # that describe the CODE, not the parts that describe the history.
+        def code_only(doc: str) -> list[str]:
+            return [l.rsplit('|', 3)[0] for l in doc.splitlines()
+                    if l.startswith('| `') or l.startswith('- `')]
+        if code_only(current) == code_only(text):
+            print(f'{OUT.relative_to(ROOT)} matches the registry and the verifiers')
+            return 0
+        print(f'{OUT.relative_to(ROOT)} is stale — a capability or a verifier changed')
+        return 1
+    OUT.write_text(text)
+    print(f'wrote {OUT.relative_to(ROOT)}')
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

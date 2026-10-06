@@ -1,0 +1,6014 @@
+{
+  "status": "DRAFT_NOT_EXECUTED",
+  "launch_ready": false,
+  "blocking_requirements": "STUDY_600.md admission checks; broader hooks/oracles not wired yet",
+  "schedule_seed": 20261003,
+  "schedule_seed_is_model_seed": false,
+  "fixture": "experiments/verification-feedback/fixture.jsonl",
+  "fixture_sha256": "a53d6ae11dfc34bbbf4a09b22493d17e8817e40c24ab8f27d6b45d1d7b3a3052",
+  "study_sha256": "cbe90f12665a18890eb15f65f32947c21d603c93cf04bb02ab7a69461aa9c1cc",
+  "cases": 15,
+  "fault_families": 9,
+  "episodes": [
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-09-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 1
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 2
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-01-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 3
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 4
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-15-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 5
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 6
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 7
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-07-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 8
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 9
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-01-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 10
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 11
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-11-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 12
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-06-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 13
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 14
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-08-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 15
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 16
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 17
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-14-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 18
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 19
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-09-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 20
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 21
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-15-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 22
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 23
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-10-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 24
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 25
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-09-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 26
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-04-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 27
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 28
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 29
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-06-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 30
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-01-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 31
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 32
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 33
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-09-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 34
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 35
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-11-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 36
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 37
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-01-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 38
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 39
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-07-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 40
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-12-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 41
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 42
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 43
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-14-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 44
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 45
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-03-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 46
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-10-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 47
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 48
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 49
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-15-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 50
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-01-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 51
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 52
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 53
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-01-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 54
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 55
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-08-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 56
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 57
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-08-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 58
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-06-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 59
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 60
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-03-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 61
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 62
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-11-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 63
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 64
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 65
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-06-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 66
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 67
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-07-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 68
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 69
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-02-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 70
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-11-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 71
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 72
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 73
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-12-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 74
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-02-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 75
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 76
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-02-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 77
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 78
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-11-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 79
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 80
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 81
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-12-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 82
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 83
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-01-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 84
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 85
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-10-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 86
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 87
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-11-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 88
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 89
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-10-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 90
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 91
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-10-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 92
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-15-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 93
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 94
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 95
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-11-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 96
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-13-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 97
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 98
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 99
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-04-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 100
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-03-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 101
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 102
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 103
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-09-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 104
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-09-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 105
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 106
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-07-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 107
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 108
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 109
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-02-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 110
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-11-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 111
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 112
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-03-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 113
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 114
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 115
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-04-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 116
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 117
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-05-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 118
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-14-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 119
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 120
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-09-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 121
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 122
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-01-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 123
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 124
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-14-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 125
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 126
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-04-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 127
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 128
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 129
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-13-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 130
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-01-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 131
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 132
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-08-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 133
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 134
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-14-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 135
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 136
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-03-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 137
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 138
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-03-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 139
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 140
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 141
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-02-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 142
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 143
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-12-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 144
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 145
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-06-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 146
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-09-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 147
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 148
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-07-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 149
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 150
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-06-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 151
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 152
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-05-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 153
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 154
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 155
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-03-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 156
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-10-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 157
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 158
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 159
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-07-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 160
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 161
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-04-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 162
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-08-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 163
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 164
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-13-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 165
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 166
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 167
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-03-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 168
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-14-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 169
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 170
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 171
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-06-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 172
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-12-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 173
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 174
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-06-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 175
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 176
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-12-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 177
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 178
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 179
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-15-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 180
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 181
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-12-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 182
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-12-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 183
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 184
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 185
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-08-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 186
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 187
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-15-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 188
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-07-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 189
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 190
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-08-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 191
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 192
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 193
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-08-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 194
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 195
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-01-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 196
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-07-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 197
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 198
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 199
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-05-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 200
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 201
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-14-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 202
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-05-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 203
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 204
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 205
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-11-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 206
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 207
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-07-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 208
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 209
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-13-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 210
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 211
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-11-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 212
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 213
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-08-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 214
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 215
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-11-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 216
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 217
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-15-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 218
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 219
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-12-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 220
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 221
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-07-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 222
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-12-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 223
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 224
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-10-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 225
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 226
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 227
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-12-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 228
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 229
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-08-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 230
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-15-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 231
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 232
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-01-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 233
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 234
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 235
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-05-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 236
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-12-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 237
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 238
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 239
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-04-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 240
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 241
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-03-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 242
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 243
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-07-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 244
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-01-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 245
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 246
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-08-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 247
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 248
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-15-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 249
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 250
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-13-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 251
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 252
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 253
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-03-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 254
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 255
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-08-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 256
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-11-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 257
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 258
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-07-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 259
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 260
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-14-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 261
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 262
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-04-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 263
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 264
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 265
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-09-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 266
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-08-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 267
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 268
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-04-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 269
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 270
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-14-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 271
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 272
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 273
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-06-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 274
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-13-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 275
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 276
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-04-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 277
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 278
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-05-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 279
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 280
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 281
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-02-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 282
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 283
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-14-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 284
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 285
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-14-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 286
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-01-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 287
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 288
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-13-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 289
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 290
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 291
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-13-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 292
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-10-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 293
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 294
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 295
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-04-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 296
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 297
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-14-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 298
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-01-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 299
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 300
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-15-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 301
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 302
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 303
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-13-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 304
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 305
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-04-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 306
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 307
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-02-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 308
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-02-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 309
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 310
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-12-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 311
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 312
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-03-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 313
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 314
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 315
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-09-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 316
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-10-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 317
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 318
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 319
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-02-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 320
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 321
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-15-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 322
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 323
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-10-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 324
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 325
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-05-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 326
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-06-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 327
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 328
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 329
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-12-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 330
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 331
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-12-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 332
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 333
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-03-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 334
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-15-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 335
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 336
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-08-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 337
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 338
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 339
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-01-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 340
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 341
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-13-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 342
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-04-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 343
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 344
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-08-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 345
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 346
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-09-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 347
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 348
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-02-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 349
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 350
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 351
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-01-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 352
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-07-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 353
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 354
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-07-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 355
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 356
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-04-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 357
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 358
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-05-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 359
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 360
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-05-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 361
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 362
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-09-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 363
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 364
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-04-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 365
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 366
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-06-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 367
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 368
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-08-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 369
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 370
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-03-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 371
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 372
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 373
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-05-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 374
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-06-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 375
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 376
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-04-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 377
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 378
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-11-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 379
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 380
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 381
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-13-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 382
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-11-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 383
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 384
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-06-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 385
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 386
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-09-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 387
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 388
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-09-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 389
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 390
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-02-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 391
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 392
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-05-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 393
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 394
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 395
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-01-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 396
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-11-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 397
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 398
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-07-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 399
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 400
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 401
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-11-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 402
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 403
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-01-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 404
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 405
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-05-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 406
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-10-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 407
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 408
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-14-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 409
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 410
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-12-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 411
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 412
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-09-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 413
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 414
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-15-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 415
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 416
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 417
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-02-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 418
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 419
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-05-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 420
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 421
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-04-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 422
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-10-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 423
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 424
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 425
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-14-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 426
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-12-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 427
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 428
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-02-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 429
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 430
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-05-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 431
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 432
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-13-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 433
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 434
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 435
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-06-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 436
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-12-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 437
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 438
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-02-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 439
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 440
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 441
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-13-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 442
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 443
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-07-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 444
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 445
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-15-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 446
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-15-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 447
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 448
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 449
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-05-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 450
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 451
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-05-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 452
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-02-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 453
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 454
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 455
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-01-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 456
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-13-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 457
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 458
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-05-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 459
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 460
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 461
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-14-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 462
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 463
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-03-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 464
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 465
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-07-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 466
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 467
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-03-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 468
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 469
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-15-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 470
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 471
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-02-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 472
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 473
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-09-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 474
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 475
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-05-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 476
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 477
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-11-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 478
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-03-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 479
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 480
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 481
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-13-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 482
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 16,
+      "condition": "structured",
+      "paired_block": "vf-10-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 483
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 16,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r16",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 484
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 485
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-11-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 486
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 487
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-12-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 488
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 489
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-08-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 490
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 6,
+      "condition": "structured",
+      "paired_block": "vf-06-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 491
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 6,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r06",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 492
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 493
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-14-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 494
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 495
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-06-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 496
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-05-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 497
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 498
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 499
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-04-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 500
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 501
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-15-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 502
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 3,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 503
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 3,
+      "condition": "structured",
+      "paired_block": "vf-03-r03",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 504
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-10-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 505
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 506
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 507
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-14-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 508
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-03-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 509
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 510
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 511
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-09-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 512
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 513
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-09-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 514
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-11-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 515
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 516
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-13-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 517
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 518
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 519
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-10-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 520
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 521
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-08-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 522
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-02-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 523
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 524
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-04-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 525
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 526
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-01-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 527
+    },
+    {
+      "goal_id": "vf-01",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-01-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 528
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-08-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 529
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 530
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-14-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 531
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 532
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 19,
+      "condition": "structured",
+      "paired_block": "vf-02-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 533
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 19,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r19",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 534
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 2,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 535
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 2,
+      "condition": "structured",
+      "paired_block": "vf-10-r02",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 536
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-08-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 537
+    },
+    {
+      "goal_id": "vf-08",
+      "fault_type": "portal_black_png",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-08-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 538
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 18,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 539
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 18,
+      "condition": "structured",
+      "paired_block": "vf-02-r18",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 540
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-10-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 541
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 542
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 543
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-07-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 544
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 545
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-13-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 546
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 547
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-03-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 548
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-15-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 549
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 550
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-11-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 551
+    },
+    {
+      "goal_id": "vf-11",
+      "fault_type": "portal_black_png_two_frames",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-11-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 552
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-07-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 553
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 554
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 11,
+      "condition": "structured",
+      "paired_block": "vf-14-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 555
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 11,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r11",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 556
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 557
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-09-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 558
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 1,
+      "condition": "structured",
+      "paired_block": "vf-07-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 559
+    },
+    {
+      "goal_id": "vf-07",
+      "fault_type": "nmcli_settings_blank_state_activated",
+      "repetition": 1,
+      "condition": "tool_only",
+      "paired_block": "vf-07-r01",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 560
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 561
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-04-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 562
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-09-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 563
+    },
+    {
+      "goal_id": "vf-09",
+      "fault_type": "portal_black_png",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-09-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 564
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 15,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 565
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 15,
+      "condition": "structured",
+      "paired_block": "vf-06-r15",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 566
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 5,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 567
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 5,
+      "condition": "structured",
+      "paired_block": "vf-10-r05",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 568
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 14,
+      "condition": "tool_only",
+      "paired_block": "vf-12-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 569
+    },
+    {
+      "goal_id": "vf-12",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 14,
+      "condition": "structured",
+      "paired_block": "vf-12-r14",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 570
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 571
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-10-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 572
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-13-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 573
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 574
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 575
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-13-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 576
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 20,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 577
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 20,
+      "condition": "structured",
+      "paired_block": "vf-06-r20",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 578
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 17,
+      "condition": "structured",
+      "paired_block": "vf-14-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 579
+    },
+    {
+      "goal_id": "vf-14",
+      "fault_type": "portal_black_png",
+      "repetition": 17,
+      "condition": "tool_only",
+      "paired_block": "vf-14-r17",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 580
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-13-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 581
+    },
+    {
+      "goal_id": "vf-13",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-13-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 582
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 7,
+      "condition": "structured",
+      "paired_block": "vf-06-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 583
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 7,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r07",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 584
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 9,
+      "condition": "structured",
+      "paired_block": "vf-03-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 585
+    },
+    {
+      "goal_id": "vf-03",
+      "fault_type": "systemctl_show_empty_exit_zero",
+      "repetition": 9,
+      "condition": "tool_only",
+      "paired_block": "vf-03-r09",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 586
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 4,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 587
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 4,
+      "condition": "structured",
+      "paired_block": "vf-15-r04",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 588
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-10-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 589
+    },
+    {
+      "goal_id": "vf-10",
+      "fault_type": "portal_uniform_grey_png",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-10-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 590
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 8,
+      "condition": "structured",
+      "paired_block": "vf-15-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 591
+    },
+    {
+      "goal_id": "vf-15",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 8,
+      "condition": "tool_only",
+      "paired_block": "vf-15-r08",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 592
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-06-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 593
+    },
+    {
+      "goal_id": "vf-06",
+      "fault_type": "nmcli_all_blank_exit_zero",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-06-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 594
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 12,
+      "condition": "structured",
+      "paired_block": "vf-05-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 595
+    },
+    {
+      "goal_id": "vf-05",
+      "fault_type": "nmcli_blank_exit_zero",
+      "repetition": 12,
+      "condition": "tool_only",
+      "paired_block": "vf-05-r12",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 596
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 10,
+      "condition": "tool_only",
+      "paired_block": "vf-04-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 597
+    },
+    {
+      "goal_id": "vf-04",
+      "fault_type": "systemctl_show_no_loadstate",
+      "repetition": 10,
+      "condition": "structured",
+      "paired_block": "vf-04-r10",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 598
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 13,
+      "condition": "tool_only",
+      "paired_block": "vf-02-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 599
+    },
+    {
+      "goal_id": "vf-02",
+      "fault_type": "systemctl_show_not_found",
+      "repetition": 13,
+      "condition": "structured",
+      "paired_block": "vf-02-r13",
+      "model_seed": null,
+      "status": "planned",
+      "schedule_index": 600
+    }
+  ]
+}

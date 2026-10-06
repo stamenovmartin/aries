@@ -1,0 +1,114 @@
+{
+  "scope": "Two read-only development controls; not evidence of general task equivalence. Alternating arm order.",
+  "paired_available": false,
+  "results": [
+    {
+      "scenario": "storage",
+      "architecture": "A",
+      "goal": "Check disk usage and report which filesystem has the highest percentage used.",
+      "passed": false,
+      "unavailable": "HTTPError",
+      "seconds": 0.021
+    },
+    {
+      "scenario": "storage",
+      "architecture": "B",
+      "goal": "Check disk usage and report which filesystem has the highest percentage used.",
+      "task_id": "24efc831a7b249f88be8db14b9d58db6",
+      "task_state": "done",
+      "passed": true,
+      "tool_execution_success": 1,
+      "verified_steps": 1,
+      "steps": 1,
+      "metrics": {
+        "planner_calls": 2,
+        "number_of_steps": 1,
+        "execution_time": 0.0173,
+        "planner_time": 2.9811252650015376,
+        "capability_failures": 0,
+        "verification_failures": 0,
+        "retries": 0,
+        "invalid_decisions": 0,
+        "wrong_capability_selections": 0,
+        "input_tokens": 5845,
+        "output_tokens": 67,
+        "total_tokens": 5912,
+        "token_measurement_complete": true,
+        "estimated_input_tokens": 5141,
+        "estimated_output_tokens": 41,
+        "task_final_status": "done",
+        "wall_seconds": 3.05,
+        "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+      },
+      "cloud_requests": 0,
+      "local_requests": 2,
+      "cloud_tokens": 0,
+      "estimated_cost_usd": null,
+      "seconds": 4.048
+    },
+    {
+      "scenario": "negative",
+      "architecture": "B",
+      "goal": "Read /this/path/does/not/exist/aries.txt",
+      "task_id": "8be81d46db9c4c91b19dbaf261bc457f",
+      "task_state": "failed",
+      "passed": true,
+      "tool_execution_success": 0,
+      "verified_steps": 0,
+      "steps": 1,
+      "metrics": {
+        "planner_calls": 2,
+        "number_of_steps": 1,
+        "execution_time": 0.0112,
+        "planner_time": 3.124437329999637,
+        "capability_failures": 1,
+        "verification_failures": 0,
+        "retries": 0,
+        "invalid_decisions": 0,
+        "wrong_capability_selections": 0,
+        "input_tokens": 5615,
+        "output_tokens": 77,
+        "total_tokens": 5692,
+        "token_measurement_complete": true,
+        "estimated_input_tokens": 5051,
+        "estimated_output_tokens": 62,
+        "task_final_status": "failed",
+        "wall_seconds": 3.185,
+        "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+      },
+      "cloud_requests": 0,
+      "local_requests": 2,
+      "cloud_tokens": 0,
+      "estimated_cost_usd": null,
+      "seconds": 15.1
+    },
+    {
+      "scenario": "negative",
+      "architecture": "A",
+      "goal": "Read /this/path/does/not/exist/aries.txt",
+      "passed": false,
+      "unavailable": "HTTPError",
+      "seconds": 0.077
+    }
+  ],
+  "summary": {
+    "A": {
+      "trials": 2,
+      "passed": 0,
+      "mean_seconds": 0.049,
+      "cloud_requests": 0,
+      "local_requests": 0,
+      "cloud_tokens": 0
+    },
+    "B": {
+      "trials": 2,
+      "passed": 2,
+      "mean_seconds": 9.574,
+      "cloud_requests": 0,
+      "local_requests": 4,
+      "cloud_tokens": 0
+    }
+  },
+  "cloud_token_savings": null,
+  "success_rate_delta": null
+}

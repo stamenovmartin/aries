@@ -1,0 +1,27 @@
+{
+  "problem": "Integrate independently reported product defects and distinguish tested source from loaded production behavior.",
+  "change": "Deployed resource admission/context omissions, team admission/grants, automation breaker/cooldown, falsifiable probe predicates and integrity sample disclosure; loaded existing memory loopback and uncertain replay fixes.",
+  "validation": {
+    "date": "2026-10-06T11:34:05.206098+00:00",
+    "source_manifest": "experiments/product/remediation-release/release-manifest.json",
+    "source_stable": true,
+    "focused_assertions_across_overlapping_suite_runs": 982,
+    "additional_safety_assertions": 150,
+    "additional_unittest_cases": 16,
+    "deployment_log": "experiments/product/remediation-release/deployment.log",
+    "live_smoke": "experiments/product/remediation-release/live-smoke.json",
+    "live_file_goals_correct": 2,
+    "live_file_goals_total": 2,
+    "analytics_cap_fields_live": true,
+    "old_pid": 86078,
+    "new_pid": 143805,
+    "maintenance_released": true
+  },
+  "limitations": [
+    "Two synthetic live goals, not held-out/general assistant acceptance.",
+    "Desktop session locked; no live desktop/voice proof.",
+    "GOAL_TEAMS remains default OFF.",
+    "Unresolved F-09 trigger provenance, F-14 learning rollback, broader F-11 verifier independence and cost declarations remain.",
+    "Historical measurements not retroactively reclassified."
+  ]
+}

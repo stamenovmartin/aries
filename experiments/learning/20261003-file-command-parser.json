@@ -1,0 +1,21 @@
+{
+  "problem": "Frozen live60 fixture found Macedonian read-file commands included the command noun in the path. Previous October1 run incomplete; reran today.",
+  "change": "Only read_file recognition accepts optional фајл/fajl after прочитај/procitaj; preserves supplied path and existing policy. Added boundary/screen regression tests and generated benchmark comparison.",
+  "validation": {
+    "before": "experiments/assistant-benchmark/20261003T112625Z-baseline-today/results.json",
+    "after": "experiments/assistant-benchmark/20261003T113052Z-after-file-parser/results.json",
+    "live_before_passed_n": 29,
+    "live_after_passed_n": 44,
+    "n_each": 60,
+    "single_read": "6/12 → 12/12",
+    "multi_step": "8/16 → 16/16",
+    "scoped_tests": "35 path/screen +28 spoken request +16 verification checks passed",
+    "docs": "aries-capability-docs --check passed"
+  },
+  "limitations": [
+    "Only14 improved MK cases attributed to parser; additional desktop pass3/4→4/4 is not attributed to patch.",
+    "Ambiguous and typed refusal predicates0/8 each remain unmet; failed protected reads do not prove forbidden access.",
+    "Concurrent the reviewing agent voice playback/input work; no causal latency claim.",
+    "No whole-assistant maturity, adaptive planner or48h stability claim."
+  ]
+}

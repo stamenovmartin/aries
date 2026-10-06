@@ -1,0 +1,48 @@
+{
+  "id": "aba34a191b1d4db68374835c3cfe529c",
+  "request": "Open https://www.python.org and list its visible navigation links.",
+  "state": "partial",
+  "updated_at": "2026-09-20T16:46:54.674657",
+  "created_at": "2026-09-20T16:46:51.749343",
+  "steps": [
+    {
+      "kind": "capability",
+      "request": "Open https://www.python.org and list its visible navigation links.",
+      "capability": "open_url",
+      "args": {
+        "url": "https://www.python.org and list its visible navigation links."
+      },
+      "prepared": true,
+      "state": "failed",
+      "goal_id": "aba34a191b1d4db68374835c3cfe529c",
+      "result": {
+        "state": "failed",
+        "summary": "ValueError: 'www.python.org and list its visible navigation links.' could not be resolved: [Errno -2] Name or service not known",
+        "report": {
+          "success": false,
+          "details": "ValueError: 'www.python.org and list its visible navigation links.' could not be resolved: [Errno -2] Name or service not known",
+          "error_class": "unknown",
+          "action": "escalate",
+          "duration_ms": 1501
+        },
+        "elapsed_seconds": 1.523
+      }
+    }
+  ],
+  "cards": [],
+  "gaps": [
+    "ValueError: 'www.python.org and list its visible navigation links.' could not be resolved: [Errno -2] Name or service not known"
+  ],
+  "agent_engine": null,
+  "routing": {
+    "execution_level": "code",
+    "source": "rule",
+    "intent": "OPEN_URL",
+    "tool": "browser.open",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "Existing deterministic workspace plan"
+  },
+  "collected_at": "2026-09-20T16:46:53.114236"
+}

@@ -1,0 +1,34 @@
+--- test_excluded_neighbours_never_reach_the_model_or_get_bumped
+PASS  excluded source and derived texts are absent from model neighbours
+PASS  a model relation cannot bump a now-excluded memory
+--- test_exclusions_precede_ranking_and_cover_provenance
+PASS  excluded memory and its differently worded conclusion never enter ranking
+PASS  an excluded neighbour cannot consume the allowed result slot
+PASS  excluded rows are not marked as retrieved
+PASS  exclusion does not expire or delete the original evidence
+PASS  removing an exclusion restores all rows without a rewrite
+--- test_information_questions_do_not_become_automatic_facts
+PASS  question refused: што има денас од вести
+PASS  question refused: Колку меморија се користи?
+PASS  question refused: Ari, kolku mesto imam na diskot
+PASS  question refused: What is the latest news?
+PASS  question refused: How much free space do I have?
+PASS  question refused: Дали има нови вести?
+PASS  statement or standing preference remains eligible: Работам на проект што се вика АРИЕС.
+PASS  statement or standing preference remains eligible: I know where my project files are stored.
+PASS  statement or standing preference remains eligible: Can you always use Macedonian for my summaries?
+--- test_privacy_change_during_inference_prevents_a_write
+PASS  privacy-change test reaches inference
+PASS  a newly excluded topic is not saved after pending inference finishes
+PASS  privacy change leaves no raw or derived rows
+--- test_privacy_read_failures_never_default_to_permission
+PASS  unreadable privacy policy supplies no optional context
+PASS  explicit memory write refuses an unreadable exclusion policy
+PASS  automatic memory write aborts at the privacy gate
+PASS  unreadable policy is checked before loading an embedder
+PASS  policy failure did not touch an existing memory
+--- test_real_task_context_excludes_old_private_conclusions
+PASS  real queued task completes with allowed memory context
+PASS  task result contains no excluded memory or derived-conclusion references
+ALL PASSED
+Memory context withheld: privacy policy is unavailable

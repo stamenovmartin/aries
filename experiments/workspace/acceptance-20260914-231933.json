@@ -1,0 +1,86 @@
+{
+  "run": "20260914-231933",
+  "goals": [
+    {
+      "capability": "agent_task",
+      "id": "8a4f5a55af644d37b088f14b7e07fc61",
+      "result": {
+        "id": "8a4f5a55af644d37b088f14b7e07fc61",
+        "request": "Plan and execute a goal using observed results: Open https://www.python.org, follow the Documentation link, and report the final page title.",
+        "state": "partial",
+        "updated_at": "2026-09-14T21:19:41.315314",
+        "created_at": "2026-09-14T21:19:33.327932",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "browser_open",
+            "args": {
+              "url": "https://www.python.org"
+            },
+            "request": "browse https://www.python.org",
+            "planner_reason": "Start by opening the specified website.",
+            "planner_usage": {
+              "eval_count": 33,
+              "prompt_eval_count": 820,
+              "total_duration": 4430502488,
+              "planning_attempts": 1
+            },
+            "prepared": true,
+            "state": "failed",
+            "goal_id": "8a4f5a55af644d37b088f14b7e07fc61",
+            "result": {
+              "state": "failed",
+              "summary": "ValueError: Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.python.org/\nCall log:\n  - navigating to \"https://www.python.org/\", waiting until \"domcontentloaded\"\n",
+              "report": {
+                "success": false,
+                "details": "ValueError: Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.python.org/\nCall log:\n  - navigating to \"https://www.python.org/\", waiting until \"domcontentloaded\"\n",
+                "error_class": "unknown",
+                "action": "escalate",
+                "duration_ms": 1693
+              },
+              "elapsed_seconds": 1.723
+            }
+          }
+        ],
+        "cards": [],
+        "gaps": [
+          "ValueError: Page.goto: net::ERR_PROXY_CONNECTION_FAILED at https://www.python.org/\nCall log:\n  - navigating to \"https://www.python.org/\", waiting until \"domcontentloaded\"\n"
+        ],
+        "context": [],
+        "related": [
+          {
+            "id": "fa7f56481a9b4a208a2331b6e958d8d0",
+            "request": "Plan and execute a goal using observed results: Open https://www.python.org, follow the Documentation link, and report the final page title."
+          },
+          {
+            "id": "03dc5acae232436cb4b20017d52426bb",
+            "request": "Follow a named link in a browser session: a15cd1ca76ee, Documentation"
+          },
+          {
+            "id": "0b485aeb82d64dc1bd1e66f560201fc4",
+            "request": "browse https://www.python.org"
+          }
+        ],
+        "collected_at": "2026-09-14T21:19:35.068912",
+        "agent": {
+          "request": "Open https://www.python.org, follow the Documentation link, and report the final page title.",
+          "finished": false,
+          "model_usage": [
+            {
+              "eval_count": 33,
+              "prompt_eval_count": 820,
+              "total_duration": 4430502488,
+              "planning_attempts": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "live multi-step goal reaches documentation and finishes",
+      "passed": false
+    }
+  ]
+}

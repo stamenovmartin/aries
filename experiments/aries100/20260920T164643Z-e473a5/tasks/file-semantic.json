@@ -1,0 +1,375 @@
+{
+  "id": "e9e7a10c92c4426193ba96b6398b96c8",
+  "request": "Find the document about Theory of Mind experiments in /home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5.",
+  "state": "partial",
+  "updated_at": "2026-09-20T16:47:17.295867",
+  "created_at": "2026-09-20T16:47:02.837840",
+  "steps": [
+    {
+      "step_id": "d3e7618c15744b138dc138a58625c510",
+      "task_id": "e9e7a10c92c4426193ba96b6398b96c8",
+      "step_index": 0,
+      "kind": "capability",
+      "request": "Search local document filenames and contents for relevance to Theory of Mind experiments.",
+      "planner_decision": {
+        "action": "execute",
+        "capability": "file.semantic_search",
+        "arguments": {
+          "path": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5",
+          "query": "Theory of Mind experiments",
+          "extension": "",
+          "modified_after": null,
+          "modified_before": null
+        },
+        "reason": "Search local document filenames and contents for relevance to Theory of Mind experiments.",
+        "summary": "",
+        "evidence_refs": []
+      },
+      "capability": "file.semantic_search",
+      "args": {
+        "path": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5",
+        "query": "Theory of Mind experiments",
+        "extension": "",
+        "modified_after": null,
+        "modified_before": null
+      },
+      "started_at": "2026-09-20T16:47:11.605499+00:00",
+      "finished_at": "2026-09-20T16:47:11.634360+00:00",
+      "execution_status": "observed",
+      "verification_status": "verified",
+      "observation": {
+        "verification": {
+          "matches": [
+            {
+              "path": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt",
+              "score": 3,
+              "filename_matches": [],
+              "text_matches": [
+                "experiments",
+                "mind",
+                "theory"
+              ],
+              "scope": "filename + bounded text",
+              "modified_at": "2026-09-20T16:46:43.168130+00:00",
+              "size": 92,
+              "sha256": "2bc9ba824625ec726d0774f4da75a41400214622054f48a735cda5dd1faf845a"
+            }
+          ],
+          "scanned": 1,
+          "truncated": false,
+          "method": "local lexical filename/text overlap, not calibrated semantic confidence",
+          "observed_at": "2026-09-20T16:47:11.620166+00:00"
+        },
+        "evidence_id": "281dd1e238924a2db48ab69a0b1feafe"
+      },
+      "error": null,
+      "evidence_refs": [
+        "281dd1e238924a2db48ab69a0b1feafe"
+      ],
+      "model_usage": {
+        "measured": {
+          "input_tokens": 17145,
+          "output_tokens": 71,
+          "total_tokens": 17216
+        },
+        "native": {
+          "usage_details": {
+            "input_tokens": 17145,
+            "cached_input_tokens": 7552,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 71,
+            "reasoning_output_tokens": 0
+          },
+          "reported_cost_usd": null,
+          "estimated_cost_usd": null,
+          "prompt_eval_count": 17145,
+          "eval_count": 71,
+          "provider": "codex-cli",
+          "model": "cli-default",
+          "execution_level": "cloud"
+        },
+        "estimated": {
+          "input_tokens": 5709,
+          "output_tokens": 71,
+          "method": "character-count / 4 heuristic; not tokenizer measurement"
+        }
+      },
+      "state": "verified",
+      "transitions": [
+        {
+          "state": "planned",
+          "timestamp": "2026-09-20T16:47:11.588338+00:00"
+        },
+        {
+          "state": "executing",
+          "timestamp": "2026-09-20T16:47:11.605517+00:00"
+        },
+        {
+          "state": "observed",
+          "timestamp": "2026-09-20T16:47:11.620251+00:00"
+        },
+        {
+          "state": "verified",
+          "timestamp": "2026-09-20T16:47:11.633918+00:00"
+        }
+      ],
+      "execution_result": {
+        "matches": [
+          {
+            "path": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt",
+            "score": 3,
+            "filename_matches": [],
+            "text_matches": [
+              "experiments",
+              "mind",
+              "theory"
+            ],
+            "scope": "filename + bounded text",
+            "modified_at": "2026-09-20T16:46:43.168130+00:00",
+            "size": 92
+          }
+        ],
+        "scanned": 1,
+        "truncated": false,
+        "method": "local lexical filename/text overlap, not calibrated semantic confidence",
+        "observed_at": "2026-09-20T16:47:11.620166+00:00"
+      },
+      "observation_ref": "e8e64a928a344de3a6cc033d26417460",
+      "verification": {
+        "met": true,
+        "type": "file_candidates",
+        "data": {
+          "matches": [
+            {
+              "path": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt",
+              "score": 3,
+              "filename_matches": [],
+              "text_matches": [
+                "experiments",
+                "mind",
+                "theory"
+              ],
+              "scope": "filename + bounded text",
+              "modified_at": "2026-09-20T16:46:43.168130+00:00",
+              "size": 92,
+              "sha256": "2bc9ba824625ec726d0774f4da75a41400214622054f48a735cda5dd1faf845a"
+            }
+          ],
+          "scanned": 1,
+          "truncated": false,
+          "method": "local lexical filename/text overlap, not calibrated semantic confidence",
+          "observed_at": "2026-09-20T16:47:11.620166+00:00"
+        }
+      },
+      "seconds": 0.0323,
+      "result": {
+        "state": "done",
+        "summary": "Independently verified",
+        "elapsed_seconds": 0.0323
+      }
+    }
+  ],
+  "cards": [
+    {
+      "title": "Goal outcome",
+      "text": "Planner decision retry/call budget exhausted; invalid attempts are recorded",
+      "evidence": "See persisted step observations and failures"
+    }
+  ],
+  "gaps": [
+    "Planner decision retry/call budget exhausted; invalid attempts are recorded"
+  ],
+  "agent_engine": "m14",
+  "collected_at": "2026-09-20T16:47:03.377526",
+  "evidence": [
+    {
+      "evidence_id": "e8e64a928a344de3a6cc033d26417460",
+      "type": "execution_observation",
+      "source": "file.semantic_search",
+      "timestamp": "2026-09-20T16:47:11.620278+00:00",
+      "step_id": "d3e7618c15744b138dc138a58625c510",
+      "verified": false,
+      "data": {
+        "matches": [
+          {
+            "path": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt",
+            "score": 3,
+            "filename_matches": [],
+            "text_matches": [
+              "experiments",
+              "mind",
+              "theory"
+            ],
+            "scope": "filename + bounded text",
+            "modified_at": "2026-09-20T16:46:43.168130+00:00",
+            "size": 92
+          }
+        ],
+        "scanned": 1,
+        "truncated": false,
+        "method": "local lexical filename/text overlap, not calibrated semantic confidence",
+        "observed_at": "2026-09-20T16:47:11.620166+00:00"
+      }
+    },
+    {
+      "evidence_id": "281dd1e238924a2db48ab69a0b1feafe",
+      "type": "file_candidates",
+      "source": "file.semantic_search",
+      "timestamp": "2026-09-20T16:47:11.633868+00:00",
+      "step_id": "d3e7618c15744b138dc138a58625c510",
+      "verified": true,
+      "data": {
+        "matches": [
+          {
+            "path": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5/paper.txt",
+            "score": 3,
+            "filename_matches": [],
+            "text_matches": [
+              "experiments",
+              "mind",
+              "theory"
+            ],
+            "scope": "filename + bounded text",
+            "modified_at": "2026-09-20T16:46:43.168130+00:00",
+            "size": 92,
+            "sha256": "2bc9ba824625ec726d0774f4da75a41400214622054f48a735cda5dd1faf845a"
+          }
+        ],
+        "scanned": 1,
+        "truncated": false,
+        "method": "local lexical filename/text overlap, not calibrated semantic confidence",
+        "observed_at": "2026-09-20T16:47:11.620166+00:00"
+      }
+    }
+  ],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "Find the document about Theory of Mind experiments in /home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5.",
+    "finished": false,
+    "max_steps": 8,
+    "contract": {
+      "supported": false,
+      "requirements": [],
+      "reason": "No independent completion contract for this goal yet. Useful verified steps may be reported only as partial."
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-09-20T16:47:03.482530+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 17145,
+            "output_tokens": 71,
+            "total_tokens": 17216
+          },
+          "native": {
+            "usage_details": {
+              "input_tokens": 17145,
+              "cached_input_tokens": 7552,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 71,
+              "reasoning_output_tokens": 0
+            },
+            "reported_cost_usd": null,
+            "estimated_cost_usd": null,
+            "prompt_eval_count": 17145,
+            "eval_count": 71,
+            "provider": "codex-cli",
+            "model": "cli-default",
+            "execution_level": "cloud"
+          },
+          "estimated": {
+            "input_tokens": 5709,
+            "output_tokens": 71,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\":\"execute\",\"capability\":\"file.semantic_search\",\"arguments\":{\"path\":\"/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5\",\"query\":\"Theory of Mind experiments\"},\"reason\":\"Search local document filenames and contents for relevance to Theory of Mind experiments.\"}",
+        "decision": {
+          "action": "execute",
+          "capability": "file.semantic_search",
+          "arguments": {
+            "path": "/home/stamenovmartin/Documents/ARIES-M15/20260920T164643Z-e473a5",
+            "query": "Theory of Mind experiments",
+            "extension": "",
+            "modified_after": null,
+            "modified_before": null
+          },
+          "reason": "Search local document filenames and contents for relevance to Theory of Mind experiments.",
+          "summary": "",
+          "evidence_refs": []
+        },
+        "seconds": 8.08
+      },
+      {
+        "index": 1,
+        "timestamp": "2026-09-20T16:47:11.658622+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "code": "NON_RETRYABLE",
+          "message": "Server error '503 Service Unavailable' for url 'http://127.0.0.1:11435/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+          "retryable": false
+        },
+        "seconds": 2.8915
+      },
+      {
+        "index": 2,
+        "timestamp": "2026-09-20T16:47:14.557599+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "code": "NON_RETRYABLE",
+          "message": "Server error '503 Service Unavailable' for url 'http://127.0.0.1:11435/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+          "retryable": false
+        },
+        "seconds": 2.7291
+      }
+    ],
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-09-20T16:47:03.391327+00:00"
+    },
+    "metrics": {
+      "planner_calls": 3,
+      "number_of_steps": 1,
+      "execution_time": 0.0323,
+      "planner_time": 13.700595379981678,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 1,
+      "invalid_decisions": 2,
+      "wrong_capability_selections": 0,
+      "input_tokens": 17145,
+      "output_tokens": 71,
+      "total_tokens": 17216,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 5709,
+      "estimated_output_tokens": 71,
+      "task_final_status": "partial",
+      "wall_seconds": 13.918,
+      "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+    },
+    "completion_feedback": "Invalid decision: Server error '503 Service Unavailable' for url 'http://127.0.0.1:11435/generate'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+    "summary": "Planner decision retry/call budget exhausted; invalid attempts are recorded"
+  },
+  "routing": {
+    "intent": "READ_EMAIL",
+    "tool": "none",
+    "confidence": 0.8,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "The request is asking to find a specific document, which is similar to reading an email or a mailbox.",
+    "execution_level": "cloud",
+    "source": "local",
+    "blocked_reason": "",
+    "input_tokens": 274,
+    "output_tokens": 64
+  },
+  "final_evidence_refs": []
+}

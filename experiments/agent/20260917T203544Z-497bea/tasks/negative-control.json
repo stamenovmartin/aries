@@ -1,0 +1,848 @@
+{
+  "id": "c2977fca1db547fcbd7c0d407ccd2f70",
+  "request": "Read /this/path/does/not/exist/aries.txt",
+  "state": "failed",
+  "updated_at": "2026-09-17T20:36:21.371273",
+  "created_at": "2026-09-17T20:36:09.964885",
+  "steps": [],
+  "cards": [
+    {
+      "title": "Goal outcome",
+      "text": "Finish requires existing verified evidence IDs; unknown/failed references rejected",
+      "evidence": "See persisted step observations and failures"
+    }
+  ],
+  "gaps": [
+    "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+  ],
+  "agent_engine": "m14",
+  "collected_at": "2026-09-17T20:36:11.097853",
+  "evidence": [],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "Read /this/path/does/not/exist/aries.txt",
+    "finished": false,
+    "max_steps": 8,
+    "contract": {
+      "supported": true,
+      "requirements": [
+        {
+          "capability": "file.read",
+          "path": "/this/path/does/not/exist/aries.txt"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-09-17T20:36:11.111909+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2568,
+            "output_tokens": 28,
+            "total_tokens": 2596
+          },
+          "native": {
+            "eval_count": 28,
+            "prompt_eval_count": 2568,
+            "total_duration": 1546001275
+          },
+          "estimated": {
+            "input_tokens": 2279,
+            "output_tokens": 24,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.path:/this/path/does/not/exist/aries.txt\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.path:/this/path/does/not/exist/aries.txt"
+          ]
+        },
+        "seconds": 1.5706
+      },
+      {
+        "index": 1,
+        "timestamp": "2026-09-17T20:36:12.698696+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 28,
+            "total_tokens": 2608
+          },
+          "native": {
+            "eval_count": 28,
+            "prompt_eval_count": 2580,
+            "total_duration": 722499265
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 24,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.path:/this/path/does/not/exist/aries.txt\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.path:/this/path/does/not/exist/aries.txt"
+          ]
+        },
+        "seconds": 0.7489
+      },
+      {
+        "index": 2,
+        "timestamp": "2026-09-17T20:36:13.464433+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 313148781
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists-1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists-1"
+          ]
+        },
+        "seconds": 0.3681
+      },
+      {
+        "index": 3,
+        "timestamp": "2026-09-17T20:36:13.848569+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 28,
+            "total_tokens": 2608
+          },
+          "native": {
+            "eval_count": 28,
+            "prompt_eval_count": 2580,
+            "total_duration": 465849583
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 24,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.path:/this/path/does/not/exist/aries.txt\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.path:/this/path/does/not/exist/aries.txt"
+          ]
+        },
+        "seconds": 0.4914
+      },
+      {
+        "index": 4,
+        "timestamp": "2026-09-17T20:36:14.355743+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 314801039
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists-1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists-1"
+          ]
+        },
+        "seconds": 0.3453
+      },
+      {
+        "index": 5,
+        "timestamp": "2026-09-17T20:36:14.716902+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 28,
+            "total_tokens": 2608
+          },
+          "native": {
+            "eval_count": 28,
+            "prompt_eval_count": 2580,
+            "total_duration": 466017530
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 24,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.path:/this/path/does/not/exist/aries.txt\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.path:/this/path/does/not/exist/aries.txt"
+          ]
+        },
+        "seconds": 0.4928
+      },
+      {
+        "index": 6,
+        "timestamp": "2026-09-17T20:36:15.235316+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 28,
+            "total_tokens": 2608
+          },
+          "native": {
+            "eval_count": 28,
+            "prompt_eval_count": 2580,
+            "total_duration": 471170348
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 24,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.path:/this/path/does/not/exist/aries.txt\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.path:/this/path/does/not/exist/aries.txt"
+          ]
+        },
+        "seconds": 0.4981
+      },
+      {
+        "index": 7,
+        "timestamp": "2026-09-17T20:36:15.751175+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 31,
+            "total_tokens": 2611
+          },
+          "native": {
+            "eval_count": 31,
+            "prompt_eval_count": 2580,
+            "total_duration": 556149287
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 24,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\n  \"action\": \"finish\",\n  \"evidence_refs\": [\"file.exists:/this/path/does/not/exist/aries.txt\"]\n}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists:/this/path/does/not/exist/aries.txt"
+          ]
+        },
+        "seconds": 0.5841
+      },
+      {
+        "index": 8,
+        "timestamp": "2026-09-17T20:36:16.353500+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 317748700
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists-1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists-1"
+          ]
+        },
+        "seconds": 0.3456
+      },
+      {
+        "index": 9,
+        "timestamp": "2026-09-17T20:36:16.720141+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 27,
+            "total_tokens": 2607
+          },
+          "native": {
+            "eval_count": 27,
+            "prompt_eval_count": 2580,
+            "total_duration": 453799676
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 17,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.1234567890\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.1234567890"
+          ]
+        },
+        "seconds": 0.4792
+      },
+      {
+        "index": 10,
+        "timestamp": "2026-09-17T20:36:17.216596+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 313454610
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists-1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists-1"
+          ]
+        },
+        "seconds": 0.3394
+      },
+      {
+        "index": 11,
+        "timestamp": "2026-09-17T20:36:17.575063+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 322583081
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists-1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists-1"
+          ]
+        },
+        "seconds": 0.35
+      },
+      {
+        "index": 12,
+        "timestamp": "2026-09-17T20:36:17.945016+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 355019536
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists-1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists-1"
+          ]
+        },
+        "seconds": 0.3819
+      },
+      {
+        "index": 13,
+        "timestamp": "2026-09-17T20:36:18.343550+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 28,
+            "total_tokens": 2608
+          },
+          "native": {
+            "eval_count": 28,
+            "prompt_eval_count": 2580,
+            "total_duration": 484602556
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 24,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.path:/this/path/does/not/exist/aries.txt\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.path:/this/path/does/not/exist/aries.txt"
+          ]
+        },
+        "seconds": 0.5121
+      },
+      {
+        "index": 14,
+        "timestamp": "2026-09-17T20:36:18.871058+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 28,
+            "total_tokens": 2608
+          },
+          "native": {
+            "eval_count": 28,
+            "prompt_eval_count": 2580,
+            "total_duration": 473130128
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 24,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.path:/this/path/does/not/exist/aries.txt\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.path:/this/path/does/not/exist/aries.txt"
+          ]
+        },
+        "seconds": 0.5012
+      },
+      {
+        "index": 15,
+        "timestamp": "2026-09-17T20:36:19.389301+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 320598519
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists-1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists-1"
+          ]
+        },
+        "seconds": 0.3461
+      },
+      {
+        "index": 16,
+        "timestamp": "2026-09-17T20:36:19.751899+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 317945837
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.1"
+          ]
+        },
+        "seconds": 0.3471
+      },
+      {
+        "index": 17,
+        "timestamp": "2026-09-17T20:36:20.115560+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 322894932
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.1"
+          ]
+        },
+        "seconds": 0.3519
+      },
+      {
+        "index": 18,
+        "timestamp": "2026-09-17T20:36:20.484799+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 28,
+            "total_tokens": 2608
+          },
+          "native": {
+            "eval_count": 28,
+            "prompt_eval_count": 2580,
+            "total_duration": 482496572
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 24,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists.path:/this/path/does/not/exist/aries.txt\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists.path:/this/path/does/not/exist/aries.txt"
+          ]
+        },
+        "seconds": 0.5078
+      },
+      {
+        "index": 19,
+        "timestamp": "2026-09-17T20:36:21.010207+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2580,
+            "output_tokens": 18,
+            "total_tokens": 2598
+          },
+          "native": {
+            "eval_count": 18,
+            "prompt_eval_count": 2580,
+            "total_duration": 318214445
+          },
+          "estimated": {
+            "input_tokens": 2299,
+            "output_tokens": 14,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\"action\": \"finish\", \"evidence_refs\": [\"file.exists-1\"]}",
+        "decision": {
+          "action": "finish",
+          "capability": null,
+          "arguments": {},
+          "reason": "",
+          "summary": "",
+          "evidence_refs": [
+            "file.exists-1"
+          ]
+        },
+        "seconds": 0.3438
+      }
+    ],
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-09-17T20:36:11.102223+00:00"
+    },
+    "metrics": {
+      "planner_calls": 20,
+      "number_of_steps": 0,
+      "execution_time": 0.0,
+      "planner_time": 9.905313896993903,
+      "capability_failures": 0,
+      "verification_failures": 20,
+      "retries": 0,
+      "invalid_decisions": 0,
+      "wrong_capability_selections": 0,
+      "input_tokens": 51588,
+      "output_tokens": 462,
+      "total_tokens": 52050,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 45960,
+      "estimated_output_tokens": 373,
+      "task_final_status": "failed",
+      "wall_seconds": 10.273
+    },
+    "completion_checks": [
+      {
+        "at": "2026-09-17T20:36:12.691471+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:13.457091+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:13.841256+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:14.348729+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:14.709877+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:15.227259+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:15.743103+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:16.345108+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:16.711880+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:17.208811+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:17.565280+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:17.937296+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:18.336060+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:18.863365+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:19.381602+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:19.744297+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:20.108272+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:20.477067+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:21.002065+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      },
+      {
+        "at": "2026-09-17T20:36:21.363285+00:00",
+        "met": false,
+        "reason": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+      }
+    ],
+    "completion_feedback": "Finish requires existing verified evidence IDs; unknown/failed references rejected",
+    "summary": "Finish requires existing verified evidence IDs; unknown/failed references rejected"
+  },
+  "final_evidence_refs": []
+}

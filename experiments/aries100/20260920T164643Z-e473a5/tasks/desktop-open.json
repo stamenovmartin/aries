@@ -1,0 +1,119 @@
+{
+  "id": "dd82d2871e70468499344e725523e9ec",
+  "request": "Open Firefox.",
+  "state": "partial",
+  "updated_at": "2026-09-20T16:46:47.116152",
+  "created_at": "2026-09-20T16:46:46.788483",
+  "steps": [
+    {
+      "kind": "capability",
+      "request": "Open Firefox.",
+      "capability": "open_app",
+      "args": {
+        "app": "Firefox."
+      },
+      "prepared": true,
+      "state": "failed",
+      "goal_id": "dd82d2871e70468499344e725523e9ec",
+      "result": {
+        "state": "failed",
+        "summary": "not done — 114 '' process(es) are running, but desktop session is locked; background tasks continue, desktop actions await unlock — so ARIES cannot tell whether it has a window on screen or is a background process",
+        "operator": {
+          "request": "Open Firefox.",
+          "outcome": "failed",
+          "summary": "not done — 114 '' process(es) are running, but desktop session is locked; background tasks continue, desktop actions await unlock — so ARIES cannot tell whether it has a window on screen or is a background process",
+          "plan": {
+            "request": "Open Firefox.",
+            "steps": [
+              {
+                "goal": "open_app",
+                "params": {
+                  "app": "Firefox."
+                },
+                "tool": "desktop.open_app",
+                "payload": {
+                  "app": "Firefox."
+                },
+                "why": ""
+              }
+            ],
+            "source": "router",
+            "refusal": "",
+            "alternatives": [],
+            "model": ""
+          },
+          "steps": [
+            {
+              "goal": "open_app",
+              "params": {
+                "app": "Firefox."
+              },
+              "tool": "desktop.open_app",
+              "payload": {
+                "app": "Firefox."
+              },
+              "why": "",
+              "reported": false,
+              "report_detail": "Cannot determine whether this app is already open: desktop session is locked; background tasks continue, desktop actions await unlock",
+              "gate": "",
+              "verification": {
+                "verdict": "unverifiable",
+                "grade": "none",
+                "checked": "processes and windows named ''",
+                "found": "114 '' process(es) are running, but desktop session is locked; background tasks continue, desktop actions await unlock — so ARIES cannot tell whether it has a window on screen or is a background process",
+                "evidence": {
+                  "processes": [
+                    {
+                      "pid": 2038,
+                      "name": "systemd",
+                      "cmdline": "/usr/lib/systemd/systemd --user"
+                    },
+                    {
+                      "pid": 2041,
+                      "name": "(sd-pam)",
+                      "cmdline": "(sd-pam)"
+                    },
+                    {
+                      "pid": 2062,
+                      "name": "dbus-daemon",
+                      "cmdline": "/usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only"
+                    }
+                  ]
+                }
+              },
+              "seconds": 0.08,
+              "observations": 1,
+              "honest": true
+            }
+          ],
+          "reported_success": false,
+          "verified_success": false,
+          "honesty_gap": false,
+          "unverifiable": true,
+          "proposed": false,
+          "held": "",
+          "task_id": "operator-1789922806990",
+          "seconds": 0.09
+        },
+        "cards": [],
+        "elapsed_seconds": 0.117
+      }
+    }
+  ],
+  "cards": [],
+  "gaps": [
+    "not done — 114 '' process(es) are running, but desktop session is locked; background tasks continue, desktop actions await unlock — so ARIES cannot tell whether it has a window on screen or is a background process"
+  ],
+  "agent_engine": null,
+  "routing": {
+    "execution_level": "code",
+    "source": "rule",
+    "intent": "OPEN_APP",
+    "tool": "desktop.launch",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "Existing deterministic workspace plan"
+  },
+  "collected_at": "2026-09-20T16:46:46.962021"
+}

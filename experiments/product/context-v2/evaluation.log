@@ -1,0 +1,7 @@
+/home/stamenovmartin/aries/experiments/product/context-v2/evaluate.py:46: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  state='failed',result_json='{}',updated_at=datetime.utcnow()-timedelta(seconds=10)))
+/home/stamenovmartin/aries/experiments/product/context-v2/evaluate.py:50: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  updated_at=datetime.utcnow()-timedelta(days=20)))
+/home/stamenovmartin/aries/experiments/product/context-v2/evaluate.py:55: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  relevance=.8,disposition='delivered',published_at=datetime.utcnow()-timedelta(hours=1)))
+{"assigned": 16, "completed": 16, "source_stable": true, "grounded": 16, "citation_correct": 16, "expanded_retrieval_exact": 8, "forbidden_inclusions": 0, "failures": [], "scope": "Two repeated native citation trials per four fixture cases, paired source ablation; no general task-success or token-saving claim"}

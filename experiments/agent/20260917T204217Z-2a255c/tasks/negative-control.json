@@ -1,0 +1,97 @@
+{
+  "id": "8ec9ef8fd07c43999df1d8a0fe8db961",
+  "request": "Read /this/path/does/not/exist/aries.txt",
+  "state": "failed",
+  "updated_at": "2026-09-17T20:42:36.303968",
+  "created_at": "2026-09-17T20:42:33.724888",
+  "steps": [],
+  "cards": [
+    {
+      "title": "Goal outcome",
+      "text": "The file does not exist at the specified path.",
+      "evidence": "See persisted step observations and failures"
+    }
+  ],
+  "gaps": [
+    "The file does not exist at the specified path."
+  ],
+  "agent_engine": "m14",
+  "collected_at": "2026-09-17T20:42:34.602243",
+  "evidence": [],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "Read /this/path/does/not/exist/aries.txt",
+    "finished": false,
+    "max_steps": 8,
+    "contract": {
+      "supported": true,
+      "requirements": [
+        {
+          "capability": "file.read",
+          "path": "/this/path/does/not/exist/aries.txt"
+        }
+      ]
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-09-17T20:42:34.616252+00:00",
+        "usage": {
+          "measured": {
+            "input_tokens": 2740,
+            "output_tokens": 25,
+            "total_tokens": 2765
+          },
+          "native": {
+            "eval_count": 25,
+            "prompt_eval_count": 2740,
+            "total_duration": 1651227529
+          },
+          "estimated": {
+            "input_tokens": 2478,
+            "output_tokens": 21,
+            "method": "character-count / 4 heuristic; not tokenizer measurement"
+          }
+        },
+        "valid": true,
+        "raw": "{\n  \"action\": \"fail\",\n  \"reason\": \"The file does not exist at the specified path.\"\n}",
+        "decision": {
+          "action": "fail",
+          "capability": null,
+          "arguments": {},
+          "reason": "The file does not exist at the specified path.",
+          "summary": "",
+          "evidence_refs": []
+        },
+        "seconds": 1.6763
+      }
+    ],
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-09-17T20:42:34.606373+00:00"
+    },
+    "metrics": {
+      "planner_calls": 1,
+      "number_of_steps": 0,
+      "execution_time": 0.0,
+      "planner_time": 1.6762735569991492,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 0,
+      "invalid_decisions": 0,
+      "wrong_capability_selections": 0,
+      "input_tokens": 2740,
+      "output_tokens": 25,
+      "total_tokens": 2765,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 2478,
+      "estimated_output_tokens": 21,
+      "task_final_status": "failed",
+      "wall_seconds": 1.702
+    },
+    "summary": "The file does not exist at the specified path."
+  },
+  "final_evidence_refs": []
+}

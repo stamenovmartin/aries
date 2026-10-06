@@ -1,0 +1,23 @@
+--- test_comparison_retains_every_case_and_known_limitation
+PASS  same 20 labelled inputs are evaluated for both versions
+PASS  generic Python no longer injects three unrelated histories
+PASS  useful statistics correction is still selected
+PASS  remaining false positive is disclosed
+PASS  improvements have no hidden per-case regressions
+PASS  fixture and implementation identities accompany results
+PASS  comparison never claims to promote a version
+PASS  unknown version is refused
+--- test_paired_statistics_known_discordance
+PASS  four improvements have exact two-sided p of one eighth
+PASS  identical paired outcomes have p one
+PASS  balanced discordance has p one
+PASS  Wilson interval bounds contain the observed proportion
+--- test_run_through_queue_is_read_only_and_durable
+PASS  queued comparison completes and preserves case-level evidence
+PASS  comparison leaves active user setting unchanged
+PASS  read-only comparison reserves no desktop resource
+--- test_switch_and_rollback_control_actual_retrieval
+PASS  selected version changes real planner experience selection
+PASS  retrieved experience identifies its producing version
+PASS  rollback restores baseline selection without editing histories
+ALL PASSED

@@ -1,0 +1,32 @@
+{
+  "problem": "Learned values lacked manual reset/undo; identical evidence repeatedly ratcheted weights; unattended/unknown goals could borrow interactive mutation policy, including legacy shell commands.",
+  "change": "DEPLOYED: revision-checked serialized learned-only reset/undo, append-only controls and history boundaries, stale proposal epochs, durable atomic evidence receipts, accurate applied counts, Learning UI/API, persisted source with fail-closed mutation review across agent and legacy executor paths.",
+  "validation": {
+    "checks": "experiments/product/learning-rollback/release-final-checks.json",
+    "passed": 488,
+    "total": 488,
+    "suite_invocations": 13,
+    "scope": "isolated SQLite/API/real GTK render; source hashes stable; overlapping existing suites, parent harness counts only",
+    "independent_review": "Two read-only the reviewing agent CLI reviews; five initial issues and three follow-up correctness issues corrected. Final tests include freeze/damping undo and inference author preservation.",
+    "before_after": "Four passes over identical80-observation fixture: .75,.9,.992,.999 before; .75,.75,.75,.75 after. Synthetic reused evidence fixture, not field learning quality.",
+    "merged_checks": {
+      "controls": 30,
+      "origin": 18
+    },
+    "live": "experiments/product/learning-rollback/live-smoke.json",
+    "live_results": {
+      "controls_get": true,
+      "background_no_effect": true,
+      "interactive_read_hashes": true
+    }
+  },
+  "limitations": [
+    "Deployed backend and source; desktop session locked, live UI not exercised. Isolated actual GTK render passed.",
+    "No actual user preference was reset. Future new evidence may produce new values; disable learning separately to prevent it.",
+    "Identical evidence is deduplicated; overlapping or changed evidence is not a global temporal rate cap.",
+    "Reset preserves old history and starts a new stability epoch; it is not automatic policy evolution or RL.",
+    "Origin is persisted trusted-caller metadata, not cryptographic client identity; privileged local API callers remain trusted.",
+    "Direct unaudited DB modifications are outside setting audit-stamp guarantee.",
+    "Undo restores prior value and stability history; cancelled pending reversals stay cancelled."
+  ]
+}

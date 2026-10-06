@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-03T21:37:57.787206+00:00",
+  "preflight_n": 15,
+  "preflight_ready": 10,
+  "screen_precondition_skips": 5,
+  "errors": 0,
+  "llm_smoke_n": 2,
+  "smokes": [
+    {
+      "case_id": "vf-01",
+      "artifact": "eval/research_feedback/runs/20261003T213317Z-4b9ab7/result.json",
+      "fault_reached": true,
+      "planner_exposed": true,
+      "planner_calls": 3,
+      "final_state": "failed",
+      "oracle_met": false,
+      "model_invalid_decisions": 2,
+      "post_action_verification": false,
+      "completed_recovery_adjudicated": false,
+      "notes": "No repaired failed requirement. Early network artifact used exposure-plus-success as recovery; this derived adjudication corrects it without rewriting the original artifact."
+    },
+    {
+      "case_id": "vf-05",
+      "artifact": "eval/research_feedback/runs/20261003T213505Z-b8c20c/result.json",
+      "fault_reached": true,
+      "planner_exposed": true,
+      "planner_calls": 2,
+      "final_state": "done",
+      "oracle_met": true,
+      "model_invalid_decisions": 0,
+      "post_action_verification": true,
+      "completed_recovery_adjudicated": false,
+      "notes": "No repaired failed requirement. Early network artifact used exposure-plus-success as recovery; this derived adjudication corrects it without rewriting the original artifact."
+    }
+  ],
+  "launch_600_ready": false,
+  "limitations": [
+    "Five screen cases need owned known scene.",
+    "Service pilot produced2invalid terminal decisions; no correct-stop reasoning claim.",
+    "Network pilot completed despite injection without detected contradiction; not LLM recovery.",
+    "Native oracle records are separate from fault-patched functions; dynamic metric identity is weaker than numeric equality.",
+    "Native cases expose only required read capabilities; alternative-route recovery is not covered."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-06T12:19:03.471952+00:00",
+  "results": [
+    {
+      "suite": "test_attention_resource_policy",
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "suite": "test_connect",
+      "exit_code": 0,
+      "passed": 116,
+      "failed": 0
+    },
+    {
+      "suite": "test_power_fail_closed",
+      "exit_code": 0,
+      "passed": 47,
+      "failed": 0
+    },
+    {
+      "suite": "test_voice_flow",
+      "exit_code": 0,
+      "passed": 75,
+      "failed": 0
+    }
+  ],
+  "source_before": {
+    "aries/connect/automation.py": "86cd4ffb3638fff8e9fba5cd83e5451ac198c7f28653a7b351eb10295704dfcd",
+    "tests/test_attention_resource_policy.py": "8acd5ac6bd96ba111ea7ab2be98ee2738f58bf1cde82f8571d37da9adff71a45",
+    "experiments/voice/voice.py": "f720e9983aa83d04c32cd6dc05b224034eeded06134e65ebca347bdc4242b858",
+    "tests/test_voice_flow.py": "4b7970f5f911bb0d2c3ccd85e108bd991cb95ede8cd7e83a628630d23931893e",
+    "tests/test_connect.py": "81b6321655c91e32fabad83d80728d04beac7f2257e12a7cccb2b8d71b96413c"
+  },
+  "source_after": {
+    "aries/connect/automation.py": "86cd4ffb3638fff8e9fba5cd83e5451ac198c7f28653a7b351eb10295704dfcd",
+    "tests/test_attention_resource_policy.py": "8acd5ac6bd96ba111ea7ab2be98ee2738f58bf1cde82f8571d37da9adff71a45",
+    "experiments/voice/voice.py": "f720e9983aa83d04c32cd6dc05b224034eeded06134e65ebca347bdc4242b858",
+    "tests/test_voice_flow.py": "4b7970f5f911bb0d2c3ccd85e108bd991cb95ede8cd7e83a628630d23931893e",
+    "tests/test_connect.py": "81b6321655c91e32fabad83d80728d04beac7f2257e12a7cccb2b8d71b96413c"
+  },
+  "source_stable": true,
+  "scope": "Synthetic docs, in-memory keyring API adapter and real isolated DB. Decoded-text voice tests, no microphone/acoustic validation. Real registered automation gate with synthetic sensors and mocked lifecycle."
+}

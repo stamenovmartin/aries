@@ -1,0 +1,90 @@
+{
+  "id": "5692039d38f2494fab029c9c21cf776f",
+  "request": "Check disk usage and report which filesystem has the highest percentage used.",
+  "state": "failed",
+  "updated_at": "2026-09-17T20:34:04.858518",
+  "created_at": "2026-09-17T20:34:03.868728",
+  "steps": [],
+  "cards": [
+    {
+      "title": "Goal outcome",
+      "text": "Planner output remained invalid after two recorded attempts",
+      "evidence": "See persisted step observations and failures"
+    }
+  ],
+  "gaps": [
+    "Planner output remained invalid after two recorded attempts"
+  ],
+  "agent_engine": "m14",
+  "collected_at": "2026-09-17T20:34:04.744285",
+  "evidence": [],
+  "schema_version": 2,
+  "agent": {
+    "engine": "m14",
+    "request": "Check disk usage and report which filesystem has the highest percentage used.",
+    "finished": false,
+    "max_steps": 8,
+    "contract": {
+      "supported": true,
+      "requirements": [
+        {
+          "capability": "system.storage"
+        }
+      ],
+      "answer": "highest_filesystem"
+    },
+    "decisions": [
+      {
+        "index": 0,
+        "timestamp": "2026-09-17T20:34:04.757682+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "message": "Client error '400 Bad Request' for url 'http://127.0.0.1:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
+          "retryable": false
+        },
+        "seconds": 0.0383
+      },
+      {
+        "index": 1,
+        "timestamp": "2026-09-17T20:34:04.804035+00:00",
+        "usage": {},
+        "valid": false,
+        "error": {
+          "error_type": "HTTPStatusError",
+          "message": "Client error '400 Bad Request' for url 'http://127.0.0.1:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
+          "retryable": false
+        },
+        "seconds": 0.0459
+      }
+    ],
+    "environment": {
+      "home": "/home/stamenovmartin",
+      "demo_directory": "/home/stamenovmartin/Documents/ARIES-Demo",
+      "now": "2026-09-17T20:34:04.748647+00:00"
+    },
+    "metrics": {
+      "planner_calls": 2,
+      "number_of_steps": 0,
+      "execution_time": 0.0,
+      "planner_time": 0.08421766399987973,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 1,
+      "invalid_decisions": 2,
+      "wrong_capability_selections": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 0,
+      "estimated_output_tokens": 0,
+      "task_final_status": "failed",
+      "wall_seconds": 0.114
+    },
+    "completion_feedback": "Invalid decision: Client error '400 Bad Request' for url 'http://127.0.0.1:11434/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
+    "summary": "Planner output remained invalid after two recorded attempts"
+  },
+  "final_evidence_refs": []
+}

@@ -1,0 +1,28 @@
+flowchart TB
+  G["Цел од корисник:<br/>текст или глас"]
+  subgraph D["1 · ОДЛУКА"]
+    direction LR
+    R{"Позната<br/>deterministic<br/>патека?"} -->|Да| DET["Код и правила,<br/>без повик на модел"]
+    R -->|Не| PL["Router 0.82 → planner:<br/>една структурирана одлука,<br/>валидирана против registry"]
+  end
+  subgraph P["2 · ПОРТИ · пред секоја промена"]
+    direction LR
+    CP["checked_path()<br/>1 внатре во $HOME · 2 без symlink<br/>3 без скриени · 4 не под ARIES"] --> AP{"requires_approval<br/>или SENSITIVE?"}
+    AP -->|Да| FRZ["proposed · PERMISSION_REQUIRED<br/>ништо не се случило, нема retry —<br/>чека човек во Monitor"]
+  end
+  subgraph V["3 · ДОКАЗ"]
+    direction LR
+    EX["Executor"] --> OB["Повторно читање на СУБЈЕКТОТ,<br/>не на излезниот код"]
+    OB --> VF["Независен verifier"] --> C{"Условите<br/>на целта?"}
+  end
+  OUT["done + evidence"]
+  UNV["unverifiable:<br/>ниту успех ниту неуспех"]
+  RETRY["нов чекор,<br/>назад во планирање"]
+  G --> D --> P --> V
+  V -->|"исполнети"| OUT
+  V -->|"нема набљудување"| UNV
+  V -.->|"не, има budget"| RETRY
+  classDef working fill:#102d31,stroke:#48d9ba,color:#e5fff8,stroke-width:2px
+  classDef partial fill:#302918,stroke:#e8b95b,color:#fff4d8,stroke-width:2px
+  class G,R,DET,CP,AP,FRZ,EX,OB,C,OUT,UNV,RETRY working
+  class PL,VF partial

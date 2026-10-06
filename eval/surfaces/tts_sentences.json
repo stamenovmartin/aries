@@ -1,0 +1,27 @@
+{
+ "about": "Twenty fixed English sentences for the TTS regression gate. Fixed means fixed: changing one invalidates the saved baseline, and eval/surfaces/tts_wer.py refuses to compare across a different set by hashing this file's sentences into every result.",
+ "language": "en",
+ "chosen_because": "These are the shapes ARIES's English replies actually take, taken from what aries/speech/replies.py builds: a bare confirmation, an app name, a measurement with a number and a unit, a count of things found, a refusal, a question, a path, a time, and a service name. A voice that is intelligible on tongue twisters and unintelligible on 'thirty percent' is useless here, so none of these are tongue twisters.",
+ "sentences": [
+  "Done.",
+  "Opening Firefox.",
+  "Volume is now thirty percent.",
+  "I found twelve stories about artificial intelligence.",
+  "I could not do that, and here is why.",
+  "Which of the two files did you mean?",
+  "The disk is ninety six percent full.",
+  "Your home folder holds forty one gigabytes in sixty one thousand files.",
+  "I restarted the voice service and it came back active.",
+  "There is nothing on the clipboard.",
+  "I tiled the editor to the left half of the screen.",
+  "That control is not a text field, so I did not type into it.",
+  "Brightness is at seventy percent and the battery is charging.",
+  "I need your approval before changing a background service.",
+  "The window you asked about is not on a monitor yet.",
+  "I read the file and it holds four hundred and twelve lines.",
+  "Wifi is connected to the five gigahertz network.",
+  "I cannot hear you, because this machine has no microphone.",
+  "The task finished, but I could not verify it, so I am not calling it done.",
+  "Macedonian is frozen, and English is the primary language from today."
+ ]
+}

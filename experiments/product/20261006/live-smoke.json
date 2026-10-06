@@ -1,0 +1,54 @@
+{
+  "id": "90fdc1ba94b44542a08ff61c0003f5e2",
+  "state": "done",
+  "seconds": 16.31865522499993,
+  "final_evidence_refs": [
+    "bc986fa355c4409cbfa3ee5f8d99f3e0"
+  ],
+  "gaps": [],
+  "agent": {
+    "engine": "m14",
+    "finished": true,
+    "metrics": {
+      "planner_calls": 2,
+      "number_of_steps": 1,
+      "execution_time": 0.3259,
+      "planner_time": 14.238901441999587,
+      "capability_failures": 0,
+      "verification_failures": 0,
+      "retries": 0,
+      "invalid_decisions": 0,
+      "wrong_capability_selections": 0,
+      "tool_calls": 1,
+      "verifier_calls": 2,
+      "replans": 0,
+      "input_tokens": 4423,
+      "output_tokens": 70,
+      "total_tokens": 4493,
+      "token_measurement_complete": true,
+      "estimated_input_tokens": 4218,
+      "estimated_output_tokens": 41,
+      "task_final_status": "done",
+      "estimated_context_tokens": 1242,
+      "resource_budget": {
+        "root_id": "90fdc1ba94b44542a08ff61c0003f5e2",
+        "max_calls": 32,
+        "max_tokens": 250000,
+        "max_tools": 64,
+        "max_cost_micros": 0,
+        "deadline": 1791281678.916203,
+        "calls": 2,
+        "tokens": 4493,
+        "tools": 3,
+        "cost_micros": 0,
+        "held": false,
+        "pending": 0,
+        "unknown": 0,
+        "token_policy": "conservative admission estimate; measured overrun holds root",
+        "unpriced_cost_is_unknown": true
+      },
+      "wall_seconds": 14.869,
+      "wall_seconds_scope": "Active execution invocations, including planning; excludes queue and approval wait"
+    }
+  }
+}

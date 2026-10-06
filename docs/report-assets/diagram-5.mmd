@@ -1,0 +1,23 @@
+flowchart LR
+  U["Корисник<br/>една цел"] --> C["Координатор<br/>the reviewing agent"]
+  C --> A1["Агент 1<br/>screen_capabilities"]
+  C --> A2["Агент 2<br/>system_capabilities"]
+  C --> A3["Агент 3<br/>network_capabilities"]
+  C --> A4["Агент 4<br/>input_capabilities"]
+  C --> A5["Агент 5<br/>introspection"]
+  C --> A6["Агенти 6-7<br/>docs · analytics"]
+  A1 --> NEW["Секој: ЕДНА нова датотека<br/>+ snippet за registry.py<br/>вратен како ТЕКСТ"]
+  A2 --> NEW
+  A3 --> NEW
+  A4 --> NEW
+  A5 --> NEW
+  A6 --> NEW
+  NEW --> SER["Координаторот применува<br/>еден по еден<br/>+ suite по секој"]
+  C <--> CH[("COORDINATION.md<br/>append-only<br/>една порака = едно заглавие")]
+  CH <--> X["Codex сесија<br/>сопствени датотеки"]
+  SER --> REV["Крос-агентска ревизија"]
+  X --> REV
+  REV --> B["Бубачки што ниедна<br/>страна не ги најде сама"]
+  classDef working fill:#102d31,stroke:#48d9ba,color:#e5fff8,stroke-width:2px
+  classDef partial fill:#302918,stroke:#e8b95b,color:#fff4d8,stroke-width:2px
+  class U,C,A1,A2,A3,A4,A5,A6,NEW,SER,CH,X,REV,B working

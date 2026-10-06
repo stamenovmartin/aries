@@ -1,0 +1,13 @@
+{
+  "window": "48 hours",
+  "opened_at_utc": "2026-10-04T10:11:31+00:00",
+  "closes_at_utc": "2026-10-06T10:11:31+00:00",
+  "count_at_open_30d": 210,
+  "newest_event_before_open": "2026-10-04 09",
+  "target": 0,
+  "baseline_is_not_zero": true,
+  "why": "The target is zero NEW `database is locked` events between opened_at and closes_at. The 30-day count at open is recorded because a claim of \"zero\" is only meaningful against a known starting point \u2014 and this baseline is NOT zero: an earlier reading of 61.9 hours clear was published and broke 14 minutes later.",
+  "deployed_fix": "write_session() with BEGIN IMMEDIATE and a bounded per-loop lock, commit b0cba38, routing parallel goal persistence and scheduler recovery through one writer",
+  "measured_cause": "all 16 recoverable failures waited 15.2-19.6 s before failing, so busy_timeout=15000 was in force and exhausted; raising it would fix nothing. Which writer held the lock past 15 s is UNKNOWN: 0 of 13 blocked windows overlap any logged automation run.",
+  "how_to_close": "scripts/aries-locking-window --close  (re-reads the count and compares)"
+}

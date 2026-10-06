@@ -1,0 +1,37 @@
+Could not apply learning proposal for fixture-comet
+Traceback (most recent call last):
+  File "/tmp/aries-learning-rollback-k6qragg0/aries/learning/loop.py", line 362, in apply
+    change = await history.record(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/mock.py", line 2291, in _execute_mock_call
+    raise effect
+RuntimeError: synthetic ledger failure
+Could not apply learning proposal for fixture-comet
+Traceback (most recent call last):
+  File "/tmp/aries-learning-rollback-k6qragg0/aries/learning/loop.py", line 342, in apply
+    raise ValueError('Manual learning control changed since proposal')
+ValueError: Manual learning control changed since proposal
+--- test_concurrent_duplicate_passes_have_one_receipt_and_one_change
+PASS  one concurrent proposal applies
+PASS  unique receipt survives concurrent writers
+PASS  concurrency does not duplicate history
+--- test_failed_history_write_rolls_back_value_and_receipt_together
+PASS  failed ledger cannot leave a changed value
+PASS  failed proposal is not marked applied
+PASS  failed application cannot consume evidence
+PASS  retry after actual repair can apply evidence
+--- test_identical_evidence_moves_only_once_and_new_evidence_can_move
+PASS  four sessions reuse one evidence set without ratcheting
+PASS  one durable evidence receipt
+PASS  one applied change in append-only history
+PASS  new actual observation can support a new bounded step
+PASS  unchanged new evidence is again consumed only once
+--- test_reset_between_proposal_and_application_wins_even_at_same_numeric_base
+PASS  stale apply cannot undo reset even when fallback equals erased value
+PASS  stale proposal leaves no consumed evidence
+--- test_reused_evidence_report_does_not_claim_application
+PASS  consumed evidence report counts zero applied changes
+PASS  skipped proposals remain visible without a success claim
+--- test_user_reset_is_not_immediately_undone_by_identical_evidence
+PASS  repeated old observations cannot recreate a reset inference
+ALL PASSED

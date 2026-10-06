@@ -1,0 +1,253 @@
+{
+  "what_this_is": "Every integer or percentage in old-docs/**/*.md that looks like a count of something in this repository, compared against raw/repo_facts.json, which takes each count from the live object or the authoritative source rather than from a text pattern.",
+  "generated_by": "experiments/product/independent-acceptance/repo_facts.py plus the manual sweep recorded here",
+  "facts_snapshot": "raw/repo_facts.json, generated_at 2026-10-06T11:12:02Z",
+  "volatility_warning": "The repository changed WHILE this audit ran: between two runs 20 minutes apart, tests/ gained files and aries/ gained lines (test functions 776 -> 783, aries/ lines 40289 -> 40324, repo-wide .py files 455 -> 458). Every line-count and file-count verdict below is therefore true as of the snapshot above and will drift. This is itself the finding: a hand-written count of a live tree is wrong the moment it is written, which is why repo_facts.py exists.",
+  "verdict_legend": {
+    "MATCHES": "the claimed value equals the value taken from the live object or authoritative source",
+    "WRONG": "the claimed value differs from the authoritative value",
+    "NOT_A_REPO_COUNT": "the number is not a static count of the repository (an experiment result, a runtime measurement, a per-run test-execution count, a forward-looking plan, or a regex false positive)"
+  },
+  "summary": {
+    "entries_recorded": 90,
+    "WRONG": 34,
+    "MATCHES": 40,
+    "NOT_A_REPO_COUNT": 16,
+    "tally_method": "counted from the entries in this file, not asserted: sum the `verdict` field of every item under `claims`.",
+    "tally_caveat": "Three of the 90 entries are bookkeeping rather than document claims: the 'NO FILE' flags entry records an absence, the 'NOTE' entry records a wrong number inside a GENERATED file in docs/ rather than in old-docs, and one entry rolls up the thesis experiment figures as a group. The other 87 are located claims with a file and a line.",
+    "distinct_wrong_facts": 11,
+    "distinct_wrong_facts_list": [
+      "registered capabilities (15, or 'fifteen', or 'петнаесет' -> 58)",
+      "the set of capability effects (4 named -> 10 distinct)",
+      "scripts/ entry points (46 -> 45 files, 44 executable)",
+      "systemd units (5 -> 6 unit files)",
+      "Python files repo-wide (424 and 428 -> 458)",
+      "aries/ Python lines (36,800 -> 40,324)",
+      "aries_ui/ lines (5,519 -> 5,585)",
+      "shell/ lines (4,389 -> 4,406)",
+      "experiments/ Python lines (2,595 -> 10,924)",
+      "tests/ size (15,370 lines / 63 files / 632 test functions / 2,428 static check sites -> 19,857 / 93 / 783 / 2,936)",
+      "settings (182 -> 187) and documentation (52 files / 14,522 lines -> 66 / 15,619)"
+    ],
+    "note_on_the_capability_error": "The 15 -> 58 error appears in 14 places. One of them, old-docs/README.md:92, is an audit line that explicitly CERTIFIES '15 способности' as correct ('точни'). That is the most instructive single line in old-docs: a verification pass that confirmed the wrong number, because it re-ran the same grep."
+  },
+  "claims": [
+    {
+      "group": "registered capabilities",
+      "actual": 58,
+      "actual_method": "import aries.workspace.registry; len(registry._items)",
+      "why_the_wrong_number_looked_right": "aries/workspace/registry.py contains exactly 15 `Capability(` constructor calls. The other 43 are registered into the same object at import time by aries/workspace/{file,browser,desktop,input,keyboard,network,screen,shell,system}_capabilities.py.",
+      "items": [
+        {"file": "old-docs/thesis/00_ABSTRACT.md", "line": 6, "claimed": 15, "quote": "built around a bounded registry of 15 verified capabilities", "verdict": "WRONG"},
+        {"file": "old-docs/thesis/00_ABSTRACT_MK.md", "line": 6, "claimed": 15, "quote": "изграден околу ограничен регистар од 15 верификувани способности", "verdict": "WRONG"},
+        {"file": "old-docs/thesis/01_INTRODUCTION.md", "line": 33, "claimed": 15, "quote": "It invokes 15 registered capabilities", "verdict": "WRONG"},
+        {"file": "old-docs/thesis/03_SYSTEM.md", "line": 81, "claimed": 15, "quote": "The registry holds 15 capabilities: file read, write, list, search and existence; browser open, read and search; application launch and focus; system status, storage and processes; task inspection; notification.", "verdict": "WRONG", "note": "The enumeration that follows is also the 15-item registry.py list, so the prose and the number are wrong together."},
+        {"file": "old-docs/thesis/09_CONCLUSION.md", "line": 6, "claimed": 15, "quote": "a bounded registry of 15 verified capabilities", "verdict": "WRONG"},
+        {"file": "old-docs/architecture/CURRENT_GAPS.md", "line": 20, "claimed": 15, "quote": "| Size | 54 catalogue entries | 15 typed capabilities |", "verdict": "WRONG", "note": "The 54 in the same table row IS correct (the spoken catalogue). Only the typed figure is wrong."},
+        {"file": "old-docs/architecture/CURRENT_GAPS.md", "line": 73, "claimed": 15, "quote": "Each of the 15 capabilities carries a verifier", "verdict": "WRONG"},
+        {"file": "old-docs/architecture/CURRENT_GAPS.md", "line": 115, "claimed": 15, "quote": "`fan_out` validates against the 15-capability registry", "verdict": "WRONG"},
+        {"file": "old-docs/architecture/CURRENT_GAPS.md", "line": 219, "claimed": 15, "quote": "the 15, and can never introduce a capability the registry does not already carry", "verdict": "WRONG"},
+        {"file": "old-docs/architecture/NEXT_AI_ARCHITECTURE.md", "line": 95, "claimed": 15, "quote": "A node's scope is a subset of the 15 registry capabilities and nothing else.", "verdict": "WRONG"},
+        {"file": "old-docs/architecture/NEXT_AI_ARCHITECTURE.md", "line": 115, "claimed": 15, "quote": "A node's scope remains a subset of the 15 registry capabilities (§3.3).", "verdict": "WRONG"},
+        {"file": "old-docs/docs-mk/01_sto_e.md", "line": 22, "claimed": 15, "quote": "способности, петнаесет на број", "verdict": "WRONG", "note": "Spelled out in words, so a numeric grep over the documents would not have found it."},
+        {"file": "old-docs/docs-mk/03_sloevi.md", "line": 58, "claimed": 15, "quote": "Петнаесетте регистрирани способности по група", "verdict": "WRONG", "note": "Also spelled out; also the caption of a generated figure, so the figure is wrong too."},
+        {"file": "old-docs/README.md", "line": 92, "claimed": 15, "quote": "Броевите за складиштето: 101 рута, 43 табели, 15 способности, 46 скрипти — точни.", "verdict": "WRONG", "note": "This line asserts the number is CORRECT. 101 and 43 in it are correct; 15 and 46 are not."},
+        {"file": "old-docs/README.md", "line": 101, "claimed": 58, "quote": "„15 регистрирани способности“ — ПОГРЕШНО, се 58", "verdict": "MATCHES"},
+        {"file": "old-docs/README.md", "line": 107, "claimed": 15, "quote": "Тој фајл навистина содржи 15 повици на конструкторот; останатите 43 ги регистраат други модули", "verdict": "MATCHES", "note": "Correct as a statement about registry.py's text: the grep-style count is 15 and the remainder is 43."},
+        {"file": "old-docs/README.md", "line": 110, "claimed": 58, "quote": "Книгата во `book/` веќе велеше „58 typed capabilities, 12 behind approval“", "verdict": "MATCHES"},
+        {"file": "old-docs/research_package/RESEARCH_AUDIT.md", "line": 24, "claimed": 58, "quote": "Typed capability registry, 58 entries", "verdict": "MATCHES"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 91, "claimed": 58, "quote": "Типизирани capabilities во registry | **58**, 29 само читаат, 12 бараат одобрување", "verdict": "MATCHES", "note": "All three numbers correct: 58 total, 29 with effect 'read', 12 requires_approval."},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 182, "claimed": 58, "quote": "Типизираните способности што planner-от смее да ги избере се **58**", "verdict": "MATCHES"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 857, "claimed": 58, "quote": "Сите 58 capabilities сè уште се нудат во enum-от.", "verdict": "MATCHES"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 983, "claimed": 58, "quote": "држеше 58", "verdict": "MATCHES"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 1071, "claimed": 58, "quote": "`docs/CAPABILITIES.md` | — | опишуваше 20 од 58 способности", "verdict": "MATCHES", "note": "58 is correct; docs/CAPABILITIES.md now has 58 generated table rows, so the '20 of 58' gap is closed."},
+        {"file": "old-docs/reports/ARIES_TECHNICAL_REPORT_MK.md", "line": 143, "claimed": "M14", "quote": "## 6. M14 capability-based agent execution", "verdict": "NOT_A_REPO_COUNT", "note": "A numeric grep for '14 capabilit' matches the milestone name M14 here, not a count. Recorded so the false positive is not mistaken for a claim."},
+        {"file": "old-docs/architecture/CURRENT_GAPS.md", "line": 22, "claimed": "m14", "quote": "the m14 agent loop, via a grammar-constrained model decision", "verdict": "NOT_A_REPO_COUNT", "note": "Same false positive, lower case."}
+      ]
+    },
+    {
+      "group": "capability metadata splits",
+      "items": [
+        {"file": "old-docs/README.md", "line": 103, "claimed": "29 mutating / 12 approval", "quote": "Од нив 29 се мутирачки, 12 бараат одобрување", "actual": "29 non-read, 12 requires_approval", "verdict": "MATCHES", "note": "A coincidence worth knowing: read = 29 and non-read = 29 exactly, so 'читаат' and 'мутирачки' are both 29 and either framing reads as correct."},
+        {"file": "old-docs/README.md", "line": 104, "claimed": 17, "quote": "а 17 менуваат без одобрување", "actual": 17, "verdict": "MATCHES"},
+        {"file": "old-docs/research_package/RESEARCH_AUDIT.md", "line": 30, "claimed": 12, "quote": "Approval gating, 12 sensitive capabilities", "actual": 12, "verdict": "MATCHES"},
+        {"file": "old-docs/thesis/03_SYSTEM.md", "line": 84, "claimed": 4, "quote": "an effect (`read`, `create`, `open`, `notify`)", "actual": 10, "actual_detail": {"read": 29, "open": 10, "desktop": 7, "file_mutation": 5, "input": 2, "create": 1, "display": 1, "network": 1, "notify": 1, "service": 1}, "verdict": "WRONG", "note": "Four effect values are named as if exhaustive; the live registry carries ten distinct effect strings. The four listed cover 41 of 58 capabilities. Same root cause as the 15: registry.py's own capabilities use only these four effects."},
+        {"file": "old-docs/docs-mk/03_sloevi.md", "line": 58, "claimed": 4, "quote": "и четирите ефекти кои одредуваат што смее да се", "actual": 10, "verdict": "WRONG"}
+      ]
+    },
+    {
+      "group": "spoken capability catalogue (a SECOND, smaller set, easy to confuse with the registry)",
+      "actual": {"CATALOGUE": 54, "SENSITIVE": 9, "WRITES": 13, "ARGUMENTS": 54},
+      "actual_method": "import aries.workspace.capabilities; len(CATALOGUE/SENSITIVE/WRITES/ARGUMENTS)",
+      "items": [
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 90, "claimed": 54, "quote": "Изговорени capabilities | **54**", "verdict": "MATCHES"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 163, "claimed": 54, "quote": "Изговорените способности (`CATALOGUE` во `aries/workspace/capabilities.py`) се 54", "verdict": "MATCHES"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 231, "claimed": 13, "quote": "`introspection.limits()` вели „секоја од 13-те способности што запишуваат", "verdict": "MATCHES", "actual": 13},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 1214, "claimed": "54 spoken / 9 of them approval / 12 typed approval", "quote": "„54 things you can ask for out loud, 58 typed capabilities the planner may use, 9 of which need your approval“ … Од 58 типизирани, 12 бараат одобрување", "verdict": "MATCHES", "note": "All four numbers correct, and the document's own point — that the sentence welds two different sets together — is also correct."},
+        {"file": "old-docs/architecture/CURRENT_GAPS.md", "line": 20, "claimed": 54, "quote": "| Size | 54 catalogue entries | …", "verdict": "MATCHES"}
+      ]
+    },
+    {
+      "group": "API routes",
+      "actual": {"aries_prefixed_route_objects": 101, "all_route_objects_in_the_app": 153, "path_method_pairs": 157, "unique_aries_paths": 87},
+      "actual_method": "import aries.api.app; len(app.routes), then filter on /api/aries",
+      "items": [
+        {"file": "old-docs/README.md", "line": 92, "claimed": 101, "quote": "101 рута", "verdict": "MATCHES"},
+        {"file": "old-docs/docs-mk/02_stek.md", "line": 10, "claimed": 101, "quote": "Веб-слојот е FastAPI 0.115.6 врз uvicorn 0.34.0, со 101 рута.", "verdict": "MATCHES"},
+        {"file": "old-docs/docs-mk/04_podatoci.md", "line": 18, "claimed": 101, "quote": "Јадрото изложува 101 рута преку FastAPI.", "verdict": "MATCHES", "note": "Correct for ARIES's own routes. The whole mounted app serves 153 route objects, because the vendored engine contributes 52; a reader could take '101 routes' as the app total and be wrong by half."}
+      ]
+    },
+    {
+      "group": "database tables",
+      "actual": {"user_tables": 43, "aries_prefixed": 21, "indexes": 116, "views": 0, "size_bytes": 270049280},
+      "actual_method": "sqlite3.connect(\"file:var/aries.db?mode=ro\", uri=True); SELECT name FROM sqlite_master WHERE type='table'",
+      "items": [
+        {"file": "old-docs/README.md", "line": 92, "claimed": 43, "quote": "43 табели", "verdict": "MATCHES"},
+        {"file": "old-docs/docs-mk/04_podatoci.md", "line": 5, "claimed": 43, "quote": "Сè живее во една SQLite датотека, `var/aries.db`, во WAL режим, со 43 табели.", "verdict": "MATCHES"}
+      ]
+    },
+    {
+      "group": "scripts/ entry points",
+      "actual": {"files": 45, "executable": 44, "aries_prefixed": 36},
+      "actual_method": "list scripts/ recursively excluding __pycache__; os.access(X_OK)",
+      "items": [
+        {"file": "old-docs/README.md", "line": 92, "claimed": 46, "quote": "46 скрипти — точни", "verdict": "WRONG", "note": "No counting of scripts/ yields 46: 45 files, 44 executable, 36 named aries-*. Certified as correct in the same line that certified the 15."},
+        {"file": "old-docs/docs-mk/04_podatoci.md", "line": 52, "claimed": 46, "quote": "Во `scripts/` има 46 влезни точки", "verdict": "WRONG"}
+      ]
+    },
+    {
+      "group": "systemd units",
+      "actual": {"unit_files_in_repo": 6, "service": 4, "timer": 1, "target": 1, "installed_in_user_dir": ["aries-core.service", "aries-endurance.service", "aries-endurance.timer", "aries-local-model.service", "aries-voice.service", "aries.target", "ollama.service"]},
+      "actual_method": "list the repository's systemd/ directory, split on filename suffix; also list ~/.config/systemd/user without querying systemd",
+      "items": [
+        {"file": "old-docs/README.md", "line": 78, "claimed": "4 .service, 1 .timer, 1 .target, 6 total", "quote": "`systemd/` содржи 4 `.service`, 1 `.timer` и 1 `.target`, вкупно **6 unit датотеки**.", "verdict": "MATCHES"},
+        {"file": "old-docs/docs-mk/04_podatoci.md", "line": 29, "claimed": 5, "quote": "Петте systemd units и зошто сите се на корисничко ниво.", "verdict": "WRONG", "note": "Six unit files; four are .service. Five matches no counting, as old-docs/README.md:76-79 already says."},
+        {"file": "old-docs/research_package/RESEARCH_AUDIT.md", "line": 38, "claimed": 4, "quote": "4 systemd units active; `aries-endurance.timer` every 5 min", "verdict": "MATCHES", "note": "Four .service files ship and four aries .service units are installed in the user directory. Whether all four are running was not checked, because checking it would mean querying a live service."}
+      ]
+    },
+    {
+      "group": "Python file count",
+      "actual": {"repo_wide_excluding_venv_and_vendor": 458, "aries": 199, "aries_ui": 29, "tests": 103, "eval": 21, "experiments": 88, "vendor_excluded": 464},
+      "actual_method": "pathlib rglob(\"*.py\") over the repo, excluding .venv, vendor, __pycache__, .git",
+      "items": [
+        {"file": "old-docs/docs-mk/02_stek.md", "line": 6, "claimed": 424, "quote": "со тестовите, мерењата и помошните скрипти бројот на Python датотеки е 424", "verdict": "WRONG"},
+        {"file": "old-docs/README.md", "line": 73, "claimed": 428, "quote": "Сега се **428**. Бројката беше точна кога беше запишана, но ваков број старее со секој commit.", "verdict": "WRONG", "note": "The correction is itself already stale: 458 at the snapshot, and it moved by 3 during this audit. The document's own conclusion — generate it, do not write it by hand — is the right one."}
+      ]
+    },
+    {
+      "group": "line counts",
+      "actual_method": "pathlib rglob + physical line count, __pycache__ excluded",
+      "items": [
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 84, "claimed": 36800, "quote": "| `aries/` Python | 36.800 линии |", "actual": 40324, "verdict": "WRONG"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 85, "claimed": {"lines": 15370, "files": 63, "test_functions": 632}, "quote": "| `tests/` | 15.370 линии, 63 датотеки, 632 test функции |", "actual": {"lines": 19857, "files_top_level": 93, "files_recursive": 94, "test_functions_ast": 783}, "verdict": "WRONG", "note": "All three wrong, and all three in the same direction (the suite grew)."},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 86, "claimed": 5519, "quote": "| `aries_ui/` (GTK4 Control Centre) | 5.519 линии |", "actual": 5585, "verdict": "WRONG"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 87, "claimed": 4389, "quote": "| `shell/` (GNOME екстензија, GJS + CSS) | 4.389 линии |", "actual": 4406, "verdict": "WRONG", "note": "Counted over shell/**/*.{js,css,json,xml}: 18 files, 4406 lines."},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 88, "claimed": 2595, "quote": "| `experiments/` Python | 2.595 линии |", "actual": 10924, "verdict": "WRONG", "note": "The largest relative error in old-docs: understates by 4.2x, because the experiment tree is where all the recent work went."},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 89, "claimed": {"files": 52, "lines": 14522}, "quote": "| Документација | 52 датотеки, 14.522 линии |", "actual": {"md_files_in_docs": 66, "md_lines_in_docs": 15619}, "verdict": "WRONG"},
+        {"file": "old-docs/docs-mk/02_stek.md", "line": 5, "claimed": "~45500", "quote": "Во `aries/` и `aries_ui/` има околу 45.500 реда", "actual": 45909, "verdict": "MATCHES", "note": "Hedged with „околу“ (approximately) and within 0.9%. The only size claim in old-docs that survives, and it survives because it was stated as an approximation."}
+      ]
+    },
+    {
+      "group": "test suite size",
+      "actual": {"test_files_top_level": 93, "test_files_recursive": 94, "test_functions_ast": 783, "static_check_call_sites_ast": 2936, "pytest_installed": false},
+      "actual_method": "ast.parse every tests/**/test_*.py and count `def test_*` definitions and `check(...)` call nodes. There is no pytest in this project and no collector that does not execute the tests, so the parsed syntax tree is the authority and the runtime count is marked UNOBTAINABLE in repo_facts.json.",
+      "items": [
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 935, "claimed": 632, "quote": "| Test функции | 632 |", "actual": 783, "verdict": "WRONG"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 936, "claimed": 2428, "quote": "| Статички `check(...)` места | 2.428 |", "actual": 2936, "verdict": "WRONG", "note": "Explicitly labelled 'static', so it is directly comparable to the AST count, and it is wrong."},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 1128, "claimed": 63, "quote": "**20 од 63 тест", "actual": 93, "verdict": "WRONG"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 1207, "claimed": 63, "quote": "Табелата покрива **22 од 63** ARIES тест датотеки", "actual": 93, "verdict": "WRONG"},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 937, "claimed": "51 suites / 3,050 checks", "quote": "Последно целосно поминување (29.09 22:27) | **51 suite, 3.050 проверки, 0 неуспеси**", "verdict": "NOT_A_REPO_COUNT", "note": "A count of what one run executed, not of what the repository contains. Loops multiply a static check() site into many executions, so it is not comparable to 2936."},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 938, "claimed": "52 suites / 3,058 checks", "quote": "Последно целосно извршување (30.09 09:03) | 52 suite со 3.058 проверки поминаа, **1 падна**", "verdict": "NOT_A_REPO_COUNT"},
+        {"file": "old-docs/research_package/RESEARCH_AUDIT.md", "line": "24-39", "claimed": "per-file check counts: 148 test_workspace, 32 test_goal_contracts, 65 test_agent_execution, 99 test_orchestration, 36 test_service_control_approval, 24 test_planner_context, 53 test_speech, 72 test_tile_hidpi, 126 test_memory, 156 test_analytics", "verdict": "NOT_A_REPO_COUNT", "note": "These are per-run check() EXECUTIONS, not static sites: every one exceeds the static count for its file (73, 12, 56, 96, 35, 17, 48, 34, 115, 92 respectively). Obtaining the runtime numbers would mean running the suite, which touches the database and was out of scope here. Two documents also disagree with each other about test_speech — RESEARCH_AUDIT.md:33 says 53, ARIES_REPORT.md:965 says 46 — which is only possible for a number that changes per run."},
+        {"file": "old-docs/research_package/01_EXPERIMENT_INVENTORY.md", "line": 81, "claimed": 469, "quote": "469 checks over Macedonian-language behaviour", "verdict": "NOT_A_REPO_COUNT", "note": "Same class: a frozen corpus's run count, from tests/frozen_mk/, not a static repository count."}
+      ]
+    },
+    {
+      "group": "settings and automations",
+      "actual": {"settings": 187, "sections": 19, "automations": 7, "automations_using_no_model": 7},
+      "actual_method": "import aries.settings.schema -> all_defs()/sections(); import aries -> automations.all_automations()",
+      "items": [
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 92, "claimed": {"settings": 182, "sections": 19}, "quote": "| Поставки | **182** во 19 секции |", "verdict": "WRONG", "note": "182 is wrong (187); 19 sections is right."},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 1208, "claimed": {"settings": 182, "sections": 19, "aries_lines": 36800, "doc_lines": 14522, "doc_files": 52}, "quote": "живо: **36.800** линии, **182** поставки во **19** секции, 3.058 проверки, **14.522** линии во **52** датотеки", "verdict": "WRONG", "note": "The line that corrects an older document's figures is itself now wrong in four of its five repository counts (only 19 sections holds). Actuals: 40324 / 187 / 19 / 15619 / 66."},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 1208, "claimed": {"state_of_aries_aries_lines": 19887, "state_of_aries_settings": 145, "state_of_aries_sections": 18, "state_of_aries_checks": 2047, "state_of_aries_doc_lines": 10604, "state_of_aries_doc_files": 30}, "quote": "**STATE_OF_ARIES** §5: 19.887 линии `aries/`, 145 поставки во 18 секции, 2.047 проверки, 10.604 линии документација во 30 датотеки", "verdict": "WRONG", "note": "Quoted by the document as a stale figure it is superseding, and it is indeed wrong; recorded for completeness, not as a claim the document makes in its own voice."},
+        {"file": "old-docs/reports/ARIES_REPORT.md", "line": 93, "claimed": 7, "quote": "| Регистрирани automations | **7**; ниту една не се испраќа вклучена", "actual": 7, "verdict": "MATCHES", "note": "Seven registered: Attention Pass, Data Lifecycle, Learning Loop, Morning Brief, News Radar, System Health Monitor, Topic Dashboards. All seven declare no agents, i.e. use no model."}
+      ]
+    },
+    {
+      "group": "brief collectors",
+      "actual": {"total": 8, "live": 5, "declared_unavailable": 3, "live_names": ["automations", "decisions", "learning", "news", "system"], "declared_unavailable_names": ["calendar", "email", "projects"]},
+      "actual_method": "import aries.brief.sections; enumerate _COLLECTORS; split on whether the collector came from the `_pending` factory",
+      "items": [
+        {"file": "old-docs/architecture/CURRENT_GAPS.md", "line": 38, "claimed": 3, "quote": "with a stated reason: `calendar`, `email`, `projects` (`sections.py:300-305`)", "verdict": "MATCHES", "note": "Three declared-unavailable collectors, and the line reference is still right: the `_pending` loop sits at sections.py:299-305."},
+        {"file": "old-docs/architecture/CURRENT_GAPS.md", "line": 287, "claimed": 3, "quote": "`brief/sections.py:300-305` declares all three unavailable with a stated reason", "verdict": "MATCHES"},
+        {"file": "old-docs/architecture/NEXT_AI_ARCHITECTURE.md", "line": "138-140", "claimed": "7 available, 3 unavailable", "quote": "Collectors available on day one: `memory` …, `system` …, `files`, `news`, `decisions`, `automations`, `learning`. Collectors that will return *declared unavailable*: `calendar`, `email`, `projects`", "verdict": "NOT_A_REPO_COUNT", "note": "A design proposal for a future context engine, not a claim about today: `memory` and `files` are not registered collectors now. The three unavailable names do match the live registry."}
+      ]
+    },
+    {
+      "group": "feature flags",
+      "actual": {"total": 14, "currently_on": 13, "currently_off": 1, "off_now": ["ARIES_GOAL_TEAMS"]},
+      "actual_method": "import aries.flags; enumerate FLAGS and describe()",
+      "items": [
+        {"file": "old-docs/research_package/05_FAILURE_TAXONOMY.md", "line": 84, "claimed": 3, "quote": "Three unused feature flags (`ARIES_VERIFY_ALL`, `ARIES_REACT_LOOP`, `ARIES_CLARIFY`) | never read by any code path | deleted, reason recorded in source", "verdict": "MATCHES", "note": "None of the three is in FLAGS, and aries/flags.py carries a comment naming exactly those three and why each was removed."},
+        {"file": "NO FILE", "line": null, "claimed": null, "quote": "No document in old-docs states a total feature-flag count.", "actual": 14, "verdict": "NOT_A_REPO_COUNT", "note": "Recorded as an absence, not a discrepancy: the flag total is a number a future document would reasonably cite, so it is in repo_facts.json ready to be cited."}
+      ]
+    },
+    {
+      "group": "execution budgets",
+      "actual": {"attempt_cap": 4, "retry_cap": 2, "alternative_cap": 2, "max_subgoals": 4, "agent_max_steps_default": 8, "agent_max_steps_min": 1, "agent_max_steps_max": 32, "typed_error_codes": 9, "primaries_with_declared_alternatives": 5},
+      "actual_method": "import aries.workspace.orchestration (ATTEMPT_CAP / RETRY_CAP / ALTERNATIVE_CAP / ROUTE / ALTERNATIVES) and aries.settings.schema.require('workspace.agent_max_steps')",
+      "items": [
+        {"file": "old-docs/thesis/03_SYSTEM.md", "line": "87-89", "claimed": {"invocations": 4, "repeats": 2, "alternatives": 2}, "quote": "at most 4 capability invocations per sub-goal, at most 2 repeats of one strategy, at most 2 distinct alternatives", "verdict": "MATCHES"},
+        {"file": "old-docs/docs-mk/01_sto_e.md", "line": 37, "claimed": 4, "quote": "најмногу четири повици на способност по", "verdict": "MATCHES"},
+        {"file": "old-docs/reports/ARIES_TECHNICAL_REPORT_MK.md", "line": 184, "claimed": {"default": 8, "min": 1, "max": 32}, "quote": "Default budget е осум capability чекори, configurable од 1 до 32.", "verdict": "MATCHES", "note": "workspace.agent_max_steps: default 8, minimum 1, maximum 32."}
+      ]
+    },
+    {
+      "group": "verification coverage",
+      "actual": {"with_branch_in_verify": 9, "re_reading_inside_execute": 24, "in_a_delegate_module": 18, "via_operator_run": 6, "read_only": 11, "changing_state_without_proof": 4, "recorded_verified_in_ledger": 9},
+      "actual_method": "read docs/verification_table.md, which is generated by scripts/aries-verification-table and whose --check mode fails if it has drifted from the system",
+      "items": [
+        {"file": "old-docs/research_package/RESEARCH_AUDIT.md", "line": 25, "claimed": {"verify": 9, "inline": 24, "delegated": 18, "no_proof": 4}, "quote": "`docs/verification_table.md`: 9 in `verify()`, 24 inline, 18 delegated, **4 change state with no proof**", "verdict": "MATCHES"},
+        {"file": "NOTE", "line": null, "claimed": 54, "quote": "docs/verification_table.md's own first bullet reads 'capabilities in the registry: 54'.", "verdict": "NOT_A_REPO_COUNT", "note": "Not an old-docs claim, but it is where a future document would get a wrong 'registry' size: the generator counts the SPOKEN catalogue (54) under the label 'registry'. The typed registry is 58. This is the same confusion as the 15, one layer down, and it is inside a file that advertises itself as generated and therefore trustworthy."}
+      ]
+    },
+    {
+      "group": "old-docs' claims about old-docs",
+      "actual_method": "count the files; read each PDF's own /Count page-tree value",
+      "items": [
+        {"file": "old-docs/README.md", "line": 13, "claimed": {"research_package_md": 11, "briefing_pages": 9, "evidence_package_pages": 36, "provenance_records": 58}, "quote": "11 markdown документи, два PDF-а … (Supervisor Briefing 9 стр., Research Evidence Package 36 стр.) … `processed_results/provenance.json` со 58 записи", "actual": {"research_package_md_top_level": 11, "ARIES_Supervisor_Briefing.pdf": 9, "ARIES_Research_Evidence_Package.pdf": 36, "provenance_records": 58}, "verdict": "MATCHES"},
+        {"file": "old-docs/README.md", "line": 14, "claimed": {"chapters": 11, "pages": 32}, "quote": "11 поглавја на англиски, 32 страници", "actual": {"numbered_chapter_files": 12, "english_chapters_00_to_10": 11, "ARIES_Thesis.pdf": 32}, "verdict": "MATCHES", "note": "12 files match ^\\d\\d_, but one is 00_ABSTRACT_MK.md, so 11 English chapters is right."},
+        {"file": "old-docs/README.md", "line": 15, "claimed": 21, "quote": "техничката документација на македонски, 21 страница", "actual": 21, "verdict": "MATCHES"},
+        {"file": "old-docs/README.md", "line": 16, "claimed": {"pages": 344, "parts": 7, "chapters": 49}, "quote": "`ARIES.pdf`, 344 страници, 7 дела, 49 поглавја", "actual": {"pages": 344, "parts": "UNOBTAINABLE", "chapters": "UNOBTAINABLE"}, "verdict": "MATCHES", "note": "344 pages confirmed from the PDF's page tree. Parts and chapters are UNOBTAINABLE: old-docs/book/source.py carries no part or chapter marker this audit could enumerate without running the book generator, and running it would write files."},
+        {"file": "old-docs/research_package/02_DATA_PROVENANCE.md", "line": "22-23", "claimed": {"records": 58, "suite_runs": 15, "superseded": 14}, "quote": "58 records are currently extracted. 15 agent-suite runs are indexed; only the final one is `CURRENT` and the other 14 are `SUPERSEDED`", "actual": {"records": 58, "suite_runs": 15}, "verdict": "MATCHES", "note": "58 and 15 confirmed from the JSON. The CURRENT/SUPERSEDED split could not be confirmed: no entry in suite_runs.json carries a top-level `status` field, so 1-and-14 is UNOBTAINABLE from that file."},
+        {"file": "old-docs/README.md", "line": 28, "claimed": 35, "quote": "**35 односи имаа покритие.**", "verdict": "NOT_A_REPO_COUNT", "note": "A count of ratio-shaped claims matched against provenance.json by audit_claims.py, i.e. an audit result, not a repository count."}
+      ]
+    },
+    {
+      "group": "verifier classification (added to old-docs/README.md section 7 while this audit was running)",
+      "actual": {"capabilities_and_therefore_verifiers": 58},
+      "actual_method": "import aries.workspace.registry; len(registry._items). Every Capability declares a verifier, so the verifier count equals the registry size.",
+      "items": [
+        {"file": "old-docs/README.md", "line": 126, "claimed": 58, "quote": "Независна класификација на сите 58 верификатори, 57 од нив со **извршен** доказ", "verdict": "MATCHES", "note": "58 is right. '57 of them with executed proof' is a ledger property this audit did not reach and is neither confirmed nor contradicted here."},
+        {"file": "old-docs/README.md", "line": "127-128", "claimed": "35 + 10 + 12 + 1", "quote": "35 независни, 10 самопријавувачки, 12 тривијални, 1 што споредува со вредност избрана од планерот", "verdict": "MATCHES", "note": "Checked for internal consistency only: the four classes sum to 58, which equals the live registry size. The classification itself is a judgement, not a count."},
+        {"file": "old-docs/README.md", "line": 131, "claimed": "98/241 = 40.7%", "quote": "**98 од 241 = 40.7% независно верификувани**", "verdict": "NOT_A_REPO_COUNT", "note": "A ledger measurement over executed steps. The arithmetic checks out (98/241 = 40.66%)."}
+      ]
+    },
+    {
+      "group": "numbers that look like repository counts but are not",
+      "items": [
+        {"file": "old-docs/docs-mk/03_sloevi.md", "line": 26, "claimed": 2181, "quote": "површината на способности: 2181 знаци составени од живиот регистар", "verdict": "NOT_A_REPO_COUNT", "note": "The character length of a prompt fragment generated at one request, recorded in experiments/router-ood/with-capability-surface.json. It changes whenever a capability description changes, so it is a measurement, not a count."},
+        {"file": "old-docs/research_package/05_FAILURE_TAXONOMY.md", "line": 16, "claimed": "1 of 86 units", "quote": "`services()` returned 1 unit when `list-units` found 86 | 85 units silently dropped", "verdict": "NOT_A_REPO_COUNT", "note": "systemd units present on the host at measurement time, not unit files in this repository (6)."},
+        {"file": "old-docs/docs-mk/04_podatoci.md", "line": 11, "claimed": "0.44%", "quote": "`database is locked` се појавува приближно на секои два часа и погаѓа 0,44% од поминувањата", "verdict": "NOT_A_REPO_COUNT"},
+        {"file": "old-docs/research_package/RESEARCH_AUDIT.md", "line": 32, "claimed": 42, "quote": "corpus is **42 usable examples**", "verdict": "NOT_A_REPO_COUNT", "note": "Rows in the live few-shot trace corpus, i.e. database content at a moment, not repository structure. Reading it would require interpreting a table in var/aries.db; the table's row count is in repo_facts.json under database.row_counts."},
+        {"file": "old-docs/thesis/05_RESULTS_ABSTENTION.md and siblings", "line": null, "claimed": "52.9% / 68.0% / 69.8% / 71.6%, AUC 0.642, 83.0/95.0/97.9% precision, 9/2/1 false holds per 100, 229 and 225 utterances, 88/90, 325/381, 0/325", "quote": "the ablation and suite figures throughout the thesis and research package", "verdict": "NOT_A_REPO_COUNT", "note": "Experiment results, out of scope for this audit, and old-docs/README.md:85-91 reports them as already reconciled against provenance.json and the raw artifacts."}
+      ]
+    }
+  ],
+  "unobtainable": [
+    {"fact": "runtime test-check totals per file", "reason": "no pytest in .venv and each test file self-runs via run_module(); obtaining them means executing the suite, which writes to the database. Static AST counts reported instead."},
+    {"fact": "book parts and chapters (7 / 49)", "reason": "old-docs/book/source.py exposes no enumerable part or chapter marker; confirming would require running the book generator, which writes files."},
+    {"fact": "CURRENT vs SUPERSEDED split of the 15 indexed suite runs", "reason": "no top-level `status` key in old-docs/research_package/processed_results/suite_runs.json entries."},
+    {"fact": "whether all four systemd .service units are currently running", "reason": "would require querying a live service; the task forbade starting or probing services. Unit FILES were counted instead, and the installed user-directory listing was read from disk."}
+  ]
+}

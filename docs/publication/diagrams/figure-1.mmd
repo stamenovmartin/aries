@@ -1,0 +1,19 @@
+flowchart TD
+ subgraph Planning[Planning and authorization]
+ direction LR
+ U[User goal] --> Q[Persistent queue] --> P[Local planner]
+ R[Capability registry] --> P
+ P --> S[Schema + policy]
+ end
+ subgraph Execution[Execution in real environment]
+ direction LR
+ X[Executor] --> O[Linux / files / browser] --> V[Observe + verify]
+ end
+ subgraph Completion[Evidence and completion]
+ direction LR
+ E[Persisted evidence] --> G[Goal check]
+ G --> F[done / partial / failed]
+ end
+ Planning --> Execution
+ Execution --> Completion
+ Completion -->|remaining work| Planning

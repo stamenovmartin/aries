@@ -1,0 +1,100 @@
+{
+  "evidence": [
+    {
+      "evidence_id": "449ad63b01a741bd9870f5b20a51cd38",
+      "type": "execution_observation",
+      "source": "file.write",
+      "timestamp": "2026-09-17T21:00:29.248408+00:00",
+      "step_id": "0837229f5f8f4269bf8f75f91c0b72a2",
+      "verified": false,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T210020Z-abb999/aries-m14-test.txt",
+        "write_call_completed": true
+      }
+    },
+    {
+      "evidence_id": "e755c62ccfbe44058d19bfef8f174bea",
+      "type": "file_state",
+      "source": "file.write",
+      "timestamp": "2026-09-17T21:00:29.264901+00:00",
+      "step_id": "0837229f5f8f4269bf8f75f91c0b72a2",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T210020Z-abb999/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19792012,
+        "observed_at": "2026-09-17T21:00:29.264804+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "96e6a71e25f9446fa3b77ca5aa2ddb32",
+      "type": "execution_observation",
+      "source": "file.read",
+      "timestamp": "2026-09-17T21:00:31.311105+00:00",
+      "step_id": "b3a6614baabc426da26666621761a629",
+      "verified": false,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T210020Z-abb999/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19792012,
+        "observed_at": "2026-09-17T21:00:31.311014+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "f9dc9d4801a04699aebff600ba6c3639",
+      "type": "file_state",
+      "source": "file.read",
+      "timestamp": "2026-09-17T21:00:31.319457+00:00",
+      "step_id": "b3a6614baabc426da26666621761a629",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T210020Z-abb999/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19792012,
+        "observed_at": "2026-09-17T21:00:31.319389+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "c20cda77aafb4016b55e20bcd4335416",
+      "type": "file_state",
+      "source": "file.write",
+      "timestamp": "2026-09-17T21:00:33.286397+00:00",
+      "step_id": "0837229f5f8f4269bf8f75f91c0b72a2",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T210020Z-abb999/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19792012,
+        "observed_at": "2026-09-17T21:00:33.286330+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    },
+    {
+      "evidence_id": "8d0d833c8045418c9d4a766c536b6cd6",
+      "type": "file_state",
+      "source": "file.read",
+      "timestamp": "2026-09-17T21:00:33.287708+00:00",
+      "step_id": "b3a6614baabc426da26666621761a629",
+      "verified": true,
+      "data": {
+        "path": "/home/stamenovmartin/Documents/ARIES-Demo/20260917T210020Z-abb999/aries-m14-test.txt",
+        "size": 28,
+        "sha256": "9bf7361bf65b8518bb563d302d148aa97d11ba3ac024d5d8e6cdea7de3fe8616",
+        "inode": 19792012,
+        "observed_at": "2026-09-17T21:00:33.287661+00:00",
+        "text": "ARIES M14 verified execution"
+      }
+    }
+  ],
+  "final_refs": [
+    "c20cda77aafb4016b55e20bcd4335416",
+    "8d0d833c8045418c9d4a766c536b6cd6"
+  ]
+}

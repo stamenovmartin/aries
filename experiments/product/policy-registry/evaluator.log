@@ -1,0 +1,48 @@
+--- test_cheaper_failures_or_unverified_claims_do_not_qualify
+PASS  savings without verified success refused
+PASS  missing independent evidence explicitly reported
+PASS  savings without verified success refused
+PASS  missing independent evidence explicitly reported
+PASS  real verified recovery can qualify
+PASS  mixed trials retain failed attempts in denominator
+--- test_finite_rows_cannot_overflow_aggregate_admission
+PASS  overflow cannot masquerade as infinite cost saved
+PASS  finite latency median does not overflow
+--- test_invalid_measurements_cannot_become_savings
+PASS  invalid case_id rejected: ''
+PASS  invalid case_id rejected: ' '
+PASS  invalid case_id rejected: None
+PASS  invalid case_id rejected: False
+PASS  invalid seed rejected: False
+PASS  invalid seed rejected: 0.0
+PASS  invalid seed rejected: -1
+PASS  invalid seed rejected: '0'
+PASS  invalid latency_ms rejected: None
+PASS  invalid latency_ms rejected: False
+PASS  invalid latency_ms rejected: '0'
+PASS  invalid latency_ms rejected: nan
+PASS  invalid latency_ms rejected: inf
+PASS  invalid latency_ms rejected: -1
+PASS  invalid cost_usd rejected: False
+PASS  invalid cost_usd rejected: '0'
+PASS  invalid cost_usd rejected: nan
+PASS  invalid cost_usd rejected: inf
+PASS  invalid cost_usd rejected: -1
+PASS  actual numeric zero remains valid
+PASS  unknown price is retained
+PASS  malformed assignment cannot alias valid trial
+PASS  malformed assignment cannot alias valid trial
+PASS  malformed assignment cannot alias valid trial
+PASS  malformed assignment cannot alias valid trial
+PASS  JSON array assignments supported
+--- test_promotions_require_all_assigned_outcomes_and_quality
+PASS  strict same-quality improvement admitted
+PASS  quality safety unknown or null gain rejected
+PASS  quality safety unknown or null gain rejected
+PASS  quality safety unknown or null gain rejected
+PASS  quality safety unknown or null gain rejected
+PASS  quality safety unknown or null gain rejected
+PASS  unpriced is not free
+PASS  missing failed attempts cannot disappear from denominator
+PASS  duplicate result rows refused
+ALL PASSED

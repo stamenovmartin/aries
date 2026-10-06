@@ -1,0 +1,49 @@
+--- test_http_path_and_permission_registration
+{"ts": "2026-10-06T12:08:41.396405+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T12:08:41.396682+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+{"ts": "2026-10-06T12:08:41.547688+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  preview is reachable over HTTP
+{"ts": "2026-10-06T12:08:41.563437+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  reset is reachable over HTTP
+{"ts": "2026-10-06T12:08:41.575943+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  undo is reachable over HTTP
+{"ts": "2026-10-06T12:08:41.583309+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 409 Conflict\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  stale HTTP request gives conflict
+PASS  mutation requires operator configuration permission
+{"ts": "2026-10-06T12:08:41.592065+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 403 Forbidden\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  actual read-only HTTP principal receives403
+--- test_newer_learning_blocks_stale_reset_and_undo
+PASS  stale preview cannot erase newer learning
+PASS  undo cannot overwrite learning after reset
+--- test_reset_starts_new_history_epoch_without_erasing_old_changes
+PASS  new inference after reset is not a reversal of discarded history
+PASS  pre-reset changes remain inspectable
+PASS  damping sees only current epoch
+PASS  old pending reversal is retained as abandoned
+--- test_scoped_settings_preserve_user_layer_and_refuse_newer_undo
+PASS  scoped USER value remains effective
+PASS  learned row actually removed
+PASS  undo restores same scope and learned value
+PASS  new scoped setting cannot be overwritten by undo
+PASS  USER setting is refused by layer guard, even with its exact revision
+--- test_setting_undo_allows_user_layer_edit_and_retains_original_author
+PASS  undo retains learned author and original value
+PASS  user-layer change does not block or get overwritten by learned undo
+--- test_setting_undo_detects_intervening_learn_and_clear_and_audits_human
+PASS  restored setting audit identifies the human actor
+PASS  absence after a newer learn/clear cannot resurrect stale value
+--- test_topic_reset_undo_and_duplicate_requests
+PASS  concurrent same-revision reset has one winner
+PASS  reset clears only learned fields
+PASS  reset remains visible and undoable
+PASS  undo restores exact learned value and evidence metadata
+PASS  explicit preference survives reset and undo
+PASS  history is appended, never erased
+PASS  undo cannot be replayed
+--- test_undo_restores_oscillation_freeze_and_damping
+{"ts": "2026-10-06T12:08:42.373818+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.learning.history", "msg": "Learning reversed direction on comet (up after down)", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "history.py", "line": 140, "func": "record"}}
+{"ts": "2026-10-06T12:08:42.377184+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.learning.history", "msg": "Learning reversed direction on comet (down after up)", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "history.py", "line": 140, "func": "record"}}
+{"ts": "2026-10-06T12:08:42.380721+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.learning.history", "msg": "Learning reversed direction on comet (up after down)", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "history.py", "line": 140, "func": "record"}}
+PASS  undo restores frozen target instead of enabling full-step learning
+PASS  undo retains original damping and reversal count
+ALL PASSED

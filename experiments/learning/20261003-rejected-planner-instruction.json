@@ -1,0 +1,21 @@
+{
+  "problem": "Daily live comparison found local planner confusing desktop windows with browser tabs.",
+  "change": "Tested a two-sentence distinction in the system instruction against exact saved23 payloads on both live backends; rejected candidate and removed only those two sentences. Baseline source hash verified restored. Saved raw candidate, driver and results.",
+  "validation": {
+    "before": "experiments/planner/20261003T130053Z-daily-local-cloud/results.json",
+    "after": "experiments/planner/20261003T131848Z-daily-local-cloud/results.json",
+    "local_usable": "22/23 to21/23",
+    "cloud_usable": "23/23 to23/23",
+    "local_valid_schema": "23/23 to21/23",
+    "local_valid_json": "23/23 to23/23",
+    "median_seconds_local": "5.838 to7.571",
+    "median_seconds_cloud": "5.987 to6.46",
+    "decision": "Candidate NOT deployed; reverted. windows.mk improved but app.en and music.mk lost required arguments.",
+    "docs": "Generated report; capability-docs --check passed"
+  },
+  "limitations": [
+    "One sample per backend/case; no significance, causal latency or held-out generalization claim.",
+    "Next-decision metric only, not completed goals. No common60 rerun for rejected candidate because it never entered core. Current core common60 remains54/60.",
+    "Do not retry identical prompt edit as a proven improvement or switch production routing."
+  ]
+}

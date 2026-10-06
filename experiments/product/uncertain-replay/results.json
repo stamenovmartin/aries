@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-06T11:12:04.206842+00:00",
+  "passed": true,
+  "runs": [
+    {
+      "suite": "replay",
+      "exit_code": 0,
+      "command": [
+        "/home/stamenovmartin/aries/.venv/bin/python",
+        "-B",
+        "tests/test_agent_replay.py"
+      ],
+      "log": "replay.log",
+      "passing_assertions": 9
+    },
+    {
+      "suite": "execution",
+      "exit_code": 0,
+      "command": [
+        "/home/stamenovmartin/aries/.venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,types; import tests.test_agent_execution as m; s=types.ModuleType('execution_regressions'); s.test_file_workflow_and_persistent_api=m.test_file_workflow_and_persistent_api; s.test_policy_and_approval_are_before_execution=m.test_policy_and_approval_are_before_execution; s.test_restart_keeps_history_and_never_replays_uncertain_write=m.test_restart_keeps_history_and_never_replays_uncertain_write; s.test_user_write_target_and_confirmation_policy=m.test_user_write_target_and_confirmation_policy; s.test_verification_failure_and_later_recovery=m.test_verification_failure_and_later_recovery; sys.exit(m.run_module(s))"
+      ],
+      "log": "execution.log",
+      "passing_assertions": 23
+    },
+    {
+      "suite": "finish",
+      "exit_code": 0,
+      "command": [
+        "/home/stamenovmartin/aries/.venv/bin/python",
+        "-B",
+        "tests/test_finish_proposal.py"
+      ],
+      "log": "finish.log",
+      "passing_assertions": 18
+    }
+  ],
+  "source_before": {
+    "aries/workspace/agent.py": "387fc6de3cde769fd4280f997c97db2402eefe888f4ae37654338b5602f4910f",
+    "tests/test_agent_replay.py": "cd81b9280f9243e85b73f59278a5742283e450be94765f3001462ebf9f1b4024",
+    "tests/test_agent_execution.py": "03f0c229048aa4c146b987be1987fe1a7328b264be02518305a7fc603ef714f0",
+    "tests/test_finish_proposal.py": "2974b1882fd8fdc6a931a1eb9c87414555b8b096652d5ce9eeb4ca6119ec925d"
+  },
+  "source_after": {
+    "aries/workspace/agent.py": "387fc6de3cde769fd4280f997c97db2402eefe888f4ae37654338b5602f4910f",
+    "tests/test_agent_replay.py": "cd81b9280f9243e85b73f59278a5742283e450be94765f3001462ebf9f1b4024",
+    "tests/test_agent_execution.py": "03f0c229048aa4c146b987be1987fe1a7328b264be02518305a7fc603ef714f0",
+    "tests/test_finish_proposal.py": "2974b1882fd8fdc6a931a1eb9c87414555b8b096652d5ce9eeb4ca6119ec925d"
+  },
+  "source_stable": true,
+  "baseline": "before-corrected-fixture.log: duplicate mutation executes again after timeout",
+  "fixture_correction": "before.log used unsupported creation wording; corrected to supported create/read contract before production edit",
+  "runtime_deployed": false,
+  "real_model_calls": 0,
+  "limitations": [
+    "Identical capability and arguments within one goal only",
+    "Not cross-goal idempotency or equivalence detection for altered arguments",
+    "No live service restart or desktop action"
+  ]
+}

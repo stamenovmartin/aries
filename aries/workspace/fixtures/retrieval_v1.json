@@ -1,0 +1,36 @@
+{
+  "version": "review-relevance-1",
+  "scope": "Developer-labelled synthetic review relevance cases; not user judgments or end-to-end task execution.",
+  "reviews": [
+    {"id": "median", "request": "Build Python median statistics", "correction": "Handle empty input explicitly"},
+    {"id": "csv", "request": "Build Python CSV parser", "correction": "Preserve quoted commas"},
+    {"id": "browser", "request": "Open Firefox browser tabs", "correction": "Reuse an existing tab when the exact URL is already open"},
+    {"id": "news", "request": "Read climate news summary", "correction": "Include the source link"},
+    {"id": "files", "request": "Find duplicate image files", "correction": "Show both paths before any deletion"},
+    {"id": "install", "request": "Install VLC media player", "correction": "Verify the installed version"},
+    {"id": "calendar", "request": "Show calendar meeting agenda", "correction": "Show the timezone"},
+    {"id": "tests", "request": "Run Python unit tests", "correction": "Keep the failing test output"}
+  ],
+  "cases": [
+    {"id":"exact-median", "query":"Build Python median statistics", "expected":["median"]},
+    {"id":"exact-csv", "query":"Build Python CSV parser", "expected":["csv"]},
+    {"id":"short-median", "query":"Python median", "expected":["median"]},
+    {"id":"short-csv", "query":"Python CSV", "expected":["csv"]},
+    {"id":"parser-topic", "query":"CSV parser", "expected":["csv"]},
+    {"id":"test-singular", "query":"Python unit test", "expected":["tests"]},
+    {"id":"test-plural", "query":"Run Python unit tests", "expected":["tests"]},
+    {"id":"generic-python", "query":"Python", "expected":[]},
+    {"id":"unrelated-python", "query":"Build Python weather forecast", "expected":[]},
+    {"id":"climate", "query":"Climate news", "expected":["news"]},
+    {"id":"new-summary", "query":"Read climate news summary again", "expected":["news"]},
+    {"id":"unrelated-summary", "query":"Read sports news summary", "expected":[]},
+    {"id":"browser-tab", "query":"Firefox browser tab", "expected":["browser"]},
+    {"id":"new-browser", "query":"Open Chromium browser documentation", "expected":[]},
+    {"id":"singular-file", "query":"Find duplicate image file", "expected":["files"]},
+    {"id":"vlc", "query":"Install VLC media player", "expected":["install"]},
+    {"id":"wrong-app", "query":"Install GIMP image editor", "expected":[]},
+    {"id":"calendar", "query":"Calendar meeting agenda", "expected":["calendar"]},
+    {"id":"mk-command", "query":"направи Python CSV parser", "expected":["csv"]},
+    {"id":"empty-request", "query":"", "expected":[]}
+  ]
+}

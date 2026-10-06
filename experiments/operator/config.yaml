@@ -1,0 +1,72 @@
+# ARIES Operator v0.1 — experiment configuration
+#
+# Everything that would change a result is here, so a rerun is a rerun.
+experiment: operator
+version: 1
+
+variants:
+  B0: direct launcher — the task's expected parameters handed straight to the tool, no language
+  B1: the deterministic keyword router only (operator.planner = router), offline, no model
+  B2: the local model, one shot, NO verification — whatever the tool returned is the outcome
+  A:  ARIES Operator — router first, model second, then act, observe and verify
+
+model:
+  location: local
+  provider: ollama
+  name: qwen2.5:7b
+  hardware: NVIDIA GeForce RTX 3060, 12 GB
+  measured_throughput_tokens_per_second: 69.4
+
+harness:
+  settle_seconds: 8.0            # identical for every variant
+  poll_interval_seconds: 0.4
+  max_actions_per_hour: 1000     # raised for the experiment; the cap still exists
+  repeats: 3                     # run 2; run 1 used 1
+  variant_order: fixed           # B0, B1, B2, A — a known confound, see analysis.md §6
+
+verification:
+  # Every variant is verified by the SAME verifier, including the ones that do
+  # not use it. B2's reported column is what B2 would have told the user; its
+  # verified column is what actually happened.
+  by: aries.operator.goals.verify
+  decided_by: the machine's state after the action, never the action's own report
+  grades: [proof, strong, circumstantial, none]
+
+excluded_from_rates:
+  - held at a gate      # the action budget, an approval, a circuit breaker: measures the gate
+  - unverifiable        # no window list available: measures the session, not the operator
+  - contaminated        # the expectation was already satisfied before the trial began
+  - control             # correct answer is UNMET; scored as verifier integrity instead
+
+controls:
+  # Five tasks that act on one thing and are verified against another. The
+  # correct verdict for every one is UNMET. A verifier that grades the plan
+  # rather than the machine returns MET here, and every other number in this
+  # experiment would be worthless. Scored before anything else.
+  ctl-url-mismatch:     opens wikipedia, checked against youtube
+  ctl-app-mismatch:     opens the calculator, checked against gimp
+  ctl-section-mismatch: navigates to news, checked against interests
+  ctl-noop-app:         launches a name that cannot launch
+  ctl-stale-automation: runs aries.health, checked against aries.news
+
+reset:
+  open_section: navigated elsewhere before each trial, and the reset is confirmed
+  run_automation: the trial's own start time
+  open_url: |
+    a neutral local page is opened so the active tab — and the window title the
+    verifier reads — stops mentioning the site. Nothing is killed and no window
+    the user owns is touched. Confirmed; 44 of 60 trials cleared, 16 did not and
+    were excluded.
+  open_app: |
+    none possible. Every application in the task set is single-instance, so
+    terminating it would close a window the user may own — for app-terminal, the
+    one the experiment runs in. The precondition is measured instead: a trial
+    that starts with its expectation already satisfied is excluded rather than
+    credited.
+
+recorded_per_trial:
+  - requested goal, planned action, actual tool outcome
+  - the window snapshot the verifier read
+  - verdict, evidence grade, what was checked, what was found
+  - claimed success, latency, model calls, replans
+  - tokens, split into planning tokens and tokens spent by whatever the trial started

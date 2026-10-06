@@ -1,0 +1,18 @@
+{
+  "problem": "Context was memory-only and could not retrieve prior ARIES tasks or cached news. The first controlled test revealed shared failure words retrieved unrelated projects and caused wrong citations.",
+  "change": [
+    "Added bounded task and permitted cached-news adapters with provenance, expiry, source permission checks, current-root exclusion and explicit missing/truncated coverage.",
+    "Enforced exact named-project matching; filtered expired context each planner turn and retained user preferences. Enabled context engine by default after validation; dynamic teams remain off."
+  ],
+  "validation": [
+    "2026-10-06:303 passing checks across9 suite configurations; experiments/product/context-v2/checks.json.",
+    "First native run14/16; preserved attempt-1 raw failures. Same fixture after correction16/16 correct citations/abstentions, expanded retrieval8/8, zero forbidden inclusion; evaluation.json and trials.jsonl.",
+    "Live API task ccb8a95fa7ed4ce39c21b15cfd71ac55 done with context_packet present and independent final proof; live-smoke.json. Maintenance deploy succeeded."
+  ],
+  "limitations": [
+    "Narrow repeated citation fixture, no general autonomous task-quality claim. Expanded context used2386 versus1100 native tokens; more information, not efficiency improvement.",
+    "Only memory, historical ARIES tasks and cached permitted global news; calendar/messages/live project repair remain incomplete.",
+    "Exact lexical project identities, bounded recent candidate windows; truncation and historical status disclosed.",
+    "Rollback:ARIES_CONTEXT_ENGINE=0; keep egress and budget invariants. No slow self-evolution or autonomous policy promotion."
+  ]
+}

@@ -1,0 +1,69 @@
+{"ts": "2026-10-06T11:23:27.714548+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T11:23:27.714847+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_a_failed_unit_explains_itself
+PASS  a failed unit is STOPPED
+PASS  and start-limit-hit is explained in words, not jargon
+PASS  pointing at the logs
+--- test_a_switched_off_worker_is_not_a_fault
+PASS  a worker the user switched off is not a failure
+PASS  and says so rather than looking broken
+--- test_alive_but_wedged_is_degraded_not_starting
+PASS  an old unit that will not answer is DEGRADED
+PASS  and says the process is alive but not answering
+--- test_degraded_when_a_worker_is_dead
+PASS  a dead worker makes ARIES DEGRADED, not RUNNING
+PASS  the failing component is named
+PASS  and its error is carried
+--- test_degraded_when_an_automation_breaker_is_open
+PASS  a paused automation makes ARIES DEGRADED
+PASS  because a process that cannot do its work is not 'running'
+--- test_running_when_everything_is_alive
+PASS  everything alive reads as RUNNING
+PASS  and the summary counts what is running
+PASS  with a component per worker, automation and the database
+PASS  and no problems
+--- test_running_without_systemd_when_the_api_answers
+PASS  an ARIES started by hand reads as RUNNING
+PASS  and says it is not managed by systemd
+--- test_starting_while_coming_up
+PASS  a unit coming up is STARTING
+PASS  and the api is reported as not answering
+--- test_status_works_without_a_systemd_session
+PASS  no session still produces a state
+PASS  with the reason
+--- test_stopped_when_not_installed
+PASS  not installed reads as STOPPED
+PASS  and says how to install it
+PASS  and reports itself as not installed
+--- test_stopped_when_the_unit_is_inactive
+PASS  an inactive unit is STOPPED
+PASS  and the meaning says no automation will fire
+--- test_the_components_endpoint_reports_everything
+{"ts": "2026-10-06T11:23:27.882950+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the components endpoint answers
+PASS  it reports the database
+PASS  it reports workers
+PASS  it reports the process id
+PASS  and when the process started
+PASS  enabled automations carry their breaker state
+--- test_the_runtime_endpoint_agrees_with_the_cli
+{"ts": "2026-10-06T11:23:27.985812+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the runtime endpoint answers
+PASS  with one of the four states
+PASS  and what that state means
+PASS  it never claims to be unreachable from inside itself
+PASS  and carries the same component shape the CLI renders
+--- test_the_units_are_shipped_and_coherent
+PASS  aries.target ships
+PASS  aries-core.service ships
+PASS  the target is wanted by the login session
+PASS  the service is pulled in by the target
+PASS  stopping the target stops the service
+PASS  a crash is restarted
+PASS  but never in a loop
+PASS  the start limit is in [Unit], where systemd reads it
+PASS  shutdown is graceful
+PASS  paths are absolute, since a service has no cwd assumptions
+PASS  it does not wait for the network, which ARIES tolerates losing
+PASS  PATH is pinned, so aries-ui resolves even before the session imports its own
+ALL PASSED

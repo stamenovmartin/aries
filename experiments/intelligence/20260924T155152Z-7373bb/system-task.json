@@ -1,0 +1,251 @@
+{
+  "id": "c5ce20f3425147e59e98b42618da3923",
+  "request": "show system status",
+  "state": "done",
+  "updated_at": "2026-09-24T15:53:59.980469",
+  "created_at": "2026-09-24T15:53:58.992539",
+  "steps": [
+    {
+      "kind": "capability",
+      "request": "show system status",
+      "capability": "system",
+      "args": {},
+      "prepared": true,
+      "state": "done",
+      "goal_id": "c5ce20f3425147e59e98b42618da3923",
+      "result": {
+        "state": "done",
+        "summary": "17 results",
+        "cards": [
+          {
+            "title": "cpu.load_per_core",
+            "text": "0.159 ",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "cpu.pressure",
+            "text": "0.0 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "memory.used_pct",
+            "text": "26.9 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "memory.swap_used_pct",
+            "text": "0.0 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "memory.pressure",
+            "text": "0.0 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "disk.used_pct",
+            "text": "5.9 %",
+            "evidence": "Live system probe",
+            "source": "/"
+          },
+          {
+            "title": "disk.used_pct",
+            "text": "0.6 %",
+            "evidence": "Live system probe",
+            "source": "/boot/efi"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "16.8 \u00b0C",
+            "evidence": "Live system probe",
+            "source": "acpitz0"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "27.8 \u00b0C",
+            "evidence": "Live system probe",
+            "source": "acpitz1"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "46.0 \u00b0C",
+            "evidence": "Live system probe",
+            "source": "pch_cannonlake"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "38.0 \u00b0C",
+            "evidence": "Live system probe",
+            "source": "x86_pkg_temp"
+          },
+          {
+            "title": "gpu.temp_celsius",
+            "text": "49.0 \u00b0C",
+            "evidence": "Live system probe",
+            "source": "gpu0"
+          },
+          {
+            "title": "gpu.utilization_pct",
+            "text": "0.0 %",
+            "evidence": "Live system probe",
+            "source": "gpu0"
+          },
+          {
+            "title": "gpu.memory_used_pct",
+            "text": "44.6 %",
+            "evidence": "Live system probe",
+            "source": "gpu0"
+          },
+          {
+            "title": "services.failed_count",
+            "text": "0.0 ",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "uptime.days",
+            "text": "0.75 days",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "uptime.reboot_required",
+            "text": "1.0 ",
+            "evidence": "Live system probe",
+            "source": ""
+          }
+        ],
+        "elapsed_seconds": 0.028
+      }
+    }
+  ],
+  "cards": [
+    {
+      "title": "cpu.load_per_core",
+      "text": "0.159 ",
+      "evidence": "Live system probe",
+      "source": ""
+    },
+    {
+      "title": "cpu.pressure",
+      "text": "0.0 %",
+      "evidence": "Live system probe",
+      "source": ""
+    },
+    {
+      "title": "memory.used_pct",
+      "text": "26.9 %",
+      "evidence": "Live system probe",
+      "source": ""
+    },
+    {
+      "title": "memory.swap_used_pct",
+      "text": "0.0 %",
+      "evidence": "Live system probe",
+      "source": ""
+    },
+    {
+      "title": "memory.pressure",
+      "text": "0.0 %",
+      "evidence": "Live system probe",
+      "source": ""
+    },
+    {
+      "title": "disk.used_pct",
+      "text": "5.9 %",
+      "evidence": "Live system probe",
+      "source": "/"
+    },
+    {
+      "title": "disk.used_pct",
+      "text": "0.6 %",
+      "evidence": "Live system probe",
+      "source": "/boot/efi"
+    },
+    {
+      "title": "thermal.celsius",
+      "text": "16.8 \u00b0C",
+      "evidence": "Live system probe",
+      "source": "acpitz0"
+    },
+    {
+      "title": "thermal.celsius",
+      "text": "27.8 \u00b0C",
+      "evidence": "Live system probe",
+      "source": "acpitz1"
+    },
+    {
+      "title": "thermal.celsius",
+      "text": "46.0 \u00b0C",
+      "evidence": "Live system probe",
+      "source": "pch_cannonlake"
+    },
+    {
+      "title": "thermal.celsius",
+      "text": "38.0 \u00b0C",
+      "evidence": "Live system probe",
+      "source": "x86_pkg_temp"
+    },
+    {
+      "title": "gpu.temp_celsius",
+      "text": "49.0 \u00b0C",
+      "evidence": "Live system probe",
+      "source": "gpu0"
+    },
+    {
+      "title": "gpu.utilization_pct",
+      "text": "0.0 %",
+      "evidence": "Live system probe",
+      "source": "gpu0"
+    },
+    {
+      "title": "gpu.memory_used_pct",
+      "text": "44.6 %",
+      "evidence": "Live system probe",
+      "source": "gpu0"
+    },
+    {
+      "title": "services.failed_count",
+      "text": "0.0 ",
+      "evidence": "Live system probe",
+      "source": ""
+    },
+    {
+      "title": "uptime.days",
+      "text": "0.75 days",
+      "evidence": "Live system probe",
+      "source": ""
+    },
+    {
+      "title": "uptime.reboot_required",
+      "text": "1.0 ",
+      "evidence": "Live system probe",
+      "source": ""
+    }
+  ],
+  "gaps": [],
+  "agent_engine": null,
+  "routing": {
+    "execution_level": "code",
+    "source": "rule",
+    "intent": "SYSTEM_ACTION",
+    "tool": "system.status",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "Existing deterministic workspace plan"
+  },
+  "context": [],
+  "related": [
+    {
+      "id": "9c26f27616ee4e65bcad341d378298cb",
+      "request": "show system status"
+    }
+  ],
+  "collected_at": "2026-09-24T15:53:59.907300"
+}

@@ -1,0 +1,5011 @@
+{
+  "run": "20260930T223728Z-c1067f",
+  "mode": "core",
+  "cases": [
+    {
+      "name": "create folder",
+      "result": {
+        "id": "ffd0f898637d4017bc39cf3375c08c0a",
+        "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f",
+        "state": "done",
+        "updated_at": "2026-09-30T22:37:29.875952",
+        "created_at": "2026-09-30T22:37:28.594720",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "create_folder",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f"
+            },
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f",
+            "prepared": true,
+            "state": "done",
+            "goal_id": "ffd0f898637d4017bc39cf3375c08c0a",
+            "result": {
+              "state": "done",
+              "summary": "Folder exists on disk",
+              "verification": {
+                "met": true,
+                "evidence": "Folder exists on disk"
+              },
+              "cards": [
+                {
+                  "title": "Create Folder",
+                  "text": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f",
+                  "evidence": "Folder exists on disk"
+                }
+              ],
+              "elapsed_seconds": 0.026
+            }
+          }
+        ],
+        "cards": [
+          {
+            "title": "Create Folder",
+            "text": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f",
+            "evidence": "Folder exists on disk"
+          }
+        ],
+        "gaps": [],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "UNKNOWN",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "983e8ed13cdd4ae5ba52ff8ce96dacaa",
+            "text": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:21.539542",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 9,
+            "valid_at": "2026-09-30T22:34:21.539542",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "17a837cc1ef04f1b89bd8cbbac812cd2",
+            "text": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.781202",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 9,
+            "valid_at": "2026-09-30T22:34:28.781202",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "fb80985460fa4692bb41f19d53801ea9",
+            "text": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content.",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.585564",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 10,
+            "valid_at": "2026-09-30T22:34:28.585564",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "f7cd913eef0e4b38a8e06c09d9bbca96",
+            "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/missing.txt",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.997498",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 6,
+            "valid_at": "2026-09-30T22:34:28.997498",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "1ab0e709f9df47ffae860f81f1efda54",
+            "confidence": 1.0
+          },
+          {
+            "id": "88fc42eaf11c4af89013e0e3c1310b52",
+            "confidence": 0.9634
+          },
+          {
+            "id": "f7f7fac03b1a413b95490a073e810c7b",
+            "confidence": 0.9991
+          },
+          {
+            "id": "832de361a1ec4df3b38414a1bd13725d",
+            "confidence": 0.9959
+          }
+        ],
+        "related": [
+          {
+            "id": "8ab8b71bd3344a1f9d0473342fd40d5d",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4; system status"
+          },
+          {
+            "id": "2c008373ffc9452891b7ff0dca5702d0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "3776b071fd424ad08c123abb90ed7f99",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4"
+          },
+          {
+            "id": "d9b9491ac9504fb6a43258b1e0dc23cd",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status"
+          },
+          {
+            "id": "b2f40d0e627248ea97765b6fcba4e5a0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content."
+          }
+        ],
+        "collected_at": "2026-09-30T22:37:29.812162",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 1.588
+    },
+    {
+      "name": "create file",
+      "result": {
+        "id": "cae1ec0f668448eba00f801ababf0aaf",
+        "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt, ARIES demo: independently verified file content.",
+        "state": "done",
+        "updated_at": "2026-09-30T22:37:31.904342",
+        "created_at": "2026-09-30T22:37:30.179174",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "create_file",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt",
+              "content": "ARIES demo: independently verified file content.\n"
+            },
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt, ARIES demo: independently verified file content.\n",
+            "prepared": true,
+            "state": "done",
+            "goal_id": "cae1ec0f668448eba00f801ababf0aaf",
+            "result": {
+              "state": "done",
+              "summary": "File bytes match the requested text",
+              "verification": {
+                "met": true,
+                "evidence": "File bytes match the requested text"
+              },
+              "cards": [
+                {
+                  "title": "Create File",
+                  "text": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt",
+                  "evidence": "File bytes match the requested text"
+                }
+              ],
+              "elapsed_seconds": 0.025
+            }
+          }
+        ],
+        "cards": [
+          {
+            "title": "Create File",
+            "text": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt",
+            "evidence": "File bytes match the requested text"
+          }
+        ],
+        "gaps": [],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "UNKNOWN",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "fb80985460fa4692bb41f19d53801ea9",
+            "text": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content.",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.585564",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 12,
+            "valid_at": "2026-09-30T22:34:28.585564",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "983e8ed13cdd4ae5ba52ff8ce96dacaa",
+            "text": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:21.539542",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 11,
+            "valid_at": "2026-09-30T22:34:21.539542",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "17a837cc1ef04f1b89bd8cbbac812cd2",
+            "text": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.781202",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 10,
+            "valid_at": "2026-09-30T22:34:28.781202",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "f7cd913eef0e4b38a8e06c09d9bbca96",
+            "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/missing.txt",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.997498",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 7,
+            "valid_at": "2026-09-30T22:34:28.997498",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "f7f7fac03b1a413b95490a073e810c7b",
+            "confidence": 0.9991
+          },
+          {
+            "id": "1ab0e709f9df47ffae860f81f1efda54",
+            "confidence": 1.0
+          },
+          {
+            "id": "88fc42eaf11c4af89013e0e3c1310b52",
+            "confidence": 0.9634
+          },
+          {
+            "id": "832de361a1ec4df3b38414a1bd13725d",
+            "confidence": 0.9959
+          }
+        ],
+        "related": [
+          {
+            "id": "ffd0f898637d4017bc39cf3375c08c0a",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f"
+          },
+          {
+            "id": "8ab8b71bd3344a1f9d0473342fd40d5d",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4; system status"
+          },
+          {
+            "id": "2c008373ffc9452891b7ff0dca5702d0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "3776b071fd424ad08c123abb90ed7f99",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4"
+          },
+          {
+            "id": "d9b9491ac9504fb6a43258b1e0dc23cd",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status"
+          }
+        ],
+        "collected_at": "2026-09-30T22:37:31.843535",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 2.337
+    },
+    {
+      "name": "three-step workflow",
+      "result": {
+        "id": "790deb95f2b24b4db4b4561d15e9ed39",
+        "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f; system status",
+        "state": "done",
+        "updated_at": "2026-09-30T22:37:34.271467",
+        "created_at": "2026-09-30T22:37:32.515444",
+        "steps": [
+          {
+            "kind": "capability",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt",
+            "capability": "read_file",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt"
+            },
+            "prepared": true,
+            "state": "done",
+            "goal_id": "790deb95f2b24b4db4b4561d15e9ed39",
+            "result": {
+              "state": "done",
+              "summary": "1 results",
+              "cards": [
+                {
+                  "title": "demo.txt",
+                  "text": "ARIES demo: independently verified file content.\n",
+                  "source": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt",
+                  "evidence": "Read from disk"
+                }
+              ],
+              "elapsed_seconds": 0.001
+            }
+          },
+          {
+            "kind": "capability",
+            "request": "list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f",
+            "capability": "list_folder",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f"
+            },
+            "prepared": true,
+            "state": "done",
+            "goal_id": "790deb95f2b24b4db4b4561d15e9ed39",
+            "result": {
+              "state": "done",
+              "summary": "1 results",
+              "cards": [
+                {
+                  "title": "demo.txt",
+                  "text": "File",
+                  "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt",
+                  "evidence": "Directory entry on disk"
+                }
+              ],
+              "elapsed_seconds": 0.001
+            }
+          },
+          {
+            "kind": "capability",
+            "request": "system status",
+            "capability": "system",
+            "args": {},
+            "prepared": true,
+            "state": "done",
+            "goal_id": "790deb95f2b24b4db4b4561d15e9ed39",
+            "result": {
+              "state": "done",
+              "summary": "18 results",
+              "cards": [
+                {
+                  "title": "cpu.load_per_core",
+                  "text": "0.145 ",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "cpu.pressure",
+                  "text": "0.08 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "cpu.used_pct",
+                  "text": "13.9 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "memory.used_pct",
+                  "text": "27.2 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "memory.swap_used_pct",
+                  "text": "4.6 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "memory.pressure",
+                  "text": "0.0 %",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "disk.used_pct",
+                  "text": "8.5 %",
+                  "evidence": "Live system probe",
+                  "source": "/"
+                },
+                {
+                  "title": "disk.used_pct",
+                  "text": "0.6 %",
+                  "evidence": "Live system probe",
+                  "source": "/boot/efi"
+                },
+                {
+                  "title": "thermal.celsius",
+                  "text": "16.8 °C",
+                  "evidence": "Live system probe",
+                  "source": "acpitz0"
+                },
+                {
+                  "title": "thermal.celsius",
+                  "text": "27.8 °C",
+                  "evidence": "Live system probe",
+                  "source": "acpitz1"
+                },
+                {
+                  "title": "thermal.celsius",
+                  "text": "46.0 °C",
+                  "evidence": "Live system probe",
+                  "source": "pch_cannonlake"
+                },
+                {
+                  "title": "thermal.celsius",
+                  "text": "36.0 °C",
+                  "evidence": "Live system probe",
+                  "source": "x86_pkg_temp"
+                },
+                {
+                  "title": "gpu.temp_celsius",
+                  "text": "43.0 °C",
+                  "evidence": "Live system probe",
+                  "source": "gpu0"
+                },
+                {
+                  "title": "gpu.utilization_pct",
+                  "text": "2.0 %",
+                  "evidence": "Live system probe",
+                  "source": "gpu0"
+                },
+                {
+                  "title": "gpu.memory_used_pct",
+                  "text": "70.7 %",
+                  "evidence": "Live system probe",
+                  "source": "gpu0"
+                },
+                {
+                  "title": "services.failed_count",
+                  "text": "0.0 ",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "uptime.days",
+                  "text": "0.01 days",
+                  "evidence": "Live system probe",
+                  "source": ""
+                },
+                {
+                  "title": "uptime.reboot_required",
+                  "text": "0.0 ",
+                  "evidence": "Live system probe",
+                  "source": ""
+                }
+              ],
+              "elapsed_seconds": 0.101
+            }
+          }
+        ],
+        "cards": [
+          {
+            "title": "demo.txt",
+            "text": "ARIES demo: independently verified file content.\n",
+            "source": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt",
+            "evidence": "Read from disk"
+          },
+          {
+            "title": "demo.txt",
+            "text": "File",
+            "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt",
+            "evidence": "Directory entry on disk"
+          },
+          {
+            "title": "cpu.load_per_core",
+            "text": "0.145 ",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "cpu.pressure",
+            "text": "0.08 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "cpu.used_pct",
+            "text": "13.9 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "memory.used_pct",
+            "text": "27.2 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "memory.swap_used_pct",
+            "text": "4.6 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "memory.pressure",
+            "text": "0.0 %",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "disk.used_pct",
+            "text": "8.5 %",
+            "evidence": "Live system probe",
+            "source": "/"
+          },
+          {
+            "title": "disk.used_pct",
+            "text": "0.6 %",
+            "evidence": "Live system probe",
+            "source": "/boot/efi"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "16.8 °C",
+            "evidence": "Live system probe",
+            "source": "acpitz0"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "27.8 °C",
+            "evidence": "Live system probe",
+            "source": "acpitz1"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "46.0 °C",
+            "evidence": "Live system probe",
+            "source": "pch_cannonlake"
+          },
+          {
+            "title": "thermal.celsius",
+            "text": "36.0 °C",
+            "evidence": "Live system probe",
+            "source": "x86_pkg_temp"
+          },
+          {
+            "title": "gpu.temp_celsius",
+            "text": "43.0 °C",
+            "evidence": "Live system probe",
+            "source": "gpu0"
+          },
+          {
+            "title": "gpu.utilization_pct",
+            "text": "2.0 %",
+            "evidence": "Live system probe",
+            "source": "gpu0"
+          },
+          {
+            "title": "gpu.memory_used_pct",
+            "text": "70.7 %",
+            "evidence": "Live system probe",
+            "source": "gpu0"
+          },
+          {
+            "title": "services.failed_count",
+            "text": "0.0 ",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "uptime.days",
+            "text": "0.01 days",
+            "evidence": "Live system probe",
+            "source": ""
+          },
+          {
+            "title": "uptime.reboot_required",
+            "text": "0.0 ",
+            "evidence": "Live system probe",
+            "source": ""
+          }
+        ],
+        "gaps": [],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "FILE_ACTION",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "17a837cc1ef04f1b89bd8cbbac812cd2",
+            "text": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.781202",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 11,
+            "valid_at": "2026-09-30T22:34:28.781202",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "fb80985460fa4692bb41f19d53801ea9",
+            "text": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content.",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.585564",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 13,
+            "valid_at": "2026-09-30T22:34:28.585564",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "f7cd913eef0e4b38a8e06c09d9bbca96",
+            "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/missing.txt",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.997498",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 8,
+            "valid_at": "2026-09-30T22:34:28.997498",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "983e8ed13cdd4ae5ba52ff8ce96dacaa",
+            "text": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:21.539542",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 12,
+            "valid_at": "2026-09-30T22:34:21.539542",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "88fc42eaf11c4af89013e0e3c1310b52",
+            "confidence": 0.9634
+          },
+          {
+            "id": "f7f7fac03b1a413b95490a073e810c7b",
+            "confidence": 0.9991
+          },
+          {
+            "id": "832de361a1ec4df3b38414a1bd13725d",
+            "confidence": 0.9959
+          },
+          {
+            "id": "1ab0e709f9df47ffae860f81f1efda54",
+            "confidence": 1.0
+          }
+        ],
+        "related": [
+          {
+            "id": "cae1ec0f668448eba00f801ababf0aaf",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "ffd0f898637d4017bc39cf3375c08c0a",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f"
+          },
+          {
+            "id": "8ab8b71bd3344a1f9d0473342fd40d5d",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4; system status"
+          },
+          {
+            "id": "2c008373ffc9452891b7ff0dca5702d0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "3776b071fd424ad08c123abb90ed7f99",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4"
+          }
+        ],
+        "collected_at": "2026-09-30T22:37:34.064524",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 2.276
+    },
+    {
+      "name": "negative control: missing file",
+      "result": {
+        "id": "5fb45192779b401eb833351b88cb9c98",
+        "request": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/missing.txt",
+        "state": "failed",
+        "updated_at": "2026-09-30T22:37:36.158199",
+        "created_at": "2026-09-30T22:37:34.791881",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "read_file",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/missing.txt"
+            },
+            "request": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/missing.txt",
+            "prepared": true,
+            "state": "running",
+            "goal_id": "5fb45192779b401eb833351b88cb9c98"
+          }
+        ],
+        "cards": [],
+        "gaps": [
+          "Read accepts a regular UTF-8 text file up to 100 KB"
+        ],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "UNKNOWN",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "f7cd913eef0e4b38a8e06c09d9bbca96",
+            "text": "Read a text file: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/missing.txt",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.997498",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 10,
+            "valid_at": "2026-09-30T22:34:28.997498",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "17a837cc1ef04f1b89bd8cbbac812cd2",
+            "text": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04; system status",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.781202",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 13,
+            "valid_at": "2026-09-30T22:34:28.781202",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "fb80985460fa4692bb41f19d53801ea9",
+            "text": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04/demo.txt, ARIES demo: independently verified file content.",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:28.585564",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 14,
+            "valid_at": "2026-09-30T22:34:28.585564",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "983e8ed13cdd4ae5ba52ff8ce96dacaa",
+            "text": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223417Z-212d04",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:21.539542",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 13,
+            "valid_at": "2026-09-30T22:34:21.539542",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "832de361a1ec4df3b38414a1bd13725d",
+            "confidence": 0.9959
+          },
+          {
+            "id": "88fc42eaf11c4af89013e0e3c1310b52",
+            "confidence": 0.9634
+          },
+          {
+            "id": "f7f7fac03b1a413b95490a073e810c7b",
+            "confidence": 0.9991
+          },
+          {
+            "id": "1ab0e709f9df47ffae860f81f1efda54",
+            "confidence": 1.0
+          }
+        ],
+        "related": [
+          {
+            "id": "790deb95f2b24b4db4b4561d15e9ed39",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f; system status"
+          },
+          {
+            "id": "cae1ec0f668448eba00f801ababf0aaf",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f/demo.txt, ARIES demo: independently verified file content."
+          },
+          {
+            "id": "ffd0f898637d4017bc39cf3375c08c0a",
+            "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223728Z-c1067f"
+          },
+          {
+            "id": "8ab8b71bd3344a1f9d0473342fd40d5d",
+            "request": "read file /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt; list folder /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4; system status"
+          },
+          {
+            "id": "2c008373ffc9452891b7ff0dca5702d0",
+            "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Demo-20260930T223656Z-21b4d4/demo.txt, ARIES demo: independently verified file content."
+          }
+        ],
+        "collected_at": "2026-09-30T22:37:36.137129",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 2.231
+    },
+    {
+      "name": "health automation",
+      "result": {
+        "ran": true,
+        "automation_id": "aries.health",
+        "task_id": 1123,
+        "verdict": "pass",
+        "status": "ok",
+        "severity": "ok",
+        "summary": "healthy — 17 checks, nothing above threshold",
+        "proposal_id": null,
+        "requires_approval": false,
+        "trigger": "api"
+      },
+      "passed": true,
+      "seconds": 0.271
+    },
+    {
+      "name": "learning comparison",
+      "result": {
+        "id": "5cc78762429f48bea91cff51eaca3647",
+        "request": "Compare versions of task experience retrieval:",
+        "state": "done",
+        "updated_at": "2026-09-30T22:37:39.323413",
+        "created_at": "2026-09-30T22:37:37.311617",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "learning_eval",
+            "args": {},
+            "request": "Compare versions of task experience retrieval: ",
+            "prepared": true,
+            "state": "done",
+            "goal_id": "5cc78762429f48bea91cff51eaca3647",
+            "result": {
+              "state": "done",
+              "summary": "Compared 3 retrieval versions on the same 20 labelled relevance cases",
+              "cards": [
+                {
+                  "title": "Review experience comparison",
+                  "text": "Active version: overlap-v1. Headline pair: overlap-v1 vs focused-v2. No version changed by this run.",
+                  "evidence": "Developer-labelled synthetic review relevance cases; not user judgments or end-to-end task execution."
+                },
+                {
+                  "title": "overlap-v1",
+                  "text": "15/20 relevance cases matched exactly · 8 unrelated inclusions · 0 misses",
+                  "evidence": "Same frozen corpus and queries for all versions; expected labels authored before this comparison."
+                },
+                {
+                  "title": "focused-v2",
+                  "text": "19/20 relevance cases matched exactly · 1 unrelated inclusions · 0 misses",
+                  "evidence": "Same frozen corpus and queries for all versions; expected labels authored before this comparison."
+                },
+                {
+                  "title": "semantic-v3",
+                  "text": "8/20 relevance cases matched exactly · 22 unrelated inclusions · 0 misses",
+                  "evidence": "Same frozen corpus and queries for all versions; expected labels authored before this comparison."
+                },
+                {
+                  "title": "Changes by case",
+                  "text": "4 improvements · 0 regressions",
+                  "evidence": "A narrow offline result, not evidence of better general task execution or model training."
+                },
+                {
+                  "title": "Paired statistical comparison — overlap-v1 vs focused-v2",
+                  "text": "Accuracy difference +20% · exact two-sided McNemar p=0.125",
+                  "evidence": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+                },
+                {
+                  "title": "Paired statistical comparison — overlap-v1 vs semantic-v3",
+                  "text": "Accuracy difference -35% · exact two-sided McNemar p=0.039",
+                  "evidence": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+                },
+                {
+                  "title": "exact-median",
+                  "text": "Build Python median statistics",
+                  "evidence": "Expected ['median'] · baseline ['median', 'csv'] · candidate ['median']"
+                },
+                {
+                  "title": "exact-csv",
+                  "text": "Build Python CSV parser",
+                  "evidence": "Expected ['csv'] · baseline ['csv', 'median'] · candidate ['csv']"
+                },
+                {
+                  "title": "short-median",
+                  "text": "Python median",
+                  "evidence": "Expected ['median'] · baseline ['median'] · candidate ['median']"
+                },
+                {
+                  "title": "short-csv",
+                  "text": "Python CSV",
+                  "evidence": "Expected ['csv'] · baseline ['csv'] · candidate ['csv']"
+                },
+                {
+                  "title": "parser-topic",
+                  "text": "CSV parser",
+                  "evidence": "Expected ['csv'] · baseline ['csv'] · candidate ['csv']"
+                },
+                {
+                  "title": "test-singular",
+                  "text": "Python unit test",
+                  "evidence": "Expected ['tests'] · baseline ['tests'] · candidate ['tests']"
+                },
+                {
+                  "title": "test-plural",
+                  "text": "Run Python unit tests",
+                  "evidence": "Expected ['tests'] · baseline ['tests'] · candidate ['tests']"
+                },
+                {
+                  "title": "generic-python",
+                  "text": "Python",
+                  "evidence": "Expected [] · baseline ['median', 'csv', 'tests'] · candidate []"
+                },
+                {
+                  "title": "unrelated-python",
+                  "text": "Build Python weather forecast",
+                  "evidence": "Expected [] · baseline ['median', 'csv'] · candidate []"
+                },
+                {
+                  "title": "climate",
+                  "text": "Climate news",
+                  "evidence": "Expected ['news'] · baseline ['news'] · candidate ['news']"
+                },
+                {
+                  "title": "new-summary",
+                  "text": "Read climate news summary again",
+                  "evidence": "Expected ['news'] · baseline ['news'] · candidate ['news']"
+                },
+                {
+                  "title": "unrelated-summary",
+                  "text": "Read sports news summary",
+                  "evidence": "Expected [] · baseline ['news'] · candidate ['news']"
+                },
+                {
+                  "title": "browser-tab",
+                  "text": "Firefox browser tab",
+                  "evidence": "Expected ['browser'] · baseline ['browser'] · candidate ['browser']"
+                },
+                {
+                  "title": "new-browser",
+                  "text": "Open Chromium browser documentation",
+                  "evidence": "Expected [] · baseline [] · candidate []"
+                },
+                {
+                  "title": "singular-file",
+                  "text": "Find duplicate image file",
+                  "evidence": "Expected ['files'] · baseline ['files'] · candidate ['files']"
+                },
+                {
+                  "title": "vlc",
+                  "text": "Install VLC media player",
+                  "evidence": "Expected ['install'] · baseline ['install'] · candidate ['install']"
+                },
+                {
+                  "title": "wrong-app",
+                  "text": "Install GIMP image editor",
+                  "evidence": "Expected [] · baseline [] · candidate []"
+                },
+                {
+                  "title": "calendar",
+                  "text": "Calendar meeting agenda",
+                  "evidence": "Expected ['calendar'] · baseline ['calendar'] · candidate ['calendar']"
+                },
+                {
+                  "title": "mk-command",
+                  "text": "направи Python CSV parser",
+                  "evidence": "Expected ['csv'] · baseline ['csv'] · candidate ['csv']"
+                },
+                {
+                  "title": "empty-request",
+                  "text": "(empty request)",
+                  "evidence": "Expected [] · baseline [] · candidate []"
+                }
+              ],
+              "comparison": {
+                "fixture_version": "review-relevance-1",
+                "fixture_sha256": "af9ac64791ea65303fd965e96cb7d134cfd0c07271534cc382643f2306b5e65b",
+                "implementation_sha256": "3d407cfb80b4c49a9588189c1244eb03d1f25f35d239b132a26b8c9d24bc2020",
+                "scope": "Developer-labelled synthetic review relevance cases; not user judgments or end-to-end task execution.",
+                "versions": {
+                  "overlap-v1": {
+                    "passed": 15,
+                    "total": 20,
+                    "precision": 0.6363636363636364,
+                    "recall": 1.0,
+                    "extra_retrievals": 8,
+                    "missed_retrievals": 0,
+                    "cases": [
+                      {
+                        "id": "exact-median",
+                        "query": "Build Python median statistics",
+                        "expected": [
+                          "median"
+                        ],
+                        "selected": [
+                          "median",
+                          "csv"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 0.0459
+                      },
+                      {
+                        "id": "exact-csv",
+                        "query": "Build Python CSV parser",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv",
+                          "median"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 0.0245
+                      },
+                      {
+                        "id": "short-median",
+                        "query": "Python median",
+                        "expected": [
+                          "median"
+                        ],
+                        "selected": [
+                          "median"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0199
+                      },
+                      {
+                        "id": "short-csv",
+                        "query": "Python CSV",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0186
+                      },
+                      {
+                        "id": "parser-topic",
+                        "query": "CSV parser",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0184
+                      },
+                      {
+                        "id": "test-singular",
+                        "query": "Python unit test",
+                        "expected": [
+                          "tests"
+                        ],
+                        "selected": [
+                          "tests"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0184
+                      },
+                      {
+                        "id": "test-plural",
+                        "query": "Run Python unit tests",
+                        "expected": [
+                          "tests"
+                        ],
+                        "selected": [
+                          "tests"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.019
+                      },
+                      {
+                        "id": "generic-python",
+                        "query": "Python",
+                        "expected": [],
+                        "selected": [
+                          "median",
+                          "csv",
+                          "tests"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 0.0183
+                      },
+                      {
+                        "id": "unrelated-python",
+                        "query": "Build Python weather forecast",
+                        "expected": [],
+                        "selected": [
+                          "median",
+                          "csv"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 0.0193
+                      },
+                      {
+                        "id": "climate",
+                        "query": "Climate news",
+                        "expected": [
+                          "news"
+                        ],
+                        "selected": [
+                          "news"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.018
+                      },
+                      {
+                        "id": "new-summary",
+                        "query": "Read climate news summary again",
+                        "expected": [
+                          "news"
+                        ],
+                        "selected": [
+                          "news"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0197
+                      },
+                      {
+                        "id": "unrelated-summary",
+                        "query": "Read sports news summary",
+                        "expected": [],
+                        "selected": [
+                          "news"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 0.0188
+                      },
+                      {
+                        "id": "browser-tab",
+                        "query": "Firefox browser tab",
+                        "expected": [
+                          "browser"
+                        ],
+                        "selected": [
+                          "browser"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0183
+                      },
+                      {
+                        "id": "new-browser",
+                        "query": "Open Chromium browser documentation",
+                        "expected": [],
+                        "selected": [],
+                        "passed": true,
+                        "elapsed_ms": 0.0186
+                      },
+                      {
+                        "id": "singular-file",
+                        "query": "Find duplicate image file",
+                        "expected": [
+                          "files"
+                        ],
+                        "selected": [
+                          "files"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0186
+                      },
+                      {
+                        "id": "vlc",
+                        "query": "Install VLC media player",
+                        "expected": [
+                          "install"
+                        ],
+                        "selected": [
+                          "install"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0186
+                      },
+                      {
+                        "id": "wrong-app",
+                        "query": "Install GIMP image editor",
+                        "expected": [],
+                        "selected": [],
+                        "passed": true,
+                        "elapsed_ms": 0.0183
+                      },
+                      {
+                        "id": "calendar",
+                        "query": "Calendar meeting agenda",
+                        "expected": [
+                          "calendar"
+                        ],
+                        "selected": [
+                          "calendar"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0181
+                      },
+                      {
+                        "id": "mk-command",
+                        "query": "направи Python CSV parser",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0207
+                      },
+                      {
+                        "id": "empty-request",
+                        "query": "",
+                        "expected": [],
+                        "selected": [],
+                        "passed": true,
+                        "elapsed_ms": 0.0018
+                      }
+                    ]
+                  },
+                  "focused-v2": {
+                    "passed": 19,
+                    "total": 20,
+                    "precision": 0.9333333333333333,
+                    "recall": 1.0,
+                    "extra_retrievals": 1,
+                    "missed_retrievals": 0,
+                    "cases": [
+                      {
+                        "id": "exact-median",
+                        "query": "Build Python median statistics",
+                        "expected": [
+                          "median"
+                        ],
+                        "selected": [
+                          "median"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.041
+                      },
+                      {
+                        "id": "exact-csv",
+                        "query": "Build Python CSV parser",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0303
+                      },
+                      {
+                        "id": "short-median",
+                        "query": "Python median",
+                        "expected": [
+                          "median"
+                        ],
+                        "selected": [
+                          "median"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0271
+                      },
+                      {
+                        "id": "short-csv",
+                        "query": "Python CSV",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0262
+                      },
+                      {
+                        "id": "parser-topic",
+                        "query": "CSV parser",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0254
+                      },
+                      {
+                        "id": "test-singular",
+                        "query": "Python unit test",
+                        "expected": [
+                          "tests"
+                        ],
+                        "selected": [
+                          "tests"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0259
+                      },
+                      {
+                        "id": "test-plural",
+                        "query": "Run Python unit tests",
+                        "expected": [
+                          "tests"
+                        ],
+                        "selected": [
+                          "tests"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0257
+                      },
+                      {
+                        "id": "generic-python",
+                        "query": "Python",
+                        "expected": [],
+                        "selected": [],
+                        "passed": true,
+                        "elapsed_ms": 0.0531
+                      },
+                      {
+                        "id": "unrelated-python",
+                        "query": "Build Python weather forecast",
+                        "expected": [],
+                        "selected": [],
+                        "passed": true,
+                        "elapsed_ms": 0.0287
+                      },
+                      {
+                        "id": "climate",
+                        "query": "Climate news",
+                        "expected": [
+                          "news"
+                        ],
+                        "selected": [
+                          "news"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0278
+                      },
+                      {
+                        "id": "new-summary",
+                        "query": "Read climate news summary again",
+                        "expected": [
+                          "news"
+                        ],
+                        "selected": [
+                          "news"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0292
+                      },
+                      {
+                        "id": "unrelated-summary",
+                        "query": "Read sports news summary",
+                        "expected": [],
+                        "selected": [
+                          "news"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 0.0284
+                      },
+                      {
+                        "id": "browser-tab",
+                        "query": "Firefox browser tab",
+                        "expected": [
+                          "browser"
+                        ],
+                        "selected": [
+                          "browser"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0278
+                      },
+                      {
+                        "id": "new-browser",
+                        "query": "Open Chromium browser documentation",
+                        "expected": [],
+                        "selected": [],
+                        "passed": true,
+                        "elapsed_ms": 0.0278
+                      },
+                      {
+                        "id": "singular-file",
+                        "query": "Find duplicate image file",
+                        "expected": [
+                          "files"
+                        ],
+                        "selected": [
+                          "files"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0284
+                      },
+                      {
+                        "id": "vlc",
+                        "query": "Install VLC media player",
+                        "expected": [
+                          "install"
+                        ],
+                        "selected": [
+                          "install"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0394
+                      },
+                      {
+                        "id": "wrong-app",
+                        "query": "Install GIMP image editor",
+                        "expected": [],
+                        "selected": [],
+                        "passed": true,
+                        "elapsed_ms": 0.0381
+                      },
+                      {
+                        "id": "calendar",
+                        "query": "Calendar meeting agenda",
+                        "expected": [
+                          "calendar"
+                        ],
+                        "selected": [
+                          "calendar"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0286
+                      },
+                      {
+                        "id": "mk-command",
+                        "query": "направи Python CSV parser",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 0.0307
+                      },
+                      {
+                        "id": "empty-request",
+                        "query": "",
+                        "expected": [],
+                        "selected": [],
+                        "passed": true,
+                        "elapsed_ms": 0.0025
+                      }
+                    ]
+                  },
+                  "semantic-v3": {
+                    "passed": 8,
+                    "total": 20,
+                    "precision": 0.3888888888888889,
+                    "recall": 1.0,
+                    "extra_retrievals": 22,
+                    "missed_retrievals": 0,
+                    "cases": [
+                      {
+                        "id": "exact-median",
+                        "query": "Build Python median statistics",
+                        "expected": [
+                          "median"
+                        ],
+                        "selected": [
+                          "median",
+                          "csv"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 55.231
+                      },
+                      {
+                        "id": "exact-csv",
+                        "query": "Build Python CSV parser",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 50.0661
+                      },
+                      {
+                        "id": "short-median",
+                        "query": "Python median",
+                        "expected": [
+                          "median"
+                        ],
+                        "selected": [
+                          "median",
+                          "csv"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 49.4574
+                      },
+                      {
+                        "id": "short-csv",
+                        "query": "Python CSV",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv",
+                          "median"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 47.8281
+                      },
+                      {
+                        "id": "parser-topic",
+                        "query": "CSV parser",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 49.479
+                      },
+                      {
+                        "id": "test-singular",
+                        "query": "Python unit test",
+                        "expected": [
+                          "tests"
+                        ],
+                        "selected": [
+                          "tests",
+                          "csv"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 49.093
+                      },
+                      {
+                        "id": "test-plural",
+                        "query": "Run Python unit tests",
+                        "expected": [
+                          "tests"
+                        ],
+                        "selected": [
+                          "tests",
+                          "csv",
+                          "median"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 48.9609
+                      },
+                      {
+                        "id": "generic-python",
+                        "query": "Python",
+                        "expected": [],
+                        "selected": [
+                          "csv",
+                          "tests",
+                          "median"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 48.4885
+                      },
+                      {
+                        "id": "unrelated-python",
+                        "query": "Build Python weather forecast",
+                        "expected": [],
+                        "selected": [
+                          "csv",
+                          "tests",
+                          "median"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 49.1901
+                      },
+                      {
+                        "id": "climate",
+                        "query": "Climate news",
+                        "expected": [
+                          "news"
+                        ],
+                        "selected": [
+                          "news"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 48.2761
+                      },
+                      {
+                        "id": "new-summary",
+                        "query": "Read climate news summary again",
+                        "expected": [
+                          "news"
+                        ],
+                        "selected": [
+                          "news"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 48.467
+                      },
+                      {
+                        "id": "unrelated-summary",
+                        "query": "Read sports news summary",
+                        "expected": [],
+                        "selected": [
+                          "news"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 47.9873
+                      },
+                      {
+                        "id": "browser-tab",
+                        "query": "Firefox browser tab",
+                        "expected": [
+                          "browser"
+                        ],
+                        "selected": [
+                          "browser"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 47.4039
+                      },
+                      {
+                        "id": "new-browser",
+                        "query": "Open Chromium browser documentation",
+                        "expected": [],
+                        "selected": [
+                          "browser"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 49.0506
+                      },
+                      {
+                        "id": "singular-file",
+                        "query": "Find duplicate image file",
+                        "expected": [
+                          "files"
+                        ],
+                        "selected": [
+                          "files"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 48.5782
+                      },
+                      {
+                        "id": "vlc",
+                        "query": "Install VLC media player",
+                        "expected": [
+                          "install"
+                        ],
+                        "selected": [
+                          "install"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 48.3084
+                      },
+                      {
+                        "id": "wrong-app",
+                        "query": "Install GIMP image editor",
+                        "expected": [],
+                        "selected": [
+                          "install",
+                          "files",
+                          "csv"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 48.2758
+                      },
+                      {
+                        "id": "calendar",
+                        "query": "Calendar meeting agenda",
+                        "expected": [
+                          "calendar"
+                        ],
+                        "selected": [
+                          "calendar"
+                        ],
+                        "passed": true,
+                        "elapsed_ms": 47.2399
+                      },
+                      {
+                        "id": "mk-command",
+                        "query": "направи Python CSV parser",
+                        "expected": [
+                          "csv"
+                        ],
+                        "selected": [
+                          "csv",
+                          "tests",
+                          "median"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 50.0074
+                      },
+                      {
+                        "id": "empty-request",
+                        "query": "",
+                        "expected": [],
+                        "selected": [
+                          "news",
+                          "median",
+                          "files"
+                        ],
+                        "passed": false,
+                        "elapsed_ms": 46.8763
+                      }
+                    ]
+                  }
+                },
+                "baseline": "overlap-v1",
+                "candidate": "focused-v2",
+                "regressions": [],
+                "improvements": [
+                  "exact-median",
+                  "exact-csv",
+                  "generic-python",
+                  "unrelated-python"
+                ],
+                "recommendation": "candidate_on_this_fixture",
+                "promoted": false,
+                "semantic_retrieval_available": true,
+                "against_baseline": {
+                  "focused-v2": {
+                    "regressions": [],
+                    "improvements": [
+                      "exact-median",
+                      "exact-csv",
+                      "generic-python",
+                      "unrelated-python"
+                    ],
+                    "statistics": {
+                      "pairs": 20,
+                      "improved": 4,
+                      "regressed": 0,
+                      "accuracy_difference": 0.2,
+                      "exact_mcnemar_two_sided_p": 0.125,
+                      "baseline_wilson_95": [
+                        0.531299122381256,
+                        0.8881382985923343
+                      ],
+                      "candidate_wilson_95": [
+                        0.763868806553258,
+                        0.9911185511992047
+                      ],
+                      "interpretation": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+                    }
+                  },
+                  "semantic-v3": {
+                    "regressions": [
+                      "short-median",
+                      "short-csv",
+                      "test-singular",
+                      "test-plural",
+                      "new-browser",
+                      "wrong-app",
+                      "mk-command",
+                      "empty-request"
+                    ],
+                    "improvements": [
+                      "exact-csv"
+                    ],
+                    "statistics": {
+                      "pairs": 20,
+                      "improved": 1,
+                      "regressed": 8,
+                      "accuracy_difference": -0.35,
+                      "exact_mcnemar_two_sided_p": 0.0390625,
+                      "baseline_wilson_95": [
+                        0.531299122381256,
+                        0.8881382985923343
+                      ],
+                      "candidate_wilson_95": [
+                        0.21880653237281705,
+                        0.6134184992377469
+                      ],
+                      "interpretation": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+                    }
+                  }
+                },
+                "statistics": {
+                  "pairs": 20,
+                  "improved": 4,
+                  "regressed": 0,
+                  "accuracy_difference": 0.2,
+                  "exact_mcnemar_two_sided_p": 0.125,
+                  "baseline_wilson_95": [
+                    0.531299122381256,
+                    0.8881382985923343
+                  ],
+                  "candidate_wilson_95": [
+                    0.763868806553258,
+                    0.9911185511992047
+                  ],
+                  "interpretation": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+                }
+              },
+              "active_version": "overlap-v1",
+              "elapsed_seconds": 0.984
+            }
+          }
+        ],
+        "cards": [
+          {
+            "title": "Review experience comparison",
+            "text": "Active version: overlap-v1. Headline pair: overlap-v1 vs focused-v2. No version changed by this run.",
+            "evidence": "Developer-labelled synthetic review relevance cases; not user judgments or end-to-end task execution."
+          },
+          {
+            "title": "overlap-v1",
+            "text": "15/20 relevance cases matched exactly · 8 unrelated inclusions · 0 misses",
+            "evidence": "Same frozen corpus and queries for all versions; expected labels authored before this comparison."
+          },
+          {
+            "title": "focused-v2",
+            "text": "19/20 relevance cases matched exactly · 1 unrelated inclusions · 0 misses",
+            "evidence": "Same frozen corpus and queries for all versions; expected labels authored before this comparison."
+          },
+          {
+            "title": "semantic-v3",
+            "text": "8/20 relevance cases matched exactly · 22 unrelated inclusions · 0 misses",
+            "evidence": "Same frozen corpus and queries for all versions; expected labels authored before this comparison."
+          },
+          {
+            "title": "Changes by case",
+            "text": "4 improvements · 0 regressions",
+            "evidence": "A narrow offline result, not evidence of better general task execution or model training."
+          },
+          {
+            "title": "Paired statistical comparison — overlap-v1 vs focused-v2",
+            "text": "Accuracy difference +20% · exact two-sided McNemar p=0.125",
+            "evidence": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+          },
+          {
+            "title": "Paired statistical comparison — overlap-v1 vs semantic-v3",
+            "text": "Accuracy difference -35% · exact two-sided McNemar p=0.039",
+            "evidence": "Exploratory developer-labelled fixture; dependent topics and development reuse prevent population or causal claims."
+          },
+          {
+            "title": "exact-median",
+            "text": "Build Python median statistics",
+            "evidence": "Expected ['median'] · baseline ['median', 'csv'] · candidate ['median']"
+          },
+          {
+            "title": "exact-csv",
+            "text": "Build Python CSV parser",
+            "evidence": "Expected ['csv'] · baseline ['csv', 'median'] · candidate ['csv']"
+          },
+          {
+            "title": "short-median",
+            "text": "Python median",
+            "evidence": "Expected ['median'] · baseline ['median'] · candidate ['median']"
+          },
+          {
+            "title": "short-csv",
+            "text": "Python CSV",
+            "evidence": "Expected ['csv'] · baseline ['csv'] · candidate ['csv']"
+          },
+          {
+            "title": "parser-topic",
+            "text": "CSV parser",
+            "evidence": "Expected ['csv'] · baseline ['csv'] · candidate ['csv']"
+          },
+          {
+            "title": "test-singular",
+            "text": "Python unit test",
+            "evidence": "Expected ['tests'] · baseline ['tests'] · candidate ['tests']"
+          },
+          {
+            "title": "test-plural",
+            "text": "Run Python unit tests",
+            "evidence": "Expected ['tests'] · baseline ['tests'] · candidate ['tests']"
+          },
+          {
+            "title": "generic-python",
+            "text": "Python",
+            "evidence": "Expected [] · baseline ['median', 'csv', 'tests'] · candidate []"
+          },
+          {
+            "title": "unrelated-python",
+            "text": "Build Python weather forecast",
+            "evidence": "Expected [] · baseline ['median', 'csv'] · candidate []"
+          },
+          {
+            "title": "climate",
+            "text": "Climate news",
+            "evidence": "Expected ['news'] · baseline ['news'] · candidate ['news']"
+          },
+          {
+            "title": "new-summary",
+            "text": "Read climate news summary again",
+            "evidence": "Expected ['news'] · baseline ['news'] · candidate ['news']"
+          },
+          {
+            "title": "unrelated-summary",
+            "text": "Read sports news summary",
+            "evidence": "Expected [] · baseline ['news'] · candidate ['news']"
+          },
+          {
+            "title": "browser-tab",
+            "text": "Firefox browser tab",
+            "evidence": "Expected ['browser'] · baseline ['browser'] · candidate ['browser']"
+          },
+          {
+            "title": "new-browser",
+            "text": "Open Chromium browser documentation",
+            "evidence": "Expected [] · baseline [] · candidate []"
+          },
+          {
+            "title": "singular-file",
+            "text": "Find duplicate image file",
+            "evidence": "Expected ['files'] · baseline ['files'] · candidate ['files']"
+          },
+          {
+            "title": "vlc",
+            "text": "Install VLC media player",
+            "evidence": "Expected ['install'] · baseline ['install'] · candidate ['install']"
+          },
+          {
+            "title": "wrong-app",
+            "text": "Install GIMP image editor",
+            "evidence": "Expected [] · baseline [] · candidate []"
+          },
+          {
+            "title": "calendar",
+            "text": "Calendar meeting agenda",
+            "evidence": "Expected ['calendar'] · baseline ['calendar'] · candidate ['calendar']"
+          },
+          {
+            "title": "mk-command",
+            "text": "направи Python CSV parser",
+            "evidence": "Expected ['csv'] · baseline ['csv'] · candidate ['csv']"
+          },
+          {
+            "title": "empty-request",
+            "text": "(empty request)",
+            "evidence": "Expected [] · baseline [] · candidate []"
+          }
+        ],
+        "gaps": [],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "UNKNOWN",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "f85d539bc962477d9c3af9091b4f47a1",
+            "text": "Compare versions of task experience retrieval:",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:32.588437",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 7,
+            "valid_at": "2026-09-30T22:34:32.588437",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "d6bc1b7ab94a4158888e445327d3f8a6",
+            "text": "Evaluate recorded task outcomes and code repairs:",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:32.693591",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 7,
+            "valid_at": "2026-09-30T22:34:32.693591",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "2b83752e81014fc4b56345cfd26ffa5b",
+            "text": "Plan and execute a goal using observed results: Open https://www.python.org and report the page title",
+            "source": "user",
+            "created_at": "2026-09-30T22:35:50.051285",
+            "lang": "en",
+            "kind": "plan",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.5,
+            "retrievals": 2,
+            "valid_at": "2026-09-30T22:35:50.051285",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "6dee201dab9b4bcfad894bac49e7f906",
+            "text": "Collect news from enabled sources:",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:53.848446",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 4,
+            "valid_at": "2026-09-30T22:34:53.848446",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "774b86d0b91c4a32ae9ebbb3d46a4663",
+            "text": "Research news with source links: artificial intelligence",
+            "source": "user",
+            "created_at": "2026-09-30T17:00:56.203255",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 25,
+            "valid_at": "2026-09-30T17:00:56.203255",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "f29491ea471645b6a55d689b8ba7c5f9",
+            "confidence": 0.9231
+          },
+          {
+            "id": "9b26945066a64083b3e5a53395d9ad0e",
+            "confidence": 0.9993
+          },
+          {
+            "id": "f95dcb8156694616b8193841af5f8f35",
+            "confidence": 0.9285
+          }
+        ],
+        "related": [
+          {
+            "id": "342da2fd55f84ae8ab06d7aa6e6d3739",
+            "request": "Compare versions of task experience retrieval:"
+          }
+        ],
+        "collected_at": "2026-09-30T22:37:38.287112",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 2.9
+    },
+    {
+      "name": "operational evaluation",
+      "result": {
+        "id": "775deed2431a412bbce3db1a98668b54",
+        "request": "Evaluate recorded task outcomes and code repairs:",
+        "state": "done",
+        "updated_at": "2026-09-30T22:37:42.693312",
+        "created_at": "2026-09-30T22:37:40.207619",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "evaluation",
+            "args": {},
+            "request": "Evaluate recorded task outcomes and code repairs: ",
+            "prepared": true,
+            "state": "done",
+            "goal_id": "775deed2431a412bbce3db1a98668b54",
+            "result": {
+              "state": "done",
+              "summary": "Evaluated recorded outcomes from the latest 500 goals",
+              "cards": [
+                {
+                  "title": "Your task reviews",
+                  "text": "0 useful · 2 need correction · 2 reviewed goals",
+                  "evidence": "Latest active review per goal, up to 500 goals. Human judgment, not verified execution success or model training."
+                },
+                {
+                  "title": "Agent Task",
+                  "text": "0/1 recorded attempts completed · execution timing not collected for older records",
+                  "evidence": "interrupted: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Brief",
+                  "text": "1/1 recorded attempts completed · median execution 25.0s",
+                  "evidence": "done: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Browser.Observe",
+                  "text": "0/1 recorded attempts completed · median execution 0.0s",
+                  "evidence": "failed: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Browser.Open",
+                  "text": "3/3 recorded attempts completed · median execution 2.6s",
+                  "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Browser.Read",
+                  "text": "3/3 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Browser.Search",
+                  "text": "0/1 recorded attempts completed · median execution 7.0s",
+                  "evidence": "failed: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Browser.Tabs",
+                  "text": "1/1 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Create File",
+                  "text": "3/3 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Create Folder",
+                  "text": "3/3 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Desktop.Observe",
+                  "text": "6/9 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 6, failed: 3. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Desktop.Windows",
+                  "text": "10/20 recorded attempts completed · median execution 0.1s",
+                  "evidence": "done: 10, failed: 10. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "File.List",
+                  "text": "2/2 recorded attempts completed · median execution 0.1s",
+                  "evidence": "done: 2. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "File.Read",
+                  "text": "3/4 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 3, failed: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "File.Semantic Search",
+                  "text": "1/1 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "File.Write",
+                  "text": "1/2 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 1, failed: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Install App",
+                  "text": "0/1 recorded attempts completed · execution timing not collected for older records",
+                  "evidence": "failed: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Learning Eval",
+                  "text": "2/2 recorded attempts completed · median execution 1.0s",
+                  "evidence": "done: 2. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "List Folder",
+                  "text": "3/3 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Open App",
+                  "text": "6/24 recorded attempts completed · median execution 8.1s",
+                  "evidence": "done: 6, failed: 11, held: 4, interrupted: 3. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Open Url",
+                  "text": "4/7 recorded attempts completed · median execution 3.4s",
+                  "evidence": "done: 4, failed: 3. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Play Music",
+                  "text": "17/39 recorded attempts completed · median execution 2.6s",
+                  "evidence": "done: 17, failed: 2, held: 10, interrupted: 2, unconfirmed: 8. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Read File",
+                  "text": "3/3 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Refresh News",
+                  "text": "1/1 recorded attempts completed · median execution 29.4s",
+                  "evidence": "done: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Research",
+                  "text": "306/306 recorded attempts completed · execution timing not collected for older records",
+                  "evidence": "done: 306. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "System",
+                  "text": "6/6 recorded attempts completed · median execution 0.1s",
+                  "evidence": "done: 6. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "System.Status",
+                  "text": "8/9 recorded attempts completed · median execution 0.2s",
+                  "evidence": "done: 8, failed: 1. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "System.Storage",
+                  "text": "6/6 recorded attempts completed · median execution 0.0s",
+                  "evidence": "done: 6. Historical operational outcomes; not a controlled benchmark."
+                },
+                {
+                  "title": "Measured code repair",
+                  "text": "0/0 recorded multi-attempt builds recovered from a failing generated suite",
+                  "evidence": "Task-local generated-test repair only. Production code and policies are not automatically rewritten."
+                }
+              ],
+              "scope": "latest 500 durable goals; pending and cancelled attempts excluded",
+              "capabilities": {
+                "learning_eval": [
+                  {
+                    "state": "done",
+                    "goal": "5cc78762429f48bea91cff51eaca3647",
+                    "elapsed_seconds": 0.984
+                  },
+                  {
+                    "state": "done",
+                    "goal": "342da2fd55f84ae8ab06d7aa6e6d3739",
+                    "elapsed_seconds": 0.985
+                  }
+                ],
+                "read_file": [
+                  {
+                    "state": "done",
+                    "goal": "790deb95f2b24b4db4b4561d15e9ed39",
+                    "elapsed_seconds": 0.001
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8ab8b71bd3344a1f9d0473342fd40d5d",
+                    "elapsed_seconds": 0.001
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d9b9491ac9504fb6a43258b1e0dc23cd",
+                    "elapsed_seconds": 0.001
+                  }
+                ],
+                "list_folder": [
+                  {
+                    "state": "done",
+                    "goal": "790deb95f2b24b4db4b4561d15e9ed39",
+                    "elapsed_seconds": 0.001
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8ab8b71bd3344a1f9d0473342fd40d5d",
+                    "elapsed_seconds": 0.001
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d9b9491ac9504fb6a43258b1e0dc23cd",
+                    "elapsed_seconds": 0.001
+                  }
+                ],
+                "system": [
+                  {
+                    "state": "done",
+                    "goal": "790deb95f2b24b4db4b4561d15e9ed39",
+                    "elapsed_seconds": 0.101
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8ab8b71bd3344a1f9d0473342fd40d5d",
+                    "elapsed_seconds": 0.101
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d9b9491ac9504fb6a43258b1e0dc23cd",
+                    "elapsed_seconds": 0.101
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c5ce20f3425147e59e98b42618da3923",
+                    "elapsed_seconds": 0.028
+                  },
+                  {
+                    "state": "done",
+                    "goal": "9c26f27616ee4e65bcad341d378298cb",
+                    "elapsed_seconds": 0.031
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a1688efa0de446b09824c6ef8476797b",
+                    "elapsed_seconds": 0.028
+                  }
+                ],
+                "create_file": [
+                  {
+                    "state": "done",
+                    "goal": "cae1ec0f668448eba00f801ababf0aaf",
+                    "elapsed_seconds": 0.025
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2c008373ffc9452891b7ff0dca5702d0",
+                    "elapsed_seconds": 0.021
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b2f40d0e627248ea97765b6fcba4e5a0",
+                    "elapsed_seconds": 0.011
+                  }
+                ],
+                "create_folder": [
+                  {
+                    "state": "done",
+                    "goal": "ffd0f898637d4017bc39cf3375c08c0a",
+                    "elapsed_seconds": 0.026
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3776b071fd424ad08c123abb90ed7f99",
+                    "elapsed_seconds": 0.04
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5bcc09ea6769418790ae25196d333b5a",
+                    "elapsed_seconds": 0.037
+                  }
+                ],
+                "browser.open": [
+                  {
+                    "state": "done",
+                    "goal": "5755aa01b72346488d60d4da1a13d45b",
+                    "elapsed_seconds": 3.5461
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4174e030b8184d06aacf3373ec330637",
+                    "elapsed_seconds": 2.5522
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c6fc96d3b2f04ef3b2bd77b630818ed7",
+                    "elapsed_seconds": 1.959
+                  }
+                ],
+                "browser.read": [
+                  {
+                    "state": "done",
+                    "goal": "5755aa01b72346488d60d4da1a13d45b",
+                    "elapsed_seconds": 0.0229
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4174e030b8184d06aacf3373ec330637",
+                    "elapsed_seconds": 0.0369
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c6fc96d3b2f04ef3b2bd77b630818ed7",
+                    "elapsed_seconds": 0.0325
+                  }
+                ],
+                "brief": [
+                  {
+                    "state": "done",
+                    "goal": "8f06c928320d44f98a7b82eee26cd6b8",
+                    "elapsed_seconds": 24.977
+                  }
+                ],
+                "refresh_news": [
+                  {
+                    "state": "done",
+                    "goal": "2455402d5c514bfc940baac373d84420",
+                    "elapsed_seconds": 29.435
+                  }
+                ],
+                "open_app": [
+                  {
+                    "state": "failed",
+                    "goal": "fd59e16517c041c6ad6db03327fd6ad0",
+                    "elapsed_seconds": 8.36
+                  },
+                  {
+                    "state": "done",
+                    "goal": "86d965c64ccf4a118bad252c10d47a02",
+                    "elapsed_seconds": 0.575
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "ef609047048a4de096a44b13d043399f",
+                    "elapsed_seconds": 9.021
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0759f274ec80418e8600f8a23e5116ae",
+                    "elapsed_seconds": 1.148
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "302a61c710a247259008d5bfffbab270",
+                    "elapsed_seconds": 8.223
+                  },
+                  {
+                    "state": "interrupted",
+                    "goal": "2cf1adcf34d44a8faef1f5ebf13c3d7a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "cf392c683909490ca0a5bce19f493754",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "interrupted",
+                    "goal": "538b9c0b04164177b1b4ff13846d9e2b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "interrupted",
+                    "goal": "0c46a542c6de46a0a0d7ceb26555956a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "94d2fca8d4584c758b7bb6154986d847",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "held",
+                    "goal": "09c63da96f4b4cd99d82226fbd14da19",
+                    "elapsed_seconds": 10.394
+                  },
+                  {
+                    "state": "held",
+                    "goal": "38cbe94529cf4d3cbbc5fe84273bc316",
+                    "elapsed_seconds": 8.102
+                  },
+                  {
+                    "state": "held",
+                    "goal": "ceaf667d4663406fb32030a9c8c9359e",
+                    "elapsed_seconds": 9.377
+                  },
+                  {
+                    "state": "held",
+                    "goal": "dd218b384469430ca6c83871b106d743",
+                    "elapsed_seconds": 8.176
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b640d8d4fd30456c8fc860126e43d439",
+                    "elapsed_seconds": 1.225
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d37ba67d8e874534971e8421e611a3bc",
+                    "elapsed_seconds": 0.572
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "3ff7107acd724f64a29f5ab997291279",
+                    "elapsed_seconds": 8.905
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6714174adb36496a96433ab3d8d966e3",
+                    "elapsed_seconds": 0.62
+                  },
+                  {
+                    "state": "done",
+                    "goal": "916603e8e1604e62a9b5cd725f4946b9",
+                    "elapsed_seconds": 0.521
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "42fc486a1b2f4a95a57e8bab0d194b01",
+                    "elapsed_seconds": 8.096
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "07bbfc87429344408e52f9bca9465f29",
+                    "elapsed_seconds": 8.147
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "2dfdb46540e84a7b9c4fe121a6a4fe54",
+                    "elapsed_seconds": 8.08
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "dd82d2871e70468499344e725523e9ec",
+                    "elapsed_seconds": 0.117
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "3f1ad14628a64181ac00bf9118434a6a",
+                    "elapsed_seconds": 8.19
+                  }
+                ],
+                "research": [
+                  {
+                    "state": "done",
+                    "goal": "41ed97af5eb2438f99bb7d6538a43c21",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b5ca802440694cacad961f04dfa0a374",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c59334b887a74016921c27fb67701e09",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d1c5f74290344eba9469cc2c828aa5ce",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "dd7e0aa366ca411abe3f4bc081623bdc",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b0ad93fab9144693880727bf45e2df50",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6e175f4ddc0745c6808552cdc5e64a6e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2bf09bbb5b104c0d8a8f10632b102a0d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f6de53386c19483d8e3be3a920710636",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "86dea5c9807f4f4c962f1d3a79ca6deb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d72e7527fe9a4ad487adf99e576551f0",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2c3e3ed832de4770ad259d0eb230d580",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "61e14ec966f74df9b0956c3abada6ea1",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a22cf0132a5b45308cf6825692dab2cf",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e26416e304a94b70a2136e0960fc3565",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "075cdbf5f4404c96ad7f4411698d37fa",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "217bfc4737654aa59ad2bd8bfed2afb5",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a2e8d95087c94fa4a71fc67ff62d53cf",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b610049c023547fda2b436c9959e17e9",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4d668654d5c44bcbb6401ce4c301e35d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "472227dccc61444aa0582a9976780312",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ba3abe002d564b5592d9943f0cd0c367",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c742e1e821c24aac8b0c4b62d1fdbf5d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4b490b18a509400baeb9a97459b4ebf4",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "94a1ed8a69d8487f8322477ff027c72e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3e08dfe5b8244cc1a2b7d63ab22f6013",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "9fd48815283b4f59988b22a5493c8940",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f08d5c8497fa45758d6c246495df0481",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "548431c1a2fe421399122979d1d667ac",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "174255f7cc864b2587dcbb32bccd68b8",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "52b128d89a714ced99204e93e27caef0",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c8a503c40acf4563999e8771f73b96e2",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c54b101749b64eb4b637367f2cee1198",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "77bcae22cf044146a2621b6c6f0a2434",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a0a89a0327014447a3f02483a6312f8b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "00d4a0369031418581ac9a5d3490722d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2fd727708cac47c1b12dd3af10d6e154",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bac179f6056d4930bfac9416718276b7",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6cb63b93dd614883b05ee39eba0f897e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7cecd07362d44ce2bd3b61ca7f98cd10",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f44d7eff025e42a3b4afdb7823a7a7ba",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f6c5038870a6494b9cdcff2fe90e6415",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "17194ce51333432a83d3cfdda43f578b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "71fd4042853140a8b86d5e3f12ff8cd2",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "968673251c7544568e56189c998b514c",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "77a3bb2fbf7f467980be25bf07937288",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6687e670272f48b9ae2359b8e9e19c23",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a0ea1d567cfb4aaa8611e3083f9e1a3f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3bfb55643568440790acb7e95397abc9",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b758362a450e464bb7547f2092a4c1f2",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3b4759241f94499dbe778766833f2c93",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "23db74164d084166bbfbe0f75d3d7e52",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "216f7c69f69e4120b864c203278f0eae",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5f93d8f39b454864bcf6802e8b0d4a5a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6992dc457198423bad21a039833de4b8",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e3330ec1b7174c8c902b829d475c577c",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "781c0eb3c3e64c6491044b7584c12953",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c8dcb416ccb84919af79b6f4648f18c4",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8c88349dd19243cab73fb6665b72c844",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f18b3810663c4beca3eb1d6a445799f5",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "246230a8d0f54fa8aa88ca56f99bd519",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "1929e9a5a805416fa1475fae406c2faa",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "10ffb2ac5e9e4bcf85bbebb1cbc89122",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "23c08afba64943dea9de8bb57a42887d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "eef443d4b3514f04b07ae10f9514d42d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "82fe71958482423ab7fd5adbf70924cb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "dc7cf96201784765b145ca9729940f7e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e12166b7c3144e3ab65a87ebac3f62f4",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d199d609c38d4122a2abb08beb063309",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "47251660275b419f8cb2a2a18f7d3215",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "fad8bf093e004a549a07f74331d5dd07",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "808c03f38fec4f8db34e3fa2cbe9e09c",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "970ce594038949d5aa388701924d3821",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7e532b2ef827448db84090f18804a53e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "139563e20cdc4383ae05f4aaf6fc36ca",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "16cbe67cdf9944df8203a788b948dddf",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "80979dcb0c6a419b93df8a8f812b197f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7cdb5cad808e467dad69cb6732d97c68",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e0a5034e211f43f19491cb35cea13bcb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "863e8b1397714138a0dbca3dd3c51269",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d34585a8c04e4fc9bedaac58e492564f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "df279b27b03f409591d625c571db843f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a1a8984d60e3471b8b5f115573634592",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "66cf5e6f7ff4473d9710bd805f13d960",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3d66c712c83e420a9813637e3c7214c7",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c7361caef04a4662bc0ba137474f3e6e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b2563f06b0db423d96fe71351c7e5871",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "212c17fcd9484c24a22eb17263b7b937",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7aa937a489a64ffd91e52c7e688fc4d3",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bc8ac8255e8a49a98c18f90cdff0bd98",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "71a1028fce354c71a19e25490619fbf3",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "11aab8e6c045414589c137d89fd2a053",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b2e71da6fcc44e689ae8686b2538809d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d5f63555baa34870a4680a68f4edeb3c",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c97c731211c349cf91c7555ae421d225",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2217c9656a9f4aad875a1ad434d460b6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d06d0dd921e1466097721462df4fe8d1",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e7d4da350e7246f3a711ff7f392994f4",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f1c95593b15f466fbcb63f129bee8520",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "83b40f5422af4feca65fae98ab54248d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "87703ff5e11340538da8add0b5202b8f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "38660b55c71d409ba80ca73855ab3bc5",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "642d8eb65e874d409dd2135947f8b24a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f6fb5d8f7bcb4790a9829bcc496360eb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ba8a4d465d714fb49fba0905c688ec06",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "fdd1079ba2d44647beef703544d6dcdc",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6559c663920b418fb8d6e941502f13c6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ea5f2aed4ceb477abdc28064c63d91e3",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "aedfbacdbf53476b9daf55a493a4f43f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5d4f6fafd0d4496f8605c2cf365cda9a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ef100a4c0d26467e9e88af34d384ae81",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "13b4558155504508941acb76471c57f1",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6b050b9e73dc4dd4a4b8f88965d4c1c5",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8e43e0baf9064f77aa06216fa18c7f54",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d8634fe7a8524a3f89470b706fee269d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "62c99edc40be4ed8a0bc38c211a2daa6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b8a168c9207e469ab86c9af7059cf624",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2d77a469f43e46b09716b2abdc46adc5",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2f418a1bee35419381dcf338cda3bb32",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "60580db05694498886e37fa829e38aa7",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b0f9a18e40e641249827075ad2561fe8",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ab5163bb966047a58240919446285ad1",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "eb8f0c8b442c4b9daac713feb4186306",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "fb77af500f0a433390852c10aaec8f8a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "730b755ea88343fb98aa71b76ad47641",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "66346835fea946c183131951a377068b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0b68876024714004ae907c43c19a9824",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7057b19a966343f3b9930c2df6140118",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4fc199ed31514ca0b0a5f1ed1403fa8f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "eabbcd6590c74f559947a9a3da47dbe5",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8e056fe5078c47b2b040f9e8dde6e9ec",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6c69ae972f45490e96caa3faa1816e52",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3941960c66ba4f76bebb01407bd29551",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f53900f53a814650b85681f923f53008",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2cb78815def84653962d8a8383c06368",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4cbc2d81f40c42849c2fb3977d245287",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8f4d21936a704075b786553f1f1495db",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e9e78f5197ac4666bb5706e473974226",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "80e7150ee8fd439a9b93d1752e29fca8",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "95e8cd62bacd4c42ad8aa574065d79d6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3b6b590b4aa44177ac158a875cb0af38",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7f89284636e94a328720265abf55a6b4",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2c9475c0819f42878b841396f78d009d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "da83f5b5f16c4ecc8873e3d6b2319fe7",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "eef2424b6ea34a4ebf34953b3bc0bb96",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "38dbd2d25aee4d348ecd2a2e00347e8b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "da4d32e9d61c46c6bf4eee37170b0f7a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "1ed346bbba21429d88f9b94b36d8a256",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "879f3948a7f84ddabb4f780e294b9ff6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6c2c0836cc9d43078eb9a680772d70a6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7719495472ca495c98962fa856ee03f7",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7b71e70f4d3f476dbfe49b9b6fa8b216",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "056273b5c70d47919315f2e26e1de799",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e8039eeac5414467ae791784a196b9e9",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8a98b2fa72644ea28d90250c309cc259",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d43a32f96ab741c2957966c35bf12cfa",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7736a27e2f2c4a80aea0a5f752d9c7c4",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e95ab7845ede4259ad513ad94ef45789",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3df9999abf824f3ea07ebde1b76a5277",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "093ba385272949e3b0f0acc0d626b3bb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "93ef4d1910cb46a6b7b847294e75b75d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "63d30c54ed7e4ecca0d5d4fbf95bd9ac",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ef062c659ea24c6cacc5495e09e782ef",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "746ee1514e8b41c989221abb06ba6b14",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "92acca701221439b9c5b8148eaf9e636",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c81b2577af78401a9ec05e26498f7d7b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "535fca697b5d481190f1d9e19bcd6f74",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ad9eacac68fa4e21994d516df0e21069",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "14bb28ca071c4218901f3d244cc5bcfb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "641f2751a86b490ebcd6a2ad0e58d0ad",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ad42ba09179d492384e0ea6d7ce6c4c9",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d34a76656e524f27a0c717d3e9bdc1ac",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "772d32a602e2405fb9c1de53ce4f2d86",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "62428efa12c74e85b10fa8678fb02e6d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c4ad55a7f9b54026a46475b343f7e7b1",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "44ced634792f413082972dcb1f757440",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bb426a6884454c25a5c92bc8de74e3f9",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5e192b91de704f1eaaef61403a63a6d0",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "be36c01635b04819bcc12f85dd5a70a0",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f1091e71522c48a08f72b8e683ad8f72",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c5d63b3ec46e40d19539e21855cec020",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5532e1835a3049368adf7b9fab91adc8",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "740e07394f85472eb77afb11b6e513a7",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "301af68dda5d45f2879eea832a06b82d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "73cf5bc6d3504bb983c395fecea58c37",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "1491ea3e2c2f42eb9758a4fbe089fe56",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8109d42a6488454c8151f997b15a4166",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0ecd75528db147d691840034a6b4f103",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d189808ed61941bea0d96b76f806308c",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "55caee4307bc4f59b79de197d2bce766",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8b8b291d4dc445afbb8320ba4c67dc82",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c0447f781d114ff49dfb29e61e5a1651",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ce8f8b6c27c84446860e6d3d2154e5d9",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3344e5c8ec03463c940f0a2309fc400d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "94e02b21008a4b14968e9ddf4521d5bb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "73d45caf78e0404f86e4b4ae95ae0307",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "fba2b02199ea495aae23e97b37f1d36d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "69a15d2b6f014c2693f7058d6e300f16",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "fe0fc235e6104289a13fcfc954ddad31",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5d4d2a3ae80c470db970b83178b289f6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "75ddcda0dee343318bf2750bdec6168e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5b1560308efc4214b69dff03d982650f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "dca4067d7c8f4c35a5bfe0a3fed24335",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bc029bc485ff441aad95d5a52ecd7461",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "dad8fbcce1a74bb3b10f5bad110ff950",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "dd4ed43f710944a4a7443ecddc44bba0",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4b3c93bdedeb4929990f63cfa859dc38",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "528bd72ca16843b8b42f4f498bec4268",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "35328bba1da043c0823e320560653c2e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ef8b8ad8951b484f9c3a81b8249e7020",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a997212a08894eefbed0d21c01a74850",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "12a6dcc41c0b4670b4adc9109ac18973",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "11d1e538e133448ba12d9be1524c0455",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7f4ddad1b39a4804b1e77af906171b9d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "99dc4e08c97f493fba9f2d41cc8bc7d1",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6252f805dcbb40a8898e2a75d1584ea0",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e953348083dc4f998fc9876cf2e6e848",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5968355726984383b4c42a12a08281e8",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "9db2cfcaf8234f6e8063e7b236480df4",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c19e7c20e9e545ebab1d957c1aabbd89",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7ed7aabc33ec4084b44c7c84afe89f4e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "84eecfb9c9f74af0a42a0b45e5c05ca6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4d189cdf8de846fa99c26ba514218855",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "1a6082af7bdc4e639b5cab40a72ee242",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2951aab41689479dae7d7f31d1850df3",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c5bd59ab55b9418fb19f35f01744872c",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5ac7567917e342279895785b313edd4b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "9541183075cc4291bb1e546b255da3b3",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6bdfeb6c29554a1088d5215f27414f2c",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d86c327596f14dca9f4de12f30a93cbb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "064bde754ded4482afbfcd8ba84d128a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "515d01f0dda64a01ad3042e5f60e12bb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c2b87cbe49b44520b18f43e50afba56e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5f573dedcc1745faa8163e18baf0f26c",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2b1710caf1994d48934011ec2c81a7a5",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d35d599f5742476a88b953924ded6370",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0e47e7c9ce144a34a808a9c48908d78d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f98d2534f7d34428825b0adf3a973178",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2234ce693b984ef4a650c5fd3b47d192",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2410caa6b02c473a9acae9f0a0d49db0",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f018f060458b403e92146ba52a9e8579",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6228c26ac62340f08c9f556c0507e6f0",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "9f2c4b2d74b5407ca8a13789304f1f10",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f3e96436d5484923a02a30b48a9f277d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7b1459faf9704996b2df555c78f3a269",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e316c3b6c76844b28394907e5409c324",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4f8ffb0728234e1185e1d66bef07be48",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f0f37ef17a6f441b94e552370cf8460e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d1602354337c44c889a65cd758cac063",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "948465d47d964f47b9688cc74d9bc23c",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3367494f89f542dabe4359cdb252274a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2fcd7631f294484aa8f0a2d3cd9abf1e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0db0d1e61e1f42788abb377d6a36d692",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f99795760b44481caf913e849fba9eb9",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e600c60f384c45b38c825d6198890f4f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6a7ba31c428946979addce150fdb9807",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e98522310fca4cab9966ebfe4dba5534",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "9d4692476afa480baa6c40d5a879332a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "fd0cd76c9dd24b558cd129b71d75ebf2",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5093cdd7331443b98c14c709dd86dafa",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0d423f2bfa2c4895bf95fa7d363ca861",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "9347169831e74ad79b72c595fb5f3303",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "20f35bdd0f0d4ff99e8eaa43da72808d",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5fb72496a670474795a2222f9e393f7a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a792a4b67206451ebbc7c493f1506e69",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4581589112b841268565298be9f8b58f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "08ba039843664365b005b491343920e6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "34dc620674b642e2b5cbb0d60c25787b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0fb8785cd820402eb28e8f4550db5e2a",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0f6a03688cd740ec9b0cfbebacef2557",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bd2f101ee5734cac94af4ce45a7525bb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d68029980f774a638fef5d7624e7a6de",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "9d37612caed040a2b32a1ee4430b8abb",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e36dba9cd88d44e3ba589ae1a7727436",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "1ce03ce1345e499a8909ff1b3be0a396",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "1027e43e7c984234a1a220cf8f1cdead",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3223b62b949042218d00986d6d5d08d3",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e1431f8528064a9f93a84bb063af052f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "8a2bd481d7964df99b32589f23cc0924",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6cfa11ea538145f7938d3308dfe405f1",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0753421466454e27b36ff8bc88810ee8",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ea59d13d96484ab19489bd0413ebd106",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "53c4ed5fd6c94daca3e762c797d1ef27",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f2bba75b3ec64e818a8b9c80191f4b0b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "fe8ec9f0f8b34345a0e4ffff0d44d080",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bb4bb624da3743ec823e71af6b67b515",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f89c25df01cd4460acb7c1a7e84a3628",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5be95be5fdbe4789894b3cb56adfcdf2",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d55e55efc205477ab3210b08900b2ed6",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "6899c97fae57461b90c0b64dee14ff77",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4103003daa634865a39d7f4527165394",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "807f3291ccf544fea365ef78aaa7c708",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ea4495e2fce34e70b23799aefc540e9e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0a8e0d6ee9194bcd9b9bc2c83cc02707",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e99fa469593343aa86938f8cdbd418dd",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d0768dd63acc4ec6998ed83b05c72740",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "97676c68479b44a7924495cb9e7e8c7f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f52b1232197942b1aa0a2792ba261921",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e9785abc4d08446dae05ed479f22ec67",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0072c1049fcc4f4a8e91a078d642e062",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f0e347e767f949b883a321f93d84f311",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f4f704ced61040f2bb695da5ebbaef0b",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a285ca1b787040ef976661611dc2ad8f",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0cce93894d4b43b1aa0f7da573cf732e",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4477abf81e644e0a8e94af06ef73dbdc",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e7a7825ce8fd4a189b09fcc89889dac7",
+                    "elapsed_seconds": null
+                  }
+                ],
+                "file.read": [
+                  {
+                    "state": "done",
+                    "goal": "30b4260e02e74ff3800b0afc44e8ab40",
+                    "elapsed_seconds": 0.0609
+                  },
+                  {
+                    "state": "done",
+                    "goal": "4d2109a2bed14946a2c46bc382ad5046",
+                    "elapsed_seconds": 0.0159
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "b61783ad940c48f886eed457898903fb",
+                    "elapsed_seconds": 0.0112
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e8b0f002899f423ca6679417de73a5b2",
+                    "elapsed_seconds": 0.0219
+                  }
+                ],
+                "system.status": [
+                  {
+                    "state": "done",
+                    "goal": "187787b47e8c4554b9c243a6f427f6ae",
+                    "elapsed_seconds": 0.21
+                  },
+                  {
+                    "state": "done",
+                    "goal": "ab105f9af49c4dff9551f8020fb0cccc",
+                    "elapsed_seconds": 0.209
+                  },
+                  {
+                    "state": "done",
+                    "goal": "d62f1c4284c84febba6eca0113a494c8",
+                    "elapsed_seconds": 0.219
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5feb2159db9e4ff4a2fca9b70081866d",
+                    "elapsed_seconds": 0.208
+                  },
+                  {
+                    "state": "done",
+                    "goal": "538dac69ee414e5894cec49bd5c307ed",
+                    "elapsed_seconds": 0.2519
+                  },
+                  {
+                    "state": "done",
+                    "goal": "fe4af15d03dd40f7854ba6b49f4c9568",
+                    "elapsed_seconds": 0.019
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "fe4af15d03dd40f7854ba6b49f4c9568",
+                    "elapsed_seconds": 0.0003
+                  },
+                  {
+                    "state": "done",
+                    "goal": "02bc719e26004f47aac6d7b132b7e146",
+                    "elapsed_seconds": 0.0237
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2d72894002f34123ab0aac18b4fb0e4e",
+                    "elapsed_seconds": 0.016
+                  }
+                ],
+                "system.storage": [
+                  {
+                    "state": "done",
+                    "goal": "2adac46e947a48b9af379b7e8aff3302",
+                    "elapsed_seconds": 0.009
+                  },
+                  {
+                    "state": "done",
+                    "goal": "0eff0777622c485c828facb08b7d39db",
+                    "elapsed_seconds": 0.012
+                  },
+                  {
+                    "state": "done",
+                    "goal": "716b6882e8ae4f97bcf709e5072ff39a",
+                    "elapsed_seconds": 0.0487
+                  },
+                  {
+                    "state": "done",
+                    "goal": "72abf88d94d24bef831c17bc46e0fe87",
+                    "elapsed_seconds": 0.0193
+                  },
+                  {
+                    "state": "done",
+                    "goal": "70f936d953cf44cc9adaa58a8a9d3ef4",
+                    "elapsed_seconds": 0.0052
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b94f158c74c84036b614264ed01c8807",
+                    "elapsed_seconds": 0.0167
+                  }
+                ],
+                "desktop.windows": [
+                  {
+                    "state": "done",
+                    "goal": "449c456fa8de4499a83b5151a6ada189",
+                    "elapsed_seconds": 0.0342
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5aa23e11da60408f98926c122c114363",
+                    "elapsed_seconds": 0.0879
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "8014f408cd554a1da700f1871fc445c3",
+                    "elapsed_seconds": 0.0179
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "3039ac86f36248cd88113b6598c6d95a",
+                    "elapsed_seconds": 0.0263
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "fea31bcffbc24dbba3c8da129758099c",
+                    "elapsed_seconds": 0.0474
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "286c33b0030e4ec8bf06727c63845d8e",
+                    "elapsed_seconds": 0.0648
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "5444f48dc1d54d2da13b1dcdb245d3f0",
+                    "elapsed_seconds": 0.1133
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "229f1d78f9a4449daf832df6b56d7e71",
+                    "elapsed_seconds": 0.3784
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "fac4a5a5cc7b44fbb5773e0062220b62",
+                    "elapsed_seconds": 0.0745
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "6a264dbcef044c50a9f3dc3cd33fa793",
+                    "elapsed_seconds": 0.6379
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "d6352dfb35404d9f9c898404c194ae7e",
+                    "elapsed_seconds": 0.0675
+                  },
+                  {
+                    "state": "done",
+                    "goal": "21b58ba6c8f447cf9bd4bb9f09c6ec9f",
+                    "elapsed_seconds": 0.3486
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7a56b90e1f604fcf852e616ddd3ed124",
+                    "elapsed_seconds": 0.0293
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "fa2d1ab10bdf422c96fc5d9b7e378d24",
+                    "elapsed_seconds": 0.0407
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3faa2a3b08644110a8324d3ccc461521",
+                    "elapsed_seconds": 0.1413
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bb329109ecdf4feaa3c8fc1998ca3a87",
+                    "elapsed_seconds": 0.039
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bfd0bdc7eeb64e9c9886c1d92634a030",
+                    "elapsed_seconds": 0.0987
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bcd52b34008d4a2a8a62cf9c0ca9b73a",
+                    "elapsed_seconds": 0.0277
+                  },
+                  {
+                    "state": "done",
+                    "goal": "27dc78fc84934c37809f10dde1e0fe4a",
+                    "elapsed_seconds": 0.0679
+                  },
+                  {
+                    "state": "done",
+                    "goal": "95b88237da7948a7b436c5d0fd94a63a",
+                    "elapsed_seconds": 0.0281
+                  }
+                ],
+                "play_music": [
+                  {
+                    "state": "done",
+                    "goal": "b34cf3570fc04d4eb269ecbf676710f4",
+                    "elapsed_seconds": 2.718
+                  },
+                  {
+                    "state": "done",
+                    "goal": "52e69df0cecd4a3f94305968327d412f",
+                    "elapsed_seconds": 3.23
+                  },
+                  {
+                    "state": "done",
+                    "goal": "5a812eeb082f47a7a8f4f723774fe4f6",
+                    "elapsed_seconds": 2.27
+                  },
+                  {
+                    "state": "done",
+                    "goal": "15385a1960834f87b9d3217b9e42d41d",
+                    "elapsed_seconds": 2.079
+                  },
+                  {
+                    "state": "done",
+                    "goal": "794b1b6db6ec4f639bfef55d3cb45874",
+                    "elapsed_seconds": 1.92
+                  },
+                  {
+                    "state": "done",
+                    "goal": "461b2649f5a84526987eba5ed1b5c47a",
+                    "elapsed_seconds": 2.045
+                  },
+                  {
+                    "state": "done",
+                    "goal": "63b6aef62d0341d5b70620629e4dd5a0",
+                    "elapsed_seconds": 5.379
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e0262e3f9819470ba01ee594399da998",
+                    "elapsed_seconds": 2.596
+                  },
+                  {
+                    "state": "done",
+                    "goal": "498d3e3db68342e28762b54f81922c5f",
+                    "elapsed_seconds": 9.443
+                  },
+                  {
+                    "state": "unconfirmed",
+                    "goal": "7c86b81ee89d4555a39b82ce4b9219fd",
+                    "elapsed_seconds": 3.258
+                  },
+                  {
+                    "state": "unconfirmed",
+                    "goal": "8cb3addcbb844f8f96337c78cec1b943",
+                    "elapsed_seconds": 5.492
+                  },
+                  {
+                    "state": "unconfirmed",
+                    "goal": "cdda4c2946fe4af085895e51fef1280e",
+                    "elapsed_seconds": 2.323
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "3d7ed671b93146e7b256f139b2400361",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "interrupted",
+                    "goal": "83e81b2223bb493c8489ef49ff080663",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "interrupted",
+                    "goal": "d115c2cac9864fb8b0557975f3fab5a0",
+                    "elapsed_seconds": null
+                  },
+                  {
+                    "state": "done",
+                    "goal": "034172e324f44758a1d26e9275f0ebb8",
+                    "elapsed_seconds": 25.051
+                  },
+                  {
+                    "state": "done",
+                    "goal": "f79b01b0a85b420e9f154eb0ef4a9531",
+                    "elapsed_seconds": 8.827
+                  },
+                  {
+                    "state": "unconfirmed",
+                    "goal": "6d62bf6530344ec58be253ed04f31219",
+                    "elapsed_seconds": 4.859
+                  },
+                  {
+                    "state": "held",
+                    "goal": "65fd8924253447f08da028a9f3eab01d",
+                    "elapsed_seconds": 3.04
+                  },
+                  {
+                    "state": "held",
+                    "goal": "3863707f55cd41138cd95987441118cb",
+                    "elapsed_seconds": 1.849
+                  },
+                  {
+                    "state": "held",
+                    "goal": "1edf6a25b20e467aa618325940540d35",
+                    "elapsed_seconds": 1.772
+                  },
+                  {
+                    "state": "held",
+                    "goal": "3f95185975324be3a62393aecf6221ce",
+                    "elapsed_seconds": 1.983
+                  },
+                  {
+                    "state": "done",
+                    "goal": "79fe13791ed44c5cb54c12cc24eab12e",
+                    "elapsed_seconds": 2.627
+                  },
+                  {
+                    "state": "done",
+                    "goal": "c49d691764c24d548fbe2ccd6050b7c1",
+                    "elapsed_seconds": 1.503
+                  },
+                  {
+                    "state": "held",
+                    "goal": "30c69b0deb3e4aed95003687744b2b53",
+                    "elapsed_seconds": 2.786
+                  },
+                  {
+                    "state": "held",
+                    "goal": "5b012f7d59af427da7fd5949f44b27c5",
+                    "elapsed_seconds": 1.918
+                  },
+                  {
+                    "state": "held",
+                    "goal": "1fb333fcb9534bd892fae9b8f93342f3",
+                    "elapsed_seconds": 2.221
+                  },
+                  {
+                    "state": "held",
+                    "goal": "660270a1b72c4eb8bd3c48d24bb6471b",
+                    "elapsed_seconds": 1.745
+                  },
+                  {
+                    "state": "held",
+                    "goal": "bb668f485f514d2aa5a619dfd3dce334",
+                    "elapsed_seconds": 1.802
+                  },
+                  {
+                    "state": "held",
+                    "goal": "cb0d174a00d04d09b8e8cf5b55443a31",
+                    "elapsed_seconds": 1.832
+                  },
+                  {
+                    "state": "unconfirmed",
+                    "goal": "c127edb99fc9412b8cf3e6f64f584647",
+                    "elapsed_seconds": 2.422
+                  },
+                  {
+                    "state": "unconfirmed",
+                    "goal": "29a72c0733ff47cdb4f31101e8c03626",
+                    "elapsed_seconds": 2.983
+                  },
+                  {
+                    "state": "done",
+                    "goal": "caea15de4d464c75861bd47c00df6417",
+                    "elapsed_seconds": 2.854
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "6edb3b46c44f481b94fd764168d3002d",
+                    "elapsed_seconds": 2.403
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3a40d38e6e044a65bbdd438a9940adab",
+                    "elapsed_seconds": 1.999
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7765c1545286410c9a2ae4fc8cd99330",
+                    "elapsed_seconds": 3.969
+                  },
+                  {
+                    "state": "unconfirmed",
+                    "goal": "0cbc47470cd04beab61d17a2a816fba4",
+                    "elapsed_seconds": 4.356
+                  },
+                  {
+                    "state": "done",
+                    "goal": "a06ca9050fc140278c2c9a644dca32bd",
+                    "elapsed_seconds": 3.919
+                  },
+                  {
+                    "state": "unconfirmed",
+                    "goal": "d45a08bee0da401ea8968e28299d64f0",
+                    "elapsed_seconds": 4.498
+                  }
+                ],
+                "desktop.observe": [
+                  {
+                    "state": "failed",
+                    "goal": "c8f4b37464394843a4db93fbd263da98",
+                    "elapsed_seconds": 0.0261
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "67a327c19e77493b8dbaa95d33d06205",
+                    "elapsed_seconds": 0.0612
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "82c17bf9c9194428826c96c8f7559b02",
+                    "elapsed_seconds": 0.0172
+                  },
+                  {
+                    "state": "done",
+                    "goal": "21b58ba6c8f447cf9bd4bb9f09c6ec9f",
+                    "elapsed_seconds": 0.0329
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7a56b90e1f604fcf852e616ddd3ed124",
+                    "elapsed_seconds": 0.0327
+                  },
+                  {
+                    "state": "done",
+                    "goal": "b9088559a0aa4617851cde9e031f61b6",
+                    "elapsed_seconds": 0.0297
+                  },
+                  {
+                    "state": "done",
+                    "goal": "613a81f1d73b4c86acdbd470a14d7107",
+                    "elapsed_seconds": 0.0482
+                  },
+                  {
+                    "state": "done",
+                    "goal": "3faa2a3b08644110a8324d3ccc461521",
+                    "elapsed_seconds": 0.0572
+                  },
+                  {
+                    "state": "done",
+                    "goal": "bb329109ecdf4feaa3c8fc1998ca3a87",
+                    "elapsed_seconds": 0.0731
+                  }
+                ],
+                "file.list": [
+                  {
+                    "state": "done",
+                    "goal": "67a327c19e77493b8dbaa95d33d06205",
+                    "elapsed_seconds": 0.075
+                  },
+                  {
+                    "state": "done",
+                    "goal": "7a1f2c77edc74821ba737a6b63a4c425",
+                    "elapsed_seconds": 0.0903
+                  }
+                ],
+                "agent_task": [
+                  {
+                    "state": "interrupted",
+                    "goal": "a669f5c749e847bf9ffb1a7f1c90f66b",
+                    "elapsed_seconds": null
+                  }
+                ],
+                "browser.tabs": [
+                  {
+                    "state": "done",
+                    "goal": "6a264dbcef044c50a9f3dc3cd33fa793",
+                    "elapsed_seconds": 0.0171
+                  }
+                ],
+                "install_app": [
+                  {
+                    "state": "failed",
+                    "goal": "1670065d1c944ae5b67d3d1f3f2d2914",
+                    "elapsed_seconds": null
+                  }
+                ],
+                "browser.search": [
+                  {
+                    "state": "failed",
+                    "goal": "03d8f34cd621424799f390fdbc1e9c9d",
+                    "elapsed_seconds": 7.0305
+                  }
+                ],
+                "browser.observe": [
+                  {
+                    "state": "failed",
+                    "goal": "03d8f34cd621424799f390fdbc1e9c9d",
+                    "elapsed_seconds": 0.0426
+                  }
+                ],
+                "open_url": [
+                  {
+                    "state": "done",
+                    "goal": "044103b67fa34472bd108e64857c9e91",
+                    "elapsed_seconds": 5.647
+                  },
+                  {
+                    "state": "done",
+                    "goal": "66b9dbca858e4980adbc4cef57d39987",
+                    "elapsed_seconds": 3.427
+                  },
+                  {
+                    "state": "done",
+                    "goal": "2dee544284dd484aaa985d724d249674",
+                    "elapsed_seconds": 8.696
+                  },
+                  {
+                    "state": "done",
+                    "goal": "20fb2278d11c41d1933c01cc39ca2188",
+                    "elapsed_seconds": 4.245
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "5839e2bc507649ff806f82ef6d0b5b92",
+                    "elapsed_seconds": 0.149
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "daea0756980349b582f8e7b8f0d75e44",
+                    "elapsed_seconds": 0.111
+                  },
+                  {
+                    "state": "failed",
+                    "goal": "aba34a191b1d4db68374835c3cfe529c",
+                    "elapsed_seconds": 1.523
+                  }
+                ],
+                "file.write": [
+                  {
+                    "state": "failed",
+                    "goal": "7a1f2c77edc74821ba737a6b63a4c425",
+                    "elapsed_seconds": 0.0028
+                  },
+                  {
+                    "state": "done",
+                    "goal": "e8b0f002899f423ca6679417de73a5b2",
+                    "elapsed_seconds": 0.0519
+                  }
+                ],
+                "file.semantic_search": [
+                  {
+                    "state": "done",
+                    "goal": "e9e7a10c92c4426193ba96b6398b96c8",
+                    "elapsed_seconds": 0.0323
+                  }
+                ]
+              },
+              "repairs": [],
+              "human_reviews": {
+                "reviewed": 2,
+                "useful": 0,
+                "needs_work": 2
+              },
+              "elapsed_seconds": 0.268
+            }
+          }
+        ],
+        "cards": [
+          {
+            "title": "Your task reviews",
+            "text": "0 useful · 2 need correction · 2 reviewed goals",
+            "evidence": "Latest active review per goal, up to 500 goals. Human judgment, not verified execution success or model training."
+          },
+          {
+            "title": "Agent Task",
+            "text": "0/1 recorded attempts completed · execution timing not collected for older records",
+            "evidence": "interrupted: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Brief",
+            "text": "1/1 recorded attempts completed · median execution 25.0s",
+            "evidence": "done: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Browser.Observe",
+            "text": "0/1 recorded attempts completed · median execution 0.0s",
+            "evidence": "failed: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Browser.Open",
+            "text": "3/3 recorded attempts completed · median execution 2.6s",
+            "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Browser.Read",
+            "text": "3/3 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Browser.Search",
+            "text": "0/1 recorded attempts completed · median execution 7.0s",
+            "evidence": "failed: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Browser.Tabs",
+            "text": "1/1 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Create File",
+            "text": "3/3 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Create Folder",
+            "text": "3/3 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Desktop.Observe",
+            "text": "6/9 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 6, failed: 3. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Desktop.Windows",
+            "text": "10/20 recorded attempts completed · median execution 0.1s",
+            "evidence": "done: 10, failed: 10. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "File.List",
+            "text": "2/2 recorded attempts completed · median execution 0.1s",
+            "evidence": "done: 2. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "File.Read",
+            "text": "3/4 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 3, failed: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "File.Semantic Search",
+            "text": "1/1 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "File.Write",
+            "text": "1/2 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 1, failed: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Install App",
+            "text": "0/1 recorded attempts completed · execution timing not collected for older records",
+            "evidence": "failed: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Learning Eval",
+            "text": "2/2 recorded attempts completed · median execution 1.0s",
+            "evidence": "done: 2. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "List Folder",
+            "text": "3/3 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Open App",
+            "text": "6/24 recorded attempts completed · median execution 8.1s",
+            "evidence": "done: 6, failed: 11, held: 4, interrupted: 3. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Open Url",
+            "text": "4/7 recorded attempts completed · median execution 3.4s",
+            "evidence": "done: 4, failed: 3. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Play Music",
+            "text": "17/39 recorded attempts completed · median execution 2.6s",
+            "evidence": "done: 17, failed: 2, held: 10, interrupted: 2, unconfirmed: 8. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Read File",
+            "text": "3/3 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 3. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Refresh News",
+            "text": "1/1 recorded attempts completed · median execution 29.4s",
+            "evidence": "done: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Research",
+            "text": "306/306 recorded attempts completed · execution timing not collected for older records",
+            "evidence": "done: 306. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "System",
+            "text": "6/6 recorded attempts completed · median execution 0.1s",
+            "evidence": "done: 6. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "System.Status",
+            "text": "8/9 recorded attempts completed · median execution 0.2s",
+            "evidence": "done: 8, failed: 1. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "System.Storage",
+            "text": "6/6 recorded attempts completed · median execution 0.0s",
+            "evidence": "done: 6. Historical operational outcomes; not a controlled benchmark."
+          },
+          {
+            "title": "Measured code repair",
+            "text": "0/0 recorded multi-attempt builds recovered from a failing generated suite",
+            "evidence": "Task-local generated-test repair only. Production code and policies are not automatically rewritten."
+          }
+        ],
+        "gaps": [],
+        "agent_engine": null,
+        "routing": {
+          "execution_level": "code",
+          "source": "rule",
+          "intent": "UNKNOWN",
+          "tool": "workspace",
+          "confidence": 1.0,
+          "requires_cloud": false,
+          "estimated_complexity": "simple",
+          "reason": "Existing deterministic workspace plan"
+        },
+        "context": [
+          {
+            "id": "d6bc1b7ab94a4158888e445327d3f8a6",
+            "text": "Evaluate recorded task outcomes and code repairs:",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:32.693591",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 9,
+            "valid_at": "2026-09-30T22:34:32.693591",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "2b83752e81014fc4b56345cfd26ffa5b",
+            "text": "Plan and execute a goal using observed results: Open https://www.python.org and report the page title",
+            "source": "user",
+            "created_at": "2026-09-30T22:35:50.051285",
+            "lang": "en",
+            "kind": "plan",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.5,
+            "retrievals": 3,
+            "valid_at": "2026-09-30T22:35:50.051285",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "f85d539bc962477d9c3af9091b4f47a1",
+            "text": "Compare versions of task experience retrieval:",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:32.588437",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 9,
+            "valid_at": "2026-09-30T22:34:32.588437",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "6dee201dab9b4bcfad894bac49e7f906",
+            "text": "Collect news from enabled sources:",
+            "source": "user",
+            "created_at": "2026-09-30T22:34:53.848446",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 5,
+            "valid_at": "2026-09-30T22:34:53.848446",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          },
+          {
+            "id": "55b2cab39e0942788019037ba6872783",
+            "text": "Research news with source links: cybersecurity",
+            "source": "user",
+            "created_at": "2026-09-30T17:00:59.479200",
+            "lang": "en",
+            "kind": "fact",
+            "layer": 60,
+            "layer_name": "user setting",
+            "importance": 0.6,
+            "retrievals": 21,
+            "valid_at": "2026-09-30T17:00:59.479200",
+            "invalid_at": null,
+            "expired_at": null,
+            "superseded_by": null,
+            "embedded": true
+          }
+        ],
+        "conclusions": [
+          {
+            "id": "9b26945066a64083b3e5a53395d9ad0e",
+            "confidence": 0.9993
+          },
+          {
+            "id": "f95dcb8156694616b8193841af5f8f35",
+            "confidence": 0.9285
+          },
+          {
+            "id": "f29491ea471645b6a55d689b8ba7c5f9",
+            "confidence": 0.9231
+          }
+        ],
+        "related": [
+          {
+            "id": "08d4d57b4e3e4126a23117202ecbb851",
+            "request": "Evaluate recorded task outcomes and code repairs:"
+          }
+        ],
+        "collected_at": "2026-09-30T22:37:42.390594",
+        "review": null
+      },
+      "passed": true,
+      "seconds": 3.039
+    }
+  ],
+  "commit": "3eb5f46680b41567e0470ffa82509c8f35facf16",
+  "working_tree_dirty": true,
+  "scope": "Installed-system acceptance, not a controlled agent benchmark.",
+  "source_sha256": "d2f88dc237f067ebcdc812572072e02f30908e9768f8c558b124a9eb00450699",
+  "passed": 7,
+  "total": 7
+}

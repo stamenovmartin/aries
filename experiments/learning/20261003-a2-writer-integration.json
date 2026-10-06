@@ -1,0 +1,12 @@
+{
+  "problem": "A2 writer existed but production save/progress and scheduler recovery bypassed it.",
+  "change": "Route these three transaction boundaries through writer.write_session, preserving cancellation and commit semantics.",
+  "validation": {
+    "scratch": "eval/locking/integration-smoke.json",
+    "live": "eval/locking/live-integration-smoke.json",
+    "commit": "b0cba38",
+    "live_completed": "3/3",
+    "live_lock_error_records": 0
+  },
+  "limitations": "Process/event-loop local serialization. Scratch test overrides capacity; live smoke does not establish overlap or 48-hour stability. Other writers still require WAL/busy_timeout."
+}

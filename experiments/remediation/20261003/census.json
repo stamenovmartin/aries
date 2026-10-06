@@ -1,0 +1,1752 @@
+{
+  "measured_at": "2026-10-03T11:35:53.512652+00:00",
+  "window_days": 14,
+  "goal_scan_cap": null,
+  "goal_n": 750,
+  "future_dated_goals_excluded_n": 3,
+  "goal_states": {
+    "done": 531,
+    "partial": 59,
+    "failed": 107,
+    "proposed": 11,
+    "interrupted": 11,
+    "cancelled": 19,
+    "answered": 12
+  },
+  "unsuccessful_n": 177,
+  "reason_counts": {
+    "ASR": 0,
+    "routing": 0,
+    "planner": 25,
+    "capability": 45,
+    "verification": 0,
+    "timeout": 5,
+    "other": 102
+  },
+  "classification": "Rule-based from stored failure fields; other includes insufficient evidence. No attribution of ASR errors without recorded ASR evidence. Partial/interrupted/unconfirmed/empty included; cancelled excluded.",
+  "classified_goals": [
+    {
+      "id": "3f1ad14628a64181ac00bf9118434a6a",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "557587eb7202432f83bcb9c665876f0e",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "dd82d2871e70468499344e725523e9ec",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "bcf71c1bacbe4bcca2453cbc89bc0e5e",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "6791f1048b9449b6b0f9afccb0d3ad7e",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "aba34a191b1d4db68374835c3cfe529c",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "daea0756980349b582f8e7b8f0d75e44",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "f549ab9187f248598b43345110e8536f",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "e025c9c930df4f11b83a864047dd2b43",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "c7a996aaa2524a1887302edbcc4a5370",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "e9e7a10c92c4426193ba96b6398b96c8",
+      "state": "partial",
+      "reason": "planner"
+    },
+    {
+      "id": "c5d7f126b7e84793963c4a514acb6c7f",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "da620d84fc3e4728bd0825cd4107b5b4",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "97b89b4310b742e2ad457d7ec04fc5b5",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "8e27785cebc14195a4b564944e469a14",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "d776660373f24451aae6bf7d3677a77d",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "7b00f454a2a940d5a353a7a1f7a1e4f0",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "b20bfcaf9c9b4d03aa754ff9e37ec4f7",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "5839e2bc507649ff806f82ef6d0b5b92",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "a98d2d6e00274c35920ee44769e454ca",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "8f6895af8b1a4749930f9a57882a6bce",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "7a1f2c77edc74821ba737a6b63a4c425",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "2dfdb46540e84a7b9c4fe121a6a4fe54",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "07bbfc87429344408e52f9bca9465f29",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "a8bfcbf8b9694d8080cb6029fe94dc74",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "d5a6ae365bec4e6f8e9451940ea8ae44",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "dda5ed7a6d494e80a244cc6ad1b986f8",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "021a4eca9f2c461481b29dea0fe796b1",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "42fc486a1b2f4a95a57e8bab0d194b01",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "815185df71a045acae6784cd23563b70",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "33a325bbdd944b26a9184fbadb3187cf",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "e737f61808f042ac9bb3e65b01323870",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "4024eb844fe44f429f54251875751b93",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "427e569f936c427b8b26f790939bd4f0",
+      "state": "failed",
+      "reason": "planner"
+    },
+    {
+      "id": "95b88237da7948a7b436c5d0fd94a63a",
+      "state": "interrupted",
+      "reason": "timeout"
+    },
+    {
+      "id": "d45a08bee0da401ea8968e28299d64f0",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "3ff7107acd724f64a29f5ab997291279",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "0cbc47470cd04beab61d17a2a816fba4",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "511d6774b4a143839d1890e791809c7a",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "3faa2a3b08644110a8324d3ccc461521",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "613a81f1d73b4c86acdbd470a14d7107",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "6edb3b46c44f481b94fd764168d3002d",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "b9088559a0aa4617851cde9e031f61b6",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "29a72c0733ff47cdb4f31101e8c03626",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "fa2d1ab10bdf422c96fc5d9b7e378d24",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "c127edb99fc9412b8cf3e6f64f584647",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "dd218b384469430ca6c83871b106d743",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "ee84165010034005923186674883d1d2",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "cb0d174a00d04d09b8e8cf5b55443a31",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "bb668f485f514d2aa5a619dfd3dce334",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "660270a1b72c4eb8bd3c48d24bb6471b",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "1fb333fcb9534bd892fae9b8f93342f3",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "5b012f7d59af427da7fd5949f44b27c5",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "2ba6342202e34c5386794faf2b78f393",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "30c69b0deb3e4aed95003687744b2b53",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "1670065d1c944ae5b67d3d1f3f2d2914",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "21b58ba6c8f447cf9bd4bb9f09c6ec9f",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "d6352dfb35404d9f9c898404c194ae7e",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "ceaf667d4663406fb32030a9c8c9359e",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "6a264dbcef044c50a9f3dc3cd33fa793",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "fac4a5a5cc7b44fbb5773e0062220b62",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "3f95185975324be3a62393aecf6221ce",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "38cbe94529cf4d3cbbc5fe84273bc316",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "82c17bf9c9194428826c96c8f7559b02",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "b33647c89d6946ec8dd53d52c80a77bc",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "1edf6a25b20e467aa618325940540d35",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "229f1d78f9a4449daf832df6b56d7e71",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "3863707f55cd41138cd95987441118cb",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "65fd8924253447f08da028a9f3eab01d",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "5444f48dc1d54d2da13b1dcdb245d3f0",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "09c63da96f4b4cd99d82226fbd14da19",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "6d62bf6530344ec58be253ed04f31219",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "ae6e008f5eff42b49f257c83578e8185",
+      "state": "interrupted",
+      "reason": "other"
+    },
+    {
+      "id": "14ec0b9d242c4fd39aa53159190762d6",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "94d2fca8d4584c758b7bb6154986d847",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "0c46a542c6de46a0a0d7ceb26555956a",
+      "state": "interrupted",
+      "reason": "other"
+    },
+    {
+      "id": "d115c2cac9864fb8b0557975f3fab5a0",
+      "state": "interrupted",
+      "reason": "other"
+    },
+    {
+      "id": "83e81b2223bb493c8489ef49ff080663",
+      "state": "interrupted",
+      "reason": "other"
+    },
+    {
+      "id": "a669f5c749e847bf9ffb1a7f1c90f66b",
+      "state": "interrupted",
+      "reason": "other"
+    },
+    {
+      "id": "3d7ed671b93146e7b256f139b2400361",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "538b9c0b04164177b1b4ff13846d9e2b",
+      "state": "interrupted",
+      "reason": "other"
+    },
+    {
+      "id": "cf392c683909490ca0a5bce19f493754",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "cdda4c2946fe4af085895e51fef1280e",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "286c33b0030e4ec8bf06727c63845d8e",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "fea31bcffbc24dbba3c8da129758099c",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "2d72894002f34123ab0aac18b4fb0e4e",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "67a327c19e77493b8dbaa95d33d06205",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "8cb3addcbb844f8f96337c78cec1b943",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "2cf1adcf34d44a8faef1f5ebf13c3d7a",
+      "state": "interrupted",
+      "reason": "timeout"
+    },
+    {
+      "id": "3039ac86f36248cd88113b6598c6d95a",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "c8f4b37464394843a4db93fbd263da98",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "7c86b81ee89d4555a39b82ce4b9219fd",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "302a61c710a247259008d5bfffbab270",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "8014f408cd554a1da700f1871fc445c3",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "ef609047048a4de096a44b13d043399f",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "bc52711b70ce4ccdaed7707610b276c8",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "70f936d953cf44cc9adaa58a8a9d3ef4",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "fe4af15d03dd40f7854ba6b49f4c9568",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "4846a573bf6749e8857646abafaf1800",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "fd59e16517c041c6ad6db03327fd6ad0",
+      "state": "partial",
+      "reason": "capability"
+    },
+    {
+      "id": "d246e9b4a254455a92987fa9ca9854ca",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "5fb45192779b401eb833351b88cb9c98",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "0dd3b6790a3a43c99c3f20ce3dd1725e",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "36b90b522ac24e1dabfa1b2a6e02c757",
+      "state": "interrupted",
+      "reason": "timeout"
+    },
+    {
+      "id": "a76c9d570db8455ead3f7b9101e119a8",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "a3729aef379a4605a24f271f04a91fb2",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "4dc36cf1b30844e7836666ef6acb10be",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "1e456c1b5a0641a796b1df50e173bf7f",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "428f5bcf9b8448f99a53d7b81500a205",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "7505bb3a2422436280b739e072b8a698",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "102bbe4a13614a4780048913d4e43665",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "88c5574d60ab476494b921ca1b3c781b",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "0c135a5d3b2a49738a3cdc5228309e8b",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "75a3bfb0b5be4298a133613dbeb37216",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "c660ff4b1a1e4463a18f67a03882ce7f",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "00f1e45de24943df97f9607155619a7d",
+      "state": "interrupted",
+      "reason": "timeout"
+    },
+    {
+      "id": "59d48a21337e4874ba81a5a58bc90194",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "110b9f57ddf647dfa3133d1930f02e43",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "68fc1f6c9d33463bae3d5ed32175a3a6",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "2b9a2d7a62e4415aaf7eac05e10cfc4b",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "7b8e9246e6d34f158c7ccc8d391a31ec",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "0fd11596e3304f0f81e1359a7c827acc",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "e6e8424383234a1fac6e0977924ae8a8",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "6877db800d7c4a1eab6b4e7fc9a62299",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "5c06e0e1bdfb4783ad628829c597fe0e",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "c067e3ca7fa449c68d560a015f47d717",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "ca2d1db94c084a6e9e6f058de0056f21",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "5a175fa04509462e96c8e862f05fb8bb",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "649ab2cc8ff34700b67c0767033a82a6",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "f540caab88774235a0982d71bbcae526",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "7e7d2163a66047c2aca37312ca27c49d",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "5681d7b6e88a486ab42fce01f6227277",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "2143759caf934e76b8cde5bd190256af",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "460df88b25464602ba187971686c3417",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "f852cd0046ad4db98681bb1c4a48bf6a",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "7032d45447c2462fb75fdfd58b4057f3",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "5691f8ba92bb4a68907da275adfc3b03",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "1145ae753d9344b4abc2a8de5e9b32f0",
+      "state": "interrupted",
+      "reason": "timeout"
+    },
+    {
+      "id": "4329d999370a481ba518943527e7c9c0",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "877c8f51ac5c4bab8a2f8696546e52b8",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "0b72bcabd1474c6081ee6b979e0c715d",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "57a6869ae3824b618ecba171bd1cfdcc",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "223307e8103d421fb5645ab5b1425859",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "b7826651a2c544dca051389de2acece7",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "517ab15105494e2aa7b93fbf1f2721b6",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "f6e60dc9326a4eb8b2659a7fdc9e5d42",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "34c236ddfe35456ab8a11b83cd88ae43",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "050b621e6d8444b4b0b71e313f5b4ef2",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "2bee17d232434573b0173fc841c7bb4b",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "e7310a003d8d46448e1e6fc8cc712032",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "294e9d711c9e4d489568eff774f3627d",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "f6487c2cbe3b4a8db81ad35696246896",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "677bac4657d54eb183e67a75facb609f",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "b41a61128563475dba9db2f327882d66",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "5f494bb654d14df8b4e24426d568e578",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "97734a2702ef472fb73b44e26f496572",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "520c67ab9f02462f977d2b39dadffc97",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "e56ae53487624c738454c48221209e3b",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "9a6811e78e6f4e5c8bd65b0da186789b",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "44a58bb6262f4bbe94eaad044ed43d43",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "8c353ad31c5345539789b9d0760def77",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "afca0c0c07154792b2beeec1350448aa",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "1443da68c58746ef8ddb7e14e31c3bc8",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "2b02fbd94b8b40f99e7d0e73fa57a706",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "4ab48754d58142bebdd101d3415e7f73",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "77e22628b0594c46bea9c5dd1069acea",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "4aaad0544cf04e3884d9247b7f9052d8",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "563cdc92ce5443d08351b82130f7cb93",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "e6fcda9474e841298434c46176245d70",
+      "state": "partial",
+      "reason": "other"
+    },
+    {
+      "id": "aeac7783a70f4797b008afa1dcc5010d",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "7fc81f9f16774b068ff0c9701b35d6b3",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "7862fd3e07074ec88c93d276329b289e",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "dfe16813caec4bf9a9b3b1b4e5679e2c",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "90c94702d5f54149889c9c5aa0dcb830",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "ee783689f46b4e879e3fc7b19abd33db",
+      "state": "failed",
+      "reason": "other"
+    },
+    {
+      "id": "f0039119ebcc482da3c87c3c291d347b",
+      "state": "failed",
+      "reason": "capability"
+    },
+    {
+      "id": "f83b628feeea43a2bb6787466f64cdd3",
+      "state": "failed",
+      "reason": "capability"
+    }
+  ],
+  "registry_n": 58,
+  "registry_capabilities": [
+    {
+      "name": "browser.back",
+      "verifier": "verify_state"
+    },
+    {
+      "name": "browser.click",
+      "verifier": "verify_state"
+    },
+    {
+      "name": "browser.download",
+      "verifier": "verify_download"
+    },
+    {
+      "name": "browser.elements",
+      "verifier": "verify_elements"
+    },
+    {
+      "name": "browser.forward",
+      "verifier": "verify_state"
+    },
+    {
+      "name": "browser.navigate",
+      "verifier": "verify_state"
+    },
+    {
+      "name": "browser.observe",
+      "verifier": "verify_state"
+    },
+    {
+      "name": "browser.open",
+      "verifier": "verify_browser"
+    },
+    {
+      "name": "browser.read",
+      "verifier": "verify_browser"
+    },
+    {
+      "name": "browser.scroll",
+      "verifier": "verify_scroll"
+    },
+    {
+      "name": "browser.search",
+      "verifier": "verify_browser"
+    },
+    {
+      "name": "browser.tabs",
+      "verifier": "verify_tabs"
+    },
+    {
+      "name": "browser.type",
+      "verifier": "verify_type"
+    },
+    {
+      "name": "browser.wait",
+      "verifier": "verify_state"
+    },
+    {
+      "name": "desktop.close",
+      "verifier": "verify"
+    },
+    {
+      "name": "desktop.focus",
+      "verifier": "verify_focus"
+    },
+    {
+      "name": "desktop.launch",
+      "verifier": "verify_desktop"
+    },
+    {
+      "name": "desktop.maximize",
+      "verifier": "verify"
+    },
+    {
+      "name": "desktop.minimize",
+      "verifier": "verify"
+    },
+    {
+      "name": "desktop.move",
+      "verifier": "verify"
+    },
+    {
+      "name": "desktop.observe",
+      "verifier": "verify_observe"
+    },
+    {
+      "name": "desktop.resize",
+      "verifier": "verify"
+    },
+    {
+      "name": "desktop.tile",
+      "verifier": "verify"
+    },
+    {
+      "name": "desktop.unmaximize",
+      "verifier": "verify"
+    },
+    {
+      "name": "desktop.windows",
+      "verifier": "verify_observe"
+    },
+    {
+      "name": "display.brightness",
+      "verifier": "verify_read_brightness"
+    },
+    {
+      "name": "display.set_brightness",
+      "verifier": "verify_set_brightness"
+    },
+    {
+      "name": "file.copy",
+      "verifier": "verify_copy"
+    },
+    {
+      "name": "file.edit",
+      "verifier": "verify_edit"
+    },
+    {
+      "name": "file.exists",
+      "verifier": "verify_exists"
+    },
+    {
+      "name": "file.list",
+      "verifier": "verify"
+    },
+    {
+      "name": "file.metadata",
+      "verifier": "verify_metadata"
+    },
+    {
+      "name": "file.move",
+      "verifier": "verify_move"
+    },
+    {
+      "name": "file.read",
+      "verifier": "verify_read"
+    },
+    {
+      "name": "file.rename",
+      "verifier": "verify_move"
+    },
+    {
+      "name": "file.search",
+      "verifier": "verify"
+    },
+    {
+      "name": "file.semantic_search",
+      "verifier": "verify_search"
+    },
+    {
+      "name": "file.write",
+      "verifier": "verify_write"
+    },
+    {
+      "name": "input.clipboard_read",
+      "verifier": "verify_clipboard_read"
+    },
+    {
+      "name": "input.clipboard_write",
+      "verifier": "verify_clipboard_write"
+    },
+    {
+      "name": "input.editable_targets",
+      "verifier": "verify_targets"
+    },
+    {
+      "name": "input.type_text",
+      "verifier": "verify_type"
+    },
+    {
+      "name": "network.status",
+      "verifier": "verify_status"
+    },
+    {
+      "name": "network.wifi_connect",
+      "verifier": "verify_connect"
+    },
+    {
+      "name": "network.wifi_list",
+      "verifier": "verify_wifi"
+    },
+    {
+      "name": "notification.send",
+      "verifier": "verify_notification"
+    },
+    {
+      "name": "screen.capture",
+      "verifier": "verify_capture"
+    },
+    {
+      "name": "screen.read",
+      "verifier": "verify_read"
+    },
+    {
+      "name": "screen.screenshot",
+      "verifier": "verify_capture"
+    },
+    {
+      "name": "system.disk",
+      "verifier": "verify_disk"
+    },
+    {
+      "name": "system.packages",
+      "verifier": "verify_packages"
+    },
+    {
+      "name": "system.processes",
+      "verifier": "verify"
+    },
+    {
+      "name": "system.service",
+      "verifier": "verify_unit"
+    },
+    {
+      "name": "system.service_control",
+      "verifier": "verify_control"
+    },
+    {
+      "name": "system.services",
+      "verifier": "verify_services"
+    },
+    {
+      "name": "system.status",
+      "verifier": "verify"
+    },
+    {
+      "name": "system.storage",
+      "verifier": "verify"
+    },
+    {
+      "name": "task.inspect",
+      "verifier": "verify"
+    }
+  ],
+  "catalogue_n": 54,
+  "capabilities": [
+    {
+      "capability": "open_app",
+      "registry_twin": "desktop.launch",
+      "registry_verifier": "verify_desktop",
+      "executor_records_verification_static": true,
+      "steps_n": 40,
+      "unverified_steps": 32,
+      "buckets": {
+        "failed": 9,
+        "accepted": 7,
+        "nested_positive_verdict": 15,
+        "withheld": 4,
+        "no_outcome_recorded": 11,
+        "verified": 8,
+        "unconfirmed": 1
+      }
+    },
+    {
+      "capability": "agent_task",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": false,
+      "steps_n": 7,
+      "unverified_steps": 7,
+      "buckets": {
+        "no_outcome_recorded": 7
+      }
+    },
+    {
+      "capability": "inspect_app",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": false,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "ui_action",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "browser_open",
+      "registry_twin": "browser.open",
+      "registry_verifier": "verify_browser",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "browser_inspect",
+      "registry_twin": "browser.observe",
+      "registry_verifier": "verify_state",
+      "executor_records_verification_static": false,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "browser_follow",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "browser_fill",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "browser_close",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "python_project",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "build_python",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "open_url",
+      "registry_twin": "browser.open",
+      "registry_verifier": "verify_browser",
+      "executor_records_verification_static": true,
+      "steps_n": 10,
+      "unverified_steps": 10,
+      "buckets": {
+        "failed": 3,
+        "accepted": 4,
+        "nested_positive_verdict": 4,
+        "unconfirmed": 1,
+        "withheld": 2
+      }
+    },
+    {
+      "capability": "open_path",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "search_web",
+      "registry_twin": "browser.search",
+      "registry_verifier": "verify_browser",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "research",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": false,
+      "steps_n": 287,
+      "unverified_steps": 287,
+      "buckets": {
+        "accepted": 287
+      }
+    },
+    {
+      "capability": "read_article",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": false,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "processes",
+      "registry_twin": "system.processes",
+      "registry_verifier": "verify",
+      "executor_records_verification_static": false,
+      "steps_n": 2,
+      "unverified_steps": 2,
+      "buckets": {
+        "accepted": 2
+      }
+    },
+    {
+      "capability": "refresh_news",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 1,
+      "unverified_steps": 1,
+      "buckets": {
+        "accepted": 1,
+        "nested_positive_verdict": 1
+      }
+    },
+    {
+      "capability": "brief",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 1,
+      "unverified_steps": 1,
+      "buckets": {
+        "accepted": 1,
+        "nested_positive_verdict": 1
+      }
+    },
+    {
+      "capability": "health",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 2,
+      "unverified_steps": 1,
+      "buckets": {
+        "no_outcome_recorded": 1,
+        "verified": 1,
+        "nested_positive_verdict": 1
+      }
+    },
+    {
+      "capability": "system",
+      "registry_twin": "system.status",
+      "registry_verifier": "verify",
+      "executor_records_verification_static": false,
+      "steps_n": 8,
+      "unverified_steps": 8,
+      "buckets": {
+        "accepted": 8
+      }
+    },
+    {
+      "capability": "services",
+      "registry_twin": "system.services",
+      "registry_verifier": "verify_services",
+      "executor_records_verification_static": true,
+      "steps_n": 10,
+      "unverified_steps": 4,
+      "buckets": {
+        "accepted": 4,
+        "verified": 6,
+        "nested_positive_verdict": 6
+      }
+    },
+    {
+      "capability": "service_control",
+      "registry_twin": "system.service_control",
+      "registry_verifier": "verify_control",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "disk",
+      "registry_twin": "system.disk",
+      "registry_verifier": "verify_disk",
+      "executor_records_verification_static": true,
+      "steps_n": 8,
+      "unverified_steps": 4,
+      "buckets": {
+        "accepted": 4,
+        "verified": 4,
+        "nested_positive_verdict": 4
+      }
+    },
+    {
+      "capability": "package_info",
+      "registry_twin": "system.packages",
+      "registry_verifier": "verify_packages",
+      "executor_records_verification_static": true,
+      "steps_n": 30,
+      "unverified_steps": 5,
+      "buckets": {
+        "accepted": 4,
+        "verified": 25,
+        "nested_positive_verdict": 25,
+        "unclassified": 1
+      }
+    },
+    {
+      "capability": "learning_eval",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": false,
+      "steps_n": 2,
+      "unverified_steps": 2,
+      "buckets": {
+        "accepted": 2
+      }
+    },
+    {
+      "capability": "evaluation",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": false,
+      "steps_n": 2,
+      "unverified_steps": 2,
+      "buckets": {
+        "accepted": 2
+      }
+    },
+    {
+      "capability": "list_apps",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": false,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "find_files",
+      "registry_twin": "file.search",
+      "registry_verifier": "verify",
+      "executor_records_verification_static": false,
+      "steps_n": 2,
+      "unverified_steps": 2,
+      "buckets": {
+        "accepted": 2
+      }
+    },
+    {
+      "capability": "list_folder",
+      "registry_twin": "file.list",
+      "registry_verifier": "verify",
+      "executor_records_verification_static": true,
+      "steps_n": 38,
+      "unverified_steps": 12,
+      "buckets": {
+        "accepted": 7,
+        "verified": 26,
+        "nested_positive_verdict": 26,
+        "no_outcome_recorded": 5
+      }
+    },
+    {
+      "capability": "read_file",
+      "registry_twin": "file.read",
+      "registry_verifier": "verify_read",
+      "executor_records_verification_static": true,
+      "steps_n": 170,
+      "unverified_steps": 76,
+      "buckets": {
+        "accepted": 7,
+        "unclassified": 4,
+        "verified": 94,
+        "nested_positive_verdict": 94,
+        "failed": 4,
+        "no_outcome_recorded": 61
+      }
+    },
+    {
+      "capability": "create_folder",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 3,
+      "unverified_steps": 3,
+      "buckets": {
+        "accepted": 3,
+        "nested_positive_verdict": 3
+      }
+    },
+    {
+      "capability": "create_file",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 4,
+      "unverified_steps": 4,
+      "buckets": {
+        "accepted": 3,
+        "nested_positive_verdict": 3,
+        "no_outcome_recorded": 1
+      }
+    },
+    {
+      "capability": "move_file",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "trash_file",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 1,
+      "unverified_steps": 1,
+      "buckets": {
+        "no_outcome_recorded": 1
+      }
+    },
+    {
+      "capability": "install_app",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 1,
+      "unverified_steps": 1,
+      "buckets": {
+        "no_outcome_recorded": 1
+      }
+    },
+    {
+      "capability": "remember",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": false,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "play_music",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 45,
+      "unverified_steps": 41,
+      "buckets": {
+        "unconfirmed": 8,
+        "accepted": 17,
+        "nested_positive_verdict": 21,
+        "failed": 1,
+        "withheld": 10,
+        "no_outcome_recorded": 5,
+        "verified": 4
+      }
+    },
+    {
+      "capability": "media_control",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "set_volume",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 10,
+      "unverified_steps": 0,
+      "buckets": {
+        "verified": 10,
+        "nested_positive_verdict": 10
+      }
+    },
+    {
+      "capability": "say",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "abilities",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": true,
+      "steps_n": 12,
+      "unverified_steps": 4,
+      "buckets": {
+        "no_outcome_recorded": 1,
+        "accepted": 3,
+        "nested_positive_verdict": 11,
+        "verified": 8
+      }
+    },
+    {
+      "capability": "can_you",
+      "registry_twin": null,
+      "registry_verifier": null,
+      "executor_records_verification_static": false,
+      "steps_n": 2,
+      "unverified_steps": 2,
+      "buckets": {
+        "accepted": 2
+      }
+    },
+    {
+      "capability": "read_screen",
+      "registry_twin": "screen.read",
+      "registry_verifier": "verify_read",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "screenshot",
+      "registry_twin": "screen.capture",
+      "registry_verifier": "verify_capture",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "clipboard_read",
+      "registry_twin": "input.clipboard_read",
+      "registry_verifier": "verify_clipboard_read",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "clipboard_write",
+      "registry_twin": "input.clipboard_write",
+      "registry_verifier": "verify_clipboard_write",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "editable_fields",
+      "registry_twin": "input.editable_targets",
+      "registry_verifier": "verify_targets",
+      "executor_records_verification_static": false,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "type_text",
+      "registry_twin": "input.type_text",
+      "registry_verifier": "verify_type",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "network_status",
+      "registry_twin": "network.status",
+      "registry_verifier": "verify_status",
+      "executor_records_verification_static": false,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "wifi_list",
+      "registry_twin": "network.wifi_list",
+      "registry_verifier": "verify_wifi",
+      "executor_records_verification_static": false,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "wifi_connect",
+      "registry_twin": "network.wifi_connect",
+      "registry_verifier": "verify_connect",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "brightness",
+      "registry_twin": "display.brightness",
+      "registry_verifier": "verify_read_brightness",
+      "executor_records_verification_static": false,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    },
+    {
+      "capability": "set_brightness",
+      "registry_twin": "display.set_brightness",
+      "registry_verifier": "verify_set_brightness",
+      "executor_records_verification_static": true,
+      "steps_n": 0,
+      "unverified_steps": 0,
+      "buckets": {}
+    }
+  ],
+  "locking": {
+    "window_start": "2026-10-01T11:35:53.512652+00:00",
+    "window_end": "2026-10-03T11:35:53.512652+00:00",
+    "requested_hours": 48,
+    "continuous_coverage_proven": false,
+    "coverage_note": "First/last log timestamps do not prove continuous service operation. Clock changes and unavailable journal intervals prevent a 48-hour acceptance claim.",
+    "journal_records_n": 0,
+    "matching_records_n": 0,
+    "count_unit": "journal records containing database is locked; not distinct incidents",
+    "journal_mode": "wal",
+    "first_available_record_at": null,
+    "last_available_record_at": null
+  },
+  "known_assistant_fixture_goals_n": 154,
+  "known_assistant_fixture_unsuccessful_n": 53,
+  "non_fixture_classification_caveat": "Only this frozen60 fixture IDs identified; other synthetic trials may remain.",
+  "reason_counts_excluding_known_assistant_fixture": {
+    "capability": 39,
+    "planner": 25,
+    "timeout": 5,
+    "other": 55
+  }
+}

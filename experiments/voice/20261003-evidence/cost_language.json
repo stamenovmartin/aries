@@ -1,0 +1,118 @@
+{
+  "snr_db": 10.0,
+  "n": 10,
+  "runs": {
+    "before": {
+      "accepted": 3,
+      "dropped": 7,
+      "not_addressed": 0
+    },
+    "after": {
+      "accepted": 5,
+      "dropped": 4,
+      "not_addressed": 1
+    }
+  },
+  "cases": [
+    {
+      "run": "before",
+      "said": "Ари, пушти ја музиката",
+      "verdict": "dropped: unsupported detected language: pt"
+    },
+    {
+      "run": "before",
+      "said": "Ари, намали го звукот",
+      "verdict": "dropped: unsupported detected language: bg"
+    },
+    {
+      "run": "before",
+      "said": "Ари, отвори го YouTube",
+      "verdict": "dropped: unsupported detected language: ro"
+    },
+    {
+      "run": "before",
+      "said": "Ари, колку диск ми е слободен",
+      "verdict": "dropped: unsupported detected language: hr"
+    },
+    {
+      "run": "before",
+      "said": "Ари, подели го екранот лево и десно",
+      "verdict": "accepted: 'подели го екранот лево и десно.'"
+    },
+    {
+      "run": "before",
+      "said": "Ари, прикажи го статусот на системот",
+      "verdict": "dropped: unsupported detected language: bg"
+    },
+    {
+      "run": "before",
+      "said": "Ари, тивко",
+      "verdict": "dropped: unsupported detected language: pl"
+    },
+    {
+      "run": "before",
+      "said": "Ари, кои прозорци ми се отворени",
+      "verdict": "accepted: 'кој прозорци ни се отворени?'"
+    },
+    {
+      "run": "before",
+      "said": "Ари, зголеми го звукот",
+      "verdict": "accepted: 'с големи го звукој.'"
+    },
+    {
+      "run": "before",
+      "said": "Ари, покажи ги вестите",
+      "verdict": "dropped: unsupported detected language: bg"
+    },
+    {
+      "run": "after",
+      "said": "Ари, пушти ја музиката",
+      "verdict": "dropped: 'ARI, play the music.' nsp=0.02 lp=-0.73 cr=0.71 [playback bar]"
+    },
+    {
+      "run": "after",
+      "said": "Ари, намали го звукот",
+      "verdict": "accepted: 'намали го звукот?'"
+    },
+    {
+      "run": "after",
+      "said": "Ари, отвори го YouTube",
+      "verdict": "dropped: 'Thank you for watching Youtube!' nsp=0.10 lp=-1.00 cr=0.79 [playback bar]"
+    },
+    {
+      "run": "after",
+      "said": "Ари, колку диск ми е слободен",
+      "verdict": "dropped: 'Ari, how much is the disk free?' nsp=0.02 lp=-0.70 cr=0.79 [playback bar]"
+    },
+    {
+      "run": "after",
+      "said": "Ари, подели го екранот лево и десно",
+      "verdict": "accepted: 'подели го екранот лево и десно.'"
+    },
+    {
+      "run": "after",
+      "said": "Ари, прикажи го статусот на системот",
+      "verdict": "accepted: 'прикажи го статусот на системот.'"
+    },
+    {
+      "run": "after",
+      "said": "Ари, тивко",
+      "verdict": "dropped: \"I'm Tiff Cook.\" nsp=0.17 lp=-0.94 cr=0.64 [playback bar]"
+    },
+    {
+      "run": "after",
+      "said": "Ари, кои прозорци ми се отворени",
+      "verdict": "accepted: 'кој прозорци ни се отворени?'"
+    },
+    {
+      "run": "after",
+      "said": "Ари, зголеми го звукот",
+      "verdict": "accepted: 'с големи го звукој.'"
+    },
+    {
+      "run": "after",
+      "said": "Ари, покажи ги вестите",
+      "verdict": "not addressed: 'Ај, покажи ги вестите.'"
+    }
+  ]
+}

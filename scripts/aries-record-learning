@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""Record a completed change batch as engineering experience, not a user rule.
+Usage: aries-record-learning path/to/record.json
+Record keys: problem, change, validation, limitations (strings or lists).
+"""
+import json,os,sys,urllib.request
+from pathlib import Path
+record=json.loads(Path(sys.argv[1]).read_text())
+for key in ('problem','change','validation','limitations'):
+    if key not in record:raise SystemExit('Missing '+key)
+text='\n'.join(key.title()+': '+(value if isinstance(value,str) else json.dumps(value,ensure_ascii=False)) for key,value in record.items())
+if len(text)>4000:raise SystemExit('Record exceeds 4000 characters')
+request=urllib.request.Request(os.environ.get('ARIES_API','http://127.0.0.1:8000')+'/api/aries/learning/feedback',
+    data=json.dumps({'text':text,'scope':'global','origin':'implementation','project':'ARIES'}).encode(),
+    headers={'Content-Type':'application/json'},method='POST')
+with urllib.request.urlopen(request,timeout=15) as response:result=json.load(response)
+if result['classification']!='implementation_note':raise SystemExit('Backend needs the implementation-note update')
+print('Recorded implementation lesson',result['id'])

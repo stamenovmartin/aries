@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-06T11:49:39.289231+00:00",
+  "scratch": "/tmp/aries-learning-rollback-k6qragg0",
+  "results": [
+    {
+      "suite": "test_learning_evidence_reuse",
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0
+    },
+    {
+      "suite": "test_learning",
+      "exit_code": 0,
+      "passed": 39,
+      "failed": 0
+    },
+    {
+      "suite": "test_reversal",
+      "exit_code": 0,
+      "passed": 63,
+      "failed": 0
+    },
+    {
+      "suite": "test_learning_controls",
+      "exit_code": 0,
+      "passed": 19,
+      "failed": 0
+    }
+  ],
+  "source_before": {
+    "aries/learning/evidence.py": "6923b7296e946e2575456323660e5e9d876d0bfa75569fed729be98f47671020",
+    "aries/learning/evidence_use.py": "55b9d4488fabee24fe273a0a40d5d515335a824556afe59969342727c18a2af9",
+    "aries/learning/loop.py": "09e0769d9267ae169e300c4cfc548e6b0429a71bda84f5572440475fa734e81a",
+    "aries/learning/__init__.py": "2bbeff5c0bf82b3524edca1f4356b827a78771a423660cae72e14d5b2613e3ca"
+  },
+  "source_after": {
+    "aries/learning/evidence.py": "6923b7296e946e2575456323660e5e9d876d0bfa75569fed729be98f47671020",
+    "aries/learning/evidence_use.py": "55b9d4488fabee24fe273a0a40d5d515335a824556afe59969342727c18a2af9",
+    "aries/learning/loop.py": "09e0769d9267ae169e300c4cfc548e6b0429a71bda84f5572440475fa734e81a",
+    "aries/learning/__init__.py": "2bbeff5c0bf82b3524edca1f4356b827a78771a423660cae72e14d5b2613e3ca"
+  },
+  "source_stable": true
+}

@@ -1,0 +1,36 @@
+--- test_cancelled_missing_or_finished_parent_never_launches
+PASS  agent: cancelled parent cannot authorize dependencies
+PASS  agent: cancelled parent starts no work
+PASS  orphan child is durably cancelled
+PASS  agent: done parent cannot authorize dependencies
+PASS  agent: done parent starts no work
+PASS  orphan child is durably cancelled
+PASS  agent: failed parent cannot authorize dependencies
+PASS  agent: failed parent starts no work
+PASS  orphan child is durably cancelled
+PASS  agent: None parent cannot authorize dependencies
+PASS  agent: None parent starts no work
+PASS  orphan child is durably cancelled
+PASS  capability: cancelled parent cannot authorize dependencies
+PASS  capability: cancelled parent starts no work
+PASS  orphan child is durably cancelled
+PASS  capability: done parent cannot authorize dependencies
+PASS  capability: done parent starts no work
+PASS  orphan child is durably cancelled
+PASS  capability: failed parent cannot authorize dependencies
+PASS  capability: failed parent starts no work
+PASS  orphan child is durably cancelled
+PASS  capability: None parent cannot authorize dependencies
+PASS  capability: None parent starts no work
+PASS  orphan child is durably cancelled
+--- test_grants_derive_from_each_nodes_contract
+PASS  first reader receives only its requested file and capability
+PASS  sibling/unrequested access file.read {'path': '/tmp/aries-b'} is denied at executor boundary
+PASS  sibling/unrequested access system.processes {} is denied at executor boundary
+PASS  sibling/unrequested access system.status {} is denied at executor boundary
+PASS  reversed order cannot create an unverifiable team
+--- test_parent_cancellation_between_read_and_child_update_wins
+PASS  race was exercised at the actual durable transition
+PASS  atomic admission sees cancellation
+PASS  no running child or reserved lane leaks
+ALL PASSED

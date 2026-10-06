@@ -1,0 +1,17 @@
+{
+  "problem": "F-13 verification analytics silently reported capped recent-goal samples as window totals; verification labels were described as independent proof.",
+  "change": "Both integrity metrics now carry goals_in_window, goals_scanned, goal_scan_cap, cutoff_utc, truncated and sample note, including empty sampled rows. Independence is explicitly not established by status labels.",
+  "validation": {
+    "date": "2026-10-06T11:30:29.105642+00:00",
+    "passed": 175,
+    "total": 175,
+    "checks": "experiments/product/integrity-sampling/checks.json",
+    "source_stable": true,
+    "initial_failure": "Outdated wording test expected engine did not run; replaced with truthful scoped absence check; initial-checks.json and initial log retained."
+  },
+  "limitations": [
+    "Source validation only, deployment next.",
+    "No historical verifier independence classification is retroactively asserted.",
+    "Goal sampling is newest-first, not random or a whole-history estimate."
+  ]
+}

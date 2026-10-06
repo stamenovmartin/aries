@@ -1,0 +1,226 @@
+#!/usr/bin/env bash
+# The ARIES login session: ARIES as a choice on the login screen.
+#
+#   ./scripts/aries-session plan        show exactly what would be written  (no sudo)
+#   ./scripts/aries-session verify      prove the session works, installed or not (no sudo)
+#   ./scripts/aries-session install     write it  (asks for sudo, shows the plan first)
+#                                       --yes   skip the confirmation
+#                                       --link  symlink the extension to the repo
+#   ./scripts/aries-session status      what is installed, and what would stop it working
+#   ./scripts/aries-session doctor      check every link from login screen to desktop
+#   ./scripts/aries-session uninstall   remove exactly what install wrote  (sudo)
+#
+# WHAT AN "ARIES SESSION" IS
+# --------------------------
+# Not a compositor and not a fork of GNOME. It is a GNOME session started in an
+# ARIES *session mode* — the same mechanism Ubuntu uses for its own session,
+# read out of /usr/share/gnome-shell/modes/ubuntu.json rather than guessed at.
+# The mode names the extensions the session loads, so logging into ARIES gives
+# you the ARIES desktop without anyone switching anything on.
+#
+# Five files, every one of them NEW. No file belonging to any package is edited,
+# and Ubuntu's session is untouched and stays on the login screen.
+#
+# THE ONE THING THAT SURPRISED US
+# -------------------------------
+# GNOME refuses to load a PER-USER extension as part of a session mode:
+#
+#   "Found user extension aries@aries.local, but not loading from
+#    ~/.local/share/gnome-shell/extensions/... as part of session mode."
+#
+# Which is correct — a session mode is system configuration and must not
+# auto-load code out of a home directory. So the session installs the extension
+# system-wide. `--link` symlinks it back to the repository instead, which is
+# convenient while developing and means the code the login session runs is
+# writable by your user account; `install` copies by default for that reason.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+ROOT="$PWD"
+UUID="aries@aries.local"
+
+SESSION_ENTRY="/usr/share/wayland-sessions/aries.desktop"
+SESSION_FILE="/usr/local/share/gnome-session/sessions/aries.session"
+SHELL_MODE="/usr/local/share/gnome-shell/modes/aries.json"
+SYS_EXT="/usr/local/share/gnome-shell/extensions/$UUID"
+UNIT_DROPIN="/etc/systemd/user/gnome-session@aries.target.d/aries.session.conf"
+
+# Run one privileged program, by whichever route this machine can authenticate.
+#
+# `sudo` needs a terminal, which a script launched from an editor, an agent or a
+# desktop shortcut does not have — that is how this was first discovered, with
+# `sudo: A terminal is required to authenticate`. `pkexec` asks the desktop's own
+# PolicyKit agent, which draws a normal password dialog on screen.
+#
+# Preference order: passwordless sudo (a machine set up that way), then pkexec
+# (graphical), then plain sudo (a real terminal). If none can authenticate, say
+# exactly what to run instead rather than failing with a shell error.
+as_root() {
+  local program="$1"; shift
+  if sudo -n true 2>/dev/null; then
+    sudo "$program" "$@"
+  elif [ -x /usr/bin/pkexec ] && [ -n "${WAYLAND_DISPLAY:-${DISPLAY:-}}" ]; then
+    dim "asking for your password — look for the dialog on your desktop"
+    pkexec "$program" "$@"
+  elif [ -t 0 ]; then
+    sudo "$program" "$@"
+  else
+    warn "This step needs administrator rights and nothing here can ask for them."
+    dim  "Run it yourself in a terminal:"
+    echo
+    echo "    sudo $program $*"
+    echo
+    exit 3
+  fi
+}
+
+bold() { printf '\033[1m%s\033[0m\n' "$*"; }
+dim()  { printf '\033[2m%s\033[0m\n' "$*"; }
+warn() { printf '\033[33m%s\033[0m\n' "$*"; }
+good() { printf '\033[32m%s\033[0m\n' "$*"; }
+
+plan() {
+  bold "The ARIES session would add five files. Nothing existing is modified."
+  echo
+  printf '  %-64s %s\n' "$SESSION_ENTRY" "the entry the login screen offers"
+  printf '  %-64s %s\n' "$SESSION_FILE" "the gnome-session definition"
+  printf '  %-64s %s\n' "$SHELL_MODE" "the shell mode: which extensions load"
+  printf '  %-64s %s\n' "$SYS_EXT/" "the ARIES shell, system-wide"
+  printf '  %-64s %s\n' "$UNIT_DROPIN" "starts gnome-shell --mode=aries, wants ARIES"
+  echo
+  dim "It would also remove '$UUID' from your 'disabled-extensions',"
+  dim "because that key takes precedence over a session mode and would make the"
+  dim "ARIES session start silently without ARIES."
+  echo
+  dim "Ubuntu's session files are not touched. Ubuntu stays on the login screen."
+}
+
+require_built() {
+  [ -d "$ROOT/shell/$UUID" ] || { warn "the extension source is missing"; exit 2; }
+  [ -f "$ROOT/shell/$UUID/stylesheet.css" ] || "$ROOT/scripts/aries-shell" generate >/dev/null
+  [ -f "$ROOT/shell/$UUID/schemas/gschemas.compiled" ] || \
+    glib-compile-schemas "$ROOT/shell/$UUID/schemas/"
+}
+
+case "${1:-status}" in
+
+  plan) plan ;;
+
+  verify)
+    # Proves the mode in a nested headless GNOME Shell, against the real files,
+    # WITHOUT needing them installed. Run it before installing and after.
+    exec "$ROOT/scripts/test-session.sh" "${2:-20}"
+    ;;
+
+  install)
+    require_built
+    plan
+    echo
+    # Flags are scanned rather than positional: `install --yes --link` and
+    # `install --link --yes` must mean the same thing, and an install command
+    # whose behaviour depends on argument order is a trap in a script people
+    # copy and paste.
+    link=""; assume_yes=""
+    for arg in "${@:2}"; do
+      case "$arg" in
+        --link) link="yes" ;;
+        --yes|-y) assume_yes="yes" ;;
+        *) warn "unknown option: $arg"; exit 2 ;;
+      esac
+    done
+    if [ -n "$link" ]; then
+      warn "--link: the system extension will be a symlink into $ROOT."
+      warn "That is convenient for development and means code running in your"
+      warn "login session is writable by your user account. Copy is the default."
+      echo
+    fi
+    echo
+    dim "Everything that runs as root is in scripts/aries-session-root — fifty lines,"
+    dim "readable before you decide to run them."
+    if [ -z "$assume_yes" ]; then
+      read -r -p "Write these five files? [y/N] " answer
+      case "$answer" in [yY]*) ;; *) echo "nothing was written"; exit 0 ;; esac
+    fi
+
+    mode="copy"; [ -n "$link" ] && mode="link"
+    as_root "$ROOT/scripts/aries-session-root" "$ROOT" "$mode"
+
+    # The precedence trap: `disabled-extensions` overrides a session mode.
+    current=$(gsettings get org.gnome.shell disabled-extensions)
+    if [[ "$current" == *"$UUID"* ]]; then
+      python3 - "$UUID" <<'PYEOF'
+import ast, subprocess, sys
+uuid = sys.argv[1]
+raw = subprocess.check_output(
+    ["gsettings", "get", "org.gnome.shell", "disabled-extensions"], text=True).strip()
+items = [] if raw in ("@as []", "[]") else ast.literal_eval(raw)
+items = [i for i in items if i != uuid]
+subprocess.run(["gsettings", "set", "org.gnome.shell", "disabled-extensions", str(items)],
+               check=True)
+print(f"removed {uuid} from disabled-extensions")
+PYEOF
+    fi
+
+    systemctl --user daemon-reload 2>/dev/null || true
+    echo
+    good "installed"
+    echo
+    dim "Log out. Then on the login screen:"
+    dim "  1. click your name"
+    dim "  2. click the gear / ⚙ button near the password box"
+    dim "  3. choose ARIES  — GDM defaults to your LAST session, so it will"
+    dim "     offer Ubuntu until you change it once"
+    dim "  4. then type your password"
+    echo
+    dim "Ubuntu remains exactly as it was — that is the recovery path."
+    dim "If it does not work:  ./scripts/aries-session doctor"
+    ;;
+
+  uninstall)
+    bold "Removing exactly what install wrote"
+    as_root "$ROOT/scripts/aries-session-root-uninstall"
+    systemctl --user daemon-reload 2>/dev/null || true
+    good "removed — the login screen offers Ubuntu only"
+    ;;
+
+  doctor)
+    exec "$ROOT/scripts/aries-session-doctor"
+    ;;
+
+  status)
+    bold "ARIES session"
+    for pair in "$SESSION_ENTRY|login screen entry" \
+                "$SESSION_FILE|gnome-session definition" \
+                "$SHELL_MODE|shell session mode" \
+                "$SYS_EXT|the shell, system-wide" \
+                "$UNIT_DROPIN|systemd session drop-in"; do
+      path="${pair%%|*}"; what="${pair##*|}"
+      if [ -L "$path" ]; then
+        printf '  %-26s \033[32m%s\033[0m  %s\n' "$what" "linked" "-> $(readlink "$path")"
+      elif [ -e "$path" ]; then
+        printf '  %-26s \033[32m%s\033[0m\n' "$what" "installed"
+      else
+        printf '  %-26s %s\n' "$what" "not installed"
+      fi
+    done
+    echo
+    disabled=$(gsettings get org.gnome.shell disabled-extensions 2>/dev/null || echo "?")
+    if [[ "$disabled" == *"$UUID"* ]]; then
+      warn "  '$UUID' is in disabled-extensions."
+      warn "  That key OVERRIDES the session mode: the ARIES session would start"
+      warn "  without ARIES and look like nothing happened. Fix:"
+      dim  "    gnome-extensions reset $UUID"
+    else
+      printf '  %-26s %s\n' "precedence" "clear — nothing overrides the session mode"
+    fi
+    printf '  %-26s %s\n' "current session" "${DESKTOP_SESSION:-?} (${XDG_SESSION_TYPE:-?})"
+    if [ -f /usr/share/wayland-sessions/ubuntu.desktop ]; then
+      printf '  %-26s \033[32m%s\033[0m\n' "Ubuntu fallback" "present"
+    else
+      warn "  Ubuntu fallback      MISSING — something removed it"
+    fi
+    ;;
+
+  *)
+    sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'
+    ;;
+esac

@@ -1,0 +1,2098 @@
+{
+  "run": "20260914-192807",
+  "environment": "installed ARIES, real HTTP/desktop/files/network",
+  "verified_done": 20,
+  "total": 20,
+  "results": [
+    {
+      "capability": "create_folder",
+      "goal_id": "97e840d3eca84dfa970cce7fe9e6a60c",
+      "state": "done",
+      "seconds": 3.2,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "create_folder",
+          "args": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807"
+          },
+          "request": "Create a folder: /home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "Folder exists on disk",
+            "verification": {
+              "met": true,
+              "evidence": "Folder exists on disk"
+            },
+            "cards": [
+              {
+                "title": "Create Folder",
+                "text": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807",
+                "evidence": "Folder exists on disk"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "create_file",
+      "goal_id": "2f3f6e4dbd5d4bd5b7b9b3bc4b11ff34",
+      "state": "done",
+      "seconds": 2.16,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "create_file",
+          "args": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt",
+            "content": "ARIES live evaluation. Real destinations: https://www.kernel.org/ and https://github.com/\n"
+          },
+          "request": "Create a text file without overwriting: /home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt, ARIES live evaluation. Real destinations: https://www.kernel.org/ and https://github.com/\n",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "File bytes match the requested text",
+            "verification": {
+              "met": true,
+              "evidence": "File bytes match the requested text"
+            },
+            "cards": [
+              {
+                "title": "Create File",
+                "text": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt",
+                "evidence": "File bytes match the requested text"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "read_file",
+      "goal_id": "88498db8747349f7bad5c6e42ab83e7d",
+      "state": "done",
+      "seconds": 2.13,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "read_file",
+          "args": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt"
+          },
+          "request": "Read a text file: /home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "1 results",
+            "cards": [
+              {
+                "title": "notes.txt",
+                "text": "ARIES live evaluation. Real destinations: https://www.kernel.org/ and https://github.com/\n",
+                "source": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt",
+                "evidence": "Read from disk"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "list_folder",
+      "goal_id": "14be8f2dc236465786e4192a232022cc",
+      "state": "done",
+      "seconds": 2.14,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "list_folder",
+          "args": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807"
+          },
+          "request": "List a folder: /home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "1 results",
+            "cards": [
+              {
+                "title": "notes.txt",
+                "text": "File",
+                "path": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt",
+                "evidence": "Directory entry on disk"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "find_files",
+      "goal_id": "012ad0a40339439faff7aa62cb1d2164",
+      "state": "done",
+      "seconds": 2.15,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "find_files",
+          "args": {
+            "query": "notes.txt"
+          },
+          "request": "Find files by name: notes.txt",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "1 matching files",
+            "cards": [
+              {
+                "title": "notes.txt",
+                "text": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt",
+                "path": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt",
+                "evidence": "Matching file on disk"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "open_path",
+      "goal_id": "cbf7e0c0ceac45048a97e58d6a918b64",
+      "state": "done",
+      "seconds": 2.09,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "open_path",
+          "args": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807"
+          },
+          "request": "Open a file or folder: /home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "Nautilus independently reports the exact folder URI as open",
+            "verification": {
+              "met": true,
+              "evidence": "Nautilus independently reports the exact folder URI as open"
+            },
+            "cards": [
+              {
+                "title": "Open Path",
+                "text": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807",
+                "evidence": "Nautilus independently reports the exact folder URI as open"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "move_file",
+      "goal_id": "52b6b173f5224afeb2b3ba711d4f3d6f",
+      "state": "done",
+      "seconds": 4.29,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "move_file",
+          "args": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt",
+            "destination": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/renamed.txt",
+            "identity": [
+              2081,
+              19687441,
+              90,
+              1789414092878672287
+            ]
+          },
+          "request": "Move or rename a file without overwriting: /home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt, /home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/renamed.txt",
+          "prepared": true,
+          "state": "done",
+          "proposal_id": 5,
+          "approved": true,
+          "result": {
+            "state": "done",
+            "summary": "Destination has the same file identity; original path is absent",
+            "verification": {
+              "met": true,
+              "evidence": "Destination has the same file identity; original path is absent"
+            },
+            "cards": [
+              {
+                "title": "Move File",
+                "text": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/notes.txt",
+                "evidence": "Destination has the same file identity; original path is absent"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "capability": "trash_file",
+      "goal_id": "3736367898224c1db5ed172e4babea65",
+      "state": "done",
+      "seconds": 4.17,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "trash_file",
+          "args": {
+            "path": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/renamed.txt",
+            "identity": [
+              2081,
+              19687441,
+              90,
+              1789414092878672287
+            ]
+          },
+          "request": "Move a file to recoverable Trash: /home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/renamed.txt",
+          "prepared": true,
+          "state": "done",
+          "proposal_id": 6,
+          "approved": true,
+          "result": {
+            "state": "done",
+            "summary": "Original is absent and a recoverable Trash record exists",
+            "verification": {
+              "met": true,
+              "evidence": "Original is absent and a recoverable Trash record exists"
+            },
+            "cards": [
+              {
+                "title": "Trash File",
+                "text": "/home/stamenovmartin/Documents/ARIES-Evaluation-20260914-192807/renamed.txt",
+                "evidence": "Original is absent and a recoverable Trash record exists"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "capability": "list_apps",
+      "goal_id": "75bf6c20ac4442f6bc80cec9e40c9b05",
+      "state": "done",
+      "seconds": 2.1,
+      "cards": 30,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "list_apps",
+          "args": {},
+          "request": "List installed applications: ",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "30 results",
+            "cards": [
+              {
+                "title": "ARIES",
+                "text": "aries-control-centre.desktop",
+                "source": "/home/stamenovmartin/.local/share/applications/aries-control-centre.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Language Support",
+                "text": "gnome-language-selector.desktop",
+                "source": "/usr/share/applications/gnome-language-selector.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Input Method",
+                "text": "im-config.desktop",
+                "source": "/usr/share/applications/im-config.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "TeXInfo",
+                "text": "info.desktop",
+                "source": "/usr/share/applications/info.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Resources",
+                "text": "net.nokyan.Resources.desktop",
+                "source": "/usr/share/applications/net.nokyan.Resources.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Advanced Network Configuration",
+                "text": "nm-connection-editor.desktop",
+                "source": "/usr/share/applications/nm-connection-editor.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "NVIDIA X Server Settings",
+                "text": "nvidia-settings.desktop",
+                "source": "/usr/share/applications/nvidia-settings.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "IBus Preferences",
+                "text": "org.freedesktop.IBus.Setup.desktop",
+                "source": "/usr/share/applications/org.freedesktop.IBus.Setup.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Calculator",
+                "text": "org.gnome.Calculator.desktop",
+                "source": "/usr/share/applications/org.gnome.Calculator.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Characters",
+                "text": "org.gnome.Characters.desktop",
+                "source": "/usr/share/applications/org.gnome.Characters.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Disks",
+                "text": "org.gnome.DiskUtility.desktop",
+                "source": "/usr/share/applications/org.gnome.DiskUtility.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Logs",
+                "text": "org.gnome.Logs.desktop",
+                "source": "/usr/share/applications/org.gnome.Logs.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Image Viewer",
+                "text": "org.gnome.Loupe.desktop",
+                "source": "/usr/share/applications/org.gnome.Loupe.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Files",
+                "text": "org.gnome.Nautilus.desktop",
+                "source": "/usr/share/applications/org.gnome.Nautilus.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Document Viewer",
+                "text": "org.gnome.Papers.desktop",
+                "source": "/usr/share/applications/org.gnome.Papers.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Terminal",
+                "text": "org.gnome.Ptyxis.desktop",
+                "source": "/usr/share/applications/org.gnome.Ptyxis.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Settings",
+                "text": "org.gnome.Settings.desktop",
+                "source": "/usr/share/applications/org.gnome.Settings.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Sysprof",
+                "text": "org.gnome.Sysprof.desktop",
+                "source": "/usr/share/applications/org.gnome.Sysprof.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Text Editor",
+                "text": "org.gnome.TextEditor.desktop",
+                "source": "/usr/share/applications/org.gnome.TextEditor.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Help",
+                "text": "org.gnome.Yelp.desktop",
+                "source": "/usr/share/applications/org.gnome.Yelp.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Disk Usage Analyzer",
+                "text": "org.gnome.baobab.desktop",
+                "source": "/usr/share/applications/org.gnome.baobab.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Clocks",
+                "text": "org.gnome.clocks.desktop",
+                "source": "/usr/share/applications/org.gnome.clocks.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Fonts",
+                "text": "org.gnome.font-viewer.desktop",
+                "source": "/usr/share/applications/org.gnome.font-viewer.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Passwords and Keys",
+                "text": "org.gnome.seahorse.Application.desktop",
+                "source": "/usr/share/applications/org.gnome.seahorse.Application.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Software Updater",
+                "text": "update-manager.desktop",
+                "source": "/usr/share/applications/update-manager.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Vim",
+                "text": "vim.desktop",
+                "source": "/usr/share/applications/vim.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Security Center",
+                "text": "desktop-security-center_desktop-security-center.desktop",
+                "source": "/var/lib/snapd/desktop/applications/desktop-security-center_desktop-security-center.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Firefox",
+                "text": "firefox_firefox.desktop",
+                "source": "/var/lib/snapd/desktop/applications/firefox_firefox.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "Firmware Updater",
+                "text": "firmware-updater_firmware-updater.desktop",
+                "source": "/var/lib/snapd/desktop/applications/firmware-updater_firmware-updater.desktop",
+                "evidence": "Installed desktop entry"
+              },
+              {
+                "title": "App Center",
+                "text": "snap-store_snap-store.desktop",
+                "source": "/var/lib/snapd/desktop/applications/snap-store_snap-store.desktop",
+                "evidence": "Installed desktop entry"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "processes",
+      "goal_id": "ed0d45c55f7548c791a1abf2877f9dbe",
+      "state": "done",
+      "seconds": 2.07,
+      "cards": 111,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "processes",
+          "args": {},
+          "request": "Show running applications and processes: ",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "111 results",
+            "cards": [
+              {
+                "title": "systemd",
+                "text": "Process ID: 1974",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "(sd-pam)",
+                "text": "Process ID: 1977",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "dbus-daemon",
+                "text": "Process ID: 2000",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "pipewire",
+                "text": "Process ID: 2001",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ollama",
+                "text": "Process ID: 2004",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gnome-keyring-d",
+                "text": "Process ID: 2006",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "mpris-proxy",
+                "text": "Process ID: 2051",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "wireplumber",
+                "text": "Process ID: 2052",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "pipewire",
+                "text": "Process ID: 2053",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "pipewire-pulse",
+                "text": "Process ID: 2054",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gdm-wayland-ses",
+                "text": "Process ID: 2055",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "xdg-document-po",
+                "text": "Process ID: 2060",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gnome-session-i",
+                "text": "Process ID: 2065",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "xdg-permission-",
+                "text": "Process ID: 2103",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gcr-ssh-agent",
+                "text": "Process ID: 2243",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gnome-session-c",
+                "text": "Process ID: 2244",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ssh-agent",
+                "text": "Process ID: 2245",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfsd",
+                "text": "Process ID: 2259",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfsd-fuse",
+                "text": "Process ID: 2267",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gnome-session-s",
+                "text": "Process ID: 2270",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gnome-shell",
+                "text": "Process ID: 2286",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "at-spi-bus-laun",
+                "text": "Process ID: 2486",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "dbus-daemon",
+                "text": "Process ID: 2493",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "at-spi2-registr",
+                "text": "Process ID: 2496",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gnome-shell-cal",
+                "text": "Process ID: 2530",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "evolution-sourc",
+                "text": "Process ID: 2539",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gjs",
+                "text": "Process ID: 2544",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ibus-daemon",
+                "text": "Process ID: 2564",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-a11y-settin",
+                "text": "Process ID: 2565",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-color",
+                "text": "Process ID: 2567",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-datetime",
+                "text": "Process ID: 2568",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-housekeepin",
+                "text": "Process ID: 2574",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-keyboard",
+                "text": "Process ID: 2575",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-media-keys",
+                "text": "Process ID: 2577",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-power",
+                "text": "Process ID: 2580",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-print-notif",
+                "text": "Process ID: 2583",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-rfkill",
+                "text": "Process ID: 2585",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-screensaver",
+                "text": "Process ID: 2591",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-sharing",
+                "text": "Process ID: 2595",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-smartcard",
+                "text": "Process ID: 2599",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-sound",
+                "text": "Process ID: 2601",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-usb-protect",
+                "text": "Process ID: 2609",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-wwan",
+                "text": "Process ID: 2610",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "update-notifier",
+                "text": "Process ID: 2612",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "evolution-alarm",
+                "text": "Process ID: 2617",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-disk-utilit",
+                "text": "Process ID: 2632",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gjs",
+                "text": "Process ID: 2711",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ibus-memconf",
+                "text": "Process ID: 2755",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ibus-extension-",
+                "text": "Process ID: 2758",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ibus-portal",
+                "text": "Process ID: 2766",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "localsearch-3",
+                "text": "Process ID: 2790",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "goa-daemon",
+                "text": "Process ID: 2835",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "Xwayland",
+                "text": "Process ID: 2836",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfs-udisks2-vo",
+                "text": "Process ID: 2840",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "goa-identity-se",
+                "text": "Process ID: 2849",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "evolution-calen",
+                "text": "Process ID: 2850",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfs-gphoto2-vo",
+                "text": "Process ID: 2865",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfs-afc-volume",
+                "text": "Process ID: 2870",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "evolution-addre",
+                "text": "Process ID: 2882",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfs-mtp-volume",
+                "text": "Process ID: 2885",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfs-goa-volume",
+                "text": "Process ID: 2893",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ibus-engine-sim",
+                "text": "Process ID: 2917",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfsd-metadata",
+                "text": "Process ID: 2956",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "dconf-service",
+                "text": "Process ID: 3105",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-xsettings",
+                "text": "Process ID: 3176",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "mutter-x11-fram",
+                "text": "Process ID: 3196",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ibus-x11",
+                "text": "Process ID: 3202",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gsd-printer",
+                "text": "Process ID: 3209",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gjs",
+                "text": "Process ID: 3217",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "xdg-desktop-por",
+                "text": "Process ID: 3220",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "xdg-desktop-por",
+                "text": "Process ID: 3237",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "xdg-desktop-por",
+                "text": "Process ID: 3307",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "user-session-he",
+                "text": "Process ID: 3570",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "snapd-desktop-i",
+                "text": "Process ID: 3635",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ptyxis",
+                "text": "Process ID: 5156",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "ptyxis-agent",
+                "text": "Process ID: 5165",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "bash",
+                "text": "Process ID: 5195",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "codex",
+                "text": "Process ID: 5707",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "codex-code-mode",
+                "text": "Process ID: 7278",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfsd-http",
+                "text": "Process ID: 12552",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "snap",
+                "text": "Process ID: 12930",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "llama-server",
+                "text": "Process ID: 14098",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "nautilus",
+                "text": "Process ID: 23726",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfsd-trash",
+                "text": "Process ID: 23735",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfsd-recent",
+                "text": "Process ID: 23769",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfsd-network",
+                "text": "Process ID: 23771",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfsd-dnssd",
+                "text": "Process ID: 23782",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "gvfsd-wsdd",
+                "text": "Process ID: 23791",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "python3",
+                "text": "Process ID: 23796",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "python3",
+                "text": "Process ID: 25915",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "firefox",
+                "text": "Process ID: 33744",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "crashhelper",
+                "text": "Process ID: 33981",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "forkserver",
+                "text": "Process ID: 34078",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "Socket Process",
+                "text": "Process ID: 34082",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "WebExtensions",
+                "text": "Process ID: 34094",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "RDD Process",
+                "text": "Process ID: 34103",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "Isolated Web Co",
+                "text": "Process ID: 34143",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "Utility Process",
+                "text": "Process ID: 34733",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "Isolated Web Co",
+                "text": "Process ID: 34922",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "Web Content",
+                "text": "Process ID: 34925",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "Web Content",
+                "text": "Process ID: 34937",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "Privileged Cont",
+                "text": "Process ID: 34958",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "Web Content",
+                "text": "Process ID: 35084",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "bash",
+                "text": "Process ID: 35499",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "python",
+                "text": "Process ID: 36414",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "python3",
+                "text": "Process ID: 36417",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "localsearch-ext",
+                "text": "Process ID: 36676",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "bash",
+                "text": "Process ID: 36787",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "bash",
+                "text": "Process ID: 36847",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "bash",
+                "text": "Process ID: 37109",
+                "evidence": "Observed in this user's /proc entries"
+              },
+              {
+                "title": "python",
+                "text": "Process ID: 37110",
+                "evidence": "Observed in this user's /proc entries"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "system",
+      "goal_id": "37c1b5f5026741469ca360b677ac4254",
+      "state": "done",
+      "seconds": 2.07,
+      "cards": 17,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "system",
+          "args": {},
+          "request": "Show live system measurements: ",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "17 results",
+            "cards": [
+              {
+                "title": "cpu.load_per_core",
+                "text": "0.017 ",
+                "evidence": "Live system probe",
+                "source": ""
+              },
+              {
+                "title": "cpu.pressure",
+                "text": "0.0 %",
+                "evidence": "Live system probe",
+                "source": ""
+              },
+              {
+                "title": "memory.used_pct",
+                "text": "20.6 %",
+                "evidence": "Live system probe",
+                "source": ""
+              },
+              {
+                "title": "memory.swap_used_pct",
+                "text": "0.0 %",
+                "evidence": "Live system probe",
+                "source": ""
+              },
+              {
+                "title": "memory.pressure",
+                "text": "0.0 %",
+                "evidence": "Live system probe",
+                "source": ""
+              },
+              {
+                "title": "disk.used_pct",
+                "text": "4.7 %",
+                "evidence": "Live system probe",
+                "source": "/"
+              },
+              {
+                "title": "disk.used_pct",
+                "text": "0.6 %",
+                "evidence": "Live system probe",
+                "source": "/boot/efi"
+              },
+              {
+                "title": "thermal.celsius",
+                "text": "16.8 °C",
+                "evidence": "Live system probe",
+                "source": "acpitz0"
+              },
+              {
+                "title": "thermal.celsius",
+                "text": "27.8 °C",
+                "evidence": "Live system probe",
+                "source": "acpitz1"
+              },
+              {
+                "title": "thermal.celsius",
+                "text": "49.0 °C",
+                "evidence": "Live system probe",
+                "source": "pch_cannonlake"
+              },
+              {
+                "title": "thermal.celsius",
+                "text": "52.0 °C",
+                "evidence": "Live system probe",
+                "source": "x86_pkg_temp"
+              },
+              {
+                "title": "gpu.temp_celsius",
+                "text": "44.0 °C",
+                "evidence": "Live system probe",
+                "source": "gpu0"
+              },
+              {
+                "title": "gpu.utilization_pct",
+                "text": "0.0 %",
+                "evidence": "Live system probe",
+                "source": "gpu0"
+              },
+              {
+                "title": "gpu.memory_used_pct",
+                "text": "41.8 %",
+                "evidence": "Live system probe",
+                "source": "gpu0"
+              },
+              {
+                "title": "services.failed_count",
+                "text": "0.0 ",
+                "evidence": "Live system probe",
+                "source": ""
+              },
+              {
+                "title": "uptime.days",
+                "text": "0.04 days",
+                "evidence": "Live system probe",
+                "source": ""
+              },
+              {
+                "title": "uptime.reboot_required",
+                "text": "0.0 ",
+                "evidence": "Live system probe",
+                "source": ""
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "health",
+      "goal_id": "347cddad963a4a3d9a54e281eca19326",
+      "state": "done",
+      "seconds": 2.06,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "health",
+          "args": {},
+          "request": "Run a system health check: ",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "done — confirmed by proof evidence",
+            "operator": {
+              "request": "run system health",
+              "outcome": "done",
+              "summary": "done — confirmed by proof evidence",
+              "plan": {
+                "request": "run system health",
+                "steps": [
+                  {
+                    "goal": "run_automation",
+                    "params": {
+                      "automation_id": "aries.health"
+                    },
+                    "tool": "aries.run_automation",
+                    "payload": {
+                      "automation_id": "aries.health"
+                    },
+                    "why": "Run a system health check"
+                  }
+                ],
+                "source": "router",
+                "refusal": "",
+                "alternatives": [],
+                "model": ""
+              },
+              "steps": [
+                {
+                  "goal": "run_automation",
+                  "params": {
+                    "automation_id": "aries.health"
+                  },
+                  "tool": "aries.run_automation",
+                  "payload": {
+                    "automation_id": "aries.health"
+                  },
+                  "why": "Run a system health check",
+                  "reported": true,
+                  "report_detail": "healthy — 17 checks, nothing above threshold",
+                  "gate": "",
+                  "verification": {
+                    "verdict": "met",
+                    "grade": "proof",
+                    "checked": "the run history of aries.health",
+                    "found": "a run finished ok: healthy — 17 checks, nothing above threshold",
+                    "evidence": {
+                      "status": "ok",
+                      "started_at": "2026-09-14 19:28:38",
+                      "summary": "healthy — 17 checks, nothing above threshold"
+                    }
+                  },
+                  "seconds": 0.15,
+                  "observations": 1,
+                  "honest": true
+                }
+              ],
+              "reported_success": true,
+              "verified_success": true,
+              "honesty_gap": false,
+              "unverifiable": false,
+              "proposed": false,
+              "held": "",
+              "task_id": "operator-1789414118872",
+              "seconds": 0.16
+            },
+            "cards": [
+              {
+                "title": "Health check",
+                "text": "healthy — 17 checks, nothing above threshold",
+                "evidence": "Recorded automation run",
+                "source": "health:188"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "open_app",
+      "goal_id": "c505fc8b749b44e4b615ab1b49be4047",
+      "state": "done",
+      "seconds": 2.08,
+      "cards": 0,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "open_app",
+          "args": {
+            "app": "Firefox"
+          },
+          "request": "open Firefox",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "done — confirmed by strong evidence",
+            "operator": {
+              "request": "open Firefox",
+              "outcome": "done",
+              "summary": "done — confirmed by strong evidence",
+              "plan": {
+                "request": "open Firefox",
+                "steps": [
+                  {
+                    "goal": "open_app",
+                    "params": {
+                      "app": "Firefox"
+                    },
+                    "tool": "desktop.open_app",
+                    "payload": {
+                      "app": "Firefox"
+                    },
+                    "why": ""
+                  }
+                ],
+                "source": "router",
+                "refusal": "",
+                "alternatives": [],
+                "model": ""
+              },
+              "steps": [
+                {
+                  "goal": "open_app",
+                  "params": {
+                    "app": "Firefox"
+                  },
+                  "tool": "desktop.open_app",
+                  "payload": {
+                    "app": "Firefox"
+                  },
+                  "why": "",
+                  "reported": true,
+                  "report_detail": "",
+                  "gate": "",
+                  "verification": {
+                    "verdict": "met",
+                    "grade": "strong",
+                    "checked": "processes and windows named 'firefox'",
+                    "found": "14 process(es) and the window 'The Linux Kernel Archives — Mozilla Firefox'",
+                    "evidence": {
+                      "windows": [
+                        {
+                          "id": "20",
+                          "title": "The Linux Kernel Archives — Mozilla Firefox",
+                          "wm_class": "firefox_firefox",
+                          "app_id": "firefox_firefox.desktop",
+                          "pid": 33744,
+                          "focused": false,
+                          "workspace": 0,
+                          "minimised": false
+                        }
+                      ],
+                      "processes": [
+                        {
+                          "pid": 33744,
+                          "name": "firefox"
+                        },
+                        {
+                          "pid": 33981,
+                          "name": "crashhelper"
+                        },
+                        {
+                          "pid": 34078,
+                          "name": "forkserver"
+                        }
+                      ]
+                    }
+                  },
+                  "seconds": 0.05,
+                  "observations": 1,
+                  "honest": true
+                }
+              ],
+              "reported_success": true,
+              "verified_success": true,
+              "honesty_gap": false,
+              "unverifiable": false,
+              "proposed": false,
+              "held": "",
+              "task_id": "operator-1789414121127",
+              "seconds": 0.06
+            },
+            "cards": []
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "open_url",
+      "goal_id": "e36c4cf5b9da48fbb83a41940a086c2c",
+      "state": "done",
+      "seconds": 3.17,
+      "cards": 0,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "open_url",
+          "args": {
+            "url": "https://www.youtube.com"
+          },
+          "request": "open https://www.youtube.com",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "done — confirmed by circumstantial evidence",
+            "operator": {
+              "request": "open https://www.youtube.com",
+              "outcome": "done",
+              "summary": "done — confirmed by circumstantial evidence",
+              "plan": {
+                "request": "open https://www.youtube.com",
+                "steps": [
+                  {
+                    "goal": "open_url",
+                    "params": {
+                      "url": "https://www.youtube.com"
+                    },
+                    "tool": "desktop.open_url",
+                    "payload": {
+                      "url": "https://www.youtube.com"
+                    },
+                    "why": ""
+                  }
+                ],
+                "source": "router",
+                "refusal": "",
+                "alternatives": [],
+                "model": ""
+              },
+              "steps": [
+                {
+                  "goal": "open_url",
+                  "params": {
+                    "url": "https://www.youtube.com"
+                  },
+                  "tool": "desktop.open_url",
+                  "payload": {
+                    "url": "https://www.youtube.com"
+                  },
+                  "why": "",
+                  "reported": true,
+                  "report_detail": "",
+                  "gate": "",
+                  "verification": {
+                    "verdict": "met",
+                    "grade": "circumstantial",
+                    "checked": "browser windows, for a title mentioning 'youtube'",
+                    "found": "firefox_firefox has a window titled 'YouTube — Mozilla Firefox'",
+                    "evidence": {
+                      "windows": [
+                        {
+                          "id": "24",
+                          "title": "YouTube — Mozilla Firefox",
+                          "wm_class": "firefox_firefox",
+                          "app_id": "firefox_firefox.desktop",
+                          "pid": 33744,
+                          "focused": true,
+                          "workspace": 0,
+                          "minimised": false
+                        }
+                      ]
+                    }
+                  },
+                  "seconds": 0.97,
+                  "observations": 3,
+                  "honest": true
+                }
+              ],
+              "reported_success": true,
+              "verified_success": true,
+              "honesty_gap": false,
+              "unverifiable": false,
+              "proposed": false,
+              "held": "",
+              "task_id": "operator-1789414123301",
+              "seconds": 0.98
+            },
+            "cards": []
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "search_web",
+      "goal_id": "e717cd1057cc49889948fccaffcdf23d",
+      "state": "done",
+      "seconds": 3.1,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "search_web",
+          "args": {
+            "query": "Linux AI agent desktop"
+          },
+          "request": "search web for Linux AI agent desktop",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "done — confirmed by circumstantial evidence",
+            "operator": {
+              "request": "search web for Linux AI agent desktop",
+              "outcome": "done",
+              "summary": "done — confirmed by circumstantial evidence",
+              "plan": {
+                "request": "search web for Linux AI agent desktop",
+                "steps": [
+                  {
+                    "goal": "open_url",
+                    "params": {
+                      "url": "https://duckduckgo.com/?q=Linux%20AI%20agent%20desktop"
+                    },
+                    "tool": "desktop.open_url",
+                    "payload": {
+                      "url": "https://duckduckgo.com/?q=Linux%20AI%20agent%20desktop"
+                    },
+                    "why": ""
+                  }
+                ],
+                "source": "router",
+                "refusal": "",
+                "alternatives": [],
+                "model": ""
+              },
+              "steps": [
+                {
+                  "goal": "open_url",
+                  "params": {
+                    "url": "https://duckduckgo.com/?q=Linux%20AI%20agent%20desktop"
+                  },
+                  "tool": "desktop.open_url",
+                  "payload": {
+                    "url": "https://duckduckgo.com/?q=Linux%20AI%20agent%20desktop"
+                  },
+                  "why": "",
+                  "reported": true,
+                  "report_detail": "",
+                  "gate": "",
+                  "verification": {
+                    "verdict": "met",
+                    "grade": "circumstantial",
+                    "checked": "browser windows, for a title mentioning 'duckduckgo'",
+                    "found": "firefox_firefox has a window titled 'Linux AI agent desktop at DuckDuckGo — Mozilla Firefox'",
+                    "evidence": {
+                      "windows": [
+                        {
+                          "id": "25",
+                          "title": "Linux AI agent desktop at DuckDuckGo — Mozilla Firefox",
+                          "wm_class": "firefox_firefox",
+                          "app_id": "firefox_firefox.desktop",
+                          "pid": 33744,
+                          "focused": true,
+                          "workspace": 0,
+                          "minimised": false
+                        }
+                      ]
+                    }
+                  },
+                  "seconds": 1.0,
+                  "observations": 3,
+                  "honest": true
+                }
+              ],
+              "reported_success": true,
+              "verified_success": true,
+              "honesty_gap": false,
+              "unverifiable": false,
+              "proposed": false,
+              "held": "",
+              "task_id": "operator-1789414126373",
+              "seconds": 1.01
+            },
+            "cards": [
+              {
+                "title": "Web search",
+                "text": "Linux AI agent desktop",
+                "url": "https://duckduckgo.com/?q=Linux%20AI%20agent%20desktop",
+                "evidence": "The visible browser window names the requested query (circumstantial evidence)"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "research",
+      "goal_id": "700574c0b14f4177bc4333a8b79ae499",
+      "state": "done",
+      "seconds": 3.08,
+      "cards": 24,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "research",
+          "capability": "research",
+          "args": {
+            "query": "artificial intelligence agents"
+          },
+          "request": "Research news with source links: artificial intelligence agents",
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "refresh_news",
+      "goal_id": "141e98d30d2d49a8813dbf1fd2009a29",
+      "state": "done",
+      "seconds": 9.65,
+      "cards": 24,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "refresh_news",
+          "args": {},
+          "request": "Collect news from enabled sources: ",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "done — confirmed by proof evidence",
+            "operator": {
+              "request": "scan for news",
+              "outcome": "done",
+              "summary": "done — confirmed by proof evidence",
+              "plan": {
+                "request": "scan for news",
+                "steps": [
+                  {
+                    "goal": "run_automation",
+                    "params": {
+                      "automation_id": "aries.news"
+                    },
+                    "tool": "aries.run_automation",
+                    "payload": {
+                      "automation_id": "aries.news"
+                    },
+                    "why": "Scan for news now"
+                  }
+                ],
+                "source": "router",
+                "refusal": "",
+                "alternatives": [],
+                "model": ""
+              },
+              "steps": [
+                {
+                  "goal": "run_automation",
+                  "params": {
+                    "automation_id": "aries.news"
+                  },
+                  "tool": "aries.run_automation",
+                  "payload": {
+                    "automation_id": "aries.news"
+                  },
+                  "why": "Scan for news now",
+                  "reported": true,
+                  "report_detail": "0 delivered from 0 source(s), 0 held, 4 duplicates merged, 65 rejected, 14 sources, 1 source(s) failed",
+                  "gate": "",
+                  "verification": {
+                    "verdict": "met",
+                    "grade": "proof",
+                    "checked": "the run history of aries.news",
+                    "found": "a run finished ok: 0 delivered from 0 source(s), 0 held, 4 duplicates merged, 65 rejected, 14 sources, 1 source(s) failed",
+                    "evidence": {
+                      "status": "ok",
+                      "started_at": "2026-09-14 19:28:59",
+                      "summary": "0 delivered from 0 source(s), 0 held, 4 duplicates merged, 65 rejected, 14 sources, 1 source(s) failed"
+                    }
+                  },
+                  "seconds": 6.93,
+                  "observations": 1,
+                  "honest": true
+                }
+              ],
+              "reported_success": true,
+              "verified_success": true,
+              "honesty_gap": false,
+              "unverifiable": false,
+              "proposed": false,
+              "held": "",
+              "task_id": "operator-1789414132350",
+              "seconds": 6.97
+            },
+            "cards": [
+              {
+                "title": "NATO pledges increased Ukraine support as Russia strikes near border",
+                "text": "NATO chief Rutte insists Western allies will not be intimidated by Russian attacks meant to 'scare' them off.",
+                "url": "https://www.aljazeera.com/news/2026/9/14/nato-pledges-increased-support-for-ukraine-after-russia-strikes-warsaw-bound-train?traffic_source=rss",
+                "source": "al-jazeera",
+                "published": "2026-09-14T18:40:23",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Djibouti humanitarian situation worsens as Yemenis seek refuge",
+                "text": "Djibouti humanitarian situation worsens as Yemenis seek refuge",
+                "url": "https://www.aljazeera.com/video/newsfeed/2026/9/14/djibouti-humanitarian-situation-worsens-as-yemenis-seek-refuge?traffic_source=rss",
+                "source": "al-jazeera",
+                "published": "2026-09-14T18:46:25",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Americast",
+                "text": "And which songs have made it onto Trump’s Air Force One playlist?",
+                "url": "https://www.bbc.co.uk/sounds/play/p0p9m9vz?at_medium=RSS&at_campaign=rss",
+                "source": "bbc-news",
+                "published": "2026-09-14T18:26:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "London musical cancelled after Ariana Grande and Jonathan Bailey pull out",
+                "text": "Sunday in the Park With George was supposed to make its debut next year at the Barbican.",
+                "url": "https://www.bbc.co.uk/news/articles/cqpved1p2j4zo?at_medium=RSS&at_campaign=rss",
+                "source": "bbc-news",
+                "published": "2026-09-14T12:28:44",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Israeli minister threatens to revoke filmmakers' citizenship over Gaza documentary",
+                "text": "The film accuses the Israeli army of mass civilian killing in Gaza, and Israeli officials say it could be treasonous.",
+                "url": "https://www.bbc.co.uk/news/articles/c9vgy8d8256go?at_medium=RSS&at_campaign=rss",
+                "source": "bbc-news",
+                "published": "2026-09-14T18:26:20",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Upcoming Speaking Engagements",
+                "text": "This is a current list of where and when I am scheduled to speak: I’m speaking online (via Zoom) at a League of Women Voters event on Tuesday, September 22, 2026 at 5 PM ET. I’m speaking at CanSecWest 2026 in Vancouver, Canada. The conference runs September 30–October 1, 2026; the time of my talk is TBD. I’m giving a talk on “ Free Speech and the Preservation of Democracy ” at Bentley University in Waltham, Massachusetts, USA, at 2 PM ET on Tuesday, October 6, 2026. I’m speaking at ATTENTION: De",
+                "url": "https://www.schneier.com/blog/archives/2026/09/upcoming-speaking-engagements-60.html",
+                "source": "schneier",
+                "published": "2026-09-14T19:02:45",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Microsoft patches Windows and Excel – breaks audio, remote access, and paste",
+                "text": "Comments",
+                "url": "https://www.theregister.com/os-platforms/2026/09/14/microsoft-patches-windows-and-excel-breaks-audio-remote-access-and-paste/5296085",
+                "source": "hacker-news",
+                "published": "2026-09-14T16:09:45",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Show HN: Pelican-bicycle alternatives",
+                "text": "Comments",
+                "url": "https://gally.net/temp/20260914pelican-alternatives/index.html",
+                "source": "hacker-news",
+                "published": "2026-09-14T13:20:22",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Newscast",
+                "text": "President Trump dismisses need for AI guardrails, saying “whoever wins AI, wins”",
+                "url": "https://www.bbc.co.uk/sounds/play/p0p9l053?at_medium=RSS&at_campaign=rss",
+                "source": "bbc-news",
+                "published": "2026-09-14T16:01:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "AI 'kill switch' may need to be mandatory, the model vendor co-founder says",
+                "text": "Jack Clark says \"most labs have different ways of being able to pull the plug\", but says this may need to be a requirement.",
+                "url": "https://www.bbc.co.uk/news/articles/cqgk5e2j0gg8o?at_medium=RSS&at_campaign=rss",
+                "source": "bbc-news",
+                "published": "2026-09-14T18:54:16",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "NüshuRescue: Reviving the Endangered Nüshu Language with AI",
+                "text": "Comments",
+                "url": "https://aclanthology.org/2025.coling-main.468/",
+                "source": "hacker-news",
+                "published": "2026-09-12T12:51:25",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Corals as climate archive: Are El Nino events intensifying?",
+                "text": "Records show that El Nino events have been frequent and often extreme over the past few decades. Is this normal? Or is it the result of climate change? Corals can give us a clear indication.",
+                "url": "https://www.dw.com/en/corals-as-climate-archive-are-el-nino-events-intensifying/a-79243425?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-12T08:53:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Germany: Merz's CDU comes out on top in Lower Saxony polls",
+                "text": "The Christian Democrats have emerged as the strongest party following local elections in the state of Lower Saxony. The vote was closely watched as an indicator of the strength of the far-right AfD, which came in third.",
+                "url": "https://www.dw.com/en/germany-merz-s-cdu-comes-out-on-top-in-lower-saxony-polls/a-79254724?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T06:09:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Canada seeks 'unique alliance' with EU, Carney says",
+                "text": "Mark Carney clarified Canada's EU ambitions amid a WSJ report that Ottawa was exploring an \"associate membership\" with the bloc.",
+                "url": "https://www.dw.com/en/canada-seeks-unique-alliance-with-eu-carney-says/a-79254541?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T06:22:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "In cosmopolitan Berlin, elections still closed to foreigners",
+                "text": "A quarter of Berlin residents will have no say in the German capital's city-state election because they lack citizenship. That's the highest proportion of residents excluded from the election yet, and many are unhappy.",
+                "url": "https://www.dw.com/en/in-cosmopolitan-berlin-elections-still-closed-to-foreigners/a-78744579?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T07:43:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Can Iran replace sea trade with land routes?",
+                "text": "Iran is shifting trade toward northern ports and land routes as its southern shipping faces a US blockade. Analysts say the corridors can keep essential goods moving, but cannot replace maritime trade.",
+                "url": "https://www.dw.com/en/can-iran-replace-sea-trade-with-land-routes/a-79211179?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T07:50:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "North Korea says recent drill shows 'huge destructive power'",
+                "text": "North Korea carried out a coordinated live-fire exercise involving multiple weapons systems over the weekend. The drill came after the US, South Korea and Japan wrapped up five days of joint maritime exercises.",
+                "url": "https://www.dw.com/en/north-korea-says-recent-drill-shows-huge-destructive-power/a-79255028?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T08:19:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Israeli minister accuses 'NAZA' filmmakers of 'treason'",
+                "text": "Israel's culture minister wants to strip the makers of a documentary on Israel's Gaza offensive of their citizenship. He accused the two of seeking \"applause from antisemites around the world.\"",
+                "url": "https://www.dw.com/en/israeli-minister-accuses-naza-filmmakers-of-treason/a-79255860?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T10:10:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Pay to ghost your boss: Japan's resignation business",
+                "text": "Resignation agencies in Japan help employees leave their jobs seamlessly in just 15 minutes. Young people are especially eager to use their services.",
+                "url": "https://www.dw.com/en/pay-to-ghost-your-boss-japan-s-resignation-business/a-79213584?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T10:36:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "India women's team refuse Asia Cup cricket trophy from Pakistan minister",
+                "text": "After beating Sri Lanka to win a record eighth Asia Cup title, the Indian women's cricket team skipped the trophy presentation with Pakistani Interior Minister Mohsin Naqvi.",
+                "url": "https://www.dw.com/en/india-women-s-team-refuse-asia-cup-cricket-trophy-from-pakistan-minister/live-79254950?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T10:44:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Berlin businesswoman charged with spying for Russia",
+                "text": "Prosecutors say the Berlin marketing executive used her political and military contacts to help a Russian intelligence officer gain access to influential circles and seek information on German defense policy.",
+                "url": "https://www.dw.com/en/berlin-businesswoman-charged-with-spying-for-russia/a-79258004?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T11:09:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "EU leaders urge unity after Russian strike on train",
+                "text": "Russia's drone attack on a train near the Ukraine-Poland border has triggered EU calls to up support for Kyiv. Allies of Ukraine should show they \"are not scared,\" said the bloc's top diplomat, Kaja Kallas.",
+                "url": "https://www.dw.com/en/eu-leaders-urge-unity-after-russian-strike-on-train/a-79259807?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T12:12:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "Nepal: thousands still missing as flood recovery begins",
+                "text": "The Himalayan nation is moving from rescue operations to recovery, facing a $4.8 billion reconstruction bill amid renewed calls for climate justice.",
+                "url": "https://www.dw.com/en/nepal-thousands-still-missing-as-flood-recovery-begins/a-79259980?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T12:18:00",
+                "evidence": "News Radar collection"
+              },
+              {
+                "title": "The Crusades: How a medieval Holy War still shapes politics",
+                "text": "In 1095, the Catholic Church launched the Crusades: wars that left millions dead and whose legacy still shapes political and ideological conflicts.",
+                "url": "https://www.dw.com/en/the-crusades-how-a-medieval-holy-war-still-shapes-politics/a-79203784?maca=en-rss-en-all-1573-rdf",
+                "source": "dw",
+                "published": "2026-09-14T12:43:00",
+                "evidence": "News Radar collection"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "brief",
+      "goal_id": "c8d352f4332747f89bae721f6500fa43",
+      "state": "done",
+      "seconds": 2.14,
+      "cards": 5,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "brief",
+          "args": {},
+          "request": "Build a morning briefing: ",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "done — confirmed by proof evidence",
+            "operator": {
+              "request": "build my brief",
+              "outcome": "done",
+              "summary": "done — confirmed by proof evidence",
+              "plan": {
+                "request": "build my brief",
+                "steps": [
+                  {
+                    "goal": "run_automation",
+                    "params": {
+                      "automation_id": "aries.brief"
+                    },
+                    "tool": "aries.run_automation",
+                    "payload": {
+                      "automation_id": "aries.brief"
+                    },
+                    "why": "Build the morning brief now"
+                  }
+                ],
+                "source": "router",
+                "refusal": "",
+                "alternatives": [],
+                "model": ""
+              },
+              "steps": [
+                {
+                  "goal": "run_automation",
+                  "params": {
+                    "automation_id": "aries.brief"
+                  },
+                  "tool": "aries.run_automation",
+                  "payload": {
+                    "automation_id": "aries.brief"
+                  },
+                  "why": "Build the morning brief now",
+                  "reported": true,
+                  "report_detail": "11 item(s) across 5 section(s): nothing needs you — 8 news, 1 aries itself, 2 what i learned",
+                  "gate": "",
+                  "verification": {
+                    "verdict": "met",
+                    "grade": "proof",
+                    "checked": "the run history of aries.brief",
+                    "found": "a run finished ok: 11 item(s) across 5 section(s): nothing needs you — 8 news, 1 aries itself, 2 what i learned",
+                    "evidence": {
+                      "status": "ok",
+                      "started_at": "2026-09-14 19:29:01",
+                      "summary": "11 item(s) across 5 section(s): nothing needs you — 8 news, 1 aries itself, 2 what i learned"
+                    }
+                  },
+                  "seconds": 0.16,
+                  "observations": 1,
+                  "honest": true
+                }
+              ],
+              "reported_success": true,
+              "verified_success": true,
+              "honesty_gap": false,
+              "unverifiable": false,
+              "proposed": false,
+              "held": "",
+              "task_id": "operator-1789414141442",
+              "seconds": 0.17
+            },
+            "cards": [
+              {
+                "title": "Waiting for you",
+                "text": "nothing needs a decision",
+                "evidence": "Morning Brief section",
+                "source": "brief:30"
+              },
+              {
+                "title": "System",
+                "text": "everything healthy",
+                "evidence": "Morning Brief section",
+                "source": "brief:30"
+              },
+              {
+                "title": "News",
+                "text": "Why don't machine learning research agents overfit?\nTransitions.dev: UI transitions for AI agents\nGAUGE: When Not to Trust LLM-as-a-Judge in User-Simulated Evaluation of Task-Oriented Agents\nCueMem: Cue-Guided Context Reconstruction for Long-Term Conversational Memory\nAMDKernelVault: Large-Scale Datasets and Agentic Training for AMD GPU Kernel Optimization\nLook Before You Leap: Pre-Action Verification for LLM Agents\nFINESSE: An Agent-Based Simulator and Benchmark Dataset for Multimodal Financial Event Sequences\nGranularity-Adaptive Credit Assignment for Long-Horizon LLM Agent Reinforcement Learning",
+                "evidence": "Morning Brief section",
+                "source": "brief:30"
+              },
+              {
+                "title": "ARIES itself",
+                "text": "News Radar succeeded 43% of the time this week",
+                "evidence": "Morning Brief section",
+                "source": "brief:30"
+              },
+              {
+                "title": "What I learned",
+                "text": "'ai' — I would weight it 0.71, but yours is 0.90\n'agents' — I would weight it 0.98, but yours is 0.85",
+                "evidence": "Morning Brief section",
+                "source": "brief:30"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "remember",
+      "goal_id": "afce237261d54287abe73775e3d09413",
+      "state": "done",
+      "seconds": 2.14,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "remember",
+          "args": {
+            "text": "ARIES evaluation 20260914-192807 uses real public websites."
+          },
+          "request": "Remember an explicit personal fact: ARIES evaluation 20260914-192807 uses real public websites.",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "1 results",
+            "cards": [
+              {
+                "title": "Remembered",
+                "text": "ARIES evaluation 20260914-192807 uses real public websites.",
+                "evidence": "Explicit user statement",
+                "source": "9989c83858ae4b278df1790fb44373d1"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "capability": "install_app",
+      "goal_id": "821c2e7885cd4ae9b18ca35f6242d1fb",
+      "state": "done",
+      "seconds": 2.16,
+      "cards": 1,
+      "gaps": [],
+      "steps": [
+        {
+          "kind": "capability",
+          "capability": "install_app",
+          "args": {
+            "app": "firefox",
+            "package": "firefox",
+            "classic": false,
+            "revision": "8863",
+            "store_info": "name:      firefox\nsummary:   Mozilla Firefox web browser\npublisher: Mozilla**\nstore-url: https://snapcraft.io/firefox\ncontact:   https://support.mozilla.org/kb/file-bug-report-or-feature-request-mozilla\nlicense:   unset\ndescription: |\n  Firefox is a powerful, extensible web browser with support for modern web\n  application technologies.\ncommands:\n  - firefox\n  - firefox.geckodriver\nsnap-id:      3wdHCAVyZEmYsCMFDE9qt92UV8rC8Wdk\ntracking:     latest/stable/ubuntu-26.04\nrefresh-date: today at 20:35 CEST\nchannels:\n  latest/stable:    155.0.1-1     2026-09-04 (8863) 274MB -\n  latest/candidate: 156.0-1       2026-09-10 (8904) 275MB -\n  latest/beta:      157.0b1-2     2026-09-14 (8922) 276MB -\n  latest/edge:      158.0a1       2026-09-14 (8920) 296MB -\n  esr/stable:       140.15.0esr-1 2026-09-01 (8844) 249MB -\n  esr/candidate:    140.16.0esr-1 2026-09-09 (8891) 249MB -\n  esr/beta:         ^                                     \n  esr/edge:         ^                                     \ninstalled:          155.0.1-1                (8863) 274MB -\n",
+            "already_installed": true
+          },
+          "request": "Install an application from the Snap store: firefox",
+          "prepared": true,
+          "result": {
+            "state": "done",
+            "summary": "Already installed at the requested stable revision",
+            "verification": {
+              "met": true,
+              "evidence": "Snap's installed-package database contains the approved package revision"
+            },
+            "cards": [
+              {
+                "title": "firefox",
+                "text": "Already installed · revision 8863",
+                "evidence": "Snap's installed-package database contains the approved package revision"
+              }
+            ]
+          },
+          "state": "done"
+        }
+      ]
+    }
+  ]
+}

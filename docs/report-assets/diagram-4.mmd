@@ -1,0 +1,31 @@
+flowchart TB
+  ACT["Дејство и исход:<br/>чекори · докази · време"]
+  subgraph A["ШТО СЕ ЧУВА — каскада, најевтино прво"]
+    direction LR
+    UTT["Изговореното<br/>verbatim, layer USER"] --> G1["1 · порта ~0 ms<br/>теми · креденцијали"]
+    G1 --> G2["2 · новост ~8 ms<br/>cosine"]
+    G2 --> G3["3 · моделот ~0.1 s<br/>ЕДЕН bare enum,<br/>калибрирана веројатност"]
+  end
+  CON["Заклучок, layer LEARNED: текстот е КОПИЈА од исказот,<br/>никој модел не ги пишува тие зборови"]
+  subgraph B["ШТО СЕ МЕНУВА"]
+    direction LR
+    FB["Fast loop:<br/>изречна корекција"] --> PREF["Поставка<br/>set_by = learning"]
+    MED["Medium loop: тежина само<br/>кога Wilson дозволува"] --> PREF
+    PREF --> REV["Reversal: hysteresis<br/>како ниво на доверба"]
+  end
+  subgraph C["ШТО СЕ МЕРИ"]
+    direction LR
+    RET["retrieval<br/>semantic-v3"] --> EV["learning_eval.compare()<br/>фиксни случаи · McNemar,<br/>регресиите се видливи"]
+  end
+  PROM["Унапредување<br/>на верзија"]
+  RL["Политика / RL"]
+  ACT --> A --> CON --> C
+  ACT --> B
+  C -. "promoted: False — намерно, со тест што го брани" .-> PROM
+  PROM -. "не постои" .-> RL
+  classDef working fill:#102d31,stroke:#48d9ba,color:#e5fff8,stroke-width:2px
+  classDef partial fill:#302918,stroke:#e8b95b,color:#fff4d8,stroke-width:2px
+  classDef future fill:#252039,stroke:#b09ae8,color:#f1eaff,stroke-dasharray:5 4
+  class ACT,UTT,G1,G2,FB,MED,PREF,REV,EV working
+  class G3,CON,RET partial
+  class PROM,RL future

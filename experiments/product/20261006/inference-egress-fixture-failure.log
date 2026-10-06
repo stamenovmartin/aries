@@ -1,0 +1,72 @@
+Traceback (most recent call last):
+  File "/home/stamenovmartin/aries/vendor/agentic-core/tests/_harness.py", line 56, in run_module
+    asyncio.run(r)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_inference_egress.py", line 36, in test_explicit_classification_has_bound_origin
+    await CloudDecisionProvider().decide(db,text)
+  File "/home/stamenovmartin/aries/aries/intelligence/router.py", line 141, in decide
+    raw,self.usage=await generate(db,messages,schema,purpose='intelligence.cloud-decision',
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/unittest/mock.py", line 2302, in _execute_mock_call
+    result = await effect(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/tests/test_inference_egress.py", line 32, in capture
+    return Decision(intent='UNKNOWN',confidence=0.5,tool='none',requires_cloud=False,complexity='simple',reason='fixture').model_dump_json(),{}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Decision
+complexity
+  Extra inputs are not permitted [type=extra_forbidden, input_value='simple', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden
+--- test_explicit_classification_has_bound_origin
+PASS  explicit baseline binds current request privacy
+PASS  explicit baseline never accepts a local substitute
+FAIL  test_explicit_classification_has_bound_origin: ValidationError: 1 validation error for Decision
+complexity
+  Extra inputs are not permitted [type=extra_forbidden, input_value='simple', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden
+--- test_label_origin_survives_history_and_context
+PASS  desktop titles remain personal in final prompt
+PASS  explicit private user request stays local
+PASS  planner origin class retained personal
+PASS  planner origin class retained personal
+PASS  planner origin class retained file_content
+PASS  planner origin class retained personal
+PASS  empty historical containers do not force local
+--- test_missing_or_tampered_provenance_cannot_authorize_cloud
+PASS  unbound content stays local
+PASS  unbound content stays local
+PASS  unbound content stays local
+PASS  no cloud dispatch on any tamper case
+PASS  strict cloud experiment fails instead of relabelling local
+--- test_transport_partition_and_task_lineage
+PASS  public transport partition
+PASS  public actual provider recorded
+PASS  synthetic transport partition
+PASS  synthetic actual provider recorded
+PASS  personal transport partition
+PASS  personal actual provider recorded
+PASS  secret transport partition
+PASS  secret actual provider recorded
+PASS  unknown transport partition
+PASS  unknown actual provider recorded
+PASS  file_content transport partition
+PASS  file_content actual provider recorded
+PASS  explicit file sharing permits file content
+PASS  file permission does not declassify personal data
+PASS  privacy mode wins over public route
+PASS  all six calls attributed including local privacy redirects
+PASS  call identifiers unique
+PASS  task context does not leak to later calls
+PASS  canary text absent from inference audit
+FAILURES

@@ -1,0 +1,15 @@
+flowchart TD
+ A[Natural-language goal] --> B[Bounded task context]
+ B --> C[Local model decision]
+ C --> D{Schema and policy valid?}
+ D -->|no| E[Record error and retry budget]
+ E --> B
+ D -->|execute| F[Capability executor]
+ F --> G[Observe and verify]
+ G --> H[Persist step and evidence]
+ H --> B
+ D -->|finish| I{Independent goal check}
+ I -->|met| J[done]
+ I -->|unmet and budget remains| B
+ I -->|unmet and no budget| K[partial / failed]
+ D -->|fail or approval needed| L[Explicit stop / approval boundary]

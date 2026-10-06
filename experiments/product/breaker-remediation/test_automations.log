@@ -1,0 +1,74 @@
+/home/stamenovmartin/aries/tests/test_automations.py:90: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  row.started_at = datetime.utcnow() - timedelta(minutes=40)
+--- test_a_healthy_machine_completes_without_asking
+PASS  a healthy pass needs no approval
+PASS  the pass reports its own status
+PASS  the task completes
+PASS  and exactly one run row is recorded, not two
+PASS  with the detail the Control Centre shows
+--- test_check_success_and_machine_health_are_separate
+PASS  the lifecycle verdict is a pass — the check did its job
+PASS  while the machine is reported CRITICAL
+PASS  a critical finding asks for a human
+PASS  and the engine records a proposal for one
+PASS  the proposal names what it is
+PASS  and is marked high risk
+PASS  the task waits for the human rather than completing silently
+PASS  the automation's own run status is 'ok' — it worked
+--- test_disabled_until_asked_for
+PASS  an automation whose setting is off does not run
+PASS  and is never due
+PASS  turning it on enables it
+--- test_due_is_paced_by_the_last_run
+PASS  an automation that has never run is due now
+PASS  just after a run it is not due
+PASS  once the interval has passed it is due again
+PASS  and it says how overdue it is
+--- test_health_is_honest_about_no_data
+PASS  with no runs the success rate is null, not zero
+PASS  and it says why
+PASS  with runs it is a real rate
+PASS  and the breakdown is kept
+--- test_hour_units_and_direct_run_history
+PASS  automation dispatcher polling is independent of wall-clock history
+PASS  daily learning interval is 1440 minutes, not 24
+PASS  direct bookkeeping persists a successful manual run
+PASS  self-recording automation is not double-counted
+--- test_no_automation_ships_enabled
+PASS  aries.attention declares an enable setting
+PASS  aries.attention is off by default
+PASS  aries.brief declares an enable setting
+PASS  aries.brief is off by default
+PASS  aries.dashboards declares an enable setting
+PASS  aries.dashboards is off by default
+PASS  aries.data declares an enable setting
+PASS  aries.data is off by default
+PASS  aries.health declares an enable setting
+PASS  aries.health is off by default
+PASS  aries.learning declares an enable setting
+PASS  aries.learning is off by default
+PASS  aries.news declares an enable setting
+PASS  aries.news is off by default
+--- test_registered_and_describable
+PASS  the health automation is registered
+PASS  and appears in the registry listing
+PASS  its task kind is registered with the engine
+PASS  the genome exposes 'automation_id' for the Control Centre
+PASS  the genome exposes 'name' for the Control Centre
+PASS  the genome exposes 'version' for the Control Centre
+PASS  the genome exposes 'purpose' for the Control Centre
+PASS  the genome exposes 'trigger' for the Control Centre
+PASS  the genome exposes 'permissions' for the Control Centre
+PASS  the genome exposes 'evaluation_metrics' for the Control Centre
+PASS  the genome exposes 'reward_signals' for the Control Centre
+PASS  the genome exposes 'evolution_history' for the Control Centre
+PASS  the genome exposes 'rollback_version' for the Control Centre
+PASS  the genome exposes 'risk' for the Control Centre
+PASS  the genome exposes 'enabled_setting' for the Control Centre
+PASS  it declares itself read-only
+PASS  it uses no model — judgement here is deterministic
+--- test_run_history_is_append_only
+PASS  last_run returns the most recent
+PASS  the run records the version that produced it
+PASS  and keeps the detail for inspection
+ALL PASSED

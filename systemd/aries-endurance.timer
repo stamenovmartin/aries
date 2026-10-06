@@ -1,0 +1,11 @@
+[Unit]
+Description=ARIES availability sample every five minutes
+
+[Timer]
+OnCalendar=*:0/5
+Persistent=true
+AccuracySec=10s
+Unit=aries-endurance.service
+
+[Install]
+WantedBy=timers.target

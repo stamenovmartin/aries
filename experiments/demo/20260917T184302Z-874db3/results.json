@@ -1,0 +1,89 @@
+{
+  "run": "20260917T184302Z-874db3",
+  "mode": "full",
+  "cases": [
+    {
+      "name": "create folder",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.016
+    },
+    {
+      "name": "create file",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.012
+    },
+    {
+      "name": "three-step workflow",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.012
+    },
+    {
+      "name": "negative control: missing file",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.013
+    },
+    {
+      "name": "health automation",
+      "result": {
+        "ran": true,
+        "automation_id": "aries.health",
+        "task_id": 357,
+        "verdict": "pass",
+        "status": "ok",
+        "severity": "ok",
+        "summary": "healthy — 17 checks, nothing above threshold",
+        "proposal_id": null,
+        "requires_approval": false,
+        "trigger": "api"
+      },
+      "passed": true,
+      "seconds": 0.186
+    },
+    {
+      "name": "learning comparison",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.019
+    },
+    {
+      "name": "operational evaluation",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.03
+    },
+    {
+      "name": "open application",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.019
+    },
+    {
+      "name": "news workflow",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.019
+    },
+    {
+      "name": "morning brief",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.022
+    },
+    {
+      "name": "agent observes page title",
+      "passed": false,
+      "error": "HTTPError: HTTP Error 400: Bad Request",
+      "seconds": 0.015
+    }
+  ],
+  "commit": "c1adb8041e2a1bd3acd1efd5f300a09a2b968967",
+  "working_tree_dirty": true,
+  "scope": "Installed-system acceptance, not a controlled agent benchmark.",
+  "source_sha256": "3c13b540ec23ac157f4e0a4c41efea9ef6ee3fc79433ba4a86a28f8d6d043c7d",
+  "passed": 1,
+  "total": 11
+}

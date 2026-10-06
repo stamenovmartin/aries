@@ -1,0 +1,16 @@
+sequenceDiagram
+ participant P as Planner
+ participant X as Executor
+ participant OS as Environment
+ participant V as Verifier
+ participant DB as Persistent state
+ P->>X: file.write(path, content)
+ X->>DB: planned → executing
+ X->>OS: exclusive file creation
+ OS-->>X: write call result
+ X->>DB: observed + execution result
+ V->>OS: read path, bytes and metadata
+ OS-->>V: actual state
+ V->>DB: verification + evidence ID
+ DB-->>P: bounded verified observation
+ Note over P,DB: finish is only a request for goal verification

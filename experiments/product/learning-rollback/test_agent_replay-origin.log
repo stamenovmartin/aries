@@ -1,0 +1,14 @@
+{"ts": "2026-10-06T11:43:57.782403+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-06T11:43:57.782684+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_timeout_after_mutation_is_not_replayed
+PASS  mutation executes exactly once despite identical retry proposal
+PASS  first real side effect remains without a second write
+PASS  timeout is retained as original observation
+PASS  duplicate mutation is explicitly rejected
+PASS  uncertain mutation is not reported successful
+PASS  executor timeout cannot fabricate verification
+--- test_transient_read_can_retry_and_verify
+PASS  transient read retains one permitted retry
+PASS  retry succeeds with independent final proof
+PASS  read retry is counted
+ALL PASSED

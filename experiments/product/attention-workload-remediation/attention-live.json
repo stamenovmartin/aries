@@ -1,0 +1,161 @@
+{
+  "automation_id": "aries.attention",
+  "name": "Attention Pass",
+  "version": "1.0.1",
+  "purpose": "Read the folders and mailboxes you connected, understand each item on the local model, and say what needs you. Reports only \u2014 it never replies, forwards, deletes or marks anything as read.",
+  "trigger": "schedule",
+  "enabled": true,
+  "running_now": false,
+  "due_now": false,
+  "due_reason": "ran 38 min ago (every 60 min)",
+  "interval_minutes": 60,
+  "next_run": "2026-10-06T12:43:39",
+  "last_run": {
+    "id": 1524,
+    "automation_id": "aries.attention",
+    "version": "1.0.0",
+    "trigger": "schedule",
+    "status": "ok",
+    "summary": "nothing to read from 1 source(s)",
+    "detail": {
+      "success": true,
+      "status": "ok",
+      "summary": "nothing to read from 1 source(s)",
+      "needs_you": [],
+      "can_wait": [],
+      "injection_attempts": 0,
+      "not_understood": 0,
+      "sources_considered": 1,
+      "failures": [],
+      "decisions": [
+        {
+          "node": "collect",
+          "label": "Read the connected sources",
+          "ran": true,
+          "reason": "default"
+        },
+        {
+          "node": "understand",
+          "label": "Understand each item, locally",
+          "ran": false,
+          "reason": "nothing was read from any source"
+        },
+        {
+          "node": "weigh",
+          "label": "Rank against my interests",
+          "ran": false,
+          "reason": "depends on skipped: understand"
+        },
+        {
+          "node": "report",
+          "label": "Say what needs me",
+          "ran": true,
+          "reason": "default"
+        }
+      ]
+    },
+    "task_id": 1328,
+    "duration_ms": 65,
+    "started_at": "2026-10-06T11:43:39"
+  },
+  "health": {
+    "automation_id": "aries.attention",
+    "window_days": 7,
+    "runs": 64,
+    "success_rate": 1.0,
+    "reason": null,
+    "counts": {
+      "ok": 64
+    }
+  },
+  "risk": "medium",
+  "requires_approval": false,
+  "agents": [],
+  "tools": [],
+  "permissions": [
+    "view_data"
+  ],
+  "enabled_setting": "connect.attention_enabled",
+  "evolution_history": [],
+  "parent_version": null,
+  "rollback_version": null,
+  "genome": {
+    "automation_id": "aries.attention",
+    "name": "Attention Pass",
+    "version": "1.0.1",
+    "purpose": "Read the folders and mailboxes you connected, understand each item on the local model, and say what needs you. Reports only \u2014 it never replies, forwards, deletes or marks anything as read.",
+    "trigger": "schedule",
+    "schedule_setting": "connect.attention_interval_minutes",
+    "default_interval_minutes": 60,
+    "time_setting": null,
+    "conditions": [
+      "connect.enabled is on",
+      "at least one source has a connector"
+    ],
+    "input_sources": [
+      "directory",
+      "documents",
+      "repository",
+      "email"
+    ],
+    "task_kind": "aries.attention.pass",
+    "workflow": null,
+    "agents": [],
+    "tools": [],
+    "permissions": [
+      "view_data"
+    ],
+    "memory_dependencies": [
+      "aries_working_set",
+      "aries_interests"
+    ],
+    "enabled_setting": "connect.attention_enabled",
+    "writes_settings": [],
+    "risk": "medium",
+    "requires_approval": false,
+    "workload": "heavy_cpu",
+    "stateful": false,
+    "breaker_on_degraded": true,
+    "evaluation_metrics": [
+      "items_read",
+      "understood_rate",
+      "needs_you_precision",
+      "injection_attempts_detected"
+    ],
+    "reward_signals": [
+      "user acted on something it surfaced",
+      "user dismissed a surfaced item as noise",
+      "something it filed as 'can wait' turned out to be urgent"
+    ],
+    "parent_version": null,
+    "evolution_history": [],
+    "rollback_version": null,
+    "has_learning_status": false
+  },
+  "evaluation_metrics": [
+    "items_read",
+    "understood_rate",
+    "needs_you_precision",
+    "injection_attempts_detected"
+  ],
+  "reward_signals": [
+    "user acted on something it surfaced",
+    "user dismissed a surfaced item as noise",
+    "something it filed as 'can wait' turned out to be urgent"
+  ],
+  "conditions": [
+    "connect.enabled is on",
+    "at least one source has a connector"
+  ],
+  "input_sources": [
+    "directory",
+    "documents",
+    "repository",
+    "email"
+  ],
+  "memory_dependencies": [
+    "aries_working_set",
+    "aries_interests"
+  ],
+  "learning_status": null
+}

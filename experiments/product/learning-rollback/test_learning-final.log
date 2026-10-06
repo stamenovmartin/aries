@@ -1,0 +1,53 @@
+--- test_a_pass_with_no_evidence_is_not_a_failure
+PASS  a quiet pass succeeds
+PASS  and says plainly that nothing was decisive
+--- test_a_topic_that_is_ignored_goes_down
+PASS  a consistently ignored topic is proposed for a cut
+PASS  and it moves downward
+PASS  the rationale explains the optimistic bound
+--- test_a_topic_that_is_read_goes_up
+PASS  a consistently opened topic is proposed for a raise
+PASS  and it moves upward from the default
+PASS  the rationale quotes the evidence
+PASS  the step is capped
+--- test_an_ambiguous_topic_is_left_alone
+PASS  a middling engagement rate is not decisive, so nothing changes
+--- test_evidence_counts_what_the_user_could_see
+PASS  delivered items count
+PASS  held items count too — they reach the user in the briefing
+PASS  items never shown are excluded, so the loop cannot confirm its own guesses
+--- test_intervals_refuse_to_overreact
+PASS  one click in three is not evidence — the interval spans most of the range
+PASS  two in forty is decisively low even optimistically
+PASS  thirty in forty is decisively high even pessimistically
+PASS  no observations means the rate could be anything
+PASS  and its point estimate is unknown, not zero
+--- test_learning_cannot_invent_a_topic
+PASS  a topic the user never chose is not added, however engaging
+--- test_learning_never_overrules_the_user
+PASS  the loop still records what it concluded
+PASS  it is reported as shadowed
+PASS  and the user's weight is what actually applies
+PASS  clearing the user's weight promotes what was learned
+--- test_proposals_can_be_watched_without_being_applied
+PASS  a pass in propose-only mode still works out what it would do
+PASS  and says so
+PASS  but writes nothing
+PASS  with applying on, the weight is written
+PASS  into the learned layer only
+--- test_steps_are_bounded
+PASS  a step is capped however confident
+PASS  and scaled by confidence
+PASS  it never leaves [0, 1]
+--- test_the_automation_is_registered_and_off_by_default
+PASS  the learning loop is an automation like any other
+PASS  it ships disabled
+PASS  it uses no model
+PASS  whether it applies what it learns is user-only
+--- test_the_relevance_bar_only_ever_goes_up
+PASS  heavy dismissal proposes a higher bar
+PASS  and the proposal is above the current value
+PASS  strong engagement never proposes LOWERING the bar — that would reason from items the user never saw
+--- test_too_little_evidence_changes_nothing
+PASS  four observations do not move a weight, however one-sided
+ALL PASSED

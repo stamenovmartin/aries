@@ -1,0 +1,10 @@
+{
+  "problem": "The sidebar/bottom dock did not match the requested top icon navigation. Long internal setting values made response windows wider than the display; window controls were not explicit.",
+  "change": "Native section icons beside ARIES; explicit minimize/maximize/close and F11. Long tags ellipsize with tooltips, internal restore records omitted from Learning. Shell app icons moved to the panel with 18px icons and all-app launcher.",
+  "validation": [
+    "Real GTK 6/6: compact resize, maximize, full screen, compositor-observed minimize, restore, main maximize. experiments/workspace/verify_window_controls.json",
+    "Isolated GNOME Shell loaded, built all surfaces, disabled and re-enabled cleanly. /tmp/aries-top-panel-shell.log",
+    "UI render and 410 client assertions passed."
+  ],
+  "limitations": "Native UI can restart independently. Live Wayland shell caches modules and requires a new login for the desktop panel; do not force logout. Native tests first found long untruncated tags; only fixed run passed."
+}

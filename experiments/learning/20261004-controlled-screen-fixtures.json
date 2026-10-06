@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-10-03T22:25:25.351986+00:00",
+  "problem": "Five screen research cases lacked an owned known image scene; a native skip must not be relabelled as experimental success.",
+  "change": "Added explicitly selected synthetic scene adapter and scratch executor/verifier/oracle smoke; real decoder and English OCR; no physical screen. Forced comparison admission false until final answer semantics can be adjudicated.",
+  "validation": {
+    "artifact": "eval/research_feedback/controlled_screen_checks.json",
+    "counts": {
+      "cases_passed": 5,
+      "n_cases": 5,
+      "valid_images_accepted": 6,
+      "n_valid_images": 6,
+      "corrupt_images_rejected": 6,
+      "n_corrupt_images": 6,
+      "oracle_rejections": 6,
+      "llm_calls": 0
+    }
+  },
+  "limitations": [
+    "Not native portal injection: fault introduced at returned artifact after capture defences.",
+    "No screen-agent LLM run in this batch; the reviewing agent live B1/B2 inference window remains protected.",
+    "No comparison, improvement or thesis-completion claim.",
+    "Learning API submission deferred to avoid changing live context during B2."
+  ],
+  "submission": "pending_main_measurement_window"
+}

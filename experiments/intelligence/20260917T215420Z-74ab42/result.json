@@ -1,0 +1,67 @@
+{
+  "scope": "Developer-labelled routing fixture. Not a held-out task-completion or energy benchmark.",
+  "cases": 13,
+  "routing_accuracy": 1.0,
+  "intent_accuracy": 1.0,
+  "local_intent_accuracy": 1.0,
+  "cloud_escalation_rate": 0.3076923076923077,
+  "false_escalation_rate": 0.0,
+  "missed_escalation_rate": 0.0,
+  "mean_routing_seconds": 0.6410307692307692,
+  "native_local_input_tokens": 1914,
+  "native_local_output_tokens": 429,
+  "B_scope": "Routing decision only; cloud recommendations do not execute cloud work in this fixture.",
+  "A_scope": "Not run: requires --cloud-baseline plus configured cloud access",
+  "A": null,
+  "paired_task_success_delta": null,
+  "estimated_token_savings": null,
+  "estimated_cost_savings": null,
+  "task_completion_probe": {
+    "task_id": "7511b6f60c504431b67176fbfe062d74",
+    "state": "done",
+    "verified_live_system_observation": true
+  },
+  "all_task_completion_success_rate": null,
+  "all_tool_execution_success_rate": null,
+  "all_verification_success_rate": null,
+  "completion_note": "Routing labels do not prove task completion. One real system probe is reported separately; use aries-agent-demo for four execution controls.",
+  "background_probe": {
+    "intent": "SYSTEM_ACTION",
+    "tool": "system.status",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "Existing validated deterministic command mapping",
+    "execution_level": "code",
+    "source": "rule",
+    "blocked_reason": "",
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "stats_snapshot": {
+    "window_events": 53,
+    "window_limit": 10000,
+    "total_requests": 31,
+    "routed_by_level": {
+      "code": 15,
+      "local": 6,
+      "cloud": 10
+    },
+    "completed_by_level": {
+      "code": 2,
+      "local": 0,
+      "cloud": 0
+    },
+    "cloud_escalation_percent": 32.25806451612903,
+    "cloud_requests": 0,
+    "local_requests": 20,
+    "cloud_successful_responses": 0,
+    "measured_cloud_input_tokens": 0,
+    "measured_cloud_output_tokens": 0,
+    "cloud_usage_unknown": 0,
+    "estimated_api_cost_usd": 0,
+    "unpriced_cloud_requests": 0,
+    "estimated_token_savings": null,
+    "savings_note": "Requires measured matched all-cloud baseline; not inferred from routing."
+  }
+}

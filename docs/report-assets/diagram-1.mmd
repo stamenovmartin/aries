@@ -1,0 +1,29 @@
+flowchart TB
+  U["КОРИСНИК · глас · текст · корекции"]
+  subgraph S1["01 · ПОВРШИНА"]
+    direction LR
+    VOICE["Глас · wake word"] --> CMD["Command palette"] --> WIN["Прозорец по задача"] --> MON["Monitor"]
+  end
+  subgraph S2["02 · КОНТРОЛА И ПЛАНИРАЊЕ"]
+    direction LR
+    API["Локален HTTP API"] --> QUEUE["Траен ред на цели"] --> PLAN["Planner"] --> GATE["Policy и одобрувања"]
+  end
+  subgraph S3["03 · ИЗВРШУВАЊЕ"]
+    direction LR
+    FILE["Датотеки"] ~~~ WEB["Browser"] ~~~ SYS["Систем"] ~~~ DESK["Desktop · AT-SPI"] ~~~ ACC["Конектори"] ~~~ WIDE["Широка контрола"]
+  end
+  subgraph S4["04 · НАБЉУДУВАЊЕ И ПРОВЕРКА"]
+    direction LR
+    OBS["Свежа состојба"] --> CHECK["Verifier · 12%"] --> STORE[("SQLite · audit")] --> EVAL["Analytics"]
+  end
+  subgraph S5["05 · УЧЕЊЕ И ЕВОЛУЦИЈА"]
+    direction LR
+    PREF["Правила · reversal"] --> MEM["Семантичка меморија"] ~~~ COMP["Споредба на верзии"] -.-> TRAIN["Идна политика"] -.-> REL["Унапредување"]
+  end
+  U --> S1 --> S2 --> S3 --> S4 --> S5
+  classDef working fill:#102d31,stroke:#48d9ba,color:#e5fff8,stroke-width:2px
+  classDef partial fill:#302918,stroke:#e8b95b,color:#fff4d8,stroke-width:2px
+  classDef future fill:#252039,stroke:#b09ae8,color:#f1eaff,stroke-dasharray:5 4
+  class U,CMD,WIN,MON,API,QUEUE,GATE,FILE,WEB,SYS,STORE,EVAL,PREF,COMP working
+  class VOICE,PLAN,DESK,ACC,OBS,CHECK,MEM partial
+  class WIDE,TRAIN,REL future

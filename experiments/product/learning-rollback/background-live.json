@@ -1,0 +1,70 @@
+{
+  "id": "bca2f67ada904560a66fa90109ce67e8",
+  "request": "create file /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/background-must-not-exist.txt :: synthetic background guard",
+  "state": "proposed",
+  "updated_at": "2026-10-06T12:09:33.754311",
+  "created_at": "2026-10-06T12:09:30.291485",
+  "steps": [
+    {
+      "kind": "capability",
+      "request": "create file /home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/background-must-not-exist.txt :: synthetic background guard",
+      "capability": "create_file",
+      "args": {
+        "path": "/home/stamenovmartin/aries/experiments/product/learning-rollback/live-fixture/d1196489db2f40e9b7b29e2b79f909aa/background-must-not-exist.txt",
+        "content": "synthetic background guard"
+      },
+      "state": "proposed",
+      "review_reason": "An unattended or unattributed action needs review before changing state"
+    }
+  ],
+  "cards": [],
+  "gaps": [],
+  "agent_engine": null,
+  "origin": "automation:release-smoke",
+  "routing": {
+    "execution_level": "code",
+    "source": "rule",
+    "intent": "FILE_ACTION",
+    "tool": "workspace",
+    "confidence": 1.0,
+    "requires_cloud": false,
+    "estimated_complexity": "simple",
+    "reason": "Existing deterministic workspace plan"
+  },
+  "context": [
+    {
+      "id": "87ba47859fb441078d1df854a62e8501"
+    },
+    {
+      "id": "0e82bf44059c400588406347c4441286"
+    },
+    {
+      "id": "fb80985460fa4692bb41f19d53801ea9"
+    },
+    {
+      "id": "d267221f8c5b4624b16e7eabcae188a0"
+    },
+    {
+      "id": "13d064b408a2425fa42aad3312c9c181"
+    },
+    {
+      "id": "811d888bc00c42aab6e4a21362a7eb90"
+    },
+    {
+      "id": "b3b7249d73da4a6ea99a6631d7b51601"
+    }
+  ],
+  "conclusions": [
+    {
+      "id": "66b39808f9634483b654ba9d981ca363",
+      "confidence": 0.8729
+    }
+  ],
+  "related": [
+    {
+      "id": "3b3f530d8f6941849c455ec29954635a",
+      "request": "Read /home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/a.txt and read /home/stamenovmartin/aries/experiments/product/remediation-release/live-fixture/7d0db2e5628e423e848a5c20afba9ca2/b.txt"
+    }
+  ],
+  "collected_at": "2026-10-06T12:09:33.732307"
+}

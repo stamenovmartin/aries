@@ -1,0 +1,1428 @@
+{
+  "project": "/home/stamenovmartin/Documents/ARIES-Statistics-20260914-230038",
+  "goals": [
+    {
+      "capability": "build_python",
+      "id": "d8c03f996a034d7694c213aa4b1eeee3",
+      "result": {
+        "id": "d8c03f996a034d7694c213aa4b1eeee3",
+        "request": "Generate and test a Python project from your request: /home/stamenovmartin/Documents/ARIES-Statistics-20260914-230038, Create a statistics module with mean and median functions for lists of numbers. Empty lists must raise ValueError. Include useful tests for odd/even length, negative values and empty lists. Include a main demonstration that prints mean and median for [1,2,3,4].",
+        "state": "partial",
+        "updated_at": "2026-09-14T21:00:47.148637",
+        "created_at": "2026-09-14T21:00:38.938390",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "build_python",
+            "args": {
+              "path": "/home/stamenovmartin/Documents/ARIES-Statistics-20260914-230038",
+              "task": "Create a statistics module with mean and median functions for lists of numbers. Empty lists must raise ValueError. Include useful tests for odd/even length, negative values and empty lists. Include a main demonstration that prints mean and median for [1,2,3,4]."
+            },
+            "request": "Generate and test a Python project from your request: /home/stamenovmartin/Documents/ARIES-Statistics-20260914-230038, Create a statistics module with mean and median functions for lists of numbers. Empty lists must raise ValueError. Include useful tests for odd/even length, negative values and empty lists. Include a main demonstration that prints mean and median for [1,2,3,4].",
+            "prepared": true,
+            "state": "failed",
+            "goal_id": "d8c03f996a034d7694c213aa4b1eeee3",
+            "result": {
+              "state": "failed",
+              "summary": "ValueError: Model did not return a project object",
+              "report": {
+                "success": false,
+                "details": "ValueError: Model did not return a project object",
+                "error_class": "unknown",
+                "action": "escalate",
+                "duration_ms": 6514
+              },
+              "elapsed_seconds": 6.62
+            }
+          }
+        ],
+        "cards": [],
+        "gaps": [
+          "ValueError: Model did not return a project object"
+        ],
+        "context": [],
+        "related": [
+          {
+            "id": "f80ac19304bd4d21865e688bd2ee88fa",
+            "request": "Research news with source links: cybersecurity"
+          },
+          {
+            "id": "a6e993850d5a44b0b9043c0e7418281b",
+            "request": "Research news with source links: AI agents"
+          },
+          {
+            "id": "541fdb3cd88f464c81e6a85ab5fc383f",
+            "request": "Research news with source links: artificial intelligence"
+          },
+          {
+            "id": "15d27702998c43a2ad4a3bf47382dda8",
+            "request": "Research news with source links: cybersecurity"
+          },
+          {
+            "id": "a4943bfe08504e71b6266e56a657de3e",
+            "request": "Research news with source links: AI agents"
+          }
+        ],
+        "collected_at": "2026-09-14T21:00:40.342725"
+      }
+    },
+    {
+      "capability": "browser_open",
+      "id": "e931e54bbae24d1e9d8c35384a21f672",
+      "result": {
+        "id": "e931e54bbae24d1e9d8c35384a21f672",
+        "request": "browse https://www.python.org",
+        "state": "partial",
+        "updated_at": "2026-09-14T21:00:40.935882",
+        "created_at": "2026-09-14T21:00:38.967872",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "browser_open",
+            "args": {
+              "url": "https://www.python.org"
+            },
+            "request": "browse https://www.python.org",
+            "prepared": true,
+            "state": "failed",
+            "goal_id": "e931e54bbae24d1e9d8c35384a21f672",
+            "result": {
+              "state": "failed",
+              "summary": "TargetClosedError: BrowserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /home/stamenovmartin/aries/scripts/aries-browser --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --proxy-server=http://127.0.0.1:9 --proxy-bypass-list=<-loopback> --disable-background-networking --disable-quic --force-webrtc-ip-handling-policy=disable_non_proxied_udp --user-data-dir=/tmp/playwright_chromiumdev_profile-giOGM6 --remote-debugging-pipe --no-startup-window\n<launched> pid=106251\n[pid=106251][err] bwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\nCall log:\n  - <launching> /home/stamenovmartin/aries/scripts/aries-browser --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --proxy-server=http://127.0.0.1:9 --proxy-bypass-list=<-loopback> --disable-background-networking --disable-quic --force-webrtc-ip-handling-policy=disable_non_proxied_udp --user-data-dir=/tmp/playwright_chromiumdev_profile-giOGM6 --remote-debugging-pipe --no-startup-window\n  - <launched> pid=106251\n  - [pid=106251][err] bwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\n  - [pid=106251] <gracefully close start>\n  - [pid=106251] <kill>\n  - [pid=106251] <will force kill>\n  - [pid=106251] exception while trying to kill process: Error: kill ESRCH\n  - [pid=106251] <process did exit: exitCode=1, signal=null>\n  - [pid=106251] starting temporary directories cleanup\n  - [pid=106251] finished temporary directories cleanup\n  - [pid=106251] <gracefully close end>\n",
+              "report": {
+                "success": false,
+                "details": "TargetClosedError: BrowserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /home/stamenovmartin/aries/scripts/aries-browser --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --proxy-server=http://127.0.0.1:9 --proxy-bypass-list=<-loopback> --disable-background-networking --disable-quic --force-webrtc-ip-handling-policy=disable_non_proxied_udp --user-data-dir=/tmp/playwright_chromiumdev_profile-giOGM6 --remote-debugging-pipe --no-startup-window\n<launched> pid=106251\n[pid=106251][err] bwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\nCall log:\n  - <launching> /home/stamenovmartin/aries/scripts/aries-browser --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --proxy-server=http://127.0.0.1:9 --proxy-bypass-list=<-loopback> --disable-background-networking --disable-quic --force-webrtc-ip-handling-policy=disable_non_proxied_udp --user-data-dir=/tmp/playwright_chromiumdev_profile-giOGM6 --remote-debugging-pipe --no-startup-window\n  - <launched> pid=106251\n  - [pid=106251][err] bwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\n  - [pid=106251] <gracefully close start>\n  - [pid=106251] <kill>\n  - [pid=106251] <will force kill>\n  - [pid=106251] exception while trying to kill process: Error: kill ESRCH\n  - [pid=106251] <process did exit: exitCode=1, signal=null>\n  - [pid=106251] starting temporary directories cleanup\n  - [pid=106251] finished temporary directories cleanup\n  - [pid=106251] <gracefully close end>\n",
+                "error_class": "policy",
+                "action": "escalate",
+                "duration_ms": 381
+              },
+              "elapsed_seconds": 0.448
+            }
+          }
+        ],
+        "cards": [],
+        "gaps": [
+          "TargetClosedError: BrowserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /home/stamenovmartin/aries/scripts/aries-browser --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --proxy-server=http://127.0.0.1:9 --proxy-bypass-list=<-loopback> --disable-background-networking --disable-quic --force-webrtc-ip-handling-policy=disable_non_proxied_udp --user-data-dir=/tmp/playwright_chromiumdev_profile-giOGM6 --remote-debugging-pipe --no-startup-window\n<launched> pid=106251\n[pid=106251][err] bwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\nCall log:\n  - <launching> /home/stamenovmartin/aries/scripts/aries-browser --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --proxy-server=http://127.0.0.1:9 --proxy-bypass-list=<-loopback> --disable-background-networking --disable-quic --force-webrtc-ip-handling-policy=disable_non_proxied_udp --user-data-dir=/tmp/playwright_chromiumdev_profile-giOGM6 --remote-debugging-pipe --no-startup-window\n  - <launched> pid=106251\n  - [pid=106251][err] bwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\n  - [pid=106251] <gracefully close start>\n  - [pid=106251] <kill>\n  - [pid=106251] <will force kill>\n  - [pid=106251] exception while trying to kill process: Error: kill ESRCH\n  - [pid=106251] <process did exit: exitCode=1, signal=null>\n  - [pid=106251] starting temporary directories cleanup\n  - [pid=106251] finished temporary directories cleanup\n  - [pid=106251] <gracefully close end>\n"
+        ],
+        "context": [],
+        "related": [],
+        "collected_at": "2026-09-14T21:00:40.436102"
+      }
+    },
+    {
+      "capability": "processes",
+      "id": "bf32f39188794e749f67455faf58e58b",
+      "result": {
+        "id": "bf32f39188794e749f67455faf58e58b",
+        "request": "Show running applications and processes:",
+        "state": "done",
+        "updated_at": "2026-09-14T21:00:40.572397",
+        "created_at": "2026-09-14T21:00:38.989484",
+        "steps": [
+          {
+            "kind": "capability",
+            "capability": "processes",
+            "args": {},
+            "request": "Show running applications and processes: ",
+            "prepared": true,
+            "state": "done",
+            "goal_id": "bf32f39188794e749f67455faf58e58b",
+            "result": {
+              "state": "done",
+              "summary": "128 results",
+              "cards": [
+                {
+                  "title": "systemd",
+                  "text": "Process ID: 1974",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "(sd-pam)",
+                  "text": "Process ID: 1977",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "dbus-daemon",
+                  "text": "Process ID: 2000",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "pipewire",
+                  "text": "Process ID: 2001",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ollama",
+                  "text": "Process ID: 2004",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gnome-keyring-d",
+                  "text": "Process ID: 2006",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "mpris-proxy",
+                  "text": "Process ID: 2051",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "wireplumber",
+                  "text": "Process ID: 2052",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "pipewire",
+                  "text": "Process ID: 2053",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "pipewire-pulse",
+                  "text": "Process ID: 2054",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gdm-wayland-ses",
+                  "text": "Process ID: 2055",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "xdg-document-po",
+                  "text": "Process ID: 2060",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gnome-session-i",
+                  "text": "Process ID: 2065",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "xdg-permission-",
+                  "text": "Process ID: 2103",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gcr-ssh-agent",
+                  "text": "Process ID: 2243",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gnome-session-c",
+                  "text": "Process ID: 2244",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ssh-agent",
+                  "text": "Process ID: 2245",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfsd",
+                  "text": "Process ID: 2259",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfsd-fuse",
+                  "text": "Process ID: 2267",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gnome-session-s",
+                  "text": "Process ID: 2270",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gnome-shell",
+                  "text": "Process ID: 2286",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "at-spi-bus-laun",
+                  "text": "Process ID: 2486",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "dbus-daemon",
+                  "text": "Process ID: 2493",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "at-spi2-registr",
+                  "text": "Process ID: 2496",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gnome-shell-cal",
+                  "text": "Process ID: 2530",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "evolution-sourc",
+                  "text": "Process ID: 2539",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gjs",
+                  "text": "Process ID: 2544",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ibus-daemon",
+                  "text": "Process ID: 2564",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-a11y-settin",
+                  "text": "Process ID: 2565",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-color",
+                  "text": "Process ID: 2567",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-datetime",
+                  "text": "Process ID: 2568",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-housekeepin",
+                  "text": "Process ID: 2574",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-keyboard",
+                  "text": "Process ID: 2575",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-media-keys",
+                  "text": "Process ID: 2577",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-power",
+                  "text": "Process ID: 2580",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-print-notif",
+                  "text": "Process ID: 2583",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-rfkill",
+                  "text": "Process ID: 2585",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-screensaver",
+                  "text": "Process ID: 2591",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-sharing",
+                  "text": "Process ID: 2595",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-smartcard",
+                  "text": "Process ID: 2599",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-sound",
+                  "text": "Process ID: 2601",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-usb-protect",
+                  "text": "Process ID: 2609",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-wwan",
+                  "text": "Process ID: 2610",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "update-notifier",
+                  "text": "Process ID: 2612",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "evolution-alarm",
+                  "text": "Process ID: 2617",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-disk-utilit",
+                  "text": "Process ID: 2632",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gjs",
+                  "text": "Process ID: 2711",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ibus-memconf",
+                  "text": "Process ID: 2755",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ibus-extension-",
+                  "text": "Process ID: 2758",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ibus-portal",
+                  "text": "Process ID: 2766",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "localsearch-3",
+                  "text": "Process ID: 2790",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "goa-daemon",
+                  "text": "Process ID: 2835",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Xwayland",
+                  "text": "Process ID: 2836",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfs-udisks2-vo",
+                  "text": "Process ID: 2840",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "goa-identity-se",
+                  "text": "Process ID: 2849",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "evolution-calen",
+                  "text": "Process ID: 2850",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfs-gphoto2-vo",
+                  "text": "Process ID: 2865",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfs-afc-volume",
+                  "text": "Process ID: 2870",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "evolution-addre",
+                  "text": "Process ID: 2882",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfs-mtp-volume",
+                  "text": "Process ID: 2885",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfs-goa-volume",
+                  "text": "Process ID: 2893",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ibus-engine-sim",
+                  "text": "Process ID: 2917",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfsd-metadata",
+                  "text": "Process ID: 2956",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "dconf-service",
+                  "text": "Process ID: 3105",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-xsettings",
+                  "text": "Process ID: 3176",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "mutter-x11-fram",
+                  "text": "Process ID: 3196",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ibus-x11",
+                  "text": "Process ID: 3202",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gsd-printer",
+                  "text": "Process ID: 3209",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gjs",
+                  "text": "Process ID: 3217",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "xdg-desktop-por",
+                  "text": "Process ID: 3220",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "xdg-desktop-por",
+                  "text": "Process ID: 3237",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "xdg-desktop-por",
+                  "text": "Process ID: 3307",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "user-session-he",
+                  "text": "Process ID: 3570",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "snapd-desktop-i",
+                  "text": "Process ID: 3635",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ptyxis",
+                  "text": "Process ID: 5156",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "ptyxis-agent",
+                  "text": "Process ID: 5165",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "bash",
+                  "text": "Process ID: 5195",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "codex",
+                  "text": "Process ID: 5707",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "codex-code-mode",
+                  "text": "Process ID: 7278",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfsd-http",
+                  "text": "Process ID: 12552",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "snap",
+                  "text": "Process ID: 12930",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "nautilus",
+                  "text": "Process ID: 23726",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfsd-trash",
+                  "text": "Process ID: 23735",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfsd-recent",
+                  "text": "Process ID: 23769",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfsd-network",
+                  "text": "Process ID: 23771",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfsd-dnssd",
+                  "text": "Process ID: 23782",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "gvfsd-wsdd",
+                  "text": "Process ID: 23791",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "python3",
+                  "text": "Process ID: 23796",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "firefox",
+                  "text": "Process ID: 33744",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "crashhelper",
+                  "text": "Process ID: 33981",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "forkserver",
+                  "text": "Process ID: 34078",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Socket Process",
+                  "text": "Process ID: 34082",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "WebExtensions",
+                  "text": "Process ID: 34094",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "RDD Process",
+                  "text": "Process ID: 34103",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Isolated Web Co",
+                  "text": "Process ID: 34143",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Utility Process",
+                  "text": "Process ID: 34733",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Isolated Web Co",
+                  "text": "Process ID: 34922",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Web Content",
+                  "text": "Process ID: 34925",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Isolated Web Co",
+                  "text": "Process ID: 34937",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Privileged Cont",
+                  "text": "Process ID: 34958",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Isolated Web Co",
+                  "text": "Process ID: 37903",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Isolated Web Co",
+                  "text": "Process ID: 38394",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Isolated Web Co",
+                  "text": "Process ID: 38399",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75381",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75383",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75384",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75414",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75415",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75461",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75519",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75540",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75541",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 75584",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "dconf",
+                  "text": "Process ID: 75674",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "python3",
+                  "text": "Process ID: 76255",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "llama-server",
+                  "text": "Process ID: 85291",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 86424",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 86475",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "code",
+                  "text": "Process ID: 86489",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Isolated Servic",
+                  "text": "Process ID: 98182",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Web Content",
+                  "text": "Process ID: 101325",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Web Content",
+                  "text": "Process ID: 104302",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "Web Content",
+                  "text": "Process ID: 105046",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "bash",
+                  "text": "Process ID: 105090",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "python",
+                  "text": "Process ID: 105172",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "bash",
+                  "text": "Process ID: 105174",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "bash",
+                  "text": "Process ID: 106148",
+                  "evidence": "Observed in this user's /proc entries"
+                },
+                {
+                  "title": "python",
+                  "text": "Process ID: 106149",
+                  "evidence": "Observed in this user's /proc entries"
+                }
+              ],
+              "elapsed_seconds": 0.052
+            }
+          }
+        ],
+        "cards": [
+          {
+            "title": "systemd",
+            "text": "Process ID: 1974",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "(sd-pam)",
+            "text": "Process ID: 1977",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "dbus-daemon",
+            "text": "Process ID: 2000",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "pipewire",
+            "text": "Process ID: 2001",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ollama",
+            "text": "Process ID: 2004",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gnome-keyring-d",
+            "text": "Process ID: 2006",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "mpris-proxy",
+            "text": "Process ID: 2051",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "wireplumber",
+            "text": "Process ID: 2052",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "pipewire",
+            "text": "Process ID: 2053",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "pipewire-pulse",
+            "text": "Process ID: 2054",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gdm-wayland-ses",
+            "text": "Process ID: 2055",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "xdg-document-po",
+            "text": "Process ID: 2060",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gnome-session-i",
+            "text": "Process ID: 2065",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "xdg-permission-",
+            "text": "Process ID: 2103",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gcr-ssh-agent",
+            "text": "Process ID: 2243",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gnome-session-c",
+            "text": "Process ID: 2244",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ssh-agent",
+            "text": "Process ID: 2245",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfsd",
+            "text": "Process ID: 2259",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfsd-fuse",
+            "text": "Process ID: 2267",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gnome-session-s",
+            "text": "Process ID: 2270",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gnome-shell",
+            "text": "Process ID: 2286",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "at-spi-bus-laun",
+            "text": "Process ID: 2486",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "dbus-daemon",
+            "text": "Process ID: 2493",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "at-spi2-registr",
+            "text": "Process ID: 2496",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gnome-shell-cal",
+            "text": "Process ID: 2530",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "evolution-sourc",
+            "text": "Process ID: 2539",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gjs",
+            "text": "Process ID: 2544",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ibus-daemon",
+            "text": "Process ID: 2564",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-a11y-settin",
+            "text": "Process ID: 2565",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-color",
+            "text": "Process ID: 2567",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-datetime",
+            "text": "Process ID: 2568",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-housekeepin",
+            "text": "Process ID: 2574",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-keyboard",
+            "text": "Process ID: 2575",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-media-keys",
+            "text": "Process ID: 2577",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-power",
+            "text": "Process ID: 2580",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-print-notif",
+            "text": "Process ID: 2583",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-rfkill",
+            "text": "Process ID: 2585",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-screensaver",
+            "text": "Process ID: 2591",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-sharing",
+            "text": "Process ID: 2595",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-smartcard",
+            "text": "Process ID: 2599",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-sound",
+            "text": "Process ID: 2601",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-usb-protect",
+            "text": "Process ID: 2609",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-wwan",
+            "text": "Process ID: 2610",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "update-notifier",
+            "text": "Process ID: 2612",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "evolution-alarm",
+            "text": "Process ID: 2617",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-disk-utilit",
+            "text": "Process ID: 2632",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gjs",
+            "text": "Process ID: 2711",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ibus-memconf",
+            "text": "Process ID: 2755",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ibus-extension-",
+            "text": "Process ID: 2758",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ibus-portal",
+            "text": "Process ID: 2766",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "localsearch-3",
+            "text": "Process ID: 2790",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "goa-daemon",
+            "text": "Process ID: 2835",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Xwayland",
+            "text": "Process ID: 2836",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfs-udisks2-vo",
+            "text": "Process ID: 2840",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "goa-identity-se",
+            "text": "Process ID: 2849",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "evolution-calen",
+            "text": "Process ID: 2850",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfs-gphoto2-vo",
+            "text": "Process ID: 2865",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfs-afc-volume",
+            "text": "Process ID: 2870",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "evolution-addre",
+            "text": "Process ID: 2882",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfs-mtp-volume",
+            "text": "Process ID: 2885",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfs-goa-volume",
+            "text": "Process ID: 2893",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ibus-engine-sim",
+            "text": "Process ID: 2917",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfsd-metadata",
+            "text": "Process ID: 2956",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "dconf-service",
+            "text": "Process ID: 3105",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-xsettings",
+            "text": "Process ID: 3176",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "mutter-x11-fram",
+            "text": "Process ID: 3196",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ibus-x11",
+            "text": "Process ID: 3202",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gsd-printer",
+            "text": "Process ID: 3209",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gjs",
+            "text": "Process ID: 3217",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "xdg-desktop-por",
+            "text": "Process ID: 3220",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "xdg-desktop-por",
+            "text": "Process ID: 3237",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "xdg-desktop-por",
+            "text": "Process ID: 3307",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "user-session-he",
+            "text": "Process ID: 3570",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "snapd-desktop-i",
+            "text": "Process ID: 3635",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ptyxis",
+            "text": "Process ID: 5156",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "ptyxis-agent",
+            "text": "Process ID: 5165",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "bash",
+            "text": "Process ID: 5195",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "codex",
+            "text": "Process ID: 5707",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "codex-code-mode",
+            "text": "Process ID: 7278",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfsd-http",
+            "text": "Process ID: 12552",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "snap",
+            "text": "Process ID: 12930",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "nautilus",
+            "text": "Process ID: 23726",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfsd-trash",
+            "text": "Process ID: 23735",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfsd-recent",
+            "text": "Process ID: 23769",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfsd-network",
+            "text": "Process ID: 23771",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfsd-dnssd",
+            "text": "Process ID: 23782",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "gvfsd-wsdd",
+            "text": "Process ID: 23791",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "python3",
+            "text": "Process ID: 23796",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "firefox",
+            "text": "Process ID: 33744",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "crashhelper",
+            "text": "Process ID: 33981",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "forkserver",
+            "text": "Process ID: 34078",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Socket Process",
+            "text": "Process ID: 34082",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "WebExtensions",
+            "text": "Process ID: 34094",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "RDD Process",
+            "text": "Process ID: 34103",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Isolated Web Co",
+            "text": "Process ID: 34143",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Utility Process",
+            "text": "Process ID: 34733",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Isolated Web Co",
+            "text": "Process ID: 34922",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Web Content",
+            "text": "Process ID: 34925",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Isolated Web Co",
+            "text": "Process ID: 34937",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Privileged Cont",
+            "text": "Process ID: 34958",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Isolated Web Co",
+            "text": "Process ID: 37903",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Isolated Web Co",
+            "text": "Process ID: 38394",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Isolated Web Co",
+            "text": "Process ID: 38399",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75381",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75383",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75384",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75414",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75415",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75461",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75519",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75540",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75541",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 75584",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "dconf",
+            "text": "Process ID: 75674",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "python3",
+            "text": "Process ID: 76255",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "llama-server",
+            "text": "Process ID: 85291",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 86424",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 86475",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "code",
+            "text": "Process ID: 86489",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Isolated Servic",
+            "text": "Process ID: 98182",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Web Content",
+            "text": "Process ID: 101325",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Web Content",
+            "text": "Process ID: 104302",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "Web Content",
+            "text": "Process ID: 105046",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "bash",
+            "text": "Process ID: 105090",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "python",
+            "text": "Process ID: 105172",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "bash",
+            "text": "Process ID: 105174",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "bash",
+            "text": "Process ID: 106148",
+            "evidence": "Observed in this user's /proc entries"
+          },
+          {
+            "title": "python",
+            "text": "Process ID: 106149",
+            "evidence": "Observed in this user's /proc entries"
+          }
+        ],
+        "gaps": [],
+        "context": [],
+        "related": [],
+        "collected_at": "2026-09-14T21:00:40.336819"
+      }
+    }
+  ]
+}
