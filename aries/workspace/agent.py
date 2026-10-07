@@ -231,6 +231,22 @@ async def _run(goal_id, goal, data):
             data.setdefault('gaps', []).append(summary)
         await persist(state)
 
+    async def ask(decision):
+        # Same record shape as the pre-planning question in service.submit, so the
+        # API, speech replies and analytics already know how to show it.
+        from aries.intelligence import budgets
+        from aries.intelligence.context import current
+        metrics['resource_budget']=await budgets.snapshot(current().get('root_id',goal_id))
+        metrics['wall_seconds'] = metrics.get('wall_seconds',0) + round(time.monotonic()-started,3)
+        metrics['wall_seconds_scope'] = 'Active execution invocations, including planning; excludes queue and approval wait'
+        observed = [s['step_id'] for s in data['steps'] if s.get('verification_status') == 'verified']
+        data['clarification'] = {'question':decision.question,'choices':list(decision.choices),
+                                 'source':'planner','observed_in_steps':observed}
+        data['cards'] = [{'title':decision.question,'text':'\n'.join(decision.choices)}]
+        data['summary'] = decision.question
+        agent.update(finished=False, summary=decision.question)
+        await persist('needs_clarification')
+
     # Do not replay a step after uncertain process death, even if somebody queues
     # its row manually. Recovery of legacy bounded plans remains unchanged.
     if any(s.get('execution_status') == 'executing' for s in data['steps']):
@@ -300,6 +316,22 @@ async def _run(goal_id, goal, data):
             if decision is None:
                 await finish('partial' if any(e['verified'] for e in data['evidence']) else 'failed',
                              'Planner decision retry/call budget exhausted; invalid attempts are recorded')
+                return
+            if decision.action == 'ask_clarification':
+                from aries import flags
+                from aries.workspace.clarification import grounded_choices
+                ok, why = (grounded_choices(decision.choices, data['steps'])
+                           if flags.enabled('ARIES_PLANNER_CLARIFY') else (False, 'clarification is switched off'))
+                if not ok:
+                    # Recorded and bounded like any invalid decision; the call budget
+                    # still ends the loop if the model keeps asking without grounds.
+                    metrics['invalid_decisions'] += 1
+                    metrics['ungrounded_clarifications'] = metrics.get('ungrounded_clarifications', 0) + 1
+                    agent['decisions'][-1].update(valid=False, error={'code':'UNGROUNDED_CLARIFICATION','message':why})
+                    agent['completion_feedback'] = 'Clarification rejected: ' + why
+                    await persist()
+                    continue
+                await ask(decision)
                 return
             if decision.action == 'fail' and not data['steps'] and not agent['contract']['supported'] \
                     and (decision.summary or decision.reason):

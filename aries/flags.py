@@ -76,6 +76,10 @@ FLAGS = {
                                 "characters — a NUL, a filtered control character, a line break "
                                 "into a single-line control, a rejected or partially landed write "
                                 "— instead of returning a success carrying landed=false"),
+    "ARIES_PLANNER_CLARIFY": (True, "the planner may stop and ask which target is meant when its own "
+                                    "verified observations show several that fit the goal; every choice "
+                                    "must name something observed. Off removes the option from the "
+                                    "grammar and the prompt"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),

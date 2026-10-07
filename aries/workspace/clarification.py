@@ -46,3 +46,52 @@ def reference_question(request, reference):
                 'choices': ['Наведи точна патека', 'Откажи'] if mk else ['Give the exact path', 'Cancel']}
     return {'question': 'На што точно се однесува барањето? Наведи име или патека.' if mk else 'What exactly does the request refer to? Give a name or path.',
             'choices': ['Наведи конкретно име или патека', 'Откажи'] if mk else ['Give the specific name or path', 'Cancel']}
+
+
+def _observed_strings(value, out, depth=0):
+    if depth > 8:
+        return
+    if isinstance(value, str):
+        text = value.strip()
+        if 3 <= len(text) <= 512:
+            out.add(text)
+            if '/' in text:
+                name = text.rstrip('/').rsplit('/', 1)[-1]
+                if len(name) >= 3:
+                    out.add(name)
+    elif isinstance(value, dict):
+        for item in value.values():
+            _observed_strings(item, out, depth + 1)
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            _observed_strings(item, out, depth + 1)
+
+
+def grounded_choices(choices, steps):
+    """A planner question may only offer what the machine actually showed.
+
+    Returns (ok, reason). A choice is grounded when it contains a path or a name
+    taken from the result of a VERIFIED step of this goal. At least two choices
+    must be grounded; one extra free choice ("cancel", "neither") is tolerated.
+    Without this, "ask" becomes a way to invent candidates instead of guessing one.
+    """
+    observed = set()
+    for step in steps:
+        if step.get('verification_status') == 'verified':
+            _observed_strings(step.get('execution_result'), observed)
+    # A directory that was listed is not itself a candidate: every invented file
+    # under it would otherwise "contain" its path and pass as observed.
+    paths = {o for o in observed if o.startswith('/')}
+    containers = {p for p in paths if any(q != p and q.startswith(p.rstrip('/') + '/') for q in paths)}
+    leaves = {q for q in paths - containers}
+    leaf_names = {q.rstrip('/').rsplit('/', 1)[-1] for q in leaves}
+    container_names = {p.rstrip('/').rsplit('/', 1)[-1] for p in containers} - leaf_names
+    observed -= containers | container_names
+    if not observed:
+        return False, 'no verified observation to take choices from'
+    grounded = [c for c in choices if any(o in c for o in observed)]
+    if len(grounded) < 2:
+        return False, 'fewer than two choices name an observed path or name'
+    if len(choices) - len(grounded) > 1:
+        return False, 'more than one choice names nothing that was observed'
+    return True, ''
