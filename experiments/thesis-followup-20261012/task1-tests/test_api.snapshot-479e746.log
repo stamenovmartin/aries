@@ -1,0 +1,170 @@
+{"ts": "2026-10-12T15:52:52.087421+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-12T15:52:52.087704+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_automation_list_and_detail
+{"ts": "2026-10-12T15:52:52.253014+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the Control Centre lists automations
+PASS  the list shows 'enabled' as section 27 requires
+PASS  the list shows 'version' as section 27 requires
+PASS  the list shows 'purpose' as section 27 requires
+PASS  the list shows 'trigger' as section 27 requires
+PASS  the list shows 'last_run' as section 27 requires
+PASS  the list shows 'next_run' as section 27 requires
+PASS  the list shows 'health' as section 27 requires
+PASS  the list shows 'agents' as section 27 requires
+PASS  the list shows 'permissions' as section 27 requires
+PASS  the list shows 'evolution_history' as section 27 requires
+PASS  the list shows 'due_now' as section 27 requires
+PASS  the list shows 'risk' as section 27 requires
+PASS  it reports the dispatcher's state too
+{"ts": "2026-10-12T15:52:52.260806+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  inspect returns the full genome
+PASS  inspect includes the learning status
+PASS  inspect includes the declared reward signals
+{"ts": "2026-10-12T15:52:52.262160+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 404 Not Found\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an unknown automation is a 404
+--- test_engine_routes_still_work
+{"ts": "2026-10-12T15:52:52.347939+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the engine's own health route still answers
+{"ts": "2026-10-12T15:52:52.354200+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  and so do its task routes
+--- test_interests_over_http
+{"ts": "2026-10-12T15:52:52.446653+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 201 Created\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a topic can be added over HTTP
+PASS  it is stored canonically
+{"ts": "2026-10-12T15:52:52.457064+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 201 Created\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a topic to ignore can be added
+{"ts": "2026-10-12T15:52:52.466262+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an impossible weight is a 400
+{"ts": "2026-10-12T15:52:52.475255+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  text can be scored over HTTP
+PASS  and the score explains which topic matched
+{"ts": "2026-10-12T15:52:52.483363+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an avoided topic disqualifies, and says so
+{"ts": "2026-10-12T15:52:52.492674+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the user's weight still decides
+PASS  what ARIES learned stays visible
+PASS  with its reasoning
+PASS  and marked as overridden
+{"ts": "2026-10-12T15:52:52.503278+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PATCH URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  clearing the user weight promotes the learned one
+PASS  and the origin is reported
+{"ts": "2026-10-12T15:52:52.511845+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: DELETE URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a topic can be removed
+{"ts": "2026-10-12T15:52:52.520123+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PATCH URL() \"HTTP/1.1 404 Not Found\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  and is then a 404
+--- test_learned_values_are_not_writable_as_user
+{"ts": "2026-10-12T15:52:52.618741+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a learned value applies when the user has said nothing
+{"ts": "2026-10-12T15:52:52.631623+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-12T15:52:52.636293+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a user value written over the API outranks it
+PASS  and the learned one stays visible underneath
+--- test_metrics_and_latest_health
+{"ts": "2026-10-12T15:52:52.722525+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  metrics are honest before any run
+{"ts": "2026-10-12T15:52:52.888838+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-12T15:52:52.894047+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  and become a real rate after one
+PASS  the learning status counts tracked metrics
+PASS  and says how many baselines are trusted yet
+PASS  and explains itself in words
+{"ts": "2026-10-12T15:52:52.898164+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the latest health pass is retrievable
+PASS  with every finding, not only the problems
+--- test_notifications_show_what_was_held
+{"ts": "2026-10-12T15:52:52.987055+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-12T15:52:52.998843+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-12T15:52:53.147960+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-12T15:52:53.153366+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  notifications are recorded
+PASS  each says what happened to it
+PASS  and why
+{"ts": "2026-10-12T15:52:53.300426+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-12T15:52:53.305207+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a repeat is recorded as suppressed rather than vanishing
+--- test_pause_and_resume
+{"ts": "2026-10-12T15:52:53.401903+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an automation can be enabled over the API
+{"ts": "2026-10-12T15:52:53.406033+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  and it went through the settings layer as a user value
+{"ts": "2026-10-12T15:52:53.420211+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  pausing works the same way
+PASS  a paused automation has no next run
+--- test_route_permissions
+PASS  reading the Control Centre needs only view_data
+PASS  running an automation needs execute, not schedule
+PASS  pausing one needs schedule
+PASS  changing a setting needs manage_tools
+PASS  an unregistered ARIES path still fails closed on a mutation
+--- test_run_now
+{"ts": "2026-10-12T15:52:53.503895+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 409 Conflict\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  running a disabled automation is refused with 409
+{"ts": "2026-10-12T15:52:53.644860+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  but 'Run now' with force runs it without enabling it
+PASS  the run went through the task lifecycle
+{"ts": "2026-10-12T15:52:53.648967+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  forcing a run did not quietly enable the automation
+{"ts": "2026-10-12T15:52:53.653389+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the run appears in the history
+--- test_settings_surface
+{"ts": "2026-10-12T15:52:53.736090+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  settings can be listed by section
+PASS  each carries the control a UI should render
+{"ts": "2026-10-12T15:52:53.747775+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a setting can be written over the API
+{"ts": "2026-10-12T15:52:53.753056+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an invalid value is a 400, not a stored mistake
+{"ts": "2026-10-12T15:52:53.757397+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  explain names the winning layer
+{"ts": "2026-10-12T15:52:53.767739+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: DELETE URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  clearing it falls back to the default
+{"ts": "2026-10-12T15:52:53.769205+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 404 Not Found\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  an unknown key is a 404
+--- test_source_route_permissions
+PASS  reading the registry needs only view_data
+PASS  adding a source needs manage_tools — it names somewhere ARIES will go
+PASS  removing one does too
+--- test_sources_over_http
+{"ts": "2026-10-12T15:52:53.847626+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the add-source form can be rendered from the type list
+PASS  and each type says whether it leaves the machine
+{"ts": "2026-10-12T15:52:53.863185+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 201 Created\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a source can be added over HTTP
+PASS  it comes back with its health
+{"ts": "2026-10-12T15:52:53.871969+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a source aimed at the metadata endpoint is a 400, not a stored row
+{"ts": "2026-10-12T15:52:53.880684+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 400 Bad Request\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a folder inside privacy.excluded_paths is refused over HTTP
+{"ts": "2026-10-12T15:52:53.892169+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 201 Created\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a legitimate folder is accepted
+{"ts": "2026-10-12T15:52:53.897352+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  sources are listed with a summary
+{"ts": "2026-10-12T15:52:53.904192+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  resolve shows what an agent would consult, in order
+PASS  and states the ordering rule
+{"ts": "2026-10-12T15:52:53.915658+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PATCH URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a source can be paused
+{"ts": "2026-10-12T15:52:53.921270+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a paused source is absent from what an agent gets
+{"ts": "2026-10-12T15:52:53.930002+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  feedback is recorded
+{"ts": "2026-10-12T15:52:53.938482+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: DELETE URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a source can be removed
+{"ts": "2026-10-12T15:52:53.942177+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 404 Not Found\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  and is then a 404
+--- test_worker_surface
+{"ts": "2026-10-12T15:52:54.025322+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the dispatcher's registration is visible
+PASS  the user's switch is reported separately from the task's state
+{"ts": "2026-10-12T15:52:54.039281+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  a tick with the switch off does nothing
+{"ts": "2026-10-12T15:52:54.051168+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: PUT URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-12T15:52:54.066188+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+{"ts": "2026-10-12T15:52:54.278512+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.automations.worker", "msg": "ARIES automations: ran 1, skipped 6", "env": "test", "correlation_id": "36f924a4-2bb2-470c-aa4a-d9c8fa6de25d", "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "worker.py", "line": 119, "func": "dispatch_pass"}}
+{"ts": "2026-10-12T15:52:54.282614+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  with the switch on, the enabled automation runs
+PASS  and a disabled one is left alone
+{"ts": "2026-10-12T15:52:54.303512+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: POST URL() \"HTTP/1.1 200 OK\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
+PASS  the next tick leaves it alone until its interval elapses
+PASS  and says why for each
+ALL PASSED

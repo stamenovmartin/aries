@@ -52,39 +52,63 @@ flowchart TD
 
 ## Results
 
-All figures from a frozen snapshot, `2026-10-06T12:38Z`, commit `f9b500d`. Every one is
-extracted from a raw artifact by script; none is transcribed.
+### The main experiment: what grounds the decision to act (controlled evaluation)
 
-### The main experiment: what grounds the decision to act
+**ARIES-FINAL-20261006.** 225 out-of-distribution utterances (100 actionable, 40 out-of-scope), four additive
+prompt arms, **3 repetitions each = 2,700 router decisions**. Same model (`qwen2.5:7b`, digest `845dbda0…`),
+same rules and frozen source in every arm; the protocol was fixed before the run (sha256 `1dc4d61e…`).
+Pooled counts combine three observations per utterance, so the independent sample size remains 225.
 
-Four additive arms over 225 out-of-distribution utterances (100 actionable, 40 out-of-scope).
-Same model (`qwen2.5:7b`, confidence threshold 0.82), same fixture; only the prompt components
-change.
+| arm | correct act/hold | out-of-scope refused | refusal precision | real requests wrongly refused |
+|---|---|---|---|---|
+| A0 baseline, no refusal vocabulary | 385/675 (57.0%) | 0/120 | never refuses | 15/300 |
+| A1 + `ASK` / `OUT_OF_SCOPE` | **463/675 (68.6%)** | 46/120 | 139/160 | 48/300 |
+| A2 + generated capability surface | 440/675 (65.2%) | 33/120 | 72/73 | 18/300 |
+| A3 + probed machine limits | **463/675 (68.6%)** | 29/120 | 90/93 | 21/300 |
+
+**The predeclared criterion was not met.** A3 − A1 = 0.0 percentage points (descriptive paired case-bootstrap
+95% interval −5.6 to +6.1 pp). Per utterance, 26 improved, 25 got worse and 174 stayed equal. Of the three
+predeclared conditions, only native-semantic non-inferiority held; binary accuracy did not improve and false
+action on out-of-scope requests did not decrease. A paired re-analysis on per-utterance majorities confirms it:
+exact McNemar A3 vs A1 p = 1.0, while A1 vs A0 p = 0.00035
+([`experiments/thesis-followup-20261012/stats.md`](experiments/thesis-followup-20261012/stats.md)).
+
+What grounding (A2, A3) did change is the **kind** of refusal: refusal precision rises from 139/160 (A1) to
+90/93 (A3), and real requests wrongly refused fall from 48/300 to 21/300. But out-of-scope requests refused
+also fall, from 46/120 to 29/120. This is a precision–recall trade-off, not a better signal on both axes.
+
+Sources: `dokazi/final-evaluation.json` in the thesis package (raw data
+`experiments/thesis-final-20261006/raw/`, 12 files, sha256s listed there).
+
+### Historical / pilot: single-run series (superseded by the controlled evaluation above)
+
+Before the controlled evaluation, the same four arms were run **once each** (225 decisions per arm) from a
+snapshot at `2026-10-06T12:38Z`, commit `f9b500d`, with confidence threshold 0.82. These are pilot figures;
+they were not repeated and they did not survive repetition with the same ordering.
 
 | arm | accuracy | out-of-scope refused | refusal precision | real requests wrongly refused |
 |---|---|---|---|---|
 | A0 baseline, no refusal vocabulary | 119/225 | 0/40 | never refuses | 0/100 |
-| A1 + `ASK` / `OUT_OF_SCOPE` | 153/225 | 15/40 | 44/53 | **9/100** |
+| A1 + `ASK` / `OUT_OF_SCOPE` | 153/225 | 15/40 | 44/53 | 9/100 |
 | A2 + generated capability surface | 157/225 | 17/40 | 38/40 | 2/100 |
-| A3 + probed machine limits | **161/225** | **21/40** | **47/48** | **1/100** |
+| A3 + probed machine limits | 161/225 | 21/40 | 47/48 | 1/100 |
 
-Accuracy is the wrong headline. A1 is a configuration nobody should ship: it blocks 9 of every
-100 real requests. The finding is in the last two columns — grounding raises precision *and*
-refuses **more** out-of-scope requests, not fewer. A shifted threshold trades one for the other;
-precision and recall improving together is the signature of a better signal.
+In this single run, A3 looked best on every column, and the interpretation offered at the time was that
+grounding raised precision *and* refused more out-of-scope requests. The controlled evaluation did not
+reproduce that: out-of-scope refusal was highest in A1.
 
-Three things that keep this honest:
+Context that applies to both series:
 
-- **47/48 is refusal precision**, not system accuracy. In the same arm only 21 of 40 out-of-scope
-  requests were caught.
-- A trivial system that refuses everything scores **125/225**. Every accuracy figure must be read
+- **47/48 (pilot) and 90/93 (controlled) are refusal precision**, not system accuracy.
+- A trivial system that refuses everything scores **125/225** per run. Every accuracy figure must be read
   against that.
-- Model confidence alone separates the two populations at **AUC 0.725** on the English fixture.
-  It carries information; it does not yield a usable threshold. Without refusal words in the
-  intent vocabulary the router refused **0 of 229** utterances — not from certainty, but from
-  having no way to say no.
+- Model confidence alone separated the two populations at **AUC 0.725** on the English fixture (earlier analysis; not recomputed in the controlled evaluation).
+  Without refusal words in the intent vocabulary the router refused **0 of 229** utterances, not from
+  certainty but from having no way to say no.
 
 ### What "verified" actually means
+
+From the frozen snapshot `2026-10-06T12:38Z`, commit `f9b500d`; extracted from raw artifacts by script.
 
 All 58 verifiers were classified, 57 of them with executed proof.
 
