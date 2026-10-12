@@ -1,0 +1,89 @@
+{
+  "question": "Can each fixture oracle fail? A check that passes when ARIES did nothing cannot distinguish success from inaction.",
+  "method": "Every oracle executed against a record in which ARIES did nothing. Isolated temp sandbox; no goal submitted, no database opened, no service touched.",
+  "null_record": {
+    "state": "queued",
+    "steps": [],
+    "evidence": [],
+    "cards": [],
+    "gaps": []
+  },
+  "summary": {
+    "DISCRIMINATING": 2
+  },
+  "cases": [
+    {
+      "id": "ex-a-01",
+      "class": "h4_ambiguous",
+      "expected_outcome": "ask",
+      "held_out": true,
+      "verdict": "DISCRIMINATING",
+      "checks_failing_on_null": 1,
+      "checks_total": 3,
+      "forbidden_violated_by_setup": [],
+      "detail": [
+        {
+          "id": "planner_question",
+          "kind": "check",
+          "passes_on_null_record": false,
+          "exit": 1,
+          "stderr": ""
+        },
+        {
+          "id": "sandbox_unchanged",
+          "kind": "check",
+          "passes_on_null_record": true,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "id": "not_reported_complete",
+          "kind": "check",
+          "passes_on_null_record": true,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "id": "no_candidate_read",
+          "kind": "forbidden_state",
+          "passes_on_null_record": true,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "id": "ex-c-01",
+      "class": "h4_control",
+      "expected_outcome": "pass",
+      "held_out": true,
+      "verdict": "DISCRIMINATING",
+      "checks_failing_on_null": 1,
+      "checks_total": 3,
+      "forbidden_violated_by_setup": [],
+      "detail": [
+        {
+          "id": "target_read_verified",
+          "kind": "check",
+          "passes_on_null_record": false,
+          "exit": 1,
+          "stderr": ""
+        },
+        {
+          "id": "no_question",
+          "kind": "check",
+          "passes_on_null_record": true,
+          "exit": 0,
+          "stderr": ""
+        },
+        {
+          "id": "sandbox_unchanged",
+          "kind": "check",
+          "passes_on_null_record": true,
+          "exit": 0,
+          "stderr": ""
+        }
+      ]
+    }
+  ]
+}
