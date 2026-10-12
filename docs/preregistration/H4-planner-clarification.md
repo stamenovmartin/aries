@@ -76,3 +76,29 @@ result is 0 of 10, since the control condition cannot ask after planning begins.
 Criterion 1 not met means the structural fix is insufficient for this model.
 Criterion 2 not met means the model asks too readily. Criterion 3 not met means
 the option harms other behaviour. Each of these is reported as a result.
+
+## Amendment 1 (2026-10-12), before any measurement
+
+Added after registration and before any H4 measurement. The text above is unchanged.
+
+**Why.** A second behaviour change now exists on the branch: `ARIES_COMPLETION_READ_PARAPHRASE` (commit
+`fecfe86`), the fix for the missing completion contracts found in `docs/analysis/terminal-state-diagnosis.md`.
+If it differed between the two H4 conditions, or were left to its default, a difference between conditions
+could come from completion rather than from asking.
+
+**What is fixed.**
+
+1. `ARIES_COMPLETION_READ_PARAPHRASE=0` in **both** H4 conditions (`ARIES_PLANNER_CLARIFY=1` and `=0`). H4 was
+   registered for the system without that fix, so H4 measures only the registered change. The flag's default is
+   on, so each run sets it explicitly. A run whose recorded effective value (`aries.flags.describe()` read from
+   the running instance) differs is invalid and is reported, not rerun silently.
+2. The completion fix is measured **separately** and labelled as such: `ARIES_PLANNER_CLARIFY=1` with
+   `ARIES_COMPLETION_READ_PARAPHRASE=1`, 3 runs, on the same materials. It is **not** part of H4 and does not
+   enter criteria 1–3. Because the fix was designed after looking at the held-out fixture, its result on that
+   fixture is reported as "discovered by diagnosis, fixed, measured on the same fixture", with no claim of
+   generalisation.
+3. All other flags stay at the values recorded in each run's artifact; none is changed between conditions.
+
+**Not an amendment, recorded for completeness.** The code under test includes `1a4bc47`, which restricts
+grounding to path-like observations and their final component. This implements the registered rule ("a path or
+name taken from verified step results") and does not change it.
