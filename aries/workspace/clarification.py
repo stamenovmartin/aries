@@ -52,13 +52,15 @@ def _observed_strings(value, out, depth=0):
     if depth > 8:
         return
     if isinstance(value, str):
+        # Only path-like strings count, plus their final component. Free text and
+        # field values such as "file" or "directory" must not ground a choice:
+        # otherwise "some other file" would pass as observed.
         text = value.strip()
-        if 3 <= len(text) <= 512:
+        if '/' in text and 3 <= len(text) <= 512 and '\n' not in text:
             out.add(text)
-            if '/' in text:
-                name = text.rstrip('/').rsplit('/', 1)[-1]
-                if len(name) >= 3:
-                    out.add(name)
+            name = text.rstrip('/').rsplit('/', 1)[-1]
+            if len(name) >= 3:
+                out.add(name)
     elif isinstance(value, dict):
         for item in value.values():
             _observed_strings(item, out, depth + 1)
