@@ -1,0 +1,159 @@
+{
+ "arms": {
+  "A0": {
+   "binary": {
+    "k": 376,
+    "n": 675,
+    "pct": 55.7037037037037
+   },
+   "semantic_native": {
+    "k": 76,
+    "n": 168,
+    "pct": 45.23809523809524
+   },
+   "ood_out_of_scope": {
+    "k": 0,
+    "n": 120,
+    "pct": 0.0
+   },
+   "ood_false_action": {
+    "k": 71,
+    "n": 120,
+    "pct": 59.166666666666664
+   },
+   "abstention_precision": {
+    "k": 0,
+    "n": 0,
+    "pct": null
+   },
+   "false_holds": {
+    "k": 47,
+    "n": 300,
+    "pct": 15.666666666666666
+   },
+   "errors": 0
+  },
+  "A1": {
+   "binary": {
+    "k": 390,
+    "n": 675,
+    "pct": 57.77777777777778
+   },
+   "semantic_native": {
+    "k": 72,
+    "n": 168,
+    "pct": 42.857142857142854
+   },
+   "ood_out_of_scope": {
+    "k": 1,
+    "n": 120,
+    "pct": 0.8333333333333334
+   },
+   "ood_false_action": {
+    "k": 75,
+    "n": 120,
+    "pct": 62.5
+   },
+   "abstention_precision": {
+    "k": 7,
+    "n": 7,
+    "pct": 100.0
+   },
+   "false_holds": {
+    "k": 36,
+    "n": 300,
+    "pct": 12.0
+   },
+   "errors": 0
+  },
+  "A2": {
+   "binary": {
+    "k": 405,
+    "n": 675,
+    "pct": 60.0
+   },
+   "semantic_native": {
+    "k": 102,
+    "n": 168,
+    "pct": 60.714285714285715
+   },
+   "ood_out_of_scope": {
+    "k": 2,
+    "n": 120,
+    "pct": 1.6666666666666667
+   },
+   "ood_false_action": {
+    "k": 64,
+    "n": 120,
+    "pct": 53.333333333333336
+   },
+   "abstention_precision": {
+    "k": 8,
+    "n": 8,
+    "pct": 100.0
+   },
+   "false_holds": {
+    "k": 12,
+    "n": 300,
+    "pct": 4.0
+   },
+   "errors": 0
+  },
+  "A3": {
+   "binary": {
+    "k": 419,
+    "n": 675,
+    "pct": 62.074074074074076
+   },
+   "semantic_native": {
+    "k": 96,
+    "n": 168,
+    "pct": 57.142857142857146
+   },
+   "ood_out_of_scope": {
+    "k": 1,
+    "n": 120,
+    "pct": 0.8333333333333334
+   },
+   "ood_false_action": {
+    "k": 68,
+    "n": 120,
+    "pct": 56.666666666666664
+   },
+   "abstention_precision": {
+    "k": 6,
+    "n": 6,
+    "pct": 100.0
+   },
+   "false_holds": {
+    "k": 13,
+    "n": 300,
+    "pct": 4.333333333333333
+   },
+   "errors": 0
+  }
+ },
+ "paired": {
+  "comparison": "A3-A1",
+  "mean_difference_pp": 4.296296296296297,
+  "case_bootstrap_95_interval_pp": [
+   0.0,
+   8.74074074074074
+  ],
+  "bootstrap_samples": 2000,
+  "independent_units": 225,
+  "case_mean_improved": 23,
+  "case_mean_worse": 12,
+  "case_mean_equal": 190
+ },
+ "criterion": {
+  "binary_improves": true,
+  "native_semantic_noninferiority_2pp": true,
+  "ood_false_action_decreases": true,
+  "note": "Declared for qwen2.5:7b in ARIES-FINAL-20261006; evaluated here descriptively, not as a new hypothesis.",
+  "all_met": true
+ },
+ "models_seen": [
+  "llama3.1:8b"
+ ]
+}
