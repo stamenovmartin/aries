@@ -1,0 +1,100 @@
+{
+ "label": "confirmation after the fix (H4 Amendment 2); NOT independent evidence: ARIES_PLANNER_CLARIFY_GUARD was designed after the p20-p22 failure of the Task 3.2 run",
+ "source": {
+  "commit": "a2d1609",
+  "tag": "h4-frozen-20261012",
+  "archive": "var/followup-source/a2d1609",
+  "differs_from_task3.2_source_79d1f23": [
+   "aries/flags.py",
+   "aries/workspace/agent_planner.py"
+  ]
+ },
+ "flags_effective": {
+  "ARIES_PLANNER_CLARIFY": {
+   "on": true,
+   "source": "environment"
+  },
+  "ARIES_PLANNER_CLARIFY_GUARD": {
+   "on": true,
+   "source": "environment"
+  },
+  "ARIES_COMPLETION_READ_PARAPHRASE": {
+   "on": false,
+   "source": "environment"
+  }
+ },
+ "run": "task3-planner-guard/runs/20261012T193022.180980Z",
+ "complete": true,
+ "model_stable": true,
+ "source_stable": true,
+ "model_digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+ "guard": {
+  "attempted": 72,
+  "denominator": 72,
+  "schema_valid": {
+   "correct": 72,
+   "denominator": 72
+  },
+  "capability_correct": {
+   "correct": 69,
+   "denominator": 72
+  },
+  "capability_arguments_correct": {
+   "correct": 69,
+   "denominator": 72
+  }
+ },
+ "independent_validation": {
+  "passed": 22,
+  "total": 22
+ },
+ "clarify_only_task3.2": {
+  "attempted": 72,
+  "denominator": 72,
+  "schema_valid": {
+   "correct": 63,
+   "denominator": 72
+  },
+  "capability_correct": {
+   "correct": 60,
+   "denominator": 72
+  },
+  "capability_arguments_correct": {
+   "correct": 60,
+   "denominator": 72
+  }
+ },
+ "frozen_ARIES-FINAL-20261006": {
+  "attempted": 72,
+  "denominator": 72,
+  "schema_valid": {
+   "correct": 72,
+   "denominator": 72
+  },
+  "capability_correct": {
+   "correct": 68,
+   "denominator": 72
+  },
+  "capability_arguments_correct": {
+   "correct": 68,
+   "denominator": 72
+  }
+ },
+ "per_case_changes_vs_clarify_only": {
+  "p20": "0/3 -> 3/3",
+  "p21": "0/3 -> 3/3",
+  "p22": "0/3 -> 3/3"
+ },
+ "remaining_failures": {
+  "p12": "0/3 in both follow-up runs"
+ },
+ "prompts_changed_by_guard": [
+  "p05",
+  "p06",
+  "p07",
+  "p20",
+  "p21",
+  "p22"
+ ],
+ "reporting": "The 68/72 -> 60/72 drop with ARIES_PLANNER_CLARIFY alone is reported regardless of this run. 69/72 vs frozen 68/72 is a difference of one attempt in one run and is not claimed as an improvement."
+}
