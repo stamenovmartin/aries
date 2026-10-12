@@ -23,4 +23,4 @@ Generic HTTP refusal and unstructured clarification are not credited.
 File and package cases do not test adaptive planning or ASR.
 Runtime stability covers the recorded core invocation and source hashes only; other clients are not isolated. No causal latency claim.
 No 48-hour stability or acoustic playback acceptance claim.
-Reference submit path measured separately1/8 to8/8. Router candidate was incidentally deployed by the reviewing agent and remains rejected/pending coordinated rollback. All60 retain locked desktop and two missing-file refusal failures.
+Reference submit path measured separately1/8 to8/8. Router candidate was incidentally deployed by Claude and remains rejected/pending coordinated rollback. All60 retain locked desktop and two missing-file refusal failures.

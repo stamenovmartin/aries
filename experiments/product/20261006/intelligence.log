@@ -70,10 +70,10 @@ PASS  gateway health honest on runtime outage
 {"ts": "2026-10-06T09:45:20.231970+00:00", "severity": "INFO", "service": "agentic-core", "logger": "httpx", "msg": "HTTP Request: GET URL() \"HTTP/1.1 403 Forbidden\"", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "_client.py", "line": 1740, "func": "_send_single_request"}}
 PASS  LAN peer refused
 --- test_terminal_cloud_protocol_and_boundaries
-PASS  the reviewing agent tools disabled while login retained
+PASS  Claude tools disabled while login retained
 PASS  Codex shell and app tools disabled
 PASS  prompt passed via stdin not executable argv
-PASS  the reviewing agent cached and uncached usage measured separately
+PASS  Claude cached and uncached usage measured separately
 PASS  Codex JSONL native usage parsed
 PASS  CLI failure/tool attempt never becomes success claude-cli
 PASS  CLI failure/tool attempt never becomes success codex-cli

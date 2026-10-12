@@ -10,7 +10,7 @@ comparison. Earlier required acceptance items remain in scope.
 | 1.2 failure causes | Fresh rule-based14day census, large unknown bucket | Review root causes, fix leading2, observe48h; include test-goal confounding |
 | Common benchmark | 60case fixture/runner built; initial run incomplete | Complete stable baseline, same frozen fixture after each change |
 | API responsiveness blocker | Before0/5 requests within8s; focused fix tested | Drained deploy and same5 live requests; baseline rerun |
-| 2.1 SQLite | Static the reviewing agent writer audit retained | Fresh before/after48h logs with actual time coverage and workload; fallback writer lock risk remains |
+| 2.1 SQLite | Static Claude writer audit retained | Fresh before/after48h logs with actual time coverage and workload; fallback writer lock risk remains |
 | 2.2 self-listening | Not closed | Same10minute music/Ari test before/after; accepted command count and monitored duration |
 | 3.1 local/cloud planner | No routing switch authorized by a score | Same-day samefixture accuracy, latency, JSON validity for both; user makes routing decision |
 | 3.2 router | Pending | >=200 mk/en, >=30OOD, >=30ambiguous; accuracy/ECE/false confidence; abstention |
@@ -26,4 +26,4 @@ suite is not a substitute for live before/after measurements or elapsed48hours.
 
 ## Resume 2026-10-03
 
-Frozen60 same-day pair completed; generated comparison: `../../assistant-benchmark/20261003-file-parser-comparison/REPORT.md`. Parser scope completed with live evidence; ambiguous/refusal predicates remain unmet. Prior dates above are historical, not current measurements. the reviewing agent observed doing live voice/input work; requested evidence via COORDINATION.md, no acknowledgment yet.
+Frozen60 same-day pair completed; generated comparison: `../../assistant-benchmark/20261003-file-parser-comparison/REPORT.md`. Parser scope completed with live evidence; ambiguous/refusal predicates remain unmet. Prior dates above are historical, not current measurements. Claude observed doing live voice/input work; requested evidence via COORDINATION.md, no acknowledgment yet.

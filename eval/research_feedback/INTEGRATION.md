@@ -1,11 +1,11 @@
-# Handoff to the main thread / the reviewing agent
+# Handoff to the main thread / Claude
 
 Update: run_loop.py now connects the four-condition adapter to production agent.run,
 Decision parsing, file execution/verification/completion and a real local LLM in a scratch
 process. See README.md and runs/ for actual evidence. This supersedes the earlier statement
 that this directory has only an offline building block; it does not deploy the adapter into
 the live API planner or complete the broader benchmark. Static findings below describe the
-earlier inspected source; the reviewing agent subsequently reported production fixes in COORDINATION.md.
+earlier inspected source; Claude subsequently reported production fixes in COORDINATION.md.
 
 This side conversation owns only this new directory. No production file was edited,
 no deployment or measurement was started, no shared git index was touched.

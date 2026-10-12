@@ -8,7 +8,7 @@ microphone to.
 
 Written by **agent/fixture on 2026-10-03** as item A7's fixture half. Part A is
 writing it. **Part B — running it — is not in this directory and is not mine**;
-`aries/intelligence/router.py` belongs to the reviewing agent/main today, so there is no
+`aries/intelligence/router.py` belongs to claude/main today, so there is no
 runner here on purpose. The only script besides the builder is `check.py`, which
 validates the JSON and prints counts and calls nothing.
 

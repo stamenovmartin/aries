@@ -135,9 +135,9 @@ Stated here rather than buried, because the brief's list was
   `ARIES_TILE_HIDPI`.
 * `aries/flags.py` — two entries appended to `FLAGS`, because
   `flags.enabled()` raises on an unregistered name and the workplan requires
-  every flag to be readable from one place. the reviewing agent/main owns this file for A0; the
+  every flag to be readable from one place. claude/main owns this file for A0; the
   change is additive and inside the dict. It was untracked when I started;
-  the reviewing agent/main then committed the file WITH my two entries in it as part of
+  claude/main then committed the file WITH my two entries in it as part of
   `bec1816 A4+A0`, so the hunk is already in history under that commit and is not
   in mine. Noted here so the authorship is findable.
 

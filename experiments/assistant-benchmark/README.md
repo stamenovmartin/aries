@@ -37,7 +37,7 @@ and two read-only stack samples found JSON serialization on the API main thread.
 That responsiveness defect is being measured/fixed before the full rerun.
 
 The repository also contains `experiments/aries100`, used by another concurrent
-the reviewing agent session. Do not run both corpora concurrently or merge their denominators.
+Claude session. Do not run both corpora concurrently or merge their denominators.
 The 60-case fixture here lacks email, media controls, typing, HiDPI and service
 control. Those require additional fixtures and approval/environment evidence;
 a pass here cannot close those acceptance items.
