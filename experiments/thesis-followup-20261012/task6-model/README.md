@@ -22,8 +22,13 @@ technical errors that look like bad decisions.
 - Timestamps, service states and the models loaded in Ollama at start are recorded in `run-conditions.json`.
 - Ollama itself is a separate user service and keeps running.
 
-It is scheduled overnight as the transient user timer `aries-task6-overnight.timer`, at 2026-10-13 01:00 CEST. The
-machine's suspend settings were checked (GNOME on AC: never; ARIES `power.allow_suspend`: false).
+It was first scheduled as the transient user timer `aries-task6-overnight.timer` for 2026-10-13 01:00 CEST. **On
+the author's instruction it was started early instead**: the timer was cancelled and the job started at
+2026-10-12 19:35 UTC as the transient unit `aries-task6-now.service` running `run-now.sh`. The procedure is the same
+because `run-now.sh` calls `overnight.sh` unchanged. The only addition is that screen blanking is off for the
+duration: GNOME `idle-delay` is set to 0 (it was 60 s) and an idle inhibitor is held, and both are restored on exit.
+This is logged in `overnight.log`. The machine's suspend settings were checked (GNOME on AC: never; ARIES
+`power.allow_suspend`: false).
 
 ## Files
 
