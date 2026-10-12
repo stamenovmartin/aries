@@ -1,0 +1,156 @@
+START r1-A2
+2026-10-12T17:05:00.757177+00:00 r1-A2 25/225
+2026-10-12T17:05:16.804650+00:00 r1-A2 50/225
+2026-10-12T17:05:40.902873+00:00 r1-A2 75/225
+2026-10-12T17:06:03.775985+00:00 r1-A2 100/225
+2026-10-12T17:06:22.015329+00:00 r1-A2 125/225
+2026-10-12T17:06:37.914150+00:00 r1-A2 150/225
+2026-10-12T17:06:55.459877+00:00 r1-A2 175/225
+2026-10-12T17:07:13.174131+00:00 r1-A2 200/225
+2026-10-12T17:07:31.270785+00:00 r1-A2 225/225
+START r1-A0
+2026-10-12T17:07:48.972097+00:00 r1-A0 25/225
+2026-10-12T17:08:01.005664+00:00 r1-A0 50/225
+2026-10-12T17:08:17.141307+00:00 r1-A0 75/225
+2026-10-12T17:08:34.821596+00:00 r1-A0 100/225
+2026-10-12T17:08:49.794523+00:00 r1-A0 125/225
+2026-10-12T17:09:02.626936+00:00 r1-A0 150/225
+2026-10-12T17:09:19.181377+00:00 r1-A0 175/225
+2026-10-12T17:09:37.124139+00:00 r1-A0 200/225
+2026-10-12T17:09:52.765636+00:00 r1-A0 225/225
+START r1-A3
+2026-10-12T17:10:14.758477+00:00 r1-A3 25/225
+2026-10-12T17:10:30.446568+00:00 r1-A3 50/225
+2026-10-12T17:10:49.561996+00:00 r1-A3 75/225
+2026-10-12T17:11:11.041716+00:00 r1-A3 100/225
+2026-10-12T17:11:28.771879+00:00 r1-A3 125/225
+2026-10-12T17:11:45.685805+00:00 r1-A3 150/225
+2026-10-12T17:12:03.728714+00:00 r1-A3 175/225
+2026-10-12T17:12:21.275598+00:00 r1-A3 200/225
+2026-10-12T17:12:38.964683+00:00 r1-A3 225/225
+START r1-A1
+2026-10-12T17:12:57.349558+00:00 r1-A1 25/225
+2026-10-12T17:13:11.225234+00:00 r1-A1 50/225
+2026-10-12T17:13:27.863792+00:00 r1-A1 75/225
+2026-10-12T17:13:48.285277+00:00 r1-A1 100/225
+2026-10-12T17:14:04.533590+00:00 r1-A1 125/225
+2026-10-12T17:14:18.206055+00:00 r1-A1 150/225
+2026-10-12T17:14:36.524304+00:00 r1-A1 175/225
+2026-10-12T17:14:55.076684+00:00 r1-A1 200/225
+2026-10-12T17:15:12.373333+00:00 r1-A1 225/225
+START r2-A1
+2026-10-12T17:15:34.228653+00:00 r2-A1 25/225
+2026-10-12T17:15:47.260367+00:00 r2-A1 50/225
+2026-10-12T17:16:02.962553+00:00 r2-A1 75/225
+Traceback (most recent call last):
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task6-model/run_router_second_model.py", line 121, in cell
+    try: row.update((await router.route(db,row['utterance'],provider=provider,allow_contract=True)).model_dump())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/experiments/thesis-final-20261006/frozen/aries/intelligence/router.py", line 167, in route
+    decision=await selected.decide(db,text)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task6-model/run_router_second_model.py", line 112, in decide
+    self.raw,self.usage=await local_structured(db,[{'role':'system','content':self.instruction()},
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/experiments/thesis-final-20261006/frozen/aries/intelligence/__init__.py", line 74, in local_structured
+    result = await generate(db, messages, schema, purpose=purpose, max_tokens=max_tokens, force_local=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/experiments/thesis-final-20261006/frozen/aries/intelligence/generation.py", line 123, in generate
+    try:g=await attempt(level)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/experiments/thesis-final-20261006/frozen/aries/intelligence/generation.py", line 101, in attempt
+    else:g=await local_generate(cfg,messages,schema,max_tokens)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/experiments/thesis-final-20261006/frozen/aries/intelligence/generation.py", line 49, in local_generate
+    return await p.generate(messages,schema,budget,**tune)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/experiments/thesis-final-20261006/frozen/aries/intelligence/providers.py", line 48, in generate
+    r=await c.post(self.url+'/api/chat',json={'model':self.model,'messages':messages,
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1859, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 35, in read
+    return await self._stream.receive(max_bytes=max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/aries/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1407, in receive
+    await self._protocol.read_event.wait()
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task6-model/run_router_second_model.py", line 152, in <module>
+    asyncio.run(cell(e['rep'],e['arm'],HERE/'raw'/f"r{e['rep']}-{e['arm']}.jsonl",e['ids']))
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/asyncio/runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task6-model/run_router_second_model.py", line 157, in <module>
+    elif a.run: run_all()
+                ^^^^^^^^^
+  File "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task6-model/run_router_second_model.py", line 136, in run_all
+    subprocess.run([sys.executable,str(Path(__file__).resolve()),'--cell',str(e['rep']),e['arm']],check=True)
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1201, in communicate
+    self.wait()
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 2053, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ^^^^^^^^^^^^^^^^^
+  File "/home/stamenovmartin/.local/share/uv/python/cpython-3.12.14-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 2011, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
