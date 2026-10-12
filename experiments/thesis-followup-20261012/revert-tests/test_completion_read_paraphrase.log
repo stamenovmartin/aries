@@ -1,0 +1,36 @@
+{"ts": "2026-10-12T16:52:19.663194+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-12T16:52:19.663494+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_correct_finish_is_accepted
+PASS  flag on: verified read of the requested file ends done
+PASS  answer is built from verified evidence, not model prose
+--- test_existence_answer_is_verified
+PASS  existence goal ends done on a verified absence
+PASS  existence answer states the re-checked fact
+--- test_flag_off_is_the_frozen_compiler
+PASS  flag-off corpus is non-trivial
+PASS  flag off: identical to ARIES-FINAL-20261006 on every corpus goal
+--- test_flag_off_keeps_the_old_behaviour
+PASS  flag off: same goal has no contract
+PASS  flag off: same goal does not reach done
+--- test_incorrect_finish_is_still_rejected
+PASS  finish on evidence for a different file is not done
+PASS  the rejection is recorded as a completion check
+PASS  finish without evidence is not done
+PASS  the file really changed before the finish was checked
+PASS  a read made stale before finish is not done (recheck still applies)
+--- test_recogniser_is_closed
+PASS  natural read compiles to file.read
+PASS  trailing period stripped from an anchored read
+PASS  without the flag the period stays (frozen behaviour)
+PASS  existence question compiles to file.exists on the named file
+PASS  "list what is inside" is a listing, not a read
+PASS  list-and-read compound compiles
+PASS  stays unsupported: Pull up /h/p/a.md and delete it.
+PASS  stays unsupported: Summarise /h/p/a.md for me.
+PASS  stays unsupported: Read /h/p/a.md and /h/p/b.md.
+PASS  stays unsupported: Show me /h/p/a.md and email it to my mentor.
+PASS  stays unsupported: Read me the notes from my thesis project.
+PASS  stays unsupported: Tell me if /h/p/a.md mentions the budget.
+PASS  stays unsupported: Print two copies of /h/p/report.txt on the office printer.
+PASS  stays unsupported: Read /h/p/a.md then move it to /h/q.
+ALL PASSED

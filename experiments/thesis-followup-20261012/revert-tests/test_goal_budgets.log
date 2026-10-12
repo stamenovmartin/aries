@@ -1,0 +1,16 @@
+--- test_parallel_children_share_atomic_limits
+PASS  exactly three of twelve racing children admitted
+PASS  reservations never overspend shared call/token cap
+PASS  duplicate settlement cannot refund twice
+PASS  resume cannot reset or widen original budget
+--- test_tool_deadlines_and_provider_boundary
+PASS  verification consumes shared tool budget
+PASS  expired root refuses dispatch
+PASS  budget refusal occurs before second provider invocation
+PASS  measured tokens settle conservative reservation
+--- test_unknown_usage_and_unpriced_calls_fail_closed
+PASS  unknown consumption retained and root held
+PASS  uncertain call cannot fund a fresh sibling retry
+PASS  positive cost cap refuses unknown CLI price
+PASS  reported cost overrun is debt and holds root
+ALL PASSED

@@ -1,10 +1,10 @@
 # Terminal cloud integration validation
 
-Cloud uses installed `the reviewing agent` / `codex` authentication. This installation has
+Cloud uses installed `claude` / `codex` authentication. This installation has
 cloud enabled with `codex-cli` selected. No new API key was required.
 
 - Codex direct constrained decision: passed, native usage recorded.
-- the reviewing agent initial request: session quota 429, explicitly failed.
+- Claude initial request: session quota 429, explicitly failed.
 - Real Codex execution A/B: A 3/3, B 3/3, including an expected failed missing-file task.
 - A: 6 cloud calls, 77,151 native total tokens including cached input.
 - B: 0 cloud calls, 4 local calls plus deterministic system probe.
