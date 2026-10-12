@@ -18,6 +18,12 @@ The optional mixed-effects logistic model runs only if statsmodels is importable
 (e.g. var/venv-stats/bin/python, kept separate from the ARIES runtime venv).
 
     python3 scripts/thesis_stats.py <final-evaluation.json> <out-dir>
+
+Second model (same tests, same frozen scorer, same reproduction gate): pass the run's
+summary.json written by analyze_second_model.py. Raw files are read from its folder's raw/,
+and the hashes, totals and paired counts the gate must reproduce come from that summary.
+
+    python3 scripts/thesis_stats.py --second-model <task6-model/summary.json> <out-dir>
 """
 import hashlib
 import importlib.util
@@ -109,16 +115,26 @@ def mixed_effects(score, ids):
                     'terms': gee_terms, 'working_correlation': float(gee.model.cov_struct.dep_params)}}
 
 
-def main(evaluation_path, out_dir):
+def main(evaluation_path, out_dir, second_model=False):
     evaluation = json.loads(Path(evaluation_path).read_text())
-    expected_hashes = evaluation['router']['raw_sha256']
+    raw_dir, published, published_paired = FROZEN / 'raw', PUBLISHED, PUBLISHED_PAIRED
+    experiment = 'ARIES-FINAL-20261006 router, re-analysis only (no new inference)'
+    if second_model:
+        raw_dir = Path(evaluation_path).resolve().parent / 'raw'
+        expected_hashes = evaluation['raw_sha256']
+        published = {a: evaluation['arms'][a]['binary']['k'] for a in ARMS}
+        published_paired = {k: evaluation['paired'][k] for k in PUBLISHED_PAIRED}
+        experiment = ('ARIES-FINAL-20261006 router protocol, second model ' + evaluation['model']['name']
+                      + ', re-analysis of its run (no new inference)')
+    else:
+        expected_hashes = evaluation['router']['raw_sha256']
     correct = frozen_scorer()
 
     rows, hashes = {}, {}
     for arm in ARMS:
         for rep in (1, 2, 3):
             name = f'r{rep}-{arm}.jsonl'
-            raw = (FROZEN / 'raw' / name).read_bytes()
+            raw = (raw_dir / name).read_bytes()
             hashes[name] = hashlib.sha256(raw).hexdigest()
             for line in raw.decode().splitlines():
                 r = json.loads(line)
@@ -136,9 +152,9 @@ def main(evaluation_path, out_dir):
     reproduction = {
         'raw_files_sha256_match': hash_ok,
         'n_requests': len(ids), 'n_decisions': len(rows),
-        'totals': {a: {'k': totals[a], 'n': 3 * len(ids), 'published_k': PUBLISHED[a],
-                       'match': totals[a] == PUBLISHED[a]} for a in ARMS},
-        'A3_vs_A1_case_means': {**paired, 'published': PUBLISHED_PAIRED, 'match': paired == PUBLISHED_PAIRED},
+        'totals': {a: {'k': totals[a], 'n': 3 * len(ids), 'published_k': published[a],
+                       'match': totals[a] == published[a]} for a in ARMS},
+        'A3_vs_A1_case_means': {**paired, 'published': published_paired, 'match': paired == published_paired},
     }
     reproduced = (all(hash_ok.values()) and len(ids) == 225 and len(rows) == 2700
                   and all(v['match'] for v in reproduction['totals'].values())
@@ -162,10 +178,10 @@ def main(evaluation_path, out_dir):
                                 'n': len(ids), 'p_value': mcnemar_exact(b, c)}
     q, df = cochran_q([[majority[a][i] for a in ARMS] for i in ids])
     result = {
-        'experiment': 'ARIES-FINAL-20261006 router, re-analysis only (no new inference)',
+        'experiment': experiment,
         'source': {'final_evaluation': str(evaluation_path),
                    'final_evaluation_sha256': hashlib.sha256(Path(evaluation_path).read_bytes()).hexdigest(),
-                   'raw_dir': str((FROZEN / 'raw').relative_to(ROOT)), 'raw_sha256': hashes,
+                   'raw_dir': str(raw_dir.relative_to(ROOT)), 'raw_sha256': hashes,
                    'scorer': 'experiments/thesis-final-20261006/analyze_router.py::correct',
                    'scorer_sha256': hashlib.sha256((FROZEN / 'analyze_router.py').read_bytes()).hexdigest()},
         'reproduction': reproduction,
@@ -185,4 +201,6 @@ def main(evaluation_path, out_dir):
 
 
 if __name__ == '__main__':
+    if sys.argv[1] == '--second-model':
+        sys.exit(main(*sys.argv[2:4], second_model=True))
     sys.exit(main(*sys.argv[1:3]))
