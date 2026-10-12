@@ -158,7 +158,7 @@ Source: `task6-model/summary.json` (frozen scorer `analyze_router.py`) and `task
 - **Cochran's Q** = 11.53, p = 0.0092.
 - **Bootstrap:** A3 − A1 = +4.3 pp, case-bootstrap 95% interval [0.0, +8.7].
 - **Reading:**
-  - llama is lower in every arm and almost never declines: 6–8 abstentions per arm, versus 73–160 for qwen.
+  - llama is lower in every arm and almost never declines: 6–8 abstentions per arm in A1–A3 (0 in A0), versus 73–160 for qwen.
   - A3 vs A1 leans towards A3, but the evidence is borderline and not robust.
   - qwen's robust A1 > A0 does not replicate.
   - The predeclared qwen criterion is met for llama, but only descriptively, because it was not declared for llama.
