@@ -14,7 +14,8 @@ as correct in an arm when at least 2 of its 3 decisions are correct. On that:
   - exact McNemar tests (two-sided binomial on the discordant pairs) for A3 vs A1,
     A2 vs A1 and A1 vs A0;
   - Cochran's Q across A0..A3 (chi-square with 3 df).
-The optional mixed-effects logistic model runs only if statsmodels is importable.
+The optional mixed-effects logistic model runs only if statsmodels is importable
+(e.g. var/venv-stats/bin/python, kept separate from the ARIES runtime venv).
 
     python3 scripts/thesis_stats.py <final-evaluation.json> <out-dir>
 """
@@ -64,6 +65,48 @@ def cochran_q(table):
     denominator = k * total - sum(x * x for x in row)
     q = (k - 1) * (k * sum(x * x for x in col) - total ** 2) / denominator if denominator else 0.0
     return q, k - 1
+
+
+def mixed_effects(score, ids):
+    """Logistic models on all 2,700 decisions; reference arm A1. Optional (needs statsmodels).
+
+    statsmodels has no maximum-likelihood logistic GLMM, so the requested model (arm fixed,
+    request random intercept) is BinomialBayesMixedGLM fitted by variational Bayes. A GEE
+    logistic model clustered by request (exchangeable) is added as a frequentist check.
+    """
+    try:
+        import numpy as np
+        import pandas as pd
+        import statsmodels
+        import statsmodels.api as sm
+        import statsmodels.formula.api as smf
+        from statsmodels.genmod.bayes_mixed_glm import BinomialBayesMixedGLM
+    except ImportError:
+        return {'status': 'not run: statsmodels is not installed in the interpreter used'}
+    frame = pd.DataFrame([{'y': int(v), 'arm': arm, 'request': i, 'rep': rep}
+                          for (arm, rep, i), v in sorted(score.items())])
+    formula = 'y ~ C(arm, Treatment("A1"))'
+    glmm = BinomialBayesMixedGLM.from_formula(formula, {'request': '0 + C(request)'}, frame).fit_vb()
+    names = list(glmm.model.exog_names)
+    fixed = {}
+    for k, name in enumerate(names):
+        mean, sd = float(glmm.fe_mean[k]), float(glmm.fe_sd[k])
+        fixed[name] = {'posterior_mean_log_odds': mean, 'posterior_sd': sd,
+                       'approx_95_interval': [mean - 1.96 * sd, mean + 1.96 * sd],
+                       'odds_ratio': float(np.exp(mean))}
+    gee = smf.gee(formula, 'request', frame, family=sm.families.Binomial(),
+                  cov_struct=sm.cov_struct.Exchangeable()).fit()
+    gee_terms = {name: {'log_odds': float(gee.params[name]), 'robust_se': float(gee.bse[name]),
+                        'p_value': float(gee.pvalues[name]), 'odds_ratio': float(np.exp(gee.params[name]))}
+                 for name in gee.params.index}
+    return {'status': 'run', 'n_decisions': len(frame), 'n_requests': len(ids), 'reference_arm': 'A1',
+            'statsmodels': statsmodels.__version__,
+            'glmm': {'model': 'BinomialBayesMixedGLM.fit_vb: y ~ arm (fixed, ref A1) + random intercept per request',
+                     'method_note': 'variational Bayes approximation; intervals are mean +- 1.96 posterior SD, not frequentist CIs',
+                     'fixed_effects': fixed,
+                     'request_random_effect_log_sd': {'mean': float(glmm.vcp_mean[0]), 'sd': float(glmm.vcp_sd[0])}},
+            'gee': {'model': 'GEE logistic, exchangeable working correlation, clustered by request, ref A1',
+                    'terms': gee_terms, 'working_correlation': float(gee.model.cov_struct.dep_params)}}
 
 
 def main(evaluation_path, out_dir):
@@ -133,11 +176,7 @@ def main(evaluation_path, out_dir):
         'cochran_q': {'arms': list(ARMS), 'Q': q, 'df': df, 'p_value': chi2_sf_df3(q), 'n': len(ids)},
         'not_corrected_for_multiple_comparisons': True,
     }
-    try:
-        import statsmodels  # noqa: F401
-        result['mixed_effects'] = {'status': 'statsmodels available but model not implemented in this version'}
-    except ImportError:
-        result['mixed_effects'] = {'status': 'not run: statsmodels is not installed in the interpreter used'}
+    result['mixed_effects'] = mixed_effects(score, ids)
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     (out / 'stats.json').write_text(json.dumps(result, indent=1))

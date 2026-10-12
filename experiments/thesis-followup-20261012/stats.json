@@ -157,6 +157,86 @@
  },
  "not_corrected_for_multiple_comparisons": true,
  "mixed_effects": {
-  "status": "not run: statsmodels is not installed in the interpreter used"
+  "status": "run",
+  "n_decisions": 2700,
+  "n_requests": 225,
+  "reference_arm": "A1",
+  "statsmodels": "0.15.0",
+  "glmm": {
+   "model": "BinomialBayesMixedGLM.fit_vb: y ~ arm (fixed, ref A1) + random intercept per request",
+   "method_note": "variational Bayes approximation; intervals are mean +- 1.96 posterior SD, not frequentist CIs",
+   "fixed_effects": {
+    "Intercept": {
+     "posterior_mean_log_odds": 3.1121879286626988,
+     "posterior_sd": 0.07884234805939193,
+     "approx_95_interval": [
+      2.9576569264662904,
+      3.266718930859107
+     ],
+     "odds_ratio": 22.470153750724926
+    },
+    "C(arm, Treatment(\"A1\"))[T.A0]": {
+     "posterior_mean_log_odds": -1.8862370944973104,
+     "posterior_sd": 0.1597589000756353,
+     "approx_95_interval": [
+      -2.199364538645556,
+      -1.5731096503490651
+     ],
+     "odds_ratio": 0.15164134866739348
+    },
+    "C(arm, Treatment(\"A1\"))[T.A2]": {
+     "posterior_mean_log_odds": -0.5298968231592341,
+     "posterior_sd": 0.15512147561984335,
+     "approx_95_interval": [
+      -0.8339349153741271,
+      -0.22585873094434117
+     ],
+     "odds_ratio": 0.5886657032126789
+    },
+    "C(arm, Treatment(\"A1\"))[T.A3]": {
+     "posterior_mean_log_odds": 0.03535051491037172,
+     "posterior_sd": 0.15740908721251057,
+     "approx_95_interval": [
+      -0.273171296026149,
+      0.3438723258468924
+     ],
+     "odds_ratio": 1.0359827725749484
+    }
+   },
+   "request_random_effect_log_sd": {
+    "mean": 1.7603729555994923,
+    "sd": 0.04690541705175999
+   }
+  },
+  "gee": {
+   "model": "GEE logistic, exchangeable working correlation, clustered by request, ref A1",
+   "terms": {
+    "Intercept": {
+     "log_odds": 0.781140779414227,
+     "robust_se": 0.14130944106933782,
+     "p_value": 3.2413477923163094e-08,
+     "odds_ratio": 2.183962264150955
+    },
+    "C(arm, Treatment(\"A1\"))[T.A0]": {
+     "log_odds": -0.4977783681069573,
+     "robust_se": 0.12602274385834367,
+     "p_value": 7.818091655173177e-05,
+     "odds_ratio": 0.6078796454904296
+    },
+    "C(arm, Treatment(\"A1\"))[T.A2]": {
+     "log_odds": -0.15395156664607376,
+     "robust_se": 0.12213906792742545,
+     "p_value": 0.20750300516788422,
+     "odds_ratio": 0.8573135425761683
+    },
+    "C(arm, Treatment(\"A1\"))[T.A3]": {
+     "log_odds": -2.9787929993882477e-16,
+     "robust_se": 0.13787957860589736,
+     "p_value": 0.9999999999999982,
+     "odds_ratio": 0.9999999999999997
+    }
+   },
+   "working_correlation": 0.7128816119065271
+  }
  }
 }
