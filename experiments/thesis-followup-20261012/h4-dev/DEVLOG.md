@@ -26,3 +26,23 @@ the runner refuses to mix them. Sets A and C have not been opened; they are stil
 | 2026-10-12T17:28:18Z | baseline (not a round) | `on`, guard off; screen woken (not locked; lock disabled), idle inhibited for the run | **0/7.** All 4 A cases failed without asking; all 3 C cases failed to read their target. Pattern: `file.read` on the folder itself → guessed file name (`report.txt`, `invoice`, `notes.txt`) → `TARGET_NOT_FOUND` → the same read repeated until the step budget ran out. Only `dev-c-02` ever listed its folder, too late to finish. `dev-a-04` (Macedonian) never reached the planner: `service.plan` routed it to the legacy `read_file` with path `dev-a-04.`, keeping the sentence period (`INVALID_ARGUMENT`). This is a separate routing defect that the guard cannot affect. Run: `../h4-runs/20261012T172818Z-dev-baseline-on/` |
 | 2026-10-12T17:31:15Z | **round 1** | `on-guard`, guard exactly as committed in `5590f41` | **2/7** (A 0/4, C 2/3). The list-first hint worked: every case listed its folder first (baseline: 1/7). No invalid decisions and no confirmation questions. Controls `dev-c-01` and `dev-c-02` passed by reading their single target. **In A, the model listed and then read a candidate (silent choice) instead of asking**, although the clarification instruction was present. In `dev-a-03` and `dev-c-03` the candidates sit in subfolders; after the top-level listing the model read `readme.txt` and stopped at `proposed`. `dev-a-04`: same routing defect as the baseline. Run: `../h4-runs/20261012T173115Z-dev-round1-on-guard/` |
 | 2026-10-12T17:34:11Z | **round 2** | `on-guard` + explicit decision step after listing a goal folder (`e1…` commit "round 2") | **2/7** (A 2/4, C 0/3). `dev-a-02` and `dev-a-03` asked grounded questions. **New failure mode:** `dev-c-01`, `dev-c-02` and `dev-a-01` chose `ask_approval` + `file.read` and stopped at `proposed`. The model read the wording "to have the user confirm … use ask_approval" as covering safe reads. `dev-c-03` asked between a subfolder (`server`) and an unrelated file (`readme.txt`), so a folder was offered as a candidate. `dev-a-04`: routing defect as before. Run: `../h4-runs/20261012T173411Z-dev-round2-on-guard/` |
+| 2026-10-12T17:36:31Z | **round 3 (last)** | `on-guard` + "reading and listing need no approval" + "a subfolder is never a candidate" | **2/7** (A 0/4, C 2/3). No `ask_approval` on reads any more, and no folder offered as a choice. But in A the model again listed and then read one candidate silently, the round-1 outcome. In `dev-a-03` and `dev-c-03` it read `readme.txt`, then tried `file.read` on the subfolder instead of listing it. `dev-a-04`: routing defect. Run: `../h4-runs/20261012T173631Z-dev-round3-on-guard/` |
+
+## Summary after the 3 allowed rounds (tuning stopped)
+
+| | A asked (of 4) | C correct (of 3) | Main failure |
+|---|---|---|---|
+| baseline (guard off) | 0 | 0 | reads the folder itself, guesses a file name, repeats |
+| round 1 | 0 | 2 | lists, then silently reads one candidate |
+| round 2 | 2 | 0 | asks for approval to read; one folder offered as a choice |
+| round 3 | 0 | 2 | lists, then silently reads one candidate |
+
+**What held in every guarded round:**
+- the list-first rule (baseline 1/7 listed; rounds 1–3: 7/7 of the planner-routed cases);
+- no invalid `ask_clarification` decisions, because the grammar makes them unreachable.
+
+**What did not hold:** getting qwen2.5:7b to ask instead of choosing silently, without also making it over-cautious
+on the controls. Each round is one run of 7 scenarios, so these counts are small and noisy.
+
+`dev-a-04` never reached the planner in any run: it is a routing defect in `service.plan` (sentence period kept in the
+path), outside the guard. Sets A and C were not opened.
