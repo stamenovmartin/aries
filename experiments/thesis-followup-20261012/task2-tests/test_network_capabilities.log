@@ -1,0 +1,117 @@
+--- test_a_failed_activation_is_not_reported_as_verified
+PASS  a refused activation is not accepted
+PASS  and it is not verified
+PASS  nmcli's reason is carried through
+PASS  the state re-read still ran
+--- test_brightness_floor_is_one_so_the_screen_stays_visible
+PASS  zero is refused by the schema
+PASS  over a hundred is refused
+PASS  a string level is refused under strict mode
+PASS  an unknown field is refused
+PASS  a valid level passes
+--- test_brightness_names_every_mechanism_and_why_it_is_unavailable
+PASS  a read always answers
+PASS  controllable is a plain boolean
+PASS  all four mechanisms are reported
+PASS  every unavailable mechanism carries a reason
+PASS  a reason is a sentence, not a flag
+PASS  an uncontrollable screen reports no number rather than 0
+PASS  and says so in one sentence
+--- test_capability_executors_and_verifiers_agree_on_shape
+PASS  the verifier re-probed and agreed
+PASS  the evidence is typed
+PASS  the evidence is a fresh observation, not the executor result
+PASS  a brightness read verifies as a display observation
+--- test_captive_portal_is_only_visible_in_the_manager_verdict
+PASS  the TCP probe alone would have said yes
+PASS  the portal is still reported
+--- test_key_value_rows_keep_raw_ipv6_and_collapse_indices
+PASS  IPv6 value is not truncated at its first colon
+PASS  indexed keys collapse onto one list
+PASS  a value containing a space and a paren survives
+--- test_link_up_and_internet_reachable_are_separate_answers
+PASS  the link is up
+PASS  the internet is NOT reported reachable
+PASS  a resolver answering is not evidence of reach
+PASS  NetworkManager's own verdict is carried through
+PASS  no global IPv6, so IPv6 was not probed at all
+PASS  the answer says what each signal means
+--- test_no_capability_can_be_handed_a_wifi_password
+PASS  the input has exactly one field
+PASS  'password' is refused by the schema
+PASS  'psk' is refused by the schema
+PASS  'wifi-sec.psk' is refused by the schema
+PASS  'secret' is refused by the schema
+PASS  the module never builds a `nmcli device wifi connect` argv
+PASS  and never passes a nmcli password option
+--- test_registration_gates_only_the_mutating_capabilities
+PASS  all five capabilities registered
+PASS  network.status is a read that needs no approval
+PASS  network.wifi_list is a read that needs no approval
+PASS  display.brightness is a read that needs no approval
+PASS  network.wifi_connect needs approval and is not a read
+PASS  display.set_brightness needs approval and is not a read
+PASS  joining a network is marked high risk
+PASS  every capability describes a JSON schema
+PASS  the wifi_connect description says ARIES takes no password
+--- test_setting_brightness_refuses_instead_of_pretending
+PASS  it raises rather than returning a cheerful ok
+PASS  the refusal explains the hardware
+PASS  and it is not retryable
+--- test_status_degrades_honestly_without_networkmanager
+PASS  the missing manager is named, not hidden
+PASS  addresses still come from ip
+PASS  the gateway still comes from ip
+--- test_status_without_probes_reports_unknown_rather_than_false
+PASS  link_up is answered from the route and the address
+PASS  internet_reachable is unknown, not False
+PASS  dns_resolves is unknown, not False
+PASS  nm_connectivity is unknown, not False
+PASS  the gateway is read
+PASS  DNS servers are read
+PASS  loopback is not offered as a connection
+PASS  the link-local address is not counted as global
+--- test_terse_columns_survive_escaped_colons
+PASS  six columns, not eleven MAC fragments
+PASS  BSSID is reassembled
+PASS  SSID and signal intact
+PASS  a hidden SSID is an empty field, not a missing column
+PASS  an escaped backslash stays one backslash
+--- test_this_machine_observed_read_only
+      link_up=True internet_reachable=True dns_resolves=True nm_connectivity=full
+PASS  the four signals are each answered
+PASS  every TCP attempt records how long it took
+PASS  a wifi connection reports where its SSID came from
+      9 networks visible, 1 saved
+PASS  every scanned network has a reassembled BSSID
+PASS  no SSID appears twice
+      brightness: no mechanism available
+PASS  the brightness answer is either a number or a stated reason
+--- test_wifi_connect_activates_by_uuid_and_verifies_by_re_reading
+PASS  the SSID resolved to its saved profile
+PASS  activation is by UUID, not by a name two profiles could share
+PASS  accepted is recorded separately from verified
+PASS  verified comes from the re-read state, not the exit code
+--- test_wifi_connect_refuses_an_unsaved_name_and_never_activates_anything
+PASS  an unsaved network is refused
+PASS  the refusal lists what IS saved
+PASS  it says where a new network must be joined instead
+PASS  `nmcli connection up` was never run
+--- test_wifi_connect_refuses_two_profiles_with_the_same_name
+PASS  an ambiguous name is refused rather than guessed
+PASS  both candidates are named
+PASS  nothing was activated
+--- test_wifi_list_collapses_one_network_on_two_bands_keeping_the_strongest
+PASS  one row per SSID
+PASS  the stronger band wins
+PASS  and its own BSSID came with it
+PASS  strongest first
+--- test_wifi_list_marks_saved_by_ssid_not_by_profile_name
+PASS  the saved network is recognised although its profile has another name
+PASS  an unsaved network is not claimed as saved
+PASS  a hidden network is reported as hidden, not dropped
+PASS  an unsecured network is labelled open
+PASS  the loopback profile is not offered as a wifi profile
+PASS  no rescan was forced
+PASS  the read is described as a cached scan
+ALL PASSED

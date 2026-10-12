@@ -76,6 +76,11 @@ FLAGS = {
                                 "characters — a NUL, a filtered control character, a line break "
                                 "into a single-line control, a rejected or partially landed write "
                                 "— instead of returning a success carrying landed=false"),
+    "ARIES_COMPLETION_READ_PARAPHRASE": (True, "the completion contract also recognises read, listing and existence "
+                                               "goals said in natural words (exactly one path, nothing else "
+                                               "asked) and strips sentence punctuation from paths; done still "
+                                               "needs re-checked verified evidence. Off compiles only the "
+                                               "anchored sentences, as in ARIES-FINAL-20261006"),
     "ARIES_PLANNER_CLARIFY": (True, "the planner may stop and ask which target is meant when its own "
                                     "verified observations show several that fit the goal; every choice "
                                     "must name something observed. Off removes the option from the "

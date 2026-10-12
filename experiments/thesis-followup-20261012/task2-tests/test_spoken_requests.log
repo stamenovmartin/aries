@@ -1,0 +1,33 @@
+/home/stamenovmartin/aries/tests/test_spoken_requests.py:47: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  updated_at=datetime.utcnow()-timedelta(minutes=age),
+--- test_natural_measurements
+PASS  whole request understood: провери ги дискот и меморијата
+PASS  whole request understood: прикажи процесор, меморија и диск
+PASS  whole request understood: proveri gi diskot i memorijata
+PASS  whole request understood: check CPU and memory
+PASS  whole request understood: show disk space
+PASS  whole request understood: колку место има на дискот и колку меморија се користи?
+PASS  whole request understood: How much disk space do I have?
+PASS  whole request understood: Show CPU usage and memory
+PASS  whole request understood: колку место има на дискот?; колку меморија се користи?
+PASS  whole request understood: а меморијата?
+PASS  whole request understood: a RAM?
+PASS  whole request understood: what about CPU?
+PASS  Macedonian follow-up retains Macedonian answer language
+PASS  unknown requirement is never silently dropped: check CPU and delete all files
+PASS  unknown requirement is never silently dropped: провери диск и избриши документи
+PASS  unknown requirement is never silently dropped: show CPU usage and reboot
+PASS  unknown requirement is never silently dropped: колку место има на дискот; испрати е-пошта
+PASS  unknown requirement is never silently dropped: check CPU,
+PASS  unknown requirement is never silently dropped: check CPU and
+PASS  unknown requirement is never silently dropped: show disk space on the USB drive
+--- test_verified_context_in_macedonian
+PASS  verified Macedonian follow-up: прочитај ја
+PASS  verified Macedonian follow-up: Прочитај го!
+PASS  verified Macedonian follow-up: prochitaj ja
+PASS  verified Macedonian follow-up: отвори ја
+PASS  verified Macedonian follow-up: otvori go
+PASS  stale, malformed and unverified evidence never becomes a reference
+PASS  additional actions are not consumed by reference shorthand
+PASS  multiple eligible files require a named choice in Macedonian
+ALL PASSED

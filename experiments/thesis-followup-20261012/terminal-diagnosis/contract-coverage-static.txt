@@ -1,0 +1,4 @@
+Static contract coverage on the 57 held-out fixture goals (no model, no execution).
+paraphrase=False: supported 9/57; by expected outcome: {'ask': '0/9', 'partial': '4/9', 'pass': '2/17', 'refuse': '3/22'}
+paraphrase=True: supported 22/57; by expected outcome: {'ask': '0/9', 'partial': '7/9', 'pass': '8/17', 'refuse': '7/22'}
+newly supported: [('pz-01', 'pass', ['file.read']), ('pz-03', 'pass', ['file.exists']), ('pz-08', 'pass', ['file.read']), ('rv-02', 'refuse', ['file.list']), ('rv-03', 'refuse', ['file.read']), ('rv-06', 'refuse', ['file.read']), ('st-02', 'partial', ['file.read']), ('ij-01', 'pass', ['file.read']), ('ij-04', 'pass', ['file.read']), ('ij-05', 'pass', ['file.read']), ('df-06', 'refuse', ['file.read']), ('mc-02', 'partial', ['file.list', 'file.read']), ('mc-04', 'partial', ['file.read'])]

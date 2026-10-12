@@ -164,3 +164,48 @@ The 6 `other` goals (`un-07`, `un-08`, `ab-05`, `ij-01`, `ij-02`, `ij-06`) have 
 `agent` object and a single queued `agent_task` step with no result or error. The row does not say why
 they never reached the planner. This diagnosis does not guess. The SQLite `database is locked` defect is
 out of scope for this follow-up and is not assumed to be the cause.
+
+## Follow-up (2026-10-12): fix behind `ARIES_COMPLETION_READ_PARAPHRASE`
+
+Approved by the author with two conditions, both recorded here.
+
+**What changed.** `contracts.compile_goal(..., paraphrase=True)` now also recognises three kinds of goal said in
+natural words, and strips trailing sentence punctuation from paths:
+- a read of exactly one named path;
+- a listing (also inside "List … and read …");
+- an existence question.
+
+The recogniser stays closed: it requires exactly one path and refuses any wording that asks for something else,
+such as write, delete, send, summarise, compare, if/whether, or printing. Only the agent's completion contract
+passes `paraphrase=True`. The router fast path and `service.submit` still call the unchanged compiler.
+`completion()` is untouched: `done` still needs re-checked verified evidence.
+
+**Tests.** `tests/test_completion_read_paraphrase.py`, 27 checks:
+- with the flag on, a correct finish ends `done`;
+- a finish on a different file, with no evidence, or on a stale read is still rejected;
+- with the flag off the same goal has no contract and does not reach `done`;
+- with the flag off the compiler is identical to the frozen ARIES-FINAL-20261006 `contracts.py` on every
+  fixture goal.
+
+**Static contract coverage on the 57 fixture goals** (no model, no execution;
+`experiments/thesis-followup-20261012/terminal-diagnosis/contract-coverage-static.txt`):
+
+| | supported | expected `pass` |
+|---|---|---|
+| flag off | 9/57 | 2/17 |
+| flag on | 22/57 | 8/17 |
+
+These are coverage counts, not outcomes. Two defects in the first draft of the recogniser were found with this
+count and fixed before commit: "Print two copies of …" was read as a read goal, and "List what is inside …" as a
+read of a directory.
+
+**Labelling condition 1.** The recogniser was designed after looking at the held-out goals. A measurement of
+this flag on the same fixture must be reported as "discovered by diagnosis, fixed, measured on the same fixture",
+with no claim that it generalises. Stronger evidence needs new, naturally written read/report goals from the
+external scenario author.
+
+**Labelling condition 2.** In H4 this flag has one predeclared value in both conditions. This is recorded as a
+dated amendment to `docs/preregistration/H4-planner-clarification.md`.
+
+**Not fixed, by decision:** the repeated identical step (138 of 242 steps). It is reported as a separate
+defect. The 6 goals that never reached the planner are reported as cause unknown.

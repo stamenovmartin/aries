@@ -1,0 +1,83 @@
+--- test_a_fractional_scale_actually_changes_the_answer
+PASS  at scale 1.5 on this logical width the aligned rectangle differs from the shell's ({'x': 1026, 'y': 0, 'width': 1024, 'height': 1081} vs {'x': 1025, 'y': 0, 'width': 1025, 'height': 1081})
+PASS  the shell's own rectangle is NOT device-aligned there, which is the bug: 1025 x 1.5 = 1537.5 device pixels
+PASS  and the aligned one is
+--- test_a_window_not_yet_on_a_monitor_keeps_being_accepted
+PASS  monitor == -1 gives no scale and an explanation, not an exception
+PASS  and the tile expectation is "verify against the shell's own rectangle", not a refusal of the whole observation
+PASS  a mapped window on an integer-scale monitor needs no correction at all
+PASS  on a fractional monitor the expectation says so and carries both rectangles
+PASS  the scale is matched by the work area's own origin, not only by an index
+PASS  a window whose index and position disagree is scaled by its POSITION (matched by work-area origin to logical monitor 1 (DP-1))
+--- test_a_work_area_that_cannot_be_tiled_is_refused_with_a_reason
+PASS  refused: no width
+PASS  refused: negative height
+PASS  refused: a missing field
+PASS  refused: a float where a pixel belongs
+PASS  refused: an unknown side
+--- test_every_split_lands_on_a_whole_device_pixel
+PASS  scale 1: every dimension this code chooses is a whole number of device pixels
+PASS  scale 1: and the dimensions it does not choose are passed through from the work area untouched
+PASS  scale 1.25: every dimension this code chooses is a whole number of device pixels
+PASS  scale 1.25: and the dimensions it does not choose are passed through from the work area untouched
+PASS  scale 1.333: every dimension this code chooses is a whole number of device pixels
+PASS  scale 1.333: and the dimensions it does not choose are passed through from the work area untouched
+PASS  scale 1.5: every dimension this code chooses is a whole number of device pixels
+PASS  scale 1.5: and the dimensions it does not choose are passed through from the work area untouched
+PASS  scale 1.667: every dimension this code chooses is a whole number of device pixels
+PASS  scale 1.667: and the dimensions it does not choose are passed through from the work area untouched
+PASS  scale 2: every dimension this code chooses is a whole number of device pixels
+PASS  scale 2: and the dimensions it does not choose are passed through from the work area untouched
+PASS  scale 2.25: every dimension this code chooses is a whole number of device pixels
+PASS  scale 2.25: and the dimensions it does not choose are passed through from the work area untouched
+PASS  scale 2.5: every dimension this code chooses is a whole number of device pixels
+PASS  scale 2.5: and the dimensions it does not choose are passed through from the work area untouched
+PASS  scale 2.75: every dimension this code chooses is a whole number of device pixels
+PASS  scale 2.75: and the dimensions it does not choose are passed through from the work area untouched
+PASS  scale 3: every dimension this code chooses is a whole number of device pixels
+PASS  scale 3: and the dimensions it does not choose are passed through from the work area untouched
+--- test_halves_meet_exactly_and_stay_inside_the_work_area
+PASS  1920x1053 at scale 1: halves meet (gap 0 x 1 px, step 1) and both edges are flush with the work area
+PASS  1920x1053 at scale 1.25: halves meet (gap 0 x 5 px, step 4) and both edges are flush with the work area
+PASS  1920x1053 at scale 1.333: halves meet (gap 0 x 3 px, step 3) and both edges are flush with the work area
+PASS  1920x1053 at scale 1.5: halves meet (gap 0 x 1 px, step 2) and both edges are flush with the work area
+PASS  1920x1053 at scale 1.667: halves meet (gap 0 x 3 px, step 3) and both edges are flush with the work area
+PASS  1920x1053 at scale 2: halves meet (gap 0 x 1 px, step 1) and both edges are flush with the work area
+PASS  1920x1053 at scale 2.25: halves meet (gap 0 x 5 px, step 4) and both edges are flush with the work area
+PASS  1920x1053 at scale 3: halves meet (gap 0 x 1 px, step 1) and both edges are flush with the work area
+PASS  1921x1081 at scale 1: halves meet (gap 1 x 1 px, step 1) and both edges are flush with the work area
+PASS  1921x1081 at scale 1.25: halves meet (gap 1 x 1 px, step 4) and both edges are flush with the work area
+PASS  1921x1081 at scale 1.333: halves meet (gap 1 x 1 px, step 3) and both edges are flush with the work area
+PASS  1921x1081 at scale 1.5: halves meet (gap 1 x 1 px, step 2) and both edges are flush with the work area
+PASS  1921x1081 at scale 1.667: halves meet (gap 1 x 1 px, step 3) and both edges are flush with the work area
+PASS  1921x1081 at scale 2: halves meet (gap 1 x 1 px, step 1) and both edges are flush with the work area
+PASS  1921x1081 at scale 2.25: halves meet (gap 1 x 1 px, step 4) and both edges are flush with the work area
+PASS  1921x1081 at scale 3: halves meet (gap 1 x 1 px, step 1) and both edges are flush with the work area
+PASS  2560x1371 at scale 1: halves meet (gap 0 x 1 px, step 1) and both edges are flush with the work area
+PASS  2560x1371 at scale 1.25: halves meet (gap 0 x 3 px, step 4) and both edges are flush with the work area
+PASS  2560x1371 at scale 1.333: halves meet (gap 4 x 3 px, step 3) and both edges are flush with the work area
+PASS  2560x1371 at scale 1.5: halves meet (gap 0 x 3 px, step 2) and both edges are flush with the work area
+PASS  2560x1371 at scale 1.667: halves meet (gap 4 x 3 px, step 3) and both edges are flush with the work area
+PASS  2560x1371 at scale 2: halves meet (gap 0 x 1 px, step 1) and both edges are flush with the work area
+PASS  2560x1371 at scale 2.25: halves meet (gap 0 x 3 px, step 4) and both edges are flush with the work area
+PASS  2560x1371 at scale 3: halves meet (gap 0 x 1 px, step 1) and both edges are flush with the work area
+--- test_the_capability_and_the_flag_are_wired
+PASS  desktop.tile is registered with all nine sides in its schema
+PASS  and it tells the planner that the scale factor is part of the verification
+PASS  ARIES_TILE_HIDPI is in the one flag registry, default on
+PASS  the rectangle the shell computed is accepted
+PASS  and so is the device-aligned one when that is where the window went
+PASS  a window that went somewhere else is NOT verified by either candidate
+PASS  and a tile with no rectangle at all is not verified by default
+--- test_the_live_tile_path_is_reported_honestly
+PASS  SKIPPED, not passed — the ARIES shell bridge is not on the bus (ValueError), so no window can be tiled from here; the arithmetic and the scale read above are what was verified
+--- test_the_python_arithmetic_is_the_shells_arithmetic_at_integer_scale
+PASS  all nine sides were read out of the live shell source, not copied here
+PASS  at every integer scale the aligned arithmetic is byte-identical to the shell's floor/ceil for all 9 sides over 5 work areas (180 comparisons)
+--- test_the_scale_factor_is_read_from_this_machine
+PASS  every logical monitor Mutter has is reported with a scale and a step
+PASS  the reading names its own source
+      monitor 0: HDMI-1 1920x1080 at scale 1 (step 1), transform 0 primary
+PASS  the logical size is consistent with the scale and the current mode
+PASS  the scales reported are exactly the scales in Mutter's reply
+ALL PASSED

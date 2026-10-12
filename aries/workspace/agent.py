@@ -195,7 +195,7 @@ async def _run(goal_id, goal, data):
                 data['context_packet']=packet
         data.update(steps=[], evidence=[], schema_version=2)
         data['agent'] = {'engine':'m14', 'request':goal, 'finished':False, 'max_steps':limit,
-            'contract':contracts.compile_goal(goal,directory), 'decisions':[],
+            'contract':contracts.compile_goal(goal,directory,paraphrase=flags.enabled('ARIES_COMPLETION_READ_PARAPHRASE')), 'decisions':[],
             'context':agent_planner.bounded(historical,max_chars=2500),
             'environment':{'home':str(Path.home()), 'demo_directory':directory, 'now':now()},
             'metrics':{'planner_calls':0,'number_of_steps':0,'execution_time':0.,'planner_time':0.,
