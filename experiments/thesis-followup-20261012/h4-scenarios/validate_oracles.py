@@ -40,7 +40,7 @@ FIELDS = ('id', 'set', 'template_id', 'class', 'expected_outcome', 'held_out', '
 GOAL_ROOT = '/home/stamenovmartin/Documents/ARIES-CIA-01/'
 
 
-def structure(rows, *, example, pair_rows):
+def structure(rows, *, example, pair_rows, dev=False):
     problems = []
     ids = [r.get('id') for r in rows]
     if len(set(ids)) != len(ids):
@@ -59,10 +59,14 @@ def structure(rows, *, example, pair_rows):
             problems.append(f'{rid}: set {s} needs class/expected_outcome {EXPECTED[s]}')
         if bool(r.get('example')) != example:
             problems.append(f'{rid}: example rows are only allowed in the example file')
+        if bool(r.get('dev')) != dev:
+            problems.append(f'{rid}: development rows are only allowed in the development file')
+        if not example and not dev and str(rid).startswith(('dev-', 'ex-')):
+            problems.append(f'{rid}: a development or example id cannot appear in a scored set')
         if r['requires']:
             problems.append(f'{rid}: requires must be empty for H4')
-        if r['held_out'] is not True:
-            problems.append(f'{rid}: held_out must be true')
+        if r['held_out'] is not (not dev):
+            problems.append(f'{rid}: held_out must be {not dev}')
         if r['surface'] != 'api':
             problems.append(f'{rid}: surface must be api')
         if GOAL_ROOT + rid not in r['goal']:
@@ -74,7 +78,7 @@ def structure(rows, *, example, pair_rows):
             problems.append(f'{rid}: missing standard checks {sorted(REQUIRED_CHECKS[s] - have)}')
         if not REQUIRED_FORBIDDEN[s] <= forb:
             problems.append(f'{rid}: missing standard forbidden_state {sorted(REQUIRED_FORBIDDEN[s] - forb)}')
-    if not example:
+    if not example and not dev:
         if len(rows) != 10:
             problems.append(f'expected 10 scenarios, found {len(rows)}')
         if len({r.get('set') for r in rows}) > 1:
@@ -110,6 +114,7 @@ def main():
     ap.add_argument('scenarios')
     ap.add_argument('--pair', help='the matched other set, for the template pairing check')
     ap.add_argument('--example', action='store_true', help='validate the worked example file')
+    ap.add_argument('--dev', action='store_true', help='validate the development file (never scored)')
     ap.add_argument('--out', required=True)
     cli = ap.parse_args()
     raw = pathlib.Path(cli.scenarios).read_bytes()
@@ -117,11 +122,11 @@ def main():
     pair_rows = None
     if cli.pair:
         pair_rows = [json.loads(l) for l in pathlib.Path(cli.pair).read_text().splitlines() if l.strip()]
-    problems = structure(rows, example=cli.example, pair_rows=pair_rows)
+    problems = structure(rows, example=cli.example, pair_rows=pair_rows, dev=cli.dev)
     tally, bad = discrimination(cli.scenarios, cli.out) if rows else ({}, [])
     ok = not problems and not bad and bool(rows)
     report = {'file': cli.scenarios, 'sha256': hashlib.sha256(raw).hexdigest(), 'rows': len(rows),
-              'example_mode': cli.example, 'structure_problems': problems,
+              'example_mode': cli.example, 'dev_mode': cli.dev, 'structure_problems': problems,
               'discrimination_tally': tally, 'not_discriminating_ids': bad,
               'result': 'PASS' if ok else 'FAIL'}
     pathlib.Path(cli.out).mkdir(parents=True, exist_ok=True)

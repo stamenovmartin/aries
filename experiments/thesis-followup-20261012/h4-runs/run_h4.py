@@ -50,11 +50,13 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 IA = ROOT / 'experiments/product/independent-acceptance'
 SCEN = HERE.parent / 'h4-scenarios'
+DEV = HERE.parent / 'h4-dev'
 LIVE_DB = ROOT / 'var/aries.db'
 CONDITIONS = {
-    'on': {'ARIES_PLANNER_CLARIFY': '1', 'ARIES_COMPLETION_READ_PARAPHRASE': '0'},
-    'off': {'ARIES_PLANNER_CLARIFY': '0', 'ARIES_COMPLETION_READ_PARAPHRASE': '0'},
-    'completion-fix': {'ARIES_PLANNER_CLARIFY': '1', 'ARIES_COMPLETION_READ_PARAPHRASE': '1'},
+    'on': {'ARIES_PLANNER_CLARIFY': '1', 'ARIES_PLANNER_CLARIFY_GUARD': '0', 'ARIES_COMPLETION_READ_PARAPHRASE': '0'},
+    'off': {'ARIES_PLANNER_CLARIFY': '0', 'ARIES_PLANNER_CLARIFY_GUARD': '0', 'ARIES_COMPLETION_READ_PARAPHRASE': '0'},
+    'on-guard': {'ARIES_PLANNER_CLARIFY': '1', 'ARIES_PLANNER_CLARIFY_GUARD': '1', 'ARIES_COMPLETION_READ_PARAPHRASE': '0'},
+    'completion-fix': {'ARIES_PLANNER_CLARIFY': '1', 'ARIES_PLANNER_CLARIFY_GUARD': '0', 'ARIES_COMPLETION_READ_PARAPHRASE': '1'},
 }
 TERMINAL = {'done', 'answered', 'failed', 'partial', 'refused', 'proposed', 'cancelled',
             'interrupted', 'error', 'needs_clarification'}
@@ -93,6 +95,11 @@ def cases_for(selection):
     if selection == 'example':
         rows = [json.loads(l) for l in (SCEN / 'example_pair.jsonl').read_text().splitlines() if l.strip()]
         return [('example', r) for r in rows]
+    if selection == 'dev':
+        # Development set: never mixed with A/C or the held-out fixture, never scored for H4.
+        rows = [json.loads(l) for l in (DEV / 'dev.jsonl').read_text().splitlines() if l.strip()]
+        assert all(r.get('dev') and r['id'].startswith('dev-') for r in rows)
+        return [('dev', r) for r in rows]
     for label, name in (('A', 'set_a.jsonl'), ('C', 'set_c.jsonl')):
         rows = [json.loads(l) for l in (SCEN / name).read_text().splitlines() if l.strip()]
         out += [(label, r) for r in rows]
@@ -228,7 +235,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--condition', choices=sorted(CONDITIONS), required=True)
     ap.add_argument('--label', required=True)
-    ap.add_argument('--sets', choices=['h4', 'example'], default='h4')
+    ap.add_argument('--sets', choices=['h4', 'example', 'dev'], default='h4')
     ap.add_argument('--port', type=int, default=8100)
     ap.add_argument('--go', action='store_true')
     cli = ap.parse_args()
@@ -241,7 +248,14 @@ def main():
         return 0
     if cli.sets == 'h4' and (counts.get('A', 0) != 10 or counts.get('C', 0) != 10):
         raise SystemExit(f'REFUSED: H4 needs 10 + 10 scenarios; found {counts}')
+    if cli.sets == 'dev':
+        v = DEV / 'validation/validation.json'
+        if not v.exists() or json.loads(v.read_text()).get('result') != 'PASS' or \
+                json.loads(v.read_text()).get('sha256') != sha(DEV / 'dev.jsonl'):
+            raise SystemExit('REFUSED: dev.jsonl has no PASS validation for its current content')
     if cli.sets == 'h4':
+        if any(c['id'].startswith(('dev-', 'ex-')) for _, c in cases):
+            raise SystemExit('REFUSED: a development or example row appears in an H4 set')
         for name in ('set_a', 'set_c'):
             v = SCEN / f'validation/{name}/validation.json'
             if not v.exists() or json.loads(v.read_text()).get('result') != 'PASS' or \
