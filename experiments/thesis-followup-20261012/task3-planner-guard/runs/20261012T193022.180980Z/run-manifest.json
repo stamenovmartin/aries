@@ -1,0 +1,2454 @@
+{
+  "started_at": "2026-10-12T19:30:23.593799+00:00",
+  "mode": "execute",
+  "window_id": "followup-20261012-planner-guard",
+  "source_root": "/home/stamenovmartin/aries/var/followup-source/a2d1609",
+  "source": {
+    "files": 315,
+    "manifest_sha256": "f2059aeb2f5b1fd591d00ae5ec7b143592a7ca6ca17e02ee082187850e406dba",
+    "verified_at": "2026-10-12T19:30:23.606352+00:00",
+    "matched": true
+  },
+  "runner_sha256": "7f8c82b82df3ceedf5f60592e587f2fa056105f92b78e9733a25cf0092265048",
+  "protocol_sha256": "45304e3c9db31ba4ab9d62dd516ba472959373827cb70481d6286213c65684c6",
+  "fixture_sha256": "6f511f045421d6168e36fdb55318c995b18b1955ff6d3f75308f934c57c8bcb1",
+  "environment": {
+    "APP_ENV": "test",
+    "DATABASE_URL": "sqlite+aiosqlite:////home/stamenovmartin/aries/experiments/thesis-followup-20261012/task3-planner-guard/runs/20261012T193022.180980Z/planner.sqlite3",
+    "DATA_DIR": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task3-planner-guard/runs/20261012T193022.180980Z/runtime",
+    "RUNTIME_STORE": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task3-planner-guard/runs/20261012T193022.180980Z/runtime/state.json",
+    "CONTEXT_DIR": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task3-planner-guard/runs/20261012T193022.180980Z/runtime/context",
+    "API_KEY": "",
+    "CREDENTIALS_KEY": "",
+    "AI_PROVIDER": "ollama",
+    "DRY_RUN": "true",
+    "LIVE_TOOLS": "",
+    "ARIES_FLAG_FILE": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task3-planner-guard/runs/20261012T193022.180980Z/flags.env",
+    "ARIES_PRIMARY_LANG": "en",
+    "SCHEDULER_ENABLED": "false",
+    "LEARNING_NIGHTLY_ENABLED": "false",
+    "ARIES_STATE_SNAPSHOT": "0",
+    "ARIES_CAP_TOPK": "0",
+    "ARIES_PLAN_MEMORY": "0",
+    "ARIES_TRACE_FEWSHOT": "0",
+    "ARIES_CONTEXT_ENGINE": "0",
+    "ARIES_GOAL_TEAMS": "0",
+    "ARIES_VERIFY_FEEDBACK": "1"
+  },
+  "resolved_settings": {
+    "intelligence.location": {
+      "key": "intelligence.location",
+      "value": "local",
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "intelligence.location",
+        "type": "str",
+        "default": "local",
+        "title": "Where ARIES thinks",
+        "description": "'local' enables the local model. Separate cloud_enabled policy controls explicit foreground escalation; background workers remain local. 'none' switches language models off entirely; ARIES keeps every deterministic capability.",
+        "section": "intelligence",
+        "control": "choice",
+        "choices": [
+          "local",
+          "none"
+        ],
+        "minimum": null,
+        "maximum": null,
+        "unit": "",
+        "advanced": false,
+        "user_only": true,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "intelligence.location",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": "local",
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "intelligence.local_model": {
+      "key": "intelligence.local_model",
+      "value": "qwen2.5:7b",
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "intelligence.local_model",
+        "type": "str",
+        "default": "qwen2.5:7b",
+        "title": "The local model",
+        "description": "Which model the configured local runtime should use. It must exist — ARIES will not download several gigabytes without being asked.",
+        "section": "intelligence",
+        "control": "text",
+        "choices": null,
+        "minimum": null,
+        "maximum": null,
+        "unit": "",
+        "advanced": false,
+        "user_only": false,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "intelligence.local_model",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": "qwen2.5:7b",
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "intelligence.local_backend": {
+      "key": "intelligence.local_backend",
+      "value": "ollama",
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "intelligence.local_backend",
+        "type": "str",
+        "default": "ollama",
+        "title": "Local Backend",
+        "description": "Runtime adapter; OpenAI-compatible supports llama.cpp/vLLM.",
+        "section": "intelligence",
+        "control": "text",
+        "choices": [
+          "ollama",
+          "openai-compatible"
+        ],
+        "minimum": null,
+        "maximum": null,
+        "unit": "",
+        "advanced": false,
+        "user_only": true,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "intelligence.local_backend",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": "ollama",
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "intelligence.gateway_enabled": {
+      "key": "intelligence.gateway_enabled",
+      "value": false,
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "intelligence.gateway_enabled",
+        "type": "bool",
+        "default": true,
+        "title": "Gateway Enabled",
+        "description": "Use the persistent local gateway; direct local fallback on gateway outage only.",
+        "section": "intelligence",
+        "control": "toggle",
+        "choices": null,
+        "minimum": null,
+        "maximum": null,
+        "unit": "",
+        "advanced": false,
+        "user_only": true,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "intelligence.gateway_enabled",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": false,
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "intelligence.local_url": {
+      "key": "intelligence.local_url",
+      "value": "http://127.0.0.1:11434",
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "intelligence.local_url",
+        "type": "str",
+        "default": "http://127.0.0.1:11434",
+        "title": "Where the local model answers",
+        "description": "Local runtime address. Only literal loopback URLs are accepted, preventing access from the network.",
+        "section": "intelligence",
+        "control": "text",
+        "choices": null,
+        "minimum": null,
+        "maximum": null,
+        "unit": "",
+        "advanced": true,
+        "user_only": false,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "intelligence.local_url",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": "http://127.0.0.1:11434",
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "intelligence.cloud_enabled": {
+      "key": "intelligence.cloud_enabled",
+      "value": false,
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "intelligence.cloud_enabled",
+        "type": "bool",
+        "default": false,
+        "title": "Cloud Enabled",
+        "description": "Explicit opt-in to send foreground tasks/context to configured cloud endpoint.",
+        "section": "intelligence",
+        "control": "toggle",
+        "choices": null,
+        "minimum": null,
+        "maximum": null,
+        "unit": "",
+        "advanced": false,
+        "user_only": true,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "intelligence.cloud_enabled",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": false,
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "intelligence.cloud_local_fallback": {
+      "key": "intelligence.cloud_local_fallback",
+      "value": false,
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "intelligence.cloud_local_fallback",
+        "type": "bool",
+        "default": true,
+        "title": "Cloud Local Fallback",
+        "description": "If cloud is unavailable, use local inference and record degradation.",
+        "section": "intelligence",
+        "control": "toggle",
+        "choices": null,
+        "minimum": null,
+        "maximum": null,
+        "unit": "",
+        "advanced": false,
+        "user_only": true,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "intelligence.cloud_local_fallback",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": false,
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "intelligence.router_enabled": {
+      "key": "intelligence.router_enabled",
+      "value": false,
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "intelligence.router_enabled",
+        "type": "bool",
+        "default": true,
+        "title": "Router Enabled",
+        "description": "Route workspace goals through rules, local decisions and explicit cloud policy.",
+        "section": "intelligence",
+        "control": "toggle",
+        "choices": null,
+        "minimum": null,
+        "maximum": null,
+        "unit": "",
+        "advanced": false,
+        "user_only": true,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "intelligence.router_enabled",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": false,
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "ai.temperature": {
+      "key": "ai.temperature",
+      "value": 0.0,
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "ai.temperature",
+        "type": "float",
+        "default": 0.1,
+        "title": "Temperature",
+        "description": "How much the model gambles on less likely words. 0 is repeatable and literal; around 0.7 is conversational; above 1.2 it invents. Structured extraction and routing decisions are more reliable low.",
+        "section": "ai",
+        "control": "slider",
+        "choices": null,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "unit": "",
+        "advanced": false,
+        "user_only": false,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "ai.temperature",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": 0.0,
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "ai.top_p": {
+      "key": "ai.top_p",
+      "value": 0.9,
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "ai.top_p",
+        "type": "float",
+        "default": 0.9,
+        "title": "Top-p (nucleus)",
+        "description": "Keeps only the most likely words whose probabilities add up to this fraction. 1.0 considers everything; 0.5 keeps the model on the obvious path. Temperature is the dial to try first — this one mostly matters above temperature 1.",
+        "section": "ai",
+        "control": "slider",
+        "choices": null,
+        "minimum": 0.05,
+        "maximum": 1.0,
+        "unit": "",
+        "advanced": true,
+        "user_only": false,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "ai.top_p",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": 0.9,
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "ai.context_tokens": {
+      "key": "ai.context_tokens",
+      "value": 8192,
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "ai.context_tokens",
+        "type": "int",
+        "default": 8192,
+        "title": "Context window",
+        "description": "How much conversation and document text the local model may hold at once. Larger remembers more but costs video memory and reloads the model; the local runtime, not ARIES, decides what it can fit.",
+        "section": "ai",
+        "control": "number",
+        "choices": null,
+        "minimum": 512,
+        "maximum": 32768,
+        "unit": "tokens",
+        "advanced": true,
+        "user_only": true,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "ai.context_tokens",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": 8192,
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "ai.max_output_tokens": {
+      "key": "ai.max_output_tokens",
+      "value": 1800,
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "ai.max_output_tokens",
+        "type": "int",
+        "default": 4096,
+        "title": "Maximum answer length",
+        "description": "Longest answer the local model may produce in one turn. Lower it for terse replies and faster responses; a task that needs more than it gets fails loudly rather than returning a truncated answer.",
+        "section": "ai",
+        "control": "number",
+        "choices": null,
+        "minimum": 256,
+        "maximum": 4096,
+        "unit": "tokens",
+        "advanced": false,
+        "user_only": false,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "ai.max_output_tokens",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": 1800,
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    },
+    "workspace.semantic_memory": {
+      "key": "workspace.semantic_memory",
+      "value": false,
+      "source": "user",
+      "source_label": "user setting",
+      "definition": {
+        "key": "workspace.semantic_memory",
+        "type": "bool",
+        "default": true,
+        "title": "Notice what matters",
+        "description": "Let ARIES decide for itself which of the things you say are worth remembering, and write them down without being asked. What you said is stored verbatim and separately from what ARIES concluded from it.",
+        "section": "workspace",
+        "control": "toggle",
+        "choices": null,
+        "minimum": null,
+        "maximum": null,
+        "unit": "",
+        "advanced": false,
+        "user_only": true,
+        "restart_required": false,
+        "tags": []
+      },
+      "scope": null,
+      "stack": [
+        {
+          "key": "workspace.semantic_memory",
+          "layer": "user",
+          "layer_label": "user setting",
+          "scope": null,
+          "value": false,
+          "confidence": null,
+          "rationale": null,
+          "set_by": "user",
+          "updated_at": "2026-10-12T19:30:23"
+        }
+      ],
+      "overridden": []
+    }
+  },
+  "flags": {
+    "primary_language": "en",
+    "listen_languages": [
+      "en"
+    ],
+    "whisper_model": "large-v3",
+    "override_file": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/task3-planner-guard/runs/20261012T193022.180980Z/flags.env",
+    "flags": {
+      "ARIES_CAP_TOPK": {
+        "on": false,
+        "default": true,
+        "source": "environment",
+        "governs": "the planner is sent the most relevant capabilities, not all of them"
+      },
+      "ARIES_COMPLETION_PROGRESS_GUARD": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "stop after two rejected completion proposals without an intervening action; preserve one correction opportunity"
+      },
+      "ARIES_COMPLETION_READ_PARAPHRASE": {
+        "on": false,
+        "default": true,
+        "source": "environment",
+        "governs": "the completion contract also recognises read, listing and existence goals said in natural words (exactly one path, nothing else asked) and strips sentence punctuation from paths; done still needs re-checked verified evidence. Off compiles only the anchored sentences, as in ARIES-FINAL-20261006"
+      },
+      "ARIES_CONTEXT_ENGINE": {
+        "on": false,
+        "default": true,
+        "source": "environment",
+        "governs": "select memory, recent task history and permitted cached news with provenance, expiry and explicit missing-source coverage"
+      },
+      "ARIES_CONTRACT_FINISH": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "propose completion without another model call when every ordered goal condition has verified evidence; fresh independent recheck still required"
+      },
+      "ARIES_GOAL_TEAMS": {
+        "on": false,
+        "default": false,
+        "source": "environment",
+        "governs": "decompose eligible goals into scoped temporary read-only runtime agents in the existing queue"
+      },
+      "ARIES_MK_FROZEN": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "Macedonian is frozen: it keeps working and keeps being tested, and nothing new is built on it"
+      },
+      "ARIES_PLANNER_CLARIFY": {
+        "on": true,
+        "default": true,
+        "source": "environment",
+        "governs": "the planner may stop and ask which target is meant when its own verified observations show several that fit the goal; every choice must name something observed. Off removes the option from the grammar and the prompt"
+      },
+      "ARIES_PLANNER_CLARIFY_GUARD": {
+        "on": true,
+        "default": false,
+        "source": "environment",
+        "governs": "with ARIES_PLANNER_CLARIFY: a question carries no capability or arguments (grammar), confirming is ask_approval and asking is only for choosing between observed targets (prompt), and a named but unlisted folder is listed before anything is read in it. Off leaves the clarification grammar and prompt unchanged"
+      },
+      "ARIES_PLAN_MEMORY": {
+        "on": false,
+        "default": true,
+        "source": "environment",
+        "governs": "relevant remembered facts are injected into planning"
+      },
+      "ARIES_ROUTER_ABSTAIN": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "the router may answer ASK or OUT_OF_SCOPE rather than choosing the nearest action; off restores the pre-2026-10-03 instruction to pick the nearest one regardless"
+      },
+      "ARIES_STATE_SNAPSHOT": {
+        "on": false,
+        "default": true,
+        "source": "environment",
+        "governs": "the planner is given the current desktop state before it plans"
+      },
+      "ARIES_TERMINAL_READ_FAILURE": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "stop repeated model planning after an actual nonretryable missing-file error for the exact single requested read"
+      },
+      "ARIES_TILE_HIDPI": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "desktop.tile reads the monitor's scale factor from Mutter and expects the device-pixel-aligned rectangle, so a correct tile on a fractionally scaled display is not reported unverified"
+      },
+      "ARIES_TRACE_FEWSHOT": {
+        "on": false,
+        "default": true,
+        "source": "environment",
+        "governs": "similar past successful plans are offered to the planner"
+      },
+      "ARIES_TYPE_STRICT": {
+        "on": true,
+        "default": true,
+        "source": "default",
+        "governs": "input.type_text refuses any case that would silently lose characters — a NUL, a filtered control character, a line break into a single-line control, a rejected or partially landed write — instead of returning a success carrying landed=false"
+      },
+      "ARIES_VERIFY_FEEDBACK": {
+        "on": true,
+        "default": true,
+        "source": "environment",
+        "governs": "the planner is told whether each past step's effect was INDEPENDENTLY OBSERVED, not merely whether the tool returned. Off leaves the loop, the retry policy and the step history untouched and removes only that — the one variable in the state-verification-feedback experiment"
+      }
+    }
+  },
+  "registry": [
+    {
+      "name": "file.read",
+      "description": "Read a regular UTF-8 text file up to 100 KB",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "FileInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "file.write",
+      "description": "Create a NEW nonempty text file; never overwrite. Parent must exist.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          },
+          "content": {
+            "maxLength": 50000,
+            "minLength": 1,
+            "title": "Content",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "content"
+        ],
+        "title": "WriteInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "create"
+    },
+    {
+      "name": "file.list",
+      "description": "List at most 200 allowed directory entries",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "FileInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "file.search",
+      "description": "Search filenames under a directory, optionally within an ISO modification-time range",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          },
+          "query": {
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Query",
+            "type": "string"
+          },
+          "modified_after": {
+            "anyOf": [
+              {
+                "maxLength": 40,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Modified After"
+          },
+          "modified_before": {
+            "anyOf": [
+              {
+                "maxLength": 40,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Modified Before"
+          }
+        },
+        "required": [
+          "path",
+          "query"
+        ],
+        "title": "SearchInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "file.exists",
+      "description": "Check existence only when asked about existence. For read goals use file.read directly, which reports missing-path errors.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "FileInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "browser.open",
+      "description": "Open a public URL in a task-owned browser and observe navigation",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "url": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "URLInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "open"
+    },
+    {
+      "name": "browser.read",
+      "description": "Read a task-owned browser session using its observed session ID",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session"
+        ],
+        "title": "BrowserInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "browser.search",
+      "description": "Open public web or YouTube search for a literal query",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "maxLength": 400,
+            "minLength": 1,
+            "title": "Query",
+            "type": "string"
+          },
+          "site": {
+            "default": "web",
+            "enum": [
+              "web",
+              "youtube"
+            ],
+            "title": "Site",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "WebSearchInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "open"
+    },
+    {
+      "name": "desktop.launch",
+      "description": "Open an installed application by name; verify visible focused window",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "app": {
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "App",
+            "type": "string"
+          }
+        },
+        "required": [
+          "app"
+        ],
+        "title": "AppInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 60,
+      "effect": "open"
+    },
+    {
+      "name": "desktop.focus",
+      "description": "Focus an already observed installed app; never launch a replacement",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "app": {
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "App",
+            "type": "string"
+          },
+          "window_id": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Window Id"
+          }
+        },
+        "required": [
+          "app"
+        ],
+        "title": "FocusInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "open"
+    },
+    {
+      "name": "system.status",
+      "description": "Observe current CPU, memory and disk probes",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "system.storage",
+      "description": "Measure filesystem usage; highest is computed from measured percentages",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "system.processes",
+      "description": "Observe bounded process names and IDs; no command lines",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "task.inspect",
+      "description": "Inspect a persisted task by ID",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "task_id": {
+            "maxLength": 40,
+            "minLength": 1,
+            "title": "Task Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "title": "TaskInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "notification.send",
+      "description": "Create a policy-controlled notification record; approval required",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "body": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Body",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "body"
+        ],
+        "title": "NoticeInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": true,
+      "timeout_seconds": 30,
+      "effect": "notify"
+    },
+    {
+      "name": "desktop.windows",
+      "description": "Observe authoritative GNOME windows; unavailable is an error",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "desktop.observe",
+      "description": "Observe authoritative GNOME windows; unavailable is an error",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "desktop.close",
+      "description": "Operate on an exact observed window ID and application identity",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Window Id",
+            "type": "string"
+          },
+          "app_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "App Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "window_id",
+          "app_id"
+        ],
+        "title": "WindowInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": true,
+      "timeout_seconds": 30,
+      "effect": "desktop"
+    },
+    {
+      "name": "desktop.move",
+      "description": "Operate on an exact observed window ID and application identity",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Window Id",
+            "type": "string"
+          },
+          "app_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "App Id",
+            "type": "string"
+          },
+          "x": {
+            "maximum": 32768,
+            "minimum": -32768,
+            "title": "X",
+            "type": "integer"
+          },
+          "y": {
+            "maximum": 32768,
+            "minimum": -32768,
+            "title": "Y",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "window_id",
+          "app_id",
+          "x",
+          "y"
+        ],
+        "title": "MoveInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "desktop"
+    },
+    {
+      "name": "desktop.resize",
+      "description": "Operate on an exact observed window ID and application identity",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Window Id",
+            "type": "string"
+          },
+          "app_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "App Id",
+            "type": "string"
+          },
+          "width": {
+            "maximum": 16384,
+            "minimum": 64,
+            "title": "Width",
+            "type": "integer"
+          },
+          "height": {
+            "maximum": 16384,
+            "minimum": 64,
+            "title": "Height",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "window_id",
+          "app_id",
+          "width",
+          "height"
+        ],
+        "title": "ResizeInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "desktop"
+    },
+    {
+      "name": "desktop.maximize",
+      "description": "Operate on an exact observed window ID and application identity",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Window Id",
+            "type": "string"
+          },
+          "app_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "App Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "window_id",
+          "app_id"
+        ],
+        "title": "WindowInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "desktop"
+    },
+    {
+      "name": "desktop.unmaximize",
+      "description": "Operate on an exact observed window ID and application identity",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Window Id",
+            "type": "string"
+          },
+          "app_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "App Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "window_id",
+          "app_id"
+        ],
+        "title": "WindowInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "desktop"
+    },
+    {
+      "name": "desktop.minimize",
+      "description": "Operate on an exact observed window ID and application identity",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Window Id",
+            "type": "string"
+          },
+          "app_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "App Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "window_id",
+          "app_id"
+        ],
+        "title": "WindowInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "desktop"
+    },
+    {
+      "name": "desktop.tile",
+      "description": "Operate on an exact observed window ID and application identity. The rectangle is computed by the shell from the monitor work area and verified against the monitor scale factor, so a tile on a fractionally scaled display is not reported unconfirmed (ARIES_TILE_HIDPI)",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Window Id",
+            "type": "string"
+          },
+          "app_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "App Id",
+            "type": "string"
+          },
+          "side": {
+            "pattern": "^(left|right|top|bottom|topleft|topright|bottomleft|bottomright|full)$",
+            "title": "Side",
+            "type": "string"
+          }
+        },
+        "required": [
+          "window_id",
+          "app_id",
+          "side"
+        ],
+        "title": "TileInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "desktop"
+    },
+    {
+      "name": "browser.tabs",
+      "description": "List only browser tabs owned by this task",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "browser.observe",
+      "description": "Task-owned public browser observe; observe again after action. No credentials or POST.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session"
+        ],
+        "title": "Session",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "read"
+    },
+    {
+      "name": "browser.elements",
+      "description": "Task-owned public browser elements; observe again after action. No credentials or POST.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session"
+        ],
+        "title": "Session",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "read"
+    },
+    {
+      "name": "browser.navigate",
+      "description": "Task-owned public browser navigate; observe again after action. No credentials or POST.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          },
+          "url": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session",
+          "url"
+        ],
+        "title": "Navigate",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "open"
+    },
+    {
+      "name": "browser.click",
+      "description": "Task-owned public browser click; observe again after action. No credentials or POST.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          },
+          "element_id": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Element Id",
+            "type": "string"
+          },
+          "expected_url": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Expected Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session",
+          "element_id",
+          "expected_url"
+        ],
+        "title": "Click",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "open"
+    },
+    {
+      "name": "browser.type",
+      "description": "Task-owned public browser type; observe again after action. No credentials or POST.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          },
+          "element_id": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Element Id",
+            "type": "string"
+          },
+          "value": {
+            "maxLength": 2000,
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session",
+          "element_id",
+          "value"
+        ],
+        "title": "Type",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "open"
+    },
+    {
+      "name": "browser.scroll",
+      "description": "Task-owned public browser scroll; observe again after action. No credentials or POST.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          },
+          "pixels": {
+            "maximum": 4000,
+            "minimum": -4000,
+            "title": "Pixels",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "session",
+          "pixels"
+        ],
+        "title": "Scroll",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "open"
+    },
+    {
+      "name": "browser.back",
+      "description": "Task-owned public browser back; observe again after action. No credentials or POST.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session"
+        ],
+        "title": "Session",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "open"
+    },
+    {
+      "name": "browser.forward",
+      "description": "Task-owned public browser forward; observe again after action. No credentials or POST.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session"
+        ],
+        "title": "Session",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "open"
+    },
+    {
+      "name": "browser.wait",
+      "description": "Task-owned public browser wait; observe again after action. No credentials or POST.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          },
+          "milliseconds": {
+            "maximum": 10000,
+            "minimum": 0,
+            "title": "Milliseconds",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "session",
+          "milliseconds"
+        ],
+        "title": "Wait",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 100,
+      "effect": "read"
+    },
+    {
+      "name": "browser.download",
+      "description": "Download an observed public link into a NEW reviewed local path; pinned GET, 20 MB maximum",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "session": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Session",
+            "type": "string"
+          },
+          "url": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Url",
+            "type": "string"
+          },
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session",
+          "url",
+          "path"
+        ],
+        "title": "Download",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": true,
+      "timeout_seconds": 60,
+      "effect": "file_mutation"
+    },
+    {
+      "name": "file.metadata",
+      "description": "Inspect regular file size, timestamp and SHA-256 up to 20 MB",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "PathInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "file.copy",
+      "description": "Copy a reviewed source hash to a NEW destination; no overwrite",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          },
+          "destination": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Destination",
+            "type": "string"
+          },
+          "expected_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Expected Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "destination",
+          "expected_sha256"
+        ],
+        "title": "CopyInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": true,
+      "timeout_seconds": 30,
+      "effect": "file_mutation"
+    },
+    {
+      "name": "file.semantic_search",
+      "description": "Bounded local filename/PDF/text relevance with metadata filters and explanations",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          },
+          "query": {
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Query",
+            "type": "string"
+          },
+          "extension": {
+            "default": "",
+            "maxLength": 16,
+            "title": "Extension",
+            "type": "string"
+          },
+          "modified_after": {
+            "anyOf": [
+              {
+                "maxLength": 40,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Modified After"
+          },
+          "modified_before": {
+            "anyOf": [
+              {
+                "maxLength": 40,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Modified Before"
+          }
+        },
+        "required": [
+          "path",
+          "query"
+        ],
+        "title": "SemanticInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "file.edit",
+      "description": "Replace exactly one text fragment after review of source SHA-256; advisory writer lock",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          },
+          "expected_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Expected Sha256",
+            "type": "string"
+          },
+          "old_text": {
+            "maxLength": 50000,
+            "minLength": 1,
+            "title": "Old Text",
+            "type": "string"
+          },
+          "new_text": {
+            "maxLength": 50000,
+            "title": "New Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "expected_sha256",
+          "old_text",
+          "new_text"
+        ],
+        "title": "EditInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": true,
+      "timeout_seconds": 30,
+      "effect": "file_mutation"
+    },
+    {
+      "name": "file.move",
+      "description": "Reviewed same-filesystem atomic move to a NEW path; existing destinations refused",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          },
+          "destination": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Destination",
+            "type": "string"
+          },
+          "expected_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Expected Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "destination",
+          "expected_sha256"
+        ],
+        "title": "CopyInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": true,
+      "timeout_seconds": 30,
+      "effect": "file_mutation"
+    },
+    {
+      "name": "file.rename",
+      "description": "Reviewed same-filesystem atomic move to a NEW path; existing destinations refused",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Path",
+            "type": "string"
+          },
+          "destination": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Destination",
+            "type": "string"
+          },
+          "expected_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Expected Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "destination",
+          "expected_sha256"
+        ],
+        "title": "CopyInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": true,
+      "timeout_seconds": 30,
+      "effect": "file_mutation"
+    },
+    {
+      "name": "network.status",
+      "description": "Observe connectivity: link, addresses, gateway, DNS, and separately whether the internet is actually reachable",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 20,
+      "effect": "read"
+    },
+    {
+      "name": "network.wifi_list",
+      "description": "List visible wifi networks with signal strength and which are already saved; no rescan is forced",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "network.wifi_connect",
+      "description": "Bring up an ALREADY-SAVED connection by name; ARIES never accepts a wifi password",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "ConnectionInput",
+        "type": "object"
+      },
+      "risk_level": "high",
+      "requires_approval": true,
+      "timeout_seconds": 60,
+      "effect": "network"
+    },
+    {
+      "name": "display.brightness",
+      "description": "Read the screen brightness; reports every mechanism it probed and why none is available when this machine has no brightness control",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 20,
+      "effect": "read"
+    },
+    {
+      "name": "display.set_brightness",
+      "description": "Set the screen brightness to a percentage and re-read it; refuses with evidence when the hardware exposes no backlight",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "level": {
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Level",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "level"
+        ],
+        "title": "BrightnessInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": true,
+      "timeout_seconds": 20,
+      "effect": "display"
+    },
+    {
+      "name": "screen.capture",
+      "description": "See the screen: capture the whole screen, or the area one observed window ID occupies, to an ARIES-owned PNG. A blanked screen or a uniform frame is an error, never a result.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Window Id"
+          }
+        },
+        "title": "CaptureInput",
+        "type": "object"
+      },
+      "risk_level": "medium",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "screen.screenshot",
+      "description": "See the screen: capture the whole screen, or the area one observed window ID occupies, to an ARIES-owned PNG. A blanked screen or a uniform frame is an error, never a result.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Window Id"
+          }
+        },
+        "title": "CaptureInput",
+        "type": "object"
+      },
+      "risk_level": "medium",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "screen.read",
+      "description": "Read what is on the screen: capture it and recover its text with local OCR in Macedonian and English. Use this to answer questions about what is displayed; refuses with instructions if OCR data is missing.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "window_id": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Window Id"
+          },
+          "language": {
+            "default": "eng+mkd",
+            "enum": [
+              "eng+mkd",
+              "eng",
+              "mkd"
+            ],
+            "title": "Language",
+            "type": "string"
+          }
+        },
+        "title": "ReadInput",
+        "type": "object"
+      },
+      "risk_level": "medium",
+      "requires_approval": false,
+      "timeout_seconds": 60,
+      "effect": "read"
+    },
+    {
+      "name": "system.services",
+      "description": "List systemd units with their real ActiveState/SubState and activation time, from the user and system managers. Read-only; a manager that cannot answer is named, not hidden.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "scope": {
+            "default": "both",
+            "enum": [
+              "user",
+              "system",
+              "both"
+            ],
+            "title": "Scope",
+            "type": "string"
+          },
+          "kind": {
+            "default": "service",
+            "enum": [
+              "service",
+              "timer",
+              "socket",
+              "target",
+              "all"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "pattern": {
+            "default": "",
+            "maxLength": 128,
+            "pattern": "^(?:[A-Za-z0-9_*?\\[\\]][A-Za-z0-9@:._\\\\*?\\[\\]-]{0,127})?$",
+            "title": "Pattern",
+            "type": "string"
+          },
+          "state": {
+            "default": "all",
+            "enum": [
+              "all",
+              "active",
+              "inactive",
+              "running",
+              "failed"
+            ],
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "title": "ServicesInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 45,
+      "effect": "read"
+    },
+    {
+      "name": "system.service",
+      "description": "Inspect ONE systemd unit by name. A name systemd does not know is an error, never an inactive unit.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "unit": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9@:._\\\\-]{0,127}$",
+            "title": "Unit",
+            "type": "string"
+          },
+          "scope": {
+            "default": "user",
+            "enum": [
+              "user",
+              "system"
+            ],
+            "title": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit"
+        ],
+        "title": "UnitInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "system.service_control",
+      "description": "Start, stop or restart ONE allowlisted user unit. System units are refused: they need an interactive administrator password. Verified by re-reading the unit; a new InvocationID is the proof, not an accepted job.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "unit": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_][A-Za-z0-9@:._\\\\-]{0,127}$",
+            "title": "Unit",
+            "type": "string"
+          },
+          "scope": {
+            "default": "user",
+            "enum": [
+              "user",
+              "system"
+            ],
+            "title": "Scope",
+            "type": "string"
+          },
+          "action": {
+            "enum": [
+              "start",
+              "stop",
+              "restart"
+            ],
+            "title": "Action",
+            "type": "string"
+          }
+        },
+        "required": [
+          "unit",
+          "action"
+        ],
+        "title": "ControlInput",
+        "type": "object"
+      },
+      "risk_level": "medium",
+      "requires_approval": true,
+      "timeout_seconds": 60,
+      "effect": "service"
+    },
+    {
+      "name": "system.disk",
+      "description": "Measure filesystem usage with statvfs and the largest directories under your home folder. Bounded by depth, entry count and time; a truncated walk says so.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "system.packages",
+      "description": "Check whether a package is installed and at what version, through dpkg and snap. Never installs anything.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "package": {
+            "maxLength": 120,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9+._-]*$",
+            "title": "Package",
+            "type": "string"
+          }
+        },
+        "required": [
+          "package"
+        ],
+        "title": "PackageInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 30,
+      "effect": "read"
+    },
+    {
+      "name": "input.clipboard_read",
+      "description": "Read the current clipboard as text, bounded to 100 KB. Use it only when the user asks what is on the clipboard: it returns whatever they last copied, which may be a password, so never call it for context.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "Empty",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 20,
+      "effect": "read"
+    },
+    {
+      "name": "input.clipboard_write",
+      "description": "Replace the clipboard with text and verify it by reading it back from a fresh session. The previous clipboard is destroyed and cannot be restored, so approval is required.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "maxLength": 100000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "ClipboardWriteInput",
+        "type": "object"
+      },
+      "risk_level": "medium",
+      "requires_approval": true,
+      "timeout_seconds": 30,
+      "effect": "input"
+    },
+    {
+      "name": "input.editable_targets",
+      "description": "List one running application's editable text controls with the node identity input.type_text needs. Password fields are never listed. Call this first; a node path alone is not a target.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "app": {
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "App",
+            "type": "string"
+          }
+        },
+        "required": [
+          "app"
+        ],
+        "title": "TargetsInput",
+        "type": "object"
+      },
+      "risk_level": "low",
+      "requires_approval": false,
+      "timeout_seconds": 20,
+      "effect": "read"
+    },
+    {
+      "name": "input.type_text",
+      "description": "Insert text into ONE control previously reported by input.editable_targets, re-verifying its identity first. Refused unless it is still editable, enabled, focused, in the active window, free of a selection and not a password field. Terminals do not support this and are refused, not approximated. Any text that would arrive incomplete is refused with the reason and the observed character counts, never reported as a success (ARIES_TYPE_STRICT).",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "app": {
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "App",
+            "type": "string"
+          },
+          "node": {
+            "pattern": "^\\d{1,5}(?:/\\d{1,5}){0,19}$",
+            "title": "Node",
+            "type": "string"
+          },
+          "pid": {
+            "maximum": 4194304,
+            "minimum": 1,
+            "title": "Pid",
+            "type": "integer"
+          },
+          "role": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Role",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 160,
+            "title": "Name",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          },
+          "mode": {
+            "default": "insert",
+            "pattern": "^(insert|replace)$",
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "app",
+          "node",
+          "pid",
+          "role",
+          "name",
+          "text"
+        ],
+        "title": "TypeInput",
+        "type": "object"
+      },
+      "risk_level": "high",
+      "requires_approval": true,
+      "timeout_seconds": 30,
+      "effect": "input"
+    }
+  ],
+  "checks": {
+    "frozen_planner_import": true,
+    "private_database": true,
+    "full_registered_scope": true,
+    "expected_58_capabilities": true,
+    "state_snapshot_disabled": true,
+    "topk_disabled": true,
+    "all24_unique": true,
+    "expected_decisions_registry_valid": true,
+    "fixture_hash_matches_protocol": true
+  },
+  "database": "sqlite+aiosqlite:////home/stamenovmartin/aries/experiments/thesis-followup-20261012/task3-planner-guard/runs/20261012T193022.180980Z/planner.sqlite3",
+  "model_metadata": {
+    "name": "qwen2.5:7b",
+    "model": "qwen2.5:7b",
+    "modified_at": "2026-09-13T15:41:19.340670035+02:00",
+    "size": 4683087332,
+    "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen2",
+      "families": [
+        "qwen2"
+      ],
+      "parameter_size": "7.6B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 32768,
+      "embedding_length": 3584
+    },
+    "capabilities": [
+      "completion",
+      "tools"
+    ]
+  },
+  "limitations": [
+    "Small synthetic authored fixture,24 distinct goals, no human annotator or hidden test set.",
+    "Three temperature-zero repetitions measure reproducibility rather than sampling robustness.",
+    "Frozen full-catalogue and no-contract settings are a declared controlled configuration, not default interactive top-k behavior.",
+    "Exact next-action capability and arguments are measured, not actual execution, policy approval, verifier quality, multi-step completion or voice.",
+    "Browser histories and writable-directory preconditions are synthetic; no real browser or file outcome is proven.",
+    "The production system prompt already contains explicit guidance for file reads, writes, storage and browser titles; performance on these cases cannot establish general planning intelligence."
+  ],
+  "router_protocol_sha256": "1dc4d61eed41a138ca1622dc0be6e451d194dd36a234f5a0ba0bf79a2db123ed",
+  "expected_model_digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+  "model_before_matches_router": true,
+  "source_after": {
+    "files": 315,
+    "manifest_sha256": "f2059aeb2f5b1fd591d00ae5ec7b143592a7ca6ca17e02ee082187850e406dba",
+    "verified_at": "2026-10-12T19:31:56.361088+00:00",
+    "matched": true
+  },
+  "model_after": {
+    "name": "qwen2.5:7b",
+    "model": "qwen2.5:7b",
+    "modified_at": "2026-09-13T15:41:19.340670035+02:00",
+    "size": 4683087332,
+    "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen2",
+      "families": [
+        "qwen2"
+      ],
+      "parameter_size": "7.6B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 32768,
+      "embedding_length": 3584
+    },
+    "capabilities": [
+      "completion",
+      "tools"
+    ]
+  },
+  "model_stable": true,
+  "completed_at": "2026-10-12T19:31:56.368907+00:00",
+  "complete": true,
+  "attempts_sha256": "37b1a940b67b7414d743d4dbdd517f0525d3d84b41a626ea000494fb7af7a79c",
+  "summary_sha256": "5ac7c252eebc6d7a3c90ca5fc1fd6bd1f682a298b924d0ef0f71519aa2807427"
+}
