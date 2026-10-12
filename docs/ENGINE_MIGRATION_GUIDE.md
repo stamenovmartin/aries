@@ -58,7 +58,7 @@ curl -s -X POST localhost:8000/api/events/propose            # → a linux.repai
 curl -s -X POST localhost:8000/api/tasks/1/run               # inspector → planner(needs_human without a model) → escalation proposal
 curl -s localhost:8000/api/proposals
 ```
-With a model (`AI_PROVIDER=cli` + a logged-in `the reviewing agent`/`codex`, or `ollama`, or `openai`), the planner returns real steps; keep `DRY_RUN=true` until `/api/execution/recent` looks right, then `POST /api/environment/go-live {"dry_run": false, "live_tools": "linux.service_restart"}` — one tool at a time, exactly as the marketing system unlocked one platform at a time after a rehearsal.
+With a model (`AI_PROVIDER=cli` + a logged-in `claude`/`codex`, or `ollama`, or `openai`), the planner returns real steps; keep `DRY_RUN=true` until `/api/execution/recent` looks right, then `POST /api/environment/go-live {"dry_run": false, "live_tools": "linux.service_restart"}` — one tool at a time, exactly as the marketing system unlocked one platform at a time after a rehearsal.
 
 ## 3. What to keep exactly as it is
 

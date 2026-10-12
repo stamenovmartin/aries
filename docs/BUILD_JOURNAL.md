@@ -2001,7 +2001,7 @@ tests/test_api.py                         +15 assertions
 ### Scoring, live
 
 ```
-0.900  the model vendor ships new agentic tooling      matches 1 topic(s): llm agents (0.90)
+0.900  Anthropic ships new agentic tooling      matches 1 topic(s): llm agents (0.90)
 0.600  5G rollout accelerates in the Balkans    matches 1 topic(s): telecom (0.60)
 0.960  Agentic AI agents for telecom networks   matches 2 topic(s): llm agents (0.90), telecom (0.60)
 0.000  Bitcoin ETF approved, agentic trading…   excluded: 'cryptocurrency' is on the list to ignore
@@ -2275,7 +2275,7 @@ should say it is broken, not queue another failure.
 
 1.00  The Agent Incident Registry: Toward Preventing Repeated AI Agent Failures   arxiv · ai, agents, security
 0.98  Finishing the Task Is Not Enough: Evaluating Agent Resilience               arxiv · ai, agents
-0.90  the model vendor boss Dario Amodei calls for AI development to slow down           bbc   · ai
+0.90  Anthropic boss Dario Amodei calls for AI development to slow down           bbc   · ai
 0.90  Nvidia is the central bank of AI                                            hn    · ai
 ```
 
@@ -5147,13 +5147,13 @@ desired. No personal application windows were closed and no logout was forced.
 
 ## 2026-09-18 — Correct cloud transport to existing terminal login
 
-The user clarified that cloud means installed `the reviewing agent` and `codex`, not a new
+The user clarified that cloud means installed `claude` and `codex`, not a new
 HTTP API credential. Added decision-only CLI adapters behind the same provider
 interface and retained the existing engine process-group cleanup pattern.
 Prompts use stdin, tools/MCP/custom hooks are disabled, output/time are bounded,
 and native usage is parsed from JSON/JSONL. API price estimates never masquerade
 as subscription charges. Enabled cloud with Codex after an actual successful
-call; the reviewing agent initially returned a session-limit 429.
+call; Claude initially returned a session-limit 429.
 
 The real paired execution passed both arms 3/3. Full regression passed with
 63 intelligence checks, including timeout cleanup, invalid/failed output,

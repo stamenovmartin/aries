@@ -14,7 +14,7 @@ at least 280 samples, no gap over 15 minutes and all sampled core/local service 
 automation API checks must be healthy for the sampled-availability verdict to pass.
 Otherwise it fails. It then stops its timer. This does not prove availability
 between samples or successful completion of every automation; raw automation results
-remain inspectable. Other applications' the reviewing agent/Codex usage is outside its scope.
+remain inspectable. Other applications' Claude/Codex usage is outside its scope.
 
 ```bash
 systemctl --user status aries-core aries-local-model aries-endurance.timer

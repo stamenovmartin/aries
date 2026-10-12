@@ -5,7 +5,7 @@ AI-native, adaptive, agentic computing environment built on top of Linux.
 
 ## What ARIES is not
 
-Not a chatbot, not a the reviewing agent wrapper, not a collection of prompts, not a Linux theme, not a
+Not a chatbot, not a Claude wrapper, not a collection of prompts, not a Linux theme, not a
 macOS clone, not a pile of shell scripts, not a static multi-agent demo.
 
 ## What ARIES is

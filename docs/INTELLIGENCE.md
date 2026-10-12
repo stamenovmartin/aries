@@ -1,7 +1,7 @@
 # Local-first intelligence
 
 **18 September correction:** the intended cloud path is the installed terminal
-`the reviewing agent` / `codex` login, not a separately configured HTTP API key. CLI adapters
+`claude` / `codex` login, not a separately configured HTTP API key. CLI adapters
 are now implemented and enabled with `codex-cli` selected. Earlier evidence of
 “unconfigured cloud” describes the superseded HTTP-only implementation.
 
@@ -117,7 +117,7 @@ under the user systemd service. A missing executable, quota error or timeout is
 recorded and follows the configured local fallback; no hidden switch to another
 cloud provider happens.
 
-the reviewing agent runs in non-interactive safe mode, with no tools/MCP/custom hooks and no
+Claude runs in non-interactive safe mode, with no tools/MCP/custom hooks and no
 session persistence. Codex runs ephemeral/read-only with user config, shell,
 unified exec, apps, plugins, hooks, multi-agent and web search disabled. Existing
 login is preserved; prompts go through stdin and fixed argv, never shell strings.
@@ -129,7 +129,7 @@ output-token limit is advisory for CLI; the timeout and byte limits are enforced
 Codex integration parameters were checked against installed CLI help and the
 [official configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
 and [non-interactive documentation](https://learn.chatgpt.com/docs/non-interactive-mode).
-Cloud generation uses each CLI's native JSON/JSONL usage. the reviewing agent cache-read and
+Cloud generation uses each CLI's native JSON/JSONL usage. Claude cache-read and
 cache-write input are retained separately and included in total input; Codex
 already reports total input with a separate cached subset. CLI reported nominal
 cost is **not a subscription invoice** and is stored separately from configured
@@ -166,7 +166,7 @@ that fell back to local. Legacy `/api/chat` calls are counted as local generatio
 Direct diagnostic gateway `/generate` calls are not included in core accounting;
 normal core requests are recorded by their calling layer without double counting.
 
-Usage is scoped to ARIES-initiated calls, not the user's the reviewing agent/Codex account.
+Usage is scoped to ARIES-initiated calls, not the user's Claude/Codex account.
 Other terminal sessions and applications are outside these measurements. Shared
 subscription limits can be consumed elsewhere; remaining account quota is unknown.
 `measured_cloud_*_tokens` are known subtotals; `cloud_*_tokens_total` is null
@@ -240,5 +240,5 @@ Real Codex paired run `20260917T222712Z-ab-f2e66d` passed A 3/3 and B 3/3.
 A used six CLI cloud calls (77,151 native tokens including cached input); B used
 zero cloud calls and four local calls plus a deterministic system probe. This
 small engineering fixture does not establish general equivalence or USD savings.
-All regression suites passed, including 63 intelligence checks. the reviewing agent's initial
+All regression suites passed, including 63 intelligence checks. Claude's initial
 429 session-limit response is retained separately from Codex success.

@@ -28,8 +28,8 @@ docker compose up -d --build
 docker compose logs -f api
 ```
 * `postgres` (loopback-only port), `api` (8000). The API creates the schema on boot (`scripts/init_db.py`), recovers stuck work, then starts the workers (`scheduler, learning, triggers, housekeeping, autopilot`).
-* CLI-agent auth is **mounted**, not configured: `~/.the reviewing agent` and `~/.codex` are bind-mounted read-only (the original's pattern: run `codex login` on the host; an expired login silently disables the "brain" — check `/api/health` → `ai_provider`).
-* The image installs Node + `@the model vendor-ai/claude-code` + `@openai/codex` so `AI_PROVIDER=cli` works; drop those lines from the Dockerfile if you only use HTTP providers.
+* CLI-agent auth is **mounted**, not configured: `~/.claude` and `~/.codex` are bind-mounted read-only (the original's pattern: run `codex login` on the host; an expired login silently disables the "brain" — check `/api/health` → `ai_provider`).
+* The image installs Node + `@anthropic-ai/claude-code` + `@openai/codex` so `AI_PROVIDER=cli` works; drop those lines from the Dockerfile if you only use HTTP providers.
 
 ## 3. Configuration
 
@@ -74,4 +74,4 @@ Or with pytest: `pip install pytest && cd agentic-core && pytest tests`.
 
 ## 8. The original stack (for reference)
 
-`examples/marketing/docker-compose.yml`: postgres (pgvector), redis, ollama (profile), Postiz + Temporal + Elasticsearch (profile `full`), the FastAPI backend (mounts `.env`, `~/.the reviewing agent`, `~/.codex`; `BACKEND_RELOAD` opt-in), the Next.js frontend (production build; restart to rebuild). See `examples/marketing/README.md`.
+`examples/marketing/docker-compose.yml`: postgres (pgvector), redis, ollama (profile), Postiz + Temporal + Elasticsearch (profile `full`), the FastAPI backend (mounts `.env`, `~/.claude`, `~/.codex`; `BACKEND_RELOAD` opt-in), the Next.js frontend (production build; restart to rebuild). See `examples/marketing/README.md`.
