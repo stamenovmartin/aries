@@ -81,6 +81,11 @@ FLAGS = {
                                                "asked) and strips sentence punctuation from paths; done still "
                                                "needs re-checked verified evidence. Off compiles only the "
                                                "anchored sentences, as in ARIES-FINAL-20261006"),
+    "ARIES_PLANNER_CLARIFY_GUARD": (False, "with ARIES_PLANNER_CLARIFY: a question carries no capability or "
+                                          "arguments (grammar), confirming is ask_approval and asking is "
+                                          "only for choosing between observed targets (prompt), and a "
+                                          "named but unlisted folder is listed before anything is read in "
+                                          "it. Off leaves the clarification grammar and prompt unchanged"),
     "ARIES_PLANNER_CLARIFY": (True, "the planner may stop and ask which target is meant when its own "
                                     "verified observations show several that fit the goal; every choice "
                                     "must name something observed. Off removes the option from the "
