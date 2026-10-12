@@ -27,7 +27,7 @@
 | `thesis/ARIES_03_Diplomska.pdf` / `.docx` ("Сите 58 верификатори беа класифицирани, 57 од нив со извршен доказ"; Figure 18 "58 верификатори, 57 со извршен доказ") | 57 | correct; not edited (protected) |
 | `thesis/ARIES_Diplomska_Paket_20261006.zip`: `ARIES_01_Tehnicka.docx` and `.pdf` ("57 од 58 имаат записи за извршување") | 57 | correct; not edited (protected) |
 | `verification/facts.json` and `verification/build_facts.py` | 57, with the correction recorded | correct |
-| **`verification/ledger_frozen.json`** → `verification.classification_method` | **56** (copy of the raw narrative) | **needs updating.** It is a frozen snapshot, so I recommend a dated erratum field or a note in `verification/` rather than rewriting the frozen string. Not edited: awaiting your decision. |
+| `verification/ledger_frozen.json` → `verification.classification_method` | 56 (copy of the raw narrative) | **erratum added 2026-10-12** as a new field `errata_20261012`; the original text is unchanged |
 | **`experiments/product/independent-acceptance/raw/review_verifier_integrity.json`** → `method` | **56** | **stale, but must not be edited** (rule 1: raw reported result). The per-entry data in the same file is authoritative. |
 | `experiments/product/independent-acceptance/acceptance.json` (lines 70–74) and `handoff.json` (lines 1336–1338, 1776) | quote both numbers | correct as written: they *document* the inconsistency and say the per-entry field is authoritative |
 | `experiments/product/independent-acceptance/findings.json` (line 204) | 57 | correct |
