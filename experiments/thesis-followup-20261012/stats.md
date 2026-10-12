@@ -45,4 +45,27 @@ Q = 23.89, df = 3, p = 2.6 × 10⁻⁵ (n = 225).
 - The p-values are not corrected for multiple comparisons. With Bonferroni over the three McNemar tests
   (α = 0.0167), only A1 vs A0 remains significant.
 - The test fixture is the author's own, so this analysis cannot generalise beyond it.
-- The optional mixed-effects logistic model was **not run**, because `statsmodels` is not installed.
+- The mixed model below was run with `var/venv-stats/bin/python` (statsmodels 0.15.0), a separate analysis
+  environment, so the ARIES runtime venv was not changed.
+
+## Mixed-effects logistic model (all 2,700 decisions, reference arm A1)
+
+statsmodels has no maximum-likelihood mixed logistic model. The requested model (arm fixed, random intercept per
+request) is therefore `BinomialBayesMixedGLM`, fitted by **variational Bayes**. Its intervals are the posterior
+mean ± 1.96 SD, not frequentist confidence intervals. A GEE logistic model clustered by request (exchangeable
+working correlation 0.71) is the frequentist cross-check. It estimates population-averaged effects, which are
+smaller than the GLMM's per-request effects.
+
+| vs A1 | GLMM log-odds (≈95%) | GLMM odds ratio | GEE log-odds ± robust SE | GEE p |
+|---|---|---|---|---|
+| A0 | −1.886 (−2.199, −1.573) | 0.15 | −0.498 ± 0.126 | 8 × 10⁻⁵ |
+| A2 | −0.530 (−0.834, −0.226) | 0.59 | −0.154 ± 0.122 | 0.21 |
+| A3 | +0.035 (−0.273, +0.344) | 1.04 | 0.000 ± 0.138 | 1.00 |
+
+Between-request variation is very large: the random-effect log-SD is 1.76 (posterior SD 0.05).
+
+**Reading the models together with McNemar:**
+- **A3 vs A1** is null in all three analyses.
+- **A1 is better than A0** in all three.
+- **A2 vs A1** is not robust. Only the variational GLMM interval excludes 0, while GEE (p = 0.21) and McNemar on
+  majorities (p = 0.27) do not. Report the direction (A2 worse than A1), not a significant effect.
