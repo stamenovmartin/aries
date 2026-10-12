@@ -102,3 +102,73 @@ could come from completion rather than from asking.
 **Not an amendment, recorded for completeness.** The code under test includes `1a4bc47`, which restricts
 grounding to path-like observations and their final component. This implements the registered rule ("a path or
 name taken from verified step results") and does not change it.
+
+## Amendment 2 (2026-10-12), before any measurement
+
+Added after Amendment 1 and before any H4 measurement. The text above, including Amendment 1, is unchanged. At the
+time of this commit `set_a.jsonl` and `set_c.jsonl` are still the empty templates (0 bytes): no scenario from A or C
+existed, and none has been read.
+
+**Why.** Before the H4 measurement, a second flag, `ARIES_PLANNER_CLARIFY_GUARD`, was added and tuned. If it is left
+out of the protocol, H4 would test a version of the system that is no longer the one proposed. This amendment
+records how the guard came about and fixes it into the treatment.
+
+**History, in order.**
+
+1. *Planner regression (found first).* The Task 3.2 regression check ran the 72-attempt planner protocol of
+   ARIES-FINAL-20261006 on the follow-up code with `ARIES_PLANNER_CLARIFY` on
+   (`experiments/thesis-followup-20261012/task3-planner/runs/20261012T171631.114537Z`, summary in
+   `experiments/thesis-followup-20261012/task3-summary.json`). Strict matches fell from **68/72 (frozen) to 60/72**.
+   The whole drop is in p20–p22. In 9 of 9 attempts on these unambiguous `browser.read` goals, the model chose
+   `ask_clarification` as a confirmation and attached arguments, which `Decision` rejects. This drop is a result and is
+   reported as such.
+2. *The guard was designed after that regression and because of it.* `ARIES_PLANNER_CLARIFY_GUARD` (default off) does
+   three things. A grammar change makes a question unable to carry a capability or arguments. A prompt rule says
+   that confirming is `ask_approval` and that asking is only for choosing between observed targets. A list-first
+   hint says that a goal folder that is named but not yet listed is listed before anything in it is read.
+3. *Tuned on a development set only, before any look at A and C.* The development set is
+   `experiments/thesis-followup-20261012/h4-dev/dev.jsonl`. It has 7 scenarios: 4 ambiguous and 3 controls. They
+   were written by the agent, not by the external author, and are marked `dev`. They are not held-out, never scored
+   for H4, and refused by the runner in an H4 run. The author's limit was **at most 3 development rounds, every round
+   logged, including failures** (`h4-dev/DEVLOG.md`). The results, one run of 7 each, are below.
+
+   | Run | Ambiguous asked (of 4) | Controls correct (of 3) |
+   |---|---|---|
+   | baseline: clarify on, guard off | 0 | 0 |
+   | round 1 (`5590f41`) | 0 | 2 |
+   | round 2 (`5c7c8b1`) | 2 | 0 (approval requested for reads) |
+   | round 3 (`09bec79`) | 0 | 2 |
+
+   No round met both goals. Tuning stopped after round 3, as the limit requires.
+
+**What is fixed.**
+
+1. **Treatment:** `ARIES_PLANNER_CLARIFY=1`, `ARIES_PLANNER_CLARIFY_GUARD=1`, `ARIES_COMPLETION_READ_PARAPHRASE=0`.
+   **Control:** all three `=0`. In the hypothesis, "with `ARIES_PLANNER_CLARIFY` on" is read as "with
+   `ARIES_PLANNER_CLARIFY` and `ARIES_PLANNER_CLARIFY_GUARD` on". The materials, outcome definitions, criteria
+   1–3, their thresholds and the analysis are unchanged.
+2. **Guard version:** the round-3 code, unchanged since `09bec79` (`aries/workspace/agent_planner.py` sha256
+   `c699131862ea970d2dfad70122a3f7c92beeddc0fe1aaada08ee95c46e166ce3`, `aries/flags.py`
+   `f6ec2800373eb60be8d34ba7375bcea8f2989e9646c2514d4b35b5c325802986`). Round 3 was chosen over round 2 by the
+   author. Round 2 asked more often on ambiguous goals, but it requested approval for harmless reads and once offered
+   a folder as a choice, which puts the product and criterion 3 at risk. The flag's default stays off, so with no
+   override the system behaves as before the guard. Each run sets all three flags explicitly. A run whose effective
+   values, as read from the running instance, differ from these is refused.
+3. **Runner:** `experiments/thesis-followup-20261012/h4-runs/run_h4.py` uses `on-guard` as the treatment and refuses
+   `on` (clarify without the guard) for H4 sets. The separate completion-fix condition of Amendment 1 becomes
+   `CLARIFY=1, GUARD=1, PARAPHRASE=1`, so that it differs from the treatment in one flag only. It remains outside H4.
+4. **No further tuning.** Nothing in the guard, the prompts or the planner changes between this commit and the end of
+   the H4 measurement. A later change to the guard would be a new hypothesis and would not be reported as H4.
+
+**Stated in advance.**
+
+- On the development set, round 3 asked in 0 of 4 ambiguous cases. **Criterion 1 is therefore expected to fail.**
+  If it does, that is the result: the structure allows a grounded question, but qwen2.5:7b mostly chooses a
+  candidate silently.
+- `dev-a-04`, a Macedonian goal, never reached the planner in any development run. `service.plan` routes
+  "Прочитај ми го … во /folder." to the legacy `read_file` with the sentence's final period inside the path. This
+  routing defect lies outside the guard and is **not fixed** before the measurement. If scenarios in A or C have the
+  same shape, they will fail for this reason. That will be reported per scenario and is not a reason to remove them.
+- The planner protocol (72 attempts) is rerun once on this code with all three flags of the treatment. Its result
+  is reported as **"confirmation after the fix"** and not as independent evidence. The guard was designed with the
+  p20–p22 failure in view, and the 68/72 → 60/72 drop above is reported whatever the rerun shows.

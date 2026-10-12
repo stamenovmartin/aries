@@ -1,17 +1,18 @@
 # H4 measurement runs
 
-Runner: `run_h4.py`. Protocol: `docs/preregistration/H4-planner-clarification.md` and its **Amendment 1**.
+Runner: `run_h4.py`. Protocol: `docs/preregistration/H4-planner-clarification.md` with **Amendments 1 and 2**.
 No H4 measurement has been run yet; it waits for the external scenario sets.
 
 ## Conditions
 
-| Condition | `ARIES_PLANNER_CLARIFY` | `ARIES_COMPLETION_READ_PARAPHRASE` | Part of H4 |
-|---|---|---|---|
-| `on` (treatment) | 1 | 0 | yes |
-| `off` (control) | 0 | 0 | yes |
-| `completion-fix` | 1 | 1 | **no**: a separate, labelled condition (Amendment 1) |
+| Condition | `ARIES_PLANNER_CLARIFY` | `ARIES_PLANNER_CLARIFY_GUARD` | `ARIES_COMPLETION_READ_PARAPHRASE` | Part of H4 |
+|---|---|---|---|---|
+| `on-guard` (treatment, Amendment 2) | 1 | 1 | 0 | yes |
+| `off` (control) | 0 | 0 | 0 | yes |
+| `completion-fix` | 1 | 1 | 1 | **no**: a separate, labelled condition (Amendments 1 and 2) |
+| `on` (clarify without guard) | 1 | 0 | 0 | **no**: refused for `--sets h4`; used only for the dev baseline |
 
-- **Order:** on, off, on, off, on, off (labels `r1`…`r6`), then `completion-fix` ×3 (`x1`…`x3`).
+- **Order:** on-guard, off, on-guard, off, on-guard, off (labels `r1`…`r6`), then `completion-fix` ×3 (`x1`…`x3`).
 - **Materials:** each run covers set A (10), set C (10) and the 49 runnable held-out cases. These are the
   DISCRIMINATING cases of the original `oracle_validation.json`, without `requires`, which is the same selection
   as the 2026-10-06 run.

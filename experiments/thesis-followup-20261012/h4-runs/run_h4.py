@@ -25,8 +25,11 @@ polling, connect/news/briefing switched off, shell.* and power.* settings not co
 Nothing is submitted without --go. Every invocation writes a new folder; nothing is
 overwritten.
 
-    run_h4.py --condition on  --label r1 [--go]
-    run_h4.py --condition off --label r2 [--go]
+H4 treatment is `on-guard` and control is `off` (preregistration, Amendment 2); `on`
+(clarify without the guard) is refused for --sets h4 and kept only for dev/example runs.
+
+    run_h4.py --condition on-guard --label r1 [--go]
+    run_h4.py --condition off      --label r2 [--go]
     run_h4.py --condition completion-fix --label x1 [--go]     # separate, NOT H4
     run_h4.py --condition on --label smoke --sets example --go  # example pair only
 """
@@ -56,7 +59,7 @@ CONDITIONS = {
     'on': {'ARIES_PLANNER_CLARIFY': '1', 'ARIES_PLANNER_CLARIFY_GUARD': '0', 'ARIES_COMPLETION_READ_PARAPHRASE': '0'},
     'off': {'ARIES_PLANNER_CLARIFY': '0', 'ARIES_PLANNER_CLARIFY_GUARD': '0', 'ARIES_COMPLETION_READ_PARAPHRASE': '0'},
     'on-guard': {'ARIES_PLANNER_CLARIFY': '1', 'ARIES_PLANNER_CLARIFY_GUARD': '1', 'ARIES_COMPLETION_READ_PARAPHRASE': '0'},
-    'completion-fix': {'ARIES_PLANNER_CLARIFY': '1', 'ARIES_PLANNER_CLARIFY_GUARD': '0', 'ARIES_COMPLETION_READ_PARAPHRASE': '1'},
+    'completion-fix': {'ARIES_PLANNER_CLARIFY': '1', 'ARIES_PLANNER_CLARIFY_GUARD': '1', 'ARIES_COMPLETION_READ_PARAPHRASE': '1'},
 }
 TERMINAL = {'done', 'answered', 'failed', 'partial', 'refused', 'proposed', 'cancelled',
             'interrupted', 'error', 'needs_clarification'}
@@ -246,6 +249,8 @@ def main():
     if not cli.go:
         print(f'DRY RUN. Nothing submitted. condition={cli.condition} flags={CONDITIONS[cli.condition]} cases={counts}')
         return 0
+    if cli.sets == 'h4' and cli.condition == 'on':
+        raise SystemExit('REFUSED: the H4 treatment is on-guard (Amendment 2); on is for dev/example runs only')
     if cli.sets == 'h4' and (counts.get('A', 0) != 10 or counts.get('C', 0) != 10):
         raise SystemExit(f'REFUSED: H4 needs 10 + 10 scenarios; found {counts}')
     if cli.sets == 'dev':
