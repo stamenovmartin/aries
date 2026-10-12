@@ -43,6 +43,16 @@ def test_guarded_grammar_separates_asking_from_acting():
     check('capability still mandatory when only acting verbs are left', 'capability' in only_acting['anyOf'][0]['required'])
 
 
+def test_listed_but_unread_rule():
+    listed = {'steps': [{'capability': 'file.list', 'args': {'path': '/h/p'}, 'verification_status': 'verified'}]}
+    check('a listed, unread goal folder gets the decision step', agent_planner.listed_but_unread('Read me the notes in /h/p.', listed) == ['/h/p'])
+    sub = {'steps': listed['steps'] + [{'capability': 'file.list', 'args': {'path': '/h/p/a'}, 'verification_status': 'verified'}]}
+    check('the latest listing inside the folder is named', agent_planner.listed_but_unread('Read me the notes in /h/p.', sub) == ['/h/p/a'])
+    done = {'steps': listed['steps'] + [{'capability': 'file.read', 'args': {'path': '/h/p/x.md'}, 'verification_status': 'verified'}]}
+    check('once something inside was read, no decision step', agent_planner.listed_but_unread('Read me the notes in /h/p.', done) == [])
+    check('a goal naming an exact file gets no decision step', agent_planner.listed_but_unread('Read /h/p/x.md.', listed) == [])
+
+
 def test_unlisted_folder_rule():
     data = {'steps': []}
     check('folder without a file is flagged', agent_planner.unlisted_folders('Read me the notes in /h/p.', data) == ['/h/p'])

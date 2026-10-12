@@ -437,6 +437,25 @@ def unlisted_folders(goal, data):
     return [str(p) for p in paths if str(p) not in listed]
 
 
+def listed_but_unread(goal, data):
+    """Goal folders (or their subfolders) with a verified listing and no verified read inside."""
+    from pathlib import Path
+    from aries.workspace.contracts import _paths
+    folders = [str(Path(p).expanduser()) for p in _paths(goal) if len(p) > 1 and not Path(p).suffix]
+    if not folders:
+        return []
+    steps = [s for s in data.get('steps', []) if s.get('verification_status') == 'verified']
+    inside = lambda path, root: path == root or path.startswith(root.rstrip('/') + '/')
+    listed = [str(Path(s['args'].get('path', '')).expanduser()) for s in steps if s.get('capability') == 'file.list']
+    read = [str(Path(s['args'].get('path', '')).expanduser()) for s in steps if s.get('capability') == 'file.read']
+    out = []
+    for root in folders:
+        mine = [l for l in listed if inside(l, root)]
+        if mine and not any(inside(r, root) for r in read):
+            out.append(mine[-1])
+    return out
+
+
 def flags_enabled(name):
     from aries import flags
     return flags.enabled(name)
@@ -520,6 +539,16 @@ async def plan(db, goal, data, budget):
             messages.append({'role':'user','content':
                 'The goal names the folder ' + ', '.join(folders) + ' but not one exact file inside it. List that '
                 'folder with file.list before reading anything in it, and do not guess file names.'})
+    if guard:
+        listed = listed_but_unread(goal, data)
+        if listed:
+            # Round 2 (h4-dev/DEVLOG.md): after listing, the model read one candidate
+            # without deciding how many entries fit. Make that decision an explicit step.
+            messages.append({'role':'user','content':
+                'You have listed ' + ', '.join(listed) + ' and read nothing in it yet. Before reading any file, '
+                'decide how many listed entries fit the goal. If two or more fit and the goal does not say which, '
+                'choose ask_clarification with those exact paths as the choices. If exactly one fits, read that one. '
+                'If none fits but the listing shows subfolders, list the subfolders that could contain the target.'})
     if can_ask and guard:
         messages.append({'role':'user','content':
             'Two different actions exist for two different situations. To have the user confirm or approve an '
