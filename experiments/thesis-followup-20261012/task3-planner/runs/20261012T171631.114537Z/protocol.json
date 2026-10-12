@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-06T17:08:14.336217+00:00",
+  "status": "predeclared before inference; root must release measurement window",
+  "fixture_sha256": "6f511f045421d6168e36fdb55318c995b18b1955ff6d3f75308f934c57c8bcb1",
+  "primary_question": "Can the frozen production M14 planner choose the exact next registered capability and required arguments for explicit synthetic tasks?",
+  "entry_point": "aries.workspace.agent_planner.plan",
+  "sample_size": 24,
+  "repetitions": 3,
+  "attempts": 72,
+  "model": "qwen2.5:7b",
+  "local_url": "http://127.0.0.1:11434",
+  "settings": {
+    "intelligence.location": "local",
+    "intelligence.local_model": "qwen2.5:7b",
+    "intelligence.local_backend": "ollama",
+    "intelligence.gateway_enabled": false,
+    "intelligence.local_url": "http://127.0.0.1:11434",
+    "intelligence.cloud_enabled": false,
+    "intelligence.cloud_local_fallback": false,
+    "intelligence.router_enabled": false,
+    "ai.temperature": 0.0,
+    "ai.top_p": 0.9,
+    "ai.context_tokens": 8192,
+    "ai.max_output_tokens": 1800,
+    "workspace.semantic_memory": false
+  },
+  "flags": {
+    "ARIES_STATE_SNAPSHOT": "0",
+    "ARIES_CAP_TOPK": "0",
+    "ARIES_PLAN_MEMORY": "0",
+    "ARIES_TRACE_FEWSHOT": "0",
+    "ARIES_CONTEXT_ENGINE": "0",
+    "ARIES_GOAL_TEAMS": "0",
+    "ARIES_VERIFY_FEEDBACK": "1"
+  },
+  "capability_scope": "Full frozen registry, no specialist grant, no catalogue top-k reduction. No capability executor is invoked.",
+  "contract": "Unsupported empty requirements for every case. This deliberately tests selection without oracle-like expected-capability names from deterministic completion contracts.",
+  "state": "All real state acquisition disabled. Data and browser-session preconditions are fixed synthetic fixtures; they are explicitly labelled as synthetic.",
+  "router": "Routing pinned local, router disabled. Measures planner rather than upstream intent routing.",
+  "order": {
+    "method": "Shuffle all24 case IDs independently per repetition with random.Random(seed)",
+    "seeds": [
+      2026100601,
+      2026100602,
+      2026100603
+    ]
+  },
+  "retry_policy": "One plan call per case/repetition, no model retries or prompt repairs. Transport/schema/argument errors are recorded as failures and the next prespecified case proceeds. Reruns require a separate preserved run directory.",
+  "metrics": {
+    "schema_valid": "Production agent_planner.parse and registry argument validation both succeed.",
+    "capability_correct": "Valid decision has action=execute and exact expected capability name.",
+    "capability_arguments_correct": "Valid decision has expected action+capability and exactly expected normalized arguments. Necessary path/content/session values must match byte-for-byte; no strip/casefold/path guessing.",
+    "reporting": "All72 slots are denominators including errors. Also report each24-case repetition, per-category and language results, and consistency of normalized decisions per case. Repetitions are not72 independent goals.",
+    "strict_gate": "Document success counts and remaining failures; do not optimize prompts or labels after inference and do not equate a planner result with execution success."
+  },
+  "limitations": [
+    "Small synthetic authored fixture,24 distinct goals, no human annotator or hidden test set.",
+    "Three temperature-zero repetitions measure reproducibility rather than sampling robustness.",
+    "Frozen full-catalogue and no-contract settings are a declared controlled configuration, not default interactive top-k behavior.",
+    "Exact next-action capability and arguments are measured, not actual execution, policy approval, verifier quality, multi-step completion or voice.",
+    "Browser histories and writable-directory preconditions are synthetic; no real browser or file outcome is proven.",
+    "The production system prompt already contains explicit guidance for file reads, writes, storage and browser titles; performance on these cases cannot establish general planning intelligence."
+  ]
+}

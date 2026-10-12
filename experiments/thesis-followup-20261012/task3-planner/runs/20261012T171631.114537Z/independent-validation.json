@@ -1,0 +1,317 @@
+{
+  "verified_at": "2026-10-12T17:18:32.243011+00:00",
+  "mode": "independent read-only recomputation from actual raw outputs and scratch DB",
+  "checks": [
+    {
+      "name": "complete_run_and_summary",
+      "passed": true
+    },
+    {
+      "name": "all72_unique_prespecified_slots",
+      "passed": true
+    },
+    {
+      "name": "order_matches_preregistered_schedule",
+      "passed": true
+    },
+    {
+      "name": "goal_expected_pairs_match_frozen_fixture",
+      "passed": true
+    },
+    {
+      "name": "protocol_and_fixture_identical_to_frozen",
+      "passed": true
+    },
+    {
+      "name": "run_copies_match_frozen_inputs",
+      "passed": true
+    },
+    {
+      "name": "manifest_input_hashes_match",
+      "passed": true
+    },
+    {
+      "name": "attempt_and_summary_hashes_match_manifest",
+      "passed": true
+    },
+    {
+      "name": "followup_source_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "model_matches_router_before_and_after",
+      "passed": true
+    },
+    {
+      "name": "all_run_integrity_flags_true",
+      "passed": true
+    },
+    {
+      "name": "all_preflight_checks_passed",
+      "passed": true
+    },
+    {
+      "name": "full58_registry_and_no_topk_snapshot",
+      "passed": true
+    },
+    {
+      "name": "all72_recorded_prompt_hashes_match",
+      "passed": true
+    },
+    {
+      "name": "all24_prompts_byte_identical_to_followup_pre_inference_dryrun",
+      "passed": true
+    },
+    {
+      "name": "raw_decisions_reparse_and_scores_recompute_identically",
+      "passed": true
+    },
+    {
+      "name": "overall_counts_match_independent_recalculation",
+      "passed": true
+    },
+    {
+      "name": "each_repetition_has_fixed24_denominator",
+      "passed": true
+    },
+    {
+      "name": "consistency_count_recomputed",
+      "passed": true
+    },
+    {
+      "name": "72_actual_recorded_local_generations",
+      "passed": true
+    },
+    {
+      "name": "no_workspace_goals_or_router_cache_written",
+      "passed": true
+    },
+    {
+      "name": "successful_usage_has_local_model_identity",
+      "passed": true
+    }
+  ],
+  "passed": 22,
+  "total": 22,
+  "independent_counts": {
+    "schema_valid": 63,
+    "capability_correct": 60,
+    "capability_arguments_correct": 60
+  },
+  "denominator": 72,
+  "unique_cases": 24,
+  "repetitions": 3,
+  "identical_valid_cases": 21,
+  "generation_count": 72,
+  "generation_success_count": 72,
+  "workspace_goals": 0,
+  "routing_cache_entries": 0,
+  "failures": [
+    {
+      "case_id": "p12",
+      "repetition": 1,
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    },
+    {
+      "case_id": "p22",
+      "repetition": 1,
+      "goal": "Extract the text currently displayed by the already-open page. Reuse the exact existing session shown in history.",
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-gamma"
+        }
+      },
+      "actual": null,
+      "error": {
+        "type": "ValidationError",
+        "message": "1 validation error for Decision\n  Value error, Terminal decisions cannot carry executable arguments [type=value_error, input_value={'action': 'ask_clarifica...owser', 'mode': 'read'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      }
+    },
+    {
+      "case_id": "p21",
+      "repetition": 1,
+      "goal": "Прочитај ја текстуалната содржина од веќе отворената страница. Употреби ја сесијата од запишаното набљудување; не отворај нова страница.",
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-beta"
+        }
+      },
+      "actual": null,
+      "error": {
+        "type": "ValidationError",
+        "message": "1 validation error for Decision\n  Value error, Terminal decisions cannot carry executable arguments [type=value_error, input_value={'action': 'ask_clarifica... 'https://example.com'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      }
+    },
+    {
+      "case_id": "p20",
+      "repetition": 1,
+      "goal": "Read the text of the page already opened in the browser. Use the session from the recorded observation; do not open another tab.",
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-alpha"
+        }
+      },
+      "actual": null,
+      "error": {
+        "type": "ValidationError",
+        "message": "1 validation error for Decision\n  Value error, Terminal decisions cannot carry executable arguments [type=value_error, input_value={'action': 'ask_clarifica...ps://www.python.org)?'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      }
+    },
+    {
+      "case_id": "p12",
+      "repetition": 2,
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    },
+    {
+      "case_id": "p20",
+      "repetition": 2,
+      "goal": "Read the text of the page already opened in the browser. Use the session from the recorded observation; do not open another tab.",
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-alpha"
+        }
+      },
+      "actual": null,
+      "error": {
+        "type": "ValidationError",
+        "message": "1 validation error for Decision\n  Value error, Terminal decisions cannot carry executable arguments [type=value_error, input_value={'action': 'ask_clarifica...the title or the URL?'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      }
+    },
+    {
+      "case_id": "p21",
+      "repetition": 2,
+      "goal": "Прочитај ја текстуалната содржина од веќе отворената страница. Употреби ја сесијата од запишаното набљудување; не отворај нова страница.",
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-beta"
+        }
+      },
+      "actual": null,
+      "error": {
+        "type": "ValidationError",
+        "message": "1 validation error for Decision\n  Value error, Terminal decisions cannot carry executable arguments [type=value_error, input_value={'action': 'ask_clarifica... 'https://example.com'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      }
+    },
+    {
+      "case_id": "p22",
+      "repetition": 2,
+      "goal": "Extract the text currently displayed by the already-open page. Reuse the exact existing session shown in history.",
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-gamma"
+        }
+      },
+      "actual": null,
+      "error": {
+        "type": "ValidationError",
+        "message": "1 validation error for Decision\n  Value error, Terminal decisions cannot carry executable arguments [type=value_error, input_value={'action': 'ask_clarifica...main', 'mode': 'exact'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      }
+    },
+    {
+      "case_id": "p22",
+      "repetition": 3,
+      "goal": "Extract the text currently displayed by the already-open page. Reuse the exact existing session shown in history.",
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-gamma"
+        }
+      },
+      "actual": null,
+      "error": {
+        "type": "ValidationError",
+        "message": "1 validation error for Decision\n  Value error, Terminal decisions cannot carry executable arguments [type=value_error, input_value={'action': 'ask_clarifica...main', 'mode': 'exact'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      }
+    },
+    {
+      "case_id": "p21",
+      "repetition": 3,
+      "goal": "Прочитај ја текстуалната содржина од веќе отворената страница. Употреби ја сесијата од запишаното набљудување; не отворај нова страница.",
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-beta"
+        }
+      },
+      "actual": null,
+      "error": {
+        "type": "ValidationError",
+        "message": "1 validation error for Decision\n  Value error, Terminal decisions cannot carry executable arguments [type=value_error, input_value={'action': 'ask_clarifica... 'https://example.com'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      }
+    },
+    {
+      "case_id": "p20",
+      "repetition": 3,
+      "goal": "Read the text of the page already opened in the browser. Use the session from the recorded observation; do not open another tab.",
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-alpha"
+        }
+      },
+      "actual": null,
+      "error": {
+        "type": "ValidationError",
+        "message": "1 validation error for Decision\n  Value error, Terminal decisions cannot carry executable arguments [type=value_error, input_value={'action': 'ask_clarifica...the title or the URL?'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      }
+    },
+    {
+      "case_id": "p12",
+      "repetition": 3,
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    }
+  ],
+  "run_manifest_sha256": "f9b5cd1f48c71a0c916804329786b990fc862a22a676ddcd299b55641ea96e05",
+  "summary_sha256": "2f79eba52250a6ff69c47627d87b82a89a4affcd6d0b29b098575c933f00581a",
+  "attempts_sha256": "e1e906a73bded32267f5f0a05e0650d4f7ee4bf9968c380af23197653ecfae20",
+  "validation_script_sha256": "2026ee7cfd99455d26fe75027bc3369ec7f628032c505cd0b768960dd80478ad",
+  "measurement_limit": "Offline exact next-action selection; no capability execution or actual task completion."
+}

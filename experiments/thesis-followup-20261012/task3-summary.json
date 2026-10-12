@@ -1,0 +1,98 @@
+{
+ "task": "3.2 regression check on thesis-followup code (same protocols as ARIES-FINAL-20261006)",
+ "source": {
+  "archive": "var/followup-source/79d1f23",
+  "commit": "79d1f23",
+  "flags": "source defaults (ARIES_PLANNER_CLARIFY on, ARIES_COMPLETION_READ_PARAPHRASE on) plus the frozen protocol overrides"
+ },
+ "live_service": "running (as in ARIES-FINAL-20261006)",
+ "planner": {
+  "run": "experiments/thesis-followup-20261012/task3-planner/runs/20261012T171631.114537Z",
+  "followup": {
+   "attempted": 72,
+   "denominator": 72,
+   "schema_valid": {
+    "correct": 63,
+    "denominator": 72
+   },
+   "capability_correct": {
+    "correct": 60,
+    "denominator": 72
+   },
+   "capability_arguments_correct": {
+    "correct": 60,
+    "denominator": 72
+   }
+  },
+  "frozen": {
+   "attempted": 72,
+   "denominator": 72,
+   "schema_valid": {
+    "correct": 72,
+    "denominator": 72
+   },
+   "capability_correct": {
+    "correct": 68,
+    "denominator": 72
+   },
+   "capability_arguments_correct": {
+    "correct": 68,
+    "denominator": 72
+   }
+  },
+  "independent_validation": {
+   "passed": 22,
+   "total": 22
+  },
+  "regression": {
+   "cases": [
+    "p20",
+    "p21",
+    "p22"
+   ],
+   "followup_strict": "0/9",
+   "frozen_strict": "9/9",
+   "what": "In all 9 attempts the model chose ask_clarification on unambiguous browser.read goals (one recorded session) and attached arguments, which Decision rejects (Terminal decisions cannot carry executable arguments). These are the only 3 of 24 prompts in which ARIES_PLANNER_CLARIFY offers the option (see task3-planner/prompt-diff.md)."
+  },
+  "other_21_cases": {
+   "followup_strict": 60,
+   "denominator": 63,
+   "frozen_strict": 59
+  }
+ },
+ "demo": {
+  "run": "experiments/thesis-followup-20261012/task3-demo/runs/20261012T171845.798750Z",
+  "passed": 3,
+  "total": 3,
+  "all_passed": true,
+  "source_stable": true,
+  "model_stable": true,
+  "cases": {
+   "success": {
+    "passed": true,
+    "state": "done",
+    "seconds": 4.786
+   },
+   "clarification": {
+    "passed": true,
+    "state": "needs_clarification",
+    "seconds": 0.028
+   },
+   "refusal": {
+    "passed": true,
+    "state": "failed",
+    "seconds": 9.675
+   }
+  },
+  "frozen": {
+   "passed": 3,
+   "total": 3
+  },
+  "validation_note": "Runner oracles plus source/model stability; the original finalize_demo.py is bound to the 2026-10-06 run paths and was not re-run."
+ },
+ "sha256": {
+  "planner_summary": "2f79eba52250a6ff69c47627d87b82a89a4affcd6d0b29b098575c933f00581a",
+  "planner_attempts": "e1e906a73bded32267f5f0a05e0650d4f7ee4bf9968c380af23197653ecfae20",
+  "demo_report": "ccc3a87e4b062fb2f1f3954c6be61709d42caecf78962e49b2401d4845f4c2e1"
+ }
+}
