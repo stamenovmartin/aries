@@ -59,6 +59,12 @@ def test_grounding_rule():
     check('observed names plus one free choice accepted', grounded_choices(['notes-a.md', 'notes-b.md', 'Cancel'], steps)[0])
     check('invented files under a listed folder rejected', not grounded_choices(['/h/p/x.md', '/h/p/y.md'], steps)[0])
     check('two free choices rejected', not grounded_choices(['notes-a.md', 'notes-b.md', 'x', 'y'], steps)[0])
+    typed = [{'verification_status': 'verified', 'execution_result': {'path': '/h/p', 'entries': [
+        {'name': 'notes-a.md', 'path': '/h/p/notes-a.md', 'type': 'file'},
+        {'name': 'notes-b.md', 'path': '/h/p/notes-b.md', 'type': 'file'}], 'summary': 'Listed directory entries'}}]
+    check('field values and free text do not ground a choice',
+          not grounded_choices(['some other file', 'a different file', 'notes-a.md'], typed)[0]
+          and not grounded_choices(['Listed directory entries', 'notes-a.md'], typed)[0])
     unverified = [{**steps[0], 'verification_status': 'failed'}]
     check('unverified observation does not ground a question', not grounded_choices(['notes-a.md', 'notes-b.md'], unverified)[0])
 
