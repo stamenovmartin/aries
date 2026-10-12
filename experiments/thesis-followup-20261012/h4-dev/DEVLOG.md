@@ -17,3 +17,9 @@ the runner refuses to mix them. Sets A and C have not been opened; they are stil
 
 **Procedure.** Each round is one run of the 7 dev scenarios through `../h4-runs/run_h4.py --sets dev`. The baseline
 (`on`, guard off) is not a round: nothing is changed for it.
+
+## Attempts
+
+| When (UTC) | Run | Condition | Result |
+|---|---|---|---|
+| 2026-10-12T17:27:58Z | baseline (not a round) | `on`, guard off | **refused by preflight**: GNOME session locked or blanked (idle-delay 60 s); nothing submitted |
