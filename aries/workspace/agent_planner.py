@@ -546,13 +546,16 @@ async def plan(db, goal, data, budget):
             # without deciding how many entries fit. Make that decision an explicit step.
             messages.append({'role':'user','content':
                 'You have listed ' + ', '.join(listed) + ' and read nothing in it yet. Before reading any file, '
-                'decide how many listed entries fit the goal. If two or more fit and the goal does not say which, '
-                'choose ask_clarification with those exact paths as the choices. If exactly one fits, read that one. '
-                'If none fits but the listing shows subfolders, list the subfolders that could contain the target.'})
+                'decide how many listed FILES fit the goal; a subfolder is never a candidate, and a file that does '
+                'not match the goal is not one either. If two or more files fit and the goal does not say which, '
+                'choose ask_clarification with those exact file paths as the choices. If exactly one file fits, '
+                'read it with execute. If no file fits but the listing shows subfolders, list the subfolders that '
+                'could contain the target.'})
     if can_ask and guard:
         messages.append({'role':'user','content':
-            'Two different actions exist for two different situations. To have the user confirm or approve an '
-            'action you would take, use ask_approval with that capability and its arguments. ask_clarification is '
+            'Two different actions exist for two different situations. Reading and listing change nothing and need '
+            'no approval: run them with execute. To have the user confirm an action that would change something, '
+            'use ask_approval with that capability and its arguments. ask_clarification is '
             'only for choosing between targets: use it when your verified observations show two or more existing '
             'targets that each fit the goal and the goal does not say which one is meant. Its question gets 2 to 5 '
             'choices, each an exact path or name copied from the observations, and it never carries a capability '
