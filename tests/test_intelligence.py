@@ -167,13 +167,13 @@ async def test_terminal_cloud_protocol_and_boundaries():
     from aries.intelligence.cli import argv_for,decode,CLIProviderError,CLIDecisionProvider
     from aries.intelligence.generation import cloud_unavailable,config
     from tempfile import TemporaryDirectory
-    the reviewing agent=argv_for('claude-cli','/usr/bin/the reviewing agent','','/tmp/owned')
+    claude=argv_for('claude-cli','/usr/bin/claude','','/tmp/owned')
     codex=argv_for('codex-cli','/usr/bin/codex','','/tmp/owned')
-    check('the reviewing agent tools disabled while login retained','--safe-mode' in the reviewing agent and the reviewing agent[the reviewing agent.index('--tools')+1]=='')
+    check('Claude tools disabled while login retained','--safe-mode' in claude and claude[claude.index('--tools')+1]=='')
     check('Codex shell and app tools disabled','features.shell_tool=false' in codex and 'features.apps=false' in codex and 'read-only' in codex)
     check('prompt passed via stdin not executable argv',codex[-1]=='-' and '--dangerously-bypass-approvals-and-sandbox' not in codex)
     g=decode('claude-cli',json.dumps({'type':'result','subtype':'success','result':'{}','usage':{'input_tokens':4,'cache_read_input_tokens':12,'cache_creation_input_tokens':3,'output_tokens':2},'total_cost_usd':0.01}))
-    check('the reviewing agent cached and uncached usage measured separately',g.input_tokens==19 and g.usage_details['cache_read_input_tokens']==12 and g.reported_cost_usd==0.01)
+    check('Claude cached and uncached usage measured separately',g.input_tokens==19 and g.usage_details['cache_read_input_tokens']==12 and g.reported_cost_usd==0.01)
     g=decode('codex-cli','{"type":"turn.completed","usage":{"input_tokens":20,"output_tokens":3}}','{}')
     check('Codex JSONL native usage parsed',g.input_tokens==20 and g.output_tokens==3)
     for provider,raw in [('claude-cli','{"is_error":true,"api_error_status":429}'),('codex-cli','{"type":"turn.failed"}'),('codex-cli','{"type":"item.completed","item":{"type":"command_execution"}}\n{"type":"turn.completed","usage":{}}')]:
@@ -184,7 +184,7 @@ async def test_terminal_cloud_protocol_and_boundaries():
     async with async_session() as db:
         await SettingsService(db).set('intelligence.cloud_enabled',True,set_by='user')
         cfg=await config(db)
-        with patch('aries.intelligence.cli.executable',return_value='/usr/bin/the reviewing agent'):
+        with patch('aries.intelligence.cli.executable',return_value='/usr/bin/claude'):
             check('CLI login path needs no separate API key/model',cloud_unavailable(cfg) is None)
         with patch('aries.intelligence.cli.CLIDecisionProvider.generate',AsyncMock(return_value=Generation('{}',20,3,'claude-cli','cli-default',reported_cost_usd=0.01))):
             _,usage=await generate(db,[],None,purpose='cli-test',route={'execution_level':'cloud'})

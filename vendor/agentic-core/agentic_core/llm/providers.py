@@ -1,7 +1,7 @@
 """Provider dispatch. Lifted from backend/app/services/ai/__init__.py.
 
 Four providers behind one `chat(messages)`:
-  cli      an installed agentic CLI in headless mode (`the reviewing agent -p`, `codex exec`),
+  cli      an installed agentic CLI in headless mode (`claude -p`, `codex exec`),
            run in an empty scratch cwd, its own process group, a hard timeout,
            a bounded semaphore, and a fallback to the OTHER binary if present.
   ollama   local HTTP.
@@ -46,7 +46,7 @@ def _cli_path(bin_name: str | None = None) -> str | None:
 
 def _alt_cli_path() -> str | None:
     primary = os.path.basename(settings.cli_agent_bin).lower()
-    return shutil.which("the reviewing agent" if "codex" in primary else "codex")
+    return shutil.which("claude" if "codex" in primary else "codex")
 
 
 def available() -> bool:
