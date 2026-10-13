@@ -58,3 +58,20 @@ No H4 measurement has been run yet; it waits for the external scenario sets.
   to ask about.
 
 This checks the instrument only and is not a result.
+
+## What is committed from each run folder (author rule, 2026-10-13)
+
+Committed: `records/*.json` (one per case), `results.redacted.json` and `run.redacted.json`.
+Kept local and never committed: `aries.sqlite3` (and `-shm`/`-wal`), `flags.env`, `instance.log`, `var/`, and
+the original `results.json` and `run.json`. Their SHA-256 and size are in `../local-only-manifest.json`.
+
+**Redaction.** The runner copies the owner's live settings into the isolated instance and records them in
+`run.settings.copied` as `{key, set_by, value}`. The values are private configuration, so `redact.py` replaces
+each `value` with `"[redacted]"` and keeps `key` and `set_by`; nothing else in the file changes. No scoring field
+depends on these values. `thesis-tables/check.py` reads the redacted copies and, wherever the local original
+exists, checks that redacting it gives exactly the committed copy.
+
+The smoke run's database, flag file, log and unredacted results were committed and pushed in e122d3f, before
+this rule. From the next commit on they are no longer tracked, and the committed copy is redacted. They remain in
+the pushed history: the history is not rewritten, because rewriting it would change the hashes of the H4
+preregistration and amendment commits.
