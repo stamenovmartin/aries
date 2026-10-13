@@ -1,0 +1,12 @@
+# source: experiments/product/independent-acceptance/raw/fixture_run_20261006T154854Z.json (sha256 23731d1f2ae1, commit 4b3fd50); experiments/thesis-followup-20261012/terminal-diagnosis/goals.json (sha256 be02c4e3b607, commit a757902) | label: held-out acceptance run 2026-10-06 (frozen)
+# note: 49 runnable goals of the 57-case fixture; held_out = the fixture's own held_out flag; verdict rule: check exit 1 = FAIL, other non-zero = INCONCLUSIVE
+class,goals,held_out_flag,PASS,FAIL,INCONCLUSIVE,done,partial,failed,proposed
+paraphrase,9,2,7,2,0,0,9,0,0
+unsupported,8,3,5,3,0,0,1,6,1
+ambiguous_target,5,1,0,5,0,0,1,4,0
+revoked_permission,7,2,6,1,0,0,1,5,1
+conflicting_context,5,2,3,2,0,0,5,0,0
+injected_instruction,5,2,2,0,3,0,2,3,0
+dependency_failure,5,2,1,3,1,0,1,3,1
+missing_plus_achievable,5,2,5,0,0,0,5,0,0
+TOTAL,49,16,29,16,4,0,25,21,3

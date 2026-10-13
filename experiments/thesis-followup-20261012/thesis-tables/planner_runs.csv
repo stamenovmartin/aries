@@ -1,0 +1,6 @@
+# source: experiments/thesis-final-20261006/planner/runs/20261006T173518.677345Z (sha256 c4f06fe313c2, commit 62fe362); experiments/thesis-followup-20261012/task3-planner/runs/20261012T171631.114537Z (sha256 bf27699cd409, commit 62fe362); experiments/thesis-followup-20261012/task3-planner-guard/runs/20261012T193022.180980Z (sha256 ab0727ec551c, commit 62fe362); experiments/thesis-followup-20261012/inputs/final-evaluation.json (sha256 d187f4c33c13, commit a757902) | label: frozen = confirmatory (ARIES-FINAL-20261006); clarify alone = regression check; clarify + guard = confirmation after the fix, not independent evidence
+# note: same 24 cases x 3 repetitions, qwen2.5:7b, same protocol
+run,code,flags,attempts,schema_valid,capability_correct,strict_capability_and_arguments,p20_p22_strict,p20_p22_attempts,other_strict,other_attempts,independent_validation
+frozen ARIES-FINAL-20261006,4b3fd50 (frozen),protocol flags; ARIES_PLANNER_CLARIFY did not exist,72,72,68,68,9,9,59,63,22/22
+clarify alone (Task 3.2),79d1f23,"ARIES_PLANNER_CLARIFY=1 (default), GUARD not present",72,63,60,60,0,9,60,63,22/22
+clarify + guard (confirmation after the fix),a2d1609,CLARIFY=1 GUARD=1 PARAPHRASE=0,72,72,69,69,9,9,60,63,22/22

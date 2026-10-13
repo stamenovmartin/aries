@@ -1,0 +1,461 @@
+#!/usr/bin/env python3
+"""Thesis data tables: build every CSV in this folder from its sources, or check them.
+
+    .venv/bin/python experiments/thesis-followup-20261012/thesis-tables/check.py           # check (default)
+    .venv/bin/python experiments/thesis-followup-20261012/thesis-tables/check.py --write   # (re)write the CSVs
+
+Check mode rebuilds each table in memory and fails (exit 1) if any CSV on disk differs by one byte,
+including its first line, which names the source files with their sha256 and last commit.
+
+Every table is also recomputed a second way wherever the raw data allows it, and the build fails if the
+two disagree:
+- router tables: the raw decisions are re-scored with the frozen analyze_router.score() and must
+  equal the published summaries (final-evaluation.json for qwen2.5:7b, summary.json for llama3.1:8b);
+- McNemar and Cochran's Q: recomputed from the raw decisions with the functions of
+  scripts/thesis_stats.py and must equal stats.json (GEE and the variational GLMM are taken from
+  stats.json; the GLMM varies by ~1e-6 between fits, so it is not refitted here);
+- verifier classes: counted from the raw review file and must equal the ledger;
+- held-out results: counted per case from the run file and must equal the per-goal diagnosis;
+- end paths: counted from goals.json and must equal its own counts_by_end_path;
+- contract coverage: recomputed with aries.workspace.contracts.compile_goal on the 57 fixture
+  goals and must equal contract-coverage-static.txt;
+- planner runs: counted from attempts.jsonl and must equal each run's summary.json;
+- H4 development rounds: counted per case from results.redacted.json (the committed copy, with the copied
+  owner settings values removed); where the local results.json exists, its redaction must equal that copy.
+Nothing is written to any source; no model, service or database is used.
+"""
+from __future__ import annotations
+
+import csv
+import collections
+import hashlib
+import importlib.util
+import io
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[2]
+FU = HERE.parent                                        # experiments/thesis-followup-20261012
+FROZEN = ROOT / 'experiments/thesis-final-20261006'
+IA = ROOT / 'experiments/product/independent-acceptance'
+ARMS = ('A0', 'A1', 'A2', 'A3')
+ROUTER_METRICS = ('binary', 'semantic_coarse', 'semantic_native', 'abstention_precision', 'abstention_recall',
+                  'ood_false_action', 'ood_out_of_scope', 'false_holds')
+MODELS = {'qwen2.5:7b': {'raw': FROZEN / 'raw', 'stats': FU / 'stats.json'},
+          'llama3.1:8b': {'raw': FU / 'task6-model/raw', 'stats': FU / 'task6-model/stats/stats.json'}}
+PLANNER_RUNS = (('frozen ARIES-FINAL-20261006', FROZEN / 'planner/runs/20261006T173518.677345Z', '4b3fd50 (frozen)',
+                 'protocol flags; ARIES_PLANNER_CLARIFY did not exist'),
+                ('clarify alone (Task 3.2)', FU / 'task3-planner/runs/20261012T171631.114537Z', '79d1f23',
+                 'ARIES_PLANNER_CLARIFY=1 (default), GUARD not present'),
+                ('clarify + guard (confirmation after the fix)', FU / 'task3-planner-guard/runs/20261012T193022.180980Z',
+                 'a2d1609', 'CLARIFY=1 GUARD=1 PARAPHRASE=0'))
+DEV_RUNS = (('baseline', '20261012T172818Z-dev-baseline-on'),
+            ('round 1', '20261012T173115Z-dev-round1-on-guard'),
+            ('round 2', '20261012T173411Z-dev-round2-on-guard'),
+            ('round 3', '20261012T173631Z-dev-round3-on-guard'))
+
+
+class Mismatch(Exception):
+    pass
+
+
+def must_equal(what, a, b):
+    if a != b:
+        raise Mismatch(f'{what}: {a!r} != {b!r}')
+
+
+def read(p):
+    return json.loads(Path(p).read_text())
+
+
+def load_module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def rel(p):
+    return str(Path(p).resolve().relative_to(ROOT))
+
+
+def published(files):
+    """Files a public clone has: git-ignored files (databases, flag files, runtime state) are left out."""
+    ignored = subprocess.run(['git', 'check-ignore', '--no-index', '--stdin'], cwd=ROOT, capture_output=True,
+                             text=True, input='\n'.join(rel(f) for f in files)).stdout.splitlines()
+    return [f for f in files if rel(f) not in set(ignored) and '__pycache__' not in f.parts]
+
+
+def provenance(paths, label):
+    """First line of every CSV: source paths, sha256 of files (or of the sorted file list of a folder), commit."""
+    parts = []
+    for p in paths:
+        p = Path(p)
+        if p.is_dir():
+            files = published(sorted(f for f in p.rglob('*') if f.is_file()))
+            digest = hashlib.sha256(b''.join(f.name.encode() + f.read_bytes() for f in files)).hexdigest()
+        else:
+            digest = hashlib.sha256(p.read_bytes()).hexdigest()
+        commit = subprocess.run(['git', 'log', '-1', '--format=%h', '--', rel(p)], cwd=ROOT,
+                                capture_output=True, text=True).stdout.strip() or 'not tracked by git'
+        parts.append(f'{rel(p)} (sha256 {digest[:12]}, commit {commit})')
+    return f'# source: {"; ".join(parts)} | label: {label}'
+
+
+def render(header, columns, rows, note=None):
+    out = io.StringIO()
+    out.write(header + '\n')
+    if note:
+        out.write('# note: ' + note + '\n')
+    w = csv.writer(out, lineterminator='\n')
+    w.writerow(columns)
+    for r in rows:
+        w.writerow(['' if v is None else (f'{v:.6g}' if isinstance(v, float) else v) for v in r])
+    return out.getvalue()
+
+
+def pct(k, n):
+    return None if not n else round(100 * k / n, 2)
+
+
+# ---------------------------------------------------------------- router
+def router_rows(model):
+    A = load_module('analyze_router', FROZEN / 'analyze_router.py')
+    labels = {r['id']: r for r in read(FROZEN / 'semantic_labels.json')['rows']}
+    raw = {arm: {rep: [json.loads(l) for l in (MODELS[model]['raw'] / f'r{rep}-{arm}.jsonl').read_text().splitlines()]
+                 for rep in (1, 2, 3)} for arm in ARMS}
+    return A, labels, raw
+
+
+def published_router(model):
+    if model == 'qwen2.5:7b':
+        return read(FU / 'inputs/final-evaluation.json')['router']['arms']
+    return read(FU / 'task6-model/summary.json')['arms']
+
+
+def table_router_arms():
+    rows = []
+    for model in MODELS:
+        A, labels, raw = router_rows(model)
+        pub = published_router(model)
+        for arm in ARMS:
+            pooled = [r for rep in (1, 2, 3) for r in raw[arm][rep]]
+            mine = {'pooled': A.score(pooled, labels), **{f'rep{rep}': A.score(raw[arm][rep], labels) for rep in (1, 2, 3)}}
+            theirs = {'pooled': pub[arm], **{f'rep{x["rep"]}': x for x in pub[arm]['repetitions']}}
+            for scope in ('pooled', 'rep1', 'rep2', 'rep3'):
+                for m in ROUTER_METRICS:
+                    must_equal(f'{model} {arm} {scope} {m} (raw vs published)',
+                               (mine[scope][m]['k'], mine[scope][m]['n']), (theirs[scope][m]['k'], theirs[scope][m]['n']))
+                    k, n = theirs[scope][m]['k'], theirs[scope][m]['n']
+                    rows.append((model, arm, scope, m, k, n, pct(k, n)))
+    head = provenance([FU / 'inputs/final-evaluation.json', FROZEN / 'raw', FU / 'task6-model/summary.json',
+                       FU / 'task6-model/raw', FROZEN / 'analyze_router.py', FROZEN / 'semantic_labels.json'],
+                      'qwen2.5:7b confirmatory (ARIES-FINAL-20261006); llama3.1:8b exploratory')
+    note = ('pct = 100k/n rounded to 2 decimals; ood_out_of_scope = out-of-scope requests declined, '
+            'ood_false_action = out-of-scope requests acted on; qwen2.5:7b is copied from dokazi/final-evaluation.json')
+    return render(head, ('model', 'arm', 'scope', 'metric', 'k', 'n', 'pct'), rows, note)
+
+
+def table_router_by_class():
+    rows = []
+    for model in MODELS:
+        A, labels, raw = router_rows(model)
+        pub = published_router(model)
+        for arm in ARMS:
+            pooled = [r for rep in (1, 2, 3) for r in raw[arm][rep]]
+            for klass in ('actionable', 'ambiguous', 'out_of_scope', 'unsafe'):
+                mine = A.score([r for r in pooled if r['klass'] == klass], labels)['binary']
+                theirs = pub[arm]['by_class'][klass]['binary']
+                must_equal(f'{model} {arm} {klass} binary', (mine['k'], mine['n']), (theirs['k'], theirs['n']))
+                rows.append((model, arm, klass, theirs['k'], theirs['n'], pct(theirs['k'], theirs['n'])))
+    head = provenance([FU / 'inputs/final-evaluation.json', FROZEN / 'raw', FU / 'task6-model/summary.json',
+                       FU / 'task6-model/raw'], 'qwen2.5:7b confirmatory data; llama3.1:8b exploratory')
+    return render(head, ('model', 'arm', 'true_class', 'binary_k', 'n', 'pct'), rows,
+                  'binary correctness per true class, 3 repetitions pooled')
+
+
+def table_router_tests():
+    S = load_module('thesis_stats', ROOT / 'scripts/thesis_stats.py')
+    rows = []
+    for model in MODELS:
+        A, labels, raw = router_rows(model)
+        st = read(MODELS[model]['stats'])
+        ids = sorted(labels)
+        score = {(arm, rep, r['id']): bool(A.correct(r)) for arm in ARMS for rep in (1, 2, 3) for r in raw[arm][rep]}
+        maj = {a: {i: int(sum(score[(a, rep, i)] for rep in (1, 2, 3)) >= 2) for i in ids} for a in ARMS}
+        gee, glmm = st['mixed_effects']['gee']['terms'], st['mixed_effects']['glmm']['fixed_effects']
+        for x, y in (('A3', 'A1'), ('A2', 'A1'), ('A1', 'A0')):
+            b = sum(maj[x][i] and not maj[y][i] for i in ids)
+            c = sum(maj[y][i] and not maj[x][i] for i in ids)
+            both = sum(maj[x][i] and maj[y][i] for i in ids)
+            neither = sum(not maj[x][i] and not maj[y][i] for i in ids)
+            t = st['mcnemar'][f'{x}_vs_{y}']
+            must_equal(f'{model} {x} vs {y} McNemar (raw vs stats.json)',
+                       (b, c, both, neither, S.mcnemar_exact(b, c)),
+                       (t[f'{x}_correct_{y}_wrong'], t[f'{x}_wrong_{y}_correct'], t['both_correct'], t['both_wrong'],
+                        t['p_value']))
+            term_arm = x if y == 'A1' else y            # the model's reference arm is A1
+            term = f'C(arm, Treatment("A1"))[T.{term_arm}]'
+            g = glmm[term]
+            rows.append((model, f'{x} vs {y}', b, c, both, neither, len(ids), t['p_value'],
+                         f'{term_arm} vs A1', gee[term]['log_odds'], gee[term]['p_value'],
+                         g['posterior_mean_log_odds'], g['approx_95_interval'][0], g['approx_95_interval'][1],
+                         None, None, 'exploratory'))
+        q, df = S.cochran_q([[maj[a][i] for a in ARMS] for i in ids])
+        must_equal(f'{model} Cochran Q', (round(q, 9), df), (round(st['cochran_q']['Q'], 9), st['cochran_q']['df']))
+        rows.append((model, 'A0-A3 (Cochran Q)', None, None, None, None, len(ids), st['cochran_q']['p_value'],
+                     None, None, None, None, None, None, st['cochran_q']['Q'], df, 'exploratory'))
+    head = provenance([MODELS['qwen2.5:7b']['stats'], MODELS['llama3.1:8b']['stats'], FROZEN / 'raw',
+                       FU / 'task6-model/raw', ROOT / 'scripts/thesis_stats.py'], 'exploratory (post-hoc tests)')
+    note = ('unit = request (n=225), majority of 3 repetitions; McNemar exact two-sided; GEE and GLMM on all 2,700 '
+            'decisions with reference A1, so the A1 vs A0 row reports the A0 term (sign reversed); GLMM is variational '
+            'Bayes, interval = mean +- 1.96 posterior SD; no multiple-comparison correction')
+    return render(head, ('model', 'comparison', 'first_right_second_wrong', 'first_wrong_second_right', 'both_right',
+                         'both_wrong', 'n_requests', 'p_value', 'model_term', 'gee_log_odds', 'gee_p',
+                         'glmm_log_odds', 'glmm_lo', 'glmm_hi', 'cochran_q', 'df', 'label'), rows, note)
+
+
+# ---------------------------------------------------------------- verifiers and ledger
+def table_verifiers():
+    review = read(IA / 'raw/review_verifier_integrity.json')
+    ledger = read(ROOT / 'verification/ledger_frozen.json')['verification']
+    classes = collections.Counter(c['verifier_class'] for c in review['capabilities'])
+    kinds = collections.Counter(c['evidence_kind'] for c in review['capabilities'])
+    must_equal('verifier classes (raw review vs ledger)', dict(classes),
+               {k: v for k, v in ledger['classification'].items() if v})
+    rows = [('capabilities', 'total', len(review['capabilities']))]
+    rows += [('verifier_class', k, classes[k]) for k in ('INDEPENDENT', 'TRIVIAL', 'SELF_REPORT', 'PLANNER_SUPPLIED')]
+    rows += [('verifier_class', 'UNDETERMINED', ledger['classification']['UNDETERMINED'])]
+    rows += [('evidence_kind', k, kinds[k]) for k in sorted(kinds)]
+    L = ledger['ledger']
+    rows += [('ledger', 'goals', L['goals']), ('ledger', 'steps', L['steps'])]
+    must_equal('ledger steps_by_status sums to steps', sum(L['steps_by_status'].values()) <= L['steps'], True)
+    rows += [('ledger_steps_by_status', k, v) for k, v in L['steps_by_status'].items()]
+    rows += [('ledger_reached_a_verifier', 'k', L['reached_a_verifier']['k']),
+             ('ledger_reached_a_verifier', 'n', L['reached_a_verifier']['n']),
+             ('ledger_contradictions', 'k', L['contradictions']['k']),
+             ('ledger_contradictions', 'n', L['contradictions']['n']),
+             ('ledger_contradictions', 'wilson_95_lo', L['contradictions']['wilson_95'][0]),
+             ('ledger_contradictions', 'wilson_95_hi', L['contradictions']['wilson_95'][1])]
+    for k, v in L['by_class'].items():
+        must_equal(f'ledger {k} verified+contradicted', v['verified'] + v['contradicted'], v['total'])
+        rows += [(f'ledger_by_class_{k}', f, v[f]) for f in ('verified', 'contradicted', 'total')]
+    must_equal('ledger by_class contradictions', sum(v['contradicted'] for v in L['by_class'].values()),
+               L['contradictions']['k'])
+    must_equal('ledger by_class totals', sum(v['total'] for v in L['by_class'].values()), L['contradictions']['n'])
+    head = provenance([IA / 'raw/review_verifier_integrity.json', ROOT / 'verification/ledger_frozen.json'],
+                      'descriptive (frozen ARIES-FINAL-20261006 ledger)')
+    note = ('57 executed / 1 source is the per-entry count; the narrative 56 in classification_method is stale '
+            '(errata_20261012). "executed" includes substituted collaborators')
+    return render(head, ('section', 'key', 'value'), rows, note)
+
+
+# ---------------------------------------------------------------- held-out run and diagnosis
+def heldout_results():
+    run = read(IA / 'raw/fixture_run_20261006T154854Z.json')['results']
+    goals = {g['id']: g for g in read(FU / 'terminal-diagnosis/goals.json')['goals']}
+    for r in run:
+        must_equal(f'held-out {r["id"]} terminal state (run vs diagnosis)', r['terminal_state'],
+                   goals[r['id']]['terminal_state'])
+        must_equal(f'held-out {r["id"]} verdict (run vs diagnosis)', r['verdict'], goals[r['id']]['verdict'])
+    return run
+
+
+def table_heldout():
+    run = heldout_results()
+    order = list(dict.fromkeys(r['class'] for r in run))
+    states = ('done', 'partial', 'failed', 'proposed')
+    rows = []
+    for klass in order + ['TOTAL']:
+        sel = [r for r in run if klass in ('TOTAL', r['class'])]
+        v = collections.Counter(r['verdict'] for r in sel)
+        s = collections.Counter(r['terminal_state'] for r in sel)
+        must_equal(f'{klass} states known', set(s) <= set(states), True)
+        rows.append((klass, len(sel), sum(r['held_out'] for r in sel), v['PASS'], v['FAIL'], v['INCONCLUSIVE'],
+                     *(s[x] for x in states)))
+    head = provenance([IA / 'raw/fixture_run_20261006T154854Z.json', FU / 'terminal-diagnosis/goals.json'],
+                      'held-out acceptance run 2026-10-06 (frozen)')
+    note = ('49 runnable goals of the 57-case fixture; held_out = the fixture\'s own held_out flag; verdict rule: '
+            'check exit 1 = FAIL, other non-zero = INCONCLUSIVE')
+    return render(head, ('class', 'goals', 'held_out_flag', 'PASS', 'FAIL', 'INCONCLUSIVE', *states), rows, note)
+
+
+def table_end_paths():
+    g = read(FU / 'terminal-diagnosis/goals.json')
+    counts = collections.Counter(x['end_path'] for x in g['goals'])
+    must_equal('end paths (per goal vs counts_by_end_path)', dict(counts), g['counts_by_end_path'])
+    rows = []
+    for path in ('step_budget_exhausted', 'rejected_finish', 'other', 'invalid_decisions', 'awaiting_approval',
+                 'terminal_read_failure'):
+        sel = [x for x in g['goals'] if x['end_path'] == path]
+        s = collections.Counter(x['terminal_state'] for x in sel)
+        rows.append((path, len(sel), s['partial'], s['failed'], s['proposed'], s['done']))
+    s = collections.Counter(x['terminal_state'] for x in g['goals'])
+    rows.append(('TOTAL', len(g['goals']), s['partial'], s['failed'], s['proposed'], s['done']))
+    head = provenance([FU / 'terminal-diagnosis/goals.json', FU / 'terminal-diagnosis/extract.py'],
+                      'exploratory (Task 2 diagnosis)')
+    return render(head, ('end_path', 'goals', 'partial', 'failed', 'proposed', 'done'), rows,
+                  '"other" = never planned, cause unknown (reported as unknown)')
+
+
+def table_contract_coverage():
+    sys.path[:0] = [str(ROOT), str(ROOT / 'vendor'), str(ROOT / 'vendor/agentic-core')]
+    from aries.workspace import contracts
+    fixtures = [json.loads(l) for l in (IA / 'fixtures.jsonl').read_text().splitlines() if l.strip()]
+    text = (FU / 'terminal-diagnosis/contract-coverage-static.txt').read_text()
+    rows = []
+    for para in (False, True):
+        sup = {f['id']: contracts.compile_goal(f['goal'], '/nonexistent-demo-dir', paraphrase=para)['supported']
+               for f in fixtures}
+        by = {}
+        for outcome in ('ask', 'partial', 'pass', 'refuse'):
+            sel = [f for f in fixtures if f['expected_outcome'] == outcome]
+            by[outcome] = (sum(sup[f['id']] for f in sel), len(sel))
+        total = (sum(sup.values()), len(fixtures))
+        line = next(l for l in text.splitlines() if l.startswith(f'paraphrase={para}:'))
+        must_equal(f'coverage paraphrase={para} (recomputed vs file)',
+                   (f'supported {total[0]}/{total[1]}', {k: f'{a}/{b}' for k, (a, b) in by.items()}),
+                   (re.search(r'supported \d+/\d+', line).group(0),
+                    json.loads(line.split('by expected outcome: ')[1].replace("'", '"'))))
+        rows.append(('on' if para else 'off', total[0], total[1], *(x for o in ('pass', 'partial', 'refuse', 'ask')
+                                                                     for x in by[o])))
+    head = provenance([FU / 'terminal-diagnosis/contract-coverage-static.txt', IA / 'fixtures.jsonl',
+                       ROOT / 'aries/workspace/contracts.py'], 'exploratory (static count, same fixture; not outcomes)')
+    return render(head, ('ARIES_COMPLETION_READ_PARAPHRASE', 'supported', 'goals', 'pass_supported', 'pass_goals',
+                         'partial_supported', 'partial_goals', 'refuse_supported', 'refuse_goals', 'ask_supported',
+                         'ask_goals'), rows, 'all 57 fixture goals, compile_goal only, no model or execution')
+
+
+# ---------------------------------------------------------------- planner
+def table_planner():
+    rows = []
+    for name, run, commit, flags in PLANNER_RUNS:
+        att = [json.loads(l) for l in (run / 'attempts.jsonl').read_text().splitlines()]
+        summ = read(run / 'summary.json')['overall']
+        val = read(run / 'independent-validation.json')
+        n = len(att)
+        sv = sum(a['scores']['schema_valid'] for a in att)
+        cap = sum(a['scores']['capability_correct'] for a in att)
+        strict = sum(a['scores']['capability_arguments_correct'] for a in att)
+        must_equal(f'planner {name} (attempts vs summary)', (n, sv, cap, strict),
+                   (summ['attempted'], summ['schema_valid']['correct'], summ['capability_correct']['correct'],
+                    summ['capability_arguments_correct']['correct']))
+        p20 = [a for a in att if a['case_id'] in ('p20', 'p21', 'p22')]
+        rest = [a for a in att if a['case_id'] not in ('p20', 'p21', 'p22')]
+        rows.append((name, commit, flags, n, sv, cap, strict,
+                     sum(a['scores']['capability_arguments_correct'] for a in p20), len(p20),
+                     sum(a['scores']['capability_arguments_correct'] for a in rest), len(rest),
+                     f'{val["passed"]}/{val["total"]}'))
+    must_equal('frozen planner equals final-evaluation.json', rows[0][3:7],
+               tuple(read(FU / 'inputs/final-evaluation.json')['planner']['overall'][k]['correct']
+                     if k != 'attempted' else read(FU / 'inputs/final-evaluation.json')['planner']['overall'][k]
+                     for k in ('attempted', 'schema_valid', 'capability_correct', 'capability_arguments_correct')))
+    head = provenance([r[1] for r in PLANNER_RUNS] + [FU / 'inputs/final-evaluation.json'],
+                      'frozen = confirmatory (ARIES-FINAL-20261006); clarify alone = regression check; '
+                      'clarify + guard = confirmation after the fix, not independent evidence')
+    return render(head, ('run', 'code', 'flags', 'attempts', 'schema_valid', 'capability_correct',
+                         'strict_capability_and_arguments', 'p20_p22_strict', 'p20_p22_attempts', 'other_strict',
+                         'other_attempts', 'independent_validation'), rows,
+                  'same 24 cases x 3 repetitions, qwen2.5:7b, same protocol')
+
+
+# ---------------------------------------------------------------- H4 development
+def dev_set(c):
+    """A = ambiguous, C = control; the dev rows carry set 'dev', so the class decides (and must match the id)."""
+    s = {'h4_ambiguous': 'A', 'h4_control': 'C'}[c['class']]
+    must_equal(f'{c["id"]} class matches id', c['id'].startswith(f'dev-{s.lower()}-'), True)
+    return s
+
+
+def dev_results(folder):
+    """The committed redacted copy; where the local original exists, it must redact to exactly this copy."""
+    run = FU / 'h4-runs' / folder
+    committed = (run / 'results.redacted.json').read_text()
+    if (run / 'results.json').exists():
+        R = load_module('redact', FU / 'h4-runs/redact.py')
+        must_equal(f'{folder} redacted copy', R.dump(R.redact(read(run / 'results.json'))), committed)
+    return json.loads(committed)
+
+
+def table_h4_dev():
+    rows = []
+    for name, folder in DEV_RUNS:
+        res = dev_results(folder)
+        cond, commit = res['run']['condition'], res['run']['preflight']['commit'][:7]
+        for c in res['results']:
+            must_equal(f'{folder} {c["id"]} is a dev row', (c['id'].startswith('dev-'), c['set']), (True, 'dev'))
+            counted = c['h4']['grounded_question'] if dev_set(c) == 'A' else c['verdict'] == 'PASS'
+            rows.append((name, commit, cond, c['id'], dev_set(c), c['terminal_state'], c['verdict'],
+                         int(c['h4']['grounded_question']), int(bool(counted))))
+    head = provenance([FU / 'h4-runs' / f / 'results.redacted.json' for _, f in DEV_RUNS] + [FU / 'h4-dev/dev.jsonl'],
+                      'exploratory (development only, never scored for H4)')
+    note = ('counted = grounded question for set A (ambiguous), oracle PASS for set C (controls); one run of 7 per '
+            'round; code = HEAD recorded by the run (round 1 ran at 46a5266, which only adds the dev log on top of the guard '
+            'commit 5590f41)')
+    return render(head, ('run', 'code', 'condition', 'case', 'set', 'terminal_state', 'verdict', 'grounded_question',
+                         'counted'), rows, note)
+
+
+def table_h4_dev_rounds():
+    per = collections.OrderedDict()
+    for name, folder in DEV_RUNS:
+        res = dev_results(folder)
+        commit = res['run']['preflight']['commit'][:7]
+        a = [c for c in res['results'] if dev_set(c) == 'A']
+        c_ = [c for c in res['results'] if dev_set(c) == 'C']
+        per[name] = (name, commit, res['run']['condition'], sum(c['h4']['grounded_question'] for c in a), len(a),
+                     sum(c['verdict'] == 'PASS' for c in c_), len(c_))
+    head = provenance([FU / 'h4-runs' / f / 'results.redacted.json' for _, f in DEV_RUNS],
+                      'exploratory (development only, never scored for H4)')
+    return render(head, ('run', 'code', 'condition', 'A_asked', 'A_n', 'C_correct', 'C_n'), per.values(),
+                  'totals of h4_dev_cases.csv')
+
+
+TABLES = {
+    'router_arms.csv': table_router_arms,
+    'router_by_class.csv': table_router_by_class,
+    'router_tests.csv': table_router_tests,
+    'verifiers_ledger.csv': table_verifiers,
+    'heldout_by_class.csv': table_heldout,
+    'terminal_end_paths.csv': table_end_paths,
+    'contract_coverage.csv': table_contract_coverage,
+    'planner_runs.csv': table_planner,
+    'h4_dev_cases.csv': table_h4_dev,
+    'h4_dev_rounds.csv': table_h4_dev_rounds,
+}
+
+
+def main():
+    write = '--write' in sys.argv[1:]
+    failures = 0
+    for name, build in TABLES.items():
+        try:
+            text = build()
+        except Mismatch as exc:
+            print(f'FAIL  {name}: sources disagree: {exc}')
+            failures += 1
+            continue
+        path = HERE / name
+        if write:
+            path.write_text(text)
+            print(f'WROTE {name}  ({text.count(chr(10))} lines)')
+        elif not path.exists():
+            print(f'FAIL  {name}: missing')
+            failures += 1
+        elif path.read_text() != text:
+            old, new = path.read_text().splitlines(), text.splitlines()
+            first = next((i for i, (a, b) in enumerate(zip(old, new)) if a != b), min(len(old), len(new)))
+            print(f'FAIL  {name}: differs from its sources at line {first + 1}')
+            failures += 1
+        else:
+            print(f'OK    {name}')
+    print(f'{len(TABLES) - failures}/{len(TABLES)} tables {"written" if write else "match their sources"}')
+    return 1 if failures else 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

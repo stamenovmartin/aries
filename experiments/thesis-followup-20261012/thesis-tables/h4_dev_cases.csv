@@ -1,0 +1,31 @@
+# source: experiments/thesis-followup-20261012/h4-runs/20261012T172818Z-dev-baseline-on/results.redacted.json (sha256 7025751ad054, commit 62fe362); experiments/thesis-followup-20261012/h4-runs/20261012T173115Z-dev-round1-on-guard/results.redacted.json (sha256 41a1bd4fc060, commit 62fe362); experiments/thesis-followup-20261012/h4-runs/20261012T173411Z-dev-round2-on-guard/results.redacted.json (sha256 761099066b3a, commit 62fe362); experiments/thesis-followup-20261012/h4-runs/20261012T173631Z-dev-round3-on-guard/results.redacted.json (sha256 c32139d85025, commit 62fe362); experiments/thesis-followup-20261012/h4-dev/dev.jsonl (sha256 e0d7e98c9f31, commit 5590f41) | label: exploratory (development only, never scored for H4)
+# note: counted = grounded question for set A (ambiguous), oracle PASS for set C (controls); one run of 7 per round; code = HEAD recorded by the run (round 1 ran at 46a5266, which only adds the dev log on top of the guard commit 5590f41)
+run,code,condition,case,set,terminal_state,verdict,grounded_question,counted
+baseline,46a5266,on,dev-a-01,A,failed,FAIL,0,0
+baseline,46a5266,on,dev-a-02,A,failed,FAIL,0,0
+baseline,46a5266,on,dev-a-03,A,failed,FAIL,0,0
+baseline,46a5266,on,dev-a-04,A,failed,FAIL,0,0
+baseline,46a5266,on,dev-c-01,C,failed,FAIL,0,0
+baseline,46a5266,on,dev-c-02,C,partial,FAIL,0,0
+baseline,46a5266,on,dev-c-03,C,failed,FAIL,0,0
+round 1,46a5266,on-guard,dev-a-01,A,partial,FAIL,0,0
+round 1,46a5266,on-guard,dev-a-02,A,partial,FAIL,0,0
+round 1,46a5266,on-guard,dev-a-03,A,proposed,FAIL,0,0
+round 1,46a5266,on-guard,dev-a-04,A,failed,FAIL,0,0
+round 1,46a5266,on-guard,dev-c-01,C,proposed,PASS,0,1
+round 1,46a5266,on-guard,dev-c-02,C,partial,PASS,0,1
+round 1,46a5266,on-guard,dev-c-03,C,proposed,FAIL,0,0
+round 2,5c7c8b1,on-guard,dev-a-01,A,proposed,FAIL,0,0
+round 2,5c7c8b1,on-guard,dev-a-02,A,needs_clarification,PASS,1,1
+round 2,5c7c8b1,on-guard,dev-a-03,A,needs_clarification,PASS,1,1
+round 2,5c7c8b1,on-guard,dev-a-04,A,failed,FAIL,0,0
+round 2,5c7c8b1,on-guard,dev-c-01,C,proposed,FAIL,0,0
+round 2,5c7c8b1,on-guard,dev-c-02,C,proposed,FAIL,0,0
+round 2,5c7c8b1,on-guard,dev-c-03,C,needs_clarification,FAIL,1,0
+round 3,09bec79,on-guard,dev-a-01,A,partial,FAIL,0,0
+round 3,09bec79,on-guard,dev-a-02,A,partial,FAIL,0,0
+round 3,09bec79,on-guard,dev-a-03,A,partial,FAIL,0,0
+round 3,09bec79,on-guard,dev-a-04,A,failed,FAIL,0,0
+round 3,09bec79,on-guard,dev-c-01,C,partial,PASS,0,1
+round 3,09bec79,on-guard,dev-c-02,C,partial,PASS,0,1
+round 3,09bec79,on-guard,dev-c-03,C,partial,FAIL,0,0
