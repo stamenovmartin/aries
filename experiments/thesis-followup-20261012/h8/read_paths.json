@@ -1,0 +1,669 @@
+{
+ "what": "H8 static read-path analysis of the frozen verifiers",
+ "rows": [
+  {
+   "capability": "browser.back",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.browser_capabilities.operation.<locals>.execute",
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "browser.click",
+   "effect": "open",
+   "verifier_class": "PLANNER_SUPPLIED",
+   "executor": "aries.workspace.browser_capabilities.operation.<locals>.execute",
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "browser.download",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.browser_capabilities.download",
+   "verifier": "aries.workspace.browser_capabilities.verify_download",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "browser.elements",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.browser_capabilities.operation.<locals>.execute",
+   "verifier": "aries.workspace.browser_capabilities.verify_elements",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "browser.forward",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.browser_capabilities.operation.<locals>.execute",
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "browser.navigate",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.browser_capabilities.operation.<locals>.execute",
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "browser.observe",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.browser_capabilities.operation.<locals>.execute",
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "browser.open",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.registry.browser_open",
+   "verifier": "aries.workspace.registry.verify_browser",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "browser_read",
+    "now"
+   ]
+  },
+  {
+   "capability": "browser.read",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.registry.browser_read",
+   "verifier": "aries.workspace.registry.verify_browser",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "browser_read",
+    "now"
+   ]
+  },
+  {
+   "capability": "browser.scroll",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.browser_capabilities.operation.<locals>.execute",
+   "verifier": "aries.workspace.browser_capabilities.verify_scroll",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "browser.search",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.registry.browser_search",
+   "verifier": "aries.workspace.registry.verify_browser",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "browser_read",
+    "now"
+   ]
+  },
+  {
+   "capability": "browser.tabs",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.browser_capabilities.tabs",
+   "verifier": "aries.workspace.browser_capabilities.verify_tabs",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "tabs"
+   ]
+  },
+  {
+   "capability": "browser.type",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.browser_capabilities.operation.<locals>.execute",
+   "verifier": "aries.workspace.browser_capabilities.verify_type",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "owned"
+   ]
+  },
+  {
+   "capability": "browser.wait",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.browser_capabilities.operation.<locals>.execute",
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "desktop.close",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.desktop_capabilities.executor.<locals>.execute",
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "observe"
+   ]
+  },
+  {
+   "capability": "desktop.focus",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.registry.desktop_focus",
+   "verifier": "aries.workspace.registry.verify_focus",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "desktop.launch",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.registry.desktop_launch",
+   "verifier": "aries.workspace.registry.verify_desktop",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "desktop.maximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.desktop_capabilities.executor.<locals>.execute",
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "observe"
+   ]
+  },
+  {
+   "capability": "desktop.minimize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.desktop_capabilities.executor.<locals>.execute",
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "observe"
+   ]
+  },
+  {
+   "capability": "desktop.move",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.desktop_capabilities.executor.<locals>.execute",
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "observe"
+   ]
+  },
+  {
+   "capability": "desktop.observe",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.desktop_capabilities.observe",
+   "verifier": "aries.workspace.desktop_capabilities.verify_observe",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "observe"
+   ]
+  },
+  {
+   "capability": "desktop.resize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.desktop_capabilities.executor.<locals>.execute",
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "observe"
+   ]
+  },
+  {
+   "capability": "desktop.tile",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.desktop_capabilities.executor.<locals>.execute",
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "observe"
+   ]
+  },
+  {
+   "capability": "desktop.unmaximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.desktop_capabilities.executor.<locals>.execute",
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "observe"
+   ]
+  },
+  {
+   "capability": "desktop.windows",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.desktop_capabilities.observe",
+   "verifier": "aries.workspace.desktop_capabilities.verify_observe",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "observe"
+   ]
+  },
+  {
+   "capability": "display.brightness",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.network_capabilities.read_brightness",
+   "verifier": "aries.workspace.network_capabilities.verify_read_brightness",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "display.set_brightness",
+   "effect": "display",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.network_capabilities.set_brightness",
+   "verifier": "aries.workspace.network_capabilities.verify_set_brightness",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "file.copy",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.file_capabilities.copy_file",
+   "verifier": "aries.workspace.file_capabilities.verify_copy",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "metadata"
+   ]
+  },
+  {
+   "capability": "file.edit",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.file_capabilities.edit_file",
+   "verifier": "aries.workspace.file_capabilities.verify_edit",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "metadata"
+   ]
+  },
+  {
+   "capability": "file.exists",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.registry.exists",
+   "verifier": "aries.workspace.registry.verify_exists",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "exists"
+   ]
+  },
+  {
+   "capability": "file.list",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.registry.listing",
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "verifier_reruns_executor": true,
+   "how": "closure over the executor (verify_probe)",
+   "collaborators_called": []
+  },
+  {
+   "capability": "file.metadata",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.file_capabilities.metadata",
+   "verifier": "aries.workspace.file_capabilities.verify_metadata",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "metadata"
+   ]
+  },
+  {
+   "capability": "file.move",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.file_capabilities.move_file",
+   "verifier": "aries.workspace.file_capabilities.verify_move",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "metadata",
+    "path_for"
+   ]
+  },
+  {
+   "capability": "file.read",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.registry.read_file",
+   "verifier": "aries.workspace.registry.verify_read",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "read_file"
+   ]
+  },
+  {
+   "capability": "file.rename",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.file_capabilities.move_file",
+   "verifier": "aries.workspace.file_capabilities.verify_move",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "metadata",
+    "path_for"
+   ]
+  },
+  {
+   "capability": "file.search",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.registry.search",
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "verifier_reruns_executor": true,
+   "how": "closure over the executor (verify_probe)",
+   "collaborators_called": []
+  },
+  {
+   "capability": "file.semantic_search",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.file_capabilities.semantic_search",
+   "verifier": "aries.workspace.file_capabilities.verify_search",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "metadata"
+   ]
+  },
+  {
+   "capability": "file.write",
+   "effect": "create",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.registry.write_file",
+   "verifier": "aries.workspace.registry.verify_write",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "read_file"
+   ]
+  },
+  {
+   "capability": "input.clipboard_read",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.input_capabilities.clipboard_read",
+   "verifier": "aries.workspace.input_capabilities.verify_clipboard_read",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "clipboard_read"
+   ]
+  },
+  {
+   "capability": "input.clipboard_write",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.input_capabilities.clipboard_write",
+   "verifier": "aries.workspace.input_capabilities.verify_clipboard_write",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "clipboard_read"
+   ]
+  },
+  {
+   "capability": "input.editable_targets",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.input_capabilities.editable_targets",
+   "verifier": "aries.workspace.input_capabilities.verify_targets",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "editable_targets"
+   ]
+  },
+  {
+   "capability": "input.type_text",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.input_capabilities.type_into",
+   "verifier": "aries.workspace.input_capabilities.verify_type",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "now",
+    "worker"
+   ]
+  },
+  {
+   "capability": "network.status",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.network_capabilities.observe_status",
+   "verifier": "aries.workspace.network_capabilities.verify_status",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "network.wifi_connect",
+   "effect": "network",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.network_capabilities.connect",
+   "verifier": "aries.workspace.network_capabilities.verify_connect",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "network.wifi_list",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.network_capabilities.observe_wifi",
+   "verifier": "aries.workspace.network_capabilities.verify_wifi",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": []
+  },
+  {
+   "capability": "notification.send",
+   "effect": "notify",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.registry.notification",
+   "verifier": "aries.workspace.registry.verify_notification",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "now"
+   ]
+  },
+  {
+   "capability": "screen.capture",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.screen_capabilities.capture_screen",
+   "verifier": "aries.workspace.screen_capabilities.verify_capture",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "_reinspect"
+   ]
+  },
+  {
+   "capability": "screen.read",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.screen_capabilities.read_screen",
+   "verifier": "aries.workspace.screen_capabilities.verify_read",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "_reinspect"
+   ]
+  },
+  {
+   "capability": "screen.screenshot",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.screen_capabilities.capture_screen",
+   "verifier": "aries.workspace.screen_capabilities.verify_capture",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "_reinspect"
+   ]
+  },
+  {
+   "capability": "system.disk",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.system_capabilities.disk",
+   "verifier": "aries.workspace.system_capabilities.verify_disk",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "now"
+   ]
+  },
+  {
+   "capability": "system.packages",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.system_capabilities.packages",
+   "verifier": "aries.workspace.system_capabilities.verify_packages",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "packages"
+   ]
+  },
+  {
+   "capability": "system.processes",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.registry.processes",
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "verifier_reruns_executor": true,
+   "how": "closure over the executor (verify_probe)",
+   "collaborators_called": []
+  },
+  {
+   "capability": "system.service",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "executor": "aries.workspace.system_capabilities.inspect_unit",
+   "verifier": "aries.workspace.system_capabilities.verify_unit",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "inspect_unit"
+   ]
+  },
+  {
+   "capability": "system.service_control",
+   "effect": "service",
+   "verifier_class": "INDEPENDENT",
+   "executor": "aries.workspace.system_capabilities.control",
+   "verifier": "aries.workspace.system_capabilities.verify_control",
+   "verifier_reruns_executor": false,
+   "how": "separate read path",
+   "collaborators_called": [
+    "now",
+    "settled",
+    "show"
+   ]
+  },
+  {
+   "capability": "system.services",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.system_capabilities.services",
+   "verifier": "aries.workspace.system_capabilities.verify_services",
+   "verifier_reruns_executor": true,
+   "how": "calls the executor function",
+   "collaborators_called": [
+    "services"
+   ]
+  },
+  {
+   "capability": "system.status",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.registry.status",
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "verifier_reruns_executor": true,
+   "how": "closure over the executor (verify_probe)",
+   "collaborators_called": []
+  },
+  {
+   "capability": "system.storage",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.registry.storage",
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "verifier_reruns_executor": true,
+   "how": "closure over the executor (verify_probe)",
+   "collaborators_called": []
+  },
+  {
+   "capability": "task.inspect",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "executor": "aries.workspace.registry.inspect_task",
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "verifier_reruns_executor": true,
+   "how": "closure over the executor (verify_probe)",
+   "collaborators_called": []
+  }
+ ],
+ "counts": {
+  "capabilities": 58,
+  "verifier_reruns_executor": 18
+ }
+}
