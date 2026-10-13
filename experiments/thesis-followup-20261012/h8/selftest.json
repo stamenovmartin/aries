@@ -1,0 +1,758 @@
+{
+ "when": "2026-10-13T21:11:02.919520+00:00",
+ "ok": 58,
+ "failed": {},
+ "all": {
+  "browser.back": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.click": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.download": {
+   "ok": true,
+   "effect": "file_mutation",
+   "world_changed": true,
+   "result_keys": [
+    "path",
+    "requested_url",
+    "sha256",
+    "size",
+    "source_page",
+    "url"
+   ]
+  },
+  "browser.elements": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "elements",
+    "session",
+    "truncated",
+    "url"
+   ]
+  },
+  "browser.forward": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.navigate": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.observe": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.open": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.read": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.scroll": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.search": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.tabs": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "tabs"
+   ]
+  },
+  "browser.type": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "blocked_resources",
+    "element_id",
+    "evidence",
+    "fields",
+    "links",
+    "observed_value",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "browser.wait": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "blocked_resources",
+    "evidence",
+    "fields",
+    "links",
+    "requests",
+    "scroll",
+    "session",
+    "text",
+    "title",
+    "url"
+   ]
+  },
+  "desktop.close": {
+   "ok": true,
+   "effect": "desktop",
+   "world_changed": true,
+   "result_keys": [
+    "requested",
+    "response",
+    "target"
+   ]
+  },
+  "desktop.focus": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "app",
+    "app_id",
+    "focus_requested",
+    "window_id"
+   ]
+  },
+  "desktop.launch": {
+   "ok": true,
+   "effect": "open",
+   "world_changed": true,
+   "result_keys": [
+    "app",
+    "launch_requested"
+   ]
+  },
+  "desktop.maximize": {
+   "ok": true,
+   "effect": "desktop",
+   "world_changed": true,
+   "result_keys": [
+    "requested",
+    "response",
+    "target"
+   ]
+  },
+  "desktop.minimize": {
+   "ok": true,
+   "effect": "desktop",
+   "world_changed": true,
+   "result_keys": [
+    "requested",
+    "response",
+    "target"
+   ]
+  },
+  "desktop.move": {
+   "ok": true,
+   "effect": "desktop",
+   "world_changed": true,
+   "result_keys": [
+    "requested",
+    "response",
+    "target"
+   ]
+  },
+  "desktop.observe": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "observed_at",
+    "shell",
+    "source",
+    "windows"
+   ]
+  },
+  "desktop.resize": {
+   "ok": true,
+   "effect": "desktop",
+   "world_changed": true,
+   "result_keys": [
+    "requested",
+    "response",
+    "target"
+   ]
+  },
+  "desktop.tile": {
+   "ok": true,
+   "effect": "desktop",
+   "world_changed": true,
+   "result_keys": [
+    "requested",
+    "response",
+    "scaling",
+    "target"
+   ]
+  },
+  "desktop.unmaximize": {
+   "ok": true,
+   "effect": "desktop",
+   "world_changed": true,
+   "result_keys": [
+    "requested",
+    "response",
+    "target"
+   ]
+  },
+  "desktop.windows": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "observed_at",
+    "shell",
+    "source",
+    "windows"
+   ]
+  },
+  "display.brightness": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "brightness",
+    "controllable",
+    "detail",
+    "observed_at",
+    "ok",
+    "sources"
+   ]
+  },
+  "display.set_brightness": {
+   "ok": true,
+   "effect": "display",
+   "world_changed": true,
+   "result_keys": [
+    "brightness",
+    "detail",
+    "mechanism",
+    "observed_at",
+    "ok",
+    "requested",
+    "sources",
+    "verified"
+   ]
+  },
+  "file.copy": {
+   "ok": true,
+   "effect": "file_mutation",
+   "world_changed": true,
+   "result_keys": [
+    "copy_requested",
+    "destination",
+    "expected_sha256",
+    "path"
+   ]
+  },
+  "file.edit": {
+   "ok": true,
+   "effect": "file_mutation",
+   "world_changed": true,
+   "result_keys": [
+    "expected_result_sha256",
+    "path"
+   ]
+  },
+  "file.exists": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "exists",
+    "is_file",
+    "observed_at",
+    "path"
+   ]
+  },
+  "file.list": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "count",
+    "count_is_lower_bound",
+    "entries",
+    "observed_at",
+    "path",
+    "truncated"
+   ]
+  },
+  "file.metadata": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "inode",
+    "modified_at",
+    "observed_at",
+    "path",
+    "sha256",
+    "size"
+   ]
+  },
+  "file.move": {
+   "ok": true,
+   "effect": "file_mutation",
+   "world_changed": true,
+   "result_keys": [
+    "destination",
+    "expected_sha256",
+    "path"
+   ]
+  },
+  "file.read": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "inode",
+    "observed_at",
+    "path",
+    "sha256",
+    "size",
+    "text"
+   ]
+  },
+  "file.rename": {
+   "ok": true,
+   "effect": "file_mutation",
+   "world_changed": true,
+   "result_keys": [
+    "destination",
+    "expected_sha256",
+    "path"
+   ]
+  },
+  "file.search": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "count",
+    "matches",
+    "observed_at",
+    "root",
+    "scanned",
+    "truncated"
+   ]
+  },
+  "file.semantic_search": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "matches",
+    "method",
+    "observed_at",
+    "scanned",
+    "truncated"
+   ]
+  },
+  "file.write": {
+   "ok": true,
+   "effect": "create",
+   "world_changed": true,
+   "result_keys": [
+    "path",
+    "write_call_completed"
+   ]
+  },
+  "input.clipboard_read": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "bytes",
+    "has_text",
+    "observed_at",
+    "sha256",
+    "source",
+    "text"
+   ]
+  },
+  "input.clipboard_write": {
+   "ok": true,
+   "effect": "input",
+   "world_changed": true,
+   "result_keys": [
+    "bytes",
+    "replaced",
+    "requested_at",
+    "served_mime_types",
+    "sha256",
+    "source"
+   ]
+  },
+  "input.editable_targets": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "app",
+    "observed_at",
+    "source",
+    "targets"
+   ]
+  },
+  "input.type_text": {
+   "ok": true,
+   "effect": "input",
+   "world_changed": true,
+   "result_keys": [
+    "app",
+    "characters_requested",
+    "expected_sha256",
+    "node",
+    "requested_at",
+    "source",
+    "typed"
+   ]
+  },
+  "network.status": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "active",
+    "internet_reachable",
+    "link_up",
+    "observed_at"
+   ]
+  },
+  "network.wifi_connect": {
+   "ok": true,
+   "effect": "network",
+   "world_changed": true,
+   "result_keys": [
+    "accept_detail",
+    "accepted",
+    "now",
+    "observed_at",
+    "ok",
+    "profile",
+    "state_unavailable",
+    "verified",
+    "was"
+   ]
+  },
+  "network.wifi_list": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "count",
+    "networks",
+    "observed_at",
+    "saved_profiles",
+    "scan"
+   ]
+  },
+  "notification.send": {
+   "ok": true,
+   "effect": "notify",
+   "world_changed": true,
+   "result_keys": [
+    "notification_id"
+   ]
+  },
+  "screen.capture": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "bytes",
+    "content",
+    "height",
+    "observed_at",
+    "path",
+    "region",
+    "scope",
+    "sha256",
+    "width"
+   ]
+  },
+  "screen.read": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "capture",
+    "characters",
+    "language",
+    "mean_confidence",
+    "observed_at",
+    "text",
+    "words"
+   ]
+  },
+  "screen.screenshot": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "bytes",
+    "content",
+    "height",
+    "observed_at",
+    "path",
+    "region",
+    "scope",
+    "sha256",
+    "width"
+   ]
+  },
+  "system.disk": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "filesystems",
+    "fullest",
+    "home",
+    "observed_at",
+    "probe"
+   ]
+  },
+  "system.packages": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "entries",
+    "installed",
+    "observed_at",
+    "package",
+    "queried",
+    "scope",
+    "unavailable"
+   ]
+  },
+  "system.processes": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "count",
+    "observed_at",
+    "processes",
+    "truncated"
+   ]
+  },
+  "system.service": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "active_seconds",
+    "active_state",
+    "can_start",
+    "can_stop",
+    "controllable",
+    "description",
+    "enablement",
+    "exit_status",
+    "invocation",
+    "load_state",
+    "main_pid",
+    "observed_at"
+   ]
+  },
+  "system.service_control": {
+   "ok": true,
+   "effect": "service",
+   "world_changed": true,
+   "result_keys": [
+    "accepted",
+    "action",
+    "before",
+    "detail",
+    "exit_code",
+    "requested_at",
+    "scope",
+    "unit"
+   ]
+  },
+  "system.services": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "controllable",
+    "count",
+    "failed",
+    "kind",
+    "listed",
+    "observed_at",
+    "scopes",
+    "source",
+    "truncated",
+    "unavailable",
+    "units"
+   ]
+  },
+  "system.status": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "observed_at",
+    "probes"
+   ]
+  },
+  "system.storage": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "filesystems",
+    "highest",
+    "observed_at",
+    "probe"
+   ]
+  },
+  "task.inspect": {
+   "ok": true,
+   "effect": "read",
+   "world_changed": false,
+   "result_keys": [
+    "evidence_ids",
+    "observed_at",
+    "state",
+    "steps",
+    "task_id"
+   ]
+  }
+ }
+}
