@@ -140,3 +140,51 @@ This amendment concerns Materials ("written and labelled by another person"). It
   these items is reported with this limitation.
 - **Frozen items:**
   - `experiments/thesis-followup-20261012/h6-items/h6_requests.jsonl`: SHA-256 `2a422d71a2c093c07e27909cf7919a6213580e87d8dbae031808df54c66a302f`, 53651 bytes
+
+## Amendment 2 (2026-10-18): row 1 replaced, before any measurement
+
+**Why.** In the repository, the H6 validator (`h6-items/validate_items.py`, unchanged) gave **FAIL** on the
+file frozen in Amendment 1 (SHA-256 `2a422d71…`). It found one problem: row 1 repeats a request from the
+earlier ARIES tests (the 225 frozen router requests). Every other check passed. The author was told only the
+row's id, class and language (`h6-0001`, `actionable`, `en`), not its text. The row was neither dropped nor
+edited by the author. A replacement of the same class and language was requested from Codex instead.
+
+**How the replacement was written.** The user's account is below, followed by what the Codex session logs
+show. Only metadata and command lines were read from the logs, never item text.
+- **The user's account:** a fresh Codex session (`gpt-6-astra`), in an empty folder `~/h-author/h6-r1`
+  holding only the README and the example file, was asked for exactly one replacement item.
+  - The user saw that one item's text in the Codex transcript and did not edit it.
+  - A `replacement.jsonl` already existed in the folder before that session, and Codex overwrote it.
+- **The session logs** (Codex CLI 0.154.0, `danger-full-access` sandbox) show three sessions, not one:
+  1. **17:11:47Z, working folder `~`, not an empty folder.**
+     - It listed README.md and AGENTS.md files across the home folder with `rg`, which takes in the home
+       folder that holds the repository.
+     - It read `~/h-author/h6/README.md` and wrote `~/replacement.jsonl`. That file was not used.
+  2. **17:12:40Z, in `~/h-author/h6-r1`:** wrote the `replacement.jsonl` that existed before the final
+     session.
+  3. **17:16:51Z, in `~/h-author/h6-r1`:** the final session.
+     - It ran `cat README.md replacement.jsonl`, so it **read the earlier attempt** before overwriting it at
+       17:17:38Z.
+     - The item used is the one this session wrote.
+  - No command in the three sessions names a repository path. No example or template file was in
+    `~/h-author/h6-r1` when it was listed (only `README.md` and `replacement.jsonl`).
+- **Limitation:** the replacement item is not independent of the earlier attempt, and one item's text was
+  seen by the user. This affects 1 of 300 requests. The limitation of Amendment 1 (a model, not a person)
+  applies as well.
+
+**The change.**
+- Row 1 was replaced programmatically by the single line of `~/h-author/h6-r1/replacement.jsonl`
+  (SHA-256 `2f60f15b…`, 182 bytes).
+- Rows 2–300 are byte-identical (checked). The id, class and language are unchanged.
+- Removed row: SHA-256 `3ee01bcbb54db42f1b0770316481dcf5a5646ddbcfb2702e1e8c1161718bd5a6`. Inserted row:
+  SHA-256 `365c400fe93e3b5e1d1889d8f6a9d15177a13c0c4c5ddcd24ebf36e1313b048c`.
+- File `experiments/thesis-followup-20261012/h6-items/h6_requests.jsonl`:
+  - before: SHA-256 `2a422d71a2c093c07e27909cf7919a6213580e87d8dbae031808df54c66a302f`, 53651 bytes;
+  - **after (frozen for H6):** SHA-256 `3068dd8d9b41b58987e6d2270b66629389c8b3b40937502ce9462b9ffce35348`,
+    53697 bytes.
+
+**Validation after the change:**
+
+    PASS  rows=300  classes={'actionable': 100, 'ambiguous': 75, 'out_of_scope': 62, 'unsafe': 63}  problems=0
+
+Nothing has been measured.
