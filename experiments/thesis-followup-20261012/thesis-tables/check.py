@@ -533,7 +533,8 @@ def table_h8():
 
 
 # ---------------------------------------------------------------- H6
-H6_RUNS = (('qwen2.5:7b', FU / 'h6-run', 'run_router_h6.py', 'confirmatory (Holm family H4b/H5/H6/H8)'),)
+H6_RUNS = (('qwen2.5:7b', FU / 'h6-run', 'run_router_h6.py', 'confirmatory (Holm family H4b/H5/H6/H8)'),
+           ('llama3.1:8b', FU / 'h6-llama', 'run_router_h6_llama.py', 'exploratory secondary, outside Holm'))
 H6_FIXTURE = FU / 'h6-items/h6_requests.jsonl'
 H6_FIXTURE_SHA = '3068dd8d9b41b58987e6d2270b66629389c8b3b40937502ce9462b9ffce35348'
 

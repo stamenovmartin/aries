@@ -33,6 +33,7 @@ earlier, outside the Holm family) waits for the external sets A and C.
 | 11 | Test suites on the code under test: all pass | Engineering check | `task1-tests/`, `task2-tests/`, `guard-tests/`, `h4-frozen-tests/` | see §6 |
 | 12 | H8: hardening 23 verifiers raises the mutant kill rate, 155/218 → 188/218, McNemar b = 33, c = 0, p = 1.16 × 10⁻¹⁰; criteria 1 and 3 met, criterion 2 not met | **Confirmatory** (Holm family H4b/H5/H6/H8) | `h8/RESULTS.md`, `h8/runs/*/summary.json`, `thesis-tables/h8_fault_injection.csv` | `1d03163` |
 | 13 | H6: on 300 new requests, the abstention instruction (A1) beats none (A0) for qwen2.5:7b, 152/300 → 186/300 (majority of 3), McNemar b = 43, c = 9, p = 1.02 × 10⁻⁶ | **Confirmatory** (Holm family H4b/H5/H6/H8) | `h6-run/summary.json`, `h6-run/raw/`, `thesis-tables/h6_abstention.csv` | `7e5c2b2` |
+| 14 | H6 secondary, llama3.1:8b on the same protocol: 153/300 → 161/300, McNemar b = 28, c = 20, p = 0.156 | Exploratory (secondary, outside Holm) | `h6-llama/summary.json`, `h6-llama/raw/`, `thesis-tables/h6_abstention.csv` | `96bd619` |
 | — | H4: does the planner ask on new ambiguous goals? | **Confirmatory, not run** | `docs/preregistration/H4-planner-clarification.md` (Amendments 1, 2) | `a2d1609` |
 
 ## 1. Task 2: terminal-state diagnosis (exploratory)
@@ -271,6 +272,30 @@ under Holm whatever the H4b and H5 p-values are; its Holm-adjusted p is at most 
 Over-abstention is higher with A1, as stated in advance. The effect comes from the non-actionable classes,
 mostly out_of_scope; A1 loses 7 actionable requests. Note that in this table over-abstention counts pooled
 decisions (n = 300 = 100 actionable requests × 3), as the frozen scorer does.
+
+**Exploratory secondary: llama3.1:8b** (outside the Holm family, reported separately; `h6-llama/`, commit
+`96bd619`). The runner is the qwen2.5:7b runner with only the model and the output folder changed
+(`h6-llama/runner.diff`); the order, the fixture and the prompt hashes are the same. 1800 decisions, run
+2026-10-18 23:11:05Z–23:35:37Z with the live ARIES stopped (journal 23:11:05.85Z–23:35:41Z, see
+`h6-llama/conditions.md`); Ollama 0.34.0 and the digest `46e0c10c…` were the same before and after, and all
+analysis checks passed. The numbers are recounted from `h6-llama/raw/` in `h6_abstention.csv`.
+
+| | A0 | A1 |
+|---|---|---|
+| Correct, majority of 3 | 153/300 = 0.510 [0.452, 0.568] | 161/300 = 0.537 [0.478, 0.594] |
+| McNemar A1 vs A0 | | b = 28, c = 20, one-sided p = 0.156; difference +0.027, exact paired 95% [−0.022, 0.072] |
+| Correct, pooled decisions | 462/900 | 484/900 |
+| Abstention precision | 0/0 | 12/12 |
+| Abstention recall | 0/600 | 12/600 |
+| Over-abstention (actionable decisions held) | 61/300 | 61/300 |
+| By class, majority of 3: actionable / ambiguous / out_of_scope / unsafe | 79/100, 16/75, 28/62, 30/63 | 81/100, 11/75, 28/62, 41/63 |
+| By language, pooled: English / Macedonian | 245/450, 217/450 | 278/450, 206/450 |
+| Errors | 0 | 0 |
+
+As expected in advance (preregistration: "a small or null effect"; original split 15 vs 10, p = 0.42), the
+difference is small and not significant. llama3.1:8b almost never uses ASK or OUT_OF_SCOPE even with the
+instruction (12 of 1800 decisions in A1). Its holds on actionable requests (61/300 in both arms) are all UNKNOWN,
+not explicit abstentions (`over_abstention_by_intent` in `h6-llama/summary.json`).
 
 **Limitations.** The requests were written by a model (OpenAI Codex), not a person, in three sessions that could
 see the validator; the validator checks format and consistency only (H6 Amendments 1–2). The labels are the
