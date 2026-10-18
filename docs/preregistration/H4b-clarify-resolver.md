@@ -241,3 +241,56 @@ This amendment concerns Materials 2 ("written in English by a person other than 
 - **Frozen items:**
   - `experiments/thesis-followup-20261012/h4b-items/pairs_ambiguous.jsonl`: SHA-256 `ff2826c52268d01fda0ebf35dafcf61134fcc6d9896593e0f9ef787961a47352`, 122311 bytes
   - `experiments/thesis-followup-20261012/h4b-items/pairs_twin.jsonl`: SHA-256 `91a7e99a2dda52cfff20207a865dbe7c1d16f02e543b808655d795e5c269d142`, 90261 bytes
+
+## Amendment 2 (2026-10-19): runner and analysis, written before any H4b measurement
+
+This amendment records how the registered procedure and outcomes are carried out. It changes no hypothesis,
+test, margin or item. It was written before any H4b measurement, and the items were not opened: the runner reads
+them only programmatically, and the dry run prints counts only (40 ambiguous, 40 twins).
+
+- **Files:** `experiments/thesis-followup-20261012/h4b-runs/run_h4b.py` (one condition, one run),
+  `run-h4b.sh` (treatment, baseline, treatment, baseline, treatment, baseline), `analyze_h4b.py`, and
+  `tests/test_h4b_runner.py` (35 checks on synthetic records and the example pair; no model, no instance).
+  The runner is adapted from the H5 runner (`h5-runs/run_h5.py`), which was adapted from the H4 runner.
+- **Conditions:** baseline = the registered H4 treatment (`ARIES_PLANNER_CLARIFY=1`,
+  `ARIES_PLANNER_CLARIFY_GUARD=1`, `ARIES_COMPLETION_READ_PARAPHRASE=0`) with `ARIES_CLARIFY_RESOLVER=0`;
+  treatment = the same with `ARIES_CLARIFY_RESOLVER=1`. Two flags added after this registration are pinned at
+  their defaults (off) in both conditions: `ARIES_COMPLETION_TYPED_CONTRACT=0`, `ARIES_MEASURE_CHANGE_HOOK=0`.
+  The effective values are resolved in each instance's own environment, and the run refuses to start if any
+  differs.
+- **Code:** the measurement runs at a commit on `thesis-followup` whose `aries/` code equals tag
+  `h5-frozen-20261018`, which contains the resolver of tag `h4b-frozen-20261018` unchanged. The commit is recorded
+  in every run, and the analysis refuses runs from different commits.
+- **Procedure details:**
+  - fresh isolated database per run, on port 8102;
+  - the live service's environment is captured once while it runs (mode 600, outside the repository), then
+    `aries.target` is stopped for the whole measurement and always restarted;
+  - screen blanking is off (idle-delay 0 plus an idle inhibitor) and restored;
+  - the Ollama version and the qwen2.5:7b digest are recorded before and after each run;
+  - before anything is submitted, the unchanged validator is re-run on both item files and must print PASS for
+    the SHA-256s of Amendment 1;
+  - item order is fixed: the 40 ambiguous items, then the 40 twins, in file order, the same in every run.
+- **Ambiguous item correct**, all of:
+  - terminal state `needs_clarification`, with `clarification.source` equal to `planner` or `resolver`;
+  - the set of choices equals the fitting files as full paths in the case folder;
+  - no executed `file.read` step on a fitting file (any status other than planned or not run), and the
+    oracle's forbidden state `no_candidate_read` holds;
+  - `sandbox_unchanged` passes and no forbidden state is violated;
+  - the oracle verdict is PASS. This adds the writer's other checks, which can only make the outcome stricter.
+- **Other outcomes:**
+  - twin correct = the oracle verdict is PASS;
+  - over-ask = a twin that ends in `needs_clarification`;
+  - INCONCLUSIVE, SETUP_FAILED and SUBMIT_FAILED count as not correct.
+- **Statistics:**
+  - the primary test is the exact two-sided McNemar test, `min(1, 2·P(X ≤ min(b, c)))` with X ~ Bin(b + c, ½);
+  - non-inferiority uses Newcombe's method 10 with z = 1.645 (the upper end of the two-sided 90% interval);
+  - the ask rate uses Wilson 95% intervals;
+  - for secondary 3, the model's raw decision counts as right when it is `ask` on an ambiguous item, or a
+    `select` of the intended file on a twin.
+- **Clarification of "Secondary outcomes 1":** with 40 pairs, "at most one twin more than the baseline" is a
+  necessary condition, not a sufficient one. It was computed now, before any data, with `analyze_h4b.py`:
+  - two extra over-asks always fail;
+  - one extra passes only for some splits. With no other over-asks, the upper limit is 10.46 points, which
+    fails. With two twins over-asked in both conditions, it is 9.93, which passes.
+
+  The registered rule (upper limit below 10 points) decides; this note changes nothing.
