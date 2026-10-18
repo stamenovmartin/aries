@@ -208,6 +208,11 @@ async def _run(goal_id, goal, data):
                        'tool_calls':0,'verifier_calls':0,'replans':0,
                        'input_tokens':0,'output_tokens':0,'total_tokens':0,'token_measurement_complete':True,
                        'estimated_input_tokens':0,'estimated_output_tokens':0}}
+        if not data['agent']['contract']['supported'] and flags.enabled('ARIES_COMPLETION_TYPED_CONTRACT'):
+            # H5: one grammar-constrained call proposes a typed read/list/exists claim; code accepts it only
+            # as an existing contract shape. completion() is unchanged (typed_contract.py).
+            from aries.workspace.typed_contract import compile_typed
+            data['agent']['contract'] = await compile_typed(goal, data, data['agent']['contract'])
         data['agent']['context_data_classes']=(data.get('context_packet') or {}).get('data_classes',[])
         if data.get('context_packet'):
             from aries.workspace.context_engine import planner_context

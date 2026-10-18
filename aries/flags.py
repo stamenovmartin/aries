@@ -81,6 +81,13 @@ FLAGS = {
                                                "asked) and strips sentence punctuation from paths; done still "
                                                "needs re-checked verified evidence. Off compiles only the "
                                                "anchored sentences, as in ARIES-FINAL-20261006"),
+    "ARIES_COMPLETION_TYPED_CONTRACT": (False, "when the fast path gives no completion contract, one "
+                                               "grammar-constrained call maps an English request to read, list, "
+                                               "exists or none with a path and a name; code accepts it only if "
+                                               "the path is the one path the request names, verbatim, and the "
+                                               "name is empty or verbatim, as an existing contract shape. The "
+                                               "model never decides completion (aries/workspace/typed_contract.py, "
+                                               "preregistration H5). Off, the module is never imported"),
     "ARIES_CLARIFY_RESOLVER": (False, "a goal naming one folder gets a code-made, verified listing first; "
                                       "code counts the files whose names fit the request, and only when "
                                       "several fit does one small model call decide, accepted only if it "
