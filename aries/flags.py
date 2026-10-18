@@ -100,6 +100,11 @@ FLAGS = {
     "ARIES_VERIFY_HARDENED_EXTRA": (False, "exploratory, designed after H8 baseline-2: the same hardening "
                                            "for two INDEPENDENT verifiers, notification.send and "
                                            "system.disk. Not part of the confirmatory H8 test"),
+    "ARIES_MEASURE_CHANGE_HOOK": (False, "measurement only (H5 changed_after_read controls): before a finish "
+                                         "is re-checked, a goal the runner has armed pauses once so the "
+                                         "runner can change a file, then the check proceeds "
+                                         "(aries/workspace/measurement_hook.py). Unarmed goals are not "
+                                         "affected. Off, the hook module is never imported"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),

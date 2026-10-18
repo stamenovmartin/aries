@@ -140,3 +140,35 @@ Criterion 1 or the primary test not met means the contracts do not generalise to
 planner does not finish; the end-path split separates the two, descriptively. Criterion 2 not met means a
 wrong or unverified result got through, which disqualifies the flags whatever criterion 1 shows. Criterion
 3 not met means the change harms other behaviour. Each is reported as a result.
+
+## Amendment 1 (2026-10-18): the file-change hook, built before any H5 item exists or is opened
+
+Materials 2 requires a runner hook for the `changed_after_read` controls. It is built and tested on the
+example items (`h5-items/example_items.jsonl`). No H5 item has been received, opened or run.
+
+- **Flag:** `ARIES_MEASURE_CHANGE_HOOK` (default off), set to `1` in **both** conditions. It is part of the
+  harness, not of the treatment. Off, `completion()` never imports the hook module.
+- **When the change happens:** at the start of `completion()`, before the contract or any evidence is
+  checked, at the first finish proposed after at least one step was verified. The moment is therefore
+  the same in both conditions, including when the control condition has no contract and would reject the
+  finish anyway. Each armed goal pauses once.
+- **Handshake:** files in `<DATA_DIR>/measure-hook/`, keyed by the SHA-256 of the goal text. The runner
+  arms a goal before submitting it, so there is no race with the task id. Only armed goals (the
+  `changed_after_read` controls) can pause. The runner then runs the item's `change_after_read.command`,
+  writes `"$M/$ID.manifest.after"`, and releases the goal. Instance side:
+  `aries/workspace/measurement_hook.py`. Runner side: `experiments/thesis-followup-20261012/h5-runs/change_hook.py`.
+- **If no release arrives** within the timeout (60 s), the check proceeds, and the goal record says
+  `released: false`.
+- **If the goal never reaches a finish after a verified step**, nothing is changed. The runner writes
+  `manifest.after` as a copy of the setup manifest, so the sandbox check still asks whether ARIES itself
+  changed anything. Such an item is reported with `fired: false`, and it stays in every count.
+- **Tests:** `tests/test_measure_change_hook.py` runs the goal loop in-process with a scripted planner (no
+  model) on `ex-n-01` and `ex-g-01`. It covers:
+  - ex-n-01 as written: the hook fires after a verified `file.read`, the file changes, and the instance
+    resumes;
+  - the anchored variant of ex-n-01: the first finish is rejected after the change, the goal is not
+    `done`, and the example oracle passes;
+  - flag off: an armed goal is ignored, the module is not imported, and the goal reaches `done` as before;
+  - an unarmed goal never pauses;
+  - the timeout;
+  - no pause without a verified step.

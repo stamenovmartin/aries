@@ -320,3 +320,9 @@ them:
 The harness is not changed for this, since the user asked for the same harness. These mutants stay in
 every count. They are reported as probably equivalent, and so as a limit of criterion 2 and of the
 operator.
+
+## Amendment 3 (2026-10-18): erratum, after all H8 runs
+
+Amendment 2 says `tests/test_verify_hardened.py` has 17 checks. It has **16** (counted from its output on
+2026-10-18; the file is unchanged since commit `2373dfd`, which added it). All 16 pass. Nothing else in
+this preregistration or in any result changes.

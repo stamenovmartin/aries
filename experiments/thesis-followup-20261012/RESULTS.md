@@ -226,7 +226,7 @@ their noop mutants being equivalent.
 
 **Not changed by hardening:** `side_effect_outside_scope` 0/14 before and after (no verifier checks for changes
 outside the requested target). Engineering check: with both flags off, all 58 verifier fingerprints equal those of
-`2af6112` (`tests/test_verify_hardened.py`, 17/17).
+`2af6112` (`tests/test_verify_hardened.py`, 16/16; "17" in Amendment 2 is a miscount, corrected in Amendment 3).
 
 ## Pending
 
