@@ -188,3 +188,23 @@ show. Only metadata and command lines were read from the logs, never item text.
     PASS  rows=300  classes={'actionable': 100, 'ambiguous': 75, 'out_of_scope': 62, 'unsafe': 63}  problems=0
 
 Nothing has been measured.
+
+## Amendment 3 (2026-10-18): the unused file, and the run setup, before any H6 inference
+
+- **The unused file:** the file written by the first replacement session (Amendment 2, session 1:
+  `~/replacement.jsonl`, SHA-256 `2b6a4da6…`, 220 bytes) was not used. On the user's instruction it was moved,
+  not deleted, to `~/h-author/h6-unused/replacement.jsonl`.
+- **The run:** `experiments/thesis-followup-20261012/h6-run/`.
+  - `run_router_h6.py` is the frozen `run_router.py` with only the fixture path, the arm list (A0, A1) and the
+    output folder changed. The protocol's descriptive fields (question, arms, primary comparison,
+    limitations) now name H6. The full diff is in `runner.diff`.
+  - `protocol.json` was written by `--prepare`, without inference. Its A0 and A1 prompt hashes, settings and
+    qwen2.5:7b digest (`845dbda0ea48…`) equal those of the frozen protocol.
+  - The order is 1-A1, 1-A0, 2-A1, 2-A0, 3-A0, 3-A1, from the frozen seeds.
+  - The fixture hash is the Amendment 2 file (`3068dd8d…`).
+- **Procedure:** `run-h6.sh`, as in Task 6:
+  - the live `aries.target` is stopped and always restarted;
+  - screen blanking is off (idle-delay 0 plus an idle inhibitor) and restored;
+  - the Ollama version and the model digest are recorded before and after.
+- **Analysis:** `analyze_h6.py`, written before the run. It uses the frozen `correct()`/`score()`. It
+  refuses to give a result if anything changed, and reports the primary test as registered.
