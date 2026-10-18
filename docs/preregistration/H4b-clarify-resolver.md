@@ -206,3 +206,38 @@ paired accuracy enough to show with 40 pairs. A failed non-inferiority test mean
 buys its questions on ambiguous items with questions on clear ones. If the model's
 `select` is overruled on most t2 twins, the model call adds little over a code-only
 rule. Each of these is reported as a result.
+
+## Amendment 1 (2026-10-18): who wrote the H4b items, and how
+
+This amendment concerns Materials 2 ("written in English by a person other than the author"). It changes no hypothesis, criterion, test or procedure.
+
+- **Who wrote them:** OpenAI Codex (model `gpt-6-astra`, Codex CLI 0.154.0, `codex-tui`), not a person.
+  The user started one fresh session per hypothesis, three in all (H6, H5, H4b), on 2026-10-18 between
+  16:56Z and 16:58Z. Each session ran in its own empty folder (`~/h-author/h6`, `~/h-author/h5`,
+  `~/h-author/h4b`), which held only that hypothesis's README. No session had memory of another, and none had
+  the ARIES conversation context.
+- **The setup did not isolate the repository.** The sessions ran with Codex's `danger-full-access` sandbox,
+  so the repository was readable. This was checked from the session logs, by listing only the commands that
+  name a repository path (no item content was read):
+  - H6: no command names the repository.
+  - H5: read `h5-items/example_items.jsonl` and `h5-items/validate_items.py`, and used both in its own
+    validation script.
+  - H4b: read `h4b-items/example_pair.jsonl`, copied it into its folder, and ran `h4b-items/validate_items.py`.
+  - No command names ARIES source code, tests, or earlier scenarios. Both files read are ones the README
+    points to. The validators contain the format rules, not ARIES's recognisers or prompts.
+- **Validators run by the writer:** the H5 and H4b sessions ran the validators themselves and may have
+  revised their items until they passed. The validators check format and consistency only (fields, counts and,
+  for H4b and H5, that each oracle fails on a do-nothing record), not ARIES behaviour, so passing them reveals nothing
+  about how ARIES will do on an item.
+- **Timeline:** the items were written (last change 16:58Z H6, 16:59Z H5, 17:02Z H4b) and copied into the
+  repository (17:05Z) **before this amendment was committed**. That was still before any measurement, and the
+  author has not read them. This amendment records their SHA-256 before the validators are run in the
+  repository and before any measurement.
+- **Limitation (deviation from the registered materials):** the preregistration requires items written by
+  **a person** other than the author. They were written by a language model. Independence from the
+  implementation rests on the sessions' isolation, described above. A model-written set may be more
+  uniform than human writing, and may share wording habits with the model under test. Every result on
+  these items is reported with this limitation.
+- **Frozen items:**
+  - `experiments/thesis-followup-20261012/h4b-items/pairs_ambiguous.jsonl`: SHA-256 `ff2826c52268d01fda0ebf35dafcf61134fcc6d9896593e0f9ef787961a47352`, 122311 bytes
+  - `experiments/thesis-followup-20261012/h4b-items/pairs_twin.jsonl`: SHA-256 `91a7e99a2dda52cfff20207a865dbe7c1d16f02e543b808655d795e5c269d142`, 90261 bytes
