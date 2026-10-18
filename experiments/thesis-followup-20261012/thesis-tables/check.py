@@ -25,6 +25,9 @@ two disagree:
 - H8 fault injection: every rate, criterion and McNemar count is recounted from records.jsonl and must equal
   summary.json; each Clopper-Pearson end is checked against the binomial tails; each run's manifest must match
   its recorded SHA-256, and every run after run 1 must have run the committed run_mutants.py.
+- H6: majority-of-3 correctness, McNemar b, c and p, and every secondary rate are recounted from the raw
+  decisions with the frozen analyze_router.correct() and must equal summary.json; the paired difference interval
+  is recomputed from Clopper-Pearson ends found by bisection on the binomial tails.
 Nothing is written to any source; no model, service or database is used.
 """
 from __future__ import annotations
@@ -529,6 +532,110 @@ def table_h8():
                          'value'), rows, note)
 
 
+# ---------------------------------------------------------------- H6
+H6_RUNS = (('qwen2.5:7b', FU / 'h6-run', 'run_router_h6.py', 'confirmatory (Holm family H4b/H5/H6/H8)'),)
+H6_FIXTURE = FU / 'h6-items/h6_requests.jsonl'
+H6_FIXTURE_SHA = '3068dd8d9b41b58987e6d2270b66629389c8b3b40937502ce9462b9ffce35348'
+
+
+def cp_end(k, n, which):
+    """A Clopper-Pearson 95% end by bisection on binomial_tail_ge, independent of the analysis' beta_ppf."""
+    if which == 'lo' and k == 0:
+        return 0.0
+    if which == 'hi' and k == n:
+        return 1.0
+    f = (lambda p: binom_tail_ge(k, n, p) - 0.025) if which == 'lo' else (lambda p: binom_tail_ge(k + 1, n, p) - 0.975)
+    a, z = 0.0, 1.0
+    for _ in range(80):
+        mid = (a + z) / 2
+        a, z = (mid, z) if f(mid) < 0 else (a, mid)
+    return (a + z) / 2
+
+
+def table_h6():
+    A = load_module('analyze_router', FROZEN / 'analyze_router.py')
+    must_equal('H6 fixture is the Amendment 2 file', hashlib.sha256(H6_FIXTURE.read_bytes()).hexdigest(), H6_FIXTURE_SHA)
+    items = {r['id']: r for r in (json.loads(l) for l in H6_FIXTURE.read_text().splitlines() if l.strip())}
+    rows, sources = [], []
+    for model, folder, runner, label in H6_RUNS:
+        s = read(folder / 'summary.json')
+        protocol = read(folder / 'protocol.json')
+        must_equal(f'{model} analysis checks all passed', all(s['checks'].values()), True)
+        must_equal(f'{model} model', protocol['model']['name'], model)
+        must_equal(f'{model} runner unchanged', hashlib.sha256((folder / runner).read_bytes()).hexdigest(),
+                   protocol['hashes']['runner'])
+        raw = {(arm, rep): [json.loads(l) for l in (folder / 'raw' / f'r{rep}-{arm}.jsonl').read_text().splitlines()]
+               for arm in ('A0', 'A1') for rep in (1, 2, 3)}
+        for v in raw.values():
+            must_equal(f'{model} cell covers the fixture once', sorted(r['id'] for r in v), sorted(items))
+        right = {(arm, rep, r['id']): A.correct(r) for (arm, rep), v in raw.items() for r in v}
+        major = {arm: {i: sum(right[(arm, rep, i)] for rep in (1, 2, 3)) >= 2 for i in items} for arm in ('A0', 'A1')}
+
+        def add(arm, metric, group, k=None, n=None, ci=None, value=None, mine=None, theirs=None):
+            if mine is not None:
+                must_equal(f'{model} {arm} {metric} {group} (raw vs summary.json)', mine, theirs)
+            if ci is not None:
+                check_ci(f'{model} {arm} {metric} {group}', k, n, ci)
+            rows.append((model, label, arm, metric, group, k, n, round(k / n, 4) if k is not None and n else None,
+                         *(ci or (None, None)), value))
+
+        def rate_row(arm, metric, group, published, k, n):
+            add(arm, metric, group, published['k'], published['n'], published['ci95'], mine=(k, n),
+                theirs=(published['k'], published['n']))
+
+        pr = s['primary']
+        n = len(items)
+        for arm in ('A0', 'A1'):
+            rate_row(arm, 'binary_majority_of_3', 'all', pr['majority_accuracy'][arm], sum(major[arm].values()), n)
+        b = sum(major['A1'][i] and not major['A0'][i] for i in items)
+        c = sum(major['A0'][i] and not major['A1'][i] for i in items)
+        p = binom_tail_ge(b, b + c, 0.5) if b + c else 1.0
+        must_equal(f'{model} McNemar (raw vs summary.json)', (b, c), (pr['b_A1_right_A0_wrong'], pr['c_A0_right_A1_wrong']))
+        must_equal(f'{model} McNemar p', abs(p - pr['p_one_sided_exact']) <= 1e-12 * max(p, 1e-300), True)
+        add('A1 vs A0', 'mcnemar_b_A1_only', 'requests', b, b + c, value=f'{p:.3g}')
+        add('A1 vs A0', 'mcnemar_c_A0_only', 'requests', c, b + c)
+        m = b + c
+        ends = (cp_end(b, m, 'lo'), cp_end(b, m, 'hi'))                  # Clopper-Pearson for b / m, from the tails
+        mine = [round(m / n * (2 * e - 1), 4) for e in ends]
+        must_equal(f'{model} difference', round((b - c) / n, 4), pr['accuracy_difference_A1_minus_A0'])
+        must_equal(f'{model} paired difference interval', mine, pr['accuracy_difference_ci95_paired_exact'])
+        rows.append((model, label, 'A1 vs A0', 'difference_A1_minus_A0', 'majority_of_3', None, None,
+                     pr['accuracy_difference_A1_minus_A0'], *mine, None))
+        for arm in ('A0', 'A1'):
+            sec = s['secondary'][arm]
+            pooled = [r for rep in (1, 2, 3) for r in raw[(arm, rep)]]
+            rate_row(arm, 'binary_pooled', 'all', sec['binary_pooled'], sum(map(A.correct, pooled)), len(pooled))
+            for k_ in ('actionable', 'ambiguous', 'out_of_scope', 'unsafe'):
+                ids = [i for i in items if items[i]['klass'] == k_]
+                rate_row(arm, 'binary_majority_of_3', k_, sec['binary_by_class_majority'][k_],
+                         sum(major[arm][i] for i in ids), len(ids))
+            for lang in ('en', 'mk'):
+                sel = [r for r in pooled if r['lang'] == lang]
+                rate_row(arm, 'binary_pooled', 'lang ' + lang, sec['by_language_binary_pooled'][lang],
+                         sum(map(A.correct, sel)), len(sel))
+            nonaction = [r for r in pooled if r['klass'] != 'actionable']
+            asked = [r for r in pooled if A.valid(r) and r['intent'] in ('ASK', 'OUT_OF_SCOPE')]
+            rate_row(arm, 'abstention_precision', 'ASK or OUT_OF_SCOPE', sec['abstention_precision'],
+                     sum(r['klass'] != 'actionable' for r in asked), len(asked))
+            rate_row(arm, 'abstention_recall', 'nonaction requests', sec['abstention_recall'],
+                     sum(A.valid(r) and r['intent'] in ('ASK', 'OUT_OF_SCOPE') for r in nonaction), len(nonaction))
+            held = [r for r in pooled if r['klass'] == 'actionable' and A.valid(r) and r['intent'] in A.HOLD]
+            rate_row(arm, 'over_abstention', 'actionable held', sec['over_abstention_actionable_held'], len(held),
+                     sum(r['klass'] == 'actionable' for r in pooled))
+            add(arm, 'errors', 'pooled', value=sec['errors'], mine=sum(bool(r.get('error')) for r in pooled),
+                theirs=sec['errors'])
+        sources += [folder / 'summary.json', folder / 'raw', folder / 'protocol.json', folder / runner]
+    head = provenance(sources + [H6_FIXTURE, FROZEN / 'analyze_router.py', FU / 'h6-run/analyze_h6.py',
+                                 ROOT / 'docs/preregistration/H6-abstention-replication.md'],
+                      '; '.join(f'{m} = {lab}' for m, _, _, lab in H6_RUNS))
+    note = ('correct = frozen analyze_router.correct(); majority_of_3 = per request, at least 2 of 3 repetitions correct; '
+            'ci = exact Clopper-Pearson 95%; mcnemar_b_A1_only: k = b, n = b + c, value = exact one-sided p; '
+            'difference ci = exact paired interval conditional on the discordant requests; '
+            'requests written by OpenAI Codex (gpt-6-astra), not a person')
+    return render(head, ('model', 'label', 'arm', 'metric', 'group', 'k', 'n', 'rate', 'ci_lo', 'ci_hi', 'value'),
+                  rows, note)
+
+
 TABLES = {
     'router_arms.csv': table_router_arms,
     'router_by_class.csv': table_router_by_class,
@@ -541,6 +648,7 @@ TABLES = {
     'h4_dev_cases.csv': table_h4_dev,
     'h4_dev_rounds.csv': table_h4_dev_rounds,
     'h8_fault_injection.csv': table_h8,
+    'h6_abstention.csv': table_h6,
 }
 
 
