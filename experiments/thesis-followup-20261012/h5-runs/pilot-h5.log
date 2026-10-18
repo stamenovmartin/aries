@@ -1,0 +1,16 @@
+2026-10-18T23:37:18Z begin; idle-delay was uint32 60
+captured 94 variables to /home/stamenovmartin/.local/state/aries-h5/service-env (mode 600); values not printed
+2026-10-18T23:37:18Z aries.target stopped (exit 0)
+2026-10-18T23:37:20Z screensaver active after wake: (false,)
+2026-10-18T23:37:20Z pilot treatment start
+FAIL         example  ex-g-01    state=failed
+PASS         example  ex-n-01    state=failed
+{"run": "experiments/thesis-followup-20261012/h5-runs/20261018T233720Z-pilot-treatment", "tally": {"example:FAIL": 1, "example:PASS": 1}, "model_stable": true, "code_stable": true}
+2026-10-18T23:38:05Z pilot treatment exit 0
+2026-10-18T23:38:05Z pilot control start
+FAIL         example  ex-g-01    state=failed
+PASS         example  ex-n-01    state=failed
+{"run": "experiments/thesis-followup-20261012/h5-runs/20261018T233805Z-pilot-control", "tally": {"example:FAIL": 1, "example:PASS": 1}, "model_stable": true, "code_stable": false}
+2026-10-18T23:38:48Z pilot control exit 0
+2026-10-18T23:38:48Z aries.target start requested (exit 0)
+2026-10-18T23:38:48Z screen blanking restored: uint32 60; end
