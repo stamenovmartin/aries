@@ -442,3 +442,11 @@ from aries.workspace.system_capabilities import register as register_system
 register_system(registry)
 from aries.workspace.input_capabilities import register as register_input
 register_input(registry)
+
+# H8 (docs/preregistration/H8-verifier-fault-injection.md). Both flags are off by default, and then
+# nothing below runs: every registered verifier stays the frozen function object.
+from aries import flags as _flags
+if _flags.enabled('ARIES_VERIFY_HARDENED') or _flags.enabled('ARIES_VERIFY_HARDENED_EXTRA'):
+    from aries.workspace.hardened_verifiers import install as _install_hardened
+    _install_hardened(registry, core=_flags.enabled('ARIES_VERIFY_HARDENED'),
+                      extra=_flags.enabled('ARIES_VERIFY_HARDENED_EXTRA'))
