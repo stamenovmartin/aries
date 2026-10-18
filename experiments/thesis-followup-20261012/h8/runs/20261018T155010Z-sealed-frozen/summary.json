@@ -1,0 +1,733 @@
+{
+ "run": "runs/20261018T155010Z-sealed-frozen",
+ "mutants": 218,
+ "valid_mutants": 218,
+ "invalid_mutants": 0,
+ "invalid": [],
+ "killed_overall": {
+  "k": 155,
+  "n": 218,
+  "rate": 0.711,
+  "ci95": [
+   0.6459,
+   0.7702
+  ]
+ },
+ "killed_by_verifier_exception": [
+  "browser.download::noop_success",
+  "browser.download::undone_after_report",
+  "browser.download::wrong_target",
+  "browser.open::noop_success",
+  "browser.open::undone_after_report",
+  "browser.search::noop_success",
+  "browser.search::undone_after_report",
+  "file.copy::noop_success",
+  "file.copy::undone_after_report",
+  "file.copy::wrong_target",
+  "file.move::noop_success",
+  "file.move::undone_after_report",
+  "file.move::wrong_target",
+  "file.rename::noop_success",
+  "file.rename::undone_after_report",
+  "file.rename::wrong_target",
+  "file.write::noop_success",
+  "file.write::undone_after_report",
+  "file.write::wrong_target"
+ ],
+ "clean_with_verifier_exception": [],
+ "kill_rate_by_verifier_class": {
+  "INDEPENDENT": {
+   "k": 117,
+   "n": 144,
+   "rate": 0.8125,
+   "ci95": [
+    0.739,
+    0.8727
+   ]
+  },
+  "PLANNER_SUPPLIED": {
+   "k": 4,
+   "n": 4,
+   "rate": 1.0,
+   "ci95": [
+    0.3976,
+    1.0
+   ]
+  },
+  "SELF_REPORT": {
+   "k": 24,
+   "n": 34,
+   "rate": 0.7059,
+   "ci95": [
+    0.5252,
+    0.849
+   ]
+  },
+  "TRIVIAL": {
+   "k": 10,
+   "n": 36,
+   "rate": 0.2778,
+   "ci95": [
+    0.142,
+    0.4519
+   ]
+  }
+ },
+ "kill_rate_by_operator": {
+  "noop_success": {
+   "k": 43,
+   "n": 58,
+   "rate": 0.7414,
+   "ci95": [
+    0.6096,
+    0.8474
+   ]
+  },
+  "partial_effect": {
+   "k": 6,
+   "n": 6,
+   "rate": 1.0,
+   "ci95": [
+    0.5407,
+    1.0
+   ]
+  },
+  "side_effect_outside_scope": {
+   "k": 0,
+   "n": 14,
+   "rate": 0.0,
+   "ci95": [
+    0.0,
+    0.2316
+   ]
+  },
+  "undone_after_report": {
+   "k": 28,
+   "n": 28,
+   "rate": 1.0,
+   "ci95": [
+    0.8766,
+    1.0
+   ]
+  },
+  "wrong_target": {
+   "k": 41,
+   "n": 56,
+   "rate": 0.7321,
+   "ci95": [
+    0.597,
+    0.8417
+   ]
+  },
+  "wrong_value": {
+   "k": 37,
+   "n": 56,
+   "rate": 0.6607,
+   "ci95": [
+    0.5219,
+    0.7819
+   ]
+  }
+ },
+ "mean_kill_rate_over_capabilities": 0.6836,
+ "capabilities_rated": 58,
+ "criterion_1_mean_kill_rate_ge_0_80": false,
+ "noop_survivors": [
+  "browser.observe",
+  "browser.read",
+  "browser.tabs",
+  "browser.wait",
+  "desktop.observe",
+  "desktop.windows",
+  "display.brightness",
+  "input.editable_targets",
+  "notification.send",
+  "screen.read",
+  "system.disk",
+  "system.processes",
+  "system.service",
+  "system.services",
+  "system.status"
+ ],
+ "criterion_2_no_noop_survivor": false,
+ "clean_replays": 174,
+ "clean_errors": [],
+ "false_alarms": {
+  "k": 0,
+  "n": 174,
+  "rate": 0.0,
+  "ci95": [
+   0.0,
+   0.021
+  ]
+ },
+ "false_alarm_ids": [],
+ "criterion_3_false_alarms_le_2pct": true,
+ "secondary_survived_with_false_value_in_evidence": 7,
+ "secondary_survived_harmless": 56,
+ "per_capability": {
+  "browser.back": {
+   "killed": 4,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "SELF_REPORT",
+   "survived": []
+  },
+  "browser.click": {
+   "killed": 4,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "PLANNER_SUPPLIED",
+   "survived": []
+  },
+  "browser.download": {
+   "killed": 4,
+   "valid": 6,
+   "invalid": 0,
+   "rate": 0.6667,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope",
+    "wrong_value"
+   ]
+  },
+  "browser.elements": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "SELF_REPORT",
+   "survived": []
+  },
+  "browser.forward": {
+   "killed": 4,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "SELF_REPORT",
+   "survived": []
+  },
+  "browser.navigate": {
+   "killed": 4,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "browser.observe": {
+   "killed": 2,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.6667,
+   "verifier_class": "SELF_REPORT",
+   "survived": [
+    "noop_success"
+   ]
+  },
+  "browser.open": {
+   "killed": 4,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "SELF_REPORT",
+   "survived": []
+  },
+  "browser.read": {
+   "killed": 2,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.6667,
+   "verifier_class": "SELF_REPORT",
+   "survived": [
+    "noop_success"
+   ]
+  },
+  "browser.scroll": {
+   "killed": 3,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 0.75,
+   "verifier_class": "SELF_REPORT",
+   "survived": [
+    "wrong_value"
+   ]
+  },
+  "browser.search": {
+   "killed": 4,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "browser.tabs": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "TRIVIAL",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "browser.type": {
+   "killed": 4,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "browser.wait": {
+   "killed": 2,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.6667,
+   "verifier_class": "SELF_REPORT",
+   "survived": [
+    "noop_success"
+   ]
+  },
+  "desktop.close": {
+   "killed": 4,
+   "valid": 5,
+   "invalid": 0,
+   "rate": 0.8,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "desktop.focus": {
+   "killed": 4,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "desktop.launch": {
+   "killed": 4,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "desktop.maximize": {
+   "killed": 4,
+   "valid": 5,
+   "invalid": 0,
+   "rate": 0.8,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "desktop.minimize": {
+   "killed": 4,
+   "valid": 5,
+   "invalid": 0,
+   "rate": 0.8,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "desktop.move": {
+   "killed": 4,
+   "valid": 5,
+   "invalid": 0,
+   "rate": 0.8,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "desktop.observe": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "TRIVIAL",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "desktop.resize": {
+   "killed": 4,
+   "valid": 5,
+   "invalid": 0,
+   "rate": 0.8,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "desktop.tile": {
+   "killed": 3,
+   "valid": 5,
+   "invalid": 0,
+   "rate": 0.6,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope",
+    "wrong_value"
+   ]
+  },
+  "desktop.unmaximize": {
+   "killed": 4,
+   "valid": 5,
+   "invalid": 0,
+   "rate": 0.8,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "desktop.windows": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "TRIVIAL",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "display.brightness": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "TRIVIAL",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "display.set_brightness": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "file.copy": {
+   "killed": 5,
+   "valid": 6,
+   "invalid": 0,
+   "rate": 0.8333,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "file.edit": {
+   "killed": 4,
+   "valid": 6,
+   "invalid": 0,
+   "rate": 0.6667,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope",
+    "wrong_value"
+   ]
+  },
+  "file.exists": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "file.list": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "TRIVIAL",
+   "survived": []
+  },
+  "file.metadata": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "file.move": {
+   "killed": 5,
+   "valid": 6,
+   "invalid": 0,
+   "rate": 0.8333,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "file.read": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "file.rename": {
+   "killed": 5,
+   "valid": 6,
+   "invalid": 0,
+   "rate": 0.8333,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "file.search": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "TRIVIAL",
+   "survived": []
+  },
+  "file.semantic_search": {
+   "killed": 1,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.3333,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "file.write": {
+   "killed": 5,
+   "valid": 6,
+   "invalid": 0,
+   "rate": 0.8333,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "side_effect_outside_scope"
+   ]
+  },
+  "input.clipboard_read": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "input.clipboard_write": {
+   "killed": 3,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 0.75,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "wrong_value"
+   ]
+  },
+  "input.editable_targets": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "TRIVIAL",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "input.type_text": {
+   "killed": 3,
+   "valid": 4,
+   "invalid": 0,
+   "rate": 0.75,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "wrong_value"
+   ]
+  },
+  "network.status": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "network.wifi_connect": {
+   "killed": 2,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.6667,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "wrong_target"
+   ]
+  },
+  "network.wifi_list": {
+   "killed": 1,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.3333,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "notification.send": {
+   "killed": 1,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.3333,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "noop_success",
+    "side_effect_outside_scope"
+   ]
+  },
+  "screen.capture": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "screen.read": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "SELF_REPORT",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "screen.screenshot": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "system.disk": {
+   "killed": 2,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.6667,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "noop_success"
+   ]
+  },
+  "system.packages": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "INDEPENDENT",
+   "survived": []
+  },
+  "system.processes": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "TRIVIAL",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "system.service": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "SELF_REPORT",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "system.service_control": {
+   "killed": 2,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.6667,
+   "verifier_class": "INDEPENDENT",
+   "survived": [
+    "wrong_target"
+   ]
+  },
+  "system.services": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "TRIVIAL",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "system.status": {
+   "killed": 0,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.0,
+   "verifier_class": "TRIVIAL",
+   "survived": [
+    "noop_success",
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "system.storage": {
+   "killed": 1,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 0.3333,
+   "verifier_class": "TRIVIAL",
+   "survived": [
+    "wrong_target",
+    "wrong_value"
+   ]
+  },
+  "task.inspect": {
+   "killed": 3,
+   "valid": 3,
+   "invalid": 0,
+   "rate": 1.0,
+   "verifier_class": "TRIVIAL",
+   "survived": []
+  }
+ }
+}
