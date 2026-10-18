@@ -40,6 +40,8 @@ c = 0 (killed before, not now), 218 pairs, p = 1.16 × 10⁻¹⁰.
 ## Sealed second set (generalisation check, not a criterion)
 
 The SHA-256 matched the committed value `fa8556e9…` before the set was opened.
+The set itself (`sealed/mutants-sealed.json`) was committed only after these runs, so its hash can now be
+checked against `sealed/SEALED.sha256`, which was committed on 2026-10-13.
 
 | | Frozen | Hardened |
 |---|---|---|
