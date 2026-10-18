@@ -1,0 +1,316 @@
+{
+ "hardened_run": "runs/20261018T154826Z-hardened",
+ "baseline_run": "runs/20261018T153000Z-baseline2",
+ "summary": {
+  "newly_killed": 33,
+  "reproduced": 33,
+  "by_failed_check": 33,
+  "by_unverified": []
+ },
+ "mutants": {
+  "browser.observe::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "scroll_agrees"
+   ],
+   "unverified_error": null
+  },
+  "browser.read::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "scroll_agrees"
+   ],
+   "unverified_error": null
+  },
+  "browser.tabs::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "inventory_agrees"
+   ],
+   "unverified_error": null
+  },
+  "browser.tabs::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "inventory_agrees"
+   ],
+   "unverified_error": null
+  },
+  "browser.tabs::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "inventory_agrees"
+   ],
+   "unverified_error": null
+  },
+  "browser.wait::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "scroll_agrees"
+   ],
+   "unverified_error": null
+  },
+  "desktop.observe::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "windows_agree"
+   ],
+   "unverified_error": null
+  },
+  "desktop.observe::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "windows_agree"
+   ],
+   "unverified_error": null
+  },
+  "desktop.observe::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "windows_agree"
+   ],
+   "unverified_error": null
+  },
+  "desktop.windows::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "windows_agree"
+   ],
+   "unverified_error": null
+  },
+  "desktop.windows::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "windows_agree"
+   ],
+   "unverified_error": null
+  },
+  "desktop.windows::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "windows_agree"
+   ],
+   "unverified_error": null
+  },
+  "display.brightness::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "agrees"
+   ],
+   "unverified_error": null
+  },
+  "display.brightness::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "agrees"
+   ],
+   "unverified_error": null
+  },
+  "display.brightness::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "agrees"
+   ],
+   "unverified_error": null
+  },
+  "input.editable_targets::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "targets_agree"
+   ],
+   "unverified_error": null
+  },
+  "input.editable_targets::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "targets_agree"
+   ],
+   "unverified_error": null
+  },
+  "input.editable_targets::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "targets_agree"
+   ],
+   "unverified_error": null
+  },
+  "screen.read::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "fresh_recognition_agrees",
+    "stored_frame_unchanged"
+   ],
+   "unverified_error": null
+  },
+  "screen.read::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "characters_match_text",
+    "fresh_recognition_agrees",
+    "words_match_text"
+   ],
+   "unverified_error": null
+  },
+  "screen.read::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "characters_match_text",
+    "fresh_recognition_agrees",
+    "words_match_text"
+   ],
+   "unverified_error": null
+  },
+  "system.processes::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "count_agrees"
+   ],
+   "unverified_error": null
+  },
+  "system.processes::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "count_agrees"
+   ],
+   "unverified_error": null
+  },
+  "system.service::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "active_state_agrees",
+    "list_units_agrees"
+   ],
+   "unverified_error": null
+  },
+  "system.service::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "invocation_agrees"
+   ],
+   "unverified_error": null
+  },
+  "system.service::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "active_state_agrees",
+    "list_units_agrees"
+   ],
+   "unverified_error": null
+  },
+  "system.services::noop_success": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "units_agree"
+   ],
+   "unverified_error": null
+  },
+  "system.services::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "count_matches_list"
+   ],
+   "unverified_error": null
+  },
+  "system.services::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "count_matches_list"
+   ],
+   "unverified_error": null
+  },
+  "system.status::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "identity_agrees"
+   ],
+   "unverified_error": null
+  },
+  "system.status::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "identity_agrees"
+   ],
+   "unverified_error": null
+  },
+  "system.storage::wrong_target": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "identity_agrees"
+   ],
+   "unverified_error": null
+  },
+  "system.storage::wrong_value": {
+   "killed": true,
+   "status": null,
+   "hardened": true,
+   "failed_checks": [
+    "identity_agrees"
+   ],
+   "unverified_error": null
+  }
+ }
+}
