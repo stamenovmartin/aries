@@ -551,6 +551,13 @@ async def plan(db, goal, data, budget):
                 'choose ask_clarification with those exact file paths as the choices. If exactly one file fits, '
                 'read it with execute. If no file fits but the listing shows subfolders, list the subfolders that '
                 'could contain the target.'})
+    resolved = (data['agent'].get('resolver') or {}) if flags_enabled('ARIES_CLARIFY_RESOLVER') else {}
+    if resolved.get('selected'):
+        # ARIES_CLARIFY_RESOLVER: the request's own words picked one of several listed files,
+        # and code checked that they occur in the request and fit only that file.
+        messages.append({'role':'user','content':
+            'The request says which file is meant: "' + resolved['evidence_span'] + '" identifies ' + resolved['selected']
+            + ' among the listed files. Use that file; do not ask which one.'})
     if can_ask and guard:
         messages.append({'role':'user','content':
             'Two different actions exist for two different situations. Reading and listing change nothing and need '
