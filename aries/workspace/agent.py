@@ -208,6 +208,11 @@ async def _run(goal_id, goal, data):
                        'tool_calls':0,'verifier_calls':0,'replans':0,
                        'input_tokens':0,'output_tokens':0,'total_tokens':0,'token_measurement_complete':True,
                        'estimated_input_tokens':0,'estimated_output_tokens':0}}
+        if not data['agent']['contract']['supported'] and flags.enabled('ARIES_COMPLETION_TYPED_CONTRACT'):
+            # H5: one grammar-constrained call proposes a typed read/list/exists claim; code accepts it only
+            # as an existing contract shape. completion() is unchanged (typed_contract.py).
+            from aries.workspace.typed_contract import compile_typed
+            data['agent']['contract'] = await compile_typed(goal, data, data['agent']['contract'])
         data['agent']['context_data_classes']=(data.get('context_packet') or {}).get('data_classes',[])
         if data.get('context_packet'):
             from aries.workspace.context_engine import planner_context
@@ -235,7 +240,7 @@ async def _run(goal_id, goal, data):
             data.setdefault('gaps', []).append(summary)
         await persist(state)
 
-    async def ask(decision):
+    async def ask(decision, source='planner'):
         # Same record shape as the pre-planning question in service.submit, so the
         # API, speech replies and analytics already know how to show it.
         from aries.intelligence import budgets
@@ -245,11 +250,75 @@ async def _run(goal_id, goal, data):
         metrics['wall_seconds_scope'] = 'Active execution invocations, including planning; excludes queue and approval wait'
         observed = [s['step_id'] for s in data['steps'] if s.get('verification_status') == 'verified']
         data['clarification'] = {'question':decision.question,'choices':list(decision.choices),
-                                 'source':'planner','observed_in_steps':observed}
+                                 'source':source,'observed_in_steps':observed}
         data['cards'] = [{'title':decision.question,'text':'\n'.join(decision.choices)}]
         data['summary'] = decision.question
         agent.update(finished=False, summary=decision.question)
         await persist('needs_clarification')
+
+    async def resolve_reference():
+        """ARIES_CLARIFY_RESOLVER (clarify_resolver.py): a code-made listing Decision, 'asked', or None."""
+        from aries.workspace import clarify_resolver as resolver
+        state = agent.setdefault('resolver', {'stage':'start'})
+        if state['stage'] == 'start':
+            folder = resolver.target_folder(goal)
+            if folder is None:
+                state.update(stage='done', applies=False)
+                return None
+            state.update(stage='listing', applies=True, folder=folder)
+            return agent_planner.Decision(action='execute', capability='file.list', arguments={'path':folder},
+                                          reason='Code-made listing of the folder the goal names (clarify resolver)')
+        if state['stage'] != 'listing':
+            return None
+        state['stage'] = 'done'
+        step = next((s for s in reversed(data['steps']) if s.get('capability') == 'file.list'
+                     and str(Path(s['args'].get('path','')).expanduser()) == state['folder']), None)
+        if step is None or step.get('verification_status') != 'verified':
+            state['outcome'] = 'listing not verified: planner continues'
+            return None
+        cands = resolver.candidates(goal, state['folder'], (step.get('verification') or {}).get('data') or {})
+        state.update(candidates=[c['path'] for c in cands], n=len(cands), listing_step=step['step_id'])
+        if len(cands) <= 1:
+            state['outcome'] = f'{len(cands)} candidates: planner continues'
+            return None
+        async with async_session() as db:
+            cands = await resolver.stat_candidates(cands, {'db':db})
+        if len(cands) > resolver.MAX_DECIDE:
+            state.update(outcome='asked', why=f'{len(cands)} candidates: no model call')
+            await ask(agent_planner.Decision(action='ask_clarification', question=resolver.question(cands),
+                                             choices=[c['path'] for c in resolver.choices(cands)]), source='resolver')
+            return 'asked'
+        async with async_session() as db:
+            messages = resolver.decision_messages(goal, cands)
+            schema = resolver.decision_schema(len(cands))
+            from aries.intelligence import structured
+            from aries.intelligence.egress import bind, planner_classes
+            t0 = time.monotonic()
+            call = {'at':now()}
+            try:
+                raw, native = await structured(db, messages, schema, purpose='workspace.clarify-resolver', max_tokens=200,
+                                               route=data.get('routing'),
+                                               provenance=bind(messages, schema, planner_classes(data) | {'personal'}))
+                call.update(raw=raw[:2000], input_tokens=native.get('prompt_eval_count'), output_tokens=native.get('eval_count'))
+                parsed = json.loads(raw)
+                if parsed.get('selected_index') == -1:
+                    parsed['selected_index'] = None
+            except Exception as exc:
+                call['error'] = error(exc)
+                parsed = {'decision':'ask'}
+            call['seconds'] = round(time.monotonic()-t0, 4)
+        metrics['resolver_model_calls'] = metrics.get('resolver_model_calls',0) + 1
+        selected, why = resolver.accept(parsed, goal, cands)
+        state.update(decision_call=call, decision=parsed, accepted=selected is not None, why=why,
+                     candidate_attributes=[{k:c[k] for k in ('path','modified','size')} for c in cands])
+        if selected is not None:
+            state.update(selected=selected['path'], evidence_span=parsed.get('evidence_span'),
+                         outcome='selected: planner continues with the selection')
+            return None
+        state['outcome'] = 'asked'
+        await ask(agent_planner.Decision(action='ask_clarification', question=resolver.question(cands),
+                                         choices=[c['path'] for c in resolver.choices(cands)]), source='resolver')
+        return 'asked'
 
     # Do not replay a step after uncertain process death, even if somebody queues
     # its row manually. Recovery of legacy bounded plans remains unchanged.
@@ -262,14 +331,24 @@ async def _run(goal_id, goal, data):
     while metrics['planner_calls'] < max_calls:
         if pending is None:
             from aries.workspace.finish_proposal import propose
-            decision = propose(data)
+            from aries import flags
+            decision = await resolve_reference() if flags.enabled('ARIES_CLARIFY_RESOLVER') else None
+            if decision == 'asked':
+                return
             if decision is not None:
-                agent['automatic_finish_step_count']=len(data['steps'])
-                metrics['automatic_finish_proposals']=metrics.get('automatic_finish_proposals',0)+1
-                event={'index':len(agent['decisions']),'timestamp':now(),'source':'contract-evidence',
+                event={'index':len(agent['decisions']),'timestamp':now(),'source':'clarify-resolver',
                        'usage':{'model_calls':0},'valid':True,'decision':decision.model_dump()}
                 agent['decisions'].append(event)
                 await persist()
+            else:
+                decision = propose(data)
+                if decision is not None:
+                    agent['automatic_finish_step_count']=len(data['steps'])
+                    metrics['automatic_finish_proposals']=metrics.get('automatic_finish_proposals',0)+1
+                    event={'index':len(agent['decisions']),'timestamp':now(),'source':'contract-evidence',
+                           'usage':{'model_calls':0},'valid':True,'decision':decision.model_dump()}
+                    agent['decisions'].append(event)
+                    await persist()
             for attempt in range(2):
                 if decision is not None:break
                 if metrics['planner_calls'] >= max_calls:

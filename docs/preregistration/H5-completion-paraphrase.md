@@ -207,3 +207,64 @@ This amendment concerns Materials 3 ("by a person other than the author"). It ch
 - **Frozen items:**
   - `experiments/thesis-followup-20261012/h5-items/goals.jsonl`: SHA-256 `4cecf03fd3d0dc70125dfe76001af72600b2a1add9384f148cca818045613d58`, 27017 bytes
   - `experiments/thesis-followup-20261012/h5-items/controls.jsonl`: SHA-256 `a47370363fac0b2f5f69fdac93d2acb86a519a730751ef8c85a3263dc3d8f142`, 16196 bytes
+
+## Amendment 3 (2026-10-18): the typed step, the runner and the analysis, frozen before any H5 item is opened
+
+The H5 items (Amendment 2) exist, but the author has not opened them. Only the validator has run on them.
+This amendment records what was built and tagged before the measurement.
+
+**`ARIES_COMPLETION_TYPED_CONTRACT`** (`aries/workspace/typed_contract.py`, default off; called in `agent.py`
+right after `compile_goal`, and only when the fast path gives no contract):
+- One call through the existing grammar-constrained `structured()` (purpose `workspace.typed-contract`,
+  at most 120 tokens). The schema is the registered one, `goal_type` ∈ {read, list, exists, none},
+  `path`, `name`. Only a string enum and strings are used, which are among the shapes measured safe.
+- Code validation, as registered:
+  - the request names exactly one path (the same path tokens as the fast path);
+  - `path` occurs verbatim and, after stripping sentence punctuation, is that path;
+  - `name` is empty or occurs verbatim.
+- **Stated additions, all stricter than the registered rules:**
+  - `name` must be a single path component (no `/`, not `.` or `..`);
+  - a `list` claim must have an empty name;
+  - a malformed reply, or a failed call, leaves the goal unsupported.
+- **Shapes:**
+  - read → `file.read` of the path, or of path/name when a name is given;
+  - list → `file.list` with `answer: listing`;
+  - exists → `file.exists` of path or path/name, with `answer: existence`.
+
+  These are the `paraphrased()` shapes. The typed result and its reason are recorded in the contract
+  (`typed`).
+- **English only:** a Cyrillic request is not sent. `completion()` and `contracts.py` are unchanged; the
+  test checks `contracts.py` against the commit before H5.
+- **Tests:**
+  - `tests/test_typed_contract.py`, 28 checks, model mocked: the validation rules, flag off (no call,
+    module never imported, contract exactly `compile_goal`'s), done only through verified and re-checked
+    evidence, a fast-path contract never replaced, and Cyrillic.
+  - `tests/test_h5_runner.py`, 11 checks.
+
+**Runner** (`h5-runs/run_h5.py`, adapted from `run_h4.py`) and **wrapper** (`h5-runs/run-h5.sh`):
+- **Conditions:**
+  - treatment: PARAPHRASE=1, TYPED=1;
+  - control: both 0;
+  - in both: CLARIFY, GUARD and RESOLVER pinned 0, and the hook flag at 1.
+
+  The effective flags are resolved in the instance's environment, and the run refuses on any mismatch.
+- **Isolation:** a fresh isolated database per run, as for H4. The live service is stopped for the whole
+  measurement, so its environment is captured once before it is stopped. The copy goes to
+  `~/.local/state/aries-h5/service-env` (mode 600, never committed). The runner refuses while `aries-core`
+  is active or `idle-delay` is not 0.
+- **Item checks:** before submitting anything, the unchanged validator is re-run into the run folder and
+  must print PASS for the Amendment 2 hashes.
+- **Order and sets:** six runs, T, C, T, C, T, C. Sets G (15), N (10), and the 49 runnable held-out goals.
+- **Hook:** as in Amendment 1.
+- **Recorded per item:** the run_fixtures verdict and the H5 outcomes (correct done, false done, contract
+  source, end path).
+- **End paths:**
+  - finish rejected = the last completion check failed;
+  - budget exhausted without a finish = planned but no completion check;
+  - never planned = no decision.
+
+**Analysis** (`h5-runs/analyze_h5.py`, written now):
+- the three criteria and the primary McNemar test exactly as registered;
+- the secondary outcomes as listed;
+- it refuses unless there are 3 + 3 complete runs at one commit, with model and code stable;
+- it was smoke-tested on synthetic folders only.
