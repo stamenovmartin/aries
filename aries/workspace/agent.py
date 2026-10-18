@@ -48,6 +48,10 @@ def mark_interrupted(data, state='interrupted'):
 
 
 async def completion(data, decision, ctx):
+    from aries import flags
+    if flags.enabled('ARIES_MEASURE_CHANGE_HOOK'):
+        from aries.workspace.measurement_hook import pause
+        await pause(ctx.get('task_id'), ctx['goal'], data)
     contract = data['agent']['contract']
     if not contract['supported']:
         return False, contract['reason'], []
