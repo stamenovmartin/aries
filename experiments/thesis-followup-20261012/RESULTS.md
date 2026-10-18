@@ -12,8 +12,9 @@ with `docs/`, `scripts/` or `verification/`. "Commit" is the commit that added o
 | **Regression check** | A fixed earlier protocol replayed unchanged on new code. No outcome was predicted, so it is descriptive. A drop is reported as a result. |
 | **Exploratory** | Diagnosis, post-hoc analysis, development or a descriptive comparison. It may motivate a hypothesis but does not confirm one. |
 
-**No confirmatory follow-up result exists yet.** The only confirmatory test planned is H4, and it has not been run:
-the external sets A and C have not arrived.
+**One confirmatory follow-up result exists: H8** (§8). The Holm family of confirmatory tests is H4b, H5, H6 and H8.
+H4b, H5 and H6 have not been measured yet: they wait for external items. H4 (registered earlier, outside the Holm
+family) waits for the external sets A and C.
 
 ## Summary
 
@@ -30,6 +31,7 @@ the external sets A and C have not arrived.
 | 9 | llama3.1:8b router statistics: arms differ, but no pairwise effect is robust | Exploratory | `task6-model/stats/stats.json`, `stats.md` | `1fc8509` |
 | 10 | Verifier count: 57 of 58 executed (the "56" is stale) | Exploratory (recount, no re-execution) | `verifier-count.md`, `verification/ledger_frozen.json` (`errata_20261012`) | `0916fd8` |
 | 11 | Test suites on the code under test: all pass | Engineering check | `task1-tests/`, `task2-tests/`, `guard-tests/`, `h4-frozen-tests/` | see §6 |
+| 12 | H8: hardening 23 verifiers raises the mutant kill rate, 155/218 → 188/218, McNemar b = 33, c = 0, p = 1.16 × 10⁻¹⁰; criteria 1 and 3 met, criterion 2 not met | **Confirmatory** (Holm family H4b/H5/H6/H8) | `h8/RESULTS.md`, `h8/runs/*/summary.json`, `thesis-tables/h8_fault_injection.csv` | `1d03163` |
 | — | H4: does the planner ask on new ambiguous goals? | **Confirmatory, not run** | `docs/preregistration/H4-planner-clarification.md` (Amendments 1, 2) | `a2d1609` |
 
 ## 1. Task 2: terminal-state diagnosis (exploratory)
@@ -180,8 +182,56 @@ of 58**. "Executed" includes runs with substituted collaborators. The stale narr
 `verification/ledger_frozen.json` received a dated `errata_20261012` field; the original text is unchanged (commit
 `0916fd8`). Nothing was re-executed.
 
+## 8. H8: verifier strength by fault injection (confirmatory)
+
+Preregistration: `docs/preregistration/H8-verifier-fault-injection.md`, with Amendment 1 (harness fixes, baseline-2
+as the McNemar baseline) and Amendment 2 (Option 1, the hardening design and the exploratory condition), both dated
+2026-10-18 and committed before the runs they govern. Full write-up: `h8/RESULTS.md`. Every number below is from the
+`summary.json` of the run folder named, and is recounted from its `records.jsonl` by `thesis-tables/check.py`
+(table `h8_fault_injection.csv`). All runs after run 1 used the same harness (`h8/run_mutants.py`, SHA-256
+`4f17771d…`). Offline, one process, against fakes.
+
+**Primary test.** One-sided exact McNemar, paired by mutant, hardened (`runs/20261018T154826Z-hardened`,
+`ARIES_VERIFY_HARDENED=1`) against baseline-2 (`runs/20261018T153000Z-baseline2`, frozen verifiers): b = 33 (killed
+now, not before), c = 0, 218 pairs, **p = 1.16 × 10⁻¹⁰**. Because p < 0.05/4, H8 is rejected under Holm whatever the
+other three p-values are; its Holm-adjusted p is at most 4p = 4.7 × 10⁻¹⁰. Commit `1d03163`.
+
+| | baseline-2 (frozen) | hardened |
+|---|---|---|
+| Killed | 155/218 = 0.711 [0.646, 0.770] | 188/218 = 0.862 [0.809, 0.905] |
+| Mean kill rate over 58 capabilities | 0.684 | 0.873 |
+| TRIVIAL / SELF_REPORT / PLANNER_SUPPLIED / INDEPENDENT | 10/36, 24/34, 4/4, 117/144 | 34/36, 33/34, 4/4, 117/144 |
+| `noop_success` survivors | 15 | 3 |
+| False alarms on clean replays | 0/174 | 0/174 [0, 0.021] |
+
+**Criteria (hardened run).**
+1. Mean kill rate ≥ 0.80: 0.873, **met**.
+2. No `noop_success` survivor: **not met.** `notification.send`, `system.disk` and `system.status` survive. The first
+   two are INDEPENDENT verifiers that the registered design does not change (Option 1, Amendment 2). This is a
+   finding: two independent verifiers do not catch an executor that does nothing. All three are probably equivalent
+   mutants (stated in Amendment 2 before the hardened run): the twin world does not include the database, so the
+   `notification.send` noop writes the real row; `system.disk` and `system.status` read the real machine, so the
+   noop report is true.
+3. False alarms ≤ 2%: 0/174, **met**.
+
+**Sealed second set** (generalisation check, not a criterion; `sealed/mutants-sealed.json`, SHA-256 `fa8556e9…`
+checked before opening, committed after use in `46ca46f`). Frozen: 155/218, all verdicts identical to baseline-2.
+Hardened: 187/218 = 0.858 [0.804, 0.901], mean 0.868, 0/174 false alarms; McNemar against the frozen sealed run
+b = 32, c = 0. **Limit:** the set seed changes only the wrong values, not the targets, so this is a weak check.
+
+**Exploratory "hardened-23+2, designed after baseline-2"** (not confirmatory, outside the Holm family;
+`runs/20261018T155139Z-exploratory-hardened-23plus2`, both flags, see its `conditions.md`). Identical to the hardened
+run: 188/218, mean 0.873, 0/174. `notification.send` stays at 1/3 and `system.disk` at 2/3, which is consistent with
+their noop mutants being equivalent.
+
+**Not changed by hardening:** `side_effect_outside_scope` 0/14 before and after (no verifier checks for changes
+outside the requested target). Engineering check: with both flags off, all 58 verifier fingerprints equal those of
+`2af6112` (`tests/test_verify_hardened.py`, 17/17).
+
 ## Pending
 
+- **H4b, H5, H6 (confirmatory, Holm family with H8):** wait for the external items (H4b 80, H5 25, H6 300). The H5
+  file-change hook is written before any H5 measurement.
 - **H4 (confirmatory):** waits for sets A and C from the external author. When they arrive, they are only validated
   (`h4-scenarios/validate_oracles.py`), never opened. Then they are run as `on-guard`/`off` ×3 alternated, plus
   `completion-fix` ×3 as a separate labelled condition.

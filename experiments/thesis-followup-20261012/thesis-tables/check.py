@@ -21,7 +21,10 @@ two disagree:
   goals and must equal contract-coverage-static.txt;
 - planner runs: counted from attempts.jsonl and must equal each run's summary.json;
 - H4 development rounds: counted per case from results.redacted.json (the committed copy, with the copied
-  owner settings values removed); where the local results.json exists, its redaction must equal that copy.
+  owner settings values removed); where the local results.json exists, its redaction must equal that copy;
+- H8 fault injection: every rate, criterion and McNemar count is recounted from records.jsonl and must equal
+  summary.json; each Clopper-Pearson end is checked against the binomial tails; each run's manifest must match
+  its recorded SHA-256, and every run after run 1 must have run the committed run_mutants.py.
 Nothing is written to any source; no model, service or database is used.
 """
 from __future__ import annotations
@@ -415,6 +418,117 @@ def table_h4_dev_rounds():
                   'totals of h4_dev_cases.csv')
 
 
+# ---------------------------------------------------------------- H8 fault injection
+H8 = FU / 'h8'
+H8_RUNS = (('run 1', '20261013T211134Z-baseline', 'frozen', None,
+            'superseded by Amendment 1 (harness defects); reported, not used'),
+           ('baseline-2', '20261018T153000Z-baseline2', 'frozen', None, 'confirmatory (McNemar baseline)'),
+           ('hardened', '20261018T154826Z-hardened', 'ARIES_VERIFY_HARDENED=1', 'baseline-2', 'confirmatory'),
+           ('sealed set, frozen', '20261018T155010Z-sealed-frozen', 'frozen', None,
+            'generalisation check, not a criterion'),
+           ('sealed set, hardened', '20261018T154928Z-sealed-hardened', 'ARIES_VERIFY_HARDENED=1', 'sealed set, frozen',
+            'generalisation check, not a criterion'),
+           ('hardened-23+2', '20261018T155139Z-exploratory-hardened-23plus2',
+            'ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1', 'baseline-2',
+            'exploratory (designed after baseline-2; outside the Holm family)'))
+
+
+def binom_tail_ge(k, n, p):
+    from math import comb
+    return sum(comb(n, j) * p ** j * (1 - p) ** (n - j) for j in range(k, n + 1))
+
+
+def check_ci(what, k, n, ci):
+    """Clopper-Pearson, checked from its definition: the binomial tails at the rounded ends straddle 0.025."""
+    lo, hi = ci
+    if k == 0:
+        must_equal(f'{what} lower end', lo, 0.0)
+    else:
+        must_equal(f'{what} lower end', binom_tail_ge(k, n, lo - 1e-4) < 0.025 < binom_tail_ge(k, n, lo + 1e-4), True)
+    if k == n:
+        must_equal(f'{what} upper end', hi, 1.0)
+    else:
+        le = lambda p: 1 - binom_tail_ge(k + 1, n, p)
+        must_equal(f'{what} upper end', le(hi + 1e-4) < 0.025 < le(hi - 1e-4), True)
+
+
+def h8_records(folder):
+    return [json.loads(l) for l in (H8 / 'runs' / folder / 'records.jsonl').read_text().splitlines()]
+
+
+def table_h8():
+    runner = hashlib.sha256((H8 / 'run_mutants.py').read_bytes()).hexdigest()
+    recs = {name: h8_records(folder) for name, folder, *_ in H8_RUNS}
+    rows = []
+    for name, folder, verifiers, base, label in H8_RUNS:
+        s = read(H8 / 'runs' / folder / 'summary.json')
+        meta = read(H8 / 'runs' / folder / 'run.json')
+        manifest = ROOT / meta['manifest']
+        must_equal(f'{name} manifest sha256', hashlib.sha256(manifest.read_bytes()).hexdigest(), meta['manifest_sha256'])
+        must_equal(f'{name} hardened flag recorded', meta['hardened'], verifiers != 'frozen')
+        if name != 'run 1':
+            must_equal(f'{name} ran the Amendment 1 harness', meta['runner_sha256'], runner)
+        mut = [r for r in recs[name] if r['operator'] != 'clean']
+        valid = [r for r in mut if not r.get('error') and not r.get('verifier_called_mutated_entry')]
+        clean = [r for r in recs[name] if r['operator'] == 'clean' and not r.get('error')]
+
+        def add(metric, group, k=None, n=None, ci=None, value=None, mine=None, theirs=None, with_rate=True):
+            if mine is not None:
+                must_equal(f'{name} {metric} {group} (records vs summary.json)', mine, theirs)
+            if ci is not None:
+                check_ci(f'{name} {metric} {group}', k, n, ci)
+            rows.append((name, folder, verifiers, label, metric, group, k, n,
+                         round(k / n, 4) if with_rate and k is not None and n else None, *(ci or (None, None)), value))
+
+        def rate_rows(metric, sel, theirs):
+            add(metric, 'all' if theirs is s['killed_overall'] else sel[0], theirs['k'], theirs['n'], theirs['ci95'],
+                mine=(sum(r['killed'] for r in sel[1]), len(sel[1])), theirs=(theirs['k'], theirs['n']))
+
+        rate_rows('killed', ('all', valid), s['killed_overall'])
+        for key, field in (('verifier_class', 'kill_rate_by_verifier_class'), ('operator', 'kill_rate_by_operator')):
+            for g, v in s[field].items():
+                rate_rows(f'killed_by_{key}', (g, [r for r in valid if r[key] == g]), v)
+        caps = sorted({r['capability'] for r in valid})
+        per = [sum(r['killed'] for r in valid if r['capability'] == c) / sum(r['capability'] == c for r in valid)
+               for c in caps]
+        add('mean_kill_rate_over_capabilities', f'{len(caps)} capabilities', value=s['mean_kill_rate_over_capabilities'],
+            mine=round(sum(per) / len(per), 4), theirs=s['mean_kill_rate_over_capabilities'])
+        noop = sorted(r['capability'] for r in valid if r['operator'] == 'noop_success' and not r['killed'])
+        add('noop_survivors', 'capabilities', len(noop), None, value=';'.join(noop) or 'none',
+            mine=noop, theirs=s['noop_survivors'])
+        fa = s['false_alarms']
+        add('false_alarms', 'clean replays', fa['k'], fa['n'], fa['ci95'],
+            mine=(sum(r['false_alarm'] for r in clean), len(clean)), theirs=(fa['k'], fa['n']))
+        for i, key in enumerate(('criterion_1_mean_kill_rate_ge_0_80', 'criterion_2_no_noop_survivor',
+                                 'criterion_3_false_alarms_le_2pct'), 1):
+            mine = (sum(per) / len(per) >= 0.80, not noop, fa['k'] <= 0.02 * fa['n'])[i - 1]
+            add(f'criterion_{i}', key.split('_', 2)[2], value='met' if s[key] else 'not met', mine=mine, theirs=s[key])
+        add('survived_false_value_in_evidence', 'secondary', value=s['secondary_survived_with_false_value_in_evidence'],
+            mine=sum(bool(r.get('false_value_in_evidence')) for r in valid if not r['killed']),
+            theirs=s['secondary_survived_with_false_value_in_evidence'])
+        if base:
+            old = {r['id']: r for r in recs[base] if r['operator'] != 'clean'}
+            pairs = [(old[r['id']], r) for r in valid if r['id'] in old and old[r['id']]['killed'] is not None]
+            b = sum(n_['killed'] and not o['killed'] for o, n_ in pairs)
+            c = sum(o['killed'] and not n_['killed'] for o, n_ in pairs)
+            p = binom_tail_ge(b, b + c, 0.5) if b + c else 1.0
+            m = s['primary_mcnemar_vs_baseline']
+            must_equal(f'{name} McNemar (records vs summary.json)', (b, c, len(pairs)),
+                       (m['b_killed_now_not_before'], m['c_killed_before_not_now'], m['pairs']))
+            must_equal(f'{name} McNemar p', abs(p - m['p_one_sided']) <= 1e-12 * max(p, 1e-300), True)
+            add('mcnemar_vs', base, b, b + c, value=f'{m["p_one_sided"]:.3g}', with_rate=False)
+            add('mcnemar_c', base, c, b + c, with_rate=False)
+    head = provenance([H8 / 'runs' / f for _, f, *_ in H8_RUNS] + [H8 / 'mutants.json', H8 / 'sealed/mutants-sealed.json',
+                       H8 / 'analyze.py', H8 / 'run_mutants.py', ROOT / 'docs/preregistration/H8-verifier-fault-injection.md'],
+                      'hardened vs baseline-2 = confirmatory (Holm family H4b/H5/H6/H8); sealed = generalisation check; '
+                      'hardened-23+2 = exploratory; run 1 = superseded')
+    note = ('killed = verdict not met or UNVERIFIED, over valid mutants; ci = exact Clopper-Pearson 95%; mean = mean of '
+            'per-capability rates; mcnemar_vs: k = b (killed now, not before), n = b + c, value = exact one-sided p; '
+            'mcnemar_c: k = c; the sealed set varies the wrong values only, not the targets')
+    return render(head, ('run', 'folder', 'verifiers', 'label', 'metric', 'group', 'k', 'n', 'rate', 'ci_lo', 'ci_hi',
+                         'value'), rows, note)
+
+
 TABLES = {
     'router_arms.csv': table_router_arms,
     'router_by_class.csv': table_router_by_class,
@@ -426,6 +540,7 @@ TABLES = {
     'planner_runs.csv': table_planner,
     'h4_dev_cases.csv': table_h4_dev,
     'h4_dev_rounds.csv': table_h4_dev_rounds,
+    'h8_fault_injection.csv': table_h8,
 }
 
 

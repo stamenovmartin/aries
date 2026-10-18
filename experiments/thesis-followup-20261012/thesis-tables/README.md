@@ -14,6 +14,7 @@ commit, and the table's label (confirmatory, regression check or exploratory). A
 | `contract_coverage.csv` | static contract counts, paraphrase flag off and on |
 | `planner_runs.csv` | the three planner runs (frozen, clarify alone, clarify + guard) |
 | `h4_dev_cases.csv`, `h4_dev_rounds.csv` | H4 development rounds, per case and totals |
+| `h8_fault_injection.csv` | H8 kill rates, criteria and McNemar per run (confirmatory, sealed check, exploratory 23+2, superseded run 1) |
 
     .venv/bin/python experiments/thesis-followup-20261012/thesis-tables/check.py           # check
     .venv/bin/python experiments/thesis-followup-20261012/thesis-tables/check.py --write   # rewrite
