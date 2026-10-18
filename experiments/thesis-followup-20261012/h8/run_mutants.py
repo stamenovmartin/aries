@@ -43,6 +43,7 @@ import sys
 import tempfile
 import time
 from pathlib import Path
+from urllib.parse import urlsplit
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -365,6 +366,10 @@ def install_fakes():
         if step.get('capability') != 'browser_open':
             return await real_execute(db, step)
         st = W['cur'].state
+        url = step['args']['url']
+        if url not in st['sites'] and urlsplit(url).hostname in ('duckduckgo.com', 'www.youtube.com'):
+            # Amendment 1: a real search-results page has a title; the fake one had none (3 false alarms).
+            st['sites'][url] = {'title': 'Search results', 'text': 'results for the query', 'links': []}
         key = f"s{len(st['sessions']) + 1}"
         st['sessions'][key] = {'owner': step['goal_id'], 'url': step['args']['url'], 'history': [step['args']['url']],
                                'index': 0, 'scroll': {'x': 0, 'y': 0}, 'elements': {'q': ''}}
@@ -674,7 +679,8 @@ def build_cases():
              target=other, value=lambda w, a, r: {**a, 'url': 'https://site5.example/'}))
     add(Case('browser.click', lambda w, r: (b_session(w, r), {'session': 's1', 'element_id': 'Next 1',
                                                              'expected_url': 'https://site2.example/'})[1],
-             target=other, value=lambda w, a, r: {**a, 'element_id': 'File'}))
+             target=lambda w, a, r: {**a, 'session': 's9', 'element_id': 'Next 4', 'expected_url': 'https://site5.example/'},
+             value=lambda w, a, r: {**a, 'element_id': 'File'}))
     add(Case('browser.type', lambda w, r: (b_session(w, r), {'session': 's1', 'element_id': 'q', 'value': 'hello'})[1],
              target=lambda w, a, r: {**a, 'element_id': 'name'}, value=lambda w, a, r: {**a, 'value': 'hello ' + marker(r)}))
     add(Case('browser.scroll', lambda w, r: (b_session(w, r), {'session': 's1', 'pixels': 400})[1],
@@ -682,8 +688,9 @@ def build_cases():
     add(Case('browser.back', lambda w, r: (b_session(w, r), {'session': 's1'})[1], target=other))
     add(Case('browser.forward', lambda w, r: (b_session(w, r, 'https://site2.example/'), 'forward_setup')[1], target=other))
     add(Case('browser.open', lambda w, r: {'url': 'https://site1.example/'},
+             target=lambda w, a, r: {**a, 'url': 'https://site2.example/'},
              value=lambda w, a, r: {**a, 'url': 'https://site5.example/'}))
-    add(Case('browser.search', lambda w, r: {'query': 'h8 query', 'site': 'web'},
+    add(Case('browser.search', lambda w, r: {'query': 'h8 query', 'site': 'web'}, target='search_other_site',
              value=lambda w, a, r: {**a, 'query': 'other ' + marker(r)}))
 
     def dl_setup(w, r):
@@ -698,7 +705,9 @@ def build_cases():
     # Desktop.
     win = {'window_id': '101', 'app_id': APP_ID}
     other_win = lambda w, a, r: {**a, 'window_id': '102', 'app_id': 'org.gnome.Nautilus.desktop'}
-    side_win = lambda w, a, r: w.state['windows'][1]['geometry'].update(x=w.state['windows'][1]['geometry']['x'] + 37)
+    def side_win(w, a, r):
+        g = next(x for x in w.state['windows'] if x['id'] == '102')['geometry']
+        g.update(x=g['x'] + 37)
     add(Case('desktop.observe', lambda w, r: {}))
     add(Case('desktop.windows', lambda w, r: {}))
     add(Case('desktop.close', lambda w, r: dict(win), target=other_win, value='other_action', side=side_win))
@@ -760,7 +769,7 @@ async def special_setup(case, world, rng, db):
     if case.setup == 'task_setup':
         from aries.workspace.models import WorkspaceGoal
         for tid, state in (('h8-target', 'done'), ('h8-other', 'failed')):
-            db.add(WorkspaceGoal(id=tid, request='H8 task ' + tid, state=state,
+            await db.merge(WorkspaceGoal(id=tid, request='H8 task ' + tid, state=state,
                                  result_json=json.dumps({'steps': [{}] * (2 if tid == 'h8-target' else 5),
                                                          'evidence': [{'evidence_id': 'e-' + tid}]})))
         await db.commit()
@@ -935,6 +944,12 @@ async def named_variant(spec, op, case, cap, world, args, ctx, rng):
         world.state['downloads'][args['url']] = 'a different body ' + marker(rng)
         result = await honest(cap, args, ctx)
         return result, [], 'the downloaded body differs from the observed link'
+    if spec == 'search_other_site':
+        from aries.workspace.registry import browser_search
+        from urllib.parse import quote
+        result = await browser_search({**args, 'site': 'youtube'}, ctx)
+        asked = 'https://duckduckgo.com/?q=' + quote(args['query'])
+        return relabel(result, {result['url']: asked}), [], 'searched another site, report relabelled'
     if spec == 'other_task':
         result = await honest(cap, {**args, 'task_id': 'h8-other'}, ctx)
         return relabel(result, {'h8-other': args['task_id']}), [], 'inspected another task, report relabelled'
@@ -996,8 +1011,16 @@ async def run_item(item, cases, flag_hardened):
             # registered executor is counted, then put the original back.
             import dataclasses
             registry._items[item['capability']] = dataclasses.replace(cap, executor=counted)
+            verifier_exception = None
             try:
                 verification = await cap.verifier(args, result, ctx)
+            except TripwireError:
+                raise
+            except Exception as exc:                               # noqa: BLE001
+                # As aries/workspace/agent.py does (Amendment 1): an exception raised by the verifier is a
+                # negative verdict, not a harness error.
+                verifier_exception = f'{type(exc).__name__}: {str(exc)[:300]}'
+                verification = {'met': False, 'type': 'verification_error', 'data': {'error': verifier_exception}}
             finally:
                 registry._items[item['capability']] = cap
         met = verification.get('met') is True and verification.get('status') != 'UNVERIFIED'
@@ -1006,7 +1029,8 @@ async def run_item(item, cases, flag_hardened):
         rec.update(verdict_met=met, killed=not met if 'operator' in item else None,
                    false_alarm=(not met) if 'operator' not in item else None,
                    false_value_in_evidence=reached if 'operator' in item else None,
-                   verifier_called_mutated_entry=calls['n'] > 0, note=note, error=None)
+                   verifier_called_mutated_entry=calls['n'] > 0, verifier_exception=verifier_exception,
+                   note=note, error=None)
     except TripwireError as exc:
         rec.update(error='TRIPWIRE: ' + str(exc), killed=None)
     except Exception as exc:                                       # noqa: BLE001
@@ -1083,6 +1107,7 @@ def main():
     ap.add_argument('--hardened', action='store_true')
     ap.add_argument('--selftest', action='store_true')
     ap.add_argument('--smoke', action='store_true')
+    ap.add_argument('--selftest-out', default='selftest.json')
     cli = ap.parse_args()
     os.environ['ARIES_VERIFY_HARDENED'] = '1' if cli.hardened else '0'
     install_fakes()
@@ -1101,7 +1126,9 @@ def main():
     if cli.selftest:
         res = asyncio.run(selftest(cases))
         bad = {k: v for k, v in res.items() if not v['ok']}
-        (HERE / 'selftest.json').write_text(json.dumps({'when': now(), 'ok': len(res) - len(bad), 'failed': bad,
+        if (HERE / cli.selftest_out).exists():
+            raise SystemExit(f'REFUSED: {cli.selftest_out} exists; earlier selftests are kept, pass a new --selftest-out')
+        (HERE / cli.selftest_out).write_text(json.dumps({'when': now(), 'ok': len(res) - len(bad), 'failed': bad,
                                                         'all': res}, indent=1) + '\n')
         print(f'selftest: {len(res) - len(bad)}/{len(res)} executors ran against the fake world')
         for k, v in bad.items():

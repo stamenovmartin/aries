@@ -71,6 +71,8 @@ def main(run, base=None):
         'invalid': [{'id': r['id'], 'error': r.get('error'), 'mutated_entry_called': r.get('verifier_called_mutated_entry')}
                     for r in invalid],
         'killed_overall': rate(sum(r['killed'] for r in valid), len(valid)),
+        'killed_by_verifier_exception': sorted(r['id'] for r in valid if r.get('verifier_exception')),
+        'clean_with_verifier_exception': sorted(r['id'] for r in clean if r.get('verifier_exception')),
         'kill_rate_by_verifier_class': by('verifier_class'),
         'kill_rate_by_operator': by('operator'),
         'mean_kill_rate_over_capabilities': round(sum(rated) / len(rated), 4) if rated else None,

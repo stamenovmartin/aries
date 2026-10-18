@@ -197,3 +197,51 @@ for the false-alarm rate.
 Criterion 1 or 2 not met means the hardening leaves known faults undetected. Criterion 3 not met means
 it rejects correct work. A non-significant primary means no measurable improvement. Each is reported as a
 result.
+
+## Amendment 1 (2026-10-18): harness fixes after the baseline, and a second baseline
+
+**Why.** The baseline run (`h8/runs/20261013T211134Z-baseline`, commit be79cbb) had 26 invalid mutants and
+3 false alarms caused by the harness, not by the verifiers. These fixes are made **after** seeing the
+baseline results. Run 1 stays committed unchanged and is reported as it ran.
+
+**What changed in the harness** (`h8/run_mutants.py`; the diff is in the commit that adds this amendment).
+No verifier, executor, manifest entry, operator or criterion changes.
+
+1. **An exception raised by the verifier is a negative verdict.** ARIES does exactly this
+   (`aries/workspace/agent.py`, the `except` after the verifier call sets `met: False`,
+   `type: verification_error`). Run 1 recorded these as harness errors, so they were invalid. The runner now
+   records the verdict as not met and stores the exception in `verifier_exception`. An exception raised
+   before the verifier (in setup, the executor or the mutation) is still a harness error, so the mutant is
+   still invalid. In run 1, 19 of the 26 invalid mutants had error types consistent with the verifier
+   (15 `FileNotFoundError` on a missing destination, 4 `PermissionError` from `verify_browser`). Run 1 did
+   not record where each exception was raised, so this split is inferred. Run 2 records it.
+2. **`task.inspect` setup** inserted its two task rows with `add`. The database is shared by the whole run,
+   so the second item failed with `IntegrityError` (3 mutants, 2 clean replays). Setup now uses `merge`.
+3. **`browser.open` and `browser.search` had no `wrong_target` spec** (`TypeError`, 2 mutants). They now
+   have one. `browser.open` opens `site2` and the report is relabelled to the requested `site1`.
+   `browser.search` searches the other site (YouTube instead of web) and the report URL is relabelled to
+   the requested search URL.
+4. **`browser.click` `wrong_target`** clicked `Next 1` in session `s9`, where that element does not exist
+   (`ValueError`, 1 mutant). It now clicks `Next 4`, which exists there.
+5. **`desktop.close` `side_effect_outside_scope`** chose the other window by list index 1. After a close,
+   only one window is left (`IndexError`, 1 mutant). The other window is now selected by id `102`.
+6. **The fake browser had no page for search-result URLs**, so the title was empty and all 3
+   `browser.search` clean replays were false alarms. A real results page has a title. The fake now gives a
+   DuckDuckGo or YouTube results URL a page titled "Search results".
+7. Bookkeeping: `--selftest-out` names the self-test file, and the runner refuses to overwrite an earlier
+   one. `analyze.py` also lists the mutants killed by a verifier exception.
+
+**Checks before the second baseline.** No mutant verdict was produced between run 1 and this commit.
+- The self-test passed 58 of 58 (`h8/selftest-amendment1.json`).
+- Only setup and mutation, **never the verifier**, were run for the 11 items affected by fixes 2–6.
+  All 11 completed. This check prints only completion, so it gives no verdict.
+
+**Second baseline.** The same manifest is run once with the frozen verifiers and the fixed harness
+(`--label baseline2`).
+- **Baseline for the primary McNemar test:** run 2. The hardened run and the sealed-set runs use the same
+  fixed harness, so run 2 is the comparable baseline. Run 1 is reported next to it.
+- **Rule for later fixes:** any further harness fix needs its own amendment and a new baseline before any
+  hardened run.
+
+**Direction of the change.** Fix 1 can only add baseline kills, and fix 6 can only remove baseline false
+alarms. Both make the baseline look stronger, which makes an improvement from hardening harder to show.
