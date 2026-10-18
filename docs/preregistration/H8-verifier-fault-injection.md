@@ -245,3 +245,78 @@ No verifier, executor, manifest entry, operator or criterion changes.
 
 **Direction of the change.** Fix 1 can only add baseline kills, and fix 6 can only remove baseline false
 alarms. Both make the baseline look stronger, which makes an improvement from hardening harder to show.
+
+## Amendment 2 (2026-10-18): the hardening, an exploratory condition, and equivalent mutants
+
+Written after baseline-2 and **before** any hardened run.
+
+**Decision on criterion 2 (the user's, Option 1).** The confirmatory test and its three criteria stay as
+registered. In baseline-2, two INDEPENDENT verifiers (`notification.send`, `system.disk`) let their
+noop_success mutant survive. INDEPENDENT verifiers are not changed, so criterion 2 cannot be met by the
+hardening. It is evaluated anyway and reported as not met, with this reason, as a finding.
+
+**The hardening** (`aries/workspace/hardened_verifiers.py`, behind `ARIES_VERIFY_HARDENED`, default off).
+It covers the 23 capabilities in `mutants.json` → `hardened_capabilities`, designed from each
+capability's contract. The frozen verdict stays one of the checks. Added:
+- **agreement:** the report's stable fields must equal a fresh read;
+- **a different channel** where one exists:
+  - `/proc/meminfo`, `/proc/loadavg` and `os.statvfs` read directly, for `system.status` and
+    `system.storage`;
+  - the process table for windows;
+  - each listed tab's own page;
+  - a direct SQL row for `task.inspect`;
+  - `os.scandir` and `lstat` for `file.list` and `file.search`;
+  - `list-units` for `system.service`, whose executor used `show`;
+- **per-capability invariants**, for example a count equals its list, `characters` equals `len(text)`,
+  and `highest` or `fullest` is the maximum;
+- **volatile values:** two fresh reads, and the allowed difference is the drift the verifier measured
+  plus a stated resolution (`TOLERANCE`). A CPU sample, which cannot be taken again, is range-checked
+  only, and the evidence says so (`range_only`);
+- **UNVERIFIED:** any exception in the verifier's own reads gives `{'met': False, 'status': 'UNVERIFIED'}`.
+
+`browser.click` keeps the planner's `expected_url` as its reference (finding F2). It adds agreement
+with the page now shown. The page the click started from cannot be re-observed after the click, so
+F2 is only narrowed, not removed.
+
+Off, nothing changes. The flag is read when the registry is imported, and the hardened module is not
+imported at all. `tests/test_verify_hardened.py` (17 checks) compares every verifier's code fingerprint
+with `h8/frozen_verifiers.json`, which was recorded from a clean worktree of 2af6112 (the baseline-2
+commit) by `h8/frozen_verifiers.py`:
+- off: all 58 fingerprints are identical;
+- on: exactly the 23 are replaced;
+- `ARIES_VERIFY_HARDENED_EXTRA` alone: exactly the 2;
+- both flags: 25.
+
+A first version of the fingerprint used the `repr` of set constants, which follows the process's hash
+seed. It was fixed (sorted members) and re-recorded before this commit. Existing suites with the flags
+off: test_agent_execution 65, test_browser 7, test_capability_failure_evidence 18,
+test_execution_boundaries 15, test_api 95, all passing.
+
+**Development check, disclosed.** `h8/dev_check_hardened.py` ran each of the 25 hardened verifiers once
+on an **honest** execution in a fake world, seeded 7 and not from the manifest. No mutation operator was
+applied. Result: 25/25 verified (`h8/dev_check_hardened-r1.json`). This is the only run of the hardened
+code before the measured run.
+
+**Runs, all with the Amendment 1 harness** (`run_mutants.py` SHA-256 `4f17771d…`, unchanged since
+2a1e66b, the same as baseline-2):
+1. **hardened:** public set, `--hardened` (`ARIES_VERIFY_HARDENED=1`, EXTRA off). The primary McNemar
+   test is against baseline-2.
+2. **sealed set:** run twice. First its SHA-256 is checked. Then it is run with `--hardened`, and once
+   more with the frozen verifiers.
+3. **Exploratory "hardened-23+2, designed after baseline-2":** public set, with
+   `ARIES_VERIFY_HARDENED_EXTRA=1` as well. It is reported separately. It is not in the confirmatory
+   criteria or the Holm family.
+
+**Equivalent mutants (found while designing the exploratory condition, before any hardened run).**
+In mutation testing, an equivalent mutant is one whose behaviour cannot be told apart from the
+original. Three noop_success mutants are probably equivalent here, so no correct verifier can kill
+them:
+- **`notification.send`:** the twin world does not include the database, so the executor run in the
+  twin writes the real row. The effect really happens.
+- **`system.disk` and `system.status`:** they read the real machine. The twin cannot change what they
+  read, and their reports differ from a real read only in volatile samples, so the harness did not
+  fabricate a value. The report is a true, slightly earlier observation.
+
+The harness is not changed for this, since the user asked for the same harness. These mutants stay in
+every count. They are reported as probably equivalent, and so as a limit of criterion 2 and of the
+operator.

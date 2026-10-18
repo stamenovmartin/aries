@@ -90,6 +90,16 @@ FLAGS = {
                                     "verified observations show several that fit the goal; every choice "
                                     "must name something observed. Off removes the option from the "
                                     "grammar and the prompt"),
+    "ARIES_VERIFY_HARDENED": (False, "the 23 verifiers the frozen review classed TRIVIAL, SELF_REPORT or "
+                                     "PLANNER_SUPPLIED also require the report to agree with a fresh read "
+                                     "(a different channel where one exists, measured drift for volatile "
+                                     "values), per-capability invariants, and UNVERIFIED when that read "
+                                     "fails (aries/workspace/hardened_verifiers.py, preregistration H8). "
+                                     "Read when the registry is imported. Off, every verifier is the "
+                                     "frozen function"),
+    "ARIES_VERIFY_HARDENED_EXTRA": (False, "exploratory, designed after H8 baseline-2: the same hardening "
+                                           "for two INDEPENDENT verifiers, notification.send and "
+                                           "system.disk. Not part of the confirmatory H8 test"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),
