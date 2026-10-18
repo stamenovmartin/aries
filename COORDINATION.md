@@ -4825,3 +4825,7 @@ User: Task 3.2 first; Task 6 overnight with aries.target stopped. Partial Task 6
 
 ## Claude · 2026-10-13 — follow-up batch 3 COMPLETE; no measurement running; ownership RELEASED
 Task 3.2 (planner 60/72 vs 68/72, demo 3/3); CLARIFY_GUARD + dev rounds; H4 Amendment 2 (a2d1609, tag h4-frozen-20261012); planner with guard 69/72 (confirmation after the fix); Task 6 llama3.1:8b complete 19:35-20:06Z with aries.target stopped and restarted, screen blanking restored; llama stats (1fc8509). Index experiments/thesis-followup-20261012/RESULTS.md. H4 waits for external sets A/C. Task 8 not started. Released all claims.
+
+
+## Claude · 2026-10-18T15:53:58+00:00 — H8 COMPLETE; no measurement running; ownership RELEASED
+thesis-followup pushed to 1d03163. H8 Amendment 1 (2a1e66b, harness fixes) -> baseline-2 (2af6112) -> ARIES_VERIFY_HARDENED + ARIES_VERIFY_HARDENED_EXTRA (both default off; flag-off fingerprints identical to 2af6112, tests/test_verify_hardened.py 17/17) and Amendment 2 (2373dfd) -> hardened/sealed/exploratory runs (1d03163). McNemar b=33 c=0 p=1.16e-10; criteria 1 met (0.873), 2 not met (3 probably-equivalent noop survivors), 3 met (0/174). Index experiments/thesis-followup-20261012/h8/RESULTS.md. Live aries-core not restarted; flags off by default. H4b resolver still uncommitted in aries/workspace (flags.py partially staged pattern). H5 file-change hook not yet written.
