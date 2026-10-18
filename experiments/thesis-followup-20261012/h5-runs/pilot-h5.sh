@@ -17,6 +17,10 @@ log "begin; idle-delay was $old"
 .venv/bin/python $T/run_h5.py --capture-env >> $T/pilot-h5.log 2>&1 || { log "capture-env failed"; exit 1; }
 systemctl --user stop aries.target; log "aries.target stopped (exit $?)"
 gsettings set org.gnome.desktop.session idle-delay 0
+# The screen may already be blanked (not locked) when the script starts; wake it so the runner's check passes.
+gdbus call --session --dest org.gnome.ScreenSaver --object-path /org/gnome/ScreenSaver \
+  --method org.gnome.ScreenSaver.SetActive false >/dev/null; sleep 2
+log "screensaver active after wake: $(gdbus call --session --dest org.gnome.ScreenSaver --object-path /org/gnome/ScreenSaver --method org.gnome.ScreenSaver.GetActive)"
 for cond in treatment control; do
   log "pilot $cond start"
   gnome-session-inhibit --inhibit idle --reason "ARIES H5 pilot" \
