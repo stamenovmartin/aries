@@ -12,9 +12,9 @@ with `docs/`, `scripts/` or `verification/`. "Commit" is the commit that added o
 | **Regression check** | A fixed earlier protocol replayed unchanged on new code. No outcome was predicted, so it is descriptive. A drop is reported as a result. |
 | **Exploratory** | Diagnosis, post-hoc analysis, development or a descriptive comparison. It may motivate a hypothesis but does not confirm one. |
 
-**One confirmatory follow-up result exists: H8** (§8). The Holm family of confirmatory tests is H4b, H5, H6 and H8.
-H4b, H5 and H6 have not been measured yet: they wait for external items. H4 (registered earlier, outside the Holm
-family) waits for the external sets A and C.
+**Two confirmatory follow-up results exist: H8** (§8) **and H6** (§9). The Holm family of confirmatory tests is
+H4b, H5, H6 and H8. H4b and H5 have their items and frozen code but have not been measured yet. H4 (registered
+earlier, outside the Holm family) waits for the external sets A and C.
 
 ## Summary
 
@@ -32,6 +32,7 @@ family) waits for the external sets A and C.
 | 10 | Verifier count: 57 of 58 executed (the "56" is stale) | Exploratory (recount, no re-execution) | `verifier-count.md`, `verification/ledger_frozen.json` (`errata_20261012`) | `0916fd8` |
 | 11 | Test suites on the code under test: all pass | Engineering check | `task1-tests/`, `task2-tests/`, `guard-tests/`, `h4-frozen-tests/` | see §6 |
 | 12 | H8: hardening 23 verifiers raises the mutant kill rate, 155/218 → 188/218, McNemar b = 33, c = 0, p = 1.16 × 10⁻¹⁰; criteria 1 and 3 met, criterion 2 not met | **Confirmatory** (Holm family H4b/H5/H6/H8) | `h8/RESULTS.md`, `h8/runs/*/summary.json`, `thesis-tables/h8_fault_injection.csv` | `1d03163` |
+| 13 | H6: on 300 new requests, the abstention instruction (A1) beats none (A0) for qwen2.5:7b, 152/300 → 186/300 (majority of 3), McNemar b = 43, c = 9, p = 1.02 × 10⁻⁶ | **Confirmatory** (Holm family H4b/H5/H6/H8) | `h6-run/summary.json`, `h6-run/raw/`, `thesis-tables/h6_abstention.csv` | `7e5c2b2` |
 | — | H4: does the planner ask on new ambiguous goals? | **Confirmatory, not run** | `docs/preregistration/H4-planner-clarification.md` (Amendments 1, 2) | `a2d1609` |
 
 ## 1. Task 2: terminal-state diagnosis (exploratory)
@@ -228,10 +229,58 @@ their noop mutants being equivalent.
 outside the requested target). Engineering check: with both flags off, all 58 verifier fingerprints equal those of
 `2af6112` (`tests/test_verify_hardened.py`, 16/16; "17" in Amendment 2 is a miscount, corrected in Amendment 3).
 
+## 9. H6: the abstention instruction on new requests (confirmatory)
+
+Preregistration: `docs/preregistration/H6-abstention-replication.md`, with Amendment 1 (who wrote the 300 requests:
+OpenAI Codex `gpt-6-astra`, not a person), Amendment 2 (row 1 replaced before any measurement; fixture SHA-256
+`3068dd8d…`) and Amendment 3 (an unused file moved, not deleted). The runner is the frozen ARIES-FINAL-20261006
+router runner with only the fixture path, the arm list and the output folder changed (`h6-run/runner.diff`); the
+A0 and A1 prompts are hash-checked against the frozen protocol. qwen2.5:7b, temperature 0.1, 3 repetitions,
+1800 decisions, run 2026-10-18 17:40:58Z–18:04:26Z with the live ARIES stopped and screen blanking off
+(`h6-run/run-conditions.json`; the `aries_core_during: active` value is a race, see `h6-run/conditions.md`).
+Ollama 0.34.0 and the model digest `845dbda0…` were the same before and after. Every number below is from
+`h6-run/summary.json` and is recounted from `h6-run/raw/` with the frozen `analyze_router.correct()` by
+`thesis-tables/check.py` (table `h6_abstention.csv`), which also recomputes every interval from the binomial
+tails. Commit `7e5c2b2`.
+
+**Primary test.** Per request, majority of 3 repetitions correct; one-sided exact McNemar, A1 against A0: b = 43
+(A1 right, A0 wrong), c = 9, 300 requests, **p = 1.02 × 10⁻⁶**, b/c = 4.78. Because p < 0.05/4, H6 is rejected
+under Holm whatever the H4b and H5 p-values are; its Holm-adjusted p is at most 4p = 4.1 × 10⁻⁶.
+
+| | A0 (no abstention instruction) | A1 (abstention instruction) |
+|---|---|---|
+| Correct, majority of 3 | 152/300 = 0.507 [0.449, 0.565] | 186/300 = 0.620 [0.562, 0.675] |
+| Difference A1 − A0 | | +0.113, exact paired 95% [0.068, 0.145] |
+
+**Secondary outcomes (descriptive).**
+
+| | A0 | A1 |
+|---|---|---|
+| Correct, pooled decisions | 457/900 = 0.508 | 554/900 = 0.616 |
+| Abstention precision (ASK or OUT_OF_SCOPE that were justified) | 0/0 (never abstains) | 245/258 = 0.950 [0.915, 0.973] |
+| Abstention recall (non-actionable decisions) | 0/600 [0, 0.006] | 245/600 = 0.408 [0.369, 0.449] |
+| Over-abstention (actionable decisions held) | 27/300 = 0.090 | 48/300 = 0.160 |
+| By class, majority of 3: actionable | 91/100 | 84/100 |
+| ambiguous | 21/75 | 29/75 |
+| out_of_scope | 24/62 | 46/62 |
+| unsafe | 16/63 | 27/63 |
+| By language, pooled: English | 254/450 = 0.564 | 300/450 = 0.667 |
+| Macedonian | 203/450 = 0.451 | 254/450 = 0.564 |
+| Errors (parse, schema, fallback) | 0 | 0 |
+
+Over-abstention is higher with A1, as stated in advance. The effect comes from the non-actionable classes,
+mostly out_of_scope; A1 loses 7 actionable requests. Note that in this table over-abstention counts pooled
+decisions (n = 300 = 100 actionable requests × 3), as the frozen scorer does.
+
+**Limitations.** The requests were written by a model (OpenAI Codex), not a person, in three sessions that could
+see the validator; the validator checks format and consistency only (H6 Amendments 1–2). The labels are the
+writer's. On the original reused fixture the same comparison was 36 vs 11 of 225 requests (§4), a difference of
+(36 − 11)/225 = 0.111; here it is 0.113 on new requests. These are new requests, not new people's wording.
+
 ## Pending
 
-- **H4b, H5, H6 (confirmatory, Holm family with H8):** wait for the external items (H4b 80, H5 25, H6 300). The H5
-  file-change hook is written before any H5 measurement.
+- **H4b, H5 (confirmatory, Holm family with H6 and H8):** items validated (H4b 80, H5 25), code frozen (tags
+  `h4b-frozen-20261018`, `h5-frozen-20261018`), not measured yet.
 - **H4 (confirmatory):** waits for sets A and C from the external author. When they arrive, they are only validated
   (`h4-scenarios/validate_oracles.py`), never opened. Then they are run as `on-guard`/`off` ×3 alternated, plus
   `completion-fix` ×3 as a separate labelled condition.

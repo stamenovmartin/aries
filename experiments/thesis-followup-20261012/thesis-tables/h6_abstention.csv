@@ -1,0 +1,30 @@
+# source: experiments/thesis-followup-20261012/h6-run/summary.json (sha256 d25683fc14b8, commit 7e5c2b2); experiments/thesis-followup-20261012/h6-run/raw (sha256 a4dd367fe28f, commit 7e5c2b2); experiments/thesis-followup-20261012/h6-run/protocol.json (sha256 738802c51b45, commit 5fd183b); experiments/thesis-followup-20261012/h6-run/run_router_h6.py (sha256 b1ee4038df0c, commit 5fd183b); experiments/thesis-followup-20261012/h6-items/h6_requests.jsonl (sha256 3068dd8d9b41, commit 7e5c2b2); experiments/thesis-final-20261006/analyze_router.py (sha256 4b6cdf26478f, commit 62fe362); experiments/thesis-followup-20261012/h6-run/analyze_h6.py (sha256 601946006f5e, commit 5fd183b); docs/preregistration/H6-abstention-replication.md (sha256 b3f0f2d01398, commit 5fd183b) | label: qwen2.5:7b = confirmatory (Holm family H4b/H5/H6/H8)
+# note: correct = frozen analyze_router.correct(); majority_of_3 = per request, at least 2 of 3 repetitions correct; ci = exact Clopper-Pearson 95%; mcnemar_b_A1_only: k = b, n = b + c, value = exact one-sided p; difference ci = exact paired interval conditional on the discordant requests; requests written by OpenAI Codex (gpt-6-astra), not a person
+model,label,arm,metric,group,k,n,rate,ci_lo,ci_hi,value
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,binary_majority_of_3,all,152,300,0.5067,0.4486,0.5646,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,binary_majority_of_3,all,186,300,0.62,0.5624,0.6752,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1 vs A0,mcnemar_b_A1_only,requests,43,52,0.8269,,,1.02e-06
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1 vs A0,mcnemar_c_A0_only,requests,9,52,0.1731,,,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1 vs A0,difference_A1_minus_A0,majority_of_3,,,0.1133,0.0682,0.1448,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,binary_pooled,all,457,900,0.5078,0.4746,0.5409,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,binary_majority_of_3,actionable,91,100,0.91,0.836,0.958,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,binary_majority_of_3,ambiguous,21,75,0.28,0.1824,0.3956,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,binary_majority_of_3,out_of_scope,24,62,0.3871,0.266,0.5193,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,binary_majority_of_3,unsafe,16,63,0.254,0.1527,0.3794,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,binary_pooled,lang en,254,450,0.5644,0.5172,0.6108,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,binary_pooled,lang mk,203,450,0.4511,0.4045,0.4984,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,abstention_precision,ASK or OUT_OF_SCOPE,0,0,,,,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,abstention_recall,nonaction requests,0,600,0,0,0.0061,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,over_abstention,actionable held,27,300,0.09,0.0601,0.1282,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A0,errors,pooled,,,,,,0
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,binary_pooled,all,554,900,0.6156,0.5829,0.6475,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,binary_majority_of_3,actionable,84,100,0.84,0.7532,0.9057,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,binary_majority_of_3,ambiguous,29,75,0.3867,0.2764,0.5062,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,binary_majority_of_3,out_of_scope,46,62,0.7419,0.615,0.8447,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,binary_majority_of_3,unsafe,27,63,0.4286,0.3046,0.5595,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,binary_pooled,lang en,300,450,0.6667,0.621,0.7101,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,binary_pooled,lang mk,254,450,0.5644,0.5172,0.6108,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,abstention_precision,ASK or OUT_OF_SCOPE,245,258,0.9496,0.9154,0.9729,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,abstention_recall,nonaction requests,245,600,0.4083,0.3687,0.4489,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,over_abstention,actionable held,48,300,0.16,0.1204,0.2065,
+qwen2.5:7b,confirmatory (Holm family H4b/H5/H6/H8),A1,errors,pooled,,,,,,0
