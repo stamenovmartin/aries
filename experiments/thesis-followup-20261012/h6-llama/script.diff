@@ -1,0 +1,24 @@
+1a2
+> # H6 llama3.1:8b exploratory secondary: a copy of ../h6-run/run-h6.sh with the folder, model and scripts changed.
+4c5
+< # (idle-delay 0 + idle inhibitor) and restored; Ollama version and qwen2.5:7b digest recorded before and after.
+---
+> # (idle-delay 0 + idle inhibitor) and restored; Ollama version and llama3.1:8b digest recorded before and after.
+7c8
+< T=experiments/thesis-followup-20261012/h6-run
+---
+> T=experiments/thesis-followup-20261012/h6-llama
+11c12
+< digest() { curl -s http://127.0.0.1:11434/api/tags | python3 -I -c "import json,sys;print(next(m['digest'] for m in json.load(sys.stdin)['models'] if m['name']=='qwen2.5:7b'))"; }
+---
+> digest() { curl -s http://127.0.0.1:11434/api/tags | python3 -I -c "import json,sys;print(next(m['digest'] for m in json.load(sys.stdin)['models'] if m['name']=='llama3.1:8b'))"; }
+37,38c38,39
+< gnome-session-inhibit --inhibit idle --reason "ARIES H6 measurement" \
+<   .venv/bin/python $T/run_router_h6.py --run > $T/run.log 2>&1; log "run exit $?"
+---
+> gnome-session-inhibit --inhibit idle --reason "ARIES H6 llama secondary" \
+>   .venv/bin/python $T/run_router_h6_llama.py --run > $T/run.log 2>&1; log "run exit $?"
+40c41
+< .venv/bin/python $T/analyze_h6.py > $T/analysis.log 2>&1; log "analysis exit $?"
+---
+> .venv/bin/python $T/analyze_h6_llama.py > $T/analysis.log 2>&1; log "analysis exit $?"
