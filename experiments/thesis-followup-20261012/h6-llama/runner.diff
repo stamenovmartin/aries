@@ -1,0 +1,27 @@
+2c2,7
+< """H6: the frozen ARIES-FINAL-20261006 router protocol on the 300 new requests, arms A0 and A1 only.
+---
+> """H6 exploratory secondary: the same protocol as h6-run/run_router_h6.py with llama3.1:8b (outside Holm).
+> 
+> A copy of ../h6-run/run_router_h6.py in which only the model and the output folder (this folder) change, as
+> Task 6 did for the original fixture (docs/preregistration/H6-abstention-replication.md, Secondary outcomes).
+> Prompts were written for qwen2.5:7b and are not re-tuned. The H6 runner's own description follows.
+> 
+16a22
+> MODEL = 'llama3.1:8b'
+36c42
+<     'intelligence.location':'local', 'intelligence.local_model':'qwen2.5:7b',
+---
+>     'intelligence.location':'local', 'intelligence.local_model':MODEL,
+81c87
+<     model=next(m for m in tags['models'] if m['name']=='qwen2.5:7b')
+---
+>     model=next(m for m in tags['models'] if m['name']==MODEL)
+116c122
+<       question='H6: on new requests, does A1 have higher per-request binary accuracy than A0 (qwen2.5:7b)?',
+---
+>       question='H6 exploratory secondary (outside Holm): on new requests, A1 vs A0 per-request binary accuracy with llama3.1:8b',
+119c125
+<                          'alpha 0.05 before Holm across H4b, H5, H6, H8 (docs/preregistration/H6-abstention-replication.md).',
+---
+>                          'exploratory, reported separately and outside the Holm family (docs/preregistration/H6-abstention-replication.md).',
