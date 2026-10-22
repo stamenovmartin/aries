@@ -85,6 +85,74 @@ def _arg(value):
         return value[1:-1]
     return value
 
+def _read_path_strict():
+    from aries.flags import enabled
+    return enabled("ARIES_READ_PATH_STRICT")
+
+
+# ARIES_READ_PATH_STRICT (docs/AUDIT.md section 4a). Words that may stand between
+# the read verb and the path without changing what is asked: "прочитај ми го /x",
+# "read file the /x". Anything else before the path ("the summary in /dir") is a
+# request about the path, not to read it, and goes to the planner.
+_READ_FILLER = {"ми", "го", "ја", "ги", "фајл", "фајлот", "датотека", "датотеката",
+                "me", "the", "my", "file", "fajl", "fajlot", "mi", "go", "ja"}
+_SENTENCE_END = ".,?!;:…"
+
+
+def _has_extension(path):
+    name = os.path.basename(path)
+    stem, ext = os.path.splitext(name)
+    return bool(stem) and len(ext) > 1
+
+
+def _exists(path):
+    try:
+        return os.path.lexists(os.path.expanduser(path))
+    except (OSError, ValueError):
+        return False
+
+
+def _strip_sentence_end(path):
+    """Strip sentence-final marks only when the path WITH them is not a real name
+    and the path without them looks like one: it exists, or its final component
+    has an extension. "notes.txt." -> "notes.txt"; an existing "archive." stays,
+    and "archive.." -> "archive." when that is the name that exists."""
+    if _exists(path):
+        return path
+    form = path
+    while form and form[-1] in _SENTENCE_END:
+        form = form[:-1]
+        if form and _exists(form):
+            return form
+    if form != path and form and _has_extension(form):
+        return form
+    return path
+
+
+def _strict_read_path(capture):
+    """The path token inside a legacy read_file capture, or None to decline."""
+    capture = capture.strip()
+    quoted = re.match(r"([\"'])(.+?)\1[\s.,?!;:…]*$", capture, re.S)
+    if quoted:
+        return quoted.group(2)
+    start = re.search(r"(?:^|\s)(~?/)", capture)
+    if not start:
+        return None
+    lead = capture[:start.start(1)].split()
+    if any(word.casefold().strip(",") not in _READ_FILLER for word in lead):
+        return None
+    words = capture[start.start(1):].split()
+    prefixes = [" ".join(words[:n]) for n in range(1, len(words) + 1)]
+    for prefix in reversed(prefixes):          # the longest name that exists
+        form = _strip_sentence_end(prefix)
+        if _exists(form):
+            return form
+    for prefix in prefixes:                    # else the first one with an extension
+        if _has_extension(prefix.rstrip(_SENTENCE_END)):
+            return _strip_sentence_end(prefix)
+    return _strip_sentence_end(words[0])       # else the first whitespace token
+
+
 # Spoken service verbs, and a systemd unit name as a person says it: dots allowed
 # inside, never at the end, so the full stop Whisper appends stays punctuation.
 VERB = (r"(restart|start|stop|рестартирај|restartiraj|престартувај|prestartuvaj|стартувај|startuvaj|"
@@ -249,6 +317,11 @@ def _match(text):
     for kind, pattern, names in patterns:
         match = re.fullmatch(pattern, text, re.I | re.S)
         if match:
+            if kind == "read_file" and _read_path_strict():
+                path = _strict_read_path(match.group(1))
+                if path is None:
+                    continue
+                return {"capability": kind, "args": {"path": path}}
             return {"capability": kind, "args": dict(zip(names, (_arg(v) for v in match.groups())))}
     exact = {"list apps": "list_apps", "installed apps": "list_apps", "aplikacii": "list_apps",
              "evaluate learning": "learning_eval", "proveri ucenje": "learning_eval", "провери учење": "learning_eval",
