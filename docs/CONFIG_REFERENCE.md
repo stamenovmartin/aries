@@ -3,7 +3,7 @@
 **Generated, do not edit.** `scripts/gen_config_reference.py` writes this file from the code;
 `--check` fails when the two disagree.
 
-- 25 flags in `aries/flags.py`, 10 of them off by default. A flag is read
+- 26 flags in `aries/flags.py`, 11 of them off by default. A flag is read
   with `aries.flags.enabled(name)`. The environment wins over the override file
   (`ARIES_FLAG_FILE`, default `var/flags.env`), and the file wins over the default.
 - 187 settings registered with `SettingDef`; the registry was imported (the live registry). A setting
@@ -29,6 +29,7 @@ Owner = every file outside `aries/flags.py` that names the flag (`git grep -l`).
 | `ARIES_MK_FROZEN` | on | Macedonian is frozen: it keeps working and keeps being tested, and nothing new is built on it | `aries/workspace/clarify_resolver.py` |
 | `ARIES_PLANNER_CLARIFY` | on | the planner may stop and ask which target is meant when its own verified observations show several that fit the goal; every choice must name something observed. Off removes the option from the grammar and the prompt | `aries/workspace/agent.py`, `aries/workspace/agent_planner.py` |
 | `ARIES_PLANNER_CLARIFY_GUARD` | off | with ARIES_PLANNER_CLARIFY: a question carries no capability or arguments (grammar), confirming is ask_approval and asking is only for choosing between observed targets (prompt), and a named but unlisted folder is listed before anything is read in it. Off leaves the clarification grammar and prompt unchanged | `aries/workspace/agent_planner.py` |
+| `ARIES_PLAN_DISPATCH_FIX` | off | when the planner context's own audit metadata (one omitted_items entry per memory dropped for budget, source_status, preferences) exceeds the 2,500-character budget, it is compacted (counts instead of entries, then source_status dropped, then preferences shortened) instead of failing the goal before its first planner call with 'Context metadata exceeds planner budget' (docs/AUDIT.md 7.2: the six never-planned held-out goals). Off, the error is raised as frozen | `aries/workspace/context_engine.py` |
 | `ARIES_PLAN_MEMORY` | on | relevant remembered facts are injected into planning | `aries/workspace/agent.py` |
 | `ARIES_READ_PATH_STRICT` | off | the legacy read_file route takes only the path token: it starts at the first / or ~/, filler words before it are allowed and any other words send the goal to the planner, it ends at the longest existing name or the first component with an extension, and a sentence-final mark is stripped only when the name without it exists or has an extension (docs/AUDIT.md 4a). Off, the capture is the rest of the sentence, as frozen | `aries/workspace/capabilities.py` |
 | `ARIES_ROUTER_ABSTAIN` | on | the router may answer ASK or OUT_OF_SCOPE rather than choosing the nearest action; off restores the pre-2026-10-03 instruction to pick the nearest one regardless | `aries/intelligence/router.py` |
