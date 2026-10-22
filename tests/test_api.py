@@ -169,7 +169,7 @@ async def test_notifications_show_what_was_held():
 
 async def test_sources_over_http():
     await reset_db()
-    import os, tempfile
+    import tempfile
     folder = tempfile.mkdtemp(prefix="aries-api-src-")
     async with await _client() as c:
         r = await c.get("/api/aries/sources/types")

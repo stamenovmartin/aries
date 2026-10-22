@@ -18,7 +18,6 @@ when something misbehaves.
 Nothing here reports success it did not observe. A player that accepts Next()
 may have done nothing; the callers re-read PlaybackStatus and Volume afterwards.
 """
-import json
 import re
 import subprocess
 

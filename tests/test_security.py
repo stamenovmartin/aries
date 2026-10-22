@@ -17,7 +17,6 @@ from tests._bootstrap import bootstrap, check, reset_db, run_module
 
 bootstrap("aries-security")
 
-import httpx  # noqa: E402
 
 from agentic_core.database.base import async_session  # noqa: E402
 

@@ -147,7 +147,6 @@ def move_bytes(source,destination,expected):
     # Linux renameat2 NOREPLACE, descriptor-relative directories. No shell and
     # no overwrite fallback on unsupported/cross-filesystem moves.
     import ctypes
-    import errno
     if snapshot(source)['sha256']!=expected:raise ValueError('Approved source changed')
     src_fd=open_nofollow(source.parent,os.O_RDONLY|os.O_DIRECTORY)
     try:

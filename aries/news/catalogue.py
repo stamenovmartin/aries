@@ -22,7 +22,7 @@ exactly the same validation as a URL typed by hand.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass(frozen=True)

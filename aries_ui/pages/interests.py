@@ -84,7 +84,6 @@ class InterestsPage(Page):
     def _topic_row(self, item, contested, pending) -> Adw.ExpanderRow:
         explicit = item.get("user_weight")
         learned = (item.get("learned") or {}).get("weight") if item.get("learned") else None
-        source = item.get("weight_source", "default")
 
         exp = Adw.ExpanderRow(title=item["topic"])
         exp.set_subtitle(", ".join(item.get("synonyms") or []) or "no synonyms")

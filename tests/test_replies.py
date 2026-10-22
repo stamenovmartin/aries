@@ -139,7 +139,7 @@ async def test_readings_are_found_wherever_they_sit():
 async def test_the_answer_is_a_sentence_not_a_report():
     """Three facts is an answer; ten is a lecture nobody listens to."""
     many = {"state": "done", "readings": [
-        {"metric": f"disk.used_pct", "subject": f"/m{i}", "value": i, "unit": "%"} for i in range(1, 12)]}
+        {"metric": "disk.used_pct", "subject": f"/m{i}", "value": i, "unit": "%"} for i in range(1, 12)]}
     said = replies.sentence(many, language="mk")
     check(f'bounded to a few facts ({said.count(".")} sentences)', said.count(".") <= 4)
 

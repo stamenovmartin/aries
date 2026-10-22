@@ -22,7 +22,7 @@ from tests._bootstrap import bootstrap, check, reset_db, run_module  # noqa: E40
 
 bootstrap("aries-memory")
 import numpy as np  # noqa: E402
-from sqlalchemy import select, text  # noqa: E402
+from sqlalchemy import select  # noqa: E402
 
 from agentic_core.database.base import async_session, engine  # noqa: E402
 from aries.settings import SettingsService  # noqa: E402
@@ -343,7 +343,6 @@ def test_the_label_is_recovered_even_when_the_model_explains_itself():
     walk must still score the label it began with — reading it as 'not emitted'
     produced a 0.250 confidence on a decision made with no hesitation at all."""
     import json
-    import urllib.request
     from unittest.mock import patch
 
     steps = [{"token": "SUPERSEDE", "logprob": -0.01,

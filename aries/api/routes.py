@@ -1787,7 +1787,6 @@ async def intelligence_ab_task(body: IntelligenceABTask, db: AsyncSession = Depe
     from aries.workspace.models import WorkspaceGoal
     from aries.intelligence.generation import config
     from aries.intelligence.tracking import record
-    import os
     if body.background:raise HTTPException(403,'A/B task execution is foreground only')
     if body.architecture=='A':
         cfg=await config(db)

@@ -25,7 +25,6 @@ command bar and the voice daemon use, so the answer and the behaviour cannot
 disagree. When the parser declines, that is reported as "this goes to the
 planner", which is the truth, rather than as a refusal.
 """
-import os
 import shutil
 import subprocess
 from pathlib import Path

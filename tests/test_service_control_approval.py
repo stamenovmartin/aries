@@ -32,7 +32,6 @@ half. Every destructive shape (stop, restart, a unit outside the allowlist, a
 system unit, the unit serving the request) is driven against a simulated
 `systemctl` so that the argv is checked without a service being stopped.
 """
-import asyncio
 import json
 import sys
 from contextlib import contextmanager
