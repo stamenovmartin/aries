@@ -40,7 +40,10 @@ The R1 files, same SHA-256 (`experiments/thesis-r1-real-data/common.py`, `SHA`).
 ## The systems
 
 - **Treatment (`T`):** the current ARIES source at the commit that adds this file's last amendment, with the
-  flag configuration named `treatment` in `experiments/thesis-r1b/configs.json`. Router: the A1 abstention
+  flag configuration named `treatment` in `experiments/thesis-r1b/configs.json`: **C1** =
+  `ARIES_ROUTER_SURFACE_CONSISTENT`, `ARIES_ROUTER_CAPABILITY_GATE`, `ARIES_PLANNER_PER_CAP_GRAMMAR`,
+  `ARIES_PLANNER_OOS_ACTION`, `ARIES_PLANNER_GATE_HINT` (all other flags at their source defaults; selected by
+  the rule in `DEVLOG.md`, highest dev sum, before any R1b run). Router: the A1 abstention
   setting, qwen2.5:7b, R1's router settings (temperature 0.1, top_p 0.9, 450 tokens). When the router acts, the
   planner is asked for one next action with the frozen planner protocol's settings and context flags, as in R1.
   Nothing is executed. Runner: `experiments/thesis-r1b/run_r1b.py aries`, which refuses uncommitted changes
