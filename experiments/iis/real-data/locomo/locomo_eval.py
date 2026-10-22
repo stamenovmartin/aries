@@ -125,6 +125,9 @@ VARIANTS = {
                               "flags": {"ARIES_MEMORY_HYBRID_RRF": "1"}},
     "cosine-only-e5":        {"store": "gated",   "rank": "cosine",      "embedder": "e5-base-int8"},
     "rrf-only-e5":           {"store": "gated",   "rank": "rrf",         "embedder": "e5-base-int8"},
+    # Added after the M1 run: the shipped flag pair whose ranking rrf-only-e5 approximated (exploratory).
+    "hybrid-similarity-e5":  {"store": "gated",   "rank": "semantic-v3", "embedder": "e5-base-int8",
+                              "flags": {"ARIES_MEMORY_HYBRID_RRF": "1", "ARIES_MEMORY_SIMILARITY_RANK": "1"}},
 }
 BASELINE = "bm25"
 NO_MODEL = ("bm25", "verbatim-focused")
@@ -652,7 +655,7 @@ def run(conversations, variants, *, embedder_factory=None, classify=None, b=BOOT
                                            "those turns were kept on cosine alone — this is not the cascade")
     comparisons = {f"{v} - {BASELINE}": paired(outcomes[v], outcomes[BASELINE], b=b, seed=seed)
                    for v in variants if v != BASELINE}
-    for v in ("hybrid-rrf-e5", "cosine-only-e5", "rrf-only-e5"):
+    for v in ("hybrid-rrf-e5", "cosine-only-e5", "rrf-only-e5", "hybrid-similarity-e5"):
         if v in outcomes and "embedding-only-e5" in outcomes:
             comparisons[f"{v} - embedding-only-e5"] = paired(outcomes[v], outcomes["embedding-only-e5"], b=b, seed=seed)
     for v in variants:

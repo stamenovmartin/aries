@@ -194,6 +194,10 @@ FLAGS = {
     "ARIES_NEWS_DIVERSE_TOPK": (False, "designed after MIND: the briefing picks by Maximal Marginal Relevance "
                                       "(lambda 0.7, topic redundancy) instead of round-robin over topics "
                                       "(aries/news/selection.py). Off, round-robin"),
+    "ARIES_MEMORY_SIMILARITY_RANK": (False, "designed after M1 (LoCoMo): semantic-v3 memory retrieval orders by the "
+                                           "similarity term alone (with ARIES_MEMORY_HYBRID_RRF, the fused rank); "
+                                           "recency, importance and layer only break ties (aries/workspace/"
+                                           "retrieval.py). Off, the weighted sum"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),
