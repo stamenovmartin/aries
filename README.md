@@ -18,6 +18,7 @@ filled in.
 > | | |
 > |---|---|
 > | Thesis results, all in one place | [`experiments/thesis-followup-20261012/RESULTS.md`](experiments/thesis-followup-20261012/RESULTS.md) |
+> | **Every comparison as a figure** | [`experiments/analysis/README.md`](experiments/analysis/README.md) |
 > | IIS results on public data | [`experiments/iis/real-data/README.md`](experiments/iis/real-data/README.md) |
 > | Preregistered hypotheses | [`docs/preregistration/`](docs/preregistration/) |
 > | Every document | [`docs/INDEX.md`](docs/INDEX.md) |

@@ -22,7 +22,8 @@
    резултати од дипломската на едно место, секој со ознака (потврден, истражувачки, описен).
 3. [`experiments/iis/real-data/README.md`](../experiments/iis/real-data/README.md): резултатите од ИИС на
    јавни податоци (MIND, LoCoMo).
-4. [`docs/preregistration/`](preregistration/): пререгистрациите.
+4. [`experiments/analysis/README.md`](../experiments/analysis/README.md): сите споредби како графици.
+5. [`docs/preregistration/`](preregistration/): пререгистрациите.
 
 ---
 
@@ -98,7 +99,7 @@ component is in [`components.csv`](../experiments/thesis-followup-20261012/thesi
 ```
 make setup     # virtual environment from requirements.lock
 make test      # the test suite
-make check     # recomputes every thesis table from its sources (17 tables) and fails on any difference
+make check     # recomputes every thesis table (17) and figure (9) from its sources; fails on any difference
 ```
 
 `make check` runs `experiments/thesis-followup-20261012/thesis-tables/check.py`. It needs no model, no service and
