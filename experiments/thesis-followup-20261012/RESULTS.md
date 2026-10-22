@@ -14,7 +14,8 @@ with `docs/`, `scripts/` or `verification/`. "Commit" is the commit that added o
 
 **The Holm family H4b, H5, H6, H8 is complete** (§8–§12). After Holm's correction **H8 and H6 are confirmed;
 H5 and H4b are not**: their registered criteria were not met. H4 (registered earlier, outside the Holm family)
-waits for the external sets A and C.
+waits for the external sets A and C. **R1 (public data, §13) is complete:** on NL2Bash and CLINC150 every
+preregistered baseline that differed significantly from ARIES was **better** than ARIES.
 
 ## Summary
 
@@ -37,6 +38,8 @@ waits for the external sets A and C.
 | 15 | H5: the typed completion contract does not make the 15 G goals finish: correct done 2/15 (treatment) vs 0/15 (control), McNemar b = 2, c = 0, p = 0.25; criteria 1 and 2 not met, 3 met | **Confirmatory** (Holm family) | `h5-runs/summary-20261022T070927Z.json`, `h5-runs/outcomes.json`, `thesis-tables/h5_completion.csv` | `efc3188` |
 | 16 | H4b: the clarify resolver asks on every item: ambiguous asked 40/40 (baseline 0/40), twins over-asked 40/40 (baseline 0/40); pairs correct 0/40 in both, p = 1.0; over-ask non-inferiority not met | **Confirmatory** (Holm family) | `h4b-runs/summary-20261022T093916Z.json`, `h4b-runs/outcomes.json`, `thesis-tables/h4b_clarification.csv` | `efc3188` |
 | 17 | Holm family: H8 p_Holm = 4.66 × 10⁻¹⁰, H6 3.06 × 10⁻⁶ (both rejected); H5 0.5, H4b 1.0 (not rejected) | **Confirmatory** (family) | `thesis-tables/holm_family.csv` | — |
+| 18 | R1, public data: on NL2Bash (500) ARIES router + planner picks the right capability or OUT_OF_SCOPE 229/500; zero-shot qwen2.5:7b 321/500, BM25 307/500, embedding 297/500 (each better than ARIES, Holm p ≤ 9.5 × 10⁻⁵). On CLINC150 (600) router A1 is right on act/abstain 277/600; zero-shot 336/600 and embedding 398/600 are better; A1 vs A0 262/600, p = 0.28 | **Confirmatory** (R1 family, Holm inside R1) | `../thesis-r1-real-data/summary.json`, `predictions.json`, `thesis-tables/r1_real_data.csv` | `411a20f` |
+| 19 | One row per ARIES component (router, planner, executor + verifiers, completion, clarification, end to end), copied from the tables above | Summary of the rows above | `thesis-tables/components.csv` | — |
 | — | H4: does the planner ask on new ambiguous goals? | **Confirmatory, not run** | `docs/preregistration/H4-planner-clarification.md` (Amendments 1, 2) | `a2d1609` |
 
 ## 1. Task 2: terminal-state diagnosis (exploratory)
@@ -380,9 +383,98 @@ hypothesis tables).
 | H5 typed completion contract | one-sided exact McNemar | 0.25 | 0.5 | not rejected |
 | H4b clarify resolver | two-sided exact McNemar | 1.0 | 1.0 | not rejected |
 
+## 13. R1: tool choice and out-of-scope detection on public data (confirmatory, own family)
+
+Preregistration `docs/preregistration/R1-real-data-benchmarks.md` (registered `837f27d`, Amendments 1–2, pushed
+before the first run). Source `../thesis-r1-real-data/summary.json` (analysis `analyze_r1.py`, committed before the
+runs), per-item predictions without request text `../thesis-r1-real-data/predictions.json`, table
+`thesis-tables/r1_real_data.csv` (recounted from the predictions; every interval checked from its definition).
+Runs 2026-10-22 12:39–13:52Z, live ARIES stopped, frozen ARIES-FINAL-20261006 source, qwen2.5:7b, one repetition.
+Gold labels: two LLM labelers (Claude Code, Codex), adjudicated, frozen before any run; Cohen's κ 0.649 (NL2Bash),
+0.826 (CLINC150 intents).
+
+**NL2Bash test, 500 shell requests** (307 gold OUT_OF_SCOPE, 193 in scope), top-1 over 58 capabilities + OUT_OF_SCOPE:
+
+| System | Top-1 correct, CP 95% | Macro-F1, bootstrap 95% | OUT_OF_SCOPE precision | OUT_OF_SCOPE recall |
+|---|---|---|---|---|
+| **ARIES** (router A1 + planner) | 229/500 = 0.458 [0.414, 0.503] | 0.192 | 126/187 = 0.674 | 126/307 = 0.410 |
+| Zero-shot qwen2.5:7b | 321/500 = 0.642 [0.598, 0.684] | 0.364 | 201/229 = 0.878 | 201/307 = 0.655 |
+| BM25 (τ from dev) | 307/500 = 0.614 [0.570, 0.657] | 0.064 | 307/499 | 307/307 |
+| Embedding e5 (τ from dev) | 297/500 = 0.594 [0.550, 0.637] | 0.087 | 266/416 | 266/307 |
+| ARIES with llama3.1:8b (exploratory) | 100/500 = 0.200 [0.166, 0.238] | 0.213 | 51/68 | 51/307 |
+
+**CLINC150, 600 utterances** (200 from supported intents, 200 from unsupported intents, 200 `oos`), act vs abstain:
+
+| System | Correct, CP 95% | Unsupported F1 | Acts on supported | Abstains on unsupported |
+|---|---|---|---|---|
+| **Router A1** | 277/600 = 0.462 [0.421, 0.503] | 0.519 | 103/200 | 174/400 |
+| Router A0 | 262/600 = 0.437 [0.397, 0.477] | 0.348 | 172/200 | 90/400 |
+| Zero-shot qwen2.5:7b | 336/600 = 0.560 [0.519, 0.600] | 0.640 | 101/200 | 235/400 |
+| Embedding e5 (τ from val) | 398/600 = 0.663 [0.624, 0.701] | 0.798 | 0/200 | 398/400 |
+| Router A1, llama3.1:8b (exploratory) | 232/600 = 0.387 [0.348, 0.427] | 0.200 | 186/200 | 46/400 |
+
+**Tests (two-sided exact McNemar, Holm over six):**
+
+| Test | b (first only) / c (second only) | p | p (Holm) | Result | Better |
+|---|---|---|---|---|---|
+| H-R1a ARIES vs embedding, NL2Bash | 97 / 165 | 3.17 × 10⁻⁵ | 9.50 × 10⁻⁵ | rejected | embedding |
+| H-R1b ARIES vs BM25, NL2Bash | 103 / 181 | 4.30 × 10⁻⁶ | 1.72 × 10⁻⁵ | rejected | BM25 |
+| H-R1c ARIES vs zero-shot, NL2Bash | 65 / 157 | 5.78 × 10⁻¹⁰ | 2.89 × 10⁻⁹ | rejected | zero-shot |
+| H-R1d A1 vs A0, CLINC150 | 90 / 75 | 0.276 | 0.276 | not rejected | — |
+| H-R1e A1 vs embedding, CLINC150 | 103 / 224 | 1.91 × 10⁻¹¹ | 1.15 × 10⁻¹⁰ | rejected | embedding |
+| H-R1f A1 vs zero-shot, CLINC150 | 80 / 139 | 8.11 × 10⁻⁵ | 1.62 × 10⁻⁴ | rejected | zero-shot |
+
+**Exploratory, written after the summary was seen** (`../thesis-r1-real-data/exploratory.json`, `explore_r1.py`):
+- BM25 and the embedding baseline win mostly by declining: BM25 says OUT_OF_SCOPE on 499 of 500 requests, exactly
+  the "always OUT_OF_SCOPE" reference (307/500); on CLINC150 the embedding abstains on 598/600, and "always abstain"
+  scores 400/600. Their thresholds were set on dev/val as registered; the majority-class reference was not
+  registered.
+- On the 193 **in-scope** NL2Bash requests ARIES picks the right capability 103/193 = 0.534 [0.461, 0.606];
+  zero-shot 120/193 = 0.622 [0.549, 0.690]; embedding 31/193; BM25 0/193.
+- **Why ARIES declines too little:** the router acts on 449 of 500 NL2Bash requests (it abstains on 51, 44 of them
+  correctly), although 307 are out of scope. On CLINC150, A1 abstains on only 69/200 of the `oos` utterances.
+- **Planner output validity:** 126 of 449 planner calls (0.281) returned a decision that failed the frozen
+  `Decision` schema (89 a missing `path`, the rest extra or malformed arguments). By the registered rule they count
+  as OUT_OF_SCOPE; 54 of them were in-scope requests. The harness did not keep the raw output of a failed parse,
+  so the capability the model meant cannot be recovered.
+
+**Deviations.**
+1. The first run (`978bfa5`) stopped at stage 6 (planner): the router-file path was relative and the stage changes
+   into the frozen source folder. Stages 1–5 had completed and were kept; the planner file was empty (no item run)
+   and was moved to `~/data-ext/r1/aborted/`. Fix `9bfed55` (path resolved; resume point in `run-r1.sh`), no
+   measured stage, prompt, model or parameter changed. Stages 6–13 ran on `9bfed55`.
+2. The planner stage records `raw_output` only after a successful parse (see above).
+
+**Plain reading.** On public data the parts of ARIES that choose a tool are weaker than a single zero-shot prompt to
+the same model, and weaker than baselines that simply decline almost everything, because most NL2Bash and CLINC
+requests are out of scope and ARIES acts on most of them. When a request is in scope, ARIES picks the right tool
+about half the time; when the planner answers, about a quarter of its answers break the argument schema. The
+abstention instruction (A1) changes behaviour on CLINC150 (more abstaining, fewer supported requests acted on) but
+not the overall accuracy (p = 0.28). This does not repeat H6 (A1 beats A0 on author-style requests): it shows the
+effect does not carry over to a public intent dataset.
+
+**Limitations.** Gold labels from LLMs, not people (κ above). One repetition. CLINC150 is a virtual-assistant
+dataset (banking, travel, small talk), not desktop tasks; NL2Bash is shell tasks, mostly outside a 58-capability
+desktop agent.
+
+## 14. Per-component table
+
+`thesis-tables/components.csv` copies one or two rows per component from the tables above:
+
+| Component | Data | Metric | Result |
+|---|---|---|---|
+| Router | H6, 300 LLM-written requests | act/abstain correct, A1 | 186/300 [0.562, 0.675] |
+| Router | CLINC150, 600 public | act/abstain correct, A1 (zero-shot 336/600) | 277/600 [0.421, 0.503] |
+| Planner | frozen fixture, 24 × 3 | strict capability and arguments | 68/72 |
+| Router + planner | NL2Bash, 500 public | top-1 (zero-shot 321/500; always OOS 307/500) | 229/500 [0.414, 0.503] |
+| Executor + verifiers | H8, 218 mutants | killed: frozen → hardened | 155/218 → 188/218 |
+| Completion contract | H5, 15 G goals | correctly done: control → treatment | 0/15 → 2/15 |
+| Clarification | H4b, 40 pairs | pairs correct: off / on | 0/40 / 0/40 |
+| End to end | held-out fixture, 49 goals | independent check PASS | 29/49 |
+
 ## Pending
 
-- **H4b, H5:** measured 2026-10-22 (§10–§12).
+- **H4b, H5:** measured 2026-10-22 (§10–§12). **R1:** measured 2026-10-22 (§13).
 - **H4 (confirmatory):** waits for sets A and C from the external author. When they arrive, they are only validated
   (`h4-scenarios/validate_oracles.py`), never opened. Then they are run as `on-guard`/`off` ×3 alternated, plus
   `completion-fix` ×3 as a separate labelled condition.
