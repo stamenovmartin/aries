@@ -209,6 +209,66 @@ def decay(row, now):
     return math.pow(.5, hours / HALF_LIFE_HOURS.get(row.get('kind') or 'fact', 24 * 365.))
 
 
+# ── ARIES_MEMORY_HYBRID_RRF ─────────────────────────────────────────────────────
+# LoCoMo (experiments/iis/real-data/locomo): plain BM25 found the evidence in the top 5 for
+# 50.0% of 1,982 questions, ARIES semantic-v3 with e5 for 37.7%, and the two missed
+# different questions (e5 was better on multi-hop by +0.106). Reciprocal Rank Fusion
+# (Cormack, Clarke and Buettcher, SIGIR 2009) combines the two rankings without tuning a
+# weight between incomparable scores: each row gets sum 1/(RRF_K + rank) over the BM25
+# and the cosine ranking. The fused score replaces the similarity term; recency,
+# importance and layer are added as before.
+RRF_K = 60
+BM25_K1, BM25_B = 1.2, .75
+_TOKEN = re.compile(r'\w+')
+
+
+def bm25_scores(request, texts, k1=BM25_K1, b=BM25_B):
+    """Okapi BM25 of `request` against each text (casefolded \\w+ tokens, no stemming)."""
+    docs = [_TOKEN.findall(t.casefold()) for t in texts]
+    if not docs:
+        return []
+    avgdl = (sum(map(len, docs)) / len(docs)) or 1.
+    df = {}
+    for d in docs:
+        for w in set(d):
+            df[w] = df.get(w, 0) + 1
+    n, terms = len(docs), _TOKEN.findall(request.casefold())
+    out = []
+    for d in docs:
+        tf = {}
+        for w in d:
+            tf[w] = tf.get(w, 0) + 1
+        score = 0.
+        for w in terms:
+            f = tf.get(w)
+            if f:
+                idf = math.log(1 + (n - df[w] + .5) / (df[w] + .5))
+                score += idf * f * (k1 + 1) / (f + k1 * (1 - b + b * len(d) / avgdl))
+        out.append(score)
+    return out
+
+
+def rrf(*score_lists, k=RRF_K):
+    """Reciprocal Rank Fusion of several score lists over the same items (higher score = better rank).
+
+    An item with score 0 in a lexical list is unranked there (BM25 found none of its words)."""
+    fused = [0.] * len(score_lists[0][0])
+    for scores, lexical in score_lists:
+        order = sorted(range(len(scores)), key=lambda i: (-scores[i], i))
+        for rank, i in enumerate(order, 1):
+            if lexical and scores[i] <= 0:
+                continue
+            fused[i] += 1. / (k + rank)
+    return fused
+
+
+def hybrid_enabled(version):
+    if version != 'semantic-v3':
+        return False
+    from aries import flags
+    return flags.enabled('ARIES_MEMORY_HYBRID_RRF')
+
+
 def score_memories(rows, request, version, *, now=None, query_vector=None, limit=8):
     """Rank memories and conclusions together. Returns [(score, row, parts)].
 
@@ -227,7 +287,12 @@ def score_memories(rows, request, version, *, now=None, query_vector=None, limit
         if query_vector is None or any(v is None for v in vectors):
             version = 'focused-v2'        # unembedded rows would score 0 and vanish
         else:
-            similarity = _rescale([float(v @ query_vector) for v in vectors])
+            cosine = [float(v @ query_vector) for v in vectors]
+            if hybrid_enabled(version):
+                lexical = bm25_scores(request, [r['text'] for r in rows])
+                similarity = _rescale(rrf((cosine, False), (lexical, True)))
+            else:
+                similarity = _rescale(cosine)
     if version != 'semantic-v3':
         terms = stems(request)
         # A request of nothing but generic command words carries no topic, so

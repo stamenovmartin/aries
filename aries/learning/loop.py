@@ -124,6 +124,13 @@ async def propose(db: AsyncSession, *, now: datetime | None = None) -> list[Prop
     stability = await history.all_stability(db, max_reversals=max_reversals,
                                             damping_base=damping_base)
     evidence = await gather(db, window_days=window)
+    from aries import flags
+    if flags.enabled("ARIES_LEARNING_RELATIVE_CTR"):
+        # Ordinary path only: the bars move with this user's own pooled rate (statistics.py).
+        from aries.learning.statistics import relative_thresholds
+        engaged_target, ignored_target = relative_thresholds(
+            sum(ev.engaged for ev in evidence.values()), sum(ev.shown for ev in evidence.values()),
+            engaged_target, ignored_target)
 
     proposals: list[Proposal] = []
     frozen: list[dict] = []
