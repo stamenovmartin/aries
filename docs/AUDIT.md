@@ -814,3 +814,243 @@ from `run_h5.py:128-145,337-363`, with a new port such as 8103, and add the appr
 interrupt/recover cases. None of the existing scripts covers those. `aries-smoke` and
 `english_end_to_end.py` cannot be pointed at an isolated DB without a code change: hard-coded
 `:8000` in `voice.py:43`, and the `systemctl` check.
+
+---
+
+## 7. Fixed / remaining (2026-10-22, consolidation on `consolidate`)
+
+Every behaviour change is behind a **new** flag in `aries/flags.py`, and each new flag is **off by
+default**. With a flag off, the code path is the one that existed before. Each fix has a test that
+was run first and failed, then passed with the flag on, plus a check that the flag off keeps the
+old behaviour. Only the test files named below were run, one at a time at `nice -n 19`. The full
+suite was not run. No service was touched, no model was called and no frozen file was edited.
+
+### 7.1 Known bugs (§4)
+
+| item | status | commit | flag (default) | test |
+|---|---|---|---|---|
+| (a) Macedonian read path | **fixed behind a flag** | `3c09efc` | `ARIES_READ_PATH_STRICT` (off) | `tests/test_read_path_strict.py`; `tests/test_read_file_language.py` also passes with the flag on |
+| (b) repeated identical steps | **fixed behind a flag** | `9d0b035` | `ARIES_LOOP_GUARD` (off) | `tests/test_loop_guard.py` |
+| (c) six goals never planned | **cause not determined**; see 7.2 | — | none (no `ARIES_PLAN_DISPATCH_FIX`) | — |
+| (d) narrow completion contract | unchanged. H5 decides it (`ARIES_COMPLETION_TYPED_CONTRACT`, registered, not measured) | — | — | — |
+| (e) side-effect mutants, 0 of 14 | **check added behind a flag**; exploratory rerun prepared, not run | `35601cb`, `9de0157` | `ARIES_VERIFY_SCOPE` (off) | `tests/test_verify_scope.py` |
+| (f) `database is locked` | unchanged | — | — | — |
+
+**(a) `ARIES_READ_PATH_STRICT`** (`aries/workspace/capabilities.py`, `_strict_read_path`). This
+applies only to the legacy `read_file` route.
+- The path starts at the first `/` or `~/` in the capture.
+- Words before the path are allowed only when they are filler: ми, го, ја, the, my, file, фајл, and
+  so on. Any other word means the request is *about* the path, not a request to read it, so the
+  route declines and `service.plan` sends the goal to `agent_task`. The dev-a-04 sentence, "the
+  summary in /dir.", now goes to the planner.
+- The path ends at the longest prefix that exists. Failing that, it ends at the first component
+  that has an extension, and failing that, at the first whitespace. A quoted path is taken verbatim.
+- A trailing `. , ? ! ; : …` is stripped only when the path with the mark does not exist and the
+  path without it either exists or has an extension in its final component. So `notes.txt.`
+  becomes `notes.txt`, an existing `archive.` stays as it is, and `README.` stays when no `README`
+  exists.
+- Tests cover English, Cyrillic Macedonian and Latin Macedonian phrasings.
+- **Remaining:** `list_folder` has the same `(.+)$` shape and was not changed. An unquoted path with
+  spaces that neither exists nor ends in an extension is cut at the first space.
+
+**(b) `ARIES_LOOP_GUARD`** (`aries/workspace/loop_guard.py`, `agent.py` just before a planned step
+is created).
+- The fingerprint is the capability plus the canonical JSON of the arguments (sorted keys).
+- The original proposal and one duplicate behave as before. The first duplicate is still rejected by
+  the executor as `NON_RETRYABLE`.
+- On the **second duplicate**, the third proposal of the same fingerprint, the goal ends through the
+  terminal state already used for budget exhaustion: `partial` if anything was verified, else
+  `failed`. The goal records:
+  - `stop_reason = 'REPEATED_ACTION'`;
+  - `agent.repeated_action = {fingerprint, capability, arguments, count, duplicates, step_ids}`;
+  - `metrics.repeated_action_stops`;
+  - the typed error `REPEATED_ACTION` on the decision event.
+- **Remaining:** the audit also proposed that a rejected duplicate should not consume a step. That
+  was not done: it changes what the step budget means, and with the flag on it is no longer needed
+  to end the loop.
+
+**(e) `ARIES_VERIFY_SCOPE`** (`aries/workspace/scope_verifiers.py`, installed at registry import).
+- It covers exactly the 14 capabilities of the H8 operator: six file mutations, seven desktop window
+  actions and `notification.send`.
+- The executor is wrapped so that it snapshots the declared scope first:
+  - for files, the parent folder of every path argument, one level deep (name, type, size,
+    mtime_ns);
+  - for windows, every window other than the target (geometry, minimised, maximised, workspace,
+    monitor);
+  - for notifications, the count and highest id.
+- After the frozen verifier has run, the verifier fails when anything in that scope other than the
+  declared target changed. A copy declares only its destination. A move or rename declares its
+  source and destination.
+- A scope that cannot be read is `UNVERIFIED`.
+- With the flag off, the registry holds the frozen function objects. The test checks this by object
+  identity in a subprocess.
+- **Exploratory.** This was designed after H8, so it is not part of the confirmatory test.
+- **Rerun.** `experiments/exploratory/h8-verify-scope/` loads the frozen H8 harness unchanged and
+  redirects only its output folder.
+  - The harness is offline: its own tripwires refuse network, D-Bus, systemctl and browsers. It
+    loads no model and needs **no GPU, no Ollama and no ARIES service**.
+  - The command is in the README there, and in `make eval-thesis EVAL=h8-scope`. It was **not run**.
+  - The prediction, written before any run, is 12 of 14 killed. `file.write` and
+    `browser.download` should survive, because the H8 stray file is in a sibling folder, outside a
+    one-level scope.
+- **Remaining:**
+  - The H8 numbers are unchanged, and this check says nothing about them until the exploratory run
+    exists.
+  - A concurrent writer in the same folder, window set or notification table is reported as a side
+    effect, which is a false alarm in live use.
+  - Edits to existing notification rows are not seen.
+  - The completion recheck runs verifiers with a fresh ctx, so it reports `NOT_CHECKED`.
+
+### 7.2 The six goals that never reached the planner (§4c)
+
+**Cause not determined.** No fix was made, and no `ARIES_PLAN_DISPATCH_FIX` flag exists, because
+the evidence does not identify a cause. This section records what the static evidence establishes
+and what it rules out.
+
+What the records show:
+- The six goals are un-07, un-08, ab-05, ij-01, ij-02 and ij-06, from the raw run
+  `fixture_run_20261006T154854Z.json` and `terminal-diagnosis/goals.json`.
+- Each has DB state `failed`, an **empty `agent` object**, and the submit-time placeholder step
+  `agent_task` still in `steps`.
+- `planner_calls`, `contract` and `evidence` are all absent.
+
+What that implies:
+1. `_run` in `agent.py` never reached `data.update(steps=[], evidence=[], …)`. That line runs before
+   the first planner call and replaces the placeholder step. So the failure happened between
+   dispatch and that line.
+2. The only code that sets a goal to `failed` without an `agent` record is the exception handler in
+   `service._supervise`. It appends `str(exc)[:300]` to **`result_json.gaps`**.
+   - `agent.finish()` needs the `agent` record.
+   - `mark_interrupted` gives `interrupted`.
+3. **The extraction did not read `gaps`.** `terminal-diagnosis/extract.py` copies `summary`,
+   `stop_reason` and steps, but not `gaps`. So "the records carry no error" is a blind spot of the
+   extraction, not evidence that no error was recorded. The exception text is most likely in the
+   live `aries_workspace_goals.result_json` of those six rows.
+
+Ruled out:
+- **The 30-minute deadline.** `timed_out=false`, the wait budget was 180 s, and a deadline would be
+  recorded as a `TimeoutError` gap.
+- **Cancellation.** It gives `interrupted`, not `failed`.
+- **The planner, executor, verifier and `finish()`.** All of them run after the `agent` record
+  exists.
+- **Recovery `recheck`.** It returns at once for a fresh goal, which has no `recovery` key.
+- **Goal content.** Similar goals in the same run were planned: ij-03 and ij-05 are reads like
+  ij-01/02/06.
+- **Concurrency between fixture goals.** `run_fixtures.py` submits one goal and waits until it is
+  terminal before the next.
+
+Candidates, by code path:
+- `memory_store.relevant` in `service._execute`. It is not wrapped, and it does two things that can
+  fail: the semantic-v3 query embedding `cache.embedder.query(...)`, and `touch()` →
+  `db.commit()`, a write outside `write_session`.
+- `budgets.create` in `agent.run`, a plain `commit`. The same day, run `20261006T173741` failed
+  with "SQLite database is locked before model budget reservation".
+- `context_engine.assemble` in `_run`. It is not wrapped.
+- Settings or review reads.
+
+The failures cluster: un-07 with un-08, ij-01 with ij-02. That suggests a transient window, such
+as a lock holder or an embedder fault, rather than a deterministic defect. **UNVERIFIED.**
+
+The runtime evidence that would decide it (read-only; run after the confirmatory measurement):
+
+```
+sqlite3 'file:/home/stamenovmartin/aries/var/aries.db?mode=ro' \
+  "select id, state, created_at, updated_at, json_extract(result_json,'$.gaps')
+     from aries_workspace_goals where id in ('59343f39dcbe403e96c6e7012b356993',
+     '68c695ef8cd5487d94639a05569eba53','a79055b8afc342f3b8f32c5d0b4a825a',
+     'f9b1c37084d44ab59b39cbe40e9f547a','29d7999e00c248129f9555a87a4d4c7d',
+     '90cb0b1fe3954309969a37768d9ffb15')"
+journalctl --user -u aries-core --since '2026-10-06 15:00' --until '2026-10-06 17:30' \
+  | grep -E 'locked|Traceback|semantic memory unavailable|EmbedderUnavailable'
+```
+
+Read the results this way:
+- A `gaps` entry naming `database is locked` points to (f), and the fix belongs to the remaining
+  `write_session` migration.
+- An embedder error points to the unwrapped `relevant()` call.
+- After that, a fix would go behind `ARIES_PLAN_DISPATCH_FIX`, with a test that injects the
+  exception at the identified call.
+
+Two side findings:
+- **un-07's FAIL is an oracle confound, not evidence about the goal.** Its `no_new_automation` check
+  diffs the row counts of `scheduled_tasks`, `aries_automation_runs` and `automation_logs` on the
+  live database. Those tables grow with every scheduled automation, and the goal never executed a
+  step.
+- **ij-01/02/06 are INCONCLUSIVE (jq exit 5)** because `.evidence` is absent, which is consistent
+  with point 1.
+
+### 7.3 Test failures (§3)
+
+| suite | change | commit | why |
+|---|---|---|---|
+| `test_lifecycle` | four `Retention` declarations; **no flag** | `5eaccd5` | Declaration only. No code path deletes from these tables, and `lifecycle.service.apply` skips policies with no window, so no deletion behaviour changes and `ARIES_RETENTION_EXTRA` was not needed. The learning controls and evidence receipts are MEMORY, kept. The goal budget ledger is AUDIT, kept: an OPERATIONAL class requires a window, and a window would be a new deletion. Two tables have no timestamp column, so the declaration names `deadline` / `id`, documented as never used to delete. **Remaining:** an operational window for the budget tables, which needs a timestamp column on `aries_goal_budgets` first |
+| `test_power` | the expectation now names `aries.attention` as the one heavy automation, and requires every heavy automation to have a permission setting | `6a3672e` | Verified in code: `aries/connect/automation.py:348` sets `workload="heavy_cpu"`, `heavy_cpu` is `heavy=True` with `permission_setting="power.allow_heavy_cpu"`, and it is the only heavy one. **Remaining:** the help text of `power.allow_gpu_jobs` (`aries/power/settings.py`) still says "nothing is being refused yet" |
+| `test_verification_coverage` | `UNCONDITIONAL` reduced from 11 to 5; docstring and the two reasons corrected | `a25af80` | Verified in code: the six are `verify_probe(...)`, which returns `agrees(...)`, and that can be False. The frozen ledger's TRIVIAL class for `verify_probe` is unchanged: the shipped code is stricter than the frozen classification |
+
+All three now pass. `test_verification_coverage` also passes with `ARIES_VERIFY_SCOPE=1`.
+
+### 7.4 Restructure (§1), compatibility-preserving
+
+| change | commit |
+|---|---|
+| `experiments/thesis/INDEX.md` and `experiments/iis/INDEX.md`: path maps, nothing moved | `3817a7e` |
+| `experiments/archive/`: `router-rejected-handoff`, `runtime`, `stability-watch` and `intent_fixture.json` moved, with a relative symlink at each old path. These are the only "archive" items with no path reference outside themselves. `stability-watch/watch.py` `ROOT` depth adjusted | `3817a7e` |
+| deleted `mmsasr.tsv` and the four `.gitkeep`-only folders; each owed evaluation is a line in `experiments/archive/INDEX.md`; `experiments/README.md` and `docs/EXPERIMENTS.md` point there | `3817a7e` |
+| `Makefile` (setup, test, lint, check, smoke, eval-thesis, eval-iis) and `scripts/eval.sh`. The eval targets print and run nothing unless `EVAL=<name>`. **`make` is not installed on this machine**, so the Makefile itself was not executed; `scripts/eval.sh` was | `ad53400` |
+| `requirements.lock` (89 packages, from `uv pip freeze`, because the venv has no `pip`), `docs/ENVIRONMENT.md` and `docs/INDEX.md` | `ad53400` |
+| `scripts/gen_config_reference.py` → `docs/CONFIG_REFERENCE.md`: 25 flags, 187 settings; `--check` detects a stale file | `65ab58c` |
+
+**Not moved, and why:**
+- Every other "archive" folder has references outside itself (`agent` 14, `workspace` 12,
+  `intelligence` 7, …). They are listed in `experiments/archive/INDEX.md`.
+- The thesis and IIS precursors are listed in their indexes by current path.
+- Frozen, sha-pinned, `check.py`-read and live folders (`voice`, `endurance`) stay in place by rule.
+
+### 7.5 Lint (§2.1)
+
+Commit `16ac6bc`. `ruff --select F,E9` on `aries aries_ui tests` went from 106 findings to 41.
+
+What was fixed:
+- the stdlib and third-party unused imports;
+- all 7 placeholder-less f-strings;
+- 6 of the 8 unused variables. Where the assigned call mattered, the call was kept.
+
+What was kept on purpose:
+- every unused import of an `aries`, `aries_ui`, `agentic_core` or `gi` module or name, because
+  importing these can register tables, settings or typelibs;
+- the package `__init__` imports;
+- the F821 false positive at `aries/api/routes.py:1781`;
+- `aries/health/automation.py` `detail`, a probe-detail dict that is built and dropped. That looks
+  like a real gap, and fixing it is a behaviour change, so it is left for a flagged change.
+
+### 7.6 Still open, unchanged
+
+- §4(d) completion contract: H5 decides it.
+- §4(f) `database is locked`: 105 `await db.commit()` call sites outside `write_session`, the
+  missing `aries-locking-window --close`, and the absent `e1-sqlite` path cited by H8.
+- §2.5 flags: `ARIES_MK_FROZEN` is unused, `ARIES_PLAN_MEMORY` is inert at defaults, and
+  `ARIES_SPEECH_EN` is documented but not implemented.
+- §6: no isolated runtime smoke covering approval, cancel and interrupt/recover.
+
+### 7.7 Tests run for this consolidation
+
+Each file was run on its own at `nice -n 19` with `.venv/bin/python` (`test_ui_client.py` with the
+system interpreter, as `scripts/test.sh` does).
+
+- **New tests:** `test_read_path_strict`, `test_loop_guard` and `test_verify_scope`. Each failed
+  before its fix and passes after.
+- **The three suites from §3:** `test_lifecycle`, `test_power` and `test_verification_coverage`.
+  They failed before and pass now.
+- **Tests covering the changed code:** `test_read_file_language` (also with
+  `ARIES_READ_PATH_STRICT=1`), `test_terminal_failure`, `test_agent_completion_progress`,
+  `test_agent_execution`, `test_verify_hardened`, `test_m15_desktop`, `test_notify`,
+  `test_ui_contract`, `test_ui_render` and every test file touched by the lint commit. All pass,
+  with two exceptions:
+  - `test_session` fails because `session/aries.desktop` and `session/modes/aries.json` are
+    missing;
+  - `test_shell` fails because the `share/icons/hicolor/*/apps/aries.png` raster icons are missing.
+
+  Both fail identically on the pre-lint versions. The paths are untracked, so they do not exist in
+  this worktree. This is an environment difference, not a regression.
+- `thesis-tables/check.py`: 12/12 tables match their sources after the restructure.
+- The full suite (`scripts/test.sh`) was **not** run. It is left to the coordinator.
