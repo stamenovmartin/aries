@@ -30,14 +30,13 @@ be silently compared as the same benchmark.
 - File content changes stop the run. Opened application windows are retained.
 
 The first run (`20261001T002857Z-baseline`) was interrupted after live API timeouts:
-it is incomplete, not a 60-case baseline. Three subsequently identified owned
-active goals were cancelled; another agent's tasks were not cancelled. Pinned
+it is incomplete, not a 60-case baseline. Three active goals started by the run
+were cancelled; goals not started by the run were not cancelled. Pinned
 response windows were observed repeatedly fetching full workspace snapshots,
 and two read-only stack samples found JSON serialization on the API main thread.
 That responsiveness defect is being measured/fixed before the full rerun.
 
-The repository also contains `experiments/aries100`, used by another concurrent
-Claude session. Do not run both corpora concurrently or merge their denominators.
+The repository also contains `experiments/aries100`, a separate corpus. Do not run both corpora concurrently or merge their denominators.
 The 60-case fixture here lacks email, media controls, typing, HiDPI and service
 control. Those require additional fixtures and approval/environment evidence;
 a pass here cannot close those acceptance items.

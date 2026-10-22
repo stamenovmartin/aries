@@ -1,6 +1,6 @@
 # Independent acceptance fixtures (57 held-out scenarios)
 
-Written 2026-10-06 by a the reviewing agent that did **not** build ARIES, for
+Generated 2026-10-06 by an LLM in a separate session that did **not** build ARIES, for
 `experiments/product/independent-acceptance/`. The existing 90-goal suite in
 `eval/agent_suite/fixture.jsonl` was written by the system's own author, which is a confound: the
 same mind chose the capabilities, the phrasings and the predicates. These 57 scenarios were written

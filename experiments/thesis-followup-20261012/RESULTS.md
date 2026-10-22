@@ -101,7 +101,7 @@ Source: `task3-planner-guard/confirmation.json`, run `task3-planner-guard/runs/2
 ## 3. H4 development log (exploratory, development only)
 
 Source: `h4-dev/DEVLOG.md`, runs in `h4-runs/20261012T17*-dev-*`. Commits `5590f41` to `7b75a70`. The development
-set `h4-dev/dev.jsonl` has 7 scenarios: 4 ambiguous and 3 controls. They were written by the agent, are never
+set `h4-dev/dev.jsonl` has 7 scenarios: 4 ambiguous and 3 controls. They were written by an LLM during development, are never
 scored for H4, and the runner refuses them in an H4 run. The limit was 3 rounds, every round logged.
 
 | Run | Ambiguous asked (of 4) | Controls correct (of 3) | Main failure |

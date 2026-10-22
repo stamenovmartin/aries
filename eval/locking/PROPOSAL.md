@@ -1,6 +1,6 @@
 # A2 — the two patches I could not apply, with their exact diffs
 
-`vendor/agentic-core/agentic_core/database/writer.py` is new and in my write scope.
+`vendor/agentic-core/agentic_core/database/writer.py` is new and inside the scope of work item A2.
 **Nothing calls it from production code yet**, because both call sites are outside
 it. Until one of these two patches lands, `write_session()` is exercised only by
 `eval/locking/smoke.py` (1 164 transactions, 609 of them contended, in that run)
@@ -21,8 +21,8 @@ state)`. Every parallel sub-goal's writes therefore funnel through `save()` and
 of them; nothing else needs touching.
 
 **Not applied because** `aries/workspace/service.py` is contended and belongs to
-another worker today (WORKPLAN: "Two files are contended and belong to Codex
-today"), and codex claimed `service.py` again at 14:04 UTC in `COORDINATION.md`.
+concurrent work that day (WORKPLAN: "Two files are contended"), and `service.py` was being
+edited again at 14:04 UTC.
 
 `progress()` is the more interesting half: it reads the row and then updates it in
 the same transaction. That is the one read-then-write shape in the sub-goal path,
@@ -96,9 +96,9 @@ AND task_runs.started_at < ?` — line 31–32 of this file. It runs at startup 
 **every scheduler tick**, so it is the most frequent single write transaction in
 the process, and it is a read-then-write transaction (`select(Task)` first).
 
-**Not applied because** my write scope is
+**Not applied because** work item A2 was scoped to
 `vendor/agentic-core/agentic_core/database/**`. `memory/recovery.py` is outside it,
-and the WORKPLAN's A2 row does not list it either. I did not edit it.
+and the WORKPLAN's A2 row does not list it either. It was not edited.
 
 ```diff
 --- a/vendor/agentic-core/agentic_core/memory/recovery.py
