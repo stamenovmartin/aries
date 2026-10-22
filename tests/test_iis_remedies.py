@@ -50,6 +50,23 @@ def test_hybrid_flag():
     check('flag on: focused-v2 is not affected', lexical[0] == 'b')
 
 
+def test_similarity_rank_flag():
+    from datetime import datetime
+    from aries.workspace import retrieval as R
+    vec = lambda *x: np.array(x, dtype=np.float32) / np.linalg.norm(x)
+    base = {**rows()[0], 'kind': 'utterance', 'text': 'x'}
+    old = {**base, 'id': 'old', 'vector': vec(1, 0), 'created_at': '2025-01-01T00:00:00'}
+    new = {**base, 'id': 'new', 'vector': vec(1, 0.4), 'created_at': '2026-01-01T23:00:00'}
+    far = {**base, 'id': 'far', 'vector': vec(0, 1), 'created_at': '2025-01-01T00:00:00'}
+    q, now = vec(1, 0), datetime(2026, 1, 2)
+    with patch.dict(os.environ, {'ARIES_MEMORY_SIMILARITY_RANK': '0', 'ARIES_MEMORY_HYBRID_RRF': '0'}):
+        off = [r['id'] for _, r, _ in R.score_memories([old, new, far], 'x', 'semantic-v3', now=now, query_vector=q)]
+    with patch.dict(os.environ, {'ARIES_MEMORY_SIMILARITY_RANK': '1', 'ARIES_MEMORY_HYBRID_RRF': '0'}):
+        on = [r['id'] for _, r, _ in R.score_memories([old, new, far], 'x', 'semantic-v3', now=now, query_vector=q)]
+    check('flag off: recency lifts the newer, less similar row', off[0] == 'new')
+    check('flag on: the more similar old row comes first', on[0] == 'old')
+
+
 def test_relative_thresholds():
     from aries.learning.statistics import relative_thresholds
     check('a 4% user: bars at 8% and 2%', relative_thresholds(4, 100, .4, .1) == (0.08, 0.02))

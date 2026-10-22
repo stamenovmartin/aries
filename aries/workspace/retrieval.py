@@ -262,11 +262,22 @@ def rrf(*score_lists, k=RRF_K):
     return fused
 
 
-def hybrid_enabled(version):
-    if version != 'semantic-v3':
-        return False
+def _flag(name):
     from aries import flags
-    return flags.enabled('ARIES_MEMORY_HYBRID_RRF')
+    return flags.enabled(name)
+
+
+def hybrid_enabled(version):
+    return version == 'semantic-v3' and _flag('ARIES_MEMORY_HYBRID_RRF')
+
+
+# ── ARIES_MEMORY_SIMILARITY_RANK ────────────────────────────────────────────────
+# M1 on LoCoMo (experiments/iis/real-data/locomo/results/locomo-20261022T193500Z.json): with
+# the recency, importance and layer terms removed, the same e5 rows reach hit@5 0.603
+# (cosine) and 0.621 (fused with BM25), against 0.377 with them. In conversations that last
+# months, a 72-hour half-life pushes every early session down whatever its relevance. With
+# the flag the similarity term decides the order and the other terms only break ties.
+TIE_BREAK = 1e-3
 
 
 def score_memories(rows, request, version, *, now=None, query_vector=None, limit=8):
@@ -299,6 +310,7 @@ def score_memories(rows, request, version, *, now=None, query_vector=None, limit
         # every memory is equally (ir)relevant and the other three terms decide.
         similarity = _rescale([lexical_similarity(terms, r['text']) for r in rows]) if terms else [0.] * len(rows)
 
+    similarity_rank = version == 'semantic-v3' and _flag('ARIES_MEMORY_SIMILARITY_RANK')
     scored = []
     for row, sim in zip(rows, similarity):
         parts = {'similarity': sim, 'recency': decay(row, now),
@@ -306,6 +318,10 @@ def score_memories(rows, request, version, *, now=None, query_vector=None, limit
                  'layer': float(row.get('layer') or 0) / MAX_LAYER}
         total = (W_SIM * parts['similarity'] + W_RECENCY * parts['recency']
                  + W_IMPORTANCE * parts['importance'] + W_LAYER * parts['layer'])
+        if similarity_rank:
+            # ARIES_MEMORY_SIMILARITY_RANK: similarity decides; the other three only break ties.
+            total = parts['similarity'] + TIE_BREAK * (W_RECENCY * parts['recency'] + W_IMPORTANCE * parts['importance']
+                                                       + W_LAYER * parts['layer'])
         scored.append((total, row, parts))
     scored.sort(key=lambda item: -item[0])
     return scored[:limit]
