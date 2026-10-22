@@ -343,6 +343,10 @@ Two licences matter if this is ever packaged: the Macedonian RHVoice voices are
 **non-commercial**, and the `piper-tts` wheel statically links espeak-ng, making that runtime
 **GPL-3.0**.
 
+**Licence.** The ARIES code is under the [MIT licence](LICENSE). Dependencies, voices and the public
+datasets used in the evaluations (NL2Bash, CLINC150, MIND, LoCoMo) keep their own licences; the datasets are
+not in this repository.
+
 ---
 
 ## What is not established
