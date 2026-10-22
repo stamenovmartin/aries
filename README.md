@@ -1,5 +1,18 @@
 # ARIES
 
+> **Гранка `iis`: проектот по ИИС (информацискиот слој).** Истиот код како `main`; оваа страница води директно
+> до резултатите по ИИС: интереси и вести, учење од повратни информации, семантичка меморија. Целиот проект е на
+> [`main`](https://github.com/stamenovmartin/aries/tree/main), дипломската на
+> [`diplomska`](https://github.com/stamenovmartin/aries/tree/diplomska).
+>
+> | | |
+> |---|---|
+> | Резултати на јавни податоци (MIND, LoCoMo) | [`experiments/iis/real-data/README.md`](experiments/iis/real-data/README.md) |
+> | Споредбите како графици | [`experiments/analysis/README.md`](experiments/analysis/README.md), дел 3 |
+> | Мапа на експериментите по ИИС | [`experiments/iis/INDEX.md`](experiments/iis/INDEX.md) |
+> | Код: интереси, вести, учење, меморија | [`aries/interests/`](aries/interests/), [`aries/news/`](aries/news/), [`aries/learning/`](aries/learning/), [`aries/workspace/memory/`](aries/workspace/memory/) |
+> | Водич за преглед (македонски) | [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md), дел „IIS“ |
+
 A voice-driven assistant that acts on a live Ubuntu/GNOME desktop, built around one question:
 
 > **What may an agent claim about itself?**
