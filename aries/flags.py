@@ -132,6 +132,13 @@ FLAGS = {
                                 "same terminal state as budget exhaustion, stop_reason REPEATED_ACTION, "
                                 "fingerprint and count recorded (aries/workspace/loop_guard.py, "
                                 "docs/AUDIT.md 4b). Off, the loop is unchanged"),
+    "ARIES_PLAN_DISPATCH_FIX": (False, "when the planner context's own audit metadata (one omitted_items "
+                                       "entry per memory dropped for budget, source_status, preferences) "
+                                       "exceeds the 2,500-character budget, it is compacted (counts instead "
+                                       "of entries, then source_status dropped, then preferences shortened) "
+                                       "instead of failing the goal before its first planner call with "
+                                       "'Context metadata exceeds planner budget' (docs/AUDIT.md 7.2: the six "
+                                       "never-planned held-out goals). Off, the error is raised as frozen"),
     "ARIES_VERIFY_SCOPE": (False, "exploratory, designed after H8: the 14 capabilities of the H8 "
                                   "side_effect_outside_scope operator snapshot their declared scope "
                                   "before the executor runs (parent folder of each path, the other "

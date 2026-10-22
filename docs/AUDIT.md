@@ -831,7 +831,7 @@ suite was not run. No service was touched, no model was called and no frozen fil
 |---|---|---|---|---|
 | (a) Macedonian read path | **fixed behind a flag** | `3c09efc` | `ARIES_READ_PATH_STRICT` (off) | `tests/test_read_path_strict.py`; `tests/test_read_file_language.py` also passes with the flag on |
 | (b) repeated identical steps | **fixed behind a flag** | `9d0b035` | `ARIES_LOOP_GUARD` (off) | `tests/test_loop_guard.py` |
-| (c) six goals never planned | **cause not determined**; see 7.2 | — | none (no `ARIES_PLAN_DISPATCH_FIX`) | — |
+| (c) six goals never planned | **cause found 2026-10-22**: planner-context metadata over budget; see 7.2 | see 7.2 | `ARIES_PLAN_DISPATCH_FIX` (off) | `tests/test_plan_dispatch_fix.py` |
 | (d) narrow completion contract | unchanged. H5 decides it (`ARIES_COMPLETION_TYPED_CONTRACT`, registered, not measured) | — | — | — |
 | (e) side-effect mutants, 0 of 14 | **check added behind a flag**; exploratory rerun prepared, not run | `35601cb`, `9de0157` | `ARIES_VERIFY_SCOPE` (off) | `tests/test_verify_scope.py` |
 | (f) `database is locked` | unchanged | — | — | — |
@@ -978,6 +978,21 @@ Two side findings:
   step.
 - **ij-01/02/06 are INCONCLUSIVE (jq exit 5)** because `.evidence` is absent, which is consistent
   with point 1.
+
+**Resolved 2026-10-22 (after the measurements; read-only queries above).** All six rows have
+`result_json.gaps = ["Context metadata exceeds planner budget"]`, created and failed within 2 s
+(15:37–15:44 local, 2026-10-06). The journal has no `database is locked` or embedder error in that window.
+The error is raised by `context_engine.planner_context` (called in `agent._run` just before the
+first planner call): after every memory record has been dropped for budget, the audit metadata it
+keeps (one `omitted_items` entry per dropped record, `source_status`, the bounded `preferences`) can
+by itself exceed the 2,500-character budget. The candidates listed above are therefore ruled out;
+the extraction blind spot (point 3) is confirmed.
+- Fix behind **`ARIES_PLAN_DISPATCH_FIX`** (off): the metadata is compacted (omitted items as counts
+  by source and reason, then `source_status` dropped, then preferences shortened, then omitted),
+  each step recorded in `context_coverage.compacted`; the error is still raised if even that does
+  not fit. A context that fits is unchanged (`tests/test_plan_dispatch_fix.py`, which reproduces
+  the frozen error on a constructed case: the 2026-10-06 contexts themselves were not saved).
+- Not re-measured: whether the six goals pass with the flag on needs a held-out rerun.
 
 ### 7.3 Test failures (§3)
 
