@@ -773,6 +773,161 @@ def table_holm():
                   'each p is checked against its raw data by the hypothesis table above it (h4b_clarification, h5_completion, h6_abstention, h8_fault_injection)')
 
 
+R1 = ROOT / 'experiments/thesis-r1-real-data'
+R1_OOS = 'OUT_OF_SCOPE'
+
+
+def mcnemar_two_sided(b, c):
+    return 1.0 if b + c == 0 else min(1.0, 2 * (1 - binom_tail_ge(min(b, c) + 1, b + c, 0.5)))
+
+
+def r1_rate(what, k, n, pub):
+    """A proportion recounted from predictions.json; it must equal summary.json and its interval its definition."""
+    must_equal(what, (k, n), (pub['k'], pub['n']))
+    if n:
+        check_ci(what, k, n, pub['cp95'])
+    return (k, n, round(k / n, 4) if n else None, *(pub['cp95'] if n else (None, None)))
+
+
+def table_r1():
+    s = read(R1 / 'summary.json')
+    pr = read(R1 / 'predictions.json')
+    nb, cl = pr['nl2bash_test'], pr['clinc150']
+    rows, ok = [], {}
+    nb_sys = ('aries', 'zeroshot_qwen', 'embedding', 'bm25', 'aries_llama_secondary')
+    for name in nb_sys:
+        pub = s['nl2bash'][name]
+        label = 'exploratory secondary, outside Holm' if 'llama' in name else 'confirmatory (R1 family)'
+        ok[name] = [x[name] == x['gold'] for x in nb]
+        pred_oos = [x for x in nb if x[name] == R1_OOS]
+        for metric, k, n in (('top1', sum(ok[name]), len(nb)),
+                             ('oos_precision', sum(x['gold'] == R1_OOS for x in pred_oos), len(pred_oos)),
+                             ('oos_recall', sum(x[name] == R1_OOS for x in nb if x['gold'] == R1_OOS),
+                              sum(x['gold'] == R1_OOS for x in nb))):
+            rows.append(('NL2Bash test', name, label, metric, *r1_rate(f'R1 {name} {metric}', k, n, pub[metric]), None))
+        rows.append(('NL2Bash test', name, label, 'macro_f1', None, None, pub['macro_f1'], *pub['macro_f1_boot95'], None))
+    tests = {}
+    for t, other in (('H-R1a', 'embedding'), ('H-R1b', 'bm25'), ('H-R1c', 'zeroshot_qwen')):
+        tests[t] = ('NL2Bash test', 'aries', other, ok['aries'], ok[other])
+    cl_sys = ('router_A1', 'router_A0', 'zeroshot_qwen', 'embedding', 'router_A1_llama_secondary')
+    for name in cl_sys:
+        pub = s['clinc150'][name]
+        label = 'exploratory secondary, outside Holm' if 'llama' in name else 'confirmatory (R1 family)'
+        ok[name] = [x[name] != x['unsupported'] for x in cl]
+        held = [x for x in cl if not x[name]]
+        for metric, k, n in (('correct', sum(ok[name]), len(cl)),
+                             ('oos_precision', sum(x['unsupported'] for x in held), len(held)),
+                             ('oos_recall', sum(not x[name] for x in cl if x['unsupported']), sum(x['unsupported'] for x in cl)),
+                             ('in_scope_accuracy', sum(x[name] for x in cl if not x['unsupported']),
+                              sum(not x['unsupported'] for x in cl))):
+            rows.append(('CLINC150', name, label, metric, *r1_rate(f'R1 {name} {metric}', k, n, pub[metric]), None))
+        rows.append(('CLINC150', name, label, 'oos_f1', None, None, pub['oos_f1'], *pub['oos_f1_boot95'], None))
+    for t, other in (('H-R1d', 'router_A0'), ('H-R1e', 'embedding'), ('H-R1f', 'zeroshot_qwen')):
+        tests[t] = ('CLINC150', 'router_A1', other, ok['router_A1'], ok[other])
+    ps = {}
+    for t, (ds, a, o, x, y) in tests.items():
+        b = sum(p and not q for p, q in zip(x, y))
+        c = sum(q and not p for p, q in zip(x, y))
+        ps[t] = mcnemar_two_sided(b, c)
+        pub = s['tests'][t]
+        must_equal(f'R1 {t} McNemar', (b, c), (pub['b_first_only'], pub['c_second_only']))
+        must_equal(f'R1 {t} p', f'{ps[t]:.6g}', f'{pub["p_two_sided_exact"]:.6g}')
+        tests[t] = (ds, a, o, b, c)
+    order = sorted(ps, key=ps.get)
+    running = 0.0
+    for i, t in enumerate(order):
+        running = max(running, min(1.0, (len(ps) - i) * ps[t]))
+        ds, a, o, b, c = tests[t]
+        must_equal(f'R1 {t} Holm', f'{running:.6g}', f'{s["tests"][t]["p_holm"]:.6g}')
+        winner = a if b > c else o if c > b else 'tie'
+        rows.append((ds, f'{a} vs {o}', f'confirmatory {t}, two-sided exact McNemar', 'b first only / c second only',
+                     b, c, None, None, None,
+                     f'p {ps[t]:.3g}; Holm {running:.3g}; {"rejected" if running < 0.05 else "not rejected"}; better: {winner}'))
+    # exploratory, written after summary.json was seen
+    ex = read(R1 / 'exploratory.json')
+    inscope = [x for x in nb if x['gold'] != R1_OOS]
+    for name in ('aries', 'zeroshot_qwen', 'embedding', 'bm25'):
+        k = sum(x[name] == x['gold'] for x in inscope)
+        rows.append(('NL2Bash test', name, 'exploratory (after results)', 'top1 on in-scope gold items',
+                     *r1_rate(f'R1 {name} in-scope', k, len(inscope), ex['nl2bash'][name]['top1_in_scope_gold']), None))
+    k = sum(x['gold'] == R1_OOS for x in nb)
+    rows.append(('NL2Bash test', 'always OUT_OF_SCOPE', 'exploratory (after results)', 'top1',
+                 *r1_rate('R1 always OOS', k, len(nb), ex['nl2bash']['always_oos']['top1_all']), None))
+    calls = [x for x in nb if x['planner_valid'] is not None]
+    bad = [x for x in calls if not x['planner_valid']]
+    must_equal('R1 planner validation errors', (len(bad), len(calls)),
+               (ex['nl2bash']['planner_validation_errors']['n'], ex['nl2bash']['planner_validation_errors']['of_planner_calls']))
+    rows.append(('NL2Bash test', 'aries planner', 'exploratory (after results)',
+                 'planner output failed Decision validation (counted OUT_OF_SCOPE)', len(bad), len(calls),
+                 round(len(bad) / len(calls), 4), None, None, f'{sum(x["gold"] != R1_OOS for x in bad)} of them in-scope gold'))
+    k = sum(x['unsupported'] for x in cl)
+    rows.append(('CLINC150', 'always abstain', 'exploratory (after results)', 'correct',
+                 *r1_rate('R1 always abstain', k, len(cl), ex['clinc150']['always_abstain']['correct_all']), None))
+    head = provenance([R1 / 'summary.json', R1 / 'predictions.json', R1 / 'exploratory.json', R1 / 'analyze_r1.py',
+                       ROOT / 'docs/preregistration/R1-real-data-benchmarks.md'], 'R1 family, Holm inside R1')
+    note = ('recomputed from predictions.json (per-item predictions, no request text; raw outputs kept local, SHA-256 in '
+            'predictions.json); ci = exact Clopper-Pearson 95% (F1: 2,000-replicate bootstrap); gold labels from two LLM '
+            'labelers with adjudication, not people')
+    return render(head, ('dataset', 'system', 'label', 'metric', 'k', 'n', 'rate', 'ci_lo', 'ci_hi', 'value'), rows, note)
+
+
+def csv_rows(name):
+    lines = [l for l in (HERE / name).read_text().splitlines() if not l.startswith('#')]
+    return list(csv.DictReader(lines))
+
+
+def pick(rows, **kw):
+    hit = [r for r in rows if all(r[k] == v for k, v in kw.items())]
+    must_equal(f'one row for {kw}', len(hit), 1)
+    return hit[0]
+
+
+def table_components():
+    """One row per ARIES component, each copied from a table above (which check mode verifies in the same run)."""
+    h6, h8, h5, h4b = (csv_rows(f) for f in ('h6_abstention.csv', 'h8_fault_injection.csv', 'h5_completion.csv',
+                                             'h4b_clarification.csv'))
+    r1, pl, ho = csv_rows('r1_real_data.csv'), csv_rows('planner_runs.csv'), csv_rows('heldout_by_class.csv')
+    rows = []
+
+    def add(component, data, metric, r, k='k', n='n', lo='ci_lo', hi='ci_hi', src=''):
+        rows.append((component, data, metric, r[k], r[n], r.get(lo, ''), r.get(hi, ''), src))
+    add('router', 'H6 requests (300, LLM-written, majority of 3)', 'act/abstain correct, A1',
+        pick(h6, model='qwen2.5:7b', arm='A1', metric='binary_majority_of_3', group='all'), src='h6_abstention.csv')
+    add('router', 'CLINC150 (600, public)', 'act/abstain correct, A1',
+        pick(r1, dataset='CLINC150', system='router_A1', metric='correct'), src='r1_real_data.csv')
+    add('router', 'CLINC150 (600, public)', 'act/abstain correct, zero-shot qwen2.5:7b (baseline)',
+        pick(r1, dataset='CLINC150', system='zeroshot_qwen', metric='correct'), src='r1_real_data.csv')
+    p = pick(pl, run='frozen ARIES-FINAL-20261006')
+    rows.append(('planner', 'frozen planner fixture (24 cases x 3, author-written)', 'strict capability and arguments',
+                 p['strict_capability_and_arguments'], p['attempts'], '', '', 'planner_runs.csv'))
+    add('router + planner', 'NL2Bash test (500, public)', 'top-1 capability or OUT_OF_SCOPE',
+        pick(r1, dataset='NL2Bash test', system='aries', metric='top1'), src='r1_real_data.csv')
+    add('router + planner', 'NL2Bash test (500, public)', 'top-1, zero-shot qwen2.5:7b (baseline)',
+        pick(r1, dataset='NL2Bash test', system='zeroshot_qwen', metric='top1'), src='r1_real_data.csv')
+    add('router + planner', 'NL2Bash test (500, public)', 'top-1, always OUT_OF_SCOPE (reference)',
+        pick(r1, dataset='NL2Bash test', system='always OUT_OF_SCOPE', metric='top1'), src='r1_real_data.csv')
+    add('executor + verifiers', 'H8 mutants (218)', 'mutants killed, frozen verifiers',
+        pick(h8, run='baseline-2', metric='killed', group='all'), src='h8_fault_injection.csv')
+    add('executor + verifiers', 'H8 mutants (218)', 'mutants killed, ARIES_VERIFY_HARDENED=1',
+        pick(h8, run='hardened', metric='killed', group='all'), src='h8_fault_injection.csv')
+    add('completion contract', 'H5 goals (15 G, LLM-written, majority of 3)', 'G goals correctly done, treatment',
+        pick(h5, part='primary', condition='treatment'), src='h5_completion.csv')
+    add('completion contract', 'H5 goals (15 G, LLM-written, majority of 3)', 'G goals correctly done, control',
+        pick(h5, part='primary', condition='control'), src='h5_completion.csv')
+    add('clarification', 'H4b pairs (40, LLM-written, majority of 3)', 'pairs correct, resolver on',
+        pick(h4b, part='primary', condition='treatment'), src='h4b_clarification.csv')
+    add('clarification', 'H4b pairs (40, LLM-written, majority of 3)', 'pairs correct, resolver off',
+        pick(h4b, part='primary', condition='baseline'), src='h4b_clarification.csv')
+    t = pick(ho, **{'class': 'TOTAL'})
+    rows.append(('end to end', 'held-out agent fixture (49 runnable goals)', 'independent check PASS', t['PASS'],
+                 t['goals'], '', '', 'heldout_by_class.csv'))
+    head = provenance([HERE / f for f in ('h6_abstention.csv', 'r1_real_data.csv', 'planner_runs.csv',
+                                          'h8_fault_injection.csv', 'h5_completion.csv', 'h4b_clarification.csv',
+                                          'heldout_by_class.csv')], 'per-component summary of the tables above')
+    return render(head, ('component', 'data', 'metric', 'k', 'n', 'ci_lo', 'ci_hi', 'source table'), rows,
+                  'every cell is copied from the named table; see that table for its label and method')
+
+
 TABLES = {
     'router_arms.csv': table_router_arms,
     'router_by_class.csv': table_router_by_class,
@@ -789,6 +944,8 @@ TABLES = {
     'h5_completion.csv': table_h5,
     'h4b_clarification.csv': table_h4b,
     'holm_family.csv': table_holm,
+    'r1_real_data.csv': table_r1,
+    'components.csv': table_components,     # last: copies cells from the tables above
 }
 
 
