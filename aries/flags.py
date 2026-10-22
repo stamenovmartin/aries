@@ -132,6 +132,14 @@ FLAGS = {
                                 "same terminal state as budget exhaustion, stop_reason REPEATED_ACTION, "
                                 "fingerprint and count recorded (aries/workspace/loop_guard.py, "
                                 "docs/AUDIT.md 4b). Off, the loop is unchanged"),
+    "ARIES_VERIFY_SCOPE": (False, "exploratory, designed after H8: the 14 capabilities of the H8 "
+                                  "side_effect_outside_scope operator snapshot their declared scope "
+                                  "before the executor runs (parent folder of each path, the other "
+                                  "windows, the notification table) and their verifier fails when "
+                                  "anything in it other than the target changed; an unreadable scope "
+                                  "is UNVERIFIED (aries/workspace/scope_verifiers.py, docs/AUDIT.md "
+                                  "4e). Read when the registry is imported. Off, every verifier is the "
+                                  "frozen function"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),
