@@ -1,0 +1,284 @@
+{
+ "label": "exploratory, written after the confirmatory summary was seen; outside Holm",
+ "nl2bash": {
+  "in_scope_gold_n": 193,
+  "aries": {
+   "top1_all": {
+    "k": 229,
+    "n": 500,
+    "rate": 0.458,
+    "cp95": [
+     0.4137,
+     0.5028
+    ]
+   },
+   "top1_in_scope_gold": {
+    "k": 103,
+    "n": 193,
+    "rate": 0.5337,
+    "cp95": [
+     0.4607,
+     0.6056
+    ]
+   }
+  },
+  "zeroshot_qwen": {
+   "top1_all": {
+    "k": 321,
+    "n": 500,
+    "rate": 0.642,
+    "cp95": [
+     0.5982,
+     0.6841
+    ]
+   },
+   "top1_in_scope_gold": {
+    "k": 120,
+    "n": 193,
+    "rate": 0.6218,
+    "cp95": [
+     0.5493,
+     0.6904
+    ]
+   }
+  },
+  "always_oos": {
+   "top1_all": {
+    "k": 307,
+    "n": 500,
+    "rate": 0.614,
+    "cp95": [
+     0.5698,
+     0.6569
+    ]
+   },
+   "top1_in_scope_gold": {
+    "k": 0,
+    "n": 193,
+    "rate": 0.0,
+    "cp95": [
+     0.0,
+     0.0189
+    ]
+   }
+  },
+  "embedding": {
+   "top1_all": {
+    "k": 297,
+    "n": 500,
+    "rate": 0.594,
+    "cp95": [
+     0.5495,
+     0.6374
+    ]
+   },
+   "top1_in_scope_gold": {
+    "k": 31,
+    "n": 193,
+    "rate": 0.1606,
+    "cp95": [
+     0.1118,
+     0.2202
+    ]
+   }
+  },
+  "bm25": {
+   "top1_all": {
+    "k": 307,
+    "n": 500,
+    "rate": 0.614,
+    "cp95": [
+     0.5698,
+     0.6569
+    ]
+   },
+   "top1_in_scope_gold": {
+    "k": 0,
+    "n": 193,
+    "rate": 0.0,
+    "cp95": [
+     0.0,
+     0.0189
+    ]
+   }
+  },
+  "planner_validation_errors": {
+   "n": 126,
+   "of_planner_calls": 449,
+   "gold_of_those": {
+    "OUT_OF_SCOPE": 72,
+    "file.search": 36,
+    "file.list": 17,
+    "file.metadata": 1
+   },
+   "error_field": {
+    "path": 89,
+    "mode": 8,
+    "extension": 7,
+    "unit": 5,
+    "node": 4,
+    "expected_sha256": 4,
+    "pattern": 3,
+    "level": 2
+   }
+  },
+  "router_abstained": {
+   "n": 51,
+   "gold_oos": 44
+  }
+ },
+ "clinc150": {
+  "always_abstain": {
+   "correct_all": {
+    "k": 400,
+    "n": 600,
+    "rate": 0.6667,
+    "cp95": [
+     0.6274,
+     0.7043
+    ]
+   },
+   "oos": {
+    "k": 200,
+    "n": 200,
+    "rate": 1.0,
+    "cp95": [
+     0.9817,
+     1.0
+    ]
+   },
+   "supported": {
+    "k": 0,
+    "n": 200,
+    "rate": 0.0,
+    "cp95": [
+     0.0,
+     0.0183
+    ]
+   },
+   "unsupported-intent": {
+    "k": 200,
+    "n": 200,
+    "rate": 1.0,
+    "cp95": [
+     0.9817,
+     1.0
+    ]
+   }
+  },
+  "router_A1": {
+   "correct_all": {
+    "k": 277,
+    "n": 600,
+    "rate": 0.4617,
+    "cp95": [
+     0.4212,
+     0.5025
+    ]
+   },
+   "oos": {
+    "k": 69,
+    "n": 200,
+    "rate": 0.345,
+    "cp95": [
+     0.2794,
+     0.4153
+    ]
+   },
+   "supported": {
+    "k": 103,
+    "n": 200,
+    "rate": 0.515,
+    "cp95": [
+     0.4435,
+     0.5861
+    ]
+   },
+   "unsupported-intent": {
+    "k": 105,
+    "n": 200,
+    "rate": 0.525,
+    "cp95": [
+     0.4534,
+     0.5959
+    ]
+   }
+  },
+  "router_A0": {
+   "correct_all": {
+    "k": 262,
+    "n": 600,
+    "rate": 0.4367,
+    "cp95": [
+     0.3965,
+     0.4774
+    ]
+   },
+   "oos": {
+    "k": 29,
+    "n": 200,
+    "rate": 0.145,
+    "cp95": [
+     0.0993,
+     0.2016
+    ]
+   },
+   "supported": {
+    "k": 172,
+    "n": 200,
+    "rate": 0.86,
+    "cp95": [
+     0.8041,
+     0.9049
+    ]
+   },
+   "unsupported-intent": {
+    "k": 61,
+    "n": 200,
+    "rate": 0.305,
+    "cp95": [
+     0.242,
+     0.3739
+    ]
+   }
+  },
+  "zeroshot_qwen": {
+   "correct_all": {
+    "k": 336,
+    "n": 600,
+    "rate": 0.56,
+    "cp95": [
+     0.5192,
+     0.6002
+    ]
+   },
+   "oos": {
+    "k": 76,
+    "n": 200,
+    "rate": 0.38,
+    "cp95": [
+     0.3125,
+     0.4511
+    ]
+   },
+   "supported": {
+    "k": 101,
+    "n": 200,
+    "rate": 0.505,
+    "cp95": [
+     0.4336,
+     0.5763
+    ]
+   },
+   "unsupported-intent": {
+    "k": 159,
+    "n": 200,
+    "rate": 0.795,
+    "cp95": [
+     0.7323,
+     0.8487
+    ]
+   }
+  }
+ }
+}
