@@ -12,5 +12,11 @@ until those references are rewritten or a symlink is left behind.
 | `experiments/interests/` | news preference relevance checks | descriptive | 1 |
 | `experiments/news/` | news runs and live-news JSON, 2026-09-18/19 | descriptive | 2 |
 
-Planned and not started: news ranking and online learning on MIND-small, and memory retrieval on
-LoCoMo (README evaluation map).
+## Public datasets (2026-10-22)
+
+| path | what | status |
+|---|---|---|
+| `experiments/iis/real-data/mind/` | news ranking and online learning on MIND-small dev (73,152 impressions) | exploratory, measured |
+| `experiments/iis/real-data/locomo/` | memory retrieval against annotated evidence turns on LoCoMo (1,982 questions) | exploratory, measured |
+
+Plain-language summary of both: [`real-data/README.md`](real-data/README.md).
