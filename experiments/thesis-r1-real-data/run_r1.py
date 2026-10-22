@@ -318,6 +318,8 @@ def main():
     ap.add_argument('--arm', choices=['A0', 'A1'])
     ap.add_argument('--router-file')
     args = ap.parse_args()
+    if args.router_file:  # router and planner stages chdir into the frozen source
+        args.router_file = str(Path(args.router_file).resolve())
     check_data()
     if args.stage == 'router':
         asyncio.run(router_stage(args))

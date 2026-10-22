@@ -15,7 +15,8 @@ trap finish EXIT
 log "begin at $(git rev-parse HEAD)"
 systemctl --user stop aries.target; log "aries.target stopped (exit $?)"
 gsettings set org.gnome.desktop.session idle-delay 0
-step() { log "start $*"; $PY $T/run_r1.py "$@" >> $T/run-r1.log 2>&1; c=$?; log "exit $c $*"; [ $c -eq 0 ] || exit 1; }
+FROM=${1:-1}; N=0  # resume: skip the first FROM-1 stages, whose outputs exist
+step() { N=$((N+1)); if [ $N -lt $FROM ]; then log "skip $N (done) $*"; return; fi; log "start $*"; $PY $T/run_r1.py "$@" >> $T/run-r1.log 2>&1; c=$?; log "exit $c $*"; [ $c -eq 0 ] || exit 1; }
 step bm25 --set nl2bash
 step embedding --set nl2bash
 step embedding --set clinc-val
