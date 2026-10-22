@@ -1,0 +1,45 @@
+{
+ "set": "nl2bash",
+ "n_items": 600,
+ "labelled_by_both": 600,
+ "missing": [],
+ "models": {
+  "A": [
+   "claude-opus-4-8"
+  ],
+  "B": [
+   "codex-cli default model (see transcript)"
+  ]
+ },
+ "kappa_labels": 0.6486,
+ "raw_agreement_labels": 0.8017,
+ "kappa_binary": 0.6672,
+ "raw_agreement_binary": 0.8383,
+ "disagreements": 119,
+ "adjudicated": 119,
+ "unresolved": [],
+ "adjudicator_picked": {
+  "B": 43,
+  "A": 76
+ },
+ "events": [],
+ "label_counts_final": {
+  "system.status": 1,
+  "OUT_OF_SCOPE": 365,
+  "file.search": 173,
+  "file.read": 15,
+  "file.metadata": 5,
+  "file.list": 30,
+  "file.write": 1,
+  "system.disk": 1,
+  "system.packages": 1,
+  "system.storage": 3,
+  "system.processes": 2,
+  "browser.search": 2,
+  "file.exists": 1
+ },
+ "sources_sha256": {
+  "A": "39ef56091a77db3297da033af05b3152fefdfd2c56f7dfd2e3ae94fd776aa8ce",
+  "B": "ca8578395f7782bc4054e79fe6a7e4030f014b863f7443d7ce50881e854bbe39"
+ }
+}

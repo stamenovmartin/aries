@@ -1,0 +1,253 @@
+{
+ "source": "experiments/thesis-final-20261006/planner/runs/20261006T173518.677345Z/run-manifest.json (registry; local file)",
+ "source_sha256": "81c4e7164a8d83e72ec87e28db44ec04f81cfb8d4e1956c049c7f301ba27125d",
+ "n": 58,
+ "alias_classes": [
+  [
+   "desktop.windows",
+   "desktop.observe"
+  ],
+  [
+   "file.move",
+   "file.rename"
+  ],
+  [
+   "screen.capture",
+   "screen.screenshot"
+  ]
+ ],
+ "capabilities": [
+  {
+   "name": "file.read",
+   "description": "Read a regular UTF-8 text file up to 100 KB"
+  },
+  {
+   "name": "file.write",
+   "description": "Create a NEW nonempty text file; never overwrite. Parent must exist."
+  },
+  {
+   "name": "file.list",
+   "description": "List at most 200 allowed directory entries"
+  },
+  {
+   "name": "file.search",
+   "description": "Search filenames under a directory, optionally within an ISO modification-time range"
+  },
+  {
+   "name": "file.exists",
+   "description": "Check existence only when asked about existence. For read goals use file.read directly, which reports missing-path errors."
+  },
+  {
+   "name": "browser.open",
+   "description": "Open a public URL in a task-owned browser and observe navigation"
+  },
+  {
+   "name": "browser.read",
+   "description": "Read a task-owned browser session using its observed session ID"
+  },
+  {
+   "name": "browser.search",
+   "description": "Open public web or YouTube search for a literal query"
+  },
+  {
+   "name": "desktop.launch",
+   "description": "Open an installed application by name; verify visible focused window"
+  },
+  {
+   "name": "desktop.focus",
+   "description": "Focus an already observed installed app; never launch a replacement"
+  },
+  {
+   "name": "system.status",
+   "description": "Observe current CPU, memory and disk probes"
+  },
+  {
+   "name": "system.storage",
+   "description": "Measure filesystem usage; highest is computed from measured percentages"
+  },
+  {
+   "name": "system.processes",
+   "description": "Observe bounded process names and IDs; no command lines"
+  },
+  {
+   "name": "task.inspect",
+   "description": "Inspect a persisted task by ID"
+  },
+  {
+   "name": "notification.send",
+   "description": "Create a policy-controlled notification record; approval required"
+  },
+  {
+   "name": "desktop.windows",
+   "description": "Observe authoritative GNOME windows; unavailable is an error"
+  },
+  {
+   "name": "desktop.observe",
+   "description": "Observe authoritative GNOME windows; unavailable is an error"
+  },
+  {
+   "name": "desktop.close",
+   "description": "Operate on an exact observed window ID and application identity"
+  },
+  {
+   "name": "desktop.move",
+   "description": "Operate on an exact observed window ID and application identity"
+  },
+  {
+   "name": "desktop.resize",
+   "description": "Operate on an exact observed window ID and application identity"
+  },
+  {
+   "name": "desktop.maximize",
+   "description": "Operate on an exact observed window ID and application identity"
+  },
+  {
+   "name": "desktop.unmaximize",
+   "description": "Operate on an exact observed window ID and application identity"
+  },
+  {
+   "name": "desktop.minimize",
+   "description": "Operate on an exact observed window ID and application identity"
+  },
+  {
+   "name": "desktop.tile",
+   "description": "Operate on an exact observed window ID and application identity. The rectangle is computed by the shell from the monitor work area and verified against the monitor scale factor, so a tile on a fractionally scaled display is not reported unconfirmed (ARIES_TILE_HIDPI)"
+  },
+  {
+   "name": "browser.tabs",
+   "description": "List only browser tabs owned by this task"
+  },
+  {
+   "name": "browser.observe",
+   "description": "Task-owned public browser observe; observe again after action. No credentials or POST."
+  },
+  {
+   "name": "browser.elements",
+   "description": "Task-owned public browser elements; observe again after action. No credentials or POST."
+  },
+  {
+   "name": "browser.navigate",
+   "description": "Task-owned public browser navigate; observe again after action. No credentials or POST."
+  },
+  {
+   "name": "browser.click",
+   "description": "Task-owned public browser click; observe again after action. No credentials or POST."
+  },
+  {
+   "name": "browser.type",
+   "description": "Task-owned public browser type; observe again after action. No credentials or POST."
+  },
+  {
+   "name": "browser.scroll",
+   "description": "Task-owned public browser scroll; observe again after action. No credentials or POST."
+  },
+  {
+   "name": "browser.back",
+   "description": "Task-owned public browser back; observe again after action. No credentials or POST."
+  },
+  {
+   "name": "browser.forward",
+   "description": "Task-owned public browser forward; observe again after action. No credentials or POST."
+  },
+  {
+   "name": "browser.wait",
+   "description": "Task-owned public browser wait; observe again after action. No credentials or POST."
+  },
+  {
+   "name": "browser.download",
+   "description": "Download an observed public link into a NEW reviewed local path; pinned GET, 20 MB maximum"
+  },
+  {
+   "name": "file.metadata",
+   "description": "Inspect regular file size, timestamp and SHA-256 up to 20 MB"
+  },
+  {
+   "name": "file.copy",
+   "description": "Copy a reviewed source hash to a NEW destination; no overwrite"
+  },
+  {
+   "name": "file.semantic_search",
+   "description": "Bounded local filename/PDF/text relevance with metadata filters and explanations"
+  },
+  {
+   "name": "file.edit",
+   "description": "Replace exactly one text fragment after review of source SHA-256; advisory writer lock"
+  },
+  {
+   "name": "file.move",
+   "description": "Reviewed same-filesystem atomic move to a NEW path; existing destinations refused"
+  },
+  {
+   "name": "file.rename",
+   "description": "Reviewed same-filesystem atomic move to a NEW path; existing destinations refused"
+  },
+  {
+   "name": "network.status",
+   "description": "Observe connectivity: link, addresses, gateway, DNS, and separately whether the internet is actually reachable"
+  },
+  {
+   "name": "network.wifi_list",
+   "description": "List visible wifi networks with signal strength and which are already saved; no rescan is forced"
+  },
+  {
+   "name": "network.wifi_connect",
+   "description": "Bring up an ALREADY-SAVED connection by name; ARIES never accepts a wifi password"
+  },
+  {
+   "name": "display.brightness",
+   "description": "Read the screen brightness; reports every mechanism it probed and why none is available when this machine has no brightness control"
+  },
+  {
+   "name": "display.set_brightness",
+   "description": "Set the screen brightness to a percentage and re-read it; refuses with evidence when the hardware exposes no backlight"
+  },
+  {
+   "name": "screen.capture",
+   "description": "See the screen: capture the whole screen, or the area one observed window ID occupies, to an ARIES-owned PNG. A blanked screen or a uniform frame is an error, never a result."
+  },
+  {
+   "name": "screen.screenshot",
+   "description": "See the screen: capture the whole screen, or the area one observed window ID occupies, to an ARIES-owned PNG. A blanked screen or a uniform frame is an error, never a result."
+  },
+  {
+   "name": "screen.read",
+   "description": "Read what is on the screen: capture it and recover its text with local OCR in Macedonian and English. Use this to answer questions about what is displayed; refuses with instructions if OCR data is missing."
+  },
+  {
+   "name": "system.services",
+   "description": "List systemd units with their real ActiveState/SubState and activation time, from the user and system managers. Read-only; a manager that cannot answer is named, not hidden."
+  },
+  {
+   "name": "system.service",
+   "description": "Inspect ONE systemd unit by name. A name systemd does not know is an error, never an inactive unit."
+  },
+  {
+   "name": "system.service_control",
+   "description": "Start, stop or restart ONE allowlisted user unit. System units are refused: they need an interactive administrator password. Verified by re-reading the unit; a new InvocationID is the proof, not an accepted job."
+  },
+  {
+   "name": "system.disk",
+   "description": "Measure filesystem usage with statvfs and the largest directories under your home folder. Bounded by depth, entry count and time; a truncated walk says so."
+  },
+  {
+   "name": "system.packages",
+   "description": "Check whether a package is installed and at what version, through dpkg and snap. Never installs anything."
+  },
+  {
+   "name": "input.clipboard_read",
+   "description": "Read the current clipboard as text, bounded to 100 KB. Use it only when the user asks what is on the clipboard: it returns whatever they last copied, which may be a password, so never call it for context."
+  },
+  {
+   "name": "input.clipboard_write",
+   "description": "Replace the clipboard with text and verify it by reading it back from a fresh session. The previous clipboard is destroyed and cannot be restored, so approval is required."
+  },
+  {
+   "name": "input.editable_targets",
+   "description": "List one running application's editable text controls with the node identity input.type_text needs. Password fields are never listed. Call this first; a node path alone is not a target."
+  },
+  {
+   "name": "input.type_text",
+   "description": "Insert text into ONE control previously reported by input.editable_targets, re-verifying its identity first. Refused unless it is still editable, enabled, focused, in the active window, free of a selection and not a password field. Terminals do not support this and are refused, not approximated. Any text that would arrive incomplete is refused with the reason and the observed character counts, never reported as a success (ARIES_TYPE_STRICT)."
+  }
+ ]
+}
