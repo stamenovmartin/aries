@@ -12,9 +12,9 @@ with `docs/`, `scripts/` or `verification/`. "Commit" is the commit that added o
 | **Regression check** | A fixed earlier protocol replayed unchanged on new code. No outcome was predicted, so it is descriptive. A drop is reported as a result. |
 | **Exploratory** | Diagnosis, post-hoc analysis, development or a descriptive comparison. It may motivate a hypothesis but does not confirm one. |
 
-**Two confirmatory follow-up results exist: H8** (§8) **and H6** (§9). The Holm family of confirmatory tests is
-H4b, H5, H6 and H8. H4b and H5 have their items and frozen code but have not been measured yet. H4 (registered
-earlier, outside the Holm family) waits for the external sets A and C.
+**The Holm family H4b, H5, H6, H8 is complete** (§8–§12). After Holm's correction **H8 and H6 are confirmed;
+H5 and H4b are not**: their registered criteria were not met. H4 (registered earlier, outside the Holm family)
+waits for the external sets A and C.
 
 ## Summary
 
@@ -34,6 +34,9 @@ earlier, outside the Holm family) waits for the external sets A and C.
 | 12 | H8: hardening 23 verifiers raises the mutant kill rate, 155/218 → 188/218, McNemar b = 33, c = 0, p = 1.16 × 10⁻¹⁰; criteria 1 and 3 met, criterion 2 not met | **Confirmatory** (Holm family H4b/H5/H6/H8) | `h8/RESULTS.md`, `h8/runs/*/summary.json`, `thesis-tables/h8_fault_injection.csv` | `1d03163` |
 | 13 | H6: on 300 new requests, the abstention instruction (A1) beats none (A0) for qwen2.5:7b, 152/300 → 186/300 (majority of 3), McNemar b = 43, c = 9, p = 1.02 × 10⁻⁶ | **Confirmatory** (Holm family H4b/H5/H6/H8) | `h6-run/summary.json`, `h6-run/raw/`, `thesis-tables/h6_abstention.csv` | `7e5c2b2` |
 | 14 | H6 secondary, llama3.1:8b on the same protocol: 153/300 → 161/300, McNemar b = 28, c = 20, p = 0.156 | Exploratory (secondary, outside Holm) | `h6-llama/summary.json`, `h6-llama/raw/`, `thesis-tables/h6_abstention.csv` | `96bd619` |
+| 15 | H5: the typed completion contract does not make the 15 G goals finish: correct done 2/15 (treatment) vs 0/15 (control), McNemar b = 2, c = 0, p = 0.25; criteria 1 and 2 not met, 3 met | **Confirmatory** (Holm family) | `h5-runs/summary-20261022T070927Z.json`, `h5-runs/outcomes.json`, `thesis-tables/h5_completion.csv` | `efc3188` |
+| 16 | H4b: the clarify resolver asks on every item: ambiguous asked 40/40 (baseline 0/40), twins over-asked 40/40 (baseline 0/40); pairs correct 0/40 in both, p = 1.0; over-ask non-inferiority not met | **Confirmatory** (Holm family) | `h4b-runs/summary-20261022T093916Z.json`, `h4b-runs/outcomes.json`, `thesis-tables/h4b_clarification.csv` | `efc3188` |
+| 17 | Holm family: H8 p_Holm = 4.66 × 10⁻¹⁰, H6 3.06 × 10⁻⁶ (both rejected); H5 0.5, H4b 1.0 (not rejected) | **Confirmatory** (family) | `thesis-tables/holm_family.csv` | — |
 | — | H4: does the planner ask on new ambiguous goals? | **Confirmatory, not run** | `docs/preregistration/H4-planner-clarification.md` (Amendments 1, 2) | `a2d1609` |
 
 ## 1. Task 2: terminal-state diagnosis (exploratory)
@@ -302,10 +305,84 @@ see the validator; the validator checks format and consistency only (H6 Amendmen
 writer's. On the original reused fixture the same comparison was 36 vs 11 of 225 requests (§4), a difference of
 (36 − 11)/225 = 0.111; here it is 0.113 on new requests. These are new requests, not new people's wording.
 
+## 10. H5: the typed completion contract (confirmatory)
+
+Source: `h5-runs/summary-20261022T070927Z.json` (analysis `h5-runs/analyze_h5.py`, written before any run),
+per item-run outcomes `h5-runs/outcomes.json`, table `thesis-tables/h5_completion.csv` (recomputed by
+`check.py`). Six runs on commit `1f4f429`, order treatment, control ×3, 2026-10-22 07:09–09:39Z, live ARIES
+stopped, model and code stable in every run. Items: 15 G goals, 10 N controls, plus the 49 held-out goals
+(H5 Amendments 1–4). The run folders stay local (they contain the item texts); their SHA-256s are in
+`outcomes.json`.
+
+| Criterion (registered) | Result | |
+|---|---|---|
+| 1. With the flags on, ≥ 10 of 15 G goals end in a correct `done` (majority of 3) | 2 / 15 | **not met** |
+| 2. With the flags on, no N goal ends in `done` in any run | 3 of 30 N runs ended `done` | **not met** |
+| 3. Held-out PASS (majority) not lower than control by more than 2 | 30 vs 30 of 49 | met |
+
+Primary test: correct `done` per G goal, treatment 2/15 vs control 0/15, b = 2, c = 0, one-sided exact McNemar
+p = 0.25 (Holm-adjusted 0.5, §12).
+
+Secondary (descriptive), treatment G item-runs (45):
+- **Where the contract came from:** the paraphrase fast path 24, none 18, the typed step 3. In 15 runs the
+  typed step's output was rejected because the path it named does not occur verbatim in the request.
+- **Goals that had a contract but did not reach `done`:** all 15 ended "budget exhausted without a finish".
+- **False `done`** over G and N item-runs: treatment 12/75 = 0.16 [0.086, 0.263], control 3/75 = 0.04
+  [0.008, 0.113]. Three of the treatment's are `missing_evidence` controls (3/9 runs).
+- **The change hook** never fired on the `changed_after_read` controls (0/9 runs in each condition).
+
+**Plain reading.** The typed step rarely got to act: its own verbatim-path guard rejected what it produced for
+most goals, and where a contract existed the agent still ran out of budget without proposing a finish. The flags
+did not raise correct completion enough and added false completions on missing-evidence controls.
+
+**Limitations.** Items written by a model (OpenAI Codex, gpt-6-astra), not a person (H5 Amendment 2). One
+machine; three runs per condition.
+
+## 11. H4b: the clarify resolver (confirmatory)
+
+Source: `h4b-runs/summary-20261022T093916Z.json` (analysis `h4b-runs/analyze_h4b.py`, H4b Amendment 2),
+`h4b-runs/outcomes.json`, table `thesis-tables/h4b_clarification.csv`. Six runs on commit `1f4f429`, order
+treatment, baseline ×3, 2026-10-22 09:39–11:39Z, live ARIES stopped, model and code stable. 40 pairs (40 ambiguous
+items, 40 twins).
+
+| | treatment (resolver on) | baseline (resolver off) |
+|---|---|---|
+| Ambiguous items correct (asked with exactly the fitting choices, nothing read) | 40 / 40 | 0 / 40 |
+| Twins correct (the intended file, oracle PASS) | 0 / 40 | 40 / 40 |
+| **Pairs correct (both items)** | **0 / 40** | **0 / 40** |
+| Twins over-asked | 40 / 40 | 0 / 40 |
+| Ambiguous asked, Wilson 95% | 40/40 [0.912, 1.0] | 0/40 [0, 0.088] |
+
+- **Primary:** b = 0, c = 0, two-sided exact McNemar p = 1.0 (Holm 1.0).
+- **Secondary 1, over-ask non-inferiority (margin 10 points):** difference +1.0, one-sided 95% upper limit 1.0,
+  **not non-inferior**. All 40 twins in the item files are of type t2, so the t1 analysis has no items.
+- **Secondary 3 (treatment item-runs):** the resolver applied in all 240 item-runs, always with 2–5 candidates.
+  The model's raw decision was `ask` in all 240 (120 ambiguous, 120 twins); it never selected a file, so code
+  never had to overrule a select. Raw decision right 120/240 = 0.50.
+- **Secondary 4:** treatment 4.8 s and 1.0 model call per item; baseline 24.8 s and 8.95 calls, every baseline
+  item ended `partial`.
+
+**Plain reading.** With the resolver on, ARIES always asks; with it off, it never asks and always picks a file.
+Each is right on exactly one half of every pair, so neither gets a pair right. The registered hypothesis needed the
+resolver to tell the two halves apart, and its model step did not: it answered `ask` every time.
+
+**Limitations.** Items written by a model (OpenAI Codex, gpt-6-astra), not a person (H4b Amendment 1).
+
+## 12. The Holm family (H4b, H5, H6, H8)
+
+Table `thesis-tables/holm_family.csv` (each p read from the committed summary and checked against raw data by the
+hypothesis tables).
+
+| Hypothesis | Test | p | p (Holm) | At α = 0.05 |
+|---|---|---|---|---|
+| H8 hardened verifiers | one-sided exact McNemar | 1.16 × 10⁻¹⁰ | 4.66 × 10⁻¹⁰ | rejected |
+| H6 abstention instruction | one-sided exact McNemar | 1.02 × 10⁻⁶ | 3.06 × 10⁻⁶ | rejected |
+| H5 typed completion contract | one-sided exact McNemar | 0.25 | 0.5 | not rejected |
+| H4b clarify resolver | two-sided exact McNemar | 1.0 | 1.0 | not rejected |
+
 ## Pending
 
-- **H4b, H5 (confirmatory, Holm family with H6 and H8):** items validated (H4b 80, H5 25), code frozen (tags
-  `h4b-frozen-20261018`, `h5-frozen-20261018`), not measured yet.
+- **H4b, H5:** measured 2026-10-22 (§10–§12).
 - **H4 (confirmatory):** waits for sets A and C from the external author. When they arrive, they are only validated
   (`h4-scenarios/validate_oracles.py`), never opened. Then they are run as `on-guard`/`off` ×3 alternated, plus
   `completion-fix` ×3 as a separate labelled condition.
