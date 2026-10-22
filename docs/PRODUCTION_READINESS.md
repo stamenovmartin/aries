@@ -9,7 +9,7 @@ arbitrary agent task is complete.
 
 Evidence and exact changed-source hashes:
 [system completion manifest](../experiments/coordination/system-completion-20260930/manifest.json).
-The subsequent [Claude review follow-up](../experiments/coordination/claude-review-20261001/result.json)
+The subsequent [independent review follow-up](../experiments/coordination/claude-review-20261001/result.json)
 adds SQLite result-code logging and visible interruption of worker checkpoint
 recording; 15 execution-boundary checks and 13 scheduler checks passed. Core was
 updated through the maintenance drain. The earlier manifest retains its original

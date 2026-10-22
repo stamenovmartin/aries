@@ -16,8 +16,8 @@ Macedonian lines), `test_replies.py` (12), `test_spoken_requests.py` (11),
 behaviour in two languages at once. Moving them here would take the **English** half of
 each out of the main suite, which is the opposite of what freezing Macedonian is for.
 
-A second reason, specific to today: the working tree carries 186 uncommitted files from
-another agent's in-flight work, and `test_goal_contracts.py` is one of them. Moving a
+A second reason, specific to today: the working tree carried 186 uncommitted files from
+work in progress, and `test_goal_contracts.py` is one of them. Moving a
 file somebody is editing produces a conflict for no gain.
 
 So the freeze is enforced by **manifest plus runner**: `MANIFEST` names every test that

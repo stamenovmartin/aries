@@ -1,7 +1,7 @@
 # H4 development log: ARIES_PLANNER_CLARIFY_GUARD
 
-Development set: `dev.jsonl`, 4 ambiguous (`dev-a-*`) and 3 matched controls (`dev-c-*`), written by Claude on
-2026-10-12. **Never part of H4 sets A/C or of any H4 score.** The validator rejects dev rows in a scored set, and
+Development set: `dev.jsonl`, 4 ambiguous (`dev-a-*`) and 3 matched controls (`dev-c-*`), written by an LLM during
+development on 2026-10-12. **Never part of H4 sets A/C or of any H4 score.** The validator rejects dev rows in a scored set, and
 the runner refuses to mix them. Sets A and C have not been opened; they are still empty.
 
 **Why the guard exists.**

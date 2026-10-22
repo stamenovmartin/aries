@@ -61,6 +61,6 @@ Artifacts distinguish model finish claims, user-visible success, completed recov
 model-chosen stop and exhaustion. Source hashes before/after expose concurrent code drift.
 
 Next main-thread integration: adopt this bounded adapter or its logic for the focused fixture
-Claude handed over in experiments/verification-feedback; preserve the protocol's equal handles,
+in experiments/verification-feedback; preserve the protocol's equal handles,
 no verifier leakage, independent oracles and fixed policies. Finish the broader fault coverage
 and freeze held-out tasks before comparative runs. See PROTOCOL.md and INTEGRATION.md.
