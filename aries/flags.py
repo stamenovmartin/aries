@@ -126,6 +126,12 @@ FLAGS = {
                                       "sentence-final mark is stripped only when the name without it "
                                       "exists or has an extension (docs/AUDIT.md 4a). Off, the capture is "
                                       "the rest of the sentence, as frozen"),
+    "ARIES_LOOP_GUARD": (False, "a planner proposal whose capability and canonical arguments match two "
+                                "earlier steps of the same goal (its second duplicate) ends the goal "
+                                "instead of being rejected and replanned until the step budget is gone; "
+                                "same terminal state as budget exhaustion, stop_reason REPEATED_ACTION, "
+                                "fingerprint and count recorded (aries/workspace/loop_guard.py, "
+                                "docs/AUDIT.md 4b). Off, the loop is unchanged"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),
