@@ -4,7 +4,6 @@ File operations use real disposable files; no user file is modified.
 """
 import asyncio
 import json
-import os
 from pathlib import Path
 import sys
 import tempfile

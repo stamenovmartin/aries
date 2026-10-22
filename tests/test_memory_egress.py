@@ -6,7 +6,6 @@ import os
 import threading
 import unittest
 from unittest.mock import patch
-import urllib.error
 
 from tests._bootstrap import bootstrap
 bootstrap('aries-memory-egress')

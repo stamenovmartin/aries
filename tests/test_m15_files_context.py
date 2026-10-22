@@ -1,5 +1,4 @@
 """Real local files, changed-state controls, bounded context eligibility."""
-import hashlib
 import json
 import sys
 import tempfile

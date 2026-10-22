@@ -243,16 +243,11 @@ async def test_fading_interest_decays_rather_than_inverting():
 async def test_reversing_needs_stricter_evidence_than_continuing():
     """The same evidence that would ESTABLISH a low weight is not enough to
     REVERSE a high one."""
-    strict_cfg = {"learning.engaged_threshold": 0.4, "learning.ignored_threshold": 0.1,
-                  "learning.reversal_hysteresis": 0.4, "learning.min_observations": 10,
-                  "learning.reversal_min_observations_factor": 2.0,
-                  "learning.established_margin": 0.1, "learning.fatigue_step": 0.05}
-
     # Fresh topic, no established position: the ordinary path applies.
     await _setup(learned=None)
     await _seed("ai", [(20, 20, 0, "s1"), (5, 20, 0, "s1")])    # 0/40
     async with async_session() as db:
-        props = await apply(db, await propose(db))
+        await apply(db, await propose(db))
         fresh = (await interests.get(db, "ai")).learned_weight
     check("with no established position, that evidence moves the weight down",
           fresh is not None and fresh < 0.6)

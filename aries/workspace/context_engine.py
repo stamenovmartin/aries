@@ -126,5 +126,30 @@ def planner_context(historical,packet,*,max_chars=2500):
         if size()>max_chars-150:
             result.pop(key);omitted.append(key)
     if omitted:result['omitted_sections']=omitted
+    if size()>max_chars:
+        from aries import flags
+        if flags.enabled('ARIES_PLAN_DISPATCH_FIX'):compact(result,max_chars,size)
     if size()>max_chars:raise ValueError('Context metadata exceeds planner budget')
     return result
+
+
+def compact(result,max_chars,size):
+    """ARIES_PLAN_DISPATCH_FIX (docs/AUDIT.md 7.2): the audit metadata alone can outgrow the budget, because
+    every memory dropped for budget adds an omitted_items entry. Shrink the metadata, most verbose first, and
+    record each step; the caller still raises if even that does not fit."""
+    coverage=result['context_coverage'];steps=[]
+    items=coverage.get('omitted_items')
+    if items:
+        counts={}
+        for i in items:counts[f"{i['source']}:{i['reason']}"]=counts.get(f"{i['source']}:{i['reason']}",0)+1
+        coverage['omitted_items']={'count':len(items),'by_source_and_reason':counts}
+        steps.append('omitted_items_counted')
+    if size()>max_chars and coverage.pop('source_status',None) is not None:steps.append('source_status_dropped')
+    if size()>max_chars and 'preferences' in result:
+        from aries.workspace.agent_planner import bounded
+        result['preferences']=bounded(result['preferences'],max_chars=max_chars//6)
+        steps.append('preferences_shortened')
+        if size()>max_chars:
+            result.pop('preferences');result.setdefault('omitted_sections',[]).append('preferences')
+            steps.append('preferences_omitted')
+    coverage['compacted']=steps

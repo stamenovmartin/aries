@@ -171,7 +171,7 @@ async def cmd_worker(args) -> int:
     print(f"  cadence:                            every {st.get('check_every_s', '?')}s")
     print(f"  {DIM}the switch is the user's setting; the task state is this process{RESET}")
     if not on:
-        print(f"\n  turn it on:  ./scripts/aries settings-set automations.worker_enabled true")
+        print("\n  turn it on:  ./scripts/aries settings-set automations.worker_enabled true")
     print()
     return 0
 
@@ -727,7 +727,7 @@ async def cmd_brief(args) -> int:
             # Formatting the UTC value directly made a re-rendered brief claim it
             # was produced two hours before it was — the same two-clocks mistake
             # as the notification cooldown in Entry 003.
-            from datetime import datetime, timezone
+            from datetime import timezone
             when = ""
             if row.created_at:
                 local = row.created_at.replace(tzinfo=timezone.utc).astimezone()
@@ -820,7 +820,7 @@ async def cmd_version(args) -> int:
     src = info["source"]
     print(f"\n{BOLD}ARIES {info['aries']}{RESET}\n")
     print(f"  source            {src['described']}")
-    print(f"  working tree      " + ("dirty" if src["dirty"] else "clean"))
+    print("  working tree      " + ("dirty" if src["dirty"] else "clean"))
     print(f"  shell build       {src['shell_build']}")
     print(f"  control centre    {src['control_centre_build']}")
 
@@ -899,15 +899,15 @@ async def cmd_power(args) -> int:
 
     print(f"\n{BOLD}Power and Background{RESET}\n")
     print(f"  Background Mode    {_paint('on', COLOUR['ok']) if mode else 'off'}")
-    print(f"  Suspend inhibitor  "
+    print("  Suspend inhibitor  "
           + (_paint("active", COLOUR["ok"]) if inh["active"] else "inactive")
           + f"   {DIM}{inh['what']}/{inh['mode']}{RESET}")
     print(f"  Display            {disp['state']}  {DIM}{disp['detail']}{RESET}")
     off_after = disp["off_after_seconds"]
-    print(f"  Display off after  "
+    print("  Display off after  "
           + ("never" if off_after == 0 else f"{off_after // 60} min" if off_after else "unknown"))
     session = snap["system"]["session"]
-    print(f"  System             awake"
+    print("  System             awake"
           + (f"  {DIM}session {session.get('id')} · {'idle' if session.get('idle') else 'active'}{RESET}"
              if session.get("available") else ""))
     print()

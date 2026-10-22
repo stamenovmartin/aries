@@ -223,7 +223,7 @@ async def test_uninstall_removes_what_install_wrote():
                     "/usr/local/share/gnome-shell/modes/aries.json",
                     "/etc/systemd/user/gnome-session@aries.target.d/aries.session.conf"):
         check(f"install writes {literal}", literal in writes)
-        check(f"and uninstall removes it", literal in removes)
+        check("and uninstall removes it", literal in removes)
     check("the system extension is written",
           '/usr/local/share/gnome-shell/extensions/$UUID' in writes)
     check("and removed", '/usr/local/share/gnome-shell/extensions/$UUID' in removes)

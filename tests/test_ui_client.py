@@ -311,7 +311,7 @@ def test_power_status_renders_measured_state():
     }
     group = power_status(snapshot)
     titles = []
-    row = group.get_first_child()
+    group.get_first_child()
 
     def collect(widget):
         if isinstance(widget, Adw.ActionRow) or isinstance(widget, Adw.ExpanderRow):
@@ -409,7 +409,7 @@ if __name__ == "__main__":
         print(f"--- {name}")
         try:
             globals()[name]()
-        except Exception as exc:                       # noqa: BLE001
+        except Exception:                       # noqa: BLE001
             import traceback
             traceback.print_exc()
             _ok = False

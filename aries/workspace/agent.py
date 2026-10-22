@@ -454,6 +454,20 @@ async def _run(goal_id, goal, data):
             if len(data['steps']) >= limit:
                 agent['completion_feedback'] = 'Action budget exhausted without verified goal completion'
                 break
+            from aries import flags
+            if flags.enabled('ARIES_LOOP_GUARD'):
+                from aries.workspace import loop_guard
+                repeated = loop_guard.repeated(data['steps'], decision.capability, decision.arguments)
+                if repeated:
+                    message = (f"REPEATED_ACTION: {decision.capability} with the same arguments was proposed "
+                               f"{repeated['count']} times; stopped instead of replanning")
+                    agent['stop_reason'] = 'REPEATED_ACTION'
+                    agent['repeated_action'] = repeated
+                    metrics['repeated_action_stops'] = metrics.get('repeated_action_stops', 0) + 1
+                    agent['decisions'][-1]['error'] = {'code':'REPEATED_ACTION','message':message,
+                                                       'fingerprint':repeated['fingerprint'],'count':repeated['count']}
+                    await finish('partial' if any(e['verified'] for e in data['evidence']) else 'failed', message)
+                    return
             pending = {'step_id':uuid.uuid4().hex,'task_id':goal_id,'step_index':len(data['steps']),
                        'kind':'capability','request':decision.reason or decision.capability,
                        'planner_decision':decision.model_dump(),'capability':decision.capability,'args':decision.arguments,

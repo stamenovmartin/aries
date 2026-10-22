@@ -2,7 +2,7 @@
 import argparse,collections,hashlib,json,subprocess,time
 from datetime import datetime,timezone
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[2]
+ROOT=Path(__file__).resolve().parents[3]  # experiments/archive/stability-watch/watch.py
 UNITS=['aries-core.service','aries-voice.service','aries-local-model.service']
 def stamp():return datetime.now(timezone.utc).isoformat()
 def journal(*args):
