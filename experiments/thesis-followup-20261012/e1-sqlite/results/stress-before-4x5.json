@@ -1,0 +1,103 @@
+{
+ "label": "before-4x5",
+ "workers": 4,
+ "goals_per_worker": 5,
+ "steps_per_goal": 32,
+ "exit_codes": [
+  0,
+  0,
+  0,
+  0
+ ],
+ "wall_seconds": 20.19,
+ "goal_states": {
+  "partial": 19,
+  "running": 1
+ },
+ "goal_errors": 0,
+ "lock_log_lines": 0,
+ "lock_mentions_in_stderr": 0,
+ "background": {
+  "writes": 996,
+  "errors": 0,
+  "lock_log_lines": 0
+ },
+ "workers_detail": [
+  {
+   "worker": 0,
+   "states": [
+    "partial",
+    "partial",
+    "partial",
+    "partial",
+    "partial"
+   ],
+   "errors": [],
+   "lock_log_lines": [],
+   "writer_stats": {
+    "acquired": 980,
+    "contended": 0,
+    "timed_out": 0,
+    "max_wait_s": 0.0007214600045699626
+   },
+   "seconds": 17.13
+  },
+  {
+   "worker": 1,
+   "states": [
+    "partial",
+    "partial",
+    "partial",
+    "partial",
+    "partial"
+   ],
+   "errors": [],
+   "lock_log_lines": [],
+   "writer_stats": {
+    "acquired": 980,
+    "contended": 0,
+    "timed_out": 0,
+    "max_wait_s": 4.860399349126965e-05
+   },
+   "seconds": 17.84
+  },
+  {
+   "worker": 2,
+   "states": [
+    "partial",
+    "partial",
+    "partial",
+    "partial",
+    "partial"
+   ],
+   "errors": [],
+   "lock_log_lines": [],
+   "writer_stats": {
+    "acquired": 980,
+    "contended": 0,
+    "timed_out": 0,
+    "max_wait_s": 3.8744998164474964e-05
+   },
+   "seconds": 18.18
+  },
+  {
+   "worker": 3,
+   "states": [
+    "running",
+    "partial",
+    "partial",
+    "partial",
+    "partial"
+   ],
+   "errors": [],
+   "lock_log_lines": [],
+   "writer_stats": {
+    "acquired": 980,
+    "contended": 0,
+    "timed_out": 0,
+    "max_wait_s": 5.614900146611035e-05
+   },
+   "seconds": 19.28
+  }
+ ]
+}
