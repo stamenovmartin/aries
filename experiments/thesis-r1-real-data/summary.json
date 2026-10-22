@@ -1,0 +1,610 @@
+{
+ "label": "R1 family (Holm inside R1); secondary llama rows exploratory, outside Holm",
+ "nl2bash": {
+  "aries": {
+   "top1": {
+    "k": 229,
+    "n": 500,
+    "rate": 0.458,
+    "cp95": [
+     0.4137,
+     0.5028
+    ]
+   },
+   "macro_f1": 0.1921,
+   "macro_f1_boot95": [
+    0.163,
+    0.3197
+   ],
+   "oos_precision": {
+    "k": 126,
+    "n": 187,
+    "rate": 0.6738,
+    "cp95": [
+     0.6016,
+     0.7404
+    ]
+   },
+   "oos_recall": {
+    "k": 126,
+    "n": 307,
+    "rate": 0.4104,
+    "cp95": [
+     0.3549,
+     0.4677
+    ]
+   },
+   "predicted": {
+    "OUT_OF_SCOPE": 187,
+    "file.search": 149,
+    "file.list": 54,
+    "file.read": 40,
+    "file.write": 19,
+    "system.disk": 11,
+    "system.processes": 10,
+    "system.status": 7,
+    "input.clipboard_read": 6,
+    "file.metadata": 5,
+    "system.service_control": 3,
+    "system.storage": 2,
+    "file.exists": 2,
+    "browser.open": 2,
+    "browser.type": 1,
+    "notification.send": 1,
+    "desktop.launch": 1
+   }
+  },
+  "zeroshot_qwen": {
+   "top1": {
+    "k": 321,
+    "n": 500,
+    "rate": 0.642,
+    "cp95": [
+     0.5982,
+     0.6841
+    ]
+   },
+   "macro_f1": 0.3644,
+   "macro_f1_boot95": [
+    0.3065,
+    0.5365
+   ],
+   "oos_precision": {
+    "k": 201,
+    "n": 229,
+    "rate": 0.8777,
+    "cp95": [
+     0.8282,
+     0.9172
+    ]
+   },
+   "oos_recall": {
+    "k": 201,
+    "n": 307,
+    "rate": 0.6547,
+    "cp95": [
+     0.5986,
+     0.7078
+    ]
+   },
+   "predicted": {
+    "OUT_OF_SCOPE": 229,
+    "file.search": 134,
+    "file.list": 45,
+    "file.semantic_search": 18,
+    "file.read": 17,
+    "system.disk": 9,
+    "file.exists": 6,
+    "file.write": 6,
+    "system.service": 5,
+    "file.copy": 5,
+    "system.processes": 5,
+    "system.status": 4,
+    "file.metadata": 3,
+    "file.edit": 2,
+    "system.packages": 2,
+    "browser.open": 2,
+    "file.move": 2,
+    "input.type_text": 2,
+    "screen.read": 1,
+    "browser.read": 1,
+    "system.services": 1,
+    "desktop.launch": 1
+   }
+  },
+  "embedding": {
+   "top1": {
+    "k": 297,
+    "n": 500,
+    "rate": 0.594,
+    "cp95": [
+     0.5495,
+     0.6374
+    ]
+   },
+   "macro_f1": 0.0866,
+   "macro_f1_boot95": [
+    0.0839,
+    0.1431
+   ],
+   "oos_precision": {
+    "k": 266,
+    "n": 416,
+    "rate": 0.6394,
+    "cp95": [
+     0.5912,
+     0.6856
+    ]
+   },
+   "oos_recall": {
+    "k": 266,
+    "n": 307,
+    "rate": 0.8664,
+    "cp95": [
+     0.8232,
+     0.9024
+    ]
+   },
+   "predicted": {
+    "OUT_OF_SCOPE": 416,
+    "file.search": 63,
+    "file.copy": 10,
+    "file.move": 4,
+    "file.exists": 3,
+    "file.write": 1,
+    "system.disk": 1,
+    "browser.forward": 1,
+    "browser.download": 1
+   }
+  },
+  "bm25": {
+   "top1": {
+    "k": 307,
+    "n": 500,
+    "rate": 0.614,
+    "cp95": [
+     0.5698,
+     0.6569
+    ]
+   },
+   "macro_f1": 0.0635,
+   "macro_f1_boot95": [
+    0.0624,
+    0.1065
+   ],
+   "oos_precision": {
+    "k": 307,
+    "n": 499,
+    "rate": 0.6152,
+    "cp95": [
+     0.571,
+     0.6581
+    ]
+   },
+   "oos_recall": {
+    "k": 307,
+    "n": 307,
+    "rate": 1.0,
+    "cp95": [
+     0.9881,
+     1.0
+    ]
+   },
+   "predicted": {
+    "OUT_OF_SCOPE": 499,
+    "file.list": 1
+   }
+  },
+  "thresholds_from_dev": {
+   "embedding": {
+    "tau": 0.897,
+    "dev_top1": 64,
+    "dev_n": 100
+   },
+   "bm25": {
+    "tau": 13.048,
+    "dev_top1": 58,
+    "dev_n": 100
+   }
+  },
+  "router_only_in_vs_out": {
+   "correct": {
+    "k": 230,
+    "n": 500,
+    "rate": 0.46,
+    "cp95": [
+     0.4157,
+     0.5048
+    ]
+   },
+   "oos_precision": {
+    "k": 44,
+    "n": 51,
+    "rate": 0.8627,
+    "cp95": [
+     0.7374,
+     0.943
+    ]
+   },
+   "oos_recall": {
+    "k": 44,
+    "n": 307,
+    "rate": 0.1433,
+    "cp95": [
+     0.1061,
+     0.1876
+    ]
+   },
+   "oos_f1": 0.2458,
+   "oos_f1_boot95": [
+    0.1899,
+    0.3037
+   ],
+   "in_scope_accuracy": {
+    "k": 186,
+    "n": 193,
+    "rate": 0.9637,
+    "cp95": [
+     0.9267,
+     0.9853
+    ]
+   }
+  },
+  "aries_llama_secondary": {
+   "top1": {
+    "k": 100,
+    "n": 500,
+    "rate": 0.2,
+    "cp95": [
+     0.1658,
+     0.2378
+    ]
+   },
+   "macro_f1": 0.2125,
+   "macro_f1_boot95": [
+    0.1472,
+    0.3548
+   ],
+   "oos_precision": {
+    "k": 51,
+    "n": 68,
+    "rate": 0.75,
+    "cp95": [
+     0.6302,
+     0.8471
+    ]
+   },
+   "oos_recall": {
+    "k": 51,
+    "n": 307,
+    "rate": 0.1661,
+    "cp95": [
+     0.1263,
+     0.2126
+    ]
+   },
+   "predicted": {
+    "file.list": 283,
+    "OUT_OF_SCOPE": 68,
+    "file.read": 47,
+    "browser.open": 37,
+    "file.search": 37,
+    "system.status": 7,
+    "file.write": 7,
+    "file.exists": 5,
+    "system.processes": 4,
+    "system.storage": 3,
+    "file.metadata": 1,
+    "task.inspect": 1
+   },
+   "paired_vs_aries_qwen": {
+    "b_first_only": 48,
+    "c_second_only": 177,
+    "p_two_sided_exact": 1.4657622178148305e-18
+   }
+  },
+  "gold_label_counts_test": {
+   "OUT_OF_SCOPE": 307,
+   "file.search": 141,
+   "file.list": 26,
+   "file.read": 13,
+   "file.metadata": 4,
+   "system.storage": 2,
+   "system.processes": 2,
+   "system.status": 1,
+   "system.disk": 1,
+   "system.packages": 1,
+   "browser.search": 1,
+   "file.exists": 1
+  }
+ },
+ "clinc150": {
+  "embedding_threshold_from_val": {
+   "tau": 0.888,
+   "val_oos_f1": 0.775,
+   "val_n": 3100
+  },
+  "router_A1": {
+   "correct": {
+    "k": 277,
+    "n": 600,
+    "rate": 0.4617,
+    "cp95": [
+     0.4212,
+     0.5025
+    ]
+   },
+   "oos_precision": {
+    "k": 174,
+    "n": 271,
+    "rate": 0.6421,
+    "cp95": [
+     0.5818,
+     0.6992
+    ]
+   },
+   "oos_recall": {
+    "k": 174,
+    "n": 400,
+    "rate": 0.435,
+    "cp95": [
+     0.3858,
+     0.4852
+    ]
+   },
+   "oos_f1": 0.5186,
+   "oos_f1_boot95": [
+    0.4723,
+    0.5648
+   ],
+   "in_scope_accuracy": {
+    "k": 103,
+    "n": 200,
+    "rate": 0.515,
+    "cp95": [
+     0.4435,
+     0.5861
+    ]
+   }
+  },
+  "router_A0": {
+   "correct": {
+    "k": 262,
+    "n": 600,
+    "rate": 0.4367,
+    "cp95": [
+     0.3965,
+     0.4774
+    ]
+   },
+   "oos_precision": {
+    "k": 90,
+    "n": 118,
+    "rate": 0.7627,
+    "cp95": [
+     0.6756,
+     0.8362
+    ]
+   },
+   "oos_recall": {
+    "k": 90,
+    "n": 400,
+    "rate": 0.225,
+    "cp95": [
+     0.185,
+     0.2691
+    ]
+   },
+   "oos_f1": 0.3475,
+   "oos_f1_boot95": [
+    0.2945,
+    0.397
+   ],
+   "in_scope_accuracy": {
+    "k": 172,
+    "n": 200,
+    "rate": 0.86,
+    "cp95": [
+     0.8041,
+     0.9049
+    ]
+   }
+  },
+  "zeroshot_qwen": {
+   "correct": {
+    "k": 336,
+    "n": 600,
+    "rate": 0.56,
+    "cp95": [
+     0.5192,
+     0.6002
+    ]
+   },
+   "oos_precision": {
+    "k": 235,
+    "n": 334,
+    "rate": 0.7036,
+    "cp95": [
+     0.6515,
+     0.7521
+    ]
+   },
+   "oos_recall": {
+    "k": 235,
+    "n": 400,
+    "rate": 0.5875,
+    "cp95": [
+     0.5375,
+     0.6362
+    ]
+   },
+   "oos_f1": 0.6403,
+   "oos_f1_boot95": [
+    0.5986,
+    0.6817
+   ],
+   "in_scope_accuracy": {
+    "k": 101,
+    "n": 200,
+    "rate": 0.505,
+    "cp95": [
+     0.4336,
+     0.5763
+    ]
+   }
+  },
+  "embedding": {
+   "correct": {
+    "k": 398,
+    "n": 600,
+    "rate": 0.6633,
+    "cp95": [
+     0.624,
+     0.7011
+    ]
+   },
+   "oos_precision": {
+    "k": 398,
+    "n": 598,
+    "rate": 0.6656,
+    "cp95": [
+     0.6262,
+     0.7033
+    ]
+   },
+   "oos_recall": {
+    "k": 398,
+    "n": 400,
+    "rate": 0.995,
+    "cp95": [
+     0.9821,
+     0.9994
+    ]
+   },
+   "oos_f1": 0.7976,
+   "oos_f1_boot95": [
+    0.7692,
+    0.8235
+   ],
+   "in_scope_accuracy": {
+    "k": 0,
+    "n": 200,
+    "rate": 0.0,
+    "cp95": [
+     0.0,
+     0.0183
+    ]
+   }
+  },
+  "router_A1_llama_secondary": {
+   "correct": {
+    "k": 232,
+    "n": 600,
+    "rate": 0.3867,
+    "cp95": [
+     0.3475,
+     0.4269
+    ]
+   },
+   "oos_precision": {
+    "k": 46,
+    "n": 60,
+    "rate": 0.7667,
+    "cp95": [
+     0.6396,
+     0.8662
+    ]
+   },
+   "oos_recall": {
+    "k": 46,
+    "n": 400,
+    "rate": 0.115,
+    "cp95": [
+     0.0854,
+     0.1504
+    ]
+   },
+   "oos_f1": 0.2,
+   "oos_f1_boot95": [
+    0.151,
+    0.25
+   ],
+   "in_scope_accuracy": {
+    "k": 186,
+    "n": 200,
+    "rate": 0.93,
+    "cp95": [
+     0.8853,
+     0.9612
+    ]
+   }
+  },
+  "groups": {
+   "supported": 200,
+   "unsupported-intent": 200,
+   "oos": 200
+  }
+ },
+ "tests": {
+  "H-R1a": {
+   "dataset": "nl2bash-test",
+   "first": "aries",
+   "second": "embedding",
+   "b_first_only": 97,
+   "c_second_only": 165,
+   "p_two_sided_exact": 3.168107392863938e-05,
+   "p_holm": 9.504322178591814e-05,
+   "significant_holm_0_05": true
+  },
+  "H-R1b": {
+   "dataset": "nl2bash-test",
+   "first": "aries",
+   "second": "bm25",
+   "b_first_only": 103,
+   "c_second_only": 181,
+   "p_two_sided_exact": 4.296603121448604e-06,
+   "p_holm": 1.7186412485794417e-05,
+   "significant_holm_0_05": true
+  },
+  "H-R1c": {
+   "dataset": "nl2bash-test",
+   "first": "aries",
+   "second": "zeroshot_qwen",
+   "b_first_only": 65,
+   "c_second_only": 157,
+   "p_two_sided_exact": 5.781461057657303e-10,
+   "p_holm": 2.8907305288286515e-09,
+   "significant_holm_0_05": true
+  },
+  "H-R1d": {
+   "dataset": "clinc150",
+   "first": "router_A1",
+   "second": "router_A0",
+   "b_first_only": 90,
+   "c_second_only": 75,
+   "p_two_sided_exact": 0.2757140572298222,
+   "p_holm": 0.2757140572298222,
+   "significant_holm_0_05": false
+  },
+  "H-R1e": {
+   "dataset": "clinc150",
+   "first": "router_A1",
+   "second": "embedding",
+   "b_first_only": 103,
+   "c_second_only": 224,
+   "p_two_sided_exact": 1.9119189357510367e-11,
+   "p_holm": 1.147151361450622e-10,
+   "significant_holm_0_05": true
+  },
+  "H-R1f": {
+   "dataset": "clinc150",
+   "first": "router_A1",
+   "second": "zeroshot_qwen",
+   "b_first_only": 80,
+   "c_second_only": 139,
+   "p_two_sided_exact": 8.105624271900317e-05,
+   "p_holm": 0.00016211248543800634,
+   "significant_holm_0_05": true
+  }
+ }
+}
