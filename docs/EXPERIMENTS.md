@@ -348,6 +348,8 @@ or `must-not-retrieve`.
 ### `orchestrator/`, `dynamic_agents/`, `model_router/`, `evolution/`
 
 Designs to be written when each milestone starts, before its implementation.
+The empty placeholder folders were removed on 2026-10-22; the owed evaluations are
+listed in `experiments/archive/INDEX.md`, and each folder is recreated when its work starts.
 The comparison that matters for `dynamic_agents` is stated early because it is
 the one most likely to flatter itself: single agent vs fixed multi-agent vs
 dynamic team, measuring whether a dynamic team *helps* or merely spends more
