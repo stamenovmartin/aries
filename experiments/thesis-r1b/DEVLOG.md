@@ -42,3 +42,15 @@ C3: 70/100, in scope 23/42, false actions 11, planner `fail` 0, invalid 3.
 | C1 | 106 | 28 | 0 |
 | C2 | 105 | 33 | 0 |
 | zero-shot | 98 | — | — |
+| C3 | 107 | 27 | 0 |
+
+## Decision (frozen before any R1b run)
+
+Rule: the configuration with the highest sum of nl2bash-dev top-1 and clinc-dev act/abstain correct.
+C1 = 74 + 106 = 180, C3 = 70 + 107 = 177, C2 = 63 + 105 = 168, C0 = 53 + 89 = 142 (zero-shot 72 + 98 = 170).
+**Treatment = C1** (`configs.json` → `treatment`). Exploratory on the R1b samples: C0, G, S, C3.
+
+What development shows about C1, stated before R1b: it refuses much more than C0 and gets fewer in-scope
+requests right (NL2Bash dev 19/42 against 25/42 for C0 and zero-shot); its planner refused 14 of the 39 dev
+requests it planned. Its gain comes from abstaining correctly, which is also where the always-OUT_OF_SCOPE
+reference scores (58/100, 94/150).
