@@ -58,7 +58,7 @@ preregistration exists and no measurement does. Full follow-up results: [`experi
 | Semantic memory: embedder swapped to bge-m3 | same | 45 rows, 25 probes | exploratory | [`experiments/memory/summary-bge-m3.json`](experiments/memory/summary-bge-m3.json) |
 | Learning: task-experience retrieval, `focused-v2` vs `overlap-v1` | developer-labelled queries (regression fixture) | 20 queries | descriptive | [`docs/LEARNING_COMPARISON.md`](docs/LEARNING_COMPARISON.md) |
 | Interests: news preference relevance checks | explicit user preferences | 3 interests, 3 checks | descriptive | [`experiments/interests/`](experiments/interests/) |
-| News ranking on MIND-small: ARIES interest profile vs 7 baselines, plus online learning | public dataset (Microsoft) | 73,152 impressions, 50,000 users | exploratory: **ARIES beats every baseline** (AUC 0.613 vs 0.578); learning adds +0.0001 | [`experiments/iis/real-data/mind/`](experiments/iis/real-data/mind/) |
+| News ranking on MIND-small: ARIES interest profile vs 7 baselines, plus online learning | public dataset (Microsoft) | 73,152 impressions, 50,000 users | exploratory: **ARIES beats every baseline** (AUC 0.613; best baseline, embedding, 0.600); learning adds +0.0001 | [`experiments/iis/real-data/mind/`](experiments/iis/real-data/mind/) |
 | Memory retrieval on LoCoMo: annotated evidence turns in the top 5 | public dataset (Snap Research) | 10 conversations, 1,982 questions | exploratory: **BM25 beats ARIES memory** (hit@5 0.500 vs 0.377) | [`experiments/iis/real-data/locomo/`](experiments/iis/real-data/locomo/) |
 
 ---
