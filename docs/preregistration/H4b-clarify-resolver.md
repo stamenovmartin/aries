@@ -294,3 +294,14 @@ them only programmatically, and the dry run prints counts only (40 ambiguous, 40
     fails. With two twins over-asked in both conditions, it is 9.93, which passes.
 
   The registered rule (upper limit below 10 points) decides; this note changes nothing.
+
+## Amendment 3 (2026-10-22): the measurement script wakes an already blanked screen, before any measurement
+
+- **What changed:** `h4b-runs/run-h4b.sh` now calls `org.gnome.ScreenSaver.SetActive false` once, after setting idle-delay 0
+  and before the first run, and logs the screensaver state after the wake. It is the same step the H5 pilot
+  script got in `12e5fc6`.
+- **Why:** the first H5 pilot (`h5-runs/pilot-h5-refused-1.log`) was refused by the runner's preflight because the
+  screen was blanked (not locked; LockedHint=no, lock disabled). Nothing was submitted in that attempt.
+- **What did not change:** the runner, the conditions, the items and their SHA-256s, the analysis, the outcome
+  rules and the criteria. The runner's own refusal on a locked or blanked session is kept.
+- **Order:** H5 is measured first and H4b directly after it, each with its own script, on one commit.
