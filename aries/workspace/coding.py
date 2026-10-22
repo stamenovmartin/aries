@@ -7,7 +7,6 @@ import os
 import signal
 import time
 import uuid
-from pathlib import Path
 
 
 async def sandbox(project, *, timeout=15):

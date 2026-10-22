@@ -606,7 +606,6 @@ async def test_no_launcher_execs_itself():
     """M13-A. `scripts/aries-ui` contained `exec "$HOME/aries/scripts/aries-ui"`
     — itself. An infinite loop, no window, ever, for days, while 1511 assertions
     stayed green. A launcher is not a component, it is the seam between them."""
-    import re
     scripts = os.path.join(ROOT, "scripts")
     offences = []
     for name in sorted(os.listdir(scripts)):
