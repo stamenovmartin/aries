@@ -140,3 +140,21 @@ running H5 and H4b measurements end (the local GPU is shared). 5. Analysis scrip
 The registration commit `837f27d` (2026-10-22T07:18:32Z) was made locally; the preparing agent is not allowed to
 push, so the push is done by the owner. Step 1 of the Procedure therefore reads: this file is committed before
 labelling starts and pushed by the owner **before any ARIES or baseline run**. Nothing else changes.
+
+## Amendment 2 (2026-10-22, before any label exists): the label space is the planner's 58 capabilities
+
+- **What was wrong:** the label space above lists the 15 capabilities defined in `aries/workspace/registry.py`.
+  The frozen planner does not choose among those 15: once the application is imported, its scope is **58**
+  capabilities (the frozen planner preflight checks `expected_58_capabilities`). Scoring a planner that can
+  answer `file.move` or `system.services` against 15 labels would count correct choices as wrong.
+- **Change:** the label space is the 58 capabilities of the frozen planner run manifest
+  (`experiments/thesis-final-20261006/planner/runs/20261006T173518.677345Z/run-manifest.json`, SHA-256
+  `81c4e7164a8d83e72ec87e28db44ec04f81cfb8d4e1956c049c7f301ba27125d`), names and descriptions verbatim, plus
+  `OUT_OF_SCOPE` = 59 labels. The list is committed as `experiments/thesis-r1-real-data/capabilities.json`.
+  Three pairs share one description and are one class for scoring and kappa: `desktop.windows`/`desktop.observe`,
+  `file.move`/`file.rename`, `screen.capture`/`screen.screenshot`. The ARIES prediction rule now accepts any of
+  the 58. The embedding and BM25 baselines and the zero-shot prompt use the same 58 descriptions.
+- **The discarded start:** labelling had started with the 15-capability list. It was stopped after about two
+  minutes; only two Labeler-B batch transcripts existed and no label file had been written. They were moved,
+  unread, to `~/data-ext/r1/discarded-15cap/` and are not used. All labelling restarts in new sessions.
+- **Unchanged:** samples, seeds, labelers, instructions (apart from the list), adjudication, metrics, tests.
