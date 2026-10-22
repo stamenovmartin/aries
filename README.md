@@ -21,6 +21,9 @@ filled in.
 > | IIS results on public data | [`experiments/iis/real-data/README.md`](experiments/iis/real-data/README.md) |
 > | Preregistered hypotheses | [`docs/preregistration/`](docs/preregistration/) |
 > | Every document | [`docs/INDEX.md`](docs/INDEX.md) |
+>
+> **Branches.** `main` is the whole project. [`diplomska`](https://github.com/stamenovmartin/aries/tree/diplomska) and [`iis`](https://github.com/stamenovmartin/aries/tree/iis) hold the
+> same code, each with a front page that leads straight to that project's results.
 
 ## Evaluation map
 
