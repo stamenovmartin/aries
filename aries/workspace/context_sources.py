@@ -5,7 +5,7 @@ are checked on every assembly, including when content was cached earlier.
 """
 import json
 import re
-from datetime import datetime,timezone,timedelta
+from datetime import datetime,timezone
 from sqlalchemy import select
 from aries.workspace.context_engine import Item,required_sources
 from aries.workspace.retrieval import stems

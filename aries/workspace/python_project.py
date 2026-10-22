@@ -1,7 +1,6 @@
 """A fixed, inspectable first development workflow; no arbitrary code execution."""
 import asyncio
 import json
-from pathlib import Path
 
 SOURCE = 'import json\nprint(json.dumps({"message": "Hello from ARIES", "total": sum(range(1, 11))}))\n'
 EXPECTED = {"message": "Hello from ARIES", "total": 55}

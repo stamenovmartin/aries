@@ -41,7 +41,7 @@ belongs on the screen next to the summary.
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 # Marked with characters that cannot occur in the content, because they are
 # stripped from it on the way in. A fence an attacker can close is not a fence.

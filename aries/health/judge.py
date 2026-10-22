@@ -23,7 +23,7 @@ branch in a growing if-tree.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Callable
 
 from aries.health.baseline import SUPPRESSIBLE, Baseline

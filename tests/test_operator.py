@@ -11,7 +11,6 @@ with no window, a window with no process, no window list at all.
 """
 from __future__ import annotations
 
-import asyncio
 from dataclasses import replace
 import os
 import sys
@@ -538,7 +537,6 @@ async def test_locked_session_is_not_an_update_request():
 
 async def test_desktop_observation_and_focus_are_verified():
     from unittest.mock import patch
-    import json
     for payload in ['{}','[]','{"windows":[{"id":"1","focused":"false"}]}']:
         with patch.object(desktop,'_call_shell',return_value=(payload,'')):
             check('malformed window list is not an empty desktop '+payload,desktop.read_windows()[0] is None)

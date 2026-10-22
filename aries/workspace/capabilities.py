@@ -1,14 +1,12 @@
 """Twenty bounded capabilities. Arbitrary shell text is not a capability."""
 import asyncio
 import configparser
-import hashlib
 import json
 import os
 from pathlib import Path
 import re
-import shlex
 import shutil
-from urllib.parse import quote, urlsplit
+from urllib.parse import quote
 
 # This catalogue drives the UI, parser, tests and evaluation inventory.
 CATALOGUE = (
