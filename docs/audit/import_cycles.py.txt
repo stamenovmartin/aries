@@ -1,0 +1,64 @@
+import ast, sys, pathlib, collections
+NOANC = sys.argv[1]=='--no-ancestor'
+args=sys.argv[2:] if NOANC else sys.argv[1:]
+root = pathlib.Path(args[0]); pkgs = args[1:]
+mods = {}
+for pkg in pkgs:
+    for p in (root/pkg).rglob('*.py'):
+        rel = p.relative_to(root).with_suffix('')
+        parts = list(rel.parts)
+        if parts[-1] == '__init__': parts = parts[:-1]
+        mods['.'.join(parts)] = p
+def resolve(name):
+    while name and name not in mods:
+        name = name.rpartition('.')[0]
+    return name or None
+def edges(toplevel_only):
+    g = collections.defaultdict(set)
+    for m, p in mods.items():
+        tree = ast.parse(p.read_text(), str(p))
+        ispkg = p.name == '__init__.py'
+        nodes = tree.body if toplevel_only else list(ast.walk(tree))
+        if toplevel_only:  # include if/try at module level, skip TYPE_CHECKING
+            stack=list(tree.body); nodes=[]
+            while stack:
+                n=stack.pop()
+                if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)): continue
+                if isinstance(n,ast.If) and 'TYPE_CHECKING' in ast.unparse(n.test): continue
+                nodes.append(n); stack.extend(ast.iter_child_nodes(n))
+        for n in nodes:
+            targets=[]
+            if isinstance(n, ast.Import): targets=[a.name for a in n.names]
+            elif isinstance(n, ast.ImportFrom):
+                if n.level:
+                    base = m.split('.') if ispkg else m.split('.')[:-1]
+                    base = base[:len(base)-(n.level-1)]
+                    b='.'.join(base+([n.module] if n.module else []))
+                else: b=n.module
+                targets=[b+'.'+a.name for a in n.names]+[b]
+            for t in targets:
+                r=resolve(t)
+                if r and r!=m and not (NOANC and m.startswith(r+'.')): g[m].add(r)
+    return g
+def scc(g):
+    idx={};low={};st=[];on=set();out=[];c=[0]
+    sys.setrecursionlimit(100000)
+    def sc(v):
+        idx[v]=low[v]=c[0];c[0]+=1;st.append(v);on.add(v)
+        for w in g.get(v,()):
+            if w not in idx: sc(w);low[v]=min(low[v],low[w])
+            elif w in on: low[v]=min(low[v],idx[w])
+        if low[v]==idx[v]:
+            comp=[]
+            while True:
+                w=st.pop();on.discard(w);comp.append(w)
+                if w==v:break
+            if len(comp)>1: out.append(sorted(comp))
+    for v in list(mods): 
+        if v not in idx: sc(v)
+    return out
+for label,top in (('module-level imports (excluding function bodies and TYPE_CHECKING)',True),('all imports including function-local',False)):
+    g=edges(top); comps=scc(g)
+    print(f'## {label}: {len(mods)} modules, {sum(len(v) for v in g.values())} edges, {len(comps)} SCCs with >1 module')
+    for c in sorted(comps,key=len,reverse=True):
+        print(f'- size {len(c)}: '+', '.join(c[:40])+(' ...' if len(c)>40 else ''))
