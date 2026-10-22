@@ -1,0 +1,7 @@
+# source: experiments/thesis-followup-20261012/h4b-runs/summary-20261022T093916Z.json (sha256 b8df0cd3c656, commit efc3188); experiments/thesis-followup-20261012/h5-runs/summary-20261022T070927Z.json (sha256 2715666d053d, commit efc3188); experiments/thesis-followup-20261012/h6-run/summary.json (sha256 d25683fc14b8, commit 7e5c2b2); experiments/thesis-followup-20261012/h8/runs/20261018T154826Z-hardened/summary.json (sha256 a9d43181722a, commit 1d03163) | label: confirmatory family, Holm at alpha 0.05
+# note: each p is checked against its raw data by the hypothesis table above it (h4b_clarification, h5_completion, h6_abstention, h8_fault_injection)
+hypothesis,test,p,p_holm,null at 0.05 (Holm)
+H4b,two-sided exact McNemar,1,1,not rejected
+H5,one-sided exact McNemar,0.25,0.5,not rejected
+H6,one-sided exact McNemar,1.02e-06,3.06e-06,rejected
+H8,one-sided exact McNemar,1.16e-10,4.66e-10,rejected

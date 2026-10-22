@@ -36,10 +36,8 @@ module is allowed to shortcut them.
 """
 from __future__ import annotations
 
-import json
 import logging
 import time
-from datetime import datetime
 
 from agentic_core.evaluators.base import Evaluator, issue
 from agentic_core.orchestrator.lifecycle import LifecyclePolicy

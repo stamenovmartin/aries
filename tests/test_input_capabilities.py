@@ -6,7 +6,6 @@ person was typing. The guard logic is therefore driven with fake AT-SPI nodes, t
 way tests/test_accessibility.py drives the read-only bridge, and the live clipboard
 path saves the real clipboard and puts it back.
 """
-import asyncio
 import hashlib
 import sys
 from pathlib import Path

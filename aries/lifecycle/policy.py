@@ -216,6 +216,20 @@ POLICIES: tuple[Retention, ...] = (
               "Past briefings. Small, and occasionally worth looking back at.",
               default_days=None),
 
+    # Found by tests/test_lifecycle.py on 2026-10-22 (docs/AUDIT.md 3.1): four
+    # tables shipped after 2026-09-17 with no decision. Declared as what the code
+    # already does — none of them has ever been deleted from — so declaring them
+    # changes no deletion. A window for the budget tables is owed, not decided here.
+    Retention("aries_learning_controls", MEMORY,
+              "The undo history of learning controls (what was changed, from what, "
+              "and which entry undoes which). An undo record that expired would make "
+              "a change impossible to take back.", default_days=None),
+    Retention("aries_learning_evidence_uses", MEMORY,
+              "Receipts that stop the learning loop from applying the identical "
+              "evidence set twice. They must live as long as the learning changes "
+              "they guard, which are kept. The table has no timestamp column; "
+              "`id` names its insertion order only and is never used to delete.",
+              timestamp_column="id", default_days=None),
     # ── the engine's own tables ─────────────────────────────────────────────
     #
     # Found by the test that refuses to let a table go undecided: seventeen
@@ -291,6 +305,20 @@ POLICIES: tuple[Retention, ...] = (
               dependants=("experiment results",), minimum_days=30),
 
     # ── audit: never automatically ──────────────────────────────────────────
+    # The goal budget ledger: what each goal was allowed and what it consumed,
+    # call by call. A record of what ARIES spent, and never deleted today (no code
+    # path deletes from either table). An operational window would be a new
+    # decision with a deletion behind it; aries_goal_budgets would first need a
+    # timestamp column (`deadline` is a float epoch and is named here only because
+    # the declaration must name an existing column).
+    Retention("aries_goal_budgets", AUDIT,
+              "Per-goal limits and consumption (model calls, tokens, tool calls, "
+              "cost). The accounting of what ARIES spent on each goal.",
+              timestamp_column="deadline", default_days=None),
+    Retention("aries_budget_reservations", AUDIT,
+              "Each reserved and settled model, tool or verification call of a "
+              "goal, with measured tokens and cost. The line items of that ledger.",
+              default_days=None),
     Retention("audit_events", AUDIT,
               "The record of every consequential act. Never deleted on a timer: "
               "§29 requires that nothing ARIES does be invisible, and a cleaner "

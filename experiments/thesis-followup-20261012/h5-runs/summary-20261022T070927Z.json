@@ -1,0 +1,208 @@
+{
+ "runs": [
+  "20261022T070927Z-r1-treatment",
+  "20261022T073327Z-r2-control",
+  "20261022T075923Z-r3-treatment",
+  "20261022T082337Z-r4-control",
+  "20261022T084928Z-r5-treatment",
+  "20261022T091320Z-r6-control"
+ ],
+ "commit": "1f4f4296b95eff62c13b31ba658e29be44038c15",
+ "primary": {
+  "b_treatment_only": 2,
+  "c_control_only": 0,
+  "n_goals": 15,
+  "correct_done_majority": {
+   "treatment": 2,
+   "control": 0
+  },
+  "p_one_sided_exact": 0.25,
+  "holm_adjusted_p": "in the family report"
+ },
+ "criteria": {
+  "criterion_1_correct_done_ge_10_of_15": {
+   "treatment": 2,
+   "n": 15,
+   "met": false
+  },
+  "criterion_2_no_N_done_in_any_treatment_run": {
+   "done_runs": 3,
+   "n_runs": 30,
+   "met": false
+  },
+  "criterion_3_heldout_no_drop_gt_2": {
+   "treatment_pass": 30,
+   "control_pass": 30,
+   "n": 49,
+   "met": true
+  }
+ },
+ "secondary": {
+  "treatment": {
+   "false_done_item_runs": {
+    "k": 12,
+    "n": 75,
+    "rate": 0.16,
+    "ci95": [
+     0.0855,
+     0.2628
+    ]
+   },
+   "G_correct_done_by_goal_type_runs": {
+    "read": {
+     "k": 0,
+     "n": 15,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.218
+     ]
+    },
+    "list": {
+     "k": 3,
+     "n": 15,
+     "rate": 0.2,
+     "ci95": [
+      0.0433,
+      0.4809
+     ]
+    },
+    "exists": {
+     "k": 3,
+     "n": 15,
+     "rate": 0.2,
+     "ci95": [
+      0.0433,
+      0.4809
+     ]
+    }
+   },
+   "N_done_by_control_type_runs": {
+    "wrong_file": {
+     "k": 0,
+     "n": 12,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.2646
+     ]
+    },
+    "missing_evidence": {
+     "k": 3,
+     "n": 9,
+     "rate": 0.3333,
+     "ci95": [
+      0.0749,
+      0.7007
+     ]
+    },
+    "changed_after_read": {
+     "k": 0,
+     "n": 9,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.3363
+     ]
+    }
+   },
+   "contract_source_G_runs": {
+    "none": 18,
+    "fast path": 24,
+    "typed step": 3
+   },
+   "typed_rejections_G_runs": {
+    "none (typed rejected: path does not occur verbatim in the request)": 15
+   },
+   "end_path_contract_not_done_G_runs": {
+    "budget exhausted without a finish": 15
+   },
+   "change_hook_fired_runs": {
+    "false": 9
+   },
+   "heldout_pass_majority": 30,
+   "heldout_label": "discovered by diagnosis, fixed, measured on the same fixture"
+  },
+  "control": {
+   "false_done_item_runs": {
+    "k": 3,
+    "n": 75,
+    "rate": 0.04,
+    "ci95": [
+     0.0083,
+     0.1125
+    ]
+   },
+   "G_correct_done_by_goal_type_runs": {
+    "read": {
+     "k": 0,
+     "n": 15,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.218
+     ]
+    },
+    "list": {
+     "k": 0,
+     "n": 15,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.218
+     ]
+    },
+    "exists": {
+     "k": 0,
+     "n": 15,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.218
+     ]
+    }
+   },
+   "N_done_by_control_type_runs": {
+    "wrong_file": {
+     "k": 0,
+     "n": 12,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.2646
+     ]
+    },
+    "missing_evidence": {
+     "k": 0,
+     "n": 9,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.3363
+     ]
+    },
+    "changed_after_read": {
+     "k": 0,
+     "n": 9,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.3363
+     ]
+    }
+   },
+   "contract_source_G_runs": {
+    "none": 45
+   },
+   "typed_rejections_G_runs": {},
+   "end_path_contract_not_done_G_runs": {},
+   "change_hook_fired_runs": {
+    "false": 9
+   },
+   "heldout_pass_majority": 30,
+   "heldout_label": "discovered by diagnosis, fixed, measured on the same fixture"
+  }
+ },
+ "label": "confirmatory (Holm family H4b/H5/H6/H8); secondary descriptive",
+ "limitation": "items written by OpenAI Codex (gpt-6-astra), not a person (H5 Amendment 2)"
+}

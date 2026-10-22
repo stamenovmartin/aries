@@ -1,5 +1,4 @@
 """Bridge compatibility and exact-state negative controls; no live claims."""
-import asyncio
 import json
 import sys
 from pathlib import Path

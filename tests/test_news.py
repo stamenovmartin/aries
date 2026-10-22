@@ -140,7 +140,7 @@ async def test_relevance_decides_delivery():
         ("Local bakery opens", "https://x.com/2", "bread and pastries"),
     ])
     await _setup(feeds={"Mix": "/mix"})
-    out = await run_automation("aries.news", trigger="manual")
+    await run_automation("aries.news", trigger="manual")
     async with async_session() as db:
         rows = {r.title: r for r in (await db.execute(select(AriesNewsItem))).scalars().all()}
     check("a relevant item is delivered", rows["AI model released"].disposition == "delivered")
@@ -186,7 +186,7 @@ async def test_the_briefing_cap_applies_to_everything():
                             for i in range(30)])
     await _setup(topics=(("ai", 0.9, None), ("agents", 0.85, None)),
                  feeds={"Many": "/many"}, news__max_items_per_briefing=5)
-    out = await run_automation("aries.news", trigger="manual")
+    await run_automation("aries.news", trigger="manual")
     async with async_session() as db:
         delivered = (await db.execute(select(AriesNewsItem).where(
             AriesNewsItem.disposition == "delivered"))).scalars().all()

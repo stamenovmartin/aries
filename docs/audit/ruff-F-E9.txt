@@ -1,0 +1,108 @@
+aries/api/routes.py:643:35: F401 [*] `aries.news.models.AriesNewsItem` imported but unused
+aries/api/routes.py:1781:49: F821 Undefined name `A`
+aries/api/routes.py:1781:53: F821 Undefined name `B`
+aries/api/routes.py:1787:40: F401 [*] `aries.workspace.models.WorkspaceGoal` imported but unused
+aries/api/routes.py:1789:45: F401 [*] `aries.intelligence.tracking.record` imported but unused
+aries/api/routes.py:1790:12: F401 [*] `os` imported but unused
+aries/cli.py:174:15: F541 [*] f-string without any placeholders
+aries/cli.py:730:34: F401 [*] `datetime.datetime` imported but unused
+aries/cli.py:823:11: F541 [*] f-string without any placeholders
+aries/cli.py:902:11: F541 [*] f-string without any placeholders
+aries/cli.py:907:11: F541 [*] f-string without any placeholders
+aries/cli.py:910:11: F541 [*] f-string without any placeholders
+aries/connect/untrusted.py:44:36: F401 [*] `dataclasses.field` imported but unused
+aries/health/automation.py:39:8: F401 [*] `json` imported but unused
+aries/health/automation.py:42:22: F401 [*] `datetime.datetime` imported but unused
+aries/health/automation.py:124:5: F841 Local variable `detail` is assigned to but never used
+aries/health/judge.py:26:36: F401 [*] `dataclasses.field` imported but unused
+aries/intelligence/__init__.py:15:27: F401 `.settings` imported but unused; consider removing, adding to `__all__`, or using a redundant alias
+aries/intelligence/router.py:2:16: F401 [*] `json` imported but unused
+aries/learning/__init__.py:11:28: F401 `aries.learning.controls` imported but unused; consider removing, adding to `__all__`, or using a redundant alias
+aries/learning/__init__.py:12:28: F401 `aries.learning.evidence_use` imported but unused; consider removing, adding to `__all__`, or using a redundant alias
+aries/learning/feedback.py:56:36: F401 [*] `dataclasses.field` imported but unused
+aries/learning/loop.py:41:32: F401 [*] `datetime.timedelta` imported but unused
+aries/learning/loop.py:49:39: F401 [*] `aries.learning.statistics.Interval` imported but unused
+aries/learning/loop.py:50:31: F401 [*] `aries.news.models.AriesNewsItem` imported but unused
+aries/learning/reversal.py:57:24: F401 [*] `sqlalchemy.Boolean` imported but unused
+aries/news/automation.py:55:54: F401 [*] `aries.automations.genome.record_run` imported but unused
+aries/news/catalogue.py:25:36: F401 [*] `dataclasses.field` imported but unused
+aries/operator/plan.py:42:8: F401 [*] `json` imported but unused
+aries/settings/service.py:50:35: F401 [*] `aries.settings.schema.SettingDef` imported but unused
+aries/sources/models.py:29:43: F401 [*] `sqlalchemy.Float` imported but unused
+aries/sources/types.py:37:36: F401 [*] `dataclasses.field` imported but unused
+aries/workspace/__init__.py:2:29: F401 `aries.workspace.models` imported but unused; consider removing, adding to `__all__`, or using a redundant alias
+aries/workspace/__init__.py:2:37: F401 `aries.workspace.settings` imported but unused; consider removing, adding to `__all__`, or using a redundant alias
+aries/workspace/__init__.py:3:29: F401 `aries.workspace.capabilities` imported but unused; consider removing, adding to `__all__`, or using a redundant alias
+aries/workspace/__init__.py:3:43: F401 `aries.workspace.service` imported but unused; consider removing, adding to `__all__`, or using a redundant alias
+aries/workspace/__init__.py:3:52: F401 `aries.workspace.automation` imported but unused; consider removing, adding to `__all__`, or using a redundant alias
+aries/workspace/capabilities.py:4:8: F401 [*] `hashlib` imported but unused
+aries/workspace/capabilities.py:9:8: F401 [*] `shlex` imported but unused
+aries/workspace/capabilities.py:11:33: F401 [*] `urllib.parse.urlsplit` imported but unused
+aries/workspace/coding.py:10:21: F401 [*] `pathlib.Path` imported but unused
+aries/workspace/context_sources.py:8:40: F401 [*] `datetime.timedelta` imported but unused
+aries/workspace/file_capabilities.py:150:12: F401 [*] `errno` imported but unused
+aries/workspace/goal_graph.py:9:8: F401 [*] `time` imported but unused
+aries/workspace/goal_graph.py:18:38: F401 [*] `aries.workspace.registry.registry` imported but unused
+aries/workspace/introspection.py:28:8: F401 [*] `os` imported but unused
+aries/workspace/media.py:21:8: F401 [*] `json` imported but unused
+aries/workspace/python_project.py:4:21: F401 [*] `pathlib.Path` imported but unused
+aries/workspace/registry.py:2:25: F401 [*] `dataclasses.dataclass` imported but unused
+aries/workspace/registry.py:5:20: F401 [*] `typing.Awaitable` imported but unused
+aries/workspace/registry.py:5:31: F401 [*] `typing.Callable` imported but unused
+aries/workspace/registry.py:12:22: F401 [*] `pydantic.BaseModel` imported but unused
+aries/workspace/registry.py:12:33: F401 [*] `pydantic.ConfigDict` imported but unused
+aries/workspace/service.py:343:33: F401 [*] `aries.workspace.capabilities` imported but unused
+aries_ui/hud.py:2:8: F401 [*] `math` imported but unused
+aries_ui/page.py:21:27: F401 [*] `gi.repository.Adw` imported but unused
+aries_ui/page.py:23:22: F401 [*] `aries_ui.design` imported but unused
+aries_ui/pages/brief.py:14:27: F401 [*] `gi.repository.Adw` imported but unused
+aries_ui/pages/files.py:2:27: F401 [*] `gi.repository.Gtk` imported but unused
+aries_ui/pages/home.py:17:27: F401 [*] `gi.repository.Adw` imported but unused
+aries_ui/pages/interests.py:87:9: F841 Local variable `source` is assigned to but never used
+aries_ui/pages/system.py:11:27: F401 [*] `aries_ui.page.Page` imported but unused
+tests/test_agent_execution.py:8:22: F401 [*] `datetime.datetime` imported but unused
+tests/test_agent_execution.py:8:32: F401 [*] `datetime.timedelta` imported but unused
+tests/test_agent_execution.py:19:77: F401 [*] `aries.workspace.registry.policy` imported but unused
+tests/test_agent_execution.py:20:23: F401 [*] `aries.api.routes` imported but unused
+tests/test_api.py:172:12: F401 [*] `os` imported but unused
+tests/test_connect.py:26:33: F401 [*] `aries.connect.files` imported but unused
+tests/test_context_sources.py:2:8: F401 [*] `json` imported but unused
+tests/test_feedback.py:22:28: F401 [*] `aries.settings.Layer` imported but unused
+tests/test_finish_proposal.py:1:8: F401 [*] `copy` imported but unused
+tests/test_goal_graph_admission.py:2:8: F401 [*] `asyncio` imported but unused
+tests/test_input_capabilities.py:9:8: F401 [*] `asyncio` imported but unused
+tests/test_intelligence.py:2:8: F401 [*] `asyncio` imported but unused
+tests/test_intelligence.py:167:56: F401 [*] `aries.intelligence.cli.CLIProviderError` imported but unused
+tests/test_interests.py:16:29: F401 [*] `aries.interests.matching` imported but unused
+tests/test_learning_evidence_reuse.py:15:36: F401 [*] `aries.interests.models.AriesInterest` imported but unused
+tests/test_lifecycle.py:121:32: F401 [*] `aries.settings.SettingsService` imported but unused
+tests/test_m15_desktop.py:2:8: F401 [*] `asyncio` imported but unused
+tests/test_m15_files_context.py:2:8: F401 [*] `hashlib` imported but unused
+tests/test_memory.py:25:32: F401 [*] `sqlalchemy.text` imported but unused
+tests/test_memory.py:27:55: F401 [*] `agentic_core.database.base.engine` imported but unused
+tests/test_memory.py:346:12: F401 [*] `urllib.request` imported but unused
+tests/test_memory_egress.py:9:8: F401 [*] `urllib.error` imported but unused
+tests/test_memory_privacy.py:14:36: F401 [*] `aries.workspace.models.WorkspaceMemory` imported but unused
+tests/test_memory_privacy.py:14:53: F401 [*] `aries.workspace.models.WorkspaceConclusion` imported but unused
+tests/test_news.py:143:5: F841 Local variable `out` is assigned to but never used
+tests/test_news.py:189:5: F841 Local variable `out` is assigned to but never used
+tests/test_operator.py:14:8: F401 [*] `asyncio` imported but unused
+tests/test_operator.py:541:12: F401 [*] `json` imported but unused
+tests/test_orchestration.py:209:33: F401 [*] `aries.workspace.agent` imported but unused
+tests/test_replies.py:142:20: F541 [*] f-string without any placeholders
+tests/test_reversal.py:26:28: F401 [*] `aries.learning.evidence` imported but unused
+tests/test_reversal.py:27:49: F401 [*] `aries.learning.loop.run_pass` imported but unused
+tests/test_reversal.py:28:37: F401 [*] `aries.learning.reversal.AriesReversal` imported but unused
+tests/test_reversal.py:246:5: F841 Local variable `strict_cfg` is assigned to but never used
+tests/test_reversal.py:255:9: F841 Local variable `props` is assigned to but never used
+tests/test_security.py:20:8: F401 [*] `httpx` imported but unused
+tests/test_service_control_approval.py:35:8: F401 [*] `asyncio` imported but unused
+tests/test_session.py:226:15: F541 [*] f-string without any placeholders
+tests/test_shell.py:609:12: F401 [*] `re` imported but unused
+tests/test_sources.py:22:43: F401 [*] `aries.sources.types.Trust` imported but unused
+tests/test_terminal_failure.py:1:13: F401 [*] `json` imported but unused
+tests/test_ui_client.py:314:5: F841 Local variable `row` is assigned to but never used
+tests/test_ui_client.py:412:29: F841 [*] Local variable `exc` is assigned to but never used
+tests/test_workspace.py:7:8: F401 [*] `os` imported but unused
+Found 106 errors.
+[*] 89 fixable with `--fix` (7 unsafe fixes available with `--fix --unsafe-fixes`).

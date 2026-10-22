@@ -1,0 +1,41 @@
+{
+ "label": "reference, not directly comparable",
+ "why_not_comparable": "Different split and/or dataset size, trained neural models, different candidate sets; the ARIES numbers are MIND-small dev with no training on MIND at all.",
+ "sources": [
+  {
+   "source": "Wu et al., MIND: A Large-scale Dataset for News Recommendation, ACL 2020, Table 3 ('Results on the test set of the MIND dataset'), Overall columns",
+   "url": "https://aclanthology.org/2020.acl-main.331.pdf",
+   "dataset": "MIND (large), test split; NOT MIND-small, NOT dev",
+   "verified": "read from the rendered PDF page 3602, 2026-10-22",
+   "units": "percent",
+   "rows": {
+    "LibFM":     {"auc": 59.93, "mrr": 28.23, "ndcg5": 30.05, "ndcg10": 35.74},
+    "DSSM":      {"auc": 64.31, "mrr": 30.47, "ndcg5": 33.86, "ndcg10": 38.61},
+    "Wide&Deep": {"auc": 62.16, "mrr": 29.31, "ndcg5": 31.38, "ndcg10": 37.12},
+    "DeepFM":    {"auc": 60.30, "mrr": 28.19, "ndcg5": 30.02, "ndcg10": 35.71},
+    "DFM":       {"auc": 62.28, "mrr": 29.42, "ndcg5": 31.52, "ndcg10": 37.22},
+    "GRU":       {"auc": 65.42, "mrr": 31.24, "ndcg5": 33.76, "ndcg10": 39.47},
+    "DKN":       {"auc": 64.60, "mrr": 31.32, "ndcg5": 33.84, "ndcg10": 39.48},
+    "NPA":       {"auc": 66.69, "mrr": 32.24, "ndcg5": 34.98, "ndcg10": 40.68},
+    "NAML":      {"auc": 66.86, "mrr": 32.49, "ndcg5": 35.24, "ndcg10": 40.91},
+    "LSTUR":     {"auc": 67.73, "mrr": 32.77, "ndcg5": 35.59, "ndcg10": 41.34},
+    "NRMS":      {"auc": 67.76, "mrr": 33.05, "ndcg5": 35.94, "ndcg10": 41.63}
+   }
+  },
+  {
+   "source": "microsoft/recommenders, examples/00_quick_start/nrms_MIND.ipynb, stored output of the evaluation cell after training",
+   "url": "https://raw.githubusercontent.com/recommenders-team/recommenders/refs/heads/main/examples/00_quick_start/nrms_MIND.ipynb",
+   "dataset": "MIND-demo (a sample of MIND-small), validation split, MIND_type='demo', epochs=5; NOT MIND-small",
+   "verified": "notebook text fetched 2026-10-22 (main branch, not pinned to a commit)",
+   "units": "fraction",
+   "rows": {"NRMS": {"group_auc": 0.6127, "mean_mrr": 0.2697, "ndcg@5": 0.2912, "ndcg@10": 0.3625}}
+  },
+  {
+   "source": "MIND-small dev numbers for NRMS/NAML/LSTUR/NPA",
+   "url": null,
+   "dataset": "MIND-small dev",
+   "verified": "not verified",
+   "note": "Candidates found (Iana et al., NewsRecLib, arXiv 2310.01146, Table 1; Iana et al., SIGIR 2023, arXiv 2304.03112, Table 2; NewsReX model cards) but their tables were only available as small rendered PDF images or unreachable pages, so no number was transcribed."
+  }
+ ]
+}
