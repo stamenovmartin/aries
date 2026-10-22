@@ -13,11 +13,15 @@ locks in the two invariants that stop either of them growing back quietly:
      capabilities could be added to the spoken surface without anyone deciding.
 
   2. A VERIFIER THAT CANNOT RETURN FALSE IS A DELIBERATE CHOICE, NOT A DEFAULT.
-     `verify_probe`, `verify_observe`, `verify_tabs`, `verify_read_brightness` and
-     `verify_targets` prove the subject is still observable, not that the executor
-     was right. They are legitimate for a read of a live tree and the code says so
-     — but they carried 32 of 34 `verified` steps, so the set of them is frozen
-     here by name. A new one fails until it is added on purpose.
+     `verify_observe`, `verify_tabs`, `verify_read_brightness` and `verify_targets`
+     prove the subject is still observable, not that the executor was right. They
+     are legitimate for a read of a live tree and the code says so — but on
+     2026-09-30 they, with `verify_probe`, carried 32 of 34 `verified` steps, so the
+     set of them is frozen here by name. A new one fails until it is added on purpose.
+     `verify_probe` left the set after 2026-10-01: it now returns
+     `probe_verification.agrees(...)`, which is False when a directory, search or
+     task snapshot disagrees with a second read or a probe sample is malformed. (The
+     frozen thesis ledger still classes it TRIVIAL; the shipped code is stricter.)
 
 Nothing here touches the live database. The harness gives each test process its
 own sqlite file.
@@ -61,8 +65,10 @@ UNVERIFIED_SPOKEN = {
     "research": "no verifier on any path; 144 of 288 steps in the last week. See "
                 "experiments/verification/analysis.md",
     "system": "system.status in the registry verifies the same probes; the spoken path does not call it",
-    "find_files": "needs a match-set re-read; file.search's verifier is unconditional",
-    "processes": "needs a PID-identity re-read; system.processes' verifier is unconditional",
+    "find_files": "needs a match-set re-read; file.search's verifier now does one "
+                  "(probe_verification.agrees) but the spoken path does not call it",
+    "processes": "needs a PID-identity re-read; system.processes' verifier checks only that "
+                 "a fresh sample is well-formed, and the spoken path does not call it",
     "list_apps": "no verifier anywhere, and no registry twin",
     "brightness": "display.brightness exists; its verifier is unconditional anyway",
     "network_status": "network.status exists and is not called",
@@ -79,11 +85,12 @@ UNVERIFIED_SPOKEN = {
 }
 
 # Verifiers whose every `met` is the literal True. Frozen on purpose — see the
-# module docstring.
+# module docstring. file.list, file.search, system.processes, system.status,
+# system.storage and task.inspect (all `verify_probe`) were removed on 2026-10-22:
+# `verify_probe` returns `agrees(...)`, which can be False.
 UNCONDITIONAL = {
     "browser.tabs", "desktop.observe", "desktop.windows", "display.brightness",
-    "file.list", "file.search", "input.editable_targets", "system.processes",
-    "system.status", "system.storage", "task.inspect",
+    "input.editable_targets",
 }
 
 MET = re.compile(r"""(?:['"]met['"]\s*:|\bmet=)\s*(.+?)\s*[,})]""")
