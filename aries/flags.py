@@ -119,6 +119,13 @@ FLAGS = {
                                          "runner can change a file, then the check proceeds "
                                          "(aries/workspace/measurement_hook.py). Unarmed goals are not "
                                          "affected. Off, the hook module is never imported"),
+    "ARIES_READ_PATH_STRICT": (False, "the legacy read_file route takes only the path token: it starts at "
+                                      "the first / or ~/, filler words before it are allowed and any "
+                                      "other words send the goal to the planner, it ends at the longest "
+                                      "existing name or the first component with an extension, and a "
+                                      "sentence-final mark is stripped only when the name without it "
+                                      "exists or has an extension (docs/AUDIT.md 4a). Off, the capture is "
+                                      "the rest of the sentence, as frozen"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),
