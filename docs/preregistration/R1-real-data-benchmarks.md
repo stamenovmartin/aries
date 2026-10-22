@@ -134,3 +134,9 @@ running H5 and H4b measurements end (the local GPU is shared). 5. Analysis scrip
   accuracy is dominated by the out-of-scope class. Macro-F1 and per-label counts are reported for that reason.
 - CLINC150 is a virtual-assistant intent dataset (banking, travel, small talk), not desktop tasks.
 - One repetition; temperature 0.1; local Ollama shared with no other load during the runs.
+
+## Amendment 1 (2026-10-22, before any label exists): push timing
+
+The registration commit `837f27d` (2026-10-22T07:18:32Z) was made locally; the preparing agent is not allowed to
+push, so the push is done by the owner. Step 1 of the Procedure therefore reads: this file is committed before
+labelling starts and pushed by the owner **before any ARIES or baseline run**. Nothing else changes.
