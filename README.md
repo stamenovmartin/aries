@@ -11,6 +11,17 @@ the model's own confidence or the executor's own report, and measures what that 
 Everything below carries its denominator. Where a number is missing, that is said rather than
 filled in.
 
+> **Reviewing this repository?** Start with the **[reviewer guide](docs/REVIEWER_GUIDE.md)**
+> (Macedonian summary and English). It lists every research question with its result and its
+> evidence, maps the code by component, and shows how to recompute the thesis tables (`make check`).
+>
+> | | |
+> |---|---|
+> | Thesis results, all in one place | [`experiments/thesis-followup-20261012/RESULTS.md`](experiments/thesis-followup-20261012/RESULTS.md) |
+> | IIS results on public data | [`experiments/iis/real-data/README.md`](experiments/iis/real-data/README.md) |
+> | Preregistered hypotheses | [`docs/preregistration/`](docs/preregistration/) |
+> | Every document | [`docs/INDEX.md`](docs/INDEX.md) |
+
 ## Evaluation map
 
 Status labels: **confirmatory** = preregistered hypothesis, measured as registered (Holm family H4b/H5/H6/H8 for
@@ -34,9 +45,10 @@ preregistration exists and no measurement does. Full follow-up results: [`experi
 | Why no held-out goal reached `done` | same | 49 goals | exploratory (diagnosis) | [`docs/analysis/terminal-state-diagnosis.md`](docs/analysis/terminal-state-diagnosis.md) |
 | Planner regression with clarification flags | planner fixture | 72 cases | regression check | [`experiments/thesis-followup-20261012/task3-summary.json`](experiments/thesis-followup-20261012/task3-summary.json) |
 | H4: planner asks on new ambiguous goals | external sets A and C | — | registered, not run (sets not received) | [`docs/preregistration/H4-planner-clarification.md`](docs/preregistration/H4-planner-clarification.md) |
-| H4b: clarification resolver (ask vs select among candidates) | ambiguous/twin pairs, written by an LLM in a separate session | 40 pairs (80 items) × 2 conditions × 3 | confirmatory, runner ready, **not measured** | [`experiments/thesis-followup-20261012/h4b-runs/`](experiments/thesis-followup-20261012/h4b-runs/) |
-| H5: typed completion contract | 25 new items + 49 held-out goals | 74 items × 2 conditions × 3 | confirmatory, **not measured**; pilot on 2 example items | [`experiments/thesis-followup-20261012/h5-runs/`](experiments/thesis-followup-20261012/h5-runs/) |
-| Tool/agent selection on NL2Bash; out-of-scope detection on CLINC150 | public datasets | 500 / 600 sampled | planned (R1), not started | — |
+| H4b: clarification resolver (ask vs select among candidates) | ambiguous/twin pairs, written by an LLM in a separate session | 40 pairs (80 items) × 2 conditions × 3 | confirmatory (**not met**: pairs correct 0/40 with and without the resolver) | [`experiments/thesis-followup-20261012/h4b-runs/`](experiments/thesis-followup-20261012/h4b-runs/) |
+| H5: typed completion contract | 25 new items + 49 held-out goals | 74 items × 2 conditions × 3 | confirmatory (**not met**: 2/15 vs 0/15, p = 0.25) | [`experiments/thesis-followup-20261012/h5-runs/`](experiments/thesis-followup-20261012/h5-runs/) |
+| R1: tool selection on NL2Bash; out-of-scope detection on CLINC150 | public datasets, LLM-labelled (κ 0.65 / 0.83) | 500 / 600 sampled | confirmatory (R1 family): **zero-shot, BM25 and embedding baselines beat ARIES** | [`experiments/thesis-r1-real-data/`](experiments/thesis-r1-real-data/), RESULTS §13 |
+| One row per component (router, planner, verifiers, completion, clarification, end to end) | the rows above | — | summary | [`experiments/thesis-followup-20261012/thesis-tables/components.csv`](experiments/thesis-followup-20261012/thesis-tables/components.csv) |
 
 ### IIS project: the information layer (interests and news, learning, semantic memory)
 
@@ -46,7 +58,8 @@ preregistration exists and no measurement does. Full follow-up results: [`experi
 | Semantic memory: embedder swapped to bge-m3 | same | 45 rows, 25 probes | exploratory | [`experiments/memory/summary-bge-m3.json`](experiments/memory/summary-bge-m3.json) |
 | Learning: task-experience retrieval, `focused-v2` vs `overlap-v1` | developer-labelled queries (regression fixture) | 20 queries | descriptive | [`docs/LEARNING_COMPARISON.md`](docs/LEARNING_COMPARISON.md) |
 | Interests: news preference relevance checks | explicit user preferences | 3 interests, 3 checks | descriptive | [`experiments/interests/`](experiments/interests/) |
-| News ranking and online learning on MIND-small; memory retrieval on LoCoMo | public datasets | — | planned, not started | — |
+| News ranking on MIND-small: ARIES interest profile vs 7 baselines, plus online learning | public dataset (Microsoft) | 73,152 impressions, 50,000 users | exploratory: **ARIES beats every baseline** (AUC 0.613; best baseline, embedding, 0.600); learning adds +0.0001 | [`experiments/iis/real-data/mind/`](experiments/iis/real-data/mind/) |
+| Memory retrieval on LoCoMo: annotated evidence turns in the top 5 | public dataset (Snap Research) | 10 conversations, 1,982 questions | exploratory: **BM25 beats ARIES memory** (hit@5 0.500 vs 0.377) | [`experiments/iis/real-data/locomo/`](experiments/iis/real-data/locomo/) |
 
 ---
 

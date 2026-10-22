@@ -5,7 +5,6 @@ import sys
 import tempfile
 from pathlib import Path
 from dataclasses import replace
-from datetime import datetime, timedelta
 from unittest.mock import AsyncMock, patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from tests._bootstrap import bootstrap, check, reset_db, run_module

@@ -1,0 +1,11 @@
+# source: experiments/thesis-followup-20261012/h5-runs/outcomes.json (sha256 a3ec7618d7a3, commit efc3188); experiments/thesis-followup-20261012/h5-runs/summary-20261022T070927Z.json (sha256 2715666d053d, commit efc3188); experiments/thesis-followup-20261012/h5-runs/analyze_h5.py (sha256 f13b6074cd2b, commit a1c70d5); docs/preregistration/H5-completion-paraphrase.md (sha256 cf6d2cdc3f9d, commit 1f4f429) | label: confirmatory (Holm family H4b/H5/H6/H8)
+# note: recomputed from outcomes.json (per item-run outcomes without item text; run folders kept local, SHA-256 in outcomes.json); majority = at least 2 of 3 runs; ci = exact Clopper-Pearson 95%; items written by OpenAI Codex (gpt-6-astra), not a person
+part,condition,metric,k,n,ci_lo,ci_hi,value
+primary,treatment,G correct done (majority of 3),2,15,,,
+primary,control,G correct done (majority of 3),0,15,,,
+primary,treatment vs control,"McNemar b / c, one-sided exact p",2,0,,,0.25
+criterion 1,treatment,>= 10 of 15 G correct done,2,15,,,not met
+criterion 2,treatment,no N goal done in any run,3,30,,,not met
+criterion 3,treatment vs control,held-out PASS (majority) not lower by more than 2,30,30,,,met
+secondary,treatment,false done (G and N item-runs),12,75,0.0855,0.2628,
+secondary,control,false done (G and N item-runs),3,75,0.0083,0.1125,

@@ -119,6 +119,34 @@ FLAGS = {
                                          "runner can change a file, then the check proceeds "
                                          "(aries/workspace/measurement_hook.py). Unarmed goals are not "
                                          "affected. Off, the hook module is never imported"),
+    "ARIES_READ_PATH_STRICT": (False, "the legacy read_file route takes only the path token: it starts at "
+                                      "the first / or ~/, filler words before it are allowed and any "
+                                      "other words send the goal to the planner, it ends at the longest "
+                                      "existing name or the first component with an extension, and a "
+                                      "sentence-final mark is stripped only when the name without it "
+                                      "exists or has an extension (docs/AUDIT.md 4a). Off, the capture is "
+                                      "the rest of the sentence, as frozen"),
+    "ARIES_LOOP_GUARD": (False, "a planner proposal whose capability and canonical arguments match two "
+                                "earlier steps of the same goal (its second duplicate) ends the goal "
+                                "instead of being rejected and replanned until the step budget is gone; "
+                                "same terminal state as budget exhaustion, stop_reason REPEATED_ACTION, "
+                                "fingerprint and count recorded (aries/workspace/loop_guard.py, "
+                                "docs/AUDIT.md 4b). Off, the loop is unchanged"),
+    "ARIES_PLAN_DISPATCH_FIX": (False, "when the planner context's own audit metadata (one omitted_items "
+                                       "entry per memory dropped for budget, source_status, preferences) "
+                                       "exceeds the 2,500-character budget, it is compacted (counts instead "
+                                       "of entries, then source_status dropped, then preferences shortened) "
+                                       "instead of failing the goal before its first planner call with "
+                                       "'Context metadata exceeds planner budget' (docs/AUDIT.md 7.2: the six "
+                                       "never-planned held-out goals). Off, the error is raised as frozen"),
+    "ARIES_VERIFY_SCOPE": (False, "exploratory, designed after H8: the 14 capabilities of the H8 "
+                                  "side_effect_outside_scope operator snapshot their declared scope "
+                                  "before the executor runs (parent folder of each path, the other "
+                                  "windows, the notification table) and their verifier fails when "
+                                  "anything in it other than the target changed; an unreadable scope "
+                                  "is UNVERIFIED (aries/workspace/scope_verifiers.py, docs/AUDIT.md "
+                                  "4e). Read when the registry is imported. Off, every verifier is the "
+                                  "frozen function"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),

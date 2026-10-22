@@ -268,3 +268,14 @@ right after `compile_goal`, and only when the fast path gives no contract):
 - the secondary outcomes as listed;
 - it refuses unless there are 3 + 3 complete runs at one commit, with model and code stable;
 - it was smoke-tested on synthetic folders only.
+
+## Amendment 4 (2026-10-22): the measurement script wakes an already blanked screen, before any measurement
+
+- **What changed:** `h5-runs/run-h5.sh` now calls `org.gnome.ScreenSaver.SetActive false` once, after setting idle-delay 0
+  and before the first run, and logs the screensaver state after the wake. It is the same step the H5 pilot
+  script got in `12e5fc6`.
+- **Why:** the first H5 pilot (`h5-runs/pilot-h5-refused-1.log`) was refused by the runner's preflight because the
+  screen was blanked (not locked; LockedHint=no, lock disabled). Nothing was submitted in that attempt.
+- **What did not change:** the runner, the conditions, the items and their SHA-256s, the analysis, the outcome
+  rules and the criteria. The runner's own refusal on a locked or blanked session is kept.
+- **Order:** H5 is measured first and H4b directly after it, each with its own script, on one commit.

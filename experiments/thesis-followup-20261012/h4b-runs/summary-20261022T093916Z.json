@@ -1,0 +1,203 @@
+{
+ "runs": [
+  "20261022T093916Z-r1-treatment",
+  "20261022T094546Z-r2-baseline",
+  "20261022T101904Z-r3-treatment",
+  "20261022T102538Z-r4-baseline",
+  "20261022T105900Z-r5-treatment",
+  "20261022T110601Z-r6-baseline"
+ ],
+ "commit": "1f4f4296b95eff62c13b31ba658e29be44038c15",
+ "primary": {
+  "pairs": 40,
+  "paired_accuracy": {
+   "treatment": 0,
+   "baseline": 0
+  },
+  "b_treatment_only": 0,
+  "c_baseline_only": 0,
+  "p_two_sided_exact": 1.0,
+  "holm_adjusted_p": "in the family report"
+ },
+ "secondary": {
+  "over_ask_non_inferiority": {
+   "all": {
+    "n_twins": 40,
+    "over_ask_treatment": 40,
+    "over_ask_baseline": 0,
+    "only_treatment": 40,
+    "only_baseline": 0,
+    "difference": 1.0,
+    "one_sided_95_upper": 1.0,
+    "two_sided_90_interval": [
+     0.9104,
+     1.0
+    ],
+    "margin": 0.1,
+    "non_inferior": false
+   },
+   "t1": {
+    "n_twins": 0
+   },
+   "t2": {
+    "n_twins": 40,
+    "over_ask_treatment": 40,
+    "over_ask_baseline": 0,
+    "only_treatment": 40,
+    "only_baseline": 0,
+    "difference": 1.0,
+    "one_sided_95_upper": 1.0,
+    "two_sided_90_interval": [
+     0.9104,
+     1.0
+    ],
+    "margin": 0.1,
+    "non_inferior": false
+   }
+  },
+  "ask_rate_ambiguous": {
+   "treatment": {
+    "k": 40,
+    "n": 40,
+    "rate": 1.0,
+    "wilson95": [
+     0.9124,
+     1.0
+    ]
+   },
+   "baseline": {
+    "k": 0,
+    "n": 40,
+    "rate": 0.0,
+    "wilson95": [
+     0.0,
+     0.0876
+    ]
+   }
+  },
+  "item_correct_majority": {
+   "treatment": {
+    "ambiguous": 40,
+    "twin": 0
+   },
+   "baseline": {
+    "ambiguous": 0,
+    "twin": 40
+   }
+  },
+  "resolver_subset_treatment_item_runs": {
+   "reached": 240,
+   "of_item_runs": 240,
+   "reached_by_kind": {
+    "ambiguous": 120,
+    "twin:t2": 120
+   },
+   "model_called": 240,
+   "raw_model_decision_by_kind": {
+    "ambiguous": {
+     "ask": 120
+    },
+    "twin": {
+     "ask": 120
+    }
+   },
+   "select_overruled_by_code": 0,
+   "select_overruled_why": {},
+   "raw_model_decision_right": {
+    "k": 120,
+    "n": 240,
+    "rate": 0.5,
+    "wilson95": [
+     0.4372,
+     0.5628
+    ]
+   },
+   "raw_model_decision_right_definition": "ask on an ambiguous item; a select of the intended file on a twin",
+   "final_correct_after_code": {
+    "k": 120,
+    "n": 240,
+    "rate": 0.5,
+    "wilson95": [
+     0.4372,
+     0.5628
+    ]
+   }
+  },
+  "descriptive": {
+   "treatment": {
+    "per_run": [
+     {
+      "ambiguous:correct": 40,
+      "twin:not": 40
+     },
+     {
+      "ambiguous:correct": 40,
+      "twin:not": 40
+     },
+     {
+      "ambiguous:correct": 40,
+      "twin:not": 40
+     }
+    ],
+    "terminal_states": {
+     "ambiguous": {
+      "needs_clarification": 120
+     },
+     "twin": {
+      "needs_clarification": 120
+     }
+    },
+    "question_source": {
+     "resolver": 240
+    },
+    "verdicts": {
+     "PASS": 120,
+     "FAIL": 120
+    },
+    "resolver_applied": 240,
+    "candidate_buckets": {
+     "2-5": 240
+    },
+    "mean_seconds_per_item": 4.8,
+    "mean_model_calls_per_item": 1.0,
+    "resolver_model_calls": 240
+   },
+   "baseline": {
+    "per_run": [
+     {
+      "ambiguous:not": 40,
+      "twin:correct": 40
+     },
+     {
+      "ambiguous:not": 40,
+      "twin:correct": 40
+     },
+     {
+      "ambiguous:not": 40,
+      "twin:correct": 40
+     }
+    ],
+    "terminal_states": {
+     "ambiguous": {
+      "partial": 120
+     },
+     "twin": {
+      "partial": 120
+     }
+    },
+    "question_source": {},
+    "verdicts": {
+     "FAIL": 120,
+     "PASS": 120
+    },
+    "resolver_applied": 0,
+    "candidate_buckets": {},
+    "mean_seconds_per_item": 24.75,
+    "mean_model_calls_per_item": 8.95,
+    "resolver_model_calls": 0
+   }
+  }
+ },
+ "label": "confirmatory (Holm family H4b/H5/H6/H8); secondary descriptive except the registered non-inferiority test",
+ "limitation": "items written by OpenAI Codex (gpt-6-astra), not a person (H4b Amendment 1)"
+}

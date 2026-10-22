@@ -711,9 +711,17 @@ async def test_every_shipped_automation_declares_its_cost():
     for spec in all_automations():
         check(f"{spec.automation_id} declares a workload class ARIES knows",
               spec.workload in workload.CLASSES)
-    heavy = [s.automation_id for s in all_automations() if workload.get(s.workload).heavy]
-    check("and nothing shipped today is heavy, so nothing is being refused yet",
-          heavy == [])
+    heavy = [s for s in all_automations() if workload.get(s.workload).heavy]
+    # One heavy automation ships since the attention-workload remediation
+    # (experiments/product/attention-workload-remediation, 2026-10-06): the
+    # independent review found attention, one local-model call per connected
+    # item, misdeclared as light. It is therefore refused while the display is
+    # off unless power.allow_heavy_cpu is on. The list is explicit so that a
+    # second heavy automation is a decision somebody has to make here.
+    check("the only heavy automation shipped is attention",
+          [s.automation_id for s in heavy] == ["aries.attention"])
+    check("and every heavy automation is gated by a permission setting",
+          all(workload.get(s.workload).permission_setting for s in heavy))
 
 
 async def test_measuring_the_real_machine():

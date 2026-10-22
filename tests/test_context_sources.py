@@ -1,5 +1,4 @@
 """Context does not turn stale/forbidden/cached records into current proof."""
-import json
 import sys
 import time
 from datetime import datetime,timedelta,timezone

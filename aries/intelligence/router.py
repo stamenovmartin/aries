@@ -1,5 +1,5 @@
 """Rule → local decision → policy-controlled cloud recommendation. No execution here."""
-import hashlib,json,re,time
+import hashlib,re,time
 from datetime import datetime,timedelta
 from typing import Protocol
 from aries.settings import SettingsService
