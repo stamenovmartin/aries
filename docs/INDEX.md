@@ -6,6 +6,7 @@ This page is a map. It adds nothing that is not already in the files it links to
 
 | document | what it is |
 |---|---|
+| [`REVIEWER_GUIDE.md`](REVIEWER_GUIDE.md) | **for reviewers**: every research question with its result and evidence, the code by component, how to recompute the tables |
 | [`../README.md`](../README.md) | what ARIES is, and the **evaluation map** (thesis and IIS), with a status label for each result |
 | [`STATE_OF_ARIES.md`](STATE_OF_ARIES.md) | the current state of the system, area by area |
 | [`AUDIT.md`](AUDIT.md) | the 2026-10-22 static audit: layout, code health, flags, test failures, known bugs, integration and runtime health, plus the **Fixed / remaining** section. Raw tool outputs are in [`audit/`](audit/) |
@@ -34,10 +35,13 @@ section in the same file, dated, and written before the measurement it changes.
 | hypothesis | file | amendments | status (README evaluation map) |
 |---|---|---|---|
 | H4 planner clarification | [`H4-planner-clarification.md`](preregistration/H4-planner-clarification.md) | 1, 2 (2026-10-12) | registered, not run |
-| H4b clarification resolver | [`H4b-clarify-resolver.md`](preregistration/H4b-clarify-resolver.md) | 1 (10-18), 2 (10-19), 3 (10-22) | confirmatory, not measured |
-| H5 completion paraphrase / typed contract | [`H5-completion-paraphrase.md`](preregistration/H5-completion-paraphrase.md) | 1, 2, 3 (10-18), 4 (10-22) | confirmatory, not measured |
+| H4b clarification resolver | [`H4b-clarify-resolver.md`](preregistration/H4b-clarify-resolver.md) | 1 (10-18), 2 (10-19), 3 (10-22) | confirmatory, measured (not met) |
+| H5 completion paraphrase / typed contract | [`H5-completion-paraphrase.md`](preregistration/H5-completion-paraphrase.md) | 1, 2, 3 (10-18), 4 (10-22) | confirmatory, measured (not met) |
 | H6 abstention replication | [`H6-abstention-replication.md`](preregistration/H6-abstention-replication.md) | 1, 2, 3 (10-18) | confirmatory, measured |
 | H8 verifier fault injection | [`H8-verifier-fault-injection.md`](preregistration/H8-verifier-fault-injection.md) | 1, 2, 3 (10-18) | confirmatory, measured |
+| R1 public data (NL2Bash, CLINC150) | [`R1-real-data-benchmarks.md`](preregistration/R1-real-data-benchmarks.md) | 1, 2 (10-22) | confirmatory (own family), measured |
+| H7 hybrid scope gate | [`H7-hybrid-scope-gate.md`](preregistration/H7-hybrid-scope-gate.md) | — | postponed (future work) |
+| H9 progress ledger | [`H9-progress-ledger.md`](preregistration/H9-progress-ledger.md) | — | dropped (design record) |
 
 See also [`preregistration/README.md`](preregistration/README.md) and
 [`preregistration/CITATIONS.md`](preregistration/CITATIONS.md).

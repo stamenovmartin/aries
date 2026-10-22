@@ -38,13 +38,14 @@ All of these are in `docs/preregistration/` (frozen). `docs/INDEX.md` lists the 
 | hypothesis | file | status |
 |---|---|---|
 | H4 planner clarification | `docs/preregistration/H4-planner-clarification.md` | registered, not run |
-| H4b clarification resolver | `docs/preregistration/H4b-clarify-resolver.md` | confirmatory, not measured |
-| H5 completion paraphrase / typed contract | `docs/preregistration/H5-completion-paraphrase.md` | confirmatory, not measured |
+| H4b clarification resolver | `docs/preregistration/H4b-clarify-resolver.md` | confirmatory, measured (not met) |
+| H5 completion paraphrase / typed contract | `docs/preregistration/H5-completion-paraphrase.md` | confirmatory, measured (not met) |
 | H6 abstention replication | `docs/preregistration/H6-abstention-replication.md` | confirmatory, measured |
 | H8 verifier fault injection | `docs/preregistration/H8-verifier-fault-injection.md` | confirmatory, measured |
+| R1 public data (NL2Bash, CLINC150) | `docs/preregistration/R1-real-data-benchmarks.md` | confirmatory (own family), measured; data in `experiments/thesis-r1-real-data/` |
 
 ## Exploratory work designed after a confirmatory result
 
 | path | what | status |
 |---|---|---|
-| `experiments/exploratory/h8-verify-scope/` | H8 harness rerun with `ARIES_VERIFY_SCOPE` (differential side-effect check) | prepared, not run |
+| `experiments/exploratory/h8-verify-scope/` | H8 harness rerun with `ARIES_VERIFY_SCOPE` (differential side-effect check) | run: side-effect mutants 12/14 killed, as predicted (`docs/AUDIT.md` §7) |
