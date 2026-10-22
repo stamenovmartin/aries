@@ -1,0 +1,15 @@
+# source: experiments/thesis-followup-20261012/h4b-runs/outcomes.json (sha256 61ff2d6e02b2, commit efc3188); experiments/thesis-followup-20261012/h4b-runs/summary-20261022T093916Z.json (sha256 b8df0cd3c656, commit efc3188); experiments/thesis-followup-20261012/h4b-runs/analyze_h4b.py (sha256 5b6e9821a4f6, commit 73cc1d9); docs/preregistration/H4b-clarify-resolver.md (sha256 ba7ba9d2f43a, commit 1f4f429) | label: confirmatory (Holm family H4b/H5/H6/H8)
+# note: recomputed from outcomes.json (no item text; run folders kept local); pair correct = both items correct; items written by OpenAI Codex (gpt-6-astra), not a person
+part,condition,metric,k,n,ci_lo,ci_hi,value
+primary,treatment,"pairs correct (both items, majority of 3)",0,40,,,
+items,treatment,ambiguous correct (majority of 3),40,40,,,
+items,treatment,twin correct (majority of 3),0,40,,,
+primary,baseline,"pairs correct (both items, majority of 3)",0,40,,,
+items,baseline,ambiguous correct (majority of 3),0,40,,,
+items,baseline,twin correct (majority of 3),40,40,,,
+primary,treatment vs baseline,"McNemar b / c, two-sided exact p",0,0,,,1
+secondary 1,treatment,twins over-asked (majority of 3),40,40,,,
+secondary 1,baseline,twins over-asked (majority of 3),0,40,,,
+secondary 1,treatment minus baseline,"over-ask difference, Newcombe one-sided 95% upper vs margin 0.10",,,0.9104,1,not non-inferior
+secondary 2,treatment,"ambiguous items asked (majority of 3), Wilson 95%",40,40,0.9124,1,
+secondary 2,baseline,"ambiguous items asked (majority of 3), Wilson 95%",0,40,0,0.0876,

@@ -637,6 +637,142 @@ def table_h6():
                   rows, note)
 
 
+def outcome_runs(exp):
+    d = read(FU / exp / 'outcomes.json')
+    must_equal(f'{exp} six runs at one commit', (len(d['runs']), len({r['commit'] for r in d['runs']})), (6, 1))
+    must_equal(f'{exp} model and code stable', all(r['model_stable'] and r['code_stable'] for r in d['runs']), True)
+    return d['runs']
+
+
+def majority_of(runs, cond, keep, key):
+    votes = {}
+    for r in runs:
+        if r['condition'] == cond:
+            for x in r['results']:
+                if keep(x):
+                    votes.setdefault(x['id'], []).append(bool(key(x)))
+    must_equal(f'{cond} three votes per item', {len(v) for v in votes.values()}, {3})
+    return {i: sum(v) >= 2 for i, v in votes.items()}
+
+
+def table_h5():
+    runs = outcome_runs('h5-runs')
+    s = read(FU / 'h5-runs/summary-20261022T070927Z.json')
+    rows = []
+    correct = {c: majority_of(runs, c, lambda x: x['set'] == 'G', lambda x: x['correct_done']) for c in ('treatment', 'control')}
+    held = {c: majority_of(runs, c, lambda x: x['set'] == 'heldout', lambda x: x['verdict'] == 'PASS')
+            for c in ('treatment', 'control')}
+    b = sum(correct['treatment'][i] and not correct['control'][i] for i in correct['treatment'])
+    c = sum(correct['control'][i] and not correct['treatment'][i] for i in correct['treatment'])
+    p = binom_tail_ge(b, b + c, 0.5) if b + c else 1.0
+    pr = s['primary']
+    must_equal('H5 McNemar (outcomes vs summary)', (b, c, round(p, 12)), (pr['b_treatment_only'], pr['c_control_only'],
+                                                                          round(pr['p_one_sided_exact'], 12)))
+    for cond in ('treatment', 'control'):
+        k = sum(correct[cond].values())
+        must_equal(f'H5 {cond} correct done', k, pr['correct_done_majority'][cond])
+        rows.append(('primary', cond, 'G correct done (majority of 3)', k, 15, None, None, None))
+    rows.append(('primary', 'treatment vs control', 'McNemar b / c, one-sided exact p', b, c, None, None, f'{p:.3g}'))
+    cr = s['criteria']
+    n_done = sum(x['terminal_state'] == 'done' for r in runs if r['condition'] == 'treatment' for x in r['results']
+                 if x['set'] == 'N')
+    hp = {k: sum(v.values()) for k, v in held.items()}
+    must_equal('H5 criterion 2', n_done, cr['criterion_2_no_N_done_in_any_treatment_run']['done_runs'])
+    must_equal('H5 criterion 3', (hp['treatment'], hp['control']),
+               (cr['criterion_3_heldout_no_drop_gt_2']['treatment_pass'], cr['criterion_3_heldout_no_drop_gt_2']['control_pass']))
+    rows += [('criterion 1', 'treatment', '>= 10 of 15 G correct done', sum(correct['treatment'].values()), 15, None, None,
+              'met' if sum(correct['treatment'].values()) >= 10 else 'not met'),
+             ('criterion 2', 'treatment', 'no N goal done in any run', n_done, 30, None, None,
+              'met' if n_done == 0 else 'not met'),
+             ('criterion 3', 'treatment vs control', 'held-out PASS (majority) not lower by more than 2',
+              hp['treatment'], hp['control'], None, None, 'met' if hp['treatment'] >= hp['control'] - 2 else 'not met')]
+    for cond in ('treatment', 'control'):
+        gn = [x for r in runs if r['condition'] == cond for x in r['results'] if x['set'] in ('G', 'N')]
+        k, n = sum(bool(x['false_done']) for x in gn), len(gn)
+        pub = s['secondary'][cond]['false_done_item_runs']
+        must_equal(f'H5 {cond} false done', (k, n), (pub['k'], pub['n']))
+        check_ci(f'H5 {cond} false done', k, n, pub['ci95'])
+        rows.append(('secondary', cond, 'false done (G and N item-runs)', k, n, *pub['ci95'], None))
+    head = provenance([FU / 'h5-runs/outcomes.json', FU / 'h5-runs/summary-20261022T070927Z.json',
+                       FU / 'h5-runs/analyze_h5.py', ROOT / 'docs/preregistration/H5-completion-paraphrase.md'],
+                      'confirmatory (Holm family H4b/H5/H6/H8)')
+    note = ('recomputed from outcomes.json (per item-run outcomes without item text; run folders kept local, SHA-256 in '
+            'outcomes.json); majority = at least 2 of 3 runs; ci = exact Clopper-Pearson 95%; items written by OpenAI '
+            'Codex (gpt-6-astra), not a person')
+    return render(head, ('part', 'condition', 'metric', 'k', 'n', 'ci_lo', 'ci_hi', 'value'), rows, note)
+
+
+def table_h4b():
+    runs = outcome_runs('h4b-runs')
+    s = read(FU / 'h4b-runs/summary-20261022T093916Z.json')
+    A = load_module('analyze_h4b', FU / 'h4b-runs/analyze_h4b.py')
+    rows = []
+    correct = {c: majority_of(runs, c, lambda x: True, lambda x: x['correct']) for c in ('treatment', 'baseline')}
+    pair = {x['id']: x['pair_id'] for x in runs[0]['results']}
+    kind = {x['id']: x['kind'] for x in runs[0]['results']}
+    pairs = sorted(set(pair.values()))
+    ok = {c: {p: all(correct[c][i] for i in pair if pair[i] == p) for p in pairs} for c in correct}
+    b = sum(ok['treatment'][p] and not ok['baseline'][p] for p in pairs)
+    c = sum(ok['baseline'][p] and not ok['treatment'][p] for p in pairs)
+    pr = s['primary']
+    must_equal('H4b paired accuracy', {k: sum(v.values()) for k, v in ok.items()}, pr['paired_accuracy'])
+    must_equal('H4b McNemar', (b, c), (pr['b_treatment_only'], pr['c_baseline_only']))
+    for cond in ('treatment', 'baseline'):
+        rows.append(('primary', cond, 'pairs correct (both items, majority of 3)', sum(ok[cond].values()), len(pairs),
+                     None, None, None))
+        for k_ in ('ambiguous', 'twin'):
+            rows.append(('items', cond, f'{k_} correct (majority of 3)', sum(correct[cond][i] for i in kind if kind[i] == k_),
+                         sum(kind[i] == k_ for i in kind), None, None, None))
+    rows.append(('primary', 'treatment vs baseline', 'McNemar b / c, two-sided exact p', b, c, None, None,
+                 f'{A.mcnemar_two_sided(b, c):.3g}'))
+    over = {cond: majority_of(runs, cond, lambda x: x['kind'] == 'twin', lambda x: x['over_ask']) for cond in correct}
+    twins = sorted(over['treatment'])
+    a_ = sum(over['treatment'][t] and over['baseline'][t] for t in twins)
+    b_ = sum(over['treatment'][t] and not over['baseline'][t] for t in twins)
+    c_ = sum(over['baseline'][t] and not over['treatment'][t] for t in twins)
+    delta, lo, hi = A.newcombe_paired(a_, b_, c_, len(twins) - a_ - b_ - c_)
+    ni = s['secondary']['over_ask_non_inferiority']['all']
+    must_equal('H4b over-ask', (a_ + b_, a_ + c_, round(hi, 4)), (ni['over_ask_treatment'], ni['over_ask_baseline'],
+                                                                   ni['one_sided_95_upper']))
+    for cond, k in (('treatment', a_ + b_), ('baseline', a_ + c_)):
+        rows.append(('secondary 1', cond, 'twins over-asked (majority of 3)', k, len(twins), None, None, None))
+    rows.append(('secondary 1', 'treatment minus baseline', 'over-ask difference, Newcombe one-sided 95% upper vs margin 0.10',
+                 None, None, round(lo, 4), round(hi, 4), 'non-inferior' if hi < 0.10 else 'not non-inferior'))
+    asked = {cond: majority_of(runs, cond, lambda x: x['kind'] == 'ambiguous',
+                               lambda x: x['terminal_state'] == 'needs_clarification') for cond in correct}
+    for cond in correct:
+        k, n = sum(asked[cond].values()), len(asked[cond])
+        pub = s['secondary']['ask_rate_ambiguous'][cond]
+        must_equal(f'H4b ask rate {cond}', (k, n), (pub['k'], pub['n']))
+        rows.append(('secondary 2', cond, 'ambiguous items asked (majority of 3), Wilson 95%', k, n, *pub['wilson95'], None))
+    head = provenance([FU / 'h4b-runs/outcomes.json', FU / 'h4b-runs/summary-20261022T093916Z.json',
+                       FU / 'h4b-runs/analyze_h4b.py', ROOT / 'docs/preregistration/H4b-clarify-resolver.md'],
+                      'confirmatory (Holm family H4b/H5/H6/H8)')
+    note = ('recomputed from outcomes.json (no item text; run folders kept local); pair correct = both items correct; '
+            'items written by OpenAI Codex (gpt-6-astra), not a person')
+    return render(head, ('part', 'condition', 'metric', 'k', 'n', 'ci_lo', 'ci_hi', 'value'), rows, note)
+
+
+def table_holm():
+    """The Holm family H4b/H5/H6/H8: each p from its committed summary, adjusted here."""
+    ps = {'H4b': (read(FU / 'h4b-runs/summary-20261022T093916Z.json')['primary']['p_two_sided_exact'], 'two-sided exact McNemar'),
+          'H5': (read(FU / 'h5-runs/summary-20261022T070927Z.json')['primary']['p_one_sided_exact'], 'one-sided exact McNemar'),
+          'H6': (read(FU / 'h6-run/summary.json')['primary']['p_one_sided_exact'], 'one-sided exact McNemar'),
+          'H8': (read(H8 / 'runs/20261018T154826Z-hardened/summary.json')['primary_mcnemar_vs_baseline']['p_one_sided'],
+                 'one-sided exact McNemar')}
+    order = sorted(ps, key=lambda k: ps[k][0])
+    adj, running = {}, 0.0
+    for i, k in enumerate(order):
+        running = max(running, min(1.0, (len(ps) - i) * ps[k][0]))
+        adj[k] = running
+    rows = [(k, ps[k][1], f'{ps[k][0]:.3g}', f'{adj[k]:.3g}', 'rejected' if adj[k] < 0.05 else 'not rejected')
+            for k in ('H4b', 'H5', 'H6', 'H8')]
+    head = provenance([FU / 'h4b-runs/summary-20261022T093916Z.json', FU / 'h5-runs/summary-20261022T070927Z.json',
+                       FU / 'h6-run/summary.json', H8 / 'runs/20261018T154826Z-hardened/summary.json'], 'confirmatory family, Holm at alpha 0.05')
+    return render(head, ('hypothesis', 'test', 'p', 'p_holm', 'null at 0.05 (Holm)'), rows,
+                  'each p is checked against its raw data by the hypothesis table above it (h4b_clarification, h5_completion, h6_abstention, h8_fault_injection)')
+
+
 TABLES = {
     'router_arms.csv': table_router_arms,
     'router_by_class.csv': table_router_by_class,
@@ -650,6 +786,9 @@ TABLES = {
     'h4_dev_rounds.csv': table_h4_dev_rounds,
     'h8_fault_injection.csv': table_h8,
     'h6_abstention.csv': table_h6,
+    'h5_completion.csv': table_h5,
+    'h4b_clarification.csv': table_h4b,
+    'holm_family.csv': table_holm,
 }
 
 
