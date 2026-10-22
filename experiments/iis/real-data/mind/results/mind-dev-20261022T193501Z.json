@@ -1,0 +1,3328 @@
+{
+ "experiment": "MIND-small dev, ARIES interests/diversity/learning vs baselines",
+ "created_utc": "20261022T193501Z",
+ "commit": "87bc3644cedd9960fb8519401f37294beec21761",
+ "code_dirty": false,
+ "dataset": {
+  "name": "MIND-small",
+  "split_evaluated": "dev",
+  "source": "https://huggingface.co/datasets/Recommenders/MIND/resolve/main/",
+  "license": "Microsoft Research License Terms (research use)",
+  "citation": "Wu et al., MIND: A Large-scale Dataset for News Recommendation, ACL 2020",
+  "zip_sha256_expected": {
+   "MINDsmall_train.zip": "6ef97a271580b98ccfc4301ada55cc639423cb0576a78b8dcfcf74a4dbcc3194",
+   "MINDsmall_dev.zip": "d6ce515dcaa6b6d47ddf0a326eebc8a31b84735ae410285c9882ca2a06eec669"
+  },
+  "zip_sha256_observed": {
+   "MINDsmall_train.zip": "6ef97a271580b98ccfc4301ada55cc639423cb0576a78b8dcfcf74a4dbcc3194",
+   "MINDsmall_dev.zip": "d6ce515dcaa6b6d47ddf0a326eebc8a31b84735ae410285c9882ca2a06eec669"
+  },
+  "tsv_sha256": {
+   "train/behaviors.tsv": "a424547c8fa17c9ea4879c2110221c2b2f2709f4f7615ede0b0d8e4765158658",
+   "train/news.tsv": "cd49d7da275e9c405f627d75a0de9d4ec6ad43ff8a8db5d23a447591676e09d6",
+   "dev/behaviors.tsv": "b6c460e33b1a8693252ded6e626da7d3ccf78920eea2ec11889020bb7d8443ef",
+   "dev/news.tsv": "e5d144667558c449d16084fe6bfa01940c2f5d5785ea9f9110292bc3b94eb822"
+  },
+  "news_conflicting_duplicates": 0,
+  "limit": null
+ },
+ "parameters": {
+  "seed": 20261022,
+  "bootstrap_replicates": 1000,
+  "bootstrap_unit": "user (resampled with replacement; mean over the resampled users' impressions)",
+  "interval": "percentile 2.5/97.5",
+  "tie_break": "crc32('<seed>:<impression id>:<news id>') ascending, same for every system; AUC uses average ranks instead",
+  "mrr_definition": "MIND: sum over clicked items of 1/rank divided by number of clicked items",
+  "ndcg_gain": "2^y - 1, discount log2(rank + 1)",
+  "aries_topics": "normalised category, subcategory and TitleEntities Label of each history item",
+  "aries_weight": "share of the user's history items (present in news.tsv) carrying the topic",
+  "aries_candidate_text": "category | subcategory | title | entity labels",
+  "aries_synonyms": "none",
+  "diverse": "aries.news.selection.diverse over the static ranking; topics = primary matched topic (highest weight, profile order on ties), unmatched -> 'other'; per_source=0; limit = all",
+  "learning": {
+   "min_observations": 10,
+   "engaged_threshold": 0.4,
+   "ignored_threshold": 0.1,
+   "max_step": 0.15,
+   "max_reversals": 3,
+   "damping": 0.5,
+   "window_days": 30,
+   "interval_hours": 24,
+   "lookback_changes": 8,
+   "path": "ordinary path of loop.propose() only",
+   "cadence": "one pass after every dev impression, topics with new evidence only",
+   "evidence": "every candidate of the impression counts as shown for each topic it matches; clicked = label 1"
+  },
+  "popular": "clicks on the item in train+dev impressions with timestamp strictly before the impression",
+  "recent": "earliest timestamp of any train+dev impression listing the item (no publish time in MIND)",
+  "text_tokens": "\\w+ over aries.interests.matching.normalise(title); no stop words, no stemming",
+  "tfidf": "tf raw count, idf = ln((1+N)/(1+df))+1 over all train+dev news titles, L2, cosine",
+  "bm25": {
+   "k1": 1.2,
+   "b": 0.75,
+   "idf": "ln(1+(N-df+0.5)/(df+0.5)) over train+dev news titles",
+   "query": "candidate title (unique terms)",
+   "document": "concatenated history titles",
+   "avgdl": "mean over dev users with non-empty history"
+  },
+  "embedding": "mean of e5-base-int8 'query:' history-title embeddings vs candidate title, cosine (not run in this result unless listed in systems)",
+  "empty_history": "ARIES systems score all candidates 0 (tie-break decides MRR/nDCG, AUC = 0.5); included"
+ },
+ "counts": {
+  "impressions": 73152,
+  "users": 50000,
+  "candidates": 2740998,
+  "impressions_no_positive": 0,
+  "impressions_no_negative": 0,
+  "impressions_excluded_from_auc": 0,
+  "impressions_excluded_from_mrr_ndcg": 0,
+  "impressions_empty_history": 2214,
+  "users_empty_history": 1407,
+  "dev_impressions_in_file": 73152
+ },
+ "diagnostics": {
+  "prefilter_validation": {
+   "pairs": 20000,
+   "mismatches": 0
+  },
+  "history_variants": 0,
+  "learning_changes": 4031,
+  "learning_relative_changes": 453,
+  "learning_relative_users_changed": 343,
+  "learning_users_changed": 2582,
+  "profile_topics_mean": 43.63586,
+  "bm25_avgdl": 309.18531475726957,
+  "news_items": 65238,
+  "systems": [
+   "aries-interests",
+   "aries-interests+diverse",
+   "aries-learning",
+   "aries-interests+mmr",
+   "aries-learning-relative",
+   "random",
+   "popular",
+   "recent",
+   "tfidf",
+   "bm25",
+   "embedding"
+  ]
+ },
+ "all_impressions": {
+  "users": 50000,
+  "impressions": 73152,
+  "systems": {
+   "aries-interests": {
+    "auc": {
+     "mean": 0.6134230448063944,
+     "ci95": [
+      0.611193185755401,
+      0.6154188141334818
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.2956420561418526,
+     "ci95": [
+      0.2932177003803642,
+      0.2978581661352652
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.32046656957048747,
+     "ci95": [
+      0.31764470336189776,
+      0.3230467194541725
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.380237354417469,
+     "ci95": [
+      0.37765663394660737,
+      0.3826380344460978
+     ],
+     "n": 73152
+    }
+   },
+   "aries-interests+diverse": {
+    "auc": {
+     "mean": 0.5782181602961605,
+     "ci95": [
+      0.576013781196633,
+      0.5803659169055355
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.28054759827493675,
+     "ci95": [
+      0.2782007331094373,
+      0.2828748920851107
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.2917777924268909,
+     "ci95": [
+      0.28904805506223663,
+      0.29433580508773866
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.3527240761875905,
+     "ci95": [
+      0.35012539435277834,
+      0.3552195362442472
+     ],
+     "n": 73152
+    }
+   },
+   "aries-learning": {
+    "auc": {
+     "mean": 0.6135263204342858,
+     "ci95": [
+      0.6112939828355816,
+      0.615543258074853
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.2956988965920379,
+     "ci95": [
+      0.2932766873438393,
+      0.2979368211190818
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.32053780606325016,
+     "ci95": [
+      0.31775388033766055,
+      0.32306688183796534
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.38032061313019794,
+     "ci95": [
+      0.37776077249295564,
+      0.38274625215985636
+     ],
+     "n": 73152
+    }
+   },
+   "aries-interests+mmr": {
+    "auc": {
+     "mean": 0.6108420293639957,
+     "ci95": [
+      0.6085782573799874,
+      0.6130536747278403
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.2948663094882505,
+     "ci95": [
+      0.2924282396559008,
+      0.2971094399782168
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.3191166876924891,
+     "ci95": [
+      0.3164976709574464,
+      0.32165345055925776
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.379765058714918,
+     "ci95": [
+      0.37721838929687895,
+      0.3821185944431316
+     ],
+     "n": 73152
+    }
+   },
+   "aries-learning-relative": {
+    "auc": {
+     "mean": 0.6134259116567332,
+     "ci95": [
+      0.6111935643213005,
+      0.615422759643606
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.2956432375993218,
+     "ci95": [
+      0.29321896334693925,
+      0.2978591417267021
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.320469051276969,
+     "ci95": [
+      0.31764730807390734,
+      0.323051738523693
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.3802405366787112,
+     "ci95": [
+      0.3776495212636947,
+      0.38264744833407954
+     ],
+     "n": 73152
+    }
+   },
+   "random": {
+    "auc": {
+     "mean": 0.4990999635437863,
+     "ci95": [
+      0.49690832837503734,
+      0.5012243211756378
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.21774777054806457,
+     "ci95": [
+      0.21578241789586589,
+      0.21977077718150895
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.22263324434011336,
+     "ci95": [
+      0.22020595295591616,
+      0.22504422692801898
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.2851817454373217,
+     "ci95": [
+      0.28279031864677184,
+      0.2875431235915027
+     ],
+     "n": 73152
+    }
+   },
+   "popular": {
+    "auc": {
+     "mean": 0.5780345376574463,
+     "ci95": [
+      0.5757997536263119,
+      0.5802342180654233
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.26936870480356284,
+     "ci95": [
+      0.267051800091952,
+      0.27144686044894234
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.29085055022490514,
+     "ci95": [
+      0.2881531257777981,
+      0.2933023322571508
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.3521006423014642,
+     "ci95": [
+      0.34962585040460425,
+      0.35445572355261307
+     ],
+     "n": 73152
+    }
+   },
+   "recent": {
+    "auc": {
+     "mean": 0.514068317646381,
+     "ci95": [
+      0.511835428643343,
+      0.5162432225551837
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.21417960533357383,
+     "ci95": [
+      0.21227014271359526,
+      0.21598046850725464
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.22853082333481162,
+     "ci95": [
+      0.2261487517998548,
+      0.23067323023363345
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.2914735948076797,
+     "ci95": [
+      0.2891974848153177,
+      0.29359556782518975
+     ],
+     "n": 73152
+    }
+   },
+   "tfidf": {
+    "auc": {
+     "mean": 0.5728837362487793,
+     "ci95": [
+      0.5708170161923252,
+      0.5750040849550688
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.2649474138097833,
+     "ci95": [
+      0.2626563169208656,
+      0.2670138666010607
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.2823912005479614,
+     "ci95": [
+      0.2796133609055817,
+      0.28483637898916303
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.3436310072941103,
+     "ci95": [
+      0.34113592194651976,
+      0.3460162910040217
+     ],
+     "n": 73152
+    }
+   },
+   "bm25": {
+    "auc": {
+     "mean": 0.5778575854934553,
+     "ci95": [
+      0.5757676582465305,
+      0.5798235747297461
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.2652300881817516,
+     "ci95": [
+      0.2630912513347847,
+      0.26723733371143077
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.28326292628648564,
+     "ci95": [
+      0.2807741489045762,
+      0.28560421454181445
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.3455536814435795,
+     "ci95": [
+      0.34317161541355923,
+      0.34778534065671945
+     ],
+     "n": 73152
+    }
+   },
+   "embedding": {
+    "auc": {
+     "mean": 0.5999846929839943,
+     "ci95": [
+      0.5977678429017256,
+      0.6022427108674839
+     ],
+     "n": 73152
+    },
+    "mrr": {
+     "mean": 0.28351696049237013,
+     "ci95": [
+      0.2811981813448829,
+      0.28577050859119635
+     ],
+     "n": 73152
+    },
+    "ndcg5": {
+     "mean": 0.3035229643121285,
+     "ci95": [
+      0.3008300611777514,
+      0.30604321774546295
+     ],
+     "n": 73152
+    },
+    "ndcg10": {
+     "mean": 0.36333180250035696,
+     "ci95": [
+      0.36079777752460823,
+      0.3656319184307092
+     ],
+     "n": 73152
+    }
+   }
+  },
+  "paired": {
+   "aries-interests - random": {
+    "auc": {
+     "diff": 0.11432308126260814,
+     "ci95": [
+      0.11133317634557582,
+      0.11725542410910426
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.07789428559378807,
+     "ci95": [
+      0.07552149112144407,
+      0.08012100866585305
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09783332523037412,
+     "ci95": [
+      0.09507043174308562,
+      0.10039855049290394
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09505560898014724,
+     "ci95": [
+      0.09263270890200728,
+      0.09739666947671632
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - popular": {
+    "auc": {
+     "diff": 0.03538850714894812,
+     "ci95": [
+      0.03220947566466897,
+      0.038360578131725546
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.02627335133828976,
+     "ci95": [
+      0.0238505926018796,
+      0.028682241541487196
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.029616019345582313,
+     "ci95": [
+      0.026783270189423076,
+      0.03267234377623979
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.02813671211600474,
+     "ci95": [
+      0.02548880714216503,
+      0.03065974551364032
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - recent": {
+    "auc": {
+     "diff": 0.09935472716001345,
+     "ci95": [
+      0.09653825020143367,
+      0.10205937075905697
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.0814624508082788,
+     "ci95": [
+      0.07906565898145755,
+      0.08376697695664041
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09193574623567585,
+     "ci95": [
+      0.08915735046898508,
+      0.09474382956191679
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.08876375960978924,
+     "ci95": [
+      0.08638458097252372,
+      0.09116528334823305
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - tfidf": {
+    "auc": {
+     "diff": 0.04053930855761509,
+     "ci95": [
+      0.03797699419134261,
+      0.043321519145821455
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.030694642332069318,
+     "ci95": [
+      0.028253087911983922,
+      0.03291877576308666
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03807536902252608,
+     "ci95": [
+      0.03537944760351368,
+      0.040689374983953086
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03660634712335868,
+     "ci95": [
+      0.03422607286534434,
+      0.0388635792078631
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - bm25": {
+    "auc": {
+     "diff": 0.035565459312939106,
+     "ci95": [
+      0.033112344001979654,
+      0.03825159161081767
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.03041196796010104,
+     "ci95": [
+      0.02807672114935173,
+      0.03252272256560552
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03720364328400185,
+     "ci95": [
+      0.03440215805670713,
+      0.03976584340446886
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.034683672973889454,
+     "ci95": [
+      0.03227768696921111,
+      0.03690928113985922
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - embedding": {
+    "auc": {
+     "diff": 0.013438351822400179,
+     "ci95": [
+      0.01092882574667602,
+      0.016022544508651548
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.01212509564948249,
+     "ci95": [
+      0.010002898306893354,
+      0.014310916381962331
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.016943605258358956,
+     "ci95": [
+      0.014575635379810043,
+      0.019409865469755636
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.016905551917112027,
+     "ci95": [
+      0.014714694897472598,
+      0.019029597382824667
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - random": {
+    "auc": {
+     "diff": 0.07911819675237426,
+     "ci95": [
+      0.07603296229475341,
+      0.08229601710389377
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.06279982772687216,
+     "ci95": [
+      0.06050726887126691,
+      0.06509246923217665
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.06914454808677753,
+     "ci95": [
+      0.06638632576871971,
+      0.0717919227666884
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.06754233075026879,
+     "ci95": [
+      0.0652946570307581,
+      0.07001304780517
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - popular": {
+    "auc": {
+     "diff": 0.0001836226387142387,
+     "ci95": [
+      -0.0029812889178511106,
+      0.003330850160187143
+     ],
+     "share_replicates_above_zero": 0.54
+    },
+    "mrr": {
+     "diff": 0.01117889347137386,
+     "ci95": [
+      0.008677409078043567,
+      0.013679434578851098
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.0009272422019857304,
+     "ci95": [
+      -0.0019143304974512582,
+      0.003826108372229062
+     ],
+     "share_replicates_above_zero": 0.72
+    },
+    "ndcg10": {
+     "diff": 0.0006234338861262847,
+     "ci95": [
+      -0.001986542032641858,
+      0.0030694081425866886
+     ],
+     "share_replicates_above_zero": 0.664
+    }
+   },
+   "aries-interests+diverse - recent": {
+    "auc": {
+     "diff": 0.06414984264977956,
+     "ci95": [
+      0.06129225923456905,
+      0.06730473855467214
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.0663679929413629,
+     "ci95": [
+      0.0639380353357854,
+      0.0687695176078439
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.06324696909207926,
+     "ci95": [
+      0.06046344090170991,
+      0.06613796658723571
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.06125048137991079,
+     "ci95": [
+      0.0587705886728313,
+      0.06374250403369626
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - tfidf": {
+    "auc": {
+     "diff": 0.00533442404738121,
+     "ci95": [
+      0.002616434060224812,
+      0.008171672415064682
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.015600184465153417,
+     "ci95": [
+      0.01344400017903544,
+      0.017744339635432125
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.0093865918789295,
+     "ci95": [
+      0.00679839493227155,
+      0.011976862533223671
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.00909306889348023,
+     "ci95": [
+      0.006890555493578516,
+      0.011272354855226877
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - bm25": {
+    "auc": {
+     "diff": 0.00036057480270522917,
+     "ci95": [
+      -0.0025424822299004975,
+      0.00327650041858509
+     ],
+     "share_replicates_above_zero": 0.59
+    },
+    "mrr": {
+     "diff": 0.015317510093185138,
+     "ci95": [
+      0.012989011983332454,
+      0.01750767070054484
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.008514866140405272,
+     "ci95": [
+      0.006025069236449876,
+      0.011134742257238133
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.007170394744011002,
+     "ci95": [
+      0.004753625612348507,
+      0.009481255061142042
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - embedding": {
+    "auc": {
+     "diff": -0.0217665326878337,
+     "ci95": [
+      -0.02473283910997368,
+      -0.018924502968432493
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "mrr": {
+     "diff": -0.0029693622174334112,
+     "ci95": [
+      -0.005188655138459371,
+      -0.0006205878605786711
+     ],
+     "share_replicates_above_zero": 0.003
+    },
+    "ndcg5": {
+     "diff": -0.011745171885237627,
+     "ci95": [
+      -0.014474458303475917,
+      -0.009051795976538945
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "ndcg10": {
+     "diff": -0.010607726312766429,
+     "ci95": [
+      -0.013023815358418896,
+      -0.008219274804878076
+     ],
+     "share_replicates_above_zero": 0.0
+    }
+   },
+   "aries-learning - random": {
+    "auc": {
+     "diff": 0.11442635689049957,
+     "ci95": [
+      0.11148399350799708,
+      0.11733600719288403
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.07795112604397338,
+     "ci95": [
+      0.07561342878238121,
+      0.08018991363151204
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.0979045617231368,
+     "ci95": [
+      0.09517197361646841,
+      0.10043275270132745
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09513886769287623,
+     "ci95": [
+      0.09272879319087717,
+      0.09747526421214983
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - popular": {
+    "auc": {
+     "diff": 0.03549178277683956,
+     "ci95": [
+      0.032319645150051604,
+      0.03843333059096997
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.02633019178847507,
+     "ci95": [
+      0.0239228766742354,
+      0.028758007250843612
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.029687255838345,
+     "ci95": [
+      0.026797749338390235,
+      0.03275819745159629
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.028219970828733728,
+     "ci95": [
+      0.025560816673358085,
+      0.030729715121483252
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - recent": {
+    "auc": {
+     "diff": 0.09945800278790488,
+     "ci95": [
+      0.09663592377455897,
+      0.10216578137321669
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.0815192912584641,
+     "ci95": [
+      0.07910755670922962,
+      0.08381052285627885
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09200698272843853,
+     "ci95": [
+      0.0892473527635159,
+      0.0947550082643327
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.08884701832251823,
+     "ci95": [
+      0.08645196871777121,
+      0.09127011852241067
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - tfidf": {
+    "auc": {
+     "diff": 0.04064258418550653,
+     "ci95": [
+      0.038103540130579656,
+      0.043482510131168065
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.030751482782254626,
+     "ci95": [
+      0.028317506455944472,
+      0.032984197940828526
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03814660551528877,
+     "ci95": [
+      0.03548691954611574,
+      0.04077600196210761
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03668960583608767,
+     "ci95": [
+      0.03431092990122402,
+      0.03895232730468786
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - bm25": {
+    "auc": {
+     "diff": 0.035668734940830546,
+     "ci95": [
+      0.03321651923852165,
+      0.038375886884585236
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.030468808410286347,
+     "ci95": [
+      0.028091910129027807,
+      0.03256564061578796
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.037274879776764545,
+     "ci95": [
+      0.034462815424097924,
+      0.03984198115353934
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.034766931686618444,
+     "ci95": [
+      0.032379794415138594,
+      0.036991239901551336
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - embedding": {
+    "auc": {
+     "diff": 0.013541627450291615,
+     "ci95": [
+      0.011032346859065345,
+      0.016086356078254375
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.012181936099667797,
+     "ci95": [
+      0.010015939873994736,
+      0.014349201165008296
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.017014841751121643,
+     "ci95": [
+      0.014642604104630294,
+      0.019439985908805378
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.016988810629841016,
+     "ci95": [
+      0.014829380538697586,
+      0.019119015364555292
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - random": {
+    "auc": {
+     "diff": 0.11174206582020942,
+     "ci95": [
+      0.10856140177086872,
+      0.1149124712871605
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.07711853894018592,
+     "ci95": [
+      0.07483424634154226,
+      0.07941144525076005
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09648344335237574,
+     "ci95": [
+      0.09372828900415496,
+      0.09918929836757573
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09458331327759628,
+     "ci95": [
+      0.09222512099442563,
+      0.09698603428945536
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - popular": {
+    "auc": {
+     "diff": 0.032807491706549397,
+     "ci95": [
+      0.029732413403753714,
+      0.03592119242780596
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.02549760468468761,
+     "ci95": [
+      0.02307556377403387,
+      0.028003222368472264
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.028266137467583934,
+     "ci95": [
+      0.025614926948623683,
+      0.03120314058101209
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.027664416413453782,
+     "ci95": [
+      0.025110503551153223,
+      0.030228060685009887
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - recent": {
+    "auc": {
+     "diff": 0.09677371171761473,
+     "ci95": [
+      0.09408061529127705,
+      0.09970028072311359
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.08068670415467664,
+     "ci95": [
+      0.0782393696117653,
+      0.0829634704854525
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09058586435767747,
+     "ci95": [
+      0.0878322921012671,
+      0.09343824766616439
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.08829146390723829,
+     "ci95": [
+      0.08589757730259365,
+      0.09068540177556841
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - tfidf": {
+    "auc": {
+     "diff": 0.03795829311521637,
+     "ci95": [
+      0.0351733745850634,
+      0.0406697608821905
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.029918895678467165,
+     "ci95": [
+      0.027579450191023907,
+      0.03212854888311138
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.0367254871445277,
+     "ci95": [
+      0.0340212786427356,
+      0.03924082977839275
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03613405142080773,
+     "ci95": [
+      0.03384279797583288,
+      0.038342952443685525
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - bm25": {
+    "auc": {
+     "diff": 0.032984443870540385,
+     "ci95": [
+      0.03027577518503607,
+      0.035789794229443506
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.029636221306498886,
+     "ci95": [
+      0.027328157894712983,
+      0.03178414697557531
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03585376140600347,
+     "ci95": [
+      0.03324629494243261,
+      0.03832337623729515
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.0342113772713385,
+     "ci95": [
+      0.03176061911246462,
+      0.036496309903445254
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - embedding": {
+    "auc": {
+     "diff": 0.010857336380001458,
+     "ci95": [
+      0.00802146546877898,
+      0.013539937480105842
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.011349348995880337,
+     "ci95": [
+      0.009162646047072839,
+      0.013602205207860006
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.015593723380360577,
+     "ci95": [
+      0.013099550061922764,
+      0.01821511755207025
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.016433256214561067,
+     "ci95": [
+      0.014115563590727525,
+      0.01865682546018145
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - random": {
+    "auc": {
+     "diff": 0.11432594811294693,
+     "ci95": [
+      0.11133307813185633,
+      0.11725411779246368
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.07789546705125727,
+     "ci95": [
+      0.0755222797720402,
+      0.08012247742374734
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09783580693685567,
+     "ci95": [
+      0.09507527577225117,
+      0.10039867506355495
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09505879124138948,
+     "ci95": [
+      0.09263263313086108,
+      0.09741361639045937
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - popular": {
+    "auc": {
+     "diff": 0.03539137399928691,
+     "ci95": [
+      0.03221020683122913,
+      0.038360769008718036
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.026274532795758972,
+     "ci95": [
+      0.023851621903839215,
+      0.028683457939989488
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.029618501052063873,
+     "ci95": [
+      0.026788171730356046,
+      0.03267488305091567
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.028139894377246975,
+     "ci95": [
+      0.025493042416861955,
+      0.030663647763301084
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - recent": {
+    "auc": {
+     "diff": 0.09935759401035223,
+     "ci95": [
+      0.09654377076869534,
+      0.10205969605968535
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.08146363226574801,
+     "ci95": [
+      0.07906703400376533,
+      0.08376740206026327
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.0919382279421574,
+     "ci95": [
+      0.08915976745651423,
+      0.09474632731038908
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.08876694187103149,
+     "ci95": [
+      0.08638093455229234,
+      0.09116589068404338
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - tfidf": {
+    "auc": {
+     "diff": 0.04054217540795388,
+     "ci95": [
+      0.0379785962342582,
+      0.043324773111959904
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.03069582378953853,
+     "ci95": [
+      0.02825427528741781,
+      0.03292077850938247
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03807785072900764,
+     "ci95": [
+      0.03538192567878101,
+      0.04069426776379361
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03660952938460092,
+     "ci95": [
+      0.03423355417566234,
+      0.03886954022426863
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - bm25": {
+    "auc": {
+     "diff": 0.035568326163277895,
+     "ci95": [
+      0.033115238160785244,
+      0.038257672882275814
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.03041314941757025,
+     "ci95": [
+      0.028078183345687464,
+      0.03252559666823922
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03720612499048342,
+     "ci95": [
+      0.034407132065290294,
+      0.03977069121471546
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.034686855235131694,
+     "ci95": [
+      0.03228949875747511,
+      0.03691124867171204
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - embedding": {
+    "auc": {
+     "diff": 0.013441218672738967,
+     "ci95": [
+      0.010938655414948048,
+      0.016027233732195407
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.0121262771069517,
+     "ci95": [
+      0.010004953730323857,
+      0.014312064121874453
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.016946086964840516,
+     "ci95": [
+      0.014578124023018255,
+      0.019412352558495324
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.016908734178354264,
+     "ci95": [
+      0.014716136617469608,
+      0.019028906460977466
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - aries-interests": {
+    "auc": {
+     "diff": 0.00010327562789143685,
+     "ci95": [
+      3.0290940022020818e-05,
+      0.00018367411069834802
+     ],
+     "share_replicates_above_zero": 0.997
+    },
+    "mrr": {
+     "diff": 5.6840450185308754e-05,
+     "ci95": [
+      -1.6835935331761807e-05,
+      0.0001330542755692235
+     ],
+     "share_replicates_above_zero": 0.926
+    },
+    "ndcg5": {
+     "diff": 7.12364927626877e-05,
+     "ci95": [
+      -2.546009033167762e-05,
+      0.00015785532848248268
+     ],
+     "share_replicates_above_zero": 0.927
+    },
+    "ndcg10": {
+     "diff": 8.325871272899017e-05,
+     "ci95": [
+      5.90778211761317e-06,
+      0.00016245691060222248
+     ],
+     "share_replicates_above_zero": 0.981
+    }
+   },
+   "aries-interests+diverse - aries-interests": {
+    "auc": {
+     "diff": -0.03520488451023388,
+     "ci95": [
+      -0.03732771185983974,
+      -0.03321064997999259
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "mrr": {
+     "diff": -0.0150944578669159,
+     "ci95": [
+      -0.01592788440119946,
+      -0.014190508812454592
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "ndcg5": {
+     "diff": -0.02868877714359658,
+     "ci95": [
+      -0.030273667629057106,
+      -0.027063568855970874
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "ndcg10": {
+     "diff": -0.02751327822987845,
+     "ci95": [
+      -0.028769834425166178,
+      -0.026135804636505583
+     ],
+     "share_replicates_above_zero": 0.0
+    }
+   },
+   "aries-learning-relative - aries-interests": {
+    "auc": {
+     "diff": 2.8668503387868225e-06,
+     "ci95": [
+      -2.63539799776058e-06,
+      8.775041520261982e-06
+     ],
+     "share_replicates_above_zero": 0.823
+    },
+    "mrr": {
+     "diff": 1.1814574692109976e-06,
+     "ci95": [
+      -1.2940513967468756e-07,
+      2.9548317115088423e-06
+     ],
+     "share_replicates_above_zero": 0.955
+    },
+    "ndcg5": {
+     "diff": 2.481706481559831e-06,
+     "ci95": [
+      0.0,
+      7.461904461916746e-06
+     ],
+     "share_replicates_above_zero": 0.636
+    },
+    "ndcg10": {
+     "diff": 3.182261242238728e-06,
+     "ci95": [
+      -7.915585900751531e-06,
+      1.721158939999856e-05
+     ],
+     "share_replicates_above_zero": 0.692
+    }
+   },
+   "aries-learning-relative - aries-learning": {
+    "auc": {
+     "diff": -0.00010040877755265002,
+     "ci95": [
+      -0.00018314132981243347,
+      -2.768211266411804e-05
+     ],
+     "share_replicates_above_zero": 0.003
+    },
+    "mrr": {
+     "diff": -5.5658992716097756e-05,
+     "ci95": [
+      -0.00013201018616516152,
+      1.783410572651351e-05
+     ],
+     "share_replicates_above_zero": 0.078
+    },
+    "ndcg5": {
+     "diff": -6.875478628112787e-05,
+     "ci95": [
+      -0.00015449491820276052,
+      2.8198092242641405e-05
+     ],
+     "share_replicates_above_zero": 0.079
+    },
+    "ndcg10": {
+     "diff": -8.007645148675144e-05,
+     "ci95": [
+      -0.00016040308241141305,
+      -4.7010414262750053e-07
+     ],
+     "share_replicates_above_zero": 0.023
+    }
+   },
+   "aries-interests+mmr - aries-interests": {
+    "auc": {
+     "diff": -0.0025810154423987217,
+     "ci95": [
+      -0.003731326737086424,
+      -0.0014506091150318563
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "mrr": {
+     "diff": -0.0007757466536021518,
+     "ci95": [
+      -0.0011910895284187677,
+      -0.000344554421542892
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "ndcg5": {
+     "diff": -0.0013498818779983798,
+     "ci95": [
+      -0.002206325445092197,
+      -0.00043548926711747425
+     ],
+     "share_replicates_above_zero": 0.002
+    },
+    "ndcg10": {
+     "diff": -0.0004722957025509568,
+     "ci95": [
+      -0.0010871662251100047,
+      0.00021356805180616206
+     ],
+     "share_replicates_above_zero": 0.08
+    }
+   },
+   "aries-interests+mmr - aries-interests+diverse": {
+    "auc": {
+     "diff": 0.03262386906783516,
+     "ci95": [
+      0.031079249581057896,
+      0.03412306544921574
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.014318711213313748,
+     "ci95": [
+      0.013687965330189993,
+      0.014981732800955456
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.0273388952655982,
+     "ci95": [
+      0.02606921195249866,
+      0.02862709765435078
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.027040982527327496,
+     "ci95": [
+      0.025927538820367423,
+      0.028072453397990912
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   }
+  }
+ },
+ "nonempty_history": {
+  "users": 48593,
+  "impressions": 70938,
+  "systems": {
+   "aries-interests": {
+    "auc": {
+     "mean": 0.6169630180393775,
+     "ci95": [
+      0.6147702789820606,
+      0.6191578750860658
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.2977581910945947,
+     "ci95": [
+      0.295235520704492,
+      0.30018682848313905
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.32312575554988576,
+     "ci95": [
+      0.3202174263952031,
+      0.32586016907561216
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.38283269509806994,
+     "ci95": [
+      0.3801409053475887,
+      0.38536300373946597
+     ],
+     "n": 70938
+    }
+   },
+   "aries-interests+diverse": {
+    "auc": {
+     "mean": 0.5806220274246144,
+     "ci95": [
+      0.5784453829946765,
+      0.5832522646557596
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.28219262987380145,
+     "ci95": [
+      0.27975700837221057,
+      0.28475267275857274
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.29354159155303816,
+     "ci95": [
+      0.29078087748313525,
+      0.2963839629951161
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.3544607177506388,
+     "ci95": [
+      0.35184220770007396,
+      0.3570820504419916
+     ],
+     "n": 70938
+    }
+   },
+   "aries-learning": {
+    "auc": {
+     "mean": 0.6170695169360411,
+     "ci95": [
+      0.6148832130235518,
+      0.6193015637171341
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.297816805555278,
+     "ci95": [
+      0.29531404425107294,
+      0.30022405189680157
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.3231992153587129,
+     "ci95": [
+      0.32029000572247285,
+      0.3259555972519224
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.38291855234458877,
+     "ci95": [
+      0.38022350838515556,
+      0.3854360490495225
+     ],
+     "n": 70938
+    }
+   },
+   "aries-interests+mmr": {
+    "auc": {
+     "mean": 0.6142640989525724,
+     "ci95": [
+      0.61200943232867,
+      0.616905791501913
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.29695823311432595,
+     "ci95": [
+      0.29442700714081577,
+      0.29947357755116405
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.32173374338236854,
+     "ci95": [
+      0.31881794615483977,
+      0.3245084963978541
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.38234565888006256,
+     "ci95": [
+      0.37962227792492664,
+      0.3848363999275049
+     ],
+     "n": 70938
+    }
+   },
+   "aries-learning-relative": {
+    "auc": {
+     "mean": 0.6169659743651267,
+     "ci95": [
+      0.6147656666394696,
+      0.6191549940072386
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.2977594094257682,
+     "ci95": [
+      0.2952365058391898,
+      0.30019001422152114
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.3231283147113019,
+     "ci95": [
+      0.32021997588793283,
+      0.32586272935515287
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.382835976678808,
+     "ci95": [
+      0.38015386688058544,
+      0.3853684359986863
+     ],
+     "n": 70938
+    }
+   },
+   "random": {
+    "auc": {
+     "mean": 0.49919764746297035,
+     "ci95": [
+      0.4971823246326861,
+      0.501424928667896
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.21743568574805064,
+     "ci95": [
+      0.21544793880159416,
+      0.219383514731865
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.2220423597255977,
+     "ci95": [
+      0.21977665772672655,
+      0.22430215955060356
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.2847713114394921,
+     "ci95": [
+      0.28254978100836387,
+      0.28692469786273156
+     ],
+     "n": 70938
+    }
+   },
+   "popular": {
+    "auc": {
+     "mean": 0.5784920894144221,
+     "ci95": [
+      0.5762159383744442,
+      0.5806602539866379
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.2696730078810847,
+     "ci95": [
+      0.26751889581072974,
+      0.27179410819613115
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.2911953247473628,
+     "ci95": [
+      0.2886284204935764,
+      0.2937839026273999
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.35247560137775363,
+     "ci95": [
+      0.3500156262213606,
+      0.3547990879003809
+     ],
+     "n": 70938
+    }
+   },
+   "recent": {
+    "auc": {
+     "mean": 0.5142764020055158,
+     "ci95": [
+      0.5122356685223045,
+      0.5165465713248597
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.21393028261261654,
+     "ci95": [
+      0.2121041547801777,
+      0.2157779342298504
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.22809802699156997,
+     "ci95": [
+      0.22575847046691477,
+      0.23043834408134595
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.2912290025829344,
+     "ci95": [
+      0.28913782167175656,
+      0.2934056469790455
+     ],
+     "n": 70938
+    }
+   },
+   "tfidf": {
+    "auc": {
+     "mean": 0.5751584633633694,
+     "ci95": [
+      0.5727512897814018,
+      0.5773414337229036
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.2661055581492687,
+     "ci95": [
+      0.26383246774161107,
+      0.2685467117705959
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.2838620408308941,
+     "ci95": [
+      0.281197004665994,
+      0.2866299588637409
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.3450838509698462,
+     "ci95": [
+      0.34262774921026945,
+      0.34768517737533755
+     ],
+     "n": 70938
+    }
+   },
+   "bm25": {
+    "auc": {
+     "mean": 0.5802875481972601,
+     "ci95": [
+      0.577963639531987,
+      0.5825790452368308
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.266397054888086,
+     "ci95": [
+      0.2641994665097814,
+      0.26877560762752156
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.2847609734371774,
+     "ci95": [
+      0.28213883635985426,
+      0.28756835871402325
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.3470665324576521,
+     "ci95": [
+      0.34470004117393427,
+      0.34967857536690494
+     ],
+     "n": 70938
+    }
+   },
+   "embedding": {
+    "auc": {
+     "mean": 0.6031052505168619,
+     "ci95": [
+      0.600911665322962,
+      0.6053343145272662
+     ],
+     "n": 70938
+    },
+    "mrr": {
+     "mean": 0.28525466693334195,
+     "ci95": [
+      0.28295146022677276,
+      0.2876579239443245
+     ],
+     "n": 70938
+    },
+    "ndcg5": {
+     "mean": 0.30565333439536385,
+     "ci95": [
+      0.30304730591007634,
+      0.30850731884324134
+     ],
+     "n": 70938
+    },
+    "ndcg10": {
+     "mean": 0.3653995149429968,
+     "ci95": [
+      0.36290216551769205,
+      0.3679970057515679
+     ],
+     "n": 70938
+    }
+   }
+  },
+  "paired": {
+   "aries-interests - random": {
+    "auc": {
+     "diff": 0.1177653705764072,
+     "ci95": [
+      0.11459017415219461,
+      0.12091883697093002
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.08032250534654407,
+     "ci95": [
+      0.07783404526740935,
+      0.08278733964109708
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.10108339582428806,
+     "ci95": [
+      0.09809940479563335,
+      0.10394954588854903
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09806138365857789,
+     "ci95": [
+      0.09549366688304595,
+      0.10062297604254408
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - popular": {
+    "auc": {
+     "diff": 0.03847092862495549,
+     "ci95": [
+      0.03528189959058807,
+      0.04160388369805355
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.028085183213509998,
+     "ci95": [
+      0.02540439645056477,
+      0.03063307438073065
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.031930430802522974,
+     "ci95": [
+      0.028686912611426495,
+      0.0350341633874348
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03035709372031632,
+     "ci95": [
+      0.027568393718459764,
+      0.03322409573459011
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - recent": {
+    "auc": {
+     "diff": 0.10268661603386167,
+     "ci95": [
+      0.09995087588664724,
+      0.10548469840995807
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.08382790848197816,
+     "ci95": [
+      0.08136534025423471,
+      0.08611233311784051
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09502772855831579,
+     "ci95": [
+      0.09217003705972156,
+      0.09776302817583597
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09160369251513557,
+     "ci95": [
+      0.08907007888292374,
+      0.093930482204634
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - tfidf": {
+    "auc": {
+     "diff": 0.04180455467600815,
+     "ci95": [
+      0.03907248619243004,
+      0.044711513412907446
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.03165263294532603,
+     "ci95": [
+      0.029426448464541004,
+      0.0339366158717476
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03926371471899163,
+     "ci95": [
+      0.03662875692220372,
+      0.041946181469959445
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.037748844128223775,
+     "ci95": [
+      0.03533394523112349,
+      0.04009472500041448
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - bm25": {
+    "auc": {
+     "diff": 0.036675469842117364,
+     "ci95": [
+      0.03394859657486504,
+      0.039522139493237976
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.03136113620650871,
+     "ci95": [
+      0.029031707745874102,
+      0.03374715615304156
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.038364782112708384,
+     "ci95": [
+      0.035729208081837806,
+      0.04089071875372765
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03576616264041785,
+     "ci95": [
+      0.033254507626907834,
+      0.03803747387778006
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests - embedding": {
+    "auc": {
+     "diff": 0.013857767522515586,
+     "ci95": [
+      0.011274092975122699,
+      0.016571399727507638
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.012503524161252737,
+     "ci95": [
+      0.010319908522737028,
+      0.014774214685307464
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.017472421154521897,
+     "ci95": [
+      0.014976915852864295,
+      0.020098921230638795
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.017433180155073197,
+     "ci95": [
+      0.015163181895815805,
+      0.019698734060082667
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - random": {
+    "auc": {
+     "diff": 0.08142437996164416,
+     "ci95": [
+      0.07831287459518804,
+      0.08486037413817547
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.06475694412575082,
+     "ci95": [
+      0.062271136489363846,
+      0.06722159289010929
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.07149923182744043,
+     "ci95": [
+      0.06852340675433535,
+      0.07431692555525166
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.06968940631114677,
+     "ci95": [
+      0.06720118497448989,
+      0.07219335606627154
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - popular": {
+    "auc": {
+     "diff": 0.0021299380101924537,
+     "ci95": [
+      -0.00104195823175961,
+      0.005318925186874279
+     ],
+     "share_replicates_above_zero": 0.921
+    },
+    "mrr": {
+     "diff": 0.012519621992716744,
+     "ci95": [
+      0.009912886053739838,
+      0.015118391819359707
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.0023462668056753477,
+     "ci95": [
+      -0.0008326970538137344,
+      0.005370559560256119
+     ],
+     "share_replicates_above_zero": 0.939
+    },
+    "ndcg10": {
+     "diff": 0.0019851163728852005,
+     "ci95": [
+      -0.0006796946675596896,
+      0.004774455375240625
+     ],
+     "share_replicates_above_zero": 0.926
+    }
+   },
+   "aries-interests+diverse - recent": {
+    "auc": {
+     "diff": 0.06634562541909864,
+     "ci95": [
+      0.06340950999113763,
+      0.06957967887501834
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.06826234726118491,
+     "ci95": [
+      0.06580241448497759,
+      0.07068684091128784
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.06544356456146816,
+     "ci95": [
+      0.06270604270022236,
+      0.06829123509296817
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.06323171516770446,
+     "ci95": [
+      0.060854142921457036,
+      0.06568295451167461
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - tfidf": {
+    "auc": {
+     "diff": 0.005463564061245118,
+     "ci95": [
+      0.0025459171339521553,
+      0.008515787285421617
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.016087071724532782,
+     "ci95": [
+      0.013818701553777853,
+      0.0184385450562635
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.009679550722143996,
+     "ci95": [
+      0.006985738641357132,
+      0.012431474838270708
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.009376866780792656,
+     "ci95": [
+      0.006941767002989305,
+      0.011895622309922768
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - bm25": {
+    "auc": {
+     "diff": 0.00033447922735433126,
+     "ci95": [
+      -0.0024464482764184363,
+      0.0033263508539738383
+     ],
+     "share_replicates_above_zero": 0.604
+    },
+    "mrr": {
+     "diff": 0.015795574985715453,
+     "ci95": [
+      0.013514461206467642,
+      0.018047166731386812
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.008780618115860754,
+     "ci95": [
+      0.0062056355229490896,
+      0.01139909830499322
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.007394185292986732,
+     "ci95": [
+      0.005060781370954286,
+      0.009711373340424427
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+diverse - embedding": {
+    "auc": {
+     "diff": -0.02248322309224745,
+     "ci95": [
+      -0.02541495508502984,
+      -0.019358324940421508
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "mrr": {
+     "diff": -0.003062037059540518,
+     "ci95": [
+      -0.005352860449321336,
+      -0.0007024020929926629
+     ],
+     "share_replicates_above_zero": 0.007
+    },
+    "ndcg5": {
+     "diff": -0.012111742842325733,
+     "ci95": [
+      -0.014690344303803064,
+      -0.009347507185273152
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "ndcg10": {
+     "diff": -0.01093879719235792,
+     "ci95": [
+      -0.013114686417546565,
+      -0.008441812186698913
+     ],
+     "share_replicates_above_zero": 0.0
+    }
+   },
+   "aries-learning - random": {
+    "auc": {
+     "diff": 0.11787186947307068,
+     "ci95": [
+      0.11473523672869827,
+      0.12102045146507147
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.08038111980722737,
+     "ci95": [
+      0.07786858729548071,
+      0.08283108198935495
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.10115685563311516,
+     "ci95": [
+      0.09816289859018511,
+      0.1040784432269878
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.0981472409050967,
+     "ci95": [
+      0.09555327721741483,
+      0.100669428500271
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - popular": {
+    "auc": {
+     "diff": 0.038577427521618975,
+     "ci95": [
+      0.03537904312087597,
+      0.041751058268337166
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.0281437976741933,
+     "ci95": [
+      0.025494758756548153,
+      0.030681316232821516
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03200389061135007,
+     "ci95": [
+      0.028755816615428347,
+      0.035086957487186064
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.030442950966835126,
+     "ci95": [
+      0.027653477077787838,
+      0.03330543551411823
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - recent": {
+    "auc": {
+     "diff": 0.10279311493052515,
+     "ci95": [
+      0.10008179215000397,
+      0.10555917976646285
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.08388652294266147,
+     "ci95": [
+      0.08145064152850721,
+      0.0861590652941619
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09510118836714287,
+     "ci95": [
+      0.09223806918012177,
+      0.09779979136168324
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09168954976165437,
+     "ci95": [
+      0.08912910337027151,
+      0.09404595626479051
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - tfidf": {
+    "auc": {
+     "diff": 0.041911053572671636,
+     "ci95": [
+      0.039194544765620044,
+      0.04480238189974426
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.031711247406009335,
+     "ci95": [
+      0.02943452981552392,
+      0.033988157203344964
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.039337174527818715,
+     "ci95": [
+      0.03669860193571182,
+      0.04201654008009303
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03783470137474258,
+     "ci95": [
+      0.035402255697277105,
+      0.04017470015593446
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - bm25": {
+    "auc": {
+     "diff": 0.036781968738780854,
+     "ci95": [
+      0.034076808759530314,
+      0.03961958740644232
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.03141975066719201,
+     "ci95": [
+      0.029087414468285482,
+      0.03381857021461649
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03843824192153547,
+     "ci95": [
+      0.0357858444066511,
+      0.040982841946515476
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.035852019886936655,
+     "ci95": [
+      0.033374036699156194,
+      0.038145757168519125
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - embedding": {
+    "auc": {
+     "diff": 0.013964266419179073,
+     "ci95": [
+      0.011350328891658126,
+      0.016703233514984494
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.01256213862193604,
+     "ci95": [
+      0.01036950723147367,
+      0.014831338788814822
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.017545880963348987,
+     "ci95": [
+      0.015057819140276449,
+      0.020171327477039924
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.017519037401592004,
+     "ci95": [
+      0.015256385644484382,
+      0.019776474999470744
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - random": {
+    "auc": {
+     "diff": 0.11506645148960207,
+     "ci95": [
+      0.11191842979834057,
+      0.11834654641826642
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.07952254736627533,
+     "ci95": [
+      0.0770054631087846,
+      0.08195487014748347
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09969138365677083,
+     "ci95": [
+      0.09668680202476407,
+      0.10258007010203152
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09757434744057052,
+     "ci95": [
+      0.09497565485045692,
+      0.10015046773762705
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - popular": {
+    "auc": {
+     "diff": 0.03577200953815035,
+     "ci95": [
+      0.032494170537299735,
+      0.03912120220220319
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.02728522523324125,
+     "ci95": [
+      0.024606273526885103,
+      0.02984058529685931
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.030538418635005744,
+     "ci95": [
+      0.027303006999018317,
+      0.0335955455650375
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.029870057502308936,
+     "ci95": [
+      0.026980009242849053,
+      0.03272862711031488
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - recent": {
+    "auc": {
+     "diff": 0.09998769694705653,
+     "ci95": [
+      0.09707919055588003,
+      0.10301704375292013
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.08302795050170941,
+     "ci95": [
+      0.08060256624127603,
+      0.08531454516805342
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09363571639079855,
+     "ci95": [
+      0.09091608528560123,
+      0.09648886791720435
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09111665629712819,
+     "ci95": [
+      0.08862386194628205,
+      0.09346245682382115
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - tfidf": {
+    "auc": {
+     "diff": 0.03910563558920302,
+     "ci95": [
+      0.036162890663900875,
+      0.042059878918101305
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.030852674965057284,
+     "ci95": [
+      0.02852813163570534,
+      0.03318206863523844
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.037871702551474394,
+     "ci95": [
+      0.035215498407889234,
+      0.04048773877988948
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.037261807910216396,
+     "ci95": [
+      0.03491992856851397,
+      0.03952284162563695
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - bm25": {
+    "auc": {
+     "diff": 0.03397655075531223,
+     "ci95": [
+      0.03122528941856863,
+      0.036849860089434236
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.03056117822623996,
+     "ci95": [
+      0.028208238218685948,
+      0.03290963463089335
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03697276994519115,
+     "ci95": [
+      0.03434960197273091,
+      0.039640569710185605
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03527912642241047,
+     "ci95": [
+      0.0329077418845105,
+      0.03751899771516685
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-interests+mmr - embedding": {
+    "auc": {
+     "diff": 0.011158848435710451,
+     "ci95": [
+      0.008366714950433876,
+      0.014072373171158068
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.011703566180983987,
+     "ci95": [
+      0.009580097208197982,
+      0.013978665722809109
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.016080408987004663,
+     "ci95": [
+      0.013513665323660187,
+      0.018762350906116648
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.016946143937065818,
+     "ci95": [
+      0.01473627415993414,
+      0.019286382779921063
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - random": {
+    "auc": {
+     "diff": 0.1177683269021563,
+     "ci95": [
+      0.11459444317130951,
+      0.12091602078664335
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.08032372367771755,
+     "ci95": [
+      0.07783521764752822,
+      0.0827884363226957
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.10108595498570416,
+     "ci95": [
+      0.09810196414319698,
+      0.10395452768555787
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.0980646652393159,
+     "ci95": [
+      0.09548179598353432,
+      0.10062713990402612
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - popular": {
+    "auc": {
+     "diff": 0.0384738849507046,
+     "ci95": [
+      0.035282111011754665,
+      0.04160358582333099
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.028086401544683476,
+     "ci95": [
+      0.0254071699713841,
+      0.030633777743325787
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.031932989963939076,
+     "ci95": [
+      0.028694467808936516,
+      0.03503422739263602
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03036037530105432,
+     "ci95": [
+      0.027567317774793383,
+      0.03322704910188396
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - recent": {
+    "auc": {
+     "diff": 0.10268957235961078,
+     "ci95": [
+      0.09995606685778428,
+      0.1054874624196498
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.08382912681315163,
+     "ci95": [
+      0.08136662425081914,
+      0.0861124768375225
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.09503028771973189,
+     "ci95": [
+      0.0921713600501399,
+      0.09776553027144712
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.09160697409587357,
+     "ci95": [
+      0.08907665626091575,
+      0.09392313382582342
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - tfidf": {
+    "auc": {
+     "diff": 0.04180751100175726,
+     "ci95": [
+      0.03907572613148364,
+      0.04471091307616446
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.031653851276499514,
+     "ci95": [
+      0.029426584325065657,
+      0.033937579410214726
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.03926627388040773,
+     "ci95": [
+      0.036633836979066005,
+      0.04195629230814322
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.037752125708961776,
+     "ci95": [
+      0.03533505179407789,
+      0.040090821146880215
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - bm25": {
+    "auc": {
+     "diff": 0.03667842616786647,
+     "ci95": [
+      0.03395181096206537,
+      0.03952142745022195
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.031362354537682186,
+     "ci95": [
+      0.02903144438800001,
+      0.033747654341597946
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.038367341274124486,
+     "ci95": [
+      0.03573435217481993,
+      0.0408907828248894
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.03576944422115585,
+     "ci95": [
+      0.03326262987641827,
+      0.03803829815930537
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning-relative - embedding": {
+    "auc": {
+     "diff": 0.013860723848264693,
+     "ci95": [
+      0.011275343673379836,
+      0.01657499951927171
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.012504742492426214,
+     "ci95": [
+      0.010320619697696787,
+      0.014776206536273985
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.017474980315938,
+     "ci95": [
+      0.0149819097375196,
+      0.020100816952610217
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.017436461735811197,
+     "ci95": [
+      0.015172592819315597,
+      0.01969816001790246
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   },
+   "aries-learning - aries-interests": {
+    "auc": {
+     "diff": 0.00010649889666348625,
+     "ci95": [
+      2.7214025118696417e-05,
+      0.00018909280240127221
+     ],
+     "share_replicates_above_zero": 0.998
+    },
+    "mrr": {
+     "diff": 5.861446068330187e-05,
+     "ci95": [
+      -1.4019460967608366e-05,
+      0.00014176375118779696
+     ],
+     "share_replicates_above_zero": 0.927
+    },
+    "ndcg5": {
+     "diff": 7.345980882709028e-05,
+     "ci95": [
+      -2.001023297409088e-05,
+      0.00016722105344526978
+     ],
+     "share_replicates_above_zero": 0.944
+    },
+    "ndcg10": {
+     "diff": 8.58572465188064e-05,
+     "ci95": [
+      3.313865583036424e-06,
+      0.00017044789844446323
+     ],
+     "share_replicates_above_zero": 0.981
+    }
+   },
+   "aries-interests+diverse - aries-interests": {
+    "auc": {
+     "diff": -0.036340990614763036,
+     "ci95": [
+      -0.038404381394749616,
+      -0.03407410494075387
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "mrr": {
+     "diff": -0.015565561220793256,
+     "ci95": [
+      -0.016459590474302517,
+      -0.014719995386268505
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "ndcg5": {
+     "diff": -0.02958416399684763,
+     "ci95": [
+      -0.03142562336851726,
+      -0.02794517821646218
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "ndcg10": {
+     "diff": -0.028371977347431118,
+     "ci95": [
+      -0.02975637215740277,
+      -0.026937425122237603
+     ],
+     "share_replicates_above_zero": 0.0
+    }
+   },
+   "aries-learning-relative - aries-interests": {
+    "auc": {
+     "diff": 2.9563257491078066e-06,
+     "ci95": [
+      -2.5760504915595117e-06,
+      9.151026096851367e-06
+     ],
+     "share_replicates_above_zero": 0.816
+    },
+    "mrr": {
+     "diff": 1.2183311734766264e-06,
+     "ci95": [
+      -1.1350978970925407e-07,
+      2.9484513889121987e-06
+     ],
+     "share_replicates_above_zero": 0.949
+    },
+    "ndcg5": {
+     "diff": 2.559161416101762e-06,
+     "ci95": [
+      0.0,
+      7.699787029662175e-06
+     ],
+     "share_replicates_above_zero": 0.632
+    },
+    "ndcg10": {
+     "diff": 3.2815807380000486e-06,
+     "ci95": [
+      -8.755059954826394e-06,
+      1.6568316669847426e-05
+     ],
+     "share_replicates_above_zero": 0.695
+    }
+   },
+   "aries-learning-relative - aries-learning": {
+    "auc": {
+     "diff": -0.00010354257091437844,
+     "ci95": [
+      -0.00018482647640069016,
+      -2.3916125849352e-05
+     ],
+     "share_replicates_above_zero": 0.002
+    },
+    "mrr": {
+     "diff": -5.739612950982524e-05,
+     "ci95": [
+      -0.0001410233567273697,
+      1.5133277163108246e-05
+     ],
+     "share_replicates_above_zero": 0.077
+    },
+    "ndcg5": {
+     "diff": -7.090064741098852e-05,
+     "ci95": [
+      -0.00016491061743344887,
+      2.3179873146950127e-05
+     ],
+     "share_replicates_above_zero": 0.067
+    },
+    "ndcg10": {
+     "diff": -8.257566578080636e-05,
+     "ci95": [
+      -0.0001652777870147268,
+      -1.2730570083705052e-06
+     ],
+     "share_replicates_above_zero": 0.024
+    }
+   },
+   "aries-interests+mmr - aries-interests": {
+    "auc": {
+     "diff": -0.002698919086805135,
+     "ci95": [
+      -0.0038097209387336793,
+      -0.0015343909607014512
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "mrr": {
+     "diff": -0.0007999579802687503,
+     "ci95": [
+      -0.0012422045517535576,
+      -0.000357022734218905
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "ndcg5": {
+     "diff": -0.0013920121675172331,
+     "ci95": [
+      -0.0022986691843755376,
+      -0.0005647151483543543
+     ],
+     "share_replicates_above_zero": 0.0
+    },
+    "ndcg10": {
+     "diff": -0.000487036218007381,
+     "ci95": [
+      -0.0011784487237890147,
+      0.0001802132989747559
+     ],
+     "share_replicates_above_zero": 0.087
+    }
+   },
+   "aries-interests+mmr - aries-interests+diverse": {
+    "auc": {
+     "diff": 0.0336420715279579,
+     "ci95": [
+      0.03192723090690669,
+      0.03526216233155642
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "mrr": {
+     "diff": 0.014765603240524505,
+     "ci95": [
+      0.014092985648492042,
+      0.015421024504448945
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg5": {
+     "diff": 0.028192151829330398,
+     "ci95": [
+      0.026845950792156216,
+      0.029518827426748707
+     ],
+     "share_replicates_above_zero": 1.0
+    },
+    "ndcg10": {
+     "diff": 0.027884941129423736,
+     "ci95": [
+      0.02669595954040264,
+      0.028947444937583548
+     ],
+     "share_replicates_above_zero": 1.0
+    }
+   }
+  }
+ },
+ "runtime_seconds": {
+  "load_and_evaluate": 615.7,
+  "total": 620.2
+ },
+ "python": "3.12.14",
+ "numpy": "2.5.3"
+}
