@@ -1,5 +1,18 @@
 # ARIES
 
+> **Гранка `diplomska`: дипломската работа (агентот).** Истиот код како `main`; оваа страница води директно
+> до резултатите на дипломската. Целиот проект е на [`main`](https://github.com/stamenovmartin/aries/tree/main),
+> проектот по ИИС на [`iis`](https://github.com/stamenovmartin/aries/tree/iis).
+>
+> | | |
+> |---|---|
+> | Водич за преглед (македонски) | [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md) |
+> | Сите резултати на дипломската | [`experiments/thesis-followup-20261012/RESULTS.md`](experiments/thesis-followup-20261012/RESULTS.md) |
+> | Споредбите како графици | [`experiments/analysis/README.md`](experiments/analysis/README.md), делови 1 и 2 |
+> | Мапа на експериментите на дипломската | [`experiments/thesis/INDEX.md`](experiments/thesis/INDEX.md) |
+> | Пререгистрации (H4b, H5, H6, H8, R1) | [`docs/preregistration/`](docs/preregistration/) |
+> | Табели и нивна проверка | [`thesis-tables/`](experiments/thesis-followup-20261012/thesis-tables/), `make check` |
+
 A voice-driven assistant that acts on a live Ubuntu/GNOME desktop, built around one question:
 
 > **What may an agent claim about itself?**
