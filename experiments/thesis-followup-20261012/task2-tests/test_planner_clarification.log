@@ -1,0 +1,36 @@
+{"ts": "2026-10-12T16:36:09.731334+00:00", "severity": "INFO", "service": "agentic-core", "logger": "aries.api.app", "msg": "ARIES routes mounted at /api/aries; security posture: {'api_key_configured': '***', 'serves': 'loopback only', 'credentials_key_configured': '***', 'secret_storage': '***', 'dry_run': True, 'live_tools': [], 'environment': 'development'}", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 63, "func": "<module>"}}
+{"ts": "2026-10-12T16:36:09.731623+00:00", "severity": "WARNING", "service": "agentic-core", "logger": "aries.api.app", "msg": "No API_KEY configured — ARIES serves loopback only. Set API_KEY before exposing it to any network.", "env": "test", "correlation_id": null, "user_id": null, "task_id": null, "execution_id": null, "agent": null, "tool": null, "error": null, "source": {"file": "app.py", "line": 65, "func": "<module>"}}
+--- test_ambiguous_goal_asks_and_touches_nothing
+PASS  goal stops as a question
+PASS  structured question with observed choices
+PASS  no candidate was read
+PASS  files untouched
+PASS  not reported as finished
+--- test_decision_shape
+PASS  valid question accepted
+PASS  one choice rejected
+PASS  six choices rejected
+PASS  duplicate choices rejected
+PASS  empty question rejected
+PASS  question cannot carry a capability
+PASS  execute cannot carry a question
+--- test_flag_off_rejects_the_option
+PASS  flag off: no planner question
+PASS  flag off: option not offered to the model
+--- test_grammar_unchanged_when_not_offered
+PASS  option absent when not offered
+PASS  option present when offered
+PASS  offered strings stay grammar-bounded
+--- test_grounding_rule
+PASS  observed paths accepted
+PASS  observed names plus one free choice accepted
+PASS  invented files under a listed folder rejected
+PASS  two free choices rejected
+PASS  field values and free text do not ground a choice
+PASS  unverified observation does not ground a question
+--- test_invented_choices_are_rejected_then_bounded
+PASS  ungrounded question does not become the answer
+PASS  rejection is counted
+--- test_question_before_any_observation_is_rejected
+PASS  no question without an observation
+ALL PASSED

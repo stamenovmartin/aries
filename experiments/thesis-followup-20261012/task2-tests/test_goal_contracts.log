@@ -1,0 +1,40 @@
+--- test_compound_reads_retain_every_requirement
+PASS  two reads require two independent proofs
+PASS  compound mutations do not enter read-only contract
+--- test_macedonian_compound_goal_cannot_be_silently_truncated
+PASS  does not discard extra instructions: Отвори Firefox и избриши датотека
+PASS  does not discard extra instructions: Otvori Firefox potoa instaliraj program
+PASS  does not discard extra instructions: Прикажи активни процеси и запреј ги
+PASS  does not discard extra instructions: Прочитај ~/Documents/a.txt и избриши ја
+--- test_macedonian_requests_have_the_same_completion_conditions
+PASS  Прочитај датотека ~/Documents/a.txt
+PASS  Prochitaj ~/Documents/a.txt
+PASS  Прикажи го статусот на системот
+PASS  Proveri statusot na sistemot
+PASS  Прикажи активни процеси
+PASS  Listaj procesi
+PASS  Отвори апликацијата Firefox
+PASS  Otvori Firefox
+PASS  Напиши датотека ~/Documents/a.txt со содржина: Здраво
+PASS  Zachuvaj ~/Documents/a.txt so sodrzhina: Здраво
+PASS  Создај датотека a.txt во ~/Documents со содржина: Здраво Потоа прочитај ја.
+PASS  Napravi datoteka a.txt vo ~/Documents so sodrzhina: Здраво Potoa prochitaj ja.
+--- test_macedonian_write_requires_the_exact_requested_bytes
+PASS  correct Macedonian bytes satisfy the independent proof
+PASS  a translation cannot substitute for the requested content
+--- test_measurement_questions_require_the_requested_numeric_observation
+PASS  measurement question: колку место има на дискот?
+PASS  measurement question: Kolku slobodno mesto imam?
+PASS  measurement question: How much disk space do I have?
+PASS  measurement question: Колку меморија се користи?
+PASS  measurement question: What is the CPU usage?
+PASS  a freshly verified disk measurement is a completion oracle
+PASS  unrelated or missing evidence cannot answer disk space
+PASS  unrelated or missing evidence cannot answer disk space
+PASS  unrelated or missing evidence cannot answer disk space
+PASS  unrelated or missing evidence cannot answer disk space
+PASS  unrelated or missing evidence cannot answer disk space
+PASS  an unverified observation cannot satisfy the question
+PASS  the answer is computed from the measured values in Macedonian
+PASS  an added destructive clause cannot hide inside a measurement question
+ALL PASSED

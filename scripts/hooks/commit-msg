@@ -1,0 +1,10 @@
+#!/bin/sh
+# Rejects commit messages that carry AI attribution (CONTRIBUTING.md, "Commits").
+# Installed by scripts/install-hooks.sh.
+msg="$1"
+if grep -qiE '^[[:space:]]*(co-authored-by:.*(claude|anthropic|codex|openai|gpt|copilot|gemini|noreply@anthropic)|claude-session:)|generated with \[?claude|🤖 generated' "$msg"; then
+    echo "commit-msg: AI attribution trailer found; remove it (see CONTRIBUTING.md)." >&2
+    grep -niE 'co-authored-by:|claude-session:|generated with' "$msg" >&2
+    exit 1
+fi
+exit 0

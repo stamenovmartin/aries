@@ -1,0 +1,20 @@
+--- test_cancelled_worker_is_never_recorded_successful
+PASS  worker cancellation propagates
+PASS  cancelled pass has a failure record, never a success heartbeat
+--- test_lifecycle_releases_writer_before_external_phases
+PASS  retry: completes two attempts with approval retained
+PASS  retry: another connection can write during executor
+PASS  retry: another connection can write during evaluator
+PASS  retry: another connection can write during notification
+PASS  replan: completes two attempts with approval retained
+PASS  replan: another connection can write during executor
+PASS  replan: another connection can write during evaluator
+PASS  replan: another connection can write during notification
+PASS  replan: another connection can write during replanner
+--- test_second_cancellation_during_recording_is_visible
+PASS  second cancellation still propagates without hanging shutdown
+PASS  interrupted recording is visible in the worker log
+--- test_worker_lock_log_includes_real_sqlite_result_code
+PASS  checkpoint contention does not replay or falsify the work outcome
+PASS  real SQLite writer contention records its extended code and name
+ALL PASSED

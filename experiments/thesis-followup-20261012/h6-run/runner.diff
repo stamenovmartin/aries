@@ -1,0 +1,61 @@
+2c2,7
+< """Frozen prompt-only experiment; classification never executes requests."""
+---
+> """H6: the frozen ARIES-FINAL-20261006 router protocol on the 300 new requests, arms A0 and A1 only.
+> 
+> A copy of experiments/thesis-final-20261006/run_router.py in which only the fixture path, the arm list and the
+> output folder change (docs/preregistration/H6-abstention-replication.md, Procedure). The frozen source,
+> prompts (regenerated from it and hash-checked against the frozen protocol), settings, schema, seeds and scorer
+> are the originals. Classification never executes requests."""
+8c13,16
+< FROZEN = HERE / 'frozen'
+---
+> ORIGINAL = HERE.parents[1] / 'thesis-final-20261006'
+> FROZEN = ORIGINAL / 'frozen'
+> FIXTURE = HERE.parent / 'h6-items' / 'h6_requests.jsonl'
+> ARMS = ['A0', 'A1']
+67a76,77
+>     frozen_hashes=read(ORIGINAL/'protocol.json')['hashes']
+>     assert all(hashlib.sha256(prompts[a].encode()).hexdigest()==frozen_hashes[a] for a in ARMS), 'prompts differ from the frozen protocol'
+72c82
+<     rows=[json.loads(l) for l in (HERE/'fixture.jsonl').read_text().splitlines() if l]
+---
+>     rows=[json.loads(l) for l in (FIXTURE).read_text().splitlines() if l]
+75c85
+<         arms=list(prompts); random.Random(26061006+rep).shuffle(arms)
+---
+>         arms=list(ARMS); random.Random(26061006+rep).shuffle(arms)
+82c92
+<       'fixture_n':225,'repetitions':3,'planned_decisions':2700,'sampling_seed':None,
+---
+>       'fixture_n':len(rows),'repetitions':3,'planned_decisions':len(rows)*len(ARMS)*3,'sampling_seed':None,
+87,88c97,98
+<       'hashes':{'fixture':digest(HERE/'fixture.jsonl'),'semantic_labels':digest(HERE/'semantic_labels.json'),
+<         'source_manifest':digest(HERE/'source-manifest.json'),'runner':digest(__file__),
+---
+>       'hashes':{'fixture':digest(FIXTURE),'semantic_labels':digest(ORIGINAL/'semantic_labels.json'),
+>         'source_manifest':digest(ORIGINAL/'source-manifest.json'),'runner':digest(__file__),
+104a115,123
+>     protocol.update(
+>       question='H6: on new requests, does A1 have higher per-request binary accuracy than A0 (qwen2.5:7b)?',
+>       arms={a:protocol['arms'][a] for a in ARMS},
+>       primary_comparison='Per request, majority of 3 repetitions correct; one-sided exact McNemar A1 vs A0 (H1: b > c), '
+>                          'alpha 0.05 before Holm across H4b, H5, H6, H8 (docs/preregistration/H6-abstention-replication.md).',
+>       predeclared_success='See the H6 preregistration; the frozen A3-vs-A1 criterion does not apply.',
+>       limitations=['Requests written by OpenAI Codex (gpt-6-astra), not a person (H6 Amendments 1-2).']+protocol['limitations'][2:],
+>       derived_from={'runner':'experiments/thesis-final-20261006/run_router.py','runner_sha256':digest(ORIGINAL/'run_router.py'),
+>                     'protocol_sha256':digest(ORIGINAL/'protocol.json')})
+112,113c131,132
+<     assert digest(HERE/'semantic_labels.json')==protocol['hashes']['semantic_labels']
+<     assert digest(HERE/'fixture.jsonl')==protocol['hashes']['fixture']
+---
+>     assert digest(ORIGINAL/'semantic_labels.json')==protocol['hashes']['semantic_labels']
+>     assert digest(FIXTURE)==protocol['hashes']['fixture']
+124c143
+<     rows={r['id']:r for r in [json.loads(l) for l in (HERE/'fixture.jsonl').read_text().splitlines() if l]}
+---
+>     rows={r['id']:r for r in [json.loads(l) for l in (FIXTURE).read_text().splitlines() if l]}
+146c165
+<     manifest=read(HERE/'source-manifest.json')
+---
+>     manifest=read(ORIGINAL/'source-manifest.json')

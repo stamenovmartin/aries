@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# H4b measurement (docs/preregistration/H4b-clarify-resolver.md, Procedure): 3 runs per condition in the
+# order treatment, baseline, treatment, baseline, treatment, baseline. Like H5 and H6: the live aries.target
+# is stopped for the whole measurement and always restarted; screen blanking is off (idle-delay 0 + an idle
+# inhibitor) and restored. The live service's environment is captured once, before it is stopped.
+set -u
+cd "$HOME/aries"
+T=experiments/thesis-followup-20261012/h4b-runs
+log() { printf '%s %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" >> $T/run-h4b.log; }
+old=$(gsettings get org.gnome.desktop.session idle-delay)
+finish() {
+  systemctl --user start aries.target; log "aries.target start requested (exit $?)"
+  gsettings set org.gnome.desktop.session idle-delay "${old#uint32 }"
+  log "screen blanking restored: $(gsettings get org.gnome.desktop.session idle-delay); end"
+}
+trap finish EXIT
+log "begin; idle-delay was $old"
+.venv/bin/python $T/run_h4b.py --capture-env >> $T/run-h4b.log 2>&1 || { log "capture-env failed"; exit 1; }
+systemctl --user stop aries.target; log "aries.target stopped (exit $?)"
+gsettings set org.gnome.desktop.session idle-delay 0
+i=0
+for cond in treatment baseline treatment baseline treatment baseline; do
+  i=$((i+1))
+  log "run r$i $cond start"
+  gnome-session-inhibit --inhibit idle --reason "ARIES H4b measurement" \
+    .venv/bin/python $T/run_h4b.py --condition $cond --label r$i --go >> $T/run-h4b.log 2>&1
+  code=$?; log "run r$i $cond exit $code"
+  [ $code -eq 0 ] || { log "stopping: a run did not complete"; exit 1; }
+done

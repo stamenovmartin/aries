@@ -15,7 +15,7 @@ agentic-orchestration-export/
 │   │   │                  state machines · retry · lifecycle (TASK→…→RETRY/REPLAN/ESCALATE) · task service
 │   │   ├── router/        rule-based → LLM-based → fallback routing, confidence, needs_human
 │   │   ├── agents/        AgentSpec (prompt, schemas, tools, permissions, model, termination), registry, run loop, roster
-│   │   ├── llm/           providers (cli the reviewing agent/codex · ollama · openai-compatible · template), structured output, cache, telemetry
+│   │   ├── llm/           providers (cli claude/codex · ollama · openai-compatible · template), structured output, cache, telemetry
 │   │   ├── tools/         ToolSpec registry · the 9-gate guarded call · capability connectors · built-ins
 │   │   ├── evaluators/    deterministic checks · weighted scorers · LLM judge · gate_and_repair · eval runner
 │   │   ├── workflows/     declarative NodeSpec/WorkflowSpec run through the Director

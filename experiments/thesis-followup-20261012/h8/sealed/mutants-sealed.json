@@ -1,0 +1,2742 @@
+{
+ "what": "H8 frozen mutant manifest (SEALED generalisation set)",
+ "set_seed": 1683869773910754237,
+ "review_sha256": "9c03a14e831a993b34d8ccb699ab1c065b94d77770d7b46c8f8c99551e5d924c",
+ "operators": {
+  "noop_success": "the executor does nothing and returns its normal success shape",
+  "wrong_target": "the effect or the report concerns a different target than requested",
+  "wrong_value": "the right target, but a different value or content (or a falsified report of it)",
+  "partial_effect": "only part of a multi-part effect happens",
+  "side_effect_outside_scope": "the requested effect happens, plus a change outside the allowed scope",
+  "undone_after_report": "the effect happens and is reverted before the verifier runs"
+ },
+ "applicable_by_effect": {
+  "read": [
+   "noop_success",
+   "wrong_target",
+   "wrong_value"
+  ],
+  "open": [
+   "noop_success",
+   "wrong_target",
+   "wrong_value",
+   "undone_after_report"
+  ],
+  "create": [
+   "noop_success",
+   "wrong_target",
+   "wrong_value",
+   "partial_effect",
+   "side_effect_outside_scope",
+   "undone_after_report"
+  ],
+  "file_mutation": [
+   "noop_success",
+   "wrong_target",
+   "wrong_value",
+   "partial_effect",
+   "side_effect_outside_scope",
+   "undone_after_report"
+  ],
+  "desktop": [
+   "noop_success",
+   "wrong_target",
+   "wrong_value",
+   "side_effect_outside_scope",
+   "undone_after_report"
+  ],
+  "display": [
+   "noop_success",
+   "wrong_value",
+   "undone_after_report"
+  ],
+  "network": [
+   "noop_success",
+   "wrong_target",
+   "undone_after_report"
+  ],
+  "service": [
+   "noop_success",
+   "wrong_target",
+   "undone_after_report"
+  ],
+  "input": [
+   "noop_success",
+   "wrong_target",
+   "wrong_value",
+   "undone_after_report"
+  ],
+  "notify": [
+   "noop_success",
+   "wrong_value",
+   "side_effect_outside_scope"
+  ]
+ },
+ "hardened_verifier_classes": [
+  "TRIVIAL",
+  "SELF_REPORT",
+  "PLANNER_SUPPLIED"
+ ],
+ "hardened_capabilities": [
+  "browser.back",
+  "browser.click",
+  "browser.elements",
+  "browser.forward",
+  "browser.observe",
+  "browser.open",
+  "browser.read",
+  "browser.scroll",
+  "browser.tabs",
+  "browser.wait",
+  "desktop.observe",
+  "desktop.windows",
+  "display.brightness",
+  "file.list",
+  "file.search",
+  "input.editable_targets",
+  "screen.read",
+  "system.processes",
+  "system.service",
+  "system.services",
+  "system.status",
+  "system.storage",
+  "task.inspect"
+ ],
+ "counts": {
+  "capabilities": 58,
+  "mutants": 218,
+  "clean_replays": 174,
+  "mutants_by_verifier_class": {
+   "SELF_REPORT": 34,
+   "PLANNER_SUPPLIED": 4,
+   "INDEPENDENT": 144,
+   "TRIVIAL": 36
+  },
+  "mutants_by_operator": {
+   "noop_success": 58,
+   "wrong_target": 56,
+   "wrong_value": 56,
+   "partial_effect": 6,
+   "side_effect_outside_scope": 14,
+   "undone_after_report": 28
+  }
+ },
+ "mutants": [
+  {
+   "id": "browser.back::noop_success",
+   "capability": "browser.back",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 5068176116951727453
+  },
+  {
+   "id": "browser.back::wrong_target",
+   "capability": "browser.back",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 12869936377161745727
+  },
+  {
+   "id": "browser.back::wrong_value",
+   "capability": "browser.back",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 222336672293248179
+  },
+  {
+   "id": "browser.back::undone_after_report",
+   "capability": "browser.back",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "undone_after_report",
+   "variant_seed": 12896723230730449672
+  },
+  {
+   "id": "browser.click::noop_success",
+   "capability": "browser.click",
+   "effect": "open",
+   "verifier_class": "PLANNER_SUPPLIED",
+   "operator": "noop_success",
+   "variant_seed": 11894464997652900680
+  },
+  {
+   "id": "browser.click::wrong_target",
+   "capability": "browser.click",
+   "effect": "open",
+   "verifier_class": "PLANNER_SUPPLIED",
+   "operator": "wrong_target",
+   "variant_seed": 4171414961968147471
+  },
+  {
+   "id": "browser.click::wrong_value",
+   "capability": "browser.click",
+   "effect": "open",
+   "verifier_class": "PLANNER_SUPPLIED",
+   "operator": "wrong_value",
+   "variant_seed": 3886023372361912199
+  },
+  {
+   "id": "browser.click::undone_after_report",
+   "capability": "browser.click",
+   "effect": "open",
+   "verifier_class": "PLANNER_SUPPLIED",
+   "operator": "undone_after_report",
+   "variant_seed": 14631234311213535189
+  },
+  {
+   "id": "browser.download::noop_success",
+   "capability": "browser.download",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 14224354418934006099
+  },
+  {
+   "id": "browser.download::wrong_target",
+   "capability": "browser.download",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 15737148502030170952
+  },
+  {
+   "id": "browser.download::wrong_value",
+   "capability": "browser.download",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 8324786666578092369
+  },
+  {
+   "id": "browser.download::partial_effect",
+   "capability": "browser.download",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "partial_effect",
+   "variant_seed": 8883913116660907936
+  },
+  {
+   "id": "browser.download::side_effect_outside_scope",
+   "capability": "browser.download",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 3764679219056531486
+  },
+  {
+   "id": "browser.download::undone_after_report",
+   "capability": "browser.download",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 12049191996878639654
+  },
+  {
+   "id": "browser.elements::noop_success",
+   "capability": "browser.elements",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 9377741606656467308
+  },
+  {
+   "id": "browser.elements::wrong_target",
+   "capability": "browser.elements",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 1206896975205881615
+  },
+  {
+   "id": "browser.elements::wrong_value",
+   "capability": "browser.elements",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 6829232246799377682
+  },
+  {
+   "id": "browser.forward::noop_success",
+   "capability": "browser.forward",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 5195581229628465771
+  },
+  {
+   "id": "browser.forward::wrong_target",
+   "capability": "browser.forward",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 5097758230107098828
+  },
+  {
+   "id": "browser.forward::wrong_value",
+   "capability": "browser.forward",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 3073817332865154507
+  },
+  {
+   "id": "browser.forward::undone_after_report",
+   "capability": "browser.forward",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "undone_after_report",
+   "variant_seed": 3212941067811385533
+  },
+  {
+   "id": "browser.navigate::noop_success",
+   "capability": "browser.navigate",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 3400315594427528106
+  },
+  {
+   "id": "browser.navigate::wrong_target",
+   "capability": "browser.navigate",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 15877735265030942805
+  },
+  {
+   "id": "browser.navigate::wrong_value",
+   "capability": "browser.navigate",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 2210694177645025162
+  },
+  {
+   "id": "browser.navigate::undone_after_report",
+   "capability": "browser.navigate",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 1526571769586840027
+  },
+  {
+   "id": "browser.observe::noop_success",
+   "capability": "browser.observe",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 17255963646436526674
+  },
+  {
+   "id": "browser.observe::wrong_target",
+   "capability": "browser.observe",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 7256824933062094536
+  },
+  {
+   "id": "browser.observe::wrong_value",
+   "capability": "browser.observe",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 4958650606063423305
+  },
+  {
+   "id": "browser.open::noop_success",
+   "capability": "browser.open",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 4669900182643456828
+  },
+  {
+   "id": "browser.open::wrong_target",
+   "capability": "browser.open",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 13909695057187436782
+  },
+  {
+   "id": "browser.open::wrong_value",
+   "capability": "browser.open",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 15364705851223646012
+  },
+  {
+   "id": "browser.open::undone_after_report",
+   "capability": "browser.open",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "undone_after_report",
+   "variant_seed": 15696630340511217351
+  },
+  {
+   "id": "browser.read::noop_success",
+   "capability": "browser.read",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 5214494812326186248
+  },
+  {
+   "id": "browser.read::wrong_target",
+   "capability": "browser.read",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 687419078791826732
+  },
+  {
+   "id": "browser.read::wrong_value",
+   "capability": "browser.read",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 9778278136321065978
+  },
+  {
+   "id": "browser.scroll::noop_success",
+   "capability": "browser.scroll",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 8829508964617957018
+  },
+  {
+   "id": "browser.scroll::wrong_target",
+   "capability": "browser.scroll",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 5596647678904957846
+  },
+  {
+   "id": "browser.scroll::wrong_value",
+   "capability": "browser.scroll",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 7105718341254391054
+  },
+  {
+   "id": "browser.scroll::undone_after_report",
+   "capability": "browser.scroll",
+   "effect": "open",
+   "verifier_class": "SELF_REPORT",
+   "operator": "undone_after_report",
+   "variant_seed": 470215269260569087
+  },
+  {
+   "id": "browser.search::noop_success",
+   "capability": "browser.search",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 3564286794399141503
+  },
+  {
+   "id": "browser.search::wrong_target",
+   "capability": "browser.search",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 8423523559105499345
+  },
+  {
+   "id": "browser.search::wrong_value",
+   "capability": "browser.search",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 15611549315843949152
+  },
+  {
+   "id": "browser.search::undone_after_report",
+   "capability": "browser.search",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 8568750647069828702
+  },
+  {
+   "id": "browser.tabs::noop_success",
+   "capability": "browser.tabs",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 17585567759066403949
+  },
+  {
+   "id": "browser.tabs::wrong_target",
+   "capability": "browser.tabs",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 13080769977555446405
+  },
+  {
+   "id": "browser.tabs::wrong_value",
+   "capability": "browser.tabs",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 5345610844655556759
+  },
+  {
+   "id": "browser.type::noop_success",
+   "capability": "browser.type",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 6298912008098470599
+  },
+  {
+   "id": "browser.type::wrong_target",
+   "capability": "browser.type",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 2619539365535677052
+  },
+  {
+   "id": "browser.type::wrong_value",
+   "capability": "browser.type",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 4806480131057019053
+  },
+  {
+   "id": "browser.type::undone_after_report",
+   "capability": "browser.type",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 7900099753281212826
+  },
+  {
+   "id": "browser.wait::noop_success",
+   "capability": "browser.wait",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 11100937629298206123
+  },
+  {
+   "id": "browser.wait::wrong_target",
+   "capability": "browser.wait",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 8176737259945211046
+  },
+  {
+   "id": "browser.wait::wrong_value",
+   "capability": "browser.wait",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 3850177561450832134
+  },
+  {
+   "id": "desktop.close::noop_success",
+   "capability": "desktop.close",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 5841916509438657747
+  },
+  {
+   "id": "desktop.close::wrong_target",
+   "capability": "desktop.close",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 4603582634522261756
+  },
+  {
+   "id": "desktop.close::wrong_value",
+   "capability": "desktop.close",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 6596812887189483012
+  },
+  {
+   "id": "desktop.close::side_effect_outside_scope",
+   "capability": "desktop.close",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 13531918864300752199
+  },
+  {
+   "id": "desktop.close::undone_after_report",
+   "capability": "desktop.close",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 10347090528910078210
+  },
+  {
+   "id": "desktop.focus::noop_success",
+   "capability": "desktop.focus",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 17937605783967091627
+  },
+  {
+   "id": "desktop.focus::wrong_target",
+   "capability": "desktop.focus",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 1263385541531280369
+  },
+  {
+   "id": "desktop.focus::wrong_value",
+   "capability": "desktop.focus",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 1176531074471006561
+  },
+  {
+   "id": "desktop.focus::undone_after_report",
+   "capability": "desktop.focus",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 15565646967018689256
+  },
+  {
+   "id": "desktop.launch::noop_success",
+   "capability": "desktop.launch",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 12706575633498525836
+  },
+  {
+   "id": "desktop.launch::wrong_target",
+   "capability": "desktop.launch",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 16475896486335007378
+  },
+  {
+   "id": "desktop.launch::wrong_value",
+   "capability": "desktop.launch",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 11452354016462754674
+  },
+  {
+   "id": "desktop.launch::undone_after_report",
+   "capability": "desktop.launch",
+   "effect": "open",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 279930036209724918
+  },
+  {
+   "id": "desktop.maximize::noop_success",
+   "capability": "desktop.maximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 466759120511806557
+  },
+  {
+   "id": "desktop.maximize::wrong_target",
+   "capability": "desktop.maximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 12786724998276239009
+  },
+  {
+   "id": "desktop.maximize::wrong_value",
+   "capability": "desktop.maximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 14043536505722358177
+  },
+  {
+   "id": "desktop.maximize::side_effect_outside_scope",
+   "capability": "desktop.maximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 2445547754504543138
+  },
+  {
+   "id": "desktop.maximize::undone_after_report",
+   "capability": "desktop.maximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 5981338751002704774
+  },
+  {
+   "id": "desktop.minimize::noop_success",
+   "capability": "desktop.minimize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 6644931127586272135
+  },
+  {
+   "id": "desktop.minimize::wrong_target",
+   "capability": "desktop.minimize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 4215730173762106329
+  },
+  {
+   "id": "desktop.minimize::wrong_value",
+   "capability": "desktop.minimize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 536801359253729477
+  },
+  {
+   "id": "desktop.minimize::side_effect_outside_scope",
+   "capability": "desktop.minimize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 7762611959178858909
+  },
+  {
+   "id": "desktop.minimize::undone_after_report",
+   "capability": "desktop.minimize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 16345143834615934252
+  },
+  {
+   "id": "desktop.move::noop_success",
+   "capability": "desktop.move",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 18258504853059173580
+  },
+  {
+   "id": "desktop.move::wrong_target",
+   "capability": "desktop.move",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 13837070536841958802
+  },
+  {
+   "id": "desktop.move::wrong_value",
+   "capability": "desktop.move",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 15738333625817045586
+  },
+  {
+   "id": "desktop.move::side_effect_outside_scope",
+   "capability": "desktop.move",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 4103590793833293112
+  },
+  {
+   "id": "desktop.move::undone_after_report",
+   "capability": "desktop.move",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 13678999350576567061
+  },
+  {
+   "id": "desktop.observe::noop_success",
+   "capability": "desktop.observe",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 10714369856488133070
+  },
+  {
+   "id": "desktop.observe::wrong_target",
+   "capability": "desktop.observe",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 8350053905024622833
+  },
+  {
+   "id": "desktop.observe::wrong_value",
+   "capability": "desktop.observe",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 3798603800114715904
+  },
+  {
+   "id": "desktop.resize::noop_success",
+   "capability": "desktop.resize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 3446783241834328260
+  },
+  {
+   "id": "desktop.resize::wrong_target",
+   "capability": "desktop.resize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 16989974649680717846
+  },
+  {
+   "id": "desktop.resize::wrong_value",
+   "capability": "desktop.resize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 10713400288190811202
+  },
+  {
+   "id": "desktop.resize::side_effect_outside_scope",
+   "capability": "desktop.resize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 1877549441238466857
+  },
+  {
+   "id": "desktop.resize::undone_after_report",
+   "capability": "desktop.resize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 11052924646224755252
+  },
+  {
+   "id": "desktop.tile::noop_success",
+   "capability": "desktop.tile",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 3405319327078180884
+  },
+  {
+   "id": "desktop.tile::wrong_target",
+   "capability": "desktop.tile",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 1524337326462574056
+  },
+  {
+   "id": "desktop.tile::wrong_value",
+   "capability": "desktop.tile",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 7666951242445267095
+  },
+  {
+   "id": "desktop.tile::side_effect_outside_scope",
+   "capability": "desktop.tile",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 2710263352963699911
+  },
+  {
+   "id": "desktop.tile::undone_after_report",
+   "capability": "desktop.tile",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 1119190143536279954
+  },
+  {
+   "id": "desktop.unmaximize::noop_success",
+   "capability": "desktop.unmaximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 14364987606110465269
+  },
+  {
+   "id": "desktop.unmaximize::wrong_target",
+   "capability": "desktop.unmaximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 13401592884884269231
+  },
+  {
+   "id": "desktop.unmaximize::wrong_value",
+   "capability": "desktop.unmaximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 4150856538864297832
+  },
+  {
+   "id": "desktop.unmaximize::side_effect_outside_scope",
+   "capability": "desktop.unmaximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 866929958270821679
+  },
+  {
+   "id": "desktop.unmaximize::undone_after_report",
+   "capability": "desktop.unmaximize",
+   "effect": "desktop",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 16360249682107725134
+  },
+  {
+   "id": "desktop.windows::noop_success",
+   "capability": "desktop.windows",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 3566029221781472823
+  },
+  {
+   "id": "desktop.windows::wrong_target",
+   "capability": "desktop.windows",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 18005215977115359090
+  },
+  {
+   "id": "desktop.windows::wrong_value",
+   "capability": "desktop.windows",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 4998067329129751312
+  },
+  {
+   "id": "display.brightness::noop_success",
+   "capability": "display.brightness",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 5031552982332640709
+  },
+  {
+   "id": "display.brightness::wrong_target",
+   "capability": "display.brightness",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 6565397060482675017
+  },
+  {
+   "id": "display.brightness::wrong_value",
+   "capability": "display.brightness",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 12679206313957403684
+  },
+  {
+   "id": "display.set_brightness::noop_success",
+   "capability": "display.set_brightness",
+   "effect": "display",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 4589025769584650792
+  },
+  {
+   "id": "display.set_brightness::wrong_value",
+   "capability": "display.set_brightness",
+   "effect": "display",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 11561612746381581134
+  },
+  {
+   "id": "display.set_brightness::undone_after_report",
+   "capability": "display.set_brightness",
+   "effect": "display",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 12326249153950572909
+  },
+  {
+   "id": "file.copy::noop_success",
+   "capability": "file.copy",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 13159876571729129455
+  },
+  {
+   "id": "file.copy::wrong_target",
+   "capability": "file.copy",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 8066953246325951391
+  },
+  {
+   "id": "file.copy::wrong_value",
+   "capability": "file.copy",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 9109924201589983783
+  },
+  {
+   "id": "file.copy::partial_effect",
+   "capability": "file.copy",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "partial_effect",
+   "variant_seed": 3354128003611777833
+  },
+  {
+   "id": "file.copy::side_effect_outside_scope",
+   "capability": "file.copy",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 11382130052640693120
+  },
+  {
+   "id": "file.copy::undone_after_report",
+   "capability": "file.copy",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 5270647640577080060
+  },
+  {
+   "id": "file.edit::noop_success",
+   "capability": "file.edit",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 18118622886406606514
+  },
+  {
+   "id": "file.edit::wrong_target",
+   "capability": "file.edit",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 9811682111735729746
+  },
+  {
+   "id": "file.edit::wrong_value",
+   "capability": "file.edit",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 11890974512167581782
+  },
+  {
+   "id": "file.edit::partial_effect",
+   "capability": "file.edit",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "partial_effect",
+   "variant_seed": 3514207081237652553
+  },
+  {
+   "id": "file.edit::side_effect_outside_scope",
+   "capability": "file.edit",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 8491185121294429499
+  },
+  {
+   "id": "file.edit::undone_after_report",
+   "capability": "file.edit",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 10817882870448338203
+  },
+  {
+   "id": "file.exists::noop_success",
+   "capability": "file.exists",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 2685414115829346342
+  },
+  {
+   "id": "file.exists::wrong_target",
+   "capability": "file.exists",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 8876250892966404399
+  },
+  {
+   "id": "file.exists::wrong_value",
+   "capability": "file.exists",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 8781785561461429521
+  },
+  {
+   "id": "file.list::noop_success",
+   "capability": "file.list",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 15831796976328782366
+  },
+  {
+   "id": "file.list::wrong_target",
+   "capability": "file.list",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 3446504288673060723
+  },
+  {
+   "id": "file.list::wrong_value",
+   "capability": "file.list",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 9349784422873510445
+  },
+  {
+   "id": "file.metadata::noop_success",
+   "capability": "file.metadata",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 4776483085881607109
+  },
+  {
+   "id": "file.metadata::wrong_target",
+   "capability": "file.metadata",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 17210161871513050013
+  },
+  {
+   "id": "file.metadata::wrong_value",
+   "capability": "file.metadata",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 12047830103354681381
+  },
+  {
+   "id": "file.move::noop_success",
+   "capability": "file.move",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 17600905351802249960
+  },
+  {
+   "id": "file.move::wrong_target",
+   "capability": "file.move",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 4919278970673142800
+  },
+  {
+   "id": "file.move::wrong_value",
+   "capability": "file.move",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 17247106574974465458
+  },
+  {
+   "id": "file.move::partial_effect",
+   "capability": "file.move",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "partial_effect",
+   "variant_seed": 5150850168984865365
+  },
+  {
+   "id": "file.move::side_effect_outside_scope",
+   "capability": "file.move",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 2139703206354527157
+  },
+  {
+   "id": "file.move::undone_after_report",
+   "capability": "file.move",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 10733197012802011725
+  },
+  {
+   "id": "file.read::noop_success",
+   "capability": "file.read",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 5677734394334387855
+  },
+  {
+   "id": "file.read::wrong_target",
+   "capability": "file.read",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 3963884041453070701
+  },
+  {
+   "id": "file.read::wrong_value",
+   "capability": "file.read",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 8790567978283387483
+  },
+  {
+   "id": "file.rename::noop_success",
+   "capability": "file.rename",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 14915631956437098478
+  },
+  {
+   "id": "file.rename::wrong_target",
+   "capability": "file.rename",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 2837129296093421763
+  },
+  {
+   "id": "file.rename::wrong_value",
+   "capability": "file.rename",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 2596621640366395852
+  },
+  {
+   "id": "file.rename::partial_effect",
+   "capability": "file.rename",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "partial_effect",
+   "variant_seed": 1573004489924147429
+  },
+  {
+   "id": "file.rename::side_effect_outside_scope",
+   "capability": "file.rename",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 3566304002685079528
+  },
+  {
+   "id": "file.rename::undone_after_report",
+   "capability": "file.rename",
+   "effect": "file_mutation",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 13462992833680464975
+  },
+  {
+   "id": "file.search::noop_success",
+   "capability": "file.search",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 158415256771814226
+  },
+  {
+   "id": "file.search::wrong_target",
+   "capability": "file.search",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 6010080552085245806
+  },
+  {
+   "id": "file.search::wrong_value",
+   "capability": "file.search",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 13691424527850976359
+  },
+  {
+   "id": "file.semantic_search::noop_success",
+   "capability": "file.semantic_search",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 14529932137623899832
+  },
+  {
+   "id": "file.semantic_search::wrong_target",
+   "capability": "file.semantic_search",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 17019428829005820867
+  },
+  {
+   "id": "file.semantic_search::wrong_value",
+   "capability": "file.semantic_search",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 17530019722914845119
+  },
+  {
+   "id": "file.write::noop_success",
+   "capability": "file.write",
+   "effect": "create",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 15927019627354736360
+  },
+  {
+   "id": "file.write::wrong_target",
+   "capability": "file.write",
+   "effect": "create",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 3295379095224528301
+  },
+  {
+   "id": "file.write::wrong_value",
+   "capability": "file.write",
+   "effect": "create",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 17177220188531288359
+  },
+  {
+   "id": "file.write::partial_effect",
+   "capability": "file.write",
+   "effect": "create",
+   "verifier_class": "INDEPENDENT",
+   "operator": "partial_effect",
+   "variant_seed": 5300222585167605968
+  },
+  {
+   "id": "file.write::side_effect_outside_scope",
+   "capability": "file.write",
+   "effect": "create",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 8619053927745774038
+  },
+  {
+   "id": "file.write::undone_after_report",
+   "capability": "file.write",
+   "effect": "create",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 131603081764456656
+  },
+  {
+   "id": "input.clipboard_read::noop_success",
+   "capability": "input.clipboard_read",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 8909046429021931327
+  },
+  {
+   "id": "input.clipboard_read::wrong_target",
+   "capability": "input.clipboard_read",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 7242005186968342434
+  },
+  {
+   "id": "input.clipboard_read::wrong_value",
+   "capability": "input.clipboard_read",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 3936885004729170591
+  },
+  {
+   "id": "input.clipboard_write::noop_success",
+   "capability": "input.clipboard_write",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 8617831623815791751
+  },
+  {
+   "id": "input.clipboard_write::wrong_target",
+   "capability": "input.clipboard_write",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 13621354728429774199
+  },
+  {
+   "id": "input.clipboard_write::wrong_value",
+   "capability": "input.clipboard_write",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 527382962117396841
+  },
+  {
+   "id": "input.clipboard_write::undone_after_report",
+   "capability": "input.clipboard_write",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 5455829667836593044
+  },
+  {
+   "id": "input.editable_targets::noop_success",
+   "capability": "input.editable_targets",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 14377586505457282723
+  },
+  {
+   "id": "input.editable_targets::wrong_target",
+   "capability": "input.editable_targets",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 6753125839112260732
+  },
+  {
+   "id": "input.editable_targets::wrong_value",
+   "capability": "input.editable_targets",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 11776744417693824105
+  },
+  {
+   "id": "input.type_text::noop_success",
+   "capability": "input.type_text",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 5256809554237560757
+  },
+  {
+   "id": "input.type_text::wrong_target",
+   "capability": "input.type_text",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 3830121031393694381
+  },
+  {
+   "id": "input.type_text::wrong_value",
+   "capability": "input.type_text",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 18083978852822579528
+  },
+  {
+   "id": "input.type_text::undone_after_report",
+   "capability": "input.type_text",
+   "effect": "input",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 4916213694245264261
+  },
+  {
+   "id": "network.status::noop_success",
+   "capability": "network.status",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 2384299390573612263
+  },
+  {
+   "id": "network.status::wrong_target",
+   "capability": "network.status",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 12754888134920641665
+  },
+  {
+   "id": "network.status::wrong_value",
+   "capability": "network.status",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 8270780057341290714
+  },
+  {
+   "id": "network.wifi_connect::noop_success",
+   "capability": "network.wifi_connect",
+   "effect": "network",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 18416622410880775485
+  },
+  {
+   "id": "network.wifi_connect::wrong_target",
+   "capability": "network.wifi_connect",
+   "effect": "network",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 4818335775336230828
+  },
+  {
+   "id": "network.wifi_connect::undone_after_report",
+   "capability": "network.wifi_connect",
+   "effect": "network",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 9237009785573790840
+  },
+  {
+   "id": "network.wifi_list::noop_success",
+   "capability": "network.wifi_list",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 3484036241766914541
+  },
+  {
+   "id": "network.wifi_list::wrong_target",
+   "capability": "network.wifi_list",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 5190971528571517175
+  },
+  {
+   "id": "network.wifi_list::wrong_value",
+   "capability": "network.wifi_list",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 12081316439917883964
+  },
+  {
+   "id": "notification.send::noop_success",
+   "capability": "notification.send",
+   "effect": "notify",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 15902356964342331960
+  },
+  {
+   "id": "notification.send::wrong_value",
+   "capability": "notification.send",
+   "effect": "notify",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 13597545733713514683
+  },
+  {
+   "id": "notification.send::side_effect_outside_scope",
+   "capability": "notification.send",
+   "effect": "notify",
+   "verifier_class": "INDEPENDENT",
+   "operator": "side_effect_outside_scope",
+   "variant_seed": 18056352797361830537
+  },
+  {
+   "id": "screen.capture::noop_success",
+   "capability": "screen.capture",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 13790476991960961174
+  },
+  {
+   "id": "screen.capture::wrong_target",
+   "capability": "screen.capture",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 15658162528136049831
+  },
+  {
+   "id": "screen.capture::wrong_value",
+   "capability": "screen.capture",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 15353390862228074883
+  },
+  {
+   "id": "screen.read::noop_success",
+   "capability": "screen.read",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 9466170067986835325
+  },
+  {
+   "id": "screen.read::wrong_target",
+   "capability": "screen.read",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 17034517097408652424
+  },
+  {
+   "id": "screen.read::wrong_value",
+   "capability": "screen.read",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 4207083462334352048
+  },
+  {
+   "id": "screen.screenshot::noop_success",
+   "capability": "screen.screenshot",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 12107721606114431474
+  },
+  {
+   "id": "screen.screenshot::wrong_target",
+   "capability": "screen.screenshot",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 10798239509656653232
+  },
+  {
+   "id": "screen.screenshot::wrong_value",
+   "capability": "screen.screenshot",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 7607921016831663478
+  },
+  {
+   "id": "system.disk::noop_success",
+   "capability": "system.disk",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 7997064890946460220
+  },
+  {
+   "id": "system.disk::wrong_target",
+   "capability": "system.disk",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 11374091596557248817
+  },
+  {
+   "id": "system.disk::wrong_value",
+   "capability": "system.disk",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 12250782060829271496
+  },
+  {
+   "id": "system.packages::noop_success",
+   "capability": "system.packages",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 5734595926169393676
+  },
+  {
+   "id": "system.packages::wrong_target",
+   "capability": "system.packages",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 8063699000445282010
+  },
+  {
+   "id": "system.packages::wrong_value",
+   "capability": "system.packages",
+   "effect": "read",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_value",
+   "variant_seed": 9174122508238275565
+  },
+  {
+   "id": "system.processes::noop_success",
+   "capability": "system.processes",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 182196423171167621
+  },
+  {
+   "id": "system.processes::wrong_target",
+   "capability": "system.processes",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 4064079975299941118
+  },
+  {
+   "id": "system.processes::wrong_value",
+   "capability": "system.processes",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 13641426610441769612
+  },
+  {
+   "id": "system.service::noop_success",
+   "capability": "system.service",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "noop_success",
+   "variant_seed": 423552633594351921
+  },
+  {
+   "id": "system.service::wrong_target",
+   "capability": "system.service",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_target",
+   "variant_seed": 11499201014461378672
+  },
+  {
+   "id": "system.service::wrong_value",
+   "capability": "system.service",
+   "effect": "read",
+   "verifier_class": "SELF_REPORT",
+   "operator": "wrong_value",
+   "variant_seed": 10604077903100334307
+  },
+  {
+   "id": "system.service_control::noop_success",
+   "capability": "system.service_control",
+   "effect": "service",
+   "verifier_class": "INDEPENDENT",
+   "operator": "noop_success",
+   "variant_seed": 12579299203300621585
+  },
+  {
+   "id": "system.service_control::wrong_target",
+   "capability": "system.service_control",
+   "effect": "service",
+   "verifier_class": "INDEPENDENT",
+   "operator": "wrong_target",
+   "variant_seed": 9336768126985677310
+  },
+  {
+   "id": "system.service_control::undone_after_report",
+   "capability": "system.service_control",
+   "effect": "service",
+   "verifier_class": "INDEPENDENT",
+   "operator": "undone_after_report",
+   "variant_seed": 18210459966797740044
+  },
+  {
+   "id": "system.services::noop_success",
+   "capability": "system.services",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 4736401809537178361
+  },
+  {
+   "id": "system.services::wrong_target",
+   "capability": "system.services",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 8696244427809947883
+  },
+  {
+   "id": "system.services::wrong_value",
+   "capability": "system.services",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 12324293360659082130
+  },
+  {
+   "id": "system.status::noop_success",
+   "capability": "system.status",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 10869765547041485830
+  },
+  {
+   "id": "system.status::wrong_target",
+   "capability": "system.status",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 5618460492537779373
+  },
+  {
+   "id": "system.status::wrong_value",
+   "capability": "system.status",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 14497715026979083142
+  },
+  {
+   "id": "system.storage::noop_success",
+   "capability": "system.storage",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 16563402892736801921
+  },
+  {
+   "id": "system.storage::wrong_target",
+   "capability": "system.storage",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 10202155444876422329
+  },
+  {
+   "id": "system.storage::wrong_value",
+   "capability": "system.storage",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 7040543733918462336
+  },
+  {
+   "id": "task.inspect::noop_success",
+   "capability": "task.inspect",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "noop_success",
+   "variant_seed": 12476596059738408658
+  },
+  {
+   "id": "task.inspect::wrong_target",
+   "capability": "task.inspect",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_target",
+   "variant_seed": 5654684298900990754
+  },
+  {
+   "id": "task.inspect::wrong_value",
+   "capability": "task.inspect",
+   "effect": "read",
+   "verifier_class": "TRIVIAL",
+   "operator": "wrong_value",
+   "variant_seed": 8515056945196736164
+  }
+ ],
+ "clean_replays": [
+  {
+   "id": "browser.back::clean1",
+   "capability": "browser.back",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.back::clean2",
+   "capability": "browser.back",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.back::clean3",
+   "capability": "browser.back",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.click::clean1",
+   "capability": "browser.click",
+   "verifier_class": "PLANNER_SUPPLIED"
+  },
+  {
+   "id": "browser.click::clean2",
+   "capability": "browser.click",
+   "verifier_class": "PLANNER_SUPPLIED"
+  },
+  {
+   "id": "browser.click::clean3",
+   "capability": "browser.click",
+   "verifier_class": "PLANNER_SUPPLIED"
+  },
+  {
+   "id": "browser.download::clean1",
+   "capability": "browser.download",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.download::clean2",
+   "capability": "browser.download",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.download::clean3",
+   "capability": "browser.download",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.elements::clean1",
+   "capability": "browser.elements",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.elements::clean2",
+   "capability": "browser.elements",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.elements::clean3",
+   "capability": "browser.elements",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.forward::clean1",
+   "capability": "browser.forward",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.forward::clean2",
+   "capability": "browser.forward",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.forward::clean3",
+   "capability": "browser.forward",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.navigate::clean1",
+   "capability": "browser.navigate",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.navigate::clean2",
+   "capability": "browser.navigate",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.navigate::clean3",
+   "capability": "browser.navigate",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.observe::clean1",
+   "capability": "browser.observe",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.observe::clean2",
+   "capability": "browser.observe",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.observe::clean3",
+   "capability": "browser.observe",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.open::clean1",
+   "capability": "browser.open",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.open::clean2",
+   "capability": "browser.open",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.open::clean3",
+   "capability": "browser.open",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.read::clean1",
+   "capability": "browser.read",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.read::clean2",
+   "capability": "browser.read",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.read::clean3",
+   "capability": "browser.read",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.scroll::clean1",
+   "capability": "browser.scroll",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.scroll::clean2",
+   "capability": "browser.scroll",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.scroll::clean3",
+   "capability": "browser.scroll",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.search::clean1",
+   "capability": "browser.search",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.search::clean2",
+   "capability": "browser.search",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.search::clean3",
+   "capability": "browser.search",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.tabs::clean1",
+   "capability": "browser.tabs",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "browser.tabs::clean2",
+   "capability": "browser.tabs",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "browser.tabs::clean3",
+   "capability": "browser.tabs",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "browser.type::clean1",
+   "capability": "browser.type",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.type::clean2",
+   "capability": "browser.type",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.type::clean3",
+   "capability": "browser.type",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "browser.wait::clean1",
+   "capability": "browser.wait",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.wait::clean2",
+   "capability": "browser.wait",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "browser.wait::clean3",
+   "capability": "browser.wait",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "desktop.close::clean1",
+   "capability": "desktop.close",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.close::clean2",
+   "capability": "desktop.close",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.close::clean3",
+   "capability": "desktop.close",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.focus::clean1",
+   "capability": "desktop.focus",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.focus::clean2",
+   "capability": "desktop.focus",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.focus::clean3",
+   "capability": "desktop.focus",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.launch::clean1",
+   "capability": "desktop.launch",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.launch::clean2",
+   "capability": "desktop.launch",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.launch::clean3",
+   "capability": "desktop.launch",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.maximize::clean1",
+   "capability": "desktop.maximize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.maximize::clean2",
+   "capability": "desktop.maximize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.maximize::clean3",
+   "capability": "desktop.maximize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.minimize::clean1",
+   "capability": "desktop.minimize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.minimize::clean2",
+   "capability": "desktop.minimize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.minimize::clean3",
+   "capability": "desktop.minimize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.move::clean1",
+   "capability": "desktop.move",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.move::clean2",
+   "capability": "desktop.move",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.move::clean3",
+   "capability": "desktop.move",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.observe::clean1",
+   "capability": "desktop.observe",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "desktop.observe::clean2",
+   "capability": "desktop.observe",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "desktop.observe::clean3",
+   "capability": "desktop.observe",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "desktop.resize::clean1",
+   "capability": "desktop.resize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.resize::clean2",
+   "capability": "desktop.resize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.resize::clean3",
+   "capability": "desktop.resize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.tile::clean1",
+   "capability": "desktop.tile",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.tile::clean2",
+   "capability": "desktop.tile",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.tile::clean3",
+   "capability": "desktop.tile",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.unmaximize::clean1",
+   "capability": "desktop.unmaximize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.unmaximize::clean2",
+   "capability": "desktop.unmaximize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.unmaximize::clean3",
+   "capability": "desktop.unmaximize",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "desktop.windows::clean1",
+   "capability": "desktop.windows",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "desktop.windows::clean2",
+   "capability": "desktop.windows",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "desktop.windows::clean3",
+   "capability": "desktop.windows",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "display.brightness::clean1",
+   "capability": "display.brightness",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "display.brightness::clean2",
+   "capability": "display.brightness",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "display.brightness::clean3",
+   "capability": "display.brightness",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "display.set_brightness::clean1",
+   "capability": "display.set_brightness",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "display.set_brightness::clean2",
+   "capability": "display.set_brightness",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "display.set_brightness::clean3",
+   "capability": "display.set_brightness",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.copy::clean1",
+   "capability": "file.copy",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.copy::clean2",
+   "capability": "file.copy",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.copy::clean3",
+   "capability": "file.copy",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.edit::clean1",
+   "capability": "file.edit",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.edit::clean2",
+   "capability": "file.edit",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.edit::clean3",
+   "capability": "file.edit",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.exists::clean1",
+   "capability": "file.exists",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.exists::clean2",
+   "capability": "file.exists",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.exists::clean3",
+   "capability": "file.exists",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.list::clean1",
+   "capability": "file.list",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "file.list::clean2",
+   "capability": "file.list",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "file.list::clean3",
+   "capability": "file.list",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "file.metadata::clean1",
+   "capability": "file.metadata",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.metadata::clean2",
+   "capability": "file.metadata",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.metadata::clean3",
+   "capability": "file.metadata",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.move::clean1",
+   "capability": "file.move",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.move::clean2",
+   "capability": "file.move",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.move::clean3",
+   "capability": "file.move",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.read::clean1",
+   "capability": "file.read",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.read::clean2",
+   "capability": "file.read",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.read::clean3",
+   "capability": "file.read",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.rename::clean1",
+   "capability": "file.rename",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.rename::clean2",
+   "capability": "file.rename",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.rename::clean3",
+   "capability": "file.rename",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.search::clean1",
+   "capability": "file.search",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "file.search::clean2",
+   "capability": "file.search",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "file.search::clean3",
+   "capability": "file.search",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "file.semantic_search::clean1",
+   "capability": "file.semantic_search",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.semantic_search::clean2",
+   "capability": "file.semantic_search",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.semantic_search::clean3",
+   "capability": "file.semantic_search",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.write::clean1",
+   "capability": "file.write",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.write::clean2",
+   "capability": "file.write",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "file.write::clean3",
+   "capability": "file.write",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "input.clipboard_read::clean1",
+   "capability": "input.clipboard_read",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "input.clipboard_read::clean2",
+   "capability": "input.clipboard_read",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "input.clipboard_read::clean3",
+   "capability": "input.clipboard_read",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "input.clipboard_write::clean1",
+   "capability": "input.clipboard_write",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "input.clipboard_write::clean2",
+   "capability": "input.clipboard_write",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "input.clipboard_write::clean3",
+   "capability": "input.clipboard_write",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "input.editable_targets::clean1",
+   "capability": "input.editable_targets",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "input.editable_targets::clean2",
+   "capability": "input.editable_targets",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "input.editable_targets::clean3",
+   "capability": "input.editable_targets",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "input.type_text::clean1",
+   "capability": "input.type_text",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "input.type_text::clean2",
+   "capability": "input.type_text",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "input.type_text::clean3",
+   "capability": "input.type_text",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "network.status::clean1",
+   "capability": "network.status",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "network.status::clean2",
+   "capability": "network.status",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "network.status::clean3",
+   "capability": "network.status",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "network.wifi_connect::clean1",
+   "capability": "network.wifi_connect",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "network.wifi_connect::clean2",
+   "capability": "network.wifi_connect",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "network.wifi_connect::clean3",
+   "capability": "network.wifi_connect",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "network.wifi_list::clean1",
+   "capability": "network.wifi_list",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "network.wifi_list::clean2",
+   "capability": "network.wifi_list",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "network.wifi_list::clean3",
+   "capability": "network.wifi_list",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "notification.send::clean1",
+   "capability": "notification.send",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "notification.send::clean2",
+   "capability": "notification.send",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "notification.send::clean3",
+   "capability": "notification.send",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "screen.capture::clean1",
+   "capability": "screen.capture",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "screen.capture::clean2",
+   "capability": "screen.capture",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "screen.capture::clean3",
+   "capability": "screen.capture",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "screen.read::clean1",
+   "capability": "screen.read",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "screen.read::clean2",
+   "capability": "screen.read",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "screen.read::clean3",
+   "capability": "screen.read",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "screen.screenshot::clean1",
+   "capability": "screen.screenshot",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "screen.screenshot::clean2",
+   "capability": "screen.screenshot",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "screen.screenshot::clean3",
+   "capability": "screen.screenshot",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.disk::clean1",
+   "capability": "system.disk",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.disk::clean2",
+   "capability": "system.disk",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.disk::clean3",
+   "capability": "system.disk",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.packages::clean1",
+   "capability": "system.packages",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.packages::clean2",
+   "capability": "system.packages",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.packages::clean3",
+   "capability": "system.packages",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.processes::clean1",
+   "capability": "system.processes",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.processes::clean2",
+   "capability": "system.processes",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.processes::clean3",
+   "capability": "system.processes",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.service::clean1",
+   "capability": "system.service",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "system.service::clean2",
+   "capability": "system.service",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "system.service::clean3",
+   "capability": "system.service",
+   "verifier_class": "SELF_REPORT"
+  },
+  {
+   "id": "system.service_control::clean1",
+   "capability": "system.service_control",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.service_control::clean2",
+   "capability": "system.service_control",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.service_control::clean3",
+   "capability": "system.service_control",
+   "verifier_class": "INDEPENDENT"
+  },
+  {
+   "id": "system.services::clean1",
+   "capability": "system.services",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.services::clean2",
+   "capability": "system.services",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.services::clean3",
+   "capability": "system.services",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.status::clean1",
+   "capability": "system.status",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.status::clean2",
+   "capability": "system.status",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.status::clean3",
+   "capability": "system.status",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.storage::clean1",
+   "capability": "system.storage",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.storage::clean2",
+   "capability": "system.storage",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "system.storage::clean3",
+   "capability": "system.storage",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "task.inspect::clean1",
+   "capability": "task.inspect",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "task.inspect::clean2",
+   "capability": "task.inspect",
+   "verifier_class": "TRIVIAL"
+  },
+  {
+   "id": "task.inspect::clean3",
+   "capability": "task.inspect",
+   "verifier_class": "TRIVIAL"
+  }
+ ]
+}

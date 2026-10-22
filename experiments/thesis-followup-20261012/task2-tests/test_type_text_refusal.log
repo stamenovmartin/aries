@@ -1,0 +1,48 @@
+--- test_a_write_that_landed_exactly_is_still_a_success
+PASS  an exact landing is ok=True with landed=True
+PASS  and the digest it publishes is of what is really in the control
+PASS  the previous contents are reported as a digest, never as text
+--- test_a_write_the_toolkit_accepted_but_did_not_keep_is_a_refusal
+PASS  a partially filtered insert is refused, not reported as done
+PASS  the refusal carries the arithmetic: characters sent, held before, held after
+PASS  the refusal states that the control WAS modified and not restored
+PASS  the observation travels with the refusal rather than being replaced by it
+PASS  neither the old nor the new text appears anywhere in the refusal
+PASS  a write that landed nothing at all is refused
+PASS  and it says the control was NOT modified, which is a different situation
+PASS  a toolkit that returns false is a refusal with its own code, not a generic one
+--- test_replace_is_held_to_the_same_standard_as_insert
+PASS  a replace that was truncated is refused
+PASS  the truncation is reported as a number, not as a mood
+--- test_text_that_cannot_survive_the_write_is_refused_before_the_write
+PASS  refused before writing: NUL (InsertText is a C call on a NUL-terminated string)
+PASS    and the control was genuinely left alone
+PASS    and the refusal says why in a sentence a person can act on
+PASS    and the refusal never quotes the text back
+PASS  refused before writing: a C0 control character (a text buffer discards it)
+PASS    and the control was genuinely left alone
+PASS    and the refusal says why in a sentence a person can act on
+PASS    and the refusal never quotes the text back
+PASS  refused before writing: a line break into a single-line entry (GtkEntry drops it)
+PASS    and the control was genuinely left alone
+PASS    and the refusal says why in a sentence a person can act on
+PASS    and the refusal never quotes the text back
+PASS  refused before writing: a carriage return into a search box (same mechanism)
+PASS    and the control was genuinely left alone
+PASS    and the refusal says why in a sentence a person can act on
+PASS    and the refusal never quotes the text back
+PASS  a line break into a MULTI-line control is still allowed — the rule is about what the control drops, not about newlines
+--- test_the_capability_raises_a_coded_refusal_rather_than_returning_a_flag
+PASS  a refusal from the worker reaches the capability as an error
+PASS  the capability tells the worker which rule is in force, because the worker runs under /usr/bin/python3 -I and cannot read the flag itself
+PASS  text past the 4000-character bound is refused before a worker is spawned
+--- test_the_flag_is_registered_and_turning_it_off_restores_the_old_shape
+PASS  ARIES_TYPE_STRICT is in the one flag registry, default on
+PASS  with the flag off the worker returns the pre-A10 shape, so Part B can measure both sides of the change
+PASS  and the capability reads the flag from aries.flags rather than its own literal
+PASS  restored to on
+--- test_the_spoken_surface_reports_a_refusal_as_a_refusal
+PASS  a lost write is state=failed on the spoken surface, not done
+PASS  and the reason, with its numbers, is what the person is told
+PASS  no verification is claimed for a write that was refused
+ALL PASSED

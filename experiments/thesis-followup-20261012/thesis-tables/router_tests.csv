@@ -1,0 +1,11 @@
+# source: experiments/thesis-followup-20261012/stats.json (sha256 cff869570957, commit c791741); experiments/thesis-followup-20261012/task6-model/stats/stats.json (sha256 29ace54366b0, commit 1fc8509); experiments/thesis-final-20261006/raw (sha256 3f7e496706d7, commit 62fe362); experiments/thesis-followup-20261012/task6-model/raw (sha256 fb1f0c954f5b, commit 6fa5d87); scripts/thesis_stats.py (sha256 fefd6eee0fe8, commit 1fc8509) | label: exploratory (post-hoc tests)
+# note: unit = request (n=225), majority of 3 repetitions; McNemar exact two-sided; GEE and GLMM on all 2,700 decisions with reference A1, so the A1 vs A0 row reports the A0 term (sign reversed); GLMM is variational Bayes, interval = mean +- 1.96 posterior SD; no multiple-comparison correction
+model,comparison,first_right_second_wrong,first_wrong_second_right,both_right,both_wrong,n_requests,p_value,model_term,gee_log_odds,gee_p,glmm_log_odds,glmm_lo,glmm_hi,cochran_q,df,label
+qwen2.5:7b,A3 vs A1,24,23,131,47,225,1,A3 vs A1,-2.97879e-16,1,0.0353505,-0.273171,0.343872,,,exploratory
+qwen2.5:7b,A2 vs A1,16,24,130,55,225,0.268187,A2 vs A1,-0.153952,0.207503,-0.529897,-0.833935,-0.225859,,,exploratory
+qwen2.5:7b,A1 vs A0,36,11,118,60,225,0.000346001,A0 vs A1,-0.497778,7.81809e-05,-1.88624,-2.19936,-1.57311,,,exploratory
+qwen2.5:7b,A0-A3 (Cochran Q),,,,,225,2.63375e-05,,,,,,,23.8899,3,exploratory
+llama3.1:8b,A3 vs A1,19,8,122,76,225,0.052239,A3 vs A1,0.179036,0.0494986,0.937303,0.585691,1.28891,,,exploratory
+llama3.1:8b,A2 vs A1,14,8,122,81,225,0.286279,A2 vs A1,0.0918075,0.255773,0.486718,0.136642,0.836794,,,exploratory
+llama3.1:8b,A1 vs A0,15,10,115,85,225,0.424356,A0 vs A1,-0.084512,0.284764,-0.454206,-0.812605,-0.0958068,,,exploratory
+llama3.1:8b,A0-A3 (Cochran Q),,,,,225,0.00919516,,,,,,,11.5263,3,exploratory

@@ -41,8 +41,8 @@ Safe defaults ship deliberately: `DRY_RUN=true`, `LIVE_TOOLS=` empty, `AI_PROVID
 (deterministic, offline, no model needed), every credential empty. Holding a credential is
 not permission to use it; clearing a tool for live execution is a separate, explicit act.
 
-For a real model, set `AI_PROVIDER=cli` — the `the reviewing agent` binary is already present at
-`~/.local/bin/the reviewing agent`. `ollama` and any OpenAI-compatible endpoint are also supported.
+For a real model, set `AI_PROVIDER=cli` — the `claude` binary is already present at
+`~/.local/bin/claude`. `ollama` and any OpenAI-compatible endpoint are also supported.
 
 ## 5. Running
 

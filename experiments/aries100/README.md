@@ -1,8 +1,8 @@
 # aries100 — superseded as the project's measuring stick, 2026-10-03
 
-67 declarative goals with external-state probes. Built 2026-10-01 in this session;
+67 declarative goals with external-state probes. Built 2026-10-01;
 **not the benchmark to quote any more.** Use
-`experiments/assistant-benchmark/` (60 cases, Codex's), which does three things
+`experiments/assistant-benchmark/` (60 cases), which does three things
 this one does not:
 
 - it hashes the production sources and the fixture into every result, so a run

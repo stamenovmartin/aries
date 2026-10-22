@@ -1,0 +1,180 @@
+{
+  "verified_at": "2026-10-06T17:37:19.541726+00:00",
+  "mode": "independent read-only recomputation from actual raw outputs and scratch DB",
+  "checks": [
+    {
+      "name": "complete_run_and_summary",
+      "passed": true
+    },
+    {
+      "name": "all72_unique_prespecified_slots",
+      "passed": true
+    },
+    {
+      "name": "order_matches_preregistered_schedule",
+      "passed": true
+    },
+    {
+      "name": "goal_expected_pairs_match_frozen_fixture",
+      "passed": true
+    },
+    {
+      "name": "freeze_v2_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "run_copies_match_frozen_inputs",
+      "passed": true
+    },
+    {
+      "name": "manifest_input_hashes_match",
+      "passed": true
+    },
+    {
+      "name": "attempt_and_summary_hashes_match_manifest",
+      "passed": true
+    },
+    {
+      "name": "698_frozen_source_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "model_matches_router_before_and_after",
+      "passed": true
+    },
+    {
+      "name": "all_run_integrity_flags_true",
+      "passed": true
+    },
+    {
+      "name": "all_preflight_checks_passed",
+      "passed": true
+    },
+    {
+      "name": "full58_registry_and_no_topk_snapshot",
+      "passed": true
+    },
+    {
+      "name": "all72_recorded_prompt_hashes_match",
+      "passed": true
+    },
+    {
+      "name": "all24_prompts_byte_identical_to_pre_inference_dryrun",
+      "passed": true
+    },
+    {
+      "name": "raw_decisions_reparse_and_scores_recompute_identically",
+      "passed": true
+    },
+    {
+      "name": "overall_counts_match_independent_recalculation",
+      "passed": true
+    },
+    {
+      "name": "each_repetition_has_fixed24_denominator",
+      "passed": true
+    },
+    {
+      "name": "consistency_count_recomputed",
+      "passed": true
+    },
+    {
+      "name": "72_actual_recorded_local_generations",
+      "passed": true
+    },
+    {
+      "name": "no_workspace_goals_or_router_cache_written",
+      "passed": true
+    },
+    {
+      "name": "successful_usage_has_local_model_identity",
+      "passed": true
+    }
+  ],
+  "passed": 22,
+  "total": 22,
+  "independent_counts": {
+    "schema_valid": 72,
+    "capability_correct": 68,
+    "capability_arguments_correct": 68
+  },
+  "denominator": 72,
+  "unique_cases": 24,
+  "repetitions": 3,
+  "identical_valid_cases": 23,
+  "generation_count": 72,
+  "generation_success_count": 72,
+  "workspace_goals": 0,
+  "routing_cache_entries": 0,
+  "failures": [
+    {
+      "case_id": "p12",
+      "repetition": 1,
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    },
+    {
+      "case_id": "p11",
+      "repetition": 1,
+      "goal": "Measure filesystem usage and tell me which filesystem has the highest percentage used.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    },
+    {
+      "case_id": "p12",
+      "repetition": 2,
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    },
+    {
+      "case_id": "p12",
+      "repetition": 3,
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    }
+  ],
+  "run_manifest_sha256": "81c4e7164a8d83e72ec87e28db44ec04f81cfb8d4e1956c049c7f301ba27125d",
+  "summary_sha256": "6c0fcbd694488b63954703a9ca4d44852b0a88734d2918956e50996b86fecbf9",
+  "attempts_sha256": "ab8cf55b623e5acb09545a4ba91b24ff844db97cdee990e336026d107a0b559b",
+  "validation_script_sha256": "987df973a6549e0a03998f548b0aea679077da6b918a54ecee46e0da159472a3",
+  "measurement_limit": "Offline exact next-action selection; no capability execution or actual task completion."
+}

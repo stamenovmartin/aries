@@ -6,15 +6,24 @@ from typing import Any, Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from aries.workspace.registry import registry
 
+CLARIFY_TEXT_MAX = 300
+CLARIFY_MIN_CHOICES = 2
+CLARIFY_MAX_CHOICES = 5
+
 
 class Decision(BaseModel):
     model_config = ConfigDict(extra='forbid', strict=True)
-    action: Literal['execute','finish','fail','ask_approval']
+    action: Literal['execute','finish','fail','ask_approval','ask_clarification']
     capability: str | None = None
     arguments: dict[str, Any] = Field(default_factory=dict)
     reason: str = Field(default='', max_length=1500)
     summary: str = Field(default='', max_length=2000)
     evidence_refs: list[str] = Field(default_factory=list, max_length=64)
+    # Only for ask_clarification. The planner could previously only guess or fail
+    # when its own observations showed several targets that fit the goal; the
+    # held-out acceptance run of 2026-10-06 scored 0 of 5 on that class.
+    question: str = Field(default='', max_length=CLARIFY_TEXT_MAX)
+    choices: list[str] = Field(default_factory=list, max_length=CLARIFY_MAX_CHOICES)
 
     @model_validator(mode='after')
     def validate_action(self):
@@ -24,6 +33,19 @@ class Decision(BaseModel):
             self.arguments = registry.validate(self.capability, self.arguments)
         elif self.capability or self.arguments:
             raise ValueError('Terminal decisions cannot carry executable arguments')
+        if self.action == 'ask_clarification':
+            self.question = self.question.strip()
+            self.choices = [c.strip() for c in self.choices]
+            if not self.question:
+                raise ValueError('A clarification needs a question')
+            if not CLARIFY_MIN_CHOICES <= len(self.choices) <= CLARIFY_MAX_CHOICES:
+                raise ValueError(f'A clarification needs {CLARIFY_MIN_CHOICES} to {CLARIFY_MAX_CHOICES} choices')
+            if any(not c or len(c) > CLARIFY_TEXT_MAX for c in self.choices):
+                raise ValueError('Every clarification choice must be non-empty and bounded')
+            if len({c.casefold() for c in self.choices}) != len(self.choices):
+                raise ValueError('Clarification choices must be distinct')
+        elif self.question or self.choices:
+            raise ValueError('Only ask_clarification may carry a question or choices')
         return self
 
 
@@ -74,7 +96,7 @@ def grammar_safe(schema):
     return out
 
 
-def generation_schema(*, allow_finish=True, allow_fail=True):
+def generation_schema(*, allow_finish=True, allow_fail=True, allow_ask=False, guard=False):
     # A finite grammar generated from the registry. See grammar_safe() above for
     # what the compiler will and will not take, and why each string is bounded.
     arguments = {}
@@ -85,20 +107,40 @@ def generation_schema(*, allow_finish=True, allow_fail=True):
             chosen = next((s for s in choices if s.get('type') != 'null'), {'type': 'string'})
             arguments[name] = grammar_safe(chosen)
     prose = {'type': 'string', 'maxLength': GRAMMAR_STRING_MAX}
-    actions = ['execute','ask_approval'] + (['fail'] if allow_fail else []) + (['finish'] if allow_finish else [])
+    actions = ['execute','ask_approval'] + (['fail'] if allow_fail else []) + (['finish'] if allow_finish else []) \
+        + (['ask_clarification'] if allow_ask else [])
     # `capability` can only be MANDATORY when no terminal verb is on offer, because
     # Decision.validate_action requires it for execute/ask_approval and REFUSES it for
     # finish/fail — a terminal decision that carried one would be rejected after the call.
     # When the only legal actions are the two that act, an omitted capability is a
     # guaranteed wasted planner attempt, so the grammar should make it unreachable.
     required = ['action'] + (['capability'] if not set(actions) - {'execute','ask_approval'} else [])
-    return {'type':'object','properties':{
+    properties = {
         'action':{'type':'string','enum':actions},
         'capability':{'type':'string','enum':[c['name'] for c in allowed]},
         'arguments':{'type':'object','properties':arguments,'additionalProperties':False},
         'reason':prose,'summary':prose,
-        'evidence_refs':{'type':'array','items':{'type':'string','maxLength':64}}},
-        'required':required,'additionalProperties':False}
+        'evidence_refs':{'type':'array','items':{'type':'string','maxLength':64}}}
+    if allow_ask:
+        # Added only when offered, so the grammar with the option off is byte-for-byte
+        # the one every earlier measurement used.
+        properties['question'] = {'type':'string','maxLength':CLARIFY_TEXT_MAX}
+        properties['choices'] = {'type':'array','items':{'type':'string','maxLength':CLARIFY_TEXT_MAX}}
+    if allow_ask and guard:
+        # ARIES_PLANNER_CLARIFY_GUARD. In the 2026-10-12 planner test the model chose
+        # ask_clarification on unambiguous goals and attached capability arguments in
+        # 9 of 9 attempts, which Decision rejects. Two shapes make that unreachable: a
+        # question carries only question/choices/reason, an action carries no question.
+        acting = [a for a in actions if a != 'ask_clarification']
+        act_props = {k: v for k, v in properties.items() if k not in ('question', 'choices')}
+        act_props['action'] = {'type':'string','enum':acting}
+        act_required = ['action'] + (['capability'] if not set(acting) - {'execute','ask_approval'} else [])
+        ask = {'type':'object','properties':{'action':{'type':'string','enum':['ask_clarification']},
+                                             'question':properties['question'],'choices':properties['choices'],
+                                             'reason':prose},
+               'required':['action','question','choices'],'additionalProperties':False}
+        return {'anyOf':[{'type':'object','properties':act_props,'required':act_required,'additionalProperties':False}, ask]}
+    return {'type':'object','properties':properties,'required':required,'additionalProperties':False}
 
 
 def bounded(value, *, max_chars=8000):
@@ -383,6 +425,48 @@ def context(goal, data, budget):
                            'Finish must reference verified evidence and satisfy every goal condition.']}
 
 
+def unlisted_folders(goal, data):
+    """Folders the goal names without naming one exact file, that no verified step has listed."""
+    from aries.workspace.contracts import _paths
+    from pathlib import Path
+    paths = [Path(p).expanduser() for p in _paths(goal) if len(p) > 1]
+    if not paths or any(p.suffix for p in paths):
+        return []
+    listed = {str(Path(s.get('args', {}).get('path', '')).expanduser()) for s in data.get('steps', [])
+              if s.get('capability') == 'file.list' and s.get('verification_status') == 'verified'}
+    return [str(p) for p in paths if str(p) not in listed]
+
+
+def listed_but_unread(goal, data):
+    """Goal folders (or their subfolders) with a verified listing and no verified read inside."""
+    from pathlib import Path
+    from aries.workspace.contracts import _paths
+    folders = [str(Path(p).expanduser()) for p in _paths(goal) if len(p) > 1 and not Path(p).suffix]
+    if not folders:
+        return []
+    steps = [s for s in data.get('steps', []) if s.get('verification_status') == 'verified']
+    inside = lambda path, root: path == root or path.startswith(root.rstrip('/') + '/')
+    listed = [str(Path(s['args'].get('path', '')).expanduser()) for s in steps if s.get('capability') == 'file.list']
+    read = [str(Path(s['args'].get('path', '')).expanduser()) for s in steps if s.get('capability') == 'file.read']
+    out = []
+    for root in folders:
+        mine = [l for l in listed if inside(l, root)]
+        if mine and not any(inside(r, root) for r in read):
+            out.append(mine[-1])
+    return out
+
+
+def flags_enabled(name):
+    from aries import flags
+    return flags.enabled(name)
+
+
+def clarification_offered(data):
+    from aries import flags
+    return flags.enabled('ARIES_PLANNER_CLARIFY') and any(
+        s.get('verification_status') == 'verified' for s in data.get('steps', []))
+
+
 async def plan(db, goal, data, budget):
     from aries.intelligence import structured
     from aries.intelligence.router import route
@@ -445,8 +529,53 @@ async def plan(db, goal, data, budget):
     # failure claim. The spelling of /does/not/exist is not an OS observation.
     # Unsupported goals can still be refused immediately.
     can_fail = bool(data['steps']) or not data['agent']['contract']['supported']
+    # Asking is offered only after something was observed: the choices must come from
+    # the machine, and a goal that names no target is already caught in service.submit.
+    can_ask = clarification_offered(data)
+    guard = flags_enabled('ARIES_PLANNER_CLARIFY_GUARD') and flags_enabled('ARIES_PLANNER_CLARIFY')
+    if guard:
+        folders = unlisted_folders(goal, data)
+        if folders:
+            messages.append({'role':'user','content':
+                'The goal names the folder ' + ', '.join(folders) + ' but not one exact file inside it. List that '
+                'folder with file.list before reading anything in it, and do not guess file names.'})
+    if guard:
+        listed = listed_but_unread(goal, data)
+        if listed:
+            # Round 2 (h4-dev/DEVLOG.md): after listing, the model read one candidate
+            # without deciding how many entries fit. Make that decision an explicit step.
+            messages.append({'role':'user','content':
+                'You have listed ' + ', '.join(listed) + ' and read nothing in it yet. Before reading any file, '
+                'decide how many listed FILES fit the goal; a subfolder is never a candidate, and a file that does '
+                'not match the goal is not one either. If two or more files fit and the goal does not say which, '
+                'choose ask_clarification with those exact file paths as the choices. If exactly one file fits, '
+                'read it with execute. If no file fits but the listing shows subfolders, list the subfolders that '
+                'could contain the target.'})
+    resolved = (data['agent'].get('resolver') or {}) if flags_enabled('ARIES_CLARIFY_RESOLVER') else {}
+    if resolved.get('selected'):
+        # ARIES_CLARIFY_RESOLVER: the request's own words picked one of several listed files,
+        # and code checked that they occur in the request and fit only that file.
+        messages.append({'role':'user','content':
+            'The request says which file is meant: "' + resolved['evidence_span'] + '" identifies ' + resolved['selected']
+            + ' among the listed files. Use that file; do not ask which one.'})
+    if can_ask and guard:
+        messages.append({'role':'user','content':
+            'Two different actions exist for two different situations. Reading and listing change nothing and need '
+            'no approval: run them with execute. To have the user confirm an action that would change something, '
+            'use ask_approval with that capability and its arguments. ask_clarification is '
+            'only for choosing between targets: use it when your verified observations show two or more existing '
+            'targets that each fit the goal and the goal does not say which one is meant. Its question gets 2 to 5 '
+            'choices, each an exact path or name copied from the observations, and it never carries a capability '
+            'or arguments. If exactly one observed target fits, or the goal names its target exactly, act on it '
+            'instead of asking.'})
+    elif can_ask:
+        messages.append({'role':'user','content':
+            'If your observations show two or more existing targets that each fit the goal, and the goal does not '
+            'say which one is meant, do not pick one and do not keep trying candidates. Choose action '
+            'ask_clarification with a short question and 2 to 5 choices, each containing an exact path or name '
+            'copied from the observations. Do not ask when exactly one observed target fits the goal.'})
     from aries.intelligence.egress import bind, planner_classes
-    schema = generation_schema(allow_finish=can_finish,allow_fail=can_fail)
+    schema = generation_schema(allow_finish=can_finish,allow_fail=can_fail,allow_ask=can_ask,guard=guard)
     raw, native = await structured(db,messages,schema,purpose='workspace.m14-planner',max_tokens=1800,
                                    route=data.get("routing"),provenance=bind(messages,schema,planner_classes(data,payload)))
     measured = {'input_tokens':native.get('prompt_eval_count'), 'output_tokens':native.get('eval_count')}

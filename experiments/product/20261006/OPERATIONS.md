@@ -4,7 +4,7 @@ This release adds a final inference egress gate, task/root attribution, durable 
 
 ## Evidence
 
-- `checks.json` and suite logs: 397 assertions across 11 focused suites, all passing. No full repository suite was run while the reviewing agent held a concurrent documentation claim.
+- `checks.json` and suite logs: 397 assertions across 11 focused suites, all passing. No full repository suite was run, because documentation was being edited concurrently.
 - `component-trials.jsonl` / `component-evaluation.json`: five paired single-agent/team trials, 10/10 independently verified file reads, stable source hashes. Deterministic planners: no real token or cost savings can be inferred.
 - `native-decomposition.json`: actual local model generated two valid specialist nodes.
 - `native-team.json`: actual qwen2.5:7b, one compound system inspection, two completed runtime agents and independently verified root; 5 model calls, 5,199 native tokens, 8 executor/verifier invocations, about 8.18 seconds. This is a smoke test, not a general success rate.

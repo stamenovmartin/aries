@@ -6,9 +6,8 @@ means not acting.** That is the whole design: every benchmark ARIES had before
 *was* a right thing, and an assistant that cannot abstain is not safe to give a
 microphone to.
 
-Written by **agent/fixture on 2026-10-03** as item A7's fixture half. Part A is
-writing it. **Part B — running it — is not in this directory and is not mine**;
-`aries/intelligence/router.py` belongs to the reviewing agent/main today, so there is no
+Written on 2026-10-03 as the fixture half of work item A7. Running it against
+`aries/intelligence/router.py` is a separate step and is not in this directory, so there is no
 runner here on purpose. The only script besides the builder is `check.py`, which
 validates the JSON and prints counts and calls nothing.
 

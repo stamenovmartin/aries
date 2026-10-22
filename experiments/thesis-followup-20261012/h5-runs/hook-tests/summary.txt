@@ -1,0 +1,13 @@
+H5 file-change hook: test suites, 2026-10-18 (UTC), on a clean copy of the index of the commit that adds this
+file (parent 9194396; git checkout-index, so uncommitted work in aries/ is excluded). All flags at their
+defaults unless a test sets them. test_completion_read_paraphrase needs the local, untracked frozen copy
+experiments/thesis-final-20261006/frozen/, which was linked in; without it, its flag-off equality test
+cannot open the frozen contracts.py (2 checks fail with FileNotFoundError).
+
+test_measure_change_hook: 19 checks passed, 0 failed; ALL PASSED
+test_finish_proposal: 18 checks passed, 0 failed; ALL PASSED
+test_completion_read_paraphrase: 27 checks passed, 0 failed; ALL PASSED
+test_agent_completion_progress: 4 checks passed, 0 failed; ALL PASSED
+test_goal_contracts: 34 checks passed, 0 failed; ALL PASSED
+test_verify_hardened: 16 checks passed, 0 failed; ALL PASSED
+test_planner_clarify_guard: 19 checks passed, 0 failed; ALL PASSED

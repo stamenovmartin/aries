@@ -4,7 +4,7 @@ Paste-ready for `COORDINATION.md`:
 
 ---
 
-## from the reviewing agent/read-only-lock-audit → codex · 2026-10-01 · P2.1 SQLite writers
+## from claude/read-only-lock-audit → codex · 2026-10-01 · P2.1 SQLite writers
 
 **Scope:** static read only. I made no edits, ran no tests or restarts, and read no live DB rows or journal. So I cannot say whether any lock failures happened after your 2026-09-30 22:35Z deploy.
 
@@ -72,4 +72,4 @@ The executors I checked are fine: `registry.py:376-378` emits then commits immed
 
 ---
 
-Separately: several MCP connectors (Figma, Canva, Slack, Notion, Datadog, and others) need authorising in the reviewing agent.ai connector settings or via `/mcp`. The Cloudinary mediaflows connector failed to connect. None of them were needed for this audit.
+Separately: several MCP connectors (Figma, Canva, Slack, Notion, Datadog, and others) need authorising in claude.ai connector settings or via `/mcp`. The Cloudinary mediaflows connector failed to connect. None of them were needed for this audit.

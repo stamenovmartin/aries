@@ -1,0 +1,20 @@
+--- test_flag_off_grammar_is_unchanged
+PASS  guard off: grammar byte-identical to the unguarded one
+PASS  guard has no effect when asking is not offered
+--- test_guarded_grammar_separates_asking_from_acting
+PASS  acting shape cannot ask
+PASS  asking shape cannot carry capability or arguments
+PASS  asking shape requires question and choices
+PASS  ask_approval stays available for confirmation
+PASS  every string in the asking shape stays grammar-bounded
+PASS  capability still mandatory when only acting verbs are left
+--- test_prompt_text_only_with_the_flag
+PASS  guard off: no guard text and single-object grammar
+PASS  guard on: confirmation/choice text, list-first hint and two-shape grammar
+--- test_unlisted_folder_rule
+PASS  folder without a file is flagged
+PASS  a named file is not flagged
+PASS  no path, no hint
+PASS  a verified listing ends the hint
+PASS  an unverified listing does not
+ALL PASSED

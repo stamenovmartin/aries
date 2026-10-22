@@ -3,7 +3,7 @@
 > **18 September — terminal cloud correction:** `claude-cli` and `codex-cli`
 > adapters use existing terminal login. Cloud routing is enabled with Codex selected;
 > no separate API key is required. The HTTP-only “unconfigured cloud” limitation
-> below is historical. the reviewing agent initially returned a session-limit 429; this is
+> below is historical. Claude initially returned a session-limit 429; this is
 > recorded as a provider failure, never successful completion.
 
 > **18 September 2026 — Local-first intelligence:** code/local/cloud routing is
