@@ -450,3 +450,8 @@ if _flags.enabled('ARIES_VERIFY_HARDENED') or _flags.enabled('ARIES_VERIFY_HARDE
     from aries.workspace.hardened_verifiers import install as _install_hardened
     _install_hardened(registry, core=_flags.enabled('ARIES_VERIFY_HARDENED'),
                       extra=_flags.enabled('ARIES_VERIFY_HARDENED_EXTRA'))
+# ARIES_VERIFY_SCOPE (docs/AUDIT.md 4e; exploratory, designed after H8). Off by default, and then
+# nothing below runs. On, it wraps whatever verifier is registered, hardened or frozen.
+if _flags.enabled('ARIES_VERIFY_SCOPE'):
+    from aries.workspace.scope_verifiers import install as _install_scope
+    _install_scope(registry)
