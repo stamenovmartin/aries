@@ -136,14 +136,28 @@ async def test_flag_off_is_the_previous_behaviour():
 
 
 def test_contract_compiler_untouched():
-    import hashlib
+    # Until the H5 measurement ended this checked that contracts.py was byte-identical to the tag. The
+    # remedy designed after H5 (ARIES_CONTRACT_FILENAME_JOIN) changes the file, so the check is now on
+    # behaviour: with the new flag off, the compiler gives exactly what the tagged one gives.
+    import importlib.util
     import subprocess
+    import tempfile as tf
+    from tests.test_completion_read_paraphrase import fixture_goals
     root = Path(__file__).resolve().parents[1]
     frozen = subprocess.run(['git', 'show', 'h4b-frozen-20261018:aries/workspace/contracts.py'], cwd=root,
                             capture_output=True).stdout
-    check('contracts.py is byte-identical to the commit before H5 (tag h4b-frozen-20261018)',
-          bool(frozen) and hashlib.sha256(frozen).digest() ==
-          hashlib.sha256((root / 'aries/workspace/contracts.py').read_bytes()).digest())
+    check('the tagged contracts.py is available', bool(frozen))
+    with tf.NamedTemporaryFile('wb', suffix='.py', delete=False) as fh:
+        fh.write(frozen)
+    spec = importlib.util.spec_from_file_location('contracts_h4b_frozen', fh.name)
+    old = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(old)
+    Path(fh.name).unlink()
+    goals = fixture_goals() + ['Read notes.txt in /h/p.', 'Is there a report.pdf in /h/p?', 'Show me /h/p/a.txt',
+                               'Read the notes in /h/p', 'Pull up /h/p/a.md and tell me what it says.']
+    check('with ARIES_CONTRACT_FILENAME_JOIN off the compiler equals the tag (h4b-frozen-20261018)',
+          all(contracts.compile_goal(g, '/d', paraphrase=p) == old.compile_goal(g, '/d', paraphrase=p)
+              for g in goals for p in (False, True)))
 
 
 async def test_fast_path_contract_is_never_replaced():

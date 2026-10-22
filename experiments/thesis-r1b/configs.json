@@ -1,0 +1,56 @@
+{
+ "about": "R1b flag configurations (docs/preregistration/R1b-improved-router-planner.md). Every flag not named keeps its source default; the planner context flags come from the frozen planner protocol, as in R1.",
+ "configs": {
+  "C0": {
+   "role": "current source, every new flag off (control for the source drift since ARIES-FINAL-20261006)",
+   "flags": {}
+  },
+  "C1": {
+   "role": "treatment: all R1 remedies together",
+   "flags": {
+    "ARIES_ROUTER_SURFACE_CONSISTENT": "1",
+    "ARIES_ROUTER_CAPABILITY_GATE": "1",
+    "ARIES_PLANNER_PER_CAP_GRAMMAR": "1",
+    "ARIES_PLANNER_OOS_ACTION": "1",
+    "ARIES_PLANNER_GATE_HINT": "1"
+   }
+  },
+  "G": {
+   "role": "ablation: capability gate and its planner hint only",
+   "flags": {
+    "ARIES_ROUTER_CAPABILITY_GATE": "1",
+    "ARIES_PLANNER_GATE_HINT": "1"
+   }
+  },
+  "P": {
+   "role": "ablation: planner grammar and OOS action only",
+   "flags": {
+    "ARIES_PLANNER_PER_CAP_GRAMMAR": "1",
+    "ARIES_PLANNER_OOS_ACTION": "1"
+   }
+  },
+  "S": {
+   "role": "ablation: consistent router surface only",
+   "flags": {
+    "ARIES_ROUTER_SURFACE_CONSISTENT": "1"
+   }
+  },
+  "C2": {
+   "role": "development round 2: capability gate, its hint and the per-capability grammar; frozen router surface, no OOS message",
+   "flags": {
+    "ARIES_ROUTER_CAPABILITY_GATE": "1",
+    "ARIES_PLANNER_GATE_HINT": "1",
+    "ARIES_PLANNER_PER_CAP_GRAMMAR": "1"
+   }
+  },
+  "C3": {
+   "role": "development round 3: C1 without the planner OOS message",
+   "flags": {
+    "ARIES_ROUTER_SURFACE_CONSISTENT": "1",
+    "ARIES_ROUTER_CAPABILITY_GATE": "1",
+    "ARIES_PLANNER_GATE_HINT": "1",
+    "ARIES_PLANNER_PER_CAP_GRAMMAR": "1"
+   }
+  }
+ }
+}

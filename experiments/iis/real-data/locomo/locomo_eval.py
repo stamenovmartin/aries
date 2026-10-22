@@ -119,6 +119,12 @@ VARIANTS = {
     "embedding-only-bge-m3": {"store": "gated",   "rank": "semantic-v3", "embedder": "bge-m3-ollama"},
     "cascade-e5":            {"store": "cascade", "rank": "semantic-v3", "embedder": "e5-base-int8"},
     "cascade-bge-m3":        {"store": "cascade", "rank": "semantic-v3", "embedder": "bge-m3-ollama"},
+    # Added after the 2026-10-22 results (preregistration docs/preregistration/M1-information-layer-remedies.md).
+    # Same store as embedding-only-e5, so only the ranking differs.
+    "hybrid-rrf-e5":         {"store": "gated",   "rank": "semantic-v3", "embedder": "e5-base-int8",
+                              "flags": {"ARIES_MEMORY_HYBRID_RRF": "1"}},
+    "cosine-only-e5":        {"store": "gated",   "rank": "cosine",      "embedder": "e5-base-int8"},
+    "rrf-only-e5":           {"store": "gated",   "rank": "rrf",         "embedder": "e5-base-int8"},
 }
 BASELINE = "bm25"
 NO_MODEL = ("bm25", "verbatim-focused")
@@ -305,7 +311,7 @@ def build(variant, conversation, embedder=None, cascade=None, excluded=()):
     utterance/conclusion pair, as in `memory_eval.build`.
     """
     spec = VARIANTS[variant]
-    semantic = spec["rank"] == "semantic-v3"
+    semantic = spec["rank"] in ("semantic-v3", "cosine", "rrf")
     if semantic and embedder is None:
         raise ValueError(f"{variant} needs an embedder")
     if spec["store"] == "cascade" and cascade is None:
@@ -414,8 +420,19 @@ def ranker(variant, rows, now, embedder=None):
     if rank == "bm25":
         index = BM25(rows)
         return index.top
-    if rank == "semantic-v3" and any(r["vector"] is None for r in rows):
+    if rank in ("semantic-v3", "cosine", "rrf") and any(r["vector"] is None for r in rows):
         raise ValueError("semantic-v3 over an unembedded row would silently degrade to focused-v2")
+    if rank in ("cosine", "rrf"):
+        # Ablations of semantic-v3: the similarity alone, with no recency, importance or layer term.
+        matrix = np.stack([r["vector"] for r in rows]) if rows else None
+
+        def top_similarity(question, k=K):
+            cosine = (matrix @ embedder.query(question)).tolist()
+            score = cosine if rank == "cosine" else retrieval.rrf(
+                (cosine, False), (retrieval.bm25_scores(question, [r["text"] for r in rows]), True))
+            order = sorted(range(len(rows)), key=lambda i: (-score[i], i))
+            return [rows[i] for i in order[:k]]
+        return top_similarity
 
     def top(question, k=K):
         query_vector = embedder.query(question) if rank == "semantic-v3" else None
@@ -597,6 +614,8 @@ def run(conversations, variants, *, embedder_factory=None, classify=None, b=BOOT
             embedder = embedders[spec["embedder"]]
         started, embed_before = perf_counter(), embedder.seconds if embedder else 0.
         counts, per, latencies = Counter(), [], []
+        saved = {k: os.environ.get(k) for k in spec.get("flags", {})}
+        os.environ.update(spec.get("flags", {}))
         for conversation in conversations:
             cascade = InjectableCascade(classify=classify) if spec["store"] == "cascade" else None
             got, c, timing = evaluate_conversation(variant, conversation, embedder=embedder, cascade=cascade)
@@ -606,6 +625,11 @@ def run(conversations, variants, *, embedder_factory=None, classify=None, b=BOOT
                 latencies.extend(cascade.latencies)
             log(f"{variant:24s} conv {conversation['sample_id']:>8s}  stored {c['stored']:4d}  "
                 f"items {len(got):4d}  calls {c.get('model_calls', 0):4d}  {timing['total_s']:.1f}s")
+        for k, v in saved.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
         wall = perf_counter() - started
         outcomes[variant] = per
         results[variant] = {
@@ -628,6 +652,9 @@ def run(conversations, variants, *, embedder_factory=None, classify=None, b=BOOT
                                            "those turns were kept on cosine alone — this is not the cascade")
     comparisons = {f"{v} - {BASELINE}": paired(outcomes[v], outcomes[BASELINE], b=b, seed=seed)
                    for v in variants if v != BASELINE}
+    for v in ("hybrid-rrf-e5", "cosine-only-e5", "rrf-only-e5"):
+        if v in outcomes and "embedding-only-e5" in outcomes:
+            comparisons[f"{v} - embedding-only-e5"] = paired(outcomes[v], outcomes["embedding-only-e5"], b=b, seed=seed)
     for v in variants:
         if v.startswith("cascade-"):
             other = "embedding-only-" + v.split("-", 1)[1]
