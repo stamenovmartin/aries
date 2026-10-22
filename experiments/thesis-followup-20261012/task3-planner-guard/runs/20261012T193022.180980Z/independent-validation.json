@@ -1,0 +1,164 @@
+{
+  "verified_at": "2026-10-12T19:32:18.379750+00:00",
+  "mode": "independent read-only recomputation from actual raw outputs and scratch DB",
+  "checks": [
+    {
+      "name": "complete_run_and_summary",
+      "passed": true
+    },
+    {
+      "name": "all72_unique_prespecified_slots",
+      "passed": true
+    },
+    {
+      "name": "order_matches_preregistered_schedule",
+      "passed": true
+    },
+    {
+      "name": "goal_expected_pairs_match_frozen_fixture",
+      "passed": true
+    },
+    {
+      "name": "protocol_and_fixture_identical_to_frozen",
+      "passed": true
+    },
+    {
+      "name": "run_copies_match_frozen_inputs",
+      "passed": true
+    },
+    {
+      "name": "manifest_input_hashes_match",
+      "passed": true
+    },
+    {
+      "name": "attempt_and_summary_hashes_match_manifest",
+      "passed": true
+    },
+    {
+      "name": "followup_source_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "model_matches_router_before_and_after",
+      "passed": true
+    },
+    {
+      "name": "all_run_integrity_flags_true",
+      "passed": true
+    },
+    {
+      "name": "all_preflight_checks_passed",
+      "passed": true
+    },
+    {
+      "name": "full58_registry_and_no_topk_snapshot",
+      "passed": true
+    },
+    {
+      "name": "all72_recorded_prompt_hashes_match",
+      "passed": true
+    },
+    {
+      "name": "all24_prompts_byte_identical_to_followup_pre_inference_dryrun",
+      "passed": true
+    },
+    {
+      "name": "raw_decisions_reparse_and_scores_recompute_identically",
+      "passed": true
+    },
+    {
+      "name": "overall_counts_match_independent_recalculation",
+      "passed": true
+    },
+    {
+      "name": "each_repetition_has_fixed24_denominator",
+      "passed": true
+    },
+    {
+      "name": "consistency_count_recomputed",
+      "passed": true
+    },
+    {
+      "name": "72_actual_recorded_local_generations",
+      "passed": true
+    },
+    {
+      "name": "no_workspace_goals_or_router_cache_written",
+      "passed": true
+    },
+    {
+      "name": "successful_usage_has_local_model_identity",
+      "passed": true
+    }
+  ],
+  "passed": 22,
+  "total": 22,
+  "independent_counts": {
+    "schema_valid": 72,
+    "capability_correct": 69,
+    "capability_arguments_correct": 69
+  },
+  "denominator": 72,
+  "unique_cases": 24,
+  "repetitions": 3,
+  "identical_valid_cases": 24,
+  "generation_count": 72,
+  "generation_success_count": 72,
+  "workspace_goals": 0,
+  "routing_cache_entries": 0,
+  "failures": [
+    {
+      "case_id": "p12",
+      "repetition": 1,
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    },
+    {
+      "case_id": "p12",
+      "repetition": 2,
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    },
+    {
+      "case_id": "p12",
+      "repetition": 3,
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "actual": {
+        "action": "execute",
+        "capability": "system.disk",
+        "arguments": {}
+      },
+      "error": null
+    }
+  ],
+  "run_manifest_sha256": "d9a678f25c64dd836c7961921d43d26711ff67d0e3a58df8975cf06b7775b74b",
+  "summary_sha256": "5ac7c252eebc6d7a3c90ca5fc1fd6bd1f682a298b924d0ef0f71519aa2807427",
+  "attempts_sha256": "37b1a940b67b7414d743d4dbdd517f0525d3d84b41a626ea000494fb7af7a79c",
+  "validation_script_sha256": "e35700e127c38ef3466f5d4bbf59aa9d44278940b40f5b133f9953a17d18597b",
+  "measurement_limit": "Offline exact next-action selection; no capability execution or actual task completion."
+}

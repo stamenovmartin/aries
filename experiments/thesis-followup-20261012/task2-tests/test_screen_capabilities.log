@@ -1,0 +1,49 @@
+--- test_a_stored_black_frame_fails_verification
+PASS  a stored black frame re-reads as uniform
+PASS  and the verifier refuses it even though every byte matches the claim
+PASS  a changed file fails verification as well
+--- test_a_uniform_frame_is_a_failure_not_a_result
+PASS  an all-black frame measures as uniform
+PASS  and its deviation is reported as zero
+PASS  an all-white frame is uniform too — a flat frame is never an answer
+PASS  a frame with content is not uniform
+PASS  and reports more than one distinct colour
+--- test_a_window_capture_needs_an_observed_id
+PASS  without a window list, a window capture is refused and says why
+PASS  an unobserved window ID is refused
+PASS  a minimised window occupies no pixels
+PASS  a window with no reported geometry cannot be located
+PASS  an off-screen window is refused rather than clamped to nothing
+PASS  skipped — the screen is blanked, so there is no region to cut: TRANSIENT
+--- test_capture_and_read_this_screen
+PASS  skipped — the screen is blanked, and capture refused instead of storing a black frame: TRANSIENT
+--- test_only_aries_own_captures_can_be_inspected
+PASS  reading an arbitrary path as a capture is refused
+--- test_retention_is_bounded_and_private
+PASS  pruning keeps at most the configured number of frames
+PASS  it keeps the newest ones
+PASS  an over-age frame is gone regardless of count
+PASS  and the count of removals is reported
+PASS  a new capture path is inside the ARIES-owned directory
+PASS  that directory is private to this user
+--- test_the_capability_surface
+PASS  screen.capture, screen.screenshot and screen.read are registered
+PASS  screen.capture is an observation, so it needs no operator approval
+PASS  screen.capture is marked as more than low risk, because a frame can hold anything
+PASS  screen.capture targets a window by observed ID only
+PASS  screen.screenshot is an observation, so it needs no operator approval
+PASS  screen.screenshot is marked as more than low risk, because a frame can hold anything
+PASS  screen.screenshot targets a window by observed ID only
+PASS  screen.read is an observation, so it needs no operator approval
+PASS  screen.read is marked as more than low risk, because a frame can hold anything
+PASS  screen.read targets a window by observed ID only
+PASS  OCR reads Macedonian and English by default
+PASS  an unlisted OCR language is rejected by the schema
+PASS  an empty window ID is rejected by the schema
+--- test_the_screenshot_door_that_opens_here
+PASS  the desktop screenshot portal answers: org.freedesktop.portal.Screenshot
+PASS  a captured frame can be decoded and measured: gdk-pixbuf
+PASS  the display layout is readable, which is what a window crop needs
+PASS  local OCR is present: tesseract 5.3.4, data /home/stamenovmartin/aries/var/models/tessdata
+PASS  an unsupported OCR language is refused, not passed to the C API
+ALL PASSED

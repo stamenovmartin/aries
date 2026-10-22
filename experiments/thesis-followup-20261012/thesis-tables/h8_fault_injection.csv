@@ -1,0 +1,117 @@
+# source: experiments/thesis-followup-20261012/h8/runs/20261013T211134Z-baseline (sha256 8894118678ca, commit be79cbb); experiments/thesis-followup-20261012/h8/runs/20261018T153000Z-baseline2 (sha256 b552c98d0d1f, commit 2af6112); experiments/thesis-followup-20261012/h8/runs/20261018T154826Z-hardened (sha256 2b2521247c2d, commit 1d03163); experiments/thesis-followup-20261012/h8/runs/20261018T155010Z-sealed-frozen (sha256 8c5bc717c1ad, commit 1d03163); experiments/thesis-followup-20261012/h8/runs/20261018T154928Z-sealed-hardened (sha256 c1682cb046c7, commit 1d03163); experiments/thesis-followup-20261012/h8/runs/20261018T155139Z-exploratory-hardened-23plus2 (sha256 cc1a69d0ffa9, commit 1d03163); experiments/thesis-followup-20261012/h8/mutants.json (sha256 bbf2f67d676a, commit 0731857); experiments/thesis-followup-20261012/h8/sealed/mutants-sealed.json (sha256 fa8556e996d5, commit 46ca46f); experiments/thesis-followup-20261012/h8/analyze.py (sha256 745d8ac0188c, commit 2a1e66b); experiments/thesis-followup-20261012/h8/run_mutants.py (sha256 4f17771da0b7, commit 2a1e66b); docs/preregistration/H8-verifier-fault-injection.md (sha256 63c70f0743db, commit 6275533) | label: hardened vs baseline-2 = confirmatory (Holm family H4b/H5/H6/H8); sealed = generalisation check; hardened-23+2 = exploratory; run 1 = superseded
+# note: killed = verdict not met or UNVERIFIED, over valid mutants; ci = exact Clopper-Pearson 95%; mean = mean of per-capability rates; mcnemar_vs: k = b (killed now, not before), n = b + c, value = exact one-sided p; mcnemar_c: k = c; the sealed set varies the wrong values only, not the targets
+run,folder,verifiers,label,metric,group,k,n,rate,ci_lo,ci_hi,value
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed,all,130,192,0.6771,0.606,0.7426,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_verifier_class,INDEPENDENT,99,125,0.792,0.7103,0.8594,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_verifier_class,PLANNER_SUPPLIED,3,3,1,0.2924,1,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_verifier_class,SELF_REPORT,21,31,0.6774,0.4863,0.8332,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_verifier_class,TRIVIAL,7,33,0.2121,0.0898,0.3891,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_operator,noop_success,35,50,0.7,0.5539,0.8214,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_operator,partial_effect,6,6,1,0.5407,1,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_operator,side_effect_outside_scope,0,13,0,0,0.2471,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_operator,undone_after_report,21,21,1,0.8389,1,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_operator,wrong_target,32,47,0.6809,0.5288,0.8091,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",killed_by_operator,wrong_value,36,55,0.6545,0.5142,0.7776,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",mean_kill_rate_over_capabilities,57 capabilities,,,,,,0.664
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",noop_survivors,capabilities,15,,,,,browser.observe;browser.read;browser.tabs;browser.wait;desktop.observe;desktop.windows;display.brightness;input.editable_targets;notification.send;screen.read;system.disk;system.processes;system.service;system.services;system.status
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",false_alarms,clean replays,3,172,0.0174,0.0036,0.0501,
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",criterion_1,mean_kill_rate_ge_0_80,,,,,,not met
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",criterion_2,no_noop_survivor,,,,,,not met
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",criterion_3,false_alarms_le_2pct,,,,,,met
+run 1,20261013T211134Z-baseline,frozen,"superseded by Amendment 1 (harness defects); reported, not used",survived_false_value_in_evidence,secondary,,,,,,7
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed,all,155,218,0.711,0.6459,0.7702,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_verifier_class,INDEPENDENT,117,144,0.8125,0.739,0.8727,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_verifier_class,PLANNER_SUPPLIED,4,4,1,0.3976,1,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_verifier_class,SELF_REPORT,24,34,0.7059,0.5252,0.849,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_verifier_class,TRIVIAL,10,36,0.2778,0.142,0.4519,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_operator,noop_success,43,58,0.7414,0.6096,0.8474,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_operator,partial_effect,6,6,1,0.5407,1,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_operator,side_effect_outside_scope,0,14,0,0,0.2316,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_operator,undone_after_report,28,28,1,0.8766,1,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_operator,wrong_target,41,56,0.7321,0.597,0.8417,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),killed_by_operator,wrong_value,37,56,0.6607,0.5219,0.7819,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),mean_kill_rate_over_capabilities,58 capabilities,,,,,,0.6836
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),noop_survivors,capabilities,15,,,,,browser.observe;browser.read;browser.tabs;browser.wait;desktop.observe;desktop.windows;display.brightness;input.editable_targets;notification.send;screen.read;system.disk;system.processes;system.service;system.services;system.status
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),false_alarms,clean replays,0,174,0,0,0.021,
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),criterion_1,mean_kill_rate_ge_0_80,,,,,,not met
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),criterion_2,no_noop_survivor,,,,,,not met
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),criterion_3,false_alarms_le_2pct,,,,,,met
+baseline-2,20261018T153000Z-baseline2,frozen,confirmatory (McNemar baseline),survived_false_value_in_evidence,secondary,,,,,,7
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed,all,188,218,0.8624,0.8094,0.9052,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_verifier_class,INDEPENDENT,117,144,0.8125,0.739,0.8727,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_verifier_class,PLANNER_SUPPLIED,4,4,1,0.3976,1,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_verifier_class,SELF_REPORT,33,34,0.9706,0.8467,0.9993,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_verifier_class,TRIVIAL,34,36,0.9444,0.8134,0.9932,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_operator,noop_success,55,58,0.9483,0.8562,0.9892,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_operator,partial_effect,6,6,1,0.5407,1,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_operator,side_effect_outside_scope,0,14,0,0,0.2316,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_operator,undone_after_report,28,28,1,0.8766,1,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_operator,wrong_target,52,56,0.9286,0.8271,0.9802,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,killed_by_operator,wrong_value,47,56,0.8393,0.7167,0.9238,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,mean_kill_rate_over_capabilities,58 capabilities,,,,,,0.8733
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,noop_survivors,capabilities,3,,,,,notification.send;system.disk;system.status
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,false_alarms,clean replays,0,174,0,0,0.021,
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,criterion_1,mean_kill_rate_ge_0_80,,,,,,met
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,criterion_2,no_noop_survivor,,,,,,not met
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,criterion_3,false_alarms_le_2pct,,,,,,met
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,survived_false_value_in_evidence,secondary,,,,,,2
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,mcnemar_vs,baseline-2,33,33,,,,1.16e-10
+hardened,20261018T154826Z-hardened,ARIES_VERIFY_HARDENED=1,confirmatory,mcnemar_c,baseline-2,0,33,,,,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed,all,155,218,0.711,0.6459,0.7702,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_verifier_class,INDEPENDENT,117,144,0.8125,0.739,0.8727,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_verifier_class,PLANNER_SUPPLIED,4,4,1,0.3976,1,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_verifier_class,SELF_REPORT,24,34,0.7059,0.5252,0.849,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_verifier_class,TRIVIAL,10,36,0.2778,0.142,0.4519,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_operator,noop_success,43,58,0.7414,0.6096,0.8474,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_operator,partial_effect,6,6,1,0.5407,1,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_operator,side_effect_outside_scope,0,14,0,0,0.2316,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_operator,undone_after_report,28,28,1,0.8766,1,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_operator,wrong_target,41,56,0.7321,0.597,0.8417,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",killed_by_operator,wrong_value,37,56,0.6607,0.5219,0.7819,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",mean_kill_rate_over_capabilities,58 capabilities,,,,,,0.6836
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",noop_survivors,capabilities,15,,,,,browser.observe;browser.read;browser.tabs;browser.wait;desktop.observe;desktop.windows;display.brightness;input.editable_targets;notification.send;screen.read;system.disk;system.processes;system.service;system.services;system.status
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",false_alarms,clean replays,0,174,0,0,0.021,
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",criterion_1,mean_kill_rate_ge_0_80,,,,,,not met
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",criterion_2,no_noop_survivor,,,,,,not met
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",criterion_3,false_alarms_le_2pct,,,,,,met
+"sealed set, frozen",20261018T155010Z-sealed-frozen,frozen,"generalisation check, not a criterion",survived_false_value_in_evidence,secondary,,,,,,7
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed,all,187,218,0.8578,0.8043,0.9013,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_verifier_class,INDEPENDENT,117,144,0.8125,0.739,0.8727,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_verifier_class,PLANNER_SUPPLIED,4,4,1,0.3976,1,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_verifier_class,SELF_REPORT,33,34,0.9706,0.8467,0.9993,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_verifier_class,TRIVIAL,33,36,0.9167,0.7753,0.9825,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_operator,noop_success,55,58,0.9483,0.8562,0.9892,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_operator,partial_effect,6,6,1,0.5407,1,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_operator,side_effect_outside_scope,0,14,0,0,0.2316,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_operator,undone_after_report,28,28,1,0.8766,1,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_operator,wrong_target,51,56,0.9107,0.8038,0.9704,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",killed_by_operator,wrong_value,47,56,0.8393,0.7167,0.9238,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",mean_kill_rate_over_capabilities,58 capabilities,,,,,,0.8675
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",noop_survivors,capabilities,3,,,,,notification.send;system.disk;system.status
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",false_alarms,clean replays,0,174,0,0,0.021,
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",criterion_1,mean_kill_rate_ge_0_80,,,,,,met
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",criterion_2,no_noop_survivor,,,,,,not met
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",criterion_3,false_alarms_le_2pct,,,,,,met
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",survived_false_value_in_evidence,secondary,,,,,,2
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",mcnemar_vs,"sealed set, frozen",32,32,,,,2.33e-10
+"sealed set, hardened",20261018T154928Z-sealed-hardened,ARIES_VERIFY_HARDENED=1,"generalisation check, not a criterion",mcnemar_c,"sealed set, frozen",0,32,,,,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed,all,188,218,0.8624,0.8094,0.9052,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_verifier_class,INDEPENDENT,117,144,0.8125,0.739,0.8727,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_verifier_class,PLANNER_SUPPLIED,4,4,1,0.3976,1,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_verifier_class,SELF_REPORT,33,34,0.9706,0.8467,0.9993,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_verifier_class,TRIVIAL,34,36,0.9444,0.8134,0.9932,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_operator,noop_success,55,58,0.9483,0.8562,0.9892,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_operator,partial_effect,6,6,1,0.5407,1,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_operator,side_effect_outside_scope,0,14,0,0,0.2316,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_operator,undone_after_report,28,28,1,0.8766,1,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_operator,wrong_target,52,56,0.9286,0.8271,0.9802,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),killed_by_operator,wrong_value,47,56,0.8393,0.7167,0.9238,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),mean_kill_rate_over_capabilities,58 capabilities,,,,,,0.8733
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),noop_survivors,capabilities,3,,,,,notification.send;system.disk;system.status
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),false_alarms,clean replays,0,174,0,0,0.021,
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),criterion_1,mean_kill_rate_ge_0_80,,,,,,met
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),criterion_2,no_noop_survivor,,,,,,not met
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),criterion_3,false_alarms_le_2pct,,,,,,met
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),survived_false_value_in_evidence,secondary,,,,,,3
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),mcnemar_vs,baseline-2,33,33,,,,1.16e-10
+hardened-23+2,20261018T155139Z-exploratory-hardened-23plus2,ARIES_VERIFY_HARDENED=1 ARIES_VERIFY_HARDENED_EXTRA=1,exploratory (designed after baseline-2; outside the Holm family),mcnemar_c,baseline-2,0,33,,,,

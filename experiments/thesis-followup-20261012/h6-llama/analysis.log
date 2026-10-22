@@ -1,0 +1,50 @@
+{
+ "checks": {
+  "run_complete": true,
+  "protocol_unchanged": true,
+  "fixture_is_amendment_2_file": true,
+  "runner_unchanged": true,
+  "prompts_unchanged": true,
+  "frozen_source_stable": true,
+  "model_digest_stable": true,
+  "ollama_version_stable": true,
+  "all_cells_full": true
+ },
+ "primary": {
+  "unit": "request, majority of 3 repetitions",
+  "n_requests": 300,
+  "b_A1_right_A0_wrong": 28,
+  "c_A0_right_A1_wrong": 20,
+  "both_right": 133,
+  "both_wrong": 119,
+  "p_one_sided_exact": 0.15616340373663462,
+  "significant_at_0.05_before_holm": false,
+  "holm_adjusted_p": "not applicable: exploratory, outside the Holm family",
+  "b_over_c": 1.4,
+  "majority_accuracy": {
+   "A0": {
+    "k": 153,
+    "n": 300,
+    "rate": 0.51,
+    "ci95": [
+     0.4519,
+     0.5679
+    ]
+   },
+   "A1": {
+    "k": 161,
+    "n": 300,
+    "rate": 0.5367,
+    "ci95": [
+     0.4784,
+     0.5942
+    ]
+   }
+  },
+  "accuracy_difference_A1_minus_A0": 0.0267,
+  "accuracy_difference_ci95_paired_exact": [
+   -0.0217,
+   0.0716
+  ]
+ }
+}

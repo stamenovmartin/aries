@@ -36,10 +36,10 @@ class Settings(BaseSettings):
     data_dir: str = "./data"
 
     # ── LLM provider ─────────────────────────────────────────────────────────
-    # "cli" (the reviewing agent / codex binaries, headless), "ollama", "openai" (any
+    # "cli" (claude / codex binaries, headless), "ollama", "openai" (any
     # OpenAI-compatible HTTP endpoint), or "template" (deterministic, offline).
     ai_provider: str = "template"
-    cli_agent_bin: str = "the reviewing agent"
+    cli_agent_bin: str = "claude"
     cli_agent_model: str = "claude-haiku-4-5"
     cli_agent_timeout: float = 60.0
     cli_agent_max_concurrency: int = 2

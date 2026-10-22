@@ -1,0 +1,24 @@
+--- test_permission_revoked_before_finish
+PASS  revoked permission prevents automatic success
+PASS  rejected proposal falls back once to planner
+--- test_proposal_requires_ordered_proof_not_tool_success
+PASS  ordered proof permits proposal
+PASS  no automatic proposal: order
+PASS  no automatic proposal: missing
+PASS  no automatic proposal: unverified
+PASS  no automatic proposal: wrong-source
+PASS  no automatic proposal: wrong-step
+PASS  no automatic proposal: wrong-path
+PASS  no automatic proposal: unsupported
+PASS  no automatic proposal: rejected
+PASS  rollback returns ordinary planner path
+--- test_real_read_still_independently_rechecked
+PASS  verified goal finishes with one planner invocation
+PASS  independent final recheck remains mandatory
+PASS  automatic proposal is distinct from model telemetry
+--- test_stale_write_never_becomes_retryable
+PASS  stale mutation never authorizes a replay
+--- test_state_change_requires_replan
+PASS  changed file causes failed independent recheck
+PASS  planner can recover with a new verified observation
+ALL PASSED

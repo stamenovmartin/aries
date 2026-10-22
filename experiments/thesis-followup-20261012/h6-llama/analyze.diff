@@ -1,0 +1,18 @@
+2c2,4
+< """H6 analysis, as registered (docs/preregistration/H6-abstention-replication.md). Writes summary.json.
+---
+> """H6 llama3.1:8b exploratory secondary: ../h6-run/analyze_h6.py with only the runner name and labels changed.
+> 
+> H6 analysis, as registered (docs/preregistration/H6-abstention-replication.md). Writes summary.json.
+70c72
+<         'runner_unchanged': A.sha(HERE / 'run_router_h6.py') == protocol['hashes']['runner'],
+---
+>         'runner_unchanged': A.sha(HERE / 'run_router_h6_llama.py') == protocol['hashes']['runner'],
+100c102
+<         'holm_adjusted_p': 'open: needs the H4b and H5 primary p-values',
+---
+>         'holm_adjusted_p': 'not applicable: exploratory, outside the Holm family',
+129c131
+<            'label': 'confirmatory (Holm family H4b/H5/H6/H8); secondary outcomes descriptive',
+---
+>            'label': 'exploratory secondary (llama3.1:8b), outside the Holm family; descriptive', 'model': protocol['model']['name'],

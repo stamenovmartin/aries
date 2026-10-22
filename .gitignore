@@ -11,3 +11,33 @@ __pycache__/
 
 # Build product of the .gschema.xml beside it.
 shell/*/schemas/gschemas.compiled
+
+# Measurement artifacts that are never committed (author rule, 2026-10-13): databases, copied
+# settings, env/flag files, server logs and per-run runtime state. Commit results, summaries and
+# READMEs; for anything kept local, commit its SHA-256 and size in a manifest instead.
+experiments/**/*.db
+experiments/**/*.db-wal
+experiments/**/*.db-shm
+experiments/**/*.sqlite
+experiments/**/*.sqlite3
+experiments/**/*.sqlite3-wal
+experiments/**/*.sqlite3-shm
+experiments/**/*.env
+experiments/**/flags.env
+experiments/**/instance.log
+experiments/**/runtime/
+experiments/**/storage/
+experiments/thesis-followup-20261012/h4-runs/*/var/
+# H4 run files that embed the copied owner settings; the committed copies are *.redacted.json.
+experiments/thesis-followup-20261012/h4-runs/*/results.json
+experiments/thesis-followup-20261012/h4-runs/*/run.json
+# The frozen evaluation folder: only its router raw files, scorer, semantic labels and frozen
+# planner run are committed; the thesis documents in it are never committed.
+experiments/thesis-final-20261006/**/*.pdf
+experiments/thesis-final-20261006/**/*.docx
+experiments/thesis-final-20261006/**/*.doc
+experiments/thesis-final-20261006/**/*.odt
+experiments/thesis-final-20261006/**/*.zip
+experiments/thesis-final-20261006/cover-revision/
+experiments/thesis-final-20261006/documents-before/
+

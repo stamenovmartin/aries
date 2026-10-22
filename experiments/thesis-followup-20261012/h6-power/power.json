@@ -1,0 +1,125 @@
+{
+ "what": "power of exact McNemar, A1 vs A0, H6 class mix, n = 120, 200, 300",
+ "source": "frozen qwen2.5:7b raw, majority of 3 per request",
+ "original_pairs_by_class": {
+  "actionable": {
+   "b": 0,
+   "c": 11,
+   "both_right": 84,
+   "both_wrong": 5,
+   "n": 100
+  },
+  "ambiguous": {
+   "b": 22,
+   "c": 0,
+   "both_right": 17,
+   "both_wrong": 16,
+   "n": 55
+  },
+  "out_of_scope": {
+   "b": 11,
+   "c": 0,
+   "both_right": 12,
+   "both_wrong": 17,
+   "n": 40
+  },
+  "unsafe": {
+   "b": 3,
+   "c": 0,
+   "both_right": 5,
+   "both_wrong": 22,
+   "n": 30
+  }
+ },
+ "original_total": {
+  "b": 36,
+  "c": 11,
+  "both_right": 118,
+  "both_wrong": 60,
+  "n": 225
+ },
+ "h6_mix": {
+  "actionable": 40,
+  "ambiguous": 30,
+  "out_of_scope": 25,
+  "unsafe": 25
+ },
+ "alpha": 0.05,
+ "simulations": 20000,
+ "seed": 61013,
+ "scenarios": {
+  "n=120, observed": {
+   "p_b": 0.1781,
+   "p_c": 0.0367,
+   "expected_discordant": 25.8,
+   "share_b_among_discordant": 0.829,
+   "power_one_sided": 0.961,
+   "power_two_sided": 0.921
+  },
+  "n=120, effect halved": {
+   "p_b": 0.1428,
+   "p_c": 0.072,
+   "expected_discordant": 25.8,
+   "share_b_among_discordant": 0.665,
+   "power_one_sided": 0.439,
+   "power_two_sided": 0.313
+  },
+  "n=120, effect quartered": {
+   "p_b": 0.1251,
+   "p_c": 0.0897,
+   "expected_discordant": 25.8,
+   "share_b_among_discordant": 0.582,
+   "power_one_sided": 0.161,
+   "power_two_sided": 0.088
+  },
+  "n=200, observed": {
+   "p_b": 0.1781,
+   "p_c": 0.0367,
+   "expected_discordant": 43.0,
+   "share_b_among_discordant": 0.829,
+   "power_one_sided": 0.998,
+   "power_two_sided": 0.993
+  },
+  "n=200, effect halved": {
+   "p_b": 0.1428,
+   "p_c": 0.072,
+   "expected_discordant": 43.0,
+   "share_b_among_discordant": 0.665,
+   "power_one_sided": 0.644,
+   "power_two_sided": 0.539
+  },
+  "n=200, effect quartered": {
+   "p_b": 0.1251,
+   "p_c": 0.0897,
+   "expected_discordant": 43.0,
+   "share_b_among_discordant": 0.582,
+   "power_one_sided": 0.239,
+   "power_two_sided": 0.153
+  },
+  "n=300, observed": {
+   "p_b": 0.1781,
+   "p_c": 0.0367,
+   "expected_discordant": 64.4,
+   "share_b_among_discordant": 0.829,
+   "power_one_sided": 1.0,
+   "power_two_sided": 1.0
+  },
+  "n=300, effect halved": {
+   "p_b": 0.1428,
+   "p_c": 0.072,
+   "expected_discordant": 64.4,
+   "share_b_among_discordant": 0.665,
+   "power_one_sided": 0.823,
+   "power_two_sided": 0.727
+  },
+  "n=300, effect quartered": {
+   "p_b": 0.1251,
+   "p_c": 0.0897,
+   "expected_discordant": 64.4,
+   "share_b_among_discordant": 0.582,
+   "power_one_sided": 0.327,
+   "power_two_sided": 0.224
+  }
+ },
+ "note": "Power counts only significant results in the predicted direction (b > c)."
+}

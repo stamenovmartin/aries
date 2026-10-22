@@ -76,6 +76,49 @@ FLAGS = {
                                 "characters — a NUL, a filtered control character, a line break "
                                 "into a single-line control, a rejected or partially landed write "
                                 "— instead of returning a success carrying landed=false"),
+    "ARIES_COMPLETION_READ_PARAPHRASE": (True, "the completion contract also recognises read, listing and existence "
+                                               "goals said in natural words (exactly one path, nothing else "
+                                               "asked) and strips sentence punctuation from paths; done still "
+                                               "needs re-checked verified evidence. Off compiles only the "
+                                               "anchored sentences, as in ARIES-FINAL-20261006"),
+    "ARIES_COMPLETION_TYPED_CONTRACT": (False, "when the fast path gives no completion contract, one "
+                                               "grammar-constrained call maps an English request to read, list, "
+                                               "exists or none with a path and a name; code accepts it only if "
+                                               "the path is the one path the request names, verbatim, and the "
+                                               "name is empty or verbatim, as an existing contract shape. The "
+                                               "model never decides completion (aries/workspace/typed_contract.py, "
+                                               "preregistration H5). Off, the module is never imported"),
+    "ARIES_CLARIFY_RESOLVER": (False, "a goal naming one folder gets a code-made, verified listing first; "
+                                      "code counts the files whose names fit the request, and only when "
+                                      "several fit does one small model call decide, accepted only if it "
+                                      "quotes words of the request that fit that file alone, otherwise "
+                                      "ARIES asks from a template. Adapted from ClarifyAgent and "
+                                      "Ask-before-Plan (aries/workspace/clarify_resolver.py). Off, none of "
+                                      "this runs"),
+    "ARIES_PLANNER_CLARIFY_GUARD": (False, "with ARIES_PLANNER_CLARIFY: a question carries no capability or "
+                                          "arguments (grammar), confirming is ask_approval and asking is "
+                                          "only for choosing between observed targets (prompt), and a "
+                                          "named but unlisted folder is listed before anything is read in "
+                                          "it. Off leaves the clarification grammar and prompt unchanged"),
+    "ARIES_PLANNER_CLARIFY": (True, "the planner may stop and ask which target is meant when its own "
+                                    "verified observations show several that fit the goal; every choice "
+                                    "must name something observed. Off removes the option from the "
+                                    "grammar and the prompt"),
+    "ARIES_VERIFY_HARDENED": (False, "the 23 verifiers the frozen review classed TRIVIAL, SELF_REPORT or "
+                                     "PLANNER_SUPPLIED also require the report to agree with a fresh read "
+                                     "(a different channel where one exists, measured drift for volatile "
+                                     "values), per-capability invariants, and UNVERIFIED when that read "
+                                     "fails (aries/workspace/hardened_verifiers.py, preregistration H8). "
+                                     "Read when the registry is imported. Off, every verifier is the "
+                                     "frozen function"),
+    "ARIES_VERIFY_HARDENED_EXTRA": (False, "exploratory, designed after H8 baseline-2: the same hardening "
+                                           "for two INDEPENDENT verifiers, notification.send and "
+                                           "system.disk. Not part of the confirmatory H8 test"),
+    "ARIES_MEASURE_CHANGE_HOOK": (False, "measurement only (H5 changed_after_read controls): before a finish "
+                                         "is re-checked, a goal the runner has armed pauses once so the "
+                                         "runner can change a file, then the check proceeds "
+                                         "(aries/workspace/measurement_hook.py). Unarmed goals are not "
+                                         "affected. Off, the hook module is never imported"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),

@@ -1,0 +1,238 @@
+{
+ "what": "H8 frozen verifier fingerprints, recorded from a clean worktree of 2af6112 (baseline-2 commit), before hardening",
+ "python": "3.12.14",
+ "verifiers": {
+  "browser.back": {
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "sha256": "722b2e31ff6c0ddfb8641004783811bf4369b5eb56640d46323f00d531e8cef9"
+  },
+  "browser.click": {
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "sha256": "722b2e31ff6c0ddfb8641004783811bf4369b5eb56640d46323f00d531e8cef9"
+  },
+  "browser.download": {
+   "verifier": "aries.workspace.browser_capabilities.verify_download",
+   "sha256": "7c8a07b03dc1b5c97b9a9e762f8d96e26a0383f1ac9d522be2175c81e8fb3521"
+  },
+  "browser.elements": {
+   "verifier": "aries.workspace.browser_capabilities.verify_elements",
+   "sha256": "aafa89cba9a841610e89bf793fbb27ca54a98c3952d5d542f180ab6f229dad07"
+  },
+  "browser.forward": {
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "sha256": "722b2e31ff6c0ddfb8641004783811bf4369b5eb56640d46323f00d531e8cef9"
+  },
+  "browser.navigate": {
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "sha256": "722b2e31ff6c0ddfb8641004783811bf4369b5eb56640d46323f00d531e8cef9"
+  },
+  "browser.observe": {
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "sha256": "722b2e31ff6c0ddfb8641004783811bf4369b5eb56640d46323f00d531e8cef9"
+  },
+  "browser.open": {
+   "verifier": "aries.workspace.registry.verify_browser",
+   "sha256": "05ed3dd83e6615a5d782a008a8bc83d4dd6dd18647baec188e6eb410c8d0720c"
+  },
+  "browser.read": {
+   "verifier": "aries.workspace.registry.verify_browser",
+   "sha256": "05ed3dd83e6615a5d782a008a8bc83d4dd6dd18647baec188e6eb410c8d0720c"
+  },
+  "browser.scroll": {
+   "verifier": "aries.workspace.browser_capabilities.verify_scroll",
+   "sha256": "3482b4a465f10b95001ee099dfe50ff3799439627873e5e5da4b5e3389294387"
+  },
+  "browser.search": {
+   "verifier": "aries.workspace.registry.verify_browser",
+   "sha256": "05ed3dd83e6615a5d782a008a8bc83d4dd6dd18647baec188e6eb410c8d0720c"
+  },
+  "browser.tabs": {
+   "verifier": "aries.workspace.browser_capabilities.verify_tabs",
+   "sha256": "effd656b094407bbc1096e8a0639d53051cd57032fc10fa4aa96bdc2175bc214"
+  },
+  "browser.type": {
+   "verifier": "aries.workspace.browser_capabilities.verify_type",
+   "sha256": "d275e5397744a3e814adff920a6a1432e498cbb2b14839797407905912b2dda1"
+  },
+  "browser.wait": {
+   "verifier": "aries.workspace.browser_capabilities.verify_state",
+   "sha256": "722b2e31ff6c0ddfb8641004783811bf4369b5eb56640d46323f00d531e8cef9"
+  },
+  "desktop.close": {
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "sha256": "c74a771175fc0b91d85f27332ad92df67d830807a48cc10ca933891d6aa88719"
+  },
+  "desktop.focus": {
+   "verifier": "aries.workspace.registry.verify_focus",
+   "sha256": "f2e1eafc54f3999e18d5b46b96a3f6ca22c9ea89889be856be9eed4342fc74ca"
+  },
+  "desktop.launch": {
+   "verifier": "aries.workspace.registry.verify_desktop",
+   "sha256": "0573e89a34da4ce7e6f16623c8731bba70a3cb51426a0ca0effaf073394aa180"
+  },
+  "desktop.maximize": {
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "sha256": "355b07d167a7fed0ab95d4f663d56bd58ba087c9a516c273d858bd96e78bfb76"
+  },
+  "desktop.minimize": {
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "sha256": "8ed5049fd8184da7be70faab8b4cb1bb753ed588f1138b2aed1517abbf826ca9"
+  },
+  "desktop.move": {
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "sha256": "696594a73c70011739c7f366383a7c21a28f9b11023e15550426ef653639bea5"
+  },
+  "desktop.observe": {
+   "verifier": "aries.workspace.desktop_capabilities.verify_observe",
+   "sha256": "db8e46acd0ee3c96f33f758573812aa7801ef3db36151e57cccaa5a062f91be1"
+  },
+  "desktop.resize": {
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "sha256": "3ff87841c23c8118440c44e4662294e21695a9113809fffbf957403fd354f619"
+  },
+  "desktop.tile": {
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "sha256": "800b5e74552d19674483dbfefcd10326202a2dc9717c2e34b96bc811062d95fa"
+  },
+  "desktop.unmaximize": {
+   "verifier": "aries.workspace.desktop_capabilities.verifier.<locals>.verify",
+   "sha256": "6e9dd6fe4d5484d681852e0724223b72c0561b0b903e0cc161e849721834f4c1"
+  },
+  "desktop.windows": {
+   "verifier": "aries.workspace.desktop_capabilities.verify_observe",
+   "sha256": "db8e46acd0ee3c96f33f758573812aa7801ef3db36151e57cccaa5a062f91be1"
+  },
+  "display.brightness": {
+   "verifier": "aries.workspace.network_capabilities.verify_read_brightness",
+   "sha256": "15713755a5b64d5c7aaad3c758e20f0a5651ec874bfe4b7090519ff23b0c5af7"
+  },
+  "display.set_brightness": {
+   "verifier": "aries.workspace.network_capabilities.verify_set_brightness",
+   "sha256": "9a6a8f3f49b3e11c96a7ac24fae675da81ed41de117df9535dc676a1c2675a27"
+  },
+  "file.copy": {
+   "verifier": "aries.workspace.file_capabilities.verify_copy",
+   "sha256": "22bd4524cbd433e93db608cb4929f070f22c81cc1779f8cb47d1e9bdbba8f234"
+  },
+  "file.edit": {
+   "verifier": "aries.workspace.file_capabilities.verify_edit",
+   "sha256": "fd58b1fffc59f4272995cb8f58d15a38a1191127617c0b49595b8c0aef21cfae"
+  },
+  "file.exists": {
+   "verifier": "aries.workspace.registry.verify_exists",
+   "sha256": "03e579675da28ee566243ed8c5dde65f42b8d959ebbdab12103ca37f9d233e3e"
+  },
+  "file.list": {
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "sha256": "8fc9c54beb8ffa7eb84cbb7f90e345f0d893a102bd5b0d87252310b5fc062348"
+  },
+  "file.metadata": {
+   "verifier": "aries.workspace.file_capabilities.verify_metadata",
+   "sha256": "365dc726f33710f6794e8f6db8efb84b3e171207778d42d6beba6d51f8421755"
+  },
+  "file.move": {
+   "verifier": "aries.workspace.file_capabilities.verify_move",
+   "sha256": "10a7114237e3a4dcd7398f23779027ea4929b12cc6ccaf701bcf32ead8e5ab80"
+  },
+  "file.read": {
+   "verifier": "aries.workspace.registry.verify_read",
+   "sha256": "9cec8d609692521c07b040525bae9b814e3e4468e12d9a6c5e1783ea60974751"
+  },
+  "file.rename": {
+   "verifier": "aries.workspace.file_capabilities.verify_move",
+   "sha256": "10a7114237e3a4dcd7398f23779027ea4929b12cc6ccaf701bcf32ead8e5ab80"
+  },
+  "file.search": {
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "sha256": "b3c514e1563b7c790cb2484c5766606f547c808aa11f553c3c0f08a5e9da5699"
+  },
+  "file.semantic_search": {
+   "verifier": "aries.workspace.file_capabilities.verify_search",
+   "sha256": "b52371a8f5ec4b5f39ed1a25bfc50f448f7f4f30bf5b62bf2fd14472a45e8ee7"
+  },
+  "file.write": {
+   "verifier": "aries.workspace.registry.verify_write",
+   "sha256": "f9ae910192e8965258b4c29e0ab957b51e07537661f95d67e723dd05ff57685a"
+  },
+  "input.clipboard_read": {
+   "verifier": "aries.workspace.input_capabilities.verify_clipboard_read",
+   "sha256": "656b541b6a06411ec5247ce4bffd546dea04804caea1b5fce61f2c9d562843dd"
+  },
+  "input.clipboard_write": {
+   "verifier": "aries.workspace.input_capabilities.verify_clipboard_write",
+   "sha256": "f230360853fcf92d9ba4c39670681602f594742b0cb34aeb38c0b8d365518447"
+  },
+  "input.editable_targets": {
+   "verifier": "aries.workspace.input_capabilities.verify_targets",
+   "sha256": "c8e526629159f62a8e614037c76d20721b13104f7cfc8d9ac2c24afeefae1959"
+  },
+  "input.type_text": {
+   "verifier": "aries.workspace.input_capabilities.verify_type",
+   "sha256": "41ba66431f2fa824b2626b32e66ebebccd7610965459b69a470b047377c03e0b"
+  },
+  "network.status": {
+   "verifier": "aries.workspace.network_capabilities.verify_status",
+   "sha256": "9abf1426981b7d4d68967bfc422b75fe6e8392f5f47d80dc61270937bd20506b"
+  },
+  "network.wifi_connect": {
+   "verifier": "aries.workspace.network_capabilities.verify_connect",
+   "sha256": "2874b3db794eb082b34ab8783595fed6844fcaf76fedd329312daba9366603dc"
+  },
+  "network.wifi_list": {
+   "verifier": "aries.workspace.network_capabilities.verify_wifi",
+   "sha256": "6ce979beb4f3a9f3db6e33b14c90d1485d6a4b7893d9974bd3dfdfbae703dc06"
+  },
+  "notification.send": {
+   "verifier": "aries.workspace.registry.verify_notification",
+   "sha256": "b8c547971ba98caa2635f279cedb293e93561233f7392ca8639bb4d34763afd0"
+  },
+  "screen.capture": {
+   "verifier": "aries.workspace.screen_capabilities.verify_capture",
+   "sha256": "c53c6c65460b685ed50cf25dc573d227ee1335c61fef7e0bbc7263e80409f7b6"
+  },
+  "screen.read": {
+   "verifier": "aries.workspace.screen_capabilities.verify_read",
+   "sha256": "3c84821cdb1c2f4b6ce077700257709fe563b94446585cc486ae5a85fd5793e3"
+  },
+  "screen.screenshot": {
+   "verifier": "aries.workspace.screen_capabilities.verify_capture",
+   "sha256": "c53c6c65460b685ed50cf25dc573d227ee1335c61fef7e0bbc7263e80409f7b6"
+  },
+  "system.disk": {
+   "verifier": "aries.workspace.system_capabilities.verify_disk",
+   "sha256": "76882e8aea930baac0a751316ca1786572a2100ec826fafc277f0ebcf7c6f4aa"
+  },
+  "system.packages": {
+   "verifier": "aries.workspace.system_capabilities.verify_packages",
+   "sha256": "23d41075ac1e01b5232979ceda58decc771571d1ae0896671d285a318db7fc77"
+  },
+  "system.processes": {
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "sha256": "de29bd79d8f6d69f8e7864a0425458b9ca966869bf3c23c23c68ae9cc8341990"
+  },
+  "system.service": {
+   "verifier": "aries.workspace.system_capabilities.verify_unit",
+   "sha256": "d8c1e09ac31b2898b3e2ec4092558243c3f85cd4d3c075c26cebff49db42367b"
+  },
+  "system.service_control": {
+   "verifier": "aries.workspace.system_capabilities.verify_control",
+   "sha256": "0b78357b12ef03e86d326edabedc9fd452786d9a392f6048b3123305548263e4"
+  },
+  "system.services": {
+   "verifier": "aries.workspace.system_capabilities.verify_services",
+   "sha256": "a98731baebecc4df166da02efeaf0612f2b1b0e32abf96fdedcade734a18ef5a"
+  },
+  "system.status": {
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "sha256": "e84d4a3e373987de5de50147cb82ac73363191c47382f34cae4845207c0486ab"
+  },
+  "system.storage": {
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "sha256": "ad3f3986be8d734b667a32d44f52e3a6098afc1bdd75a306c61215c06dc4117b"
+  },
+  "task.inspect": {
+   "verifier": "aries.workspace.registry.verify_probe.<locals>.verify",
+   "sha256": "8bd564cad0a3e77ad5754565ee765dbbaab41331142b667c950905307457579f"
+  }
+ }
+}

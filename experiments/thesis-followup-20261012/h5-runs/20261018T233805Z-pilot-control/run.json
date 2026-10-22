@@ -1,0 +1,254 @@
+{
+ "condition": "control",
+ "label": "pilot",
+ "sets": "example",
+ "declared_flags": {
+  "ARIES_COMPLETION_READ_PARAPHRASE": "0",
+  "ARIES_COMPLETION_TYPED_CONTRACT": "0",
+  "ARIES_PLANNER_CLARIFY": "0",
+  "ARIES_PLANNER_CLARIFY_GUARD": "0",
+  "ARIES_CLARIFY_RESOLVER": "0",
+  "ARIES_MEASURE_CHANGE_HOOK": "1"
+ },
+ "effective_flags": {
+  "primary_language": "en",
+  "listen_languages": [
+   "en"
+  ],
+  "whisper_model": "large-v3",
+  "override_file": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/h5-runs/20261018T233805Z-pilot-control/flags.env",
+  "flags": {
+   "ARIES_CAP_TOPK": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "the planner is sent the most relevant capabilities, not all of them"
+   },
+   "ARIES_CLARIFY_RESOLVER": {
+    "on": false,
+    "default": false,
+    "source": "file flags.env",
+    "governs": "a goal naming one folder gets a code-made, verified listing first; code counts the files whose names fit the request, and only when several fit does one small model call decide, accepted only if it quotes words of the request that fit that file alone, otherwise ARIES asks from a template. Adapted from ClarifyAgent and Ask-before-Plan (aries/workspace/clarify_resolver.py). Off, none of this runs"
+   },
+   "ARIES_COMPLETION_PROGRESS_GUARD": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "stop after two rejected completion proposals without an intervening action; preserve one correction opportunity"
+   },
+   "ARIES_COMPLETION_READ_PARAPHRASE": {
+    "on": false,
+    "default": true,
+    "source": "file flags.env",
+    "governs": "the completion contract also recognises read, listing and existence goals said in natural words (exactly one path, nothing else asked) and strips sentence punctuation from paths; done still needs re-checked verified evidence. Off compiles only the anchored sentences, as in ARIES-FINAL-20261006"
+   },
+   "ARIES_COMPLETION_TYPED_CONTRACT": {
+    "on": false,
+    "default": false,
+    "source": "file flags.env",
+    "governs": "when the fast path gives no completion contract, one grammar-constrained call maps an English request to read, list, exists or none with a path and a name; code accepts it only if the path is the one path the request names, verbatim, and the name is empty or verbatim, as an existing contract shape. The model never decides completion (aries/workspace/typed_contract.py, preregistration H5). Off, the module is never imported"
+   },
+   "ARIES_CONTEXT_ENGINE": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "select memory, recent task history and permitted cached news with provenance, expiry and explicit missing-source coverage"
+   },
+   "ARIES_CONTRACT_FINISH": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "propose completion without another model call when every ordered goal condition has verified evidence; fresh independent recheck still required"
+   },
+   "ARIES_GOAL_TEAMS": {
+    "on": false,
+    "default": false,
+    "source": "default",
+    "governs": "decompose eligible goals into scoped temporary read-only runtime agents in the existing queue"
+   },
+   "ARIES_MEASURE_CHANGE_HOOK": {
+    "on": true,
+    "default": false,
+    "source": "file flags.env",
+    "governs": "measurement only (H5 changed_after_read controls): before a finish is re-checked, a goal the runner has armed pauses once so the runner can change a file, then the check proceeds (aries/workspace/measurement_hook.py). Unarmed goals are not affected. Off, the hook module is never imported"
+   },
+   "ARIES_MK_FROZEN": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "Macedonian is frozen: it keeps working and keeps being tested, and nothing new is built on it"
+   },
+   "ARIES_PLANNER_CLARIFY": {
+    "on": false,
+    "default": true,
+    "source": "file flags.env",
+    "governs": "the planner may stop and ask which target is meant when its own verified observations show several that fit the goal; every choice must name something observed. Off removes the option from the grammar and the prompt"
+   },
+   "ARIES_PLANNER_CLARIFY_GUARD": {
+    "on": false,
+    "default": false,
+    "source": "file flags.env",
+    "governs": "with ARIES_PLANNER_CLARIFY: a question carries no capability or arguments (grammar), confirming is ask_approval and asking is only for choosing between observed targets (prompt), and a named but unlisted folder is listed before anything is read in it. Off leaves the clarification grammar and prompt unchanged"
+   },
+   "ARIES_PLAN_MEMORY": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "relevant remembered facts are injected into planning"
+   },
+   "ARIES_ROUTER_ABSTAIN": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "the router may answer ASK or OUT_OF_SCOPE rather than choosing the nearest action; off restores the pre-2026-10-03 instruction to pick the nearest one regardless"
+   },
+   "ARIES_STATE_SNAPSHOT": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "the planner is given the current desktop state before it plans"
+   },
+   "ARIES_TERMINAL_READ_FAILURE": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "stop repeated model planning after an actual nonretryable missing-file error for the exact single requested read"
+   },
+   "ARIES_TILE_HIDPI": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "desktop.tile reads the monitor's scale factor from Mutter and expects the device-pixel-aligned rectangle, so a correct tile on a fractionally scaled display is not reported unverified"
+   },
+   "ARIES_TRACE_FEWSHOT": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "similar past successful plans are offered to the planner"
+   },
+   "ARIES_TYPE_STRICT": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "input.type_text refuses any case that would silently lose characters — a NUL, a filtered control character, a line break into a single-line control, a rejected or partially landed write — instead of returning a success carrying landed=false"
+   },
+   "ARIES_VERIFY_FEEDBACK": {
+    "on": true,
+    "default": true,
+    "source": "default",
+    "governs": "the planner is told whether each past step's effect was INDEPENDENTLY OBSERVED, not merely whether the tool returned. Off leaves the loop, the retry policy and the step history untouched and removes only that — the one variable in the state-verification-feedback experiment"
+   },
+   "ARIES_VERIFY_HARDENED": {
+    "on": false,
+    "default": false,
+    "source": "default",
+    "governs": "the 23 verifiers the frozen review classed TRIVIAL, SELF_REPORT or PLANNER_SUPPLIED also require the report to agree with a fresh read (a different channel where one exists, measured drift for volatile values), per-capability invariants, and UNVERIFIED when that read fails (aries/workspace/hardened_verifiers.py, preregistration H8). Read when the registry is imported. Off, every verifier is the frozen function"
+   },
+   "ARIES_VERIFY_HARDENED_EXTRA": {
+    "on": false,
+    "default": false,
+    "source": "default",
+    "governs": "exploratory, designed after H8 baseline-2: the same hardening for two INDEPENDENT verifiers, notification.send and system.disk. Not part of the confirmatory H8 test"
+   }
+  }
+ },
+ "preflight": {
+  "aries_core": "inactive",
+  "screensaver_active": "(false,)",
+  "idle_delay": "uint32 0",
+  "commit": "12e5fc62929b028aafcc5e6d901e1b41d87aead3",
+  "tags_at_head": [],
+  "code_dirty": [],
+  "model": "qwen2.5:7b",
+  "model_digest_before": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+  "ollama_version_before": "0.34.0"
+ },
+ "environment_note": {
+  "service_env_captured_at": "2026-10-18T23:37:18Z",
+  "removed_inherited_aries_vars": []
+ },
+ "validation": "example items: not validated here",
+ "isolated": {
+  "DATABASE_URL": "sqlite+aiosqlite:////home/stamenovmartin/aries/experiments/thesis-followup-20261012/h5-runs/20261018T233805Z-pilot-control/aries.sqlite3",
+  "DATA_DIR": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/h5-runs/20261018T233805Z-pilot-control/var",
+  "RUNTIME_STORE": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/h5-runs/20261018T233805Z-pilot-control/var/runtime.json",
+  "CONTEXT_DIR": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/h5-runs/20261018T233805Z-pilot-control/var/context",
+  "ARIES_FLAG_FILE": "/home/stamenovmartin/aries/experiments/thesis-followup-20261012/h5-runs/20261018T233805Z-pilot-control/flags.env"
+ },
+ "settings": {
+  "copied_keys": [
+   "news.enabled",
+   "health.enabled",
+   "learning.enabled",
+   "briefing.morning_enabled",
+   "notifications.minimum_level",
+   "health.interval_minutes",
+   "automations.worker_enabled",
+   "general.start_on_login",
+   "autonomy.level",
+   "operator.enabled",
+   "connect.enabled",
+   "connect.attention_enabled",
+   "workspace.web_search",
+   "workspace.topics",
+   "workspace.dashboard_enabled",
+   "workspace.ai_briefings",
+   "workspace.auto_close_tools",
+   "workspace.auto_close_results",
+   "operator.settle_seconds",
+   "intelligence.cloud_provider",
+   "intelligence.cloud_model",
+   "intelligence.cloud_enabled",
+   "news.local_summaries",
+   "workspace.controlled_browser"
+  ],
+  "not_copied": [
+   "power.background_mode",
+   "power.allow_suspend",
+   "power.display_off_after_minutes",
+   "power.restore_idle_delay",
+   "power.temperature_limit_celsius",
+   "shell.restore_shortcut",
+   "shell.restore_dock",
+   "shell.wallpaper",
+   "shell.restore_wallpaper",
+   "shell.dock_position"
+  ],
+  "forced_off": [
+   "connect.enabled",
+   "connect.attention_enabled",
+   "news.enabled",
+   "news.local_summaries",
+   "briefing.morning_enabled",
+   "workspace.ai_briefings"
+  ]
+ },
+ "api": "http://127.0.0.1:8101",
+ "terminal_states": [
+  "answered",
+  "cancelled",
+  "done",
+  "error",
+  "failed",
+  "interrupted",
+  "needs_clarification",
+  "partial",
+  "proposed",
+  "refused"
+ ],
+ "scorer": {
+  "run_fixtures.py": "2c9ed291642f6de7aea777870eab294ade8aeb95d4b7421871479502a2a44452",
+  "run_h5.py": "40d065678d9c2867de9b9866d79c0a497b8bd1f6b2662b39032fcbd17ec98e0d",
+  "change_hook.py": "9fd740066f224753d8dc05150a16f96098d51f95a3c8dd6d2817d0b391482b28"
+ },
+ "inputs": {
+  "goals.jsonl": "4cecf03fd3d0dc70125dfe76001af72600b2a1add9384f148cca818045613d58",
+  "controls.jsonl": "a47370363fac0b2f5f69fdac93d2acb86a519a730751ef8c85a3263dc3d8f142",
+  "fixtures.jsonl": "23d358f65665955ed2f70c97ec2de6c9fd977d7b60fc5e93b1e89f08c3ac087b",
+  "oracle_validation.json": "147057da2a8836182d2a390df3267f1f0aa7fbede6904f4429120b62d666eee6"
+ },
+ "started_at": "20261018T233805Z",
+ "case_counts": {
+  "example": 2
+ }
+}

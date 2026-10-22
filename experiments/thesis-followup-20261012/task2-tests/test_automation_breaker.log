@@ -1,0 +1,24 @@
+/home/stamenovmartin/aries/tests/test_automation_breaker.py:25: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now=datetime.utcnow()
+/home/stamenovmartin/aries/tests/test_automation_breaker.py:56: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now=datetime.utcnow()
+/home/stamenovmartin/aries/tests/test_automation_breaker.py:40: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  now=datetime.utcnow()
+--- test_degraded_failures_pause_and_only_success_resets
+PASS  three unsuccessful passes pause
+PASS  skips do not clear the breaker
+PASS  verified successful pass closes breaker
+PASS  three unsuccessful passes pause
+PASS  skips do not clear the breaker
+PASS  verified successful pass closes breaker
+--- test_diagnostic_partial_passes_are_neutral_and_policy_is_visible
+PASS  missing optional sensor cannot disable health diagnostics
+PASS  workflow describes its explicit exception
+PASS  partial diagnostics do not erase actual failures
+PASS  explicit user setting disabling breaker remains respected
+--- test_failed_half_open_trial_starts_a_fresh_cooldown
+PASS  old failures permit a trial after cooldown
+PASS  unsuccessful trial reopens
+PASS  retry deadline uses latest attempt, not oldest failure
+PASS  trial becomes available only at new deadline
+ALL PASSED

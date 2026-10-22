@@ -47,7 +47,7 @@ not claim HTTP conditional caching or a 24-hour uptime measurement.
 Validation on 2026-09-18: all 8 demo checks passed, including all three subjects in
 the actual persisted Morning Brief. The scan had one failed source out of 20
 (Google AI connection failure); individual failures remain in `news-history.json`.
-No account-wide the reviewing agent/Codex consumption or quota is inferred from this run.
+No account-wide Claude/Codex consumption or quota is inferred from this run.
 
 Feed provenance: [Hugging Face's RSS announcement](https://github.com/huggingface/blog/issues/42),
 [Managing Madrid feed](https://www.managingmadrid.com/rss/index.xml),

@@ -1,0 +1,242 @@
+{
+ "experiment": "ARIES-FINAL-20261006 router, re-analysis only (no new inference)",
+ "source": {
+  "final_evaluation": "experiments/thesis-followup-20261012/inputs/final-evaluation.json",
+  "final_evaluation_sha256": "d187f4c33c137874c6b1bb53b70c6a4af1288675272d914360bd7f727f082973",
+  "raw_dir": "experiments/thesis-final-20261006/raw",
+  "raw_sha256": {
+   "r1-A0.jsonl": "e3de255e7f6307c61be4fd9a763cfb194ca0f4385c297a46992c5f1deacca301",
+   "r2-A0.jsonl": "dfe8084026a9d80845dc7fb37f027e8496eac8a1f43594d1d8a39ad53c180cdb",
+   "r3-A0.jsonl": "893a99bdf090318a93723225b1964d9c8b631431c4a4e13347ca06fc917eff07",
+   "r1-A1.jsonl": "144221493ef88e459d0c04db6e990a9c3b5d2a2f415d063355fba4abf879e517",
+   "r2-A1.jsonl": "ddd22567f24e215693e8a648e5415e77428a52ff101ab7c0a0ab73f60cda038b",
+   "r3-A1.jsonl": "b5900b9be630f1740eec15873b566a0cc24ea2466269a6e83614419b6f5e8c6f",
+   "r1-A2.jsonl": "a6919c650c877335f06ef04db3f38a4de1d90df75acd69fb7d18c184f9fa1688",
+   "r2-A2.jsonl": "a86d9e8e7b2fa6501e4640426f971c1f729ef72da6577d9c33940233cd22d89c",
+   "r3-A2.jsonl": "d6afe12b5d7b9b5300447886e8f17bfe621f4c487576d5fc33256dd4b07c3876",
+   "r1-A3.jsonl": "79fd3afcc13941d86cf5e82e815ba81164da2fdd514c226edb603b7a7c24f119",
+   "r2-A3.jsonl": "82028e925b4777a3552b57dd6b0cde36cb492973ef7dc7ade548709cddf59377",
+   "r3-A3.jsonl": "93a6a456c432a57e7bf5a395ec73a5033d08453f261bd0ab233d7460b42894c6"
+  },
+  "scorer": "experiments/thesis-final-20261006/analyze_router.py::correct",
+  "scorer_sha256": "4b6cdf26478f3f85da32f166610258015036318856c3bb7ceaecaeb5a091c3b9"
+ },
+ "reproduction": {
+  "raw_files_sha256_match": {
+   "r1-A0.jsonl": true,
+   "r1-A1.jsonl": true,
+   "r1-A2.jsonl": true,
+   "r1-A3.jsonl": true,
+   "r2-A0.jsonl": true,
+   "r2-A1.jsonl": true,
+   "r2-A2.jsonl": true,
+   "r2-A3.jsonl": true,
+   "r3-A0.jsonl": true,
+   "r3-A1.jsonl": true,
+   "r3-A2.jsonl": true,
+   "r3-A3.jsonl": true
+  },
+  "n_requests": 225,
+  "n_decisions": 2700,
+  "totals": {
+   "A0": {
+    "k": 385,
+    "n": 675,
+    "published_k": 385,
+    "match": true
+   },
+   "A1": {
+    "k": 463,
+    "n": 675,
+    "published_k": 463,
+    "match": true
+   },
+   "A2": {
+    "k": 440,
+    "n": 675,
+    "published_k": 440,
+    "match": true
+   },
+   "A3": {
+    "k": 463,
+    "n": 675,
+    "published_k": 463,
+    "match": true
+   }
+  },
+  "A3_vs_A1_case_means": {
+   "case_mean_improved": 26,
+   "case_mean_worse": 25,
+   "case_mean_equal": 174,
+   "published": {
+    "case_mean_improved": 26,
+    "case_mean_worse": 25,
+    "case_mean_equal": 174
+   },
+   "match": true
+  },
+  "all_match": true
+ },
+ "unit": "request (n=225); per-arm outcome = correct in at least 2 of 3 repetitions",
+ "majority_correct": {
+  "A0": {
+   "k": 129,
+   "n": 225
+  },
+  "A1": {
+   "k": 154,
+   "n": 225
+  },
+  "A2": {
+   "k": 146,
+   "n": 225
+  },
+  "A3": {
+   "k": 155,
+   "n": 225
+  }
+ },
+ "requests_with_unanimous_repetitions": {
+  "A0": {
+   "k": 221,
+   "n": 225
+  },
+  "A1": {
+   "k": 218,
+   "n": 225
+  },
+  "A2": {
+   "k": 221,
+   "n": 225
+  },
+  "A3": {
+   "k": 223,
+   "n": 225
+  }
+ },
+ "mcnemar": {
+  "A3_vs_A1": {
+   "test": "exact McNemar, two-sided",
+   "A3_correct_A1_wrong": 24,
+   "A3_wrong_A1_correct": 23,
+   "both_correct": 131,
+   "both_wrong": 47,
+   "n": 225,
+   "p_value": 1.0
+  },
+  "A2_vs_A1": {
+   "test": "exact McNemar, two-sided",
+   "A2_correct_A1_wrong": 16,
+   "A2_wrong_A1_correct": 24,
+   "both_correct": 130,
+   "both_wrong": 55,
+   "n": 225,
+   "p_value": 0.26818725105476915
+  },
+  "A1_vs_A0": {
+   "test": "exact McNemar, two-sided",
+   "A1_correct_A0_wrong": 36,
+   "A1_wrong_A0_correct": 11,
+   "both_correct": 118,
+   "both_wrong": 60,
+   "n": 225,
+   "p_value": 0.000346001140314911
+  }
+ },
+ "cochran_q": {
+  "arms": [
+   "A0",
+   "A1",
+   "A2",
+   "A3"
+  ],
+  "Q": 23.889908256880734,
+  "df": 3,
+  "p_value": 2.6337482134080813e-05,
+  "n": 225
+ },
+ "not_corrected_for_multiple_comparisons": true,
+ "mixed_effects": {
+  "status": "run",
+  "n_decisions": 2700,
+  "n_requests": 225,
+  "reference_arm": "A1",
+  "statsmodels": "0.15.0",
+  "glmm": {
+   "model": "BinomialBayesMixedGLM.fit_vb: y ~ arm (fixed, ref A1) + random intercept per request",
+   "method_note": "variational Bayes approximation; intervals are mean +- 1.96 posterior SD, not frequentist CIs",
+   "fixed_effects": {
+    "Intercept": {
+     "posterior_mean_log_odds": 3.1121879286626988,
+     "posterior_sd": 0.07884234805939193,
+     "approx_95_interval": [
+      2.9576569264662904,
+      3.266718930859107
+     ],
+     "odds_ratio": 22.470153750724926
+    },
+    "C(arm, Treatment(\"A1\"))[T.A0]": {
+     "posterior_mean_log_odds": -1.8862370944973104,
+     "posterior_sd": 0.1597589000756353,
+     "approx_95_interval": [
+      -2.199364538645556,
+      -1.5731096503490651
+     ],
+     "odds_ratio": 0.15164134866739348
+    },
+    "C(arm, Treatment(\"A1\"))[T.A2]": {
+     "posterior_mean_log_odds": -0.5298968231592341,
+     "posterior_sd": 0.15512147561984335,
+     "approx_95_interval": [
+      -0.8339349153741271,
+      -0.22585873094434117
+     ],
+     "odds_ratio": 0.5886657032126789
+    },
+    "C(arm, Treatment(\"A1\"))[T.A3]": {
+     "posterior_mean_log_odds": 0.03535051491037172,
+     "posterior_sd": 0.15740908721251057,
+     "approx_95_interval": [
+      -0.273171296026149,
+      0.3438723258468924
+     ],
+     "odds_ratio": 1.0359827725749484
+    }
+   },
+   "request_random_effect_log_sd": {
+    "mean": 1.7603729555994923,
+    "sd": 0.04690541705175999
+   }
+  },
+  "gee": {
+   "model": "GEE logistic, exchangeable working correlation, clustered by request, ref A1",
+   "terms": {
+    "Intercept": {
+     "log_odds": 0.781140779414227,
+     "robust_se": 0.14130944106933782,
+     "p_value": 3.2413477923163094e-08,
+     "odds_ratio": 2.183962264150955
+    },
+    "C(arm, Treatment(\"A1\"))[T.A0]": {
+     "log_odds": -0.4977783681069573,
+     "robust_se": 0.12602274385834367,
+     "p_value": 7.818091655173177e-05,
+     "odds_ratio": 0.6078796454904296
+    },
+    "C(arm, Treatment(\"A1\"))[T.A2]": {
+     "log_odds": -0.15395156664607376,
+     "robust_se": 0.12213906792742545,
+     "p_value": 0.20750300516788422,
+     "odds_ratio": 0.8573135425761683
+    },
+    "C(arm, Treatment(\"A1\"))[T.A3]": {
+     "log_odds": -2.9787929993882477e-16,
+     "robust_se": 0.13787957860589736,
+     "p_value": 0.9999999999999982,
+     "odds_ratio": 0.9999999999999997
+    }
+   },
+   "working_correlation": 0.7128816119065271
+  }
+ }
+}

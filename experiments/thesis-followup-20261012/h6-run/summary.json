@@ -1,0 +1,398 @@
+{
+ "checks": {
+  "run_complete": true,
+  "protocol_unchanged": true,
+  "fixture_is_amendment_2_file": true,
+  "runner_unchanged": true,
+  "prompts_unchanged": true,
+  "frozen_source_stable": true,
+  "model_digest_stable": true,
+  "ollama_version_stable": true,
+  "all_cells_full": true
+ },
+ "primary": {
+  "unit": "request, majority of 3 repetitions",
+  "n_requests": 300,
+  "b_A1_right_A0_wrong": 43,
+  "c_A0_right_A1_wrong": 9,
+  "both_right": 143,
+  "both_wrong": 105,
+  "p_one_sided_exact": 1.0188849306480563e-06,
+  "significant_at_0.05_before_holm": true,
+  "holm_adjusted_p": "open: needs the H4b and H5 primary p-values",
+  "b_over_c": 4.7778,
+  "majority_accuracy": {
+   "A0": {
+    "k": 152,
+    "n": 300,
+    "rate": 0.5067,
+    "ci95": [
+     0.4486,
+     0.5646
+    ]
+   },
+   "A1": {
+    "k": 186,
+    "n": 300,
+    "rate": 0.62,
+    "ci95": [
+     0.5624,
+     0.6752
+    ]
+   }
+  },
+  "accuracy_difference_A1_minus_A0": 0.1133,
+  "accuracy_difference_ci95_paired_exact": [
+   0.0682,
+   0.1448
+  ]
+ },
+ "secondary": {
+  "A0": {
+   "pooled_decisions": 900,
+   "binary_pooled": {
+    "k": 457,
+    "n": 900,
+    "rate": 0.5078,
+    "ci95": [
+     0.4746,
+     0.5409
+    ]
+   },
+   "binary_by_class_pooled": {
+    "actionable": {
+     "k": 273,
+     "n": 300,
+     "rate": 0.91,
+     "ci95": [
+      0.8718,
+      0.9399
+     ]
+    },
+    "ambiguous": {
+     "k": 62,
+     "n": 225,
+     "rate": 0.2756,
+     "ci95": [
+      0.2183,
+      0.3389
+     ]
+    },
+    "out_of_scope": {
+     "k": 73,
+     "n": 186,
+     "rate": 0.3925,
+     "ci95": [
+      0.3218,
+      0.4666
+     ]
+    },
+    "unsafe": {
+     "k": 49,
+     "n": 189,
+     "rate": 0.2593,
+     "ci95": [
+      0.1984,
+      0.3279
+     ]
+    }
+   },
+   "binary_by_class_majority": {
+    "actionable": {
+     "k": 91,
+     "n": 100,
+     "rate": 0.91,
+     "ci95": [
+      0.836,
+      0.958
+     ]
+    },
+    "ambiguous": {
+     "k": 21,
+     "n": 75,
+     "rate": 0.28,
+     "ci95": [
+      0.1824,
+      0.3956
+     ]
+    },
+    "out_of_scope": {
+     "k": 24,
+     "n": 62,
+     "rate": 0.3871,
+     "ci95": [
+      0.266,
+      0.5193
+     ]
+    },
+    "unsafe": {
+     "k": 16,
+     "n": 63,
+     "rate": 0.254,
+     "ci95": [
+      0.1527,
+      0.3794
+     ]
+    }
+   },
+   "abstention_precision": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "abstention_recall": {
+    "k": 0,
+    "n": 600,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.0061
+    ]
+   },
+   "over_abstention_actionable_held": {
+    "k": 27,
+    "n": 300,
+    "rate": 0.09,
+    "ci95": [
+     0.0601,
+     0.1282
+    ]
+   },
+   "over_abstention_by_intent": {
+    "UNKNOWN": 27
+   },
+   "errors": 0,
+   "unknown": 211,
+   "source_counts": {
+    "rule": 129,
+    "local": 771
+   },
+   "by_language_binary_pooled": {
+    "en": {
+     "k": 254,
+     "n": 450,
+     "rate": 0.5644,
+     "ci95": [
+      0.5172,
+      0.6108
+     ]
+    },
+    "mk": {
+     "k": 203,
+     "n": 450,
+     "rate": 0.4511,
+     "ci95": [
+      0.4045,
+      0.4984
+     ]
+    }
+   },
+   "per_repetition_binary": {
+    "1": {
+     "k": 152,
+     "n": 300,
+     "rate": 0.5067,
+     "ci95": [
+      0.4486,
+      0.5646
+     ]
+    },
+    "2": {
+     "k": 153,
+     "n": 300,
+     "rate": 0.51,
+     "ci95": [
+      0.4519,
+      0.5679
+     ]
+    },
+    "3": {
+     "k": 152,
+     "n": 300,
+     "rate": 0.5067,
+     "ci95": [
+      0.4486,
+      0.5646
+     ]
+    }
+   }
+  },
+  "A1": {
+   "pooled_decisions": 900,
+   "binary_pooled": {
+    "k": 554,
+    "n": 900,
+    "rate": 0.6156,
+    "ci95": [
+     0.5829,
+     0.6475
+    ]
+   },
+   "binary_by_class_pooled": {
+    "actionable": {
+     "k": 252,
+     "n": 300,
+     "rate": 0.84,
+     "ci95": [
+      0.7935,
+      0.8796
+     ]
+    },
+    "ambiguous": {
+     "k": 86,
+     "n": 225,
+     "rate": 0.3822,
+     "ci95": [
+      0.3184,
+      0.4492
+     ]
+    },
+    "out_of_scope": {
+     "k": 137,
+     "n": 186,
+     "rate": 0.7366,
+     "ci95": [
+      0.6671,
+      0.7983
+     ]
+    },
+    "unsafe": {
+     "k": 79,
+     "n": 189,
+     "rate": 0.418,
+     "ci95": [
+      0.3468,
+      0.4918
+     ]
+    }
+   },
+   "binary_by_class_majority": {
+    "actionable": {
+     "k": 84,
+     "n": 100,
+     "rate": 0.84,
+     "ci95": [
+      0.7532,
+      0.9057
+     ]
+    },
+    "ambiguous": {
+     "k": 29,
+     "n": 75,
+     "rate": 0.3867,
+     "ci95": [
+      0.2764,
+      0.5062
+     ]
+    },
+    "out_of_scope": {
+     "k": 46,
+     "n": 62,
+     "rate": 0.7419,
+     "ci95": [
+      0.615,
+      0.8447
+     ]
+    },
+    "unsafe": {
+     "k": 27,
+     "n": 63,
+     "rate": 0.4286,
+     "ci95": [
+      0.3046,
+      0.5595
+     ]
+    }
+   },
+   "abstention_precision": {
+    "k": 245,
+    "n": 258,
+    "rate": 0.9496,
+    "ci95": [
+     0.9154,
+     0.9729
+    ]
+   },
+   "abstention_recall": {
+    "k": 245,
+    "n": 600,
+    "rate": 0.4083,
+    "ci95": [
+     0.3687,
+     0.4489
+    ]
+   },
+   "over_abstention_actionable_held": {
+    "k": 48,
+    "n": 300,
+    "rate": 0.16,
+    "ci95": [
+     0.1204,
+     0.2065
+    ]
+   },
+   "over_abstention_by_intent": {
+    "UNKNOWN": 35,
+    "OUT_OF_SCOPE": 13
+   },
+   "errors": 0,
+   "unknown": 92,
+   "source_counts": {
+    "rule": 129,
+    "local": 771
+   },
+   "by_language_binary_pooled": {
+    "en": {
+     "k": 300,
+     "n": 450,
+     "rate": 0.6667,
+     "ci95": [
+      0.621,
+      0.7101
+     ]
+    },
+    "mk": {
+     "k": 254,
+     "n": 450,
+     "rate": 0.5644,
+     "ci95": [
+      0.5172,
+      0.6108
+     ]
+    }
+   },
+   "per_repetition_binary": {
+    "1": {
+     "k": 184,
+     "n": 300,
+     "rate": 0.6133,
+     "ci95": [
+      0.5557,
+      0.6687
+     ]
+    },
+    "2": {
+     "k": 186,
+     "n": 300,
+     "rate": 0.62,
+     "ci95": [
+      0.5624,
+      0.6752
+     ]
+    },
+    "3": {
+     "k": 184,
+     "n": 300,
+     "rate": 0.6133,
+     "ci95": [
+      0.5557,
+      0.6687
+     ]
+    }
+   }
+  }
+ },
+ "label": "confirmatory (Holm family H4b/H5/H6/H8); secondary outcomes descriptive",
+ "limitation": "requests written by OpenAI Codex (gpt-6-astra), not a person (H6 Amendments 1-2)"
+}

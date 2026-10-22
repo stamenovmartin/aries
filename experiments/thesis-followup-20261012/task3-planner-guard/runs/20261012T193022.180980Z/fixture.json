@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-06T17:08:14.335873+00:00",
+  "annotation": "Pre-result second AI-agent exact capability/argument labels. No human annotation; not held-out from project design.",
+  "fixture_scope": "Synthetic offline next-action decisions only. No files, browser sessions or capability executions are created by the cases.",
+  "cases": [
+    {
+      "id": "p01",
+      "category": "file_read",
+      "language": "en",
+      "goal": "Read the complete text from /home/stamenovmartin/ARIES-Diploma-Offline/notes.txt.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.read",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/notes.txt"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p02",
+      "category": "file_read",
+      "language": "mk",
+      "goal": "Прочитај ја текстуалната содржина од /home/stamenovmartin/ARIES-Diploma-Offline/poraka.txt.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.read",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/poraka.txt"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p03",
+      "category": "file_read",
+      "language": "en",
+      "goal": "I need the contents of /home/stamenovmartin/ARIES-Diploma-Offline/config.ini; read that file directly.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.read",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/config.ini"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p04",
+      "category": "file_read",
+      "language": "en",
+      "goal": "Try reading /home/stamenovmartin/ARIES-Diploma-Offline/missing.txt; if it is missing, the read operation should report the error.",
+      "precondition": "File existence is unknown. No existence probe or read has been performed.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.read",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/missing.txt"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p05",
+      "category": "file_list",
+      "language": "en",
+      "goal": "List the entries immediately inside the directory /home/stamenovmartin/ARIES-Diploma-Offline/reports.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.list",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/reports"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p06",
+      "category": "file_list",
+      "language": "mk",
+      "goal": "Излистај ги датотеките и папките што се наоѓаат директно во /home/stamenovmartin/ARIES-Diploma-Offline/dokumenti.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.list",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/dokumenti"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p07",
+      "category": "file_list",
+      "language": "en",
+      "goal": "Show the names of files directly under /home/stamenovmartin/ARIES-Diploma-Offline/archive.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.list",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/archive"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p08",
+      "category": "file_write",
+      "language": "en",
+      "goal": "Create a new text file at /home/stamenovmartin/ARIES-Diploma-Offline/hello.txt containing exactly this text, with no trailing newline: Hello ARIES",
+      "precondition": "The parent directory exists and is writable; the target file does not exist. These are supplied synthetic preconditions, not OS observations.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.write",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/hello.txt",
+          "content": "Hello ARIES"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p09",
+      "category": "file_write",
+      "language": "mk",
+      "goal": "Создај нова текстуална датотека /home/stamenovmartin/ARIES-Diploma-Offline/zdravo.txt со точно оваа содржина, без нов ред на крајот: Здраво свету",
+      "precondition": "The parent directory exists and is writable; the target file does not exist. These are supplied synthetic preconditions, not OS observations.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.write",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/zdravo.txt",
+          "content": "Здраво свету"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p10",
+      "category": "file_write",
+      "language": "en",
+      "goal": "Create the new file /home/stamenovmartin/ARIES-Diploma-Offline/values.csv with exactly two lines: first line alpha,beta and second line 3,7. Use one newline between the lines and no trailing newline.",
+      "precondition": "The parent directory exists and is writable; the target file does not exist. These are supplied synthetic preconditions, not OS observations.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.write",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/values.csv",
+          "content": "alpha,beta\n3,7"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p11",
+      "category": "storage",
+      "language": "en",
+      "goal": "Measure filesystem usage and tell me which filesystem has the highest percentage used.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p12",
+      "category": "storage",
+      "language": "mk",
+      "goal": "Измери ја процентуалната искористеност на датотечните системи и кажи кој има највисок процент.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "system.storage",
+        "arguments": {}
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p13",
+      "category": "processes",
+      "language": "en",
+      "goal": "Inspect the running process names and their process IDs.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "system.processes",
+        "arguments": {}
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p14",
+      "category": "processes",
+      "language": "mk",
+      "goal": "Покажи ги имињата и идентификаторите на процесите што моментално работат.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "system.processes",
+        "arguments": {}
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p15",
+      "category": "cpu",
+      "language": "en",
+      "goal": "Measure the current CPU usage percentage.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "system.status",
+        "arguments": {}
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p16",
+      "category": "memory",
+      "language": "en",
+      "goal": "Measure how much RAM is currently being used.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "system.status",
+        "arguments": {}
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p17",
+      "category": "system",
+      "language": "mk",
+      "goal": "Измери ја моменталната оптовареност на процесорот и искористеноста на меморијата.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "system.status",
+        "arguments": {}
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p18",
+      "category": "browser_open",
+      "language": "en",
+      "goal": "Open https://www.python.org and then inspect the page title. No browser session exists yet.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "browser.open",
+        "arguments": {
+          "url": "https://www.python.org"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p19",
+      "category": "browser_open",
+      "language": "mk",
+      "goal": "Отвори https://example.com и потоа прочитај го насловот на страницата. Сè уште нема отворена сесија на прелистувачот.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "browser.open",
+        "arguments": {
+          "url": "https://example.com"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p20",
+      "category": "browser_read",
+      "language": "en",
+      "goal": "Read the text of the page already opened in the browser. Use the session from the recorded observation; do not open another tab.",
+      "precondition": "One synthetic browser.open observation is supplied; its body text is absent. No real browser was opened.",
+      "history": [
+        {
+          "step_id": "fixture-browser-open",
+          "capability": "browser.open",
+          "args": {
+            "url": "https://www.python.org"
+          },
+          "execution_status": "done",
+          "verification_status": "verified",
+          "observation": {
+            "session": "fixture-tab-alpha",
+            "url": "https://www.python.org",
+            "title": "Synthetic fixture page title",
+            "text": "",
+            "synthetic": true,
+            "note": "Synthetic frozen browser-open precondition, not an actual browser execution. Page body has not been read."
+          },
+          "executor_observation": {
+            "session": "fixture-tab-alpha",
+            "url": "https://www.python.org",
+            "title": "Synthetic fixture page title",
+            "text": "",
+            "synthetic": true,
+            "note": "Synthetic frozen browser-open precondition, not an actual browser execution. Page body has not been read."
+          },
+          "evidence_refs": [
+            "fixture-browser-open-evidence"
+          ]
+        }
+      ],
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-alpha"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p21",
+      "category": "browser_read",
+      "language": "mk",
+      "goal": "Прочитај ја текстуалната содржина од веќе отворената страница. Употреби ја сесијата од запишаното набљудување; не отворај нова страница.",
+      "precondition": "One synthetic browser.open observation is supplied; its body text is absent. No real browser was opened.",
+      "history": [
+        {
+          "step_id": "fixture-browser-open",
+          "capability": "browser.open",
+          "args": {
+            "url": "https://example.com"
+          },
+          "execution_status": "done",
+          "verification_status": "verified",
+          "observation": {
+            "session": "fixture-tab-beta",
+            "url": "https://example.com",
+            "title": "Synthetic fixture page title",
+            "text": "",
+            "synthetic": true,
+            "note": "Synthetic frozen browser-open precondition, not an actual browser execution. Page body has not been read."
+          },
+          "executor_observation": {
+            "session": "fixture-tab-beta",
+            "url": "https://example.com",
+            "title": "Synthetic fixture page title",
+            "text": "",
+            "synthetic": true,
+            "note": "Synthetic frozen browser-open precondition, not an actual browser execution. Page body has not been read."
+          },
+          "evidence_refs": [
+            "fixture-browser-open-evidence"
+          ]
+        }
+      ],
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-beta"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p22",
+      "category": "browser_read",
+      "language": "en",
+      "goal": "Extract the text currently displayed by the already-open page. Reuse the exact existing session shown in history.",
+      "precondition": "One synthetic browser.open observation is supplied; its body text is absent. No real browser was opened.",
+      "history": [
+        {
+          "step_id": "fixture-browser-open",
+          "capability": "browser.open",
+          "args": {
+            "url": "https://docs.python.org/3/"
+          },
+          "execution_status": "done",
+          "verification_status": "verified",
+          "observation": {
+            "session": "fixture-tab-gamma",
+            "url": "https://docs.python.org/3/",
+            "title": "Synthetic fixture page title",
+            "text": "",
+            "synthetic": true,
+            "note": "Synthetic frozen browser-open precondition, not an actual browser execution. Page body has not been read."
+          },
+          "executor_observation": {
+            "session": "fixture-tab-gamma",
+            "url": "https://docs.python.org/3/",
+            "title": "Synthetic fixture page title",
+            "text": "",
+            "synthetic": true,
+            "note": "Synthetic frozen browser-open precondition, not an actual browser execution. Page body has not been read."
+          },
+          "evidence_refs": [
+            "fixture-browser-open-evidence"
+          ]
+        }
+      ],
+      "expected": {
+        "action": "execute",
+        "capability": "browser.read",
+        "arguments": {
+          "session": "fixture-tab-gamma"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p23",
+      "category": "file_exists",
+      "language": "en",
+      "goal": "Check only whether the file /home/stamenovmartin/ARIES-Diploma-Offline/report.pdf exists. Do not read its contents.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.exists",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/report.pdf"
+        }
+      },
+      "execution_performed": false
+    },
+    {
+      "id": "p24",
+      "category": "file_exists",
+      "language": "mk",
+      "goal": "Провери само дали постои датотеката /home/stamenovmartin/ARIES-Diploma-Offline/podatoci.csv. Не ја читај нејзината содржина.",
+      "precondition": "No action has run; no current observation is available.",
+      "history": [],
+      "expected": {
+        "action": "execute",
+        "capability": "file.exists",
+        "arguments": {
+          "path": "/home/stamenovmartin/ARIES-Diploma-Offline/podatoci.csv"
+        }
+      },
+      "execution_performed": false
+    }
+  ]
+}

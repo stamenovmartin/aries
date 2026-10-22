@@ -1,0 +1,31 @@
+--- test_a_capability_already_used_is_never_dropped
+PASS  a half-finished route can still be continued or corrected
+--- test_every_flag_is_readable_and_enumerable
+PASS  ARIES_CAP_TOPK is enumerable for an ablation
+PASS  ARIES_CAP_TOPK reports where its value came from
+PASS  ARIES_STATE_SNAPSHOT is enumerable for an ablation
+PASS  ARIES_STATE_SNAPSHOT reports where its value came from
+PASS  ARIES_PLAN_MEMORY is enumerable for an ablation
+PASS  ARIES_PLAN_MEMORY reports where its value came from
+PASS  an unknown flag raises instead of reading False
+--- test_no_signal_shows_everything_rather_than_an_arbitrary_ten
+PASS  no lexical signal shows all 58: 'turn the volume down'
+PASS  no lexical signal shows all 58: 'install vlc'
+PASS  no lexical signal shows all 58: 'xyzzy plugh'
+--- test_recent_actions_carry_the_verdict_not_just_the_attempt
+PASS  a verified action is marked verified
+PASS  an unverifiable one is marked unverifiable, not failed
+PASS  a typed error code survives into the observation
+--- test_selection_shortens_the_prompt_without_losing_the_right_tool
+PASS  the prompt gets shorter (8613 -> 2258 chars)
+PASS  and says how many of how many it is showing
+PASS  the right tool is ranked first, not merely included (got desktop.tile)
+PASS  maximise wins for a fullscreen request
+PASS  reading the clipboard wins for a clipboard question
+--- test_the_snapshot_reports_what_it_could_not_read
+PASS  it always carries a clock
+PASS  it is bounded and says how long it took
+PASS  windows is either a reading or a stated reason
+PASS  audio is either a reading or a stated reason
+PASS  an unreadable section is announced, so absent is not read as empty
+ALL PASSED

@@ -23,7 +23,7 @@ flowchart TB
   subgraph Agents["agents/ + llm/"]
     ROSTER["AgentSpec registry\nplanner · researcher · executor · reviewer\nrepairer · judge · distiller · assistant · router"]
     RUN["runtime.run_agent\nprompt(+learned rules +context digest)\n→ provider → JSON validate (1 corrective retry)\n→ tool loop (bounded) → fallback"]
-    PROV["providers\ncli (the reviewing agent/codex) · ollama · openai · template\nclassified retries · telemetry · strict mode"]
+    PROV["providers\ncli (claude/codex) · ollama · openai · template\nclassified retries · telemetry · strict mode"]
   end
 
   subgraph Eval["evaluators/"]

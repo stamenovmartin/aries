@@ -1,0 +1,398 @@
+{
+ "checks": {
+  "run_complete": true,
+  "protocol_unchanged": true,
+  "fixture_is_amendment_2_file": true,
+  "runner_unchanged": true,
+  "prompts_unchanged": true,
+  "frozen_source_stable": true,
+  "model_digest_stable": true,
+  "ollama_version_stable": true,
+  "all_cells_full": true
+ },
+ "primary": {
+  "unit": "request, majority of 3 repetitions",
+  "n_requests": 300,
+  "b_A1_right_A0_wrong": 28,
+  "c_A0_right_A1_wrong": 20,
+  "both_right": 133,
+  "both_wrong": 119,
+  "p_one_sided_exact": 0.15616340373663462,
+  "significant_at_0.05_before_holm": false,
+  "holm_adjusted_p": "not applicable: exploratory, outside the Holm family",
+  "b_over_c": 1.4,
+  "majority_accuracy": {
+   "A0": {
+    "k": 153,
+    "n": 300,
+    "rate": 0.51,
+    "ci95": [
+     0.4519,
+     0.5679
+    ]
+   },
+   "A1": {
+    "k": 161,
+    "n": 300,
+    "rate": 0.5367,
+    "ci95": [
+     0.4784,
+     0.5942
+    ]
+   }
+  },
+  "accuracy_difference_A1_minus_A0": 0.0267,
+  "accuracy_difference_ci95_paired_exact": [
+   -0.0217,
+   0.0716
+  ]
+ },
+ "secondary": {
+  "A0": {
+   "pooled_decisions": 900,
+   "binary_pooled": {
+    "k": 462,
+    "n": 900,
+    "rate": 0.5133,
+    "ci95": [
+     0.4801,
+     0.5465
+    ]
+   },
+   "binary_by_class_pooled": {
+    "actionable": {
+     "k": 239,
+     "n": 300,
+     "rate": 0.7967,
+     "ci95": [
+      0.7466,
+      0.8407
+     ]
+    },
+    "ambiguous": {
+     "k": 49,
+     "n": 225,
+     "rate": 0.2178,
+     "ci95": [
+      0.1657,
+      0.2775
+     ]
+    },
+    "out_of_scope": {
+     "k": 85,
+     "n": 186,
+     "rate": 0.457,
+     "ci95": [
+      0.3839,
+      0.5315
+     ]
+    },
+    "unsafe": {
+     "k": 89,
+     "n": 189,
+     "rate": 0.4709,
+     "ci95": [
+      0.398,
+      0.5447
+     ]
+    }
+   },
+   "binary_by_class_majority": {
+    "actionable": {
+     "k": 79,
+     "n": 100,
+     "rate": 0.79,
+     "ci95": [
+      0.6971,
+      0.8651
+     ]
+    },
+    "ambiguous": {
+     "k": 16,
+     "n": 75,
+     "rate": 0.2133,
+     "ci95": [
+      0.1271,
+      0.3232
+     ]
+    },
+    "out_of_scope": {
+     "k": 28,
+     "n": 62,
+     "rate": 0.4516,
+     "ci95": [
+      0.3248,
+      0.5832
+     ]
+    },
+    "unsafe": {
+     "k": 30,
+     "n": 63,
+     "rate": 0.4762,
+     "ci95": [
+      0.3488,
+      0.6059
+     ]
+    }
+   },
+   "abstention_precision": {
+    "k": 0,
+    "n": 0,
+    "rate": null,
+    "ci95": null
+   },
+   "abstention_recall": {
+    "k": 0,
+    "n": 600,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.0061
+    ]
+   },
+   "over_abstention_actionable_held": {
+    "k": 61,
+    "n": 300,
+    "rate": 0.2033,
+    "ci95": [
+     0.1593,
+     0.2534
+    ]
+   },
+   "over_abstention_by_intent": {
+    "UNKNOWN": 61
+   },
+   "errors": 0,
+   "unknown": 284,
+   "source_counts": {
+    "rule": 129,
+    "local": 771
+   },
+   "by_language_binary_pooled": {
+    "en": {
+     "k": 245,
+     "n": 450,
+     "rate": 0.5444,
+     "ci95": [
+      0.4972,
+      0.5911
+     ]
+    },
+    "mk": {
+     "k": 217,
+     "n": 450,
+     "rate": 0.4822,
+     "ci95": [
+      0.4352,
+      0.5295
+     ]
+    }
+   },
+   "per_repetition_binary": {
+    "1": {
+     "k": 152,
+     "n": 300,
+     "rate": 0.5067,
+     "ci95": [
+      0.4486,
+      0.5646
+     ]
+    },
+    "2": {
+     "k": 156,
+     "n": 300,
+     "rate": 0.52,
+     "ci95": [
+      0.4618,
+      0.5778
+     ]
+    },
+    "3": {
+     "k": 154,
+     "n": 300,
+     "rate": 0.5133,
+     "ci95": [
+      0.4552,
+      0.5712
+     ]
+    }
+   }
+  },
+  "A1": {
+   "pooled_decisions": 900,
+   "binary_pooled": {
+    "k": 484,
+    "n": 900,
+    "rate": 0.5378,
+    "ci95": [
+     0.5046,
+     0.5707
+    ]
+   },
+   "binary_by_class_pooled": {
+    "actionable": {
+     "k": 239,
+     "n": 300,
+     "rate": 0.7967,
+     "ci95": [
+      0.7466,
+      0.8407
+     ]
+    },
+    "ambiguous": {
+     "k": 34,
+     "n": 225,
+     "rate": 0.1511,
+     "ci95": [
+      0.107,
+      0.2047
+     ]
+    },
+    "out_of_scope": {
+     "k": 87,
+     "n": 186,
+     "rate": 0.4677,
+     "ci95": [
+      0.3944,
+      0.5422
+     ]
+    },
+    "unsafe": {
+     "k": 124,
+     "n": 189,
+     "rate": 0.6561,
+     "ci95": [
+      0.5837,
+      0.7235
+     ]
+    }
+   },
+   "binary_by_class_majority": {
+    "actionable": {
+     "k": 81,
+     "n": 100,
+     "rate": 0.81,
+     "ci95": [
+      0.7193,
+      0.8816
+     ]
+    },
+    "ambiguous": {
+     "k": 11,
+     "n": 75,
+     "rate": 0.1467,
+     "ci95": [
+      0.0756,
+      0.2473
+     ]
+    },
+    "out_of_scope": {
+     "k": 28,
+     "n": 62,
+     "rate": 0.4516,
+     "ci95": [
+      0.3248,
+      0.5832
+     ]
+    },
+    "unsafe": {
+     "k": 41,
+     "n": 63,
+     "rate": 0.6508,
+     "ci95": [
+      0.5203,
+      0.7666
+     ]
+    }
+   },
+   "abstention_precision": {
+    "k": 12,
+    "n": 12,
+    "rate": 1.0,
+    "ci95": [
+     0.7354,
+     1.0
+    ]
+   },
+   "abstention_recall": {
+    "k": 12,
+    "n": 600,
+    "rate": 0.02,
+    "ci95": [
+     0.0104,
+     0.0347
+    ]
+   },
+   "over_abstention_actionable_held": {
+    "k": 61,
+    "n": 300,
+    "rate": 0.2033,
+    "ci95": [
+     0.1593,
+     0.2534
+    ]
+   },
+   "over_abstention_by_intent": {
+    "UNKNOWN": 61
+   },
+   "errors": 0,
+   "unknown": 294,
+   "source_counts": {
+    "rule": 129,
+    "local": 771
+   },
+   "by_language_binary_pooled": {
+    "en": {
+     "k": 278,
+     "n": 450,
+     "rate": 0.6178,
+     "ci95": [
+      0.5711,
+      0.6629
+     ]
+    },
+    "mk": {
+     "k": 206,
+     "n": 450,
+     "rate": 0.4578,
+     "ci95": [
+      0.411,
+      0.5051
+     ]
+    }
+   },
+   "per_repetition_binary": {
+    "1": {
+     "k": 160,
+     "n": 300,
+     "rate": 0.5333,
+     "ci95": [
+      0.4751,
+      0.5909
+     ]
+    },
+    "2": {
+     "k": 161,
+     "n": 300,
+     "rate": 0.5367,
+     "ci95": [
+      0.4784,
+      0.5942
+     ]
+    },
+    "3": {
+     "k": 163,
+     "n": 300,
+     "rate": 0.5433,
+     "ci95": [
+      0.4851,
+      0.6007
+     ]
+    }
+   }
+  }
+ },
+ "label": "exploratory secondary (llama3.1:8b), outside the Holm family; descriptive",
+ "model": "llama3.1:8b",
+ "limitation": "requests written by OpenAI Codex (gpt-6-astra), not a person (H6 Amendments 1-2)"
+}

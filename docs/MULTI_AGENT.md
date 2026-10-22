@@ -1,6 +1,6 @@
 # Two agents, one repository
 
-On 2026-09-29 and 30 this repository was built by several agents at once: a the reviewing agent
+On 2026-09-29 and 30 this repository was built by several agents at once: a Claude
 session with seven subagents, and a Codex session. They had no message channel, so
 they made one — `COORDINATION.md` at the repository root, append-only, one heading
 per message. This is what that produced, and what it cost.
@@ -42,7 +42,7 @@ refuses to do — sitting in the module written to remove it.
 The author had tested the happy paths and the process-word blocklist. The reader
 tested the state machine. `tests/test_replies.py` now carries that case verbatim.
 
-### the reviewing agent found why the voice loop had never once worked
+### Claude found why the voice loop had never once worked
 
 Every component passed its tests. The journal showed **not one addressed utterance
 all day** — every line `not addressed` or `dropped`, full of `'Thank you for
@@ -68,7 +68,7 @@ measurement; the fix needed ownership of the file.
 
 ### And a claim corrected in the other direction
 
-the reviewing agent told Codex to make the settings UI schema-driven. Codex replied that
+Claude told Codex to make the settings UI schema-driven. Codex replied that
 `aries_ui/pages/settings.py` **already** derives every group and control from
 `/settings`. The instruction had been inferred from the schema's docstring rather
 than read from the UI. Recorded here because an agent confidently briefing another
@@ -93,7 +93,7 @@ organisational half.
 
 ## What it cost
 
-Seven the reviewing agent subagents: **405 tool calls, ~1.04M tokens, 129.7 minutes of agent
+Seven Claude subagents: **405 tool calls, ~1.04M tokens, 129.7 minutes of agent
 time compressed into about 31 minutes of wall clock** by running four in parallel.
 Plus the Codex session's own work. The animated timeline in the published inventory
 artifact shows the parallelism.

@@ -42,13 +42,62 @@ def measured_readings(data, requirement, depth=0):
     return found
 
 
-def compile_goal(goal, demo_directory):
+# ── ARIES_COMPLETION_READ_PARAPHRASE ────────────────────────────────────────────
+# The held-out run of 2026-10-06 showed 39 of 49 goals with no completion contract,
+# because only about ten anchored sentences compile (docs/analysis/terminal-state-
+# diagnosis.md). These recognisers add read, listing and existence goals said in
+# natural words. They stay closed: exactly one path, a read/list/existence intent,
+# and no word that asks for anything else; otherwise the goal stays unsupported.
+# Completion itself is unchanged: done still needs re-checked verified evidence.
+TRAILING = '.,;:!?)"\''
+PATH_TOKEN = re.compile(r'(?<![\w/~])(~?/[^\s"\'`<>]+)')
+OTHER_REQUEST = re.compile(
+    r'\b(?:write|create|save|append|edit|modify|change|update|delete|remove|trash|move|rename|copy|'
+    r'send|e-?mail|mail|upload|share|install|run|execute|launch|compare|translate|summari[sz]e|summary|'
+    r'fix|replace|convert|schedule|remind|count|search|find|grep|why|how|who|when|which|also|then)\b', re.I)
+CONDITIONAL = re.compile(r'\b(?:if|whether)\b', re.I)
+READ_INTENT = re.compile(
+    r'\b(?:read|pull up|show(?: me)?|tell me what (?:it|this|that|the file) says|'
+    r'what does (?:it|this|that|the file) say|what(?:\'s| is) (?:in|inside))\b', re.I)
+LIST_INTENT = re.compile(r'(?:list|show(?: me)?)(?: (?:what(?:\'s| is) (?:in|inside)|(?:the )?(?:contents|files|entries) (?:of|in)))?\s+(~?/\S+)', re.I)
+PRINTER = re.compile(r'\b(?:print(?:er|ed|ing)?|copies)\b', re.I)
+EXISTS_INTENT = re.compile(r'\b(?:is there|are there|exists?|nothing called|no file|any file)\b', re.I)
+NAMED = re.compile(r'\b(?:called|named)\s+["\']?([^\s"\'/?,;]+)', re.I)
+
+
+def _paths(text):
+    return [p.rstrip(TRAILING) for p in PATH_TOKEN.findall(text)]
+
+
+def paraphrased(text):
+    """A closed recogniser for read, listing and existence goals said in natural words."""
+    paths = [p for p in _paths(text) if len(p) > 1]
+    if len(paths) != 1 or OTHER_REQUEST.search(text) or PRINTER.search(text):
+        return None
+    path = str(Path(paths[0]).expanduser())
+    listing = LIST_INTENT.fullmatch(text.rstrip(TRAILING + ' '))
+    if listing:
+        return {'supported': True, 'requirements': [{'capability': 'file.list', 'path': path}],
+                'answer': 'listing', 'recognised_by': 'paraphrase'}
+    reads, exists = bool(READ_INTENT.search(text)), bool(EXISTS_INTENT.search(text))
+    if reads and not exists and not CONDITIONAL.search(text):
+        return {'supported': True, 'requirements': [{'capability': 'file.read', 'path': path}],
+                'recognised_by': 'paraphrase'}
+    if exists and not reads:
+        name = NAMED.search(text)
+        target = str(Path(path) / name[1].rstrip(TRAILING)) if name else path
+        return {'supported': True, 'requirements': [{'capability': 'file.exists', 'path': target}],
+                'answer': 'existence', 'recognised_by': 'paraphrase'}
+    return None
+
+
+def compile_goal(goal, demo_directory, *, paraphrase=False):
     text = goal.strip()
     # Only complete, independently recognizable read clauses may be combined.
     # Never split arbitrary prose or creation content into executable sub-goals.
     clauses=re.split(r'\s+(?:and|then)\s+(?=(?:read|check|list)\s)',text,flags=re.I)
     if 1<len(clauses)<=4 and all(re.match(r'^(?:read|check|list)\s',c,re.I) for c in clauses):
-        parts=[compile_goal(c,demo_directory) for c in clauses]
+        parts=[compile_goal(c,demo_directory,paraphrase=paraphrase) for c in clauses]
         allowed={'file.read','file.exists','file.list','system.status','system.storage','system.processes'}
         if all(p['supported'] and all(r['capability'] in allowed for r in p['requirements']) for p in parts):
             return {'supported':True,'requirements':[r for p in parts for r in p['requirements']],
@@ -74,7 +123,8 @@ def compile_goal(goal, demo_directory):
             'content_sha256':hashlib.sha256(content.encode()).hexdigest()}]}
     match = re.fullmatch(r'(?:Read|Прочитај|Prochitaj)\s+(?:(?:file|датотека|datoteka)\s+)?((?:~?/)[^\s]+)',text,re.I)
     if match:
-        return {'supported':True,'requirements':[{'capability':'file.read','path':str(Path(match[1]).expanduser())}]}
+        path = match[1].rstrip(TRAILING) if paraphrase else match[1]
+        return {'supported':True,'requirements':[{'capability':'file.read','path':str(Path(path).expanduser())}]}
     if re.fullmatch(r'Check disk usage and report which filesystem has the highest percentage used\.?',text,re.I):
         return {'supported':True,'requirements':[{'capability':'system.storage'}], 'answer':'highest_filesystem'}
     match = re.fullmatch(r'Open\s+(https?://\S+)\s+and report (?:the )?(?:observed )?(?:page )?title\.?',text,re.I)
@@ -91,6 +141,10 @@ def compile_goal(goal, demo_directory):
     match = re.fullmatch(r'(?:Open|Launch|Отвори|Пушти|Otvori|Pushti) (?:the )?(?:(?:application|апликација|апликацијата|aplikacija) )?([^/\n]+)',text,re.I)
     if match and not re.search(r'\b(and|then|search|report|save|delete|install|и|потоа|пребарај|зачувај|избриши|инсталирај|i|potoa|prebaraj|zachuvaj|izbrishi|instaliraj)\b',match[1],re.I):
         return {'supported':True,'requirements':[{'capability':'desktop.launch','app':match[1]}]}
+    if paraphrase:
+        found = paraphrased(text)
+        if found:
+            return found
     return {'supported':False,'requirements':[],
             'reason':'No independent completion contract for this goal yet. Useful verified steps may be reported only as partial.'}
 
@@ -156,6 +210,13 @@ def answer(contract, evidence):
         return f"Highest observed filesystem usage: {top['subject']} — {top['value']} {top['unit']}."
     if contract.get('answer') == 'page_title':
         return rows[-1]['title'] + ' — ' + rows[-1]['url']
+    if contract.get('answer') == 'existence':
+        row = rows[-1]
+        return f"{row['path']} {'exists' if row.get('exists') else 'does not exist'} (independently re-checked)."
+    if contract.get('answer') == 'listing':
+        row = rows[-1]
+        names = [e['name'] for e in row.get('entries', [])]
+        return f"Verified listing of {row['path']} ({row.get('count', len(names))} entries): " + ', '.join(names[:50])
     if contract.get('answer') == 'search_page':
         return 'Observed search destination: ' + rows[-1]['url']
     if rows and 'text' in rows[-1]:

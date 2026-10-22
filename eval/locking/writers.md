@@ -36,7 +36,7 @@ transaction boundary belongs to someone else.
 |---|---|---|
 | `aries/workspace/service.py` (21 commits) | `aries_workspace_goals`, audits | `save()`, `progress()`, `dispatch()`. **The sub-goal write path.** Contended file — see `PROPOSAL.md` |
 | `aries/workspace/orchestration.py` (7) | child/parent goals, evidence | `_persist` → `service.save`; `claim()` CAS; `_drive` interrupt path |
-| `aries/workspace/memory/store.py` (10) | `aries_workspace_memory`, conclusions | claimed by codex today |
+| `aries/workspace/memory/store.py` (10) | `aries_workspace_memory`, conclusions | being edited concurrently that day |
 | `aries/automations/runner.py` (8), `automations/worker.py` (1) | `automation_logs`, tasks | the hourly automations pass |
 | `vendor/.../scheduler/worker.py` (1) | `automation_logs` checkpoint, at **`worker.py:83` — `await db.commit()`** | the site the earlier investigation named. **Verified**: that line is the commit, and the `except Exception` below it is the handler that logs `sqlite_errorcode`/`sqlite_errorname` |
 | `vendor/.../memory/recovery.py` (1) | `task_runs`, `tasks`, `execution_operations`, `execution_plans`, `scheduled_tasks` | `recover_stuck()`. **This is the writer still failing live** — see §5 |
@@ -90,7 +90,7 @@ on-demand process point `DATABASE_URL` at the same file:
 | `scripts/aries <cmd>` | `export DATABASE_URL="${DATABASE_URL:-...var/aries.db}"` | yes, one new process each time |
 | `aries-lock-observer-20261003-final.service` | — | no: it reads `journalctl`, not the database |
 | `experiments/**` probes | `?mode=ro&uri=true` | no, SQLite refuses the write |
-| `experiments/memory-preservation/measure.py` | sets `DATABASE_URL` to the **live** file | writes, then rolls back (codex's fixture) |
+| `experiments/memory-preservation/measure.py` | sets `DATABASE_URL` to the **live** file | writes, then rolls back (a test fixture) |
 
 **This bounds what "one writer" can mean.** A process-local lock cannot serialise
 `aries-core` against `aries-local-model` or against a CLI run. For those, SQLite's
@@ -110,7 +110,7 @@ raise on a read-only probe), and it **reads the pragmas back** and logs a warnin
 if they did not take, because a pragma that silently failed is indistinguishable
 from no configuration until a lock error hours later.
 
-| Opener | WAL | `busy_timeout` | In my write scope? |
+| Opener | WAL | `busy_timeout` | In the A2 scope? |
 |---|---|---|---|
 | the shared engine, `database/base.py` | yes | 15 000 ms | yes — done |
 | `aries/workspace/media.py:242`, Firefox `permissions.sqlite` | **no, deliberately** | **200 ms, deliberately** | no — reported, not edited |
