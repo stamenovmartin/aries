@@ -50,6 +50,22 @@ labels and every result are committed**, so each number can be recomputed.
 | Memory on LoCoMo | exploratory | hit@5 0.377 (original) → **0.620** (hybrid + similarity rank) vs BM25 0.500 | [`iis/real-data/locomo/`](experiments/iis/real-data/locomo/) |
 | News on MIND-small | exploratory | AUC 0.613, above all 7 baselines (best 0.600); online learning adds nothing | [`iis/real-data/mind/`](experiments/iis/real-data/mind/) |
 
+**Where each result is in this repository.** The component's code, the script that ran the measurement, the
+script that computed the numbers, and the file the numbers are read from:
+
+| Result | Component code | Run | Analysis | Numbers |
+|---|---|---|---|---|
+| R1 | [`router.py`](aries/intelligence/router.py), [`agent_planner.py`](aries/workspace/agent_planner.py) (frozen source) | [`run_r1.py`](experiments/thesis-r1-real-data/run_r1.py) | [`analyze_r1.py`](experiments/thesis-r1-real-data/analyze_r1.py) | [`summary.json`](experiments/thesis-r1-real-data/summary.json), per-item [`predictions.json`](experiments/thesis-r1-real-data/predictions.json) |
+| R1b | the above + [`capability_gate.py`](aries/intelligence/capability_gate.py) | [`run_r1b.py`](experiments/thesis-r1b/run_r1b.py) | [`analyze_r1b.py`](experiments/thesis-r1b/analyze_r1b.py) | [`summary.json`](experiments/thesis-r1b/summary.json) |
+| M2 | same as R1b | [`run_m2.py`](experiments/thesis-m2-models/run_m2.py) | [`analyze_m2.py`](experiments/thesis-m2-models/analyze_m2.py) | [`summary.json`](experiments/thesis-m2-models/summary.json) |
+| H8 | [`verification/`](verification/) | [`run_mutants.py`](experiments/thesis-followup-20261012/h8/run_mutants.py) | [`analyze.py`](experiments/thesis-followup-20261012/h8/analyze.py) | [`h8/RESULTS.md`](experiments/thesis-followup-20261012/h8/RESULTS.md), [`runs/`](experiments/thesis-followup-20261012/h8/runs/) |
+| Hallucinations (HAL1) | [`agent.py`](aries/workspace/agent.py), [`contracts.py`](aries/workspace/contracts.py) | the runs above | [`hallucination_eval.py`](experiments/thesis-improvements-20261022/hallucination_eval.py) | [`hallucination-summary.json`](experiments/thesis-improvements-20261022/hallucination-summary.json) |
+| LoCoMo | [`retrieval.py`](aries/workspace/retrieval.py), [`memory/`](aries/workspace/memory/) | [`locomo_eval.py`](experiments/iis/real-data/locomo/locomo_eval.py) | the same script | [`results/`](experiments/iis/real-data/locomo/results/): first run `…T072458Z`, embeddings `…T142603Z`, M1 `…T193500Z` and `…T200243Z` |
+| MIND-small | [`interests/`](aries/interests/), [`selection.py`](aries/news/selection.py), [`loop.py`](aries/learning/loop.py) | [`mind_eval.py`](experiments/iis/real-data/mind/mind_eval.py) | the same script | [`results/`](experiments/iis/real-data/mind/results/): first run `…T072250Z`, embedding baseline `…T142633Z`, M1 `…T193501Z` |
+
+Each run writes a new file and never overwrites one. The runs record the source commit or code hash, and, where a
+model is used, its digest. Every ratio in the thesis is checked against these files when the thesis is built.
+
 The first public-data result (R1) was negative and stays reported; the repairs were designed from its records,
 registered before the new measurement (R1b), and checked with four models (M2). All results in one place:
 [`experiments/thesis-improvements-20261022/RESULTS.md`](experiments/thesis-improvements-20261022/RESULTS.md).
