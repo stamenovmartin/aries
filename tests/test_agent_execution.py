@@ -15,8 +15,7 @@ from agentic_core.config.settings import settings as engine_settings
 from aries.settings import SettingsService
 from aries.workspace import service, agent_planner, contracts
 from aries.workspace.models import WorkspaceGoal
-from aries.workspace.registry import registry, Registry, Capability, Empty, policy
-from aries.api import routes
+from aries.workspace.registry import registry, Registry, Capability, Empty
 from aries.api.app import app
 
 

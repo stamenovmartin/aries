@@ -10,6 +10,12 @@ T=experiments/thesis-p1-performance
 PY=.venv/bin/python
 export PYTHONPATH="$PWD/vendor/agentic-core:$PWD/vendor:$PWD"
 log() { printf '%s %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" >> $T/run-p1.log; }
+# Added after the first P1 window (2026-10-23), which ran while the session was locked: idle-delay 0 does not
+# unlock a session that is already locked, and the desktop goals then measure the lock. Refuse to start instead.
+if gdbus call --session --dest org.gnome.ScreenSaver --object-path /org/gnome/ScreenSaver \
+     --method org.gnome.ScreenSaver.GetActive 2>/dev/null | grep -q true; then
+  echo "REFUSED: the desktop session is locked; unlock it and run again" >&2; exit 2
+fi
 old=$(gsettings get org.gnome.desktop.session idle-delay)
 mkdir -p $T/raw
 python3 $T/sample.py $T/raw/resources-$(date -u +%Y%m%dT%H%M%SZ).jsonl & SAMPLER=$!

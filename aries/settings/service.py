@@ -47,7 +47,7 @@ from agentic_core.observability import audit
 
 from aries.settings import schema, store
 from aries.settings.layers import MACHINE_WRITABLE, Layer
-from aries.settings.schema import SettingDef, SettingError
+from aries.settings.schema import SettingError
 
 logger = logging.getLogger(__name__)
 

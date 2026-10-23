@@ -25,6 +25,7 @@ r1|NL2Bash and CLINC150 in ~/data-ext (download.sh), the local model, aries.targ
 r1b-x1|the R1b samples and labels, the H5/H4b items, the local model; stops and restarts aries.target; writes new raw files|bash experiments/thesis-improvements-20261022/run-improvements.sh
 m2|the R1b samples, ollama with llama3.1:8b, qwen2.5:1.5b and qwen2.5:14b; stops and restarts aries.target|bash experiments/thesis-m2-models/run-m2.sh
 m2-analysis|the M2 raw files; refuses if summary.json exists|$PY experiments/thesis-m2-models/analyze_m2.py
+p1|aries.target is stopped and restarted by the script; the desktop must be unlocked; ~1 h; writes new raw and suite files|bash experiments/thesis-p1-performance/run-p1.sh
 hal1|the H5, H4b, X1, R1 and R1b run folders; refuses if hallucination-summary.json exists|$PY experiments/thesis-improvements-20261022/hallucination_eval.py
 h8-scope|nothing live: offline, no model, no GPU; writes experiments/exploratory/h8-verify-scope/runs/<run>; exploratory, designed after H8|$PY experiments/exploratory/h8-verify-scope/run.py --manifest experiments/thesis-followup-20261012/h8/mutants.json --label exploratory-verify-scope
 TABLE

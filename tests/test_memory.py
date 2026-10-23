@@ -24,7 +24,7 @@ bootstrap("aries-memory")
 import numpy as np  # noqa: E402
 from sqlalchemy import select  # noqa: E402
 
-from agentic_core.database.base import async_session, engine  # noqa: E402
+from agentic_core.database.base import async_session  # noqa: E402
 from aries.settings import SettingsService  # noqa: E402
 from aries.settings.layers import Layer  # noqa: E402
 from aries.workspace import retrieval, service  # noqa: E402

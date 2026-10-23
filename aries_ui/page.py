@@ -18,9 +18,9 @@ import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Adw, Gtk  # noqa: E402
+from gi.repository import Gtk  # noqa: E402
 
-from aries_ui import design, widgets  # noqa: E402
+from aries_ui import widgets  # noqa: E402
 
 
 class Page(Gtk.Box):

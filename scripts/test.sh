@@ -12,7 +12,11 @@ $PY vendor/agentic-core/tests/run_tests.py "$@" || fail=1
 
 echo
 echo "=== engine reference example (linux_agent) ==="
-$PY vendor/examples/linux_agent/test_linux_agent.py || fail=1
+if [ -f vendor/examples/linux_agent/test_linux_agent.py ]; then
+  $PY vendor/examples/linux_agent/test_linux_agent.py || fail=1
+else
+  echo "  skipped — vendor/examples is not in this checkout"
+fi
 
 echo
 echo "=== aries ==="
