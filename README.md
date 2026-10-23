@@ -13,6 +13,13 @@
 > | Код: интереси, вести, учење, меморија | [`aries/interests/`](aries/interests/), [`aries/news/`](aries/news/), [`aries/learning/`](aries/learning/), [`aries/workspace/memory/`](aries/workspace/memory/) |
 > | Водич за преглед (македонски) | [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md), дел „IIS“ |
 
+> **Резултати на ИИС на јавни податоци:**
+>
+> | Препорака на вести (MIND-small) | Меморија (LoCoMo) |
+> |---|---|
+> | ![MIND AUC](experiments/analysis/figures/mind_auc.svg) | ![LoCoMo hit@5](experiments/analysis/figures/locomo_hit5.svg) |
+> | ARIES 0,613 AUC, над сите 7 основи; MMR разновидност 0,611 | меморијата 0,377 → 0,620 по поправките, над BM25 (0,500) |
+
 A voice-driven assistant that acts on a live Ubuntu/GNOME desktop, built around one question:
 
 > **What may an agent claim about itself?**
