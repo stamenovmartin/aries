@@ -194,7 +194,7 @@ so that it is not retrofitted later, which is when it would be forgotten. See [D
 | shell | `org.aries.Shell.Windows()` — read-only observation |
 | settings | `operator.*` (off by default) and `intelligence.*` (local by default) |
 | audit | `operator.ran`, carrying `reported_success`, `verified_success` and `honesty_gap` |
-| evaluation | [`experiments/operator/`](../experiments/operator/) and [EXPERIMENTS.md](EXPERIMENTS.md) |
+| evaluation | [`experiments/thesis/operator/`](../experiments/thesis/operator/) and [EXPERIMENTS.md](EXPERIMENTS.md) |
 
 ---
 

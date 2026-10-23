@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$(readlink -f "$0")")/.."
-exec .venv/bin/python experiments/intelligence/evaluate.py "$@"
+exec .venv/bin/python experiments/archive/intelligence/evaluate.py "$@"

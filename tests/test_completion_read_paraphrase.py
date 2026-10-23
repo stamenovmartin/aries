@@ -32,7 +32,7 @@ def frozen_contracts():
 def fixture_goals():
     goals = []
     for name in ('experiments/product/independent-acceptance/fixtures.jsonl',
-                 'eval/agent_suite/goals.jsonl', 'experiments/aries100/goals.jsonl'):
+                 'eval/agent_suite/goals.jsonl', 'experiments/archive/aries100/goals.jsonl'):
         p = ROOT / name
         if p.exists():
             for line in p.read_text().splitlines():

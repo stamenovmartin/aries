@@ -4649,7 +4649,7 @@ failure is not a model refusing; it is a model answering plausibly.
 ## The experiment
 
 Designed before the implementation, as the rule requires, and run:
-`experiments/operator/` — four variants, 26 tasks, one verifier for all of them.
+`experiments/thesis/operator/` — four variants, 26 tasks, one verifier for all of them.
 
 | variant | verified | honesty gap | median s |
 |---|---:|---:|---:|
@@ -4693,7 +4693,7 @@ in the Control Centre (`docs/screenshots/operator.png`) showing what ARIES can
 act on, what it cannot verify and why, and its own history with the gap.
 
 **RESEARCH** — run, with results and a falsified criterion recorded in
-`experiments/operator/analysis.md`.
+`experiments/thesis/operator/analysis.md`.
 
 ## What should happen next
 
@@ -4711,7 +4711,7 @@ the goal does not.
 
 ```bash
 rm -rf aries/operator aries/intelligence.py aries_ui/pages/operator.py \
-       tests/test_operator.py experiments/operator docs/OPERATOR.md
+       tests/test_operator.py experiments/thesis/operator docs/OPERATOR.md
 git checkout aries/api/routes.py aries/cli.py aries_ui/contract.py \
              aries_ui/pages/__init__.py aries/__init__.py \
              shell/aries@aries.local/lib/dbus.js
@@ -5027,7 +5027,7 @@ browser goal. GVariant decoding now preserves Unicode.
 Final validation: all suites pass; 66 workspace and 94 Operator checks; 31 real UI
 checks; all 13 smoke checks. Live requests: 20/20 completion criteria, qualified by
 an already-installed Firefox check rather than a fresh install. Earlier failures
-are retained in experiments/workspace. WORKSPACE.md documents limits and examples.
+are retained in experiments/archive/workspace. WORKSPACE.md documents limits and examples.
 
 Follow-up: the user requested separate Jarvis-style screens and visibility into
 background agents/evaluation. Added command-deck styling, News Radar cards, live
@@ -5099,12 +5099,12 @@ grammar incompatibility and premature finish/refusal. All failed runs remain
 recorded; constrained generation was adjusted and the successful runs are
 engineering acceptance, not held-out planner evaluation.
 
-Final live replication: experiments/agent/20260917T204843Z-1ae7a7, 4/4.
+Final live replication: experiments/archive/agent/20260917T204843Z-1ae7a7, 4/4.
 Full regression suites passed before the final small timing/call-budget fixes;
 58 dedicated checks and live 4/4 passed afterwards. Isolated shell passed;
 UI navigation passed 8/8. Existing full demo is 10/11 in the current old-shell
 session; smoke correctly flags its build mismatch. Fresh login is still needed.
-Validation logs are retained under experiments/agent/validation-20260917/.
+Validation logs are retained under experiments/archive/agent/validation-20260917/.
 
 Added a Macedonian research paper, 18-slide presentation, Mermaid sources and
 rendered diagrams, PDFs and a hashed evidence manifest. Research reporting
@@ -5158,7 +5158,7 @@ call; Claude initially returned a session-limit 429.
 The real paired execution passed both arms 3/3. Full regression passed with
 63 intelligence checks, including timeout cleanup, invalid/failed output,
 unexpected tool attempts and native cached-token accounting. Evidence lives in
-experiments/intelligence/cli-20260918 and 20260917T222712Z-ab-f2e66d.
+experiments/archive/intelligence/cli-20260918 and 20260917T222712Z-ab-f2e66d.
 
 ## 2026-09-19 — Background operation and local news summaries
 
@@ -5177,4 +5177,4 @@ task survived restart and completed. Window observations now fail closed on inva
 schemas, and focus requests require independently observed target focus. Added
 read-only production readiness report, keeping desktop capability failure explicit.
 Disabled automatic locking/lock-on-suspend at user's request. See
-`experiments/hardening/maintenance-live.json` and `docs/PRODUCTION_READINESS.md`.
+`experiments/archive/hardening/maintenance-live.json` and `docs/PRODUCTION_READINESS.md`.

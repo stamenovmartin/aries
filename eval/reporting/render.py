@@ -14,7 +14,7 @@ END = '<!-- BUILD-MEASURE-RESULTS:END -->'
 
 def render():
     data = json.loads((ROOT / 'eval/reporting/denominators.json').read_text())
-    memory = json.loads((ROOT / 'experiments/memory/summary.json').read_text())
+    memory = json.loads((ROOT / 'experiments/iis/memory/summary.json').read_text())
     v = data['verification']
     c = v['coverage']
     assert sum(v['buckets'].values()) == v['n']
@@ -38,7 +38,7 @@ def render():
         f"The remaining **{probes-answerable}** have no expected answer. Thus the two denominators describe different outcomes, not competing sample counts. "
         f"Historical source run: {memory.get('ran_at_utc', memory['environment']['evaluated_at_utc'])}; "
         'these are retained historical denominators, not a measurement of today’s system.', '',
-        'Sources: `eval/reporting/denominators.json` and `experiments/memory/summary.json`.', '',
+        'Sources: `eval/reporting/denominators.json` and `experiments/iis/memory/summary.json`.', '',
         '## Results — Part B', '',
         'Intentionally empty. Populate only from completed Part B artifacts with n, time window, actual runtime flags, '
         'fixture hash and code identity. Build smoke tests do not populate this table.', '',

@@ -43,7 +43,7 @@ def paired_statistics(baseline, candidate):
 #
 # `semantic-v3` is evaluated here for completeness. It is proposed for MEMORY
 # retrieval, where it is measured against its own baseline with its own fixture
-# in `experiments/memory/`; a twenty-case review fixture is not the evidence
+# in `experiments/iis/memory/`; a twenty-case review fixture is not the evidence
 # that would promote it, and this file does not promote anything.
 BASELINE = 'overlap-v1'
 PROMOTION_CANDIDATE = 'focused-v2'

@@ -38,7 +38,7 @@ cd /home/stamenovmartin/aries
 ```
 
 This runs the real news and brief automations and writes JSON evidence and a linked
-Markdown report under `experiments/news/<UTC timestamp>/`. Nonzero exit means a
+Markdown report under `experiments/iis/news/<UTC timestamp>/`. Nonzero exit means a
 required coverage or pipeline check failed. It requires enabled sources/interests
 covering AI, Real Madrid and Macedonian news. It does not alter interests or feeds.
 Repeated scans use persisted item identities to avoid repeated delivery. It does
@@ -72,7 +72,7 @@ failed attempts have a one-hour cooldown. Pruning occurs when the cache is used.
 Changing the prompt version invalidates previous cached output. Cache holds generated
 summaries and usage, not complete source articles; deleting it is safe.
 
-Actual run: `experiments/news/20260919T000327Z/` passed 8/8 news checks. Two of six
+Actual run: `experiments/iis/news/20260919T000327Z/` passed 8/8 news checks. Two of six
 English items yielded accepted summaries, four fell back, and two domestic items
 used original Macedonian excerpts. Repeated briefing verified all generated/fallback
 entries were cached (`cached-brief.json`). This is not a claim of universal translation

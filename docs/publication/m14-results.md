@@ -54,7 +54,7 @@ Historical Operator 372 trials, controls 52/52, old full demo 11/11 и core demo
 
 ## Subsequent replication
 
-Run [`20260917T204843Z-1ae7a7`](../../experiments/agent/20260917T204843Z-1ae7a7/result.json) повторно помина **4/4** по поправки на active wall-time accumulation и planner call-budget edge handling. Task states повторно се `done`, `done`, `failed` (expected negative control), `done`. Harness durations се 14.785 s, 4.673 s, 4.130 s и 11.350 s за file, system, negative и browser.
+Run [`20260917T204843Z-1ae7a7`](../../experiments/archive/agent/20260917T204843Z-1ae7a7/result.json) повторно помина **4/4** по поправки на active wall-time accumulation и planner call-budget edge handling. Task states повторно се `done`, `done`, `failed` (expected negative control), `done`. Harness durations се 14.785 s, 4.673 s, 4.130 s и 11.350 s за file, system, negative и browser.
 
 Новото `metrics.wall_seconds` ја вклучува активната обработка пред и по approval resume, но го исклучува approval/queue waiting interval; harness `seconds` останува end-to-end scenario metric. Првата acceptance табела погоре и нејзините historical timing limitations се задржани непроменети. Replication е врз истите development fixtures и не претставува независен held-out benchmark. Source digest: `0459dac21da3e7ffc57fa9ea850e74f20ab2b91bfe63b11f88f79127c108cb3a`.
 
@@ -71,6 +71,6 @@ cd ~/aries
 ./scripts/aries-agent-demo
 ```
 
-[Run result](../../experiments/agent/20260917T204354Z-fb8722/result.json) · [Report](../../experiments/agent/20260917T204354Z-fb8722/report.md) · [Task snapshots](../../experiments/agent/20260917T204354Z-fb8722/tasks/) · [Evidence snapshots](../../experiments/agent/20260917T204354Z-fb8722/evidence/)
+[Run result](../../experiments/archive/agent/20260917T204354Z-fb8722/result.json) · [Report](../../experiments/archive/agent/20260917T204354Z-fb8722/report.md) · [Task snapshots](../../experiments/archive/agent/20260917T204354Z-fb8722/tasks/) · [Evidence snapshots](../../experiments/archive/agent/20260917T204354Z-fb8722/evidence/)
 
 Run source SHA-256: `0ec0e1ca9df86982738a53d4835163b466a1509783ec6400ad6b4af93aae14ae`. Git marker `c1adb8041e2a1bd3acd1efd5f300a09a2b968967`, dirty tree. Artifact digests are included in the publication manifest.
