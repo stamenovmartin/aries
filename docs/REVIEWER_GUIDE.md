@@ -33,7 +33,10 @@
 3. [`experiments/iis/real-data/README.md`](../experiments/iis/real-data/README.md): резултатите од ИИС на
    јавни податоци (MIND, LoCoMo).
 4. [`experiments/analysis/README.md`](../experiments/analysis/README.md): сите споредби како графици.
-5. [`docs/preregistration/`](preregistration/): пререгистрациите.
+5. [`docs/preregistration/`](preregistration/README.md): пререгистрациите, со семејствата на тестови.
+6. [`docs/DATASETS.md`](DATASETS.md): сите податочни множества: извор, лиценца, примерок, ознаки, што е во
+   складиштето.
+7. [`experiments/README.md`](../experiments/README.md): распоредот на мерењата (`thesis/`, `iis/`, `archive/`).
 
 ---
 
