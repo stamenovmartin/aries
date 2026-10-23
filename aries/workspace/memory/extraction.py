@@ -10,7 +10,7 @@ Stage 3 never runs on every turn. Stage 2 resolves anything clearly redundant
 SAGE (arXiv:2605.30711) reports that band skipping 16-18% of LLM calls.
 
 MEASURED HERE IT SAVES LESS THAN THAT, and the honest number is in
-`experiments/memory/analysis.md`: over 45 utterances, stage 1 refused 12 (27%),
+`experiments/iis/memory/analysis.md`: over 45 utterances, stage 1 refused 12 (27%),
 stage 2 settled 6 more (13%), and **27 still escalated — a 60% escalation
 rate**. The reason belongs to the embedder rather than the method. e5 puts every
 pair of short sentences between roughly 0.83 and 0.99, so the band that keeps a
@@ -54,7 +54,7 @@ OLLAMA = os.environ.get("ARIES_OLLAMA", "http://127.0.0.1:11434")
 # is plainly unrelated to everything stored. Between them, ask the model.
 #
 # CALIBRATED, NOT ASSUMED, and specific to this embedder. Measured on
-# experiments/memory/corpus.jsonl with e5-base-int8: a restatement of a stored
+# experiments/iis/memory/corpus.jsonl with e5-base-int8: a restatement of a stored
 # note scores 0.992, a statement that CONTRADICTS one scores 0.950, one that
 # qualifies one scores 0.939, and genuinely unrelated pairs bottom out at 0.827.
 # The whole usable range is 0.83-0.99, so a textbook 0.90/0.50 band would call

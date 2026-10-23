@@ -10,9 +10,11 @@ This page is a map. It adds nothing that is not already in the files it links to
 | [`../README.md`](../README.md) | what ARIES is, and the **evaluation map** (thesis and IIS), with a status label for each result |
 | [`STATE_OF_ARIES.md`](STATE_OF_ARIES.md) | the current state of the system, area by area |
 | [`AUDIT.md`](AUDIT.md) | the 2026-10-22 static audit: layout, code health, flags, test failures, known bugs, integration and runtime health, plus the **Fixed / remaining** section. Raw tool outputs are in [`audit/`](audit/) |
+| [`DATASETS.md`](DATASETS.md) | every dataset and item set: source, licence, what it measures, sample, labels, what is committed |
+| [`../experiments/README.md`](../experiments/README.md), [`../eval/README.md`](../eval/README.md) | the layout of the measurements and of the evaluation harnesses |
 | [`ENVIRONMENT.md`](ENVIRONMENT.md) | the machine, Python, the pinned packages (`../requirements.lock`), the Ollama version and the model IDs |
 | [`CONFIG_REFERENCE.md`](CONFIG_REFERENCE.md) | every flag and every setting, with its default, **generated from the code** by `../scripts/gen_config_reference.py` |
-| [`../Makefile`](../Makefile) | one entry point: `setup`, `test`, `lint`, `check`, `smoke`, `eval-thesis`, `eval-iis` |
+| [`../Makefile`](../Makefile) | one entry point: `setup`, `test`, `lint`, `check`, `links`, `smoke`, `eval-thesis`, `eval-iis` |
 
 ## Architecture
 
@@ -40,6 +42,11 @@ section in the same file, dated, and written before the measurement it changes.
 | H6 abstention replication | [`H6-abstention-replication.md`](preregistration/H6-abstention-replication.md) | 1, 2, 3 (10-18) | confirmatory, measured |
 | H8 verifier fault injection | [`H8-verifier-fault-injection.md`](preregistration/H8-verifier-fault-injection.md) | 1, 2, 3 (10-18) | confirmatory, measured |
 | R1 public data (NL2Bash, CLINC150) | [`R1-real-data-benchmarks.md`](preregistration/R1-real-data-benchmarks.md) | 1, 2 (10-22) | confirmatory (own family), measured |
+| R1b remedies on new public samples | [`R1b-improved-router-planner.md`](preregistration/R1b-improved-router-planner.md) | — | confirmatory (own family, 3 of 4), measured |
+| M2 four local language models | [`M2-local-models.md`](preregistration/M2-local-models.md) | — | confirmatory (own family, 6 of 6), measured |
+| X1 H5 and H4b re-run with the remedies | [`X1-remedy-reruns.md`](preregistration/X1-remedy-reruns.md) | — | registered exploratory, measured |
+| HAL1 hallucination measures | [`HAL1-hallucination-measures.md`](preregistration/HAL1-hallucination-measures.md) | 1 (10-22) | registered descriptive, measured |
+| M1 information-layer remedies (IIS) | [`M1-information-layer-remedies.md`](preregistration/M1-information-layer-remedies.md) | — | registered exploratory, measured |
 | H7 hybrid scope gate | [`H7-hybrid-scope-gate.md`](preregistration/H7-hybrid-scope-gate.md) | — | postponed (future work) |
 | H9 progress ledger | [`H9-progress-ledger.md`](preregistration/H9-progress-ledger.md) | — | dropped (design record) |
 

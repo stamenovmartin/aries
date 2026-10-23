@@ -119,10 +119,10 @@ preregistration exists and no measurement does. Full follow-up results: [`experi
 
 | What is measured | Dataset | Size | Status | Results |
 |---|---|---|---|---|
-| Semantic memory: extract-then-store vs store-everything, e5-base | author-written corpus and probes | 45 rows, 25 probes | preregistered hypothesis (supported on clean@3, not on hit@3) | [`experiments/memory/analysis.md`](experiments/memory/analysis.md) |
-| Semantic memory: embedder swapped to bge-m3 | same | 45 rows, 25 probes | exploratory | [`experiments/memory/summary-bge-m3.json`](experiments/memory/summary-bge-m3.json) |
+| Semantic memory: extract-then-store vs store-everything, e5-base | author-written corpus and probes | 45 rows, 25 probes | preregistered hypothesis (supported on clean@3, not on hit@3) | [`experiments/iis/memory/analysis.md`](experiments/iis/memory/analysis.md) |
+| Semantic memory: embedder swapped to bge-m3 | same | 45 rows, 25 probes | exploratory | [`experiments/iis/memory/summary-bge-m3.json`](experiments/iis/memory/summary-bge-m3.json) |
 | Learning: task-experience retrieval, `focused-v2` vs `overlap-v1` | developer-labelled queries (regression fixture) | 20 queries | descriptive | [`docs/LEARNING_COMPARISON.md`](docs/LEARNING_COMPARISON.md) |
-| Interests: news preference relevance checks | explicit user preferences | 3 interests, 3 checks | descriptive | [`experiments/interests/`](experiments/interests/) |
+| Interests: news preference relevance checks | explicit user preferences | 3 interests, 3 checks | descriptive | [`experiments/iis/interests/`](experiments/iis/interests/) |
 | News ranking on MIND-small: ARIES interest profile vs 7 baselines, plus online learning | public dataset (Microsoft) | 73,152 impressions, 50,000 users | exploratory: **ARIES beats every baseline** (AUC 0.613; best baseline, embedding, 0.600); learning adds +0.0001; MMR diversity (M1) 0.611 vs round-robin 0.578 | [`experiments/iis/real-data/mind/`](experiments/iis/real-data/mind/) |
 | Memory retrieval on LoCoMo: annotated evidence turns in the top 5 | public dataset (Snap Research) | 10 conversations, 1,982 questions | exploratory: BM25 beat the original ARIES memory (hit@5 0.500 vs 0.377); with `ARIES_MEMORY_HYBRID_RRF` + `ARIES_MEMORY_SIMILARITY_RANK` (M1) **0.620**, +0.120 [0.098, 0.147] over BM25 | [`experiments/iis/real-data/locomo/`](experiments/iis/real-data/locomo/) |
 
@@ -457,16 +457,19 @@ system's trivial verifiers. They were repaired before the fixture was used.
 ## Layout
 
 ```
-aries/           the system: workspace, intelligence, analytics, learning, speech, power
+aries/           the system: router, planner, verifiers, completion contracts, memory, news, learning, speech
 aries_ui/        GTK4 control centre
 shell/           GNOME Shell extension (window access over D-Bus)
 systemd/         four user units and a target
-scripts/         46 entry points: session, models, evaluation, diagnostics
-eval/            the 90-goal suite, its fixture and every run including the invalid ones
-experiments/     measurement artifacts; router ablations, voice, endurance
-  product/independent-acceptance/   the independent review: findings, fixtures, runners
-tests/           unit and integration tests
-docs/            engineering documentation
+scripts/         entry points: session, models, evaluation (eval.sh), checks (check_links.py), diagnostics
+eval/            reusable evaluation harnesses: the 90-goal agent suite, research feedback, smoke tests
+experiments/     dated measurements, each with its scripts and result files (experiments/README.md)
+  thesis/          thesis index and precursors        iis/       IIS index, public-data evaluations
+  thesis-*/        the thesis measurements (frozen)   archive/   superseded series
+  analysis/        every comparison as a figure
+docs/            documentation; preregistration/ (every registration), DATASETS.md, ENVIRONMENT.md
+tests/           unit and integration tests (make test)
+vendor/          the agentic-core engine ARIES runs on
 ```
 
 Runs that turned out to be invalid are kept with the cause recorded — two series were discarded

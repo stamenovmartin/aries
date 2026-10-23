@@ -1,0 +1,26 @@
+# The read-only checks a reviewer would run: the thesis tables and figures still match their sources,
+# and every relative link in the documentation resolves. Nothing here needs a model, a GPU or a desktop.
+name: checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the table headers record the commit of each source file
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the pinned dependencies
+        run: pip install -r requirements.lock
+      - name: Thesis tables match their sources
+        run: PYTHONPATH=$PWD/vendor/agentic-core:$PWD/vendor:$PWD python experiments/thesis-followup-20261012/thesis-tables/check.py
+      - name: Figures match their sources
+        run: python experiments/analysis/make_figures.py --check
+      - name: Documentation links resolve
+        run: python scripts/check_links.py

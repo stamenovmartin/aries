@@ -2,7 +2,7 @@
 
 The rules checked here are structural, not behavioural, and that is deliberate.
 Whether the local model labels one sentence well is measured in
-`experiments/memory/`, against a baseline, with statistics. What is asserted
+`experiments/iis/memory/`, against a baseline, with statistics. What is asserted
 here is what must hold even when the model is wrong: a machine may not write the
 user layer, nothing is deleted, a conclusion without provenance cannot exist,
 and a contradiction is reviewed explicitly before the clock orders confirmed facts.

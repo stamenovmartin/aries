@@ -17,7 +17,7 @@
 > **17 September 2026 — M14:** central registry (15 capabilities), strict local-model
 > decisions, bounded execution, independent completion checks, durable step/evidence
 > history and API/Monitor integration are implemented. Final live run
-> `experiments/agent/20260917T204843Z-1ae7a7/` passed 4/4, including a genuinely
+> `experiments/archive/agent/20260917T204843Z-1ae7a7/` passed 4/4, including a genuinely
 > failed missing-file task. Full regression suites passed; 58 dedicated checks and
 > native UI 8/8 passed. The latest legacy demo is 10/11 because the loaded older
 > GNOME extension cannot focus an existing background Firefox window; smoke also
