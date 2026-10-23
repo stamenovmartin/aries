@@ -36,6 +36,8 @@ class Route(Decision):
     blocked_reason: str = ''
     input_tokens: int | None = None
     output_tokens: int | None = None
+    # ARIES_ROUTER_CAPABILITY_GATE (capability_gate.py): the capability the gate named, or None.
+    gate_capability: str | None = None
 
 class Request(Strict):
     text: str = Field(min_length=1, max_length=12000)

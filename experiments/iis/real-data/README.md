@@ -69,13 +69,55 @@ annotated evidence turns. Each conversation is fed to ARIES turn by turn; answer
   and did not change retrieval.
 - The store gate is not the cause: 99.6% of the questions still have an evidence turn stored.
 
+## 3. After the first results: remedies (M1, registered exploratory)
+
+Registered in `docs/preregistration/M1-information-layer-remedies.md` before the runs. Both datasets had
+already been used, so these are **exploratory** numbers; a confirmatory test needs unseen data (for memory,
+LongMemEval).
+
+**LoCoMo** (`locomo/results/locomo-20261022T193500Z.json`, same 1,982 questions, same rows as
+`embedding-only-e5`, only the ranking differs; intervals are conversation-cluster bootstrap):
+
+| Ranking | hit@5 | vs BM25 | vs ARIES e5 (semantic-v3) |
+|---|---|---|---|
+| BM25 | 0.500 | — | |
+| ARIES e5, semantic-v3 (as shipped) | 0.377 | −0.123 [−0.140, −0.104] | — |
+| hybrid RRF + recency/importance (`ARIES_MEMORY_HYBRID_RRF`) | 0.492 | −0.008 [−0.029, 0.017] | +0.116 |
+| cosine only, no recency/importance (ablation) | 0.603 | +0.103 [0.077, 0.133] | +0.226 |
+| RRF only, no recency/importance (ablation) | 0.621 | +0.121 [0.098, 0.147] | +0.244 |
+| `ARIES_MEMORY_HYBRID_RRF` + `ARIES_MEMORY_SIMILARITY_RANK` (designed after the run above) | 0.620 | +0.120 [0.098, 0.147] | +0.243 |
+
+- **The cause was not the embedder but the ranking formula.** semantic-v3 adds recency (half-life 72 hours
+  for an utterance) and importance to the similarity. In conversations that span months this pushes every
+  early session down. Without those terms the same e5 rows beat BM25 by 0.10–0.12.
+- `ARIES_MEMORY_SIMILARITY_RANK` (default off) makes similarity decide and leaves recency, importance and
+  layer as tie-breaks. It was designed after this result; its LoCoMo number (last row, run
+  `locomo-20261022T200243Z.json`) is therefore exploratory, not a confirmation.
+
+**MIND-small dev** (`mind/results/mind-dev-20261022T193501Z.json`, 73,152 impressions):
+
+| System | AUC |
+|---|---|
+| ARIES interests | 0.613 |
+| + round-robin diversity (as shipped) | 0.578 |
+| + MMR diversity (`ARIES_NEWS_DIVERSE_TOPK`) | 0.611 |
+| learning, absolute bars (as shipped) | 0.6135 |
+| learning, relative bars (`ARIES_LEARNING_RELATIVE_CTR`) | 0.6134 |
+
+- **MMR recovers almost all of the diversity cost:** +0.033 [0.031, 0.034] over round-robin, −0.003 against
+  no diversity at all.
+- **Relative learning does not help, and the expectation behind it was wrong.** The absolute rule was not
+  idle: it changed 4,031 topic weights (mostly down, because almost every topic is below a 10% click rate);
+  the relative rule changed 453. Neither moves AUC. Learning from clicks does not improve ranking on MIND.
+
 ## What this means
 
-On news ranking, the hand-built ARIES interest profile is a real improvement over simple baselines, but the
-learning on top of it does not add anything measurable here. On conversational memory, ARIES's embedding
-retrieval is clearly weaker than keyword search over the raw turns overall, though it helps on multi-hop
-questions. A hybrid (keyword plus embedding) is the
-obvious next step and has not been tested.
+On news ranking, the hand-built ARIES interest profile is a real improvement over simple baselines, and
+MMR keeps diversity almost free; the learning on top of it does not add anything measurable, with either
+rule. On conversational memory, the first run made ARIES look weaker than keyword search; M1 shows that the
+recency and importance terms of the ranking were the cause. With similarity deciding the order (and BM25
+fused in), ARIES retrieves the evidence in the top 5 for 62% of the questions, against 50% for BM25. Both
+remedies are behind flags, default off, and exploratory until measured on unseen data.
 
 ## Reproduce
 

@@ -30,6 +30,13 @@ whether the request itself picks one of several.
    A reply is used only if it picks one of those paths (resolved_choice); anything else is not
    acted on.
 
+ARIES_RESOLVER_CODE_SELECT (default off, designed after the H4b result): in H4b the decision call
+answered ask on all 240 runs, unambiguous twins included, so the resolver asked every time. With
+the flag step 3 makes no model call. Code tries every word of the request and every order word
+with the same _distinguishes() test that checks a model's span; when the words single out exactly
+one candidate, that candidate is selected with the word as its evidence span, and otherwise ARIES
+asks. The check that guards a model's selection is the whole decision.
+
 The resolver does not apply to Cyrillic requests (ARIES_MK_FROZEN: nothing new is built on
 Macedonian), to goals that name an exact file, to listing or existence questions, or to goals
 naming more than one folder. Off, nothing here runs.
@@ -139,6 +146,25 @@ def accept(decision, goal, cands):
     if not _distinguishes(span, index, cands):
         return None, 'evidence_span does not single out the selected candidate'
     return cands[index], 'selected on evidence span'
+
+
+def code_select(goal, folder, cands):
+    """ARIES_RESOLVER_CODE_SELECT: (candidate, span) when request words single out one candidate, else None."""
+    text = goal
+    for p in _paths(goal):
+        text = text.replace(p, ' ')
+    spans = [w for w in WORD.findall(text.casefold()) if (len(w) >= 3 and w not in STOP
+             and _stem(w) not in _words(folder)) or w in EXTENSION_WORDS]
+    spans += [w for w in ORDER_WORDS if re.search(rf'\b{re.escape(w)}\b', text.casefold())]
+    picked = {}
+    for span in spans:
+        hits = [i for i in range(len(cands)) if _distinguishes(span, i, cands)]
+        if len(hits) == 1:
+            picked.setdefault(hits[0], span)
+    if len(picked) != 1:
+        return None
+    (index, span), = picked.items()
+    return cands[index], span
 
 
 def decision_schema(n):
