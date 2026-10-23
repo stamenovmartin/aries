@@ -51,3 +51,21 @@ P1-B for the four models; `aries.target` restarted, screen blanking restored, sa
 - Ollama keeps a model loaded for its `keep_alive`; the first request after a cold start is not in P1-A's
   quantiles as a separate category, so P1-B reports cold load on its own.
 - Power is the GPU board's reported draw, not wall power; CPU and RAM are not converted to energy.
+
+## Amendment 1 (2026-10-23, after the first P1 window, before these runs)
+
+The first P1-C ran while the desktop was **blanked**: idle blanking had already started before the window, and
+`idle-delay 0` does not wake a blanked screen. Desktop capabilities refuse on a blanked screen by design, so eight
+goals measured the blank, not the agent. The exploratory diagnosis (`diagnosis.json`) also found nine goals that
+fail on "Context metadata exceeds planner budget" in the installed service. Two further series, each the agent
+suite three times exactly as in P1-C, are added. Both are **exploratory**; the first P1-C stays as measured.
+
+- **P1-C2:** the installed system unchanged, with idle blanking switched off permanently
+  (`org.gnome.desktop.session idle-delay 0`, `idle-dim false`) and the screen awake (`ScreenSaver.GetActive` false)
+  at the start; the window refuses to start otherwise. It separates the blank from the agent.
+- **P1-C3:** as C2, with `ARIES_PLAN_DISPATCH_FIX=1` in the service's override file (`~/aries/var/flags.env`, read
+  by the running service every 2 s; removed after the series). The flag is already in the installed code, default
+  off; it compacts the planner context's own metadata instead of failing the goal.
+
+Reported per series as in P1-C (pass, false success, skip, latency, resources, reliability across the three runs),
+by `analyze_p1_suite.py`, and diagnosed by `diagnose_p1.py` with the same rules.
