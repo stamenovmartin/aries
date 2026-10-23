@@ -37,15 +37,19 @@ async def _refused(target):
             return str(exc)
 
 
+# The installation as the user would type it (`~/aries` when installed; any checkout under home works).
+ROOT = '~/' + cap.INSTALLATION.resolve().relative_to(Path.home().resolve()).as_posix()
+
+
 async def test_its_own_source_is_not_a_write_target():
     await _ready()
     check('the installation root is where this file lives',
           (cap.INSTALLATION / 'aries' / 'workspace' / 'capabilities.py').is_file())
-    for target in ('~/aries/aries/workspace/capabilities.py',
-                   '~/aries/aries/speech/engines.py',
-                   '~/aries/scripts/aries-voice',
-                   '~/aries/var/anything.txt',
-                   '~/aries/brand-new-module.py'):
+    for target in (f'{ROOT}/aries/workspace/capabilities.py',
+                   f'{ROOT}/aries/speech/engines.py',
+                   f'{ROOT}/scripts/aries-voice',
+                   f'{ROOT}/var/anything.txt',
+                   f'{ROOT}/brand-new-module.py'):
         why = await _refused(target)
         check(f'refused: {target}', why is not None and 'installation' in why)
 
@@ -55,7 +59,7 @@ async def test_reading_its_own_source_is_still_allowed():
     reviewed self-development before either was written."""
     await _ready()
     async with async_session() as db:
-        path = await cap.checked_path(db, '~/aries/aries/speech/engines.py', write=False)
+        path = await cap.checked_path(db, f'{ROOT}/aries/speech/engines.py', write=False)
         check('ARIES can still read its own code', path.name == 'engines.py')
 
 
