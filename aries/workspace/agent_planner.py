@@ -96,7 +96,42 @@ def grammar_safe(schema):
     return out
 
 
-def generation_schema(*, allow_finish=True, allow_fail=True, allow_ask=False, guard=False):
+def per_capability_schema(allowed, actions, prose, ask_branch):
+    """ARIES_PLANNER_PER_CAP_GRAMMAR: one grammar branch per capability, with its own required arguments.
+
+    The flat grammar below merges every capability's arguments into one object with nothing required, so
+    file.search could be generated without `path`; in R1 on NL2Bash 126 of 449 planner outputs failed
+    validation, 89 of them for a missing `path` (experiments/thesis-r1-real-data/exploratory.json). Here the
+    capability fixes which arguments exist and which must be present, so that error cannot be generated.
+    """
+    branches = []
+    acting = [a for a in actions if a in ('execute', 'ask_approval')]
+    for cap in allowed:
+        props = {}
+        for name, schema in cap['input_schema'].get('properties', {}).items():
+            choices = schema.get('anyOf', [schema])
+            props[name] = grammar_safe(next((c for c in choices if c.get('type') != 'null'), {'type': 'string'}))
+        required = [n for n in cap['input_schema'].get('required', []) if n in props]
+        args = {'type': 'object', 'properties': props, 'additionalProperties': False}
+        if required:
+            args['required'] = required
+        branches.append({'type': 'object', 'additionalProperties': False,
+                         'required': ['action', 'capability', 'arguments'],
+                         'properties': {'action': {'type': 'string', 'enum': acting},
+                                        'capability': {'type': 'string', 'enum': [cap['name']]},
+                                        'arguments': args, 'reason': prose}})
+    terminal = [a for a in actions if a in ('finish', 'fail')]
+    if terminal:
+        branches.append({'type': 'object', 'additionalProperties': False, 'required': ['action'],
+                         'properties': {'action': {'type': 'string', 'enum': terminal}, 'reason': prose,
+                                        'summary': prose,
+                                        'evidence_refs': {'type': 'array', 'items': {'type': 'string', 'maxLength': 64}}}})
+    if ask_branch:
+        branches.append(ask_branch)
+    return {'anyOf': branches}
+
+
+def generation_schema(*, allow_finish=True, allow_fail=True, allow_ask=False, guard=False, per_capability=False):
     # A finite grammar generated from the registry. See grammar_safe() above for
     # what the compiler will and will not take, and why each string is bounded.
     arguments = {}
@@ -126,6 +161,14 @@ def generation_schema(*, allow_finish=True, allow_fail=True, allow_ask=False, gu
         # the one every earlier measurement used.
         properties['question'] = {'type':'string','maxLength':CLARIFY_TEXT_MAX}
         properties['choices'] = {'type':'array','items':{'type':'string','maxLength':CLARIFY_TEXT_MAX}}
+    if per_capability:
+        ask = None
+        if allow_ask:
+            ask = {'type':'object','properties':{'action':{'type':'string','enum':['ask_clarification']},
+                                                 'question':properties['question'],'choices':properties['choices'],
+                                                 'reason':prose},
+                   'required':['action','question','choices'],'additionalProperties':False}
+        return per_capability_schema(allowed, actions, prose, ask)
     if allow_ask and guard:
         # ARIES_PLANNER_CLARIFY_GUARD. In the 2026-10-12 planner test the model chose
         # ask_clarification on unambiguous goals and attached capability arguments in
@@ -574,8 +617,22 @@ async def plan(db, goal, data, budget):
             'say which one is meant, do not pick one and do not keep trying candidates. Choose action '
             'ask_clarification with a short question and 2 to 5 choices, each containing an exact path or name '
             'copied from the observations. Do not ask when exactly one observed target fits the goal.'})
+    gate_hint = (data.get('routing') or {}).get('gate_capability')
+    if flags_enabled('ARIES_PLANNER_GATE_HINT') and gate_hint and gate_hint in {c['name'] for c in scoped_capabilities()}:
+        # ARIES_ROUTER_CAPABILITY_GATE named this capability from the full list with descriptions.
+        messages.append({'role':'user','content':
+            'A capability classifier, shown every capability with its description, chose ' + gate_hint + ' as the '
+            'first step for this request. Use it unless the goal or your observations clearly need another one.'})
+    if flags_enabled('ARIES_PLANNER_OOS_ACTION') and can_fail:
+        # With ARIES_PLANNER_PER_CAP_GRAMMAR an invalid output can no longer stand in for "cannot do this";
+        # the planner needs to be told that refusing is the right answer then.
+        messages.append({'role':'user','content':
+            'If no allowed capability can fulfil this goal completely (for example it needs deleting, compressing, '
+            'converting, changing permissions or running an arbitrary command), do not choose the nearest '
+            'capability: choose action fail with reason "OUT_OF_SCOPE: " followed by what is missing.'})
     from aries.intelligence.egress import bind, planner_classes
-    schema = generation_schema(allow_finish=can_finish,allow_fail=can_fail,allow_ask=can_ask,guard=guard)
+    schema = generation_schema(allow_finish=can_finish,allow_fail=can_fail,allow_ask=can_ask,guard=guard,
+                               per_capability=flags_enabled('ARIES_PLANNER_PER_CAP_GRAMMAR'))
     raw, native = await structured(db,messages,schema,purpose='workspace.m14-planner',max_tokens=1800,
                                    route=data.get("routing"),provenance=bind(messages,schema,planner_classes(data,payload)))
     measured = {'input_tokens':native.get('prompt_eval_count'), 'output_tokens':native.get('eval_count')}

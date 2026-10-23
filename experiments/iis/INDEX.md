@@ -18,5 +18,6 @@ until those references are rewritten or a symlink is left behind.
 |---|---|---|
 | `experiments/iis/real-data/mind/` | news ranking and online learning on MIND-small dev (73,152 impressions) | exploratory, measured |
 | `experiments/iis/real-data/locomo/` | memory retrieval against annotated evidence turns on LoCoMo (1,982 questions) | exploratory, measured |
+| M1 remedies on both datasets (`docs/preregistration/M1-information-layer-remedies.md`) | LoCoMo hit@5 0.620 with `ARIES_MEMORY_HYBRID_RRF` + `ARIES_MEMORY_SIMILARITY_RANK` vs BM25 0.500; MIND MMR AUC 0.611 vs round-robin 0.578; relative learning +0.000 | registered exploratory, measured; flags default off |
 
 Plain-language summary of both: [`real-data/README.md`](real-data/README.md).

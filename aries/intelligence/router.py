@@ -116,9 +116,37 @@ class LocalLLMDecisionProvider:
             'bills, controlling a television or an air conditioner, booking travel, unlocking doors, live weather '
             'or market prices, or anything needing an account or a device that is not attached. ')
 
+    def consistent_abstention(self):
+        """ARIES_ROUTER_SURFACE_CONSISTENT: the abstention text without its two contradictions.
+
+        The frozen text says the listed capabilities are "never OUT_OF_SCOPE", so a request that only
+        resembles one (delete, compress or convert files) is sent on; R1 on NL2Bash measured 181 such false
+        actions in 500. It also defines READ_EMAIL and SEND_EMAIL as intents and then says email is always
+        out of scope, and no registered capability reads mail or a calendar. Here a capability covers only
+        what it says, and the three intents with no capability are named as out of scope.
+        """
+        return (
+            'ASK the request names an action but not what to act on, so one question would resolve it '
+            '("open it", "play something", "fix that"); OUT_OF_SCOPE the request is clear and this machine '
+            'cannot do it at all. '
+            'Do NOT pick an action intent when no tool can carry it out: answer ASK or OUT_OF_SCOPE with tool=none. '
+            'Being unable is a correct answer; inventing is not. '
+            'This machine can do the following, each exactly as described and nothing more: '
+            + capability_surface() + '. '
+            'A request that needs something none of these does (for example deleting or compressing files, '
+            'changing permissions, converting formats, or running an arbitrary command) is OUT_OF_SCOPE, even when '
+            'it mentions files, folders or the system. '
+            'No capability here reads or sends email or touches a calendar, so a request for those is '
+            'OUT_OF_SCOPE, not READ_EMAIL, SEND_EMAIL or CALENDAR_ACTION. '
+            'These are measured limits of THIS machine and are always OUT_OF_SCOPE: ' + machine_limits() + '. '
+            'Also out of scope: telephony, SMS, printing, postal mail, paying bills, controlling a television or '
+            'an air conditioner, booking travel, unlocking doors, live weather or market prices, or anything '
+            'needing an account or a device that is not attached. ')
+
     def instruction(self):
         from aries import flags
-        middle = self.abstention() if flags.enabled('ARIES_ROUTER_ABSTAIN') else self.GUESS
+        abstain = self.consistent_abstention if flags.enabled('ARIES_ROUTER_SURFACE_CONSISTENT') else self.abstention
+        middle = abstain() if flags.enabled('ARIES_ROUTER_ABSTAIN') else self.GUESS
         return self.SHARED + middle + self.TRAILER
 
     async def decide(self, db, text):
@@ -145,7 +173,7 @@ class CloudDecisionProvider:
 
 async def route(db,text,*,background=False,provider=None,allow_contract=True):
     if not isinstance(text,str) or not 0<len(text)<=12000:raise ValueError('Bounded text required')
-    start=time.monotonic();s=SettingsService(db);selected=None
+    start=time.monotonic();s=SettingsService(db);selected=None;gated=None
     rule=await RuleDecisionProvider().decide(db,text)
     if rule:
         result=Route(**rule.model_dump(),execution_level='code',source='rule')
@@ -167,6 +195,12 @@ async def route(db,text,*,background=False,provider=None,allow_contract=True):
                 decision=await selected.decide(db,text)
                 if not isinstance(decision,Decision):raise ValueError('Invalid decision provider output')
                 source='local'
+                from aries import flags
+                if flags.enabled('ARIES_ROUTER_CAPABILITY_GATE'):
+                    from . import capability_gate
+                    if capability_gate.applies(decision,source):
+                        gated=await capability_gate.gate(db,text)
+                        decision=capability_gate.apply(decision,gated)
             except (ValueError, __import__('pydantic').ValidationError):
                 await record(db,'invalid_decision',reason='Invalid structured local decision; no execution authorized')
                 await db.commit()
@@ -178,6 +212,8 @@ async def route(db,text,*,background=False,provider=None,allow_contract=True):
         level='cloud' if escalate and not background else 'local'
         result=Route(**decision.model_dump(),execution_level=level,source=source,
                      blocked_reason='Background cloud inference prohibited' if background and escalate else '')
+        if gated is not None:
+            result.gate_capability=gated.get('label')
     if selected is not None:
         usage=getattr(selected,'usage',{})
         result.input_tokens=usage.get('prompt_eval_count')
