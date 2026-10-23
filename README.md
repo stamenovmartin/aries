@@ -444,16 +444,19 @@ system's trivial verifiers. They were repaired before the fixture was used.
 ## Layout
 
 ```
-aries/           the system: workspace, intelligence, analytics, learning, speech, power
+aries/           the system: router, planner, verifiers, completion contracts, memory, news, learning, speech
 aries_ui/        GTK4 control centre
 shell/           GNOME Shell extension (window access over D-Bus)
 systemd/         four user units and a target
-scripts/         46 entry points: session, models, evaluation, diagnostics
-eval/            the 90-goal suite, its fixture and every run including the invalid ones
-experiments/     measurement artifacts; router ablations, voice, endurance
-  product/independent-acceptance/   the independent review: findings, fixtures, runners
-tests/           unit and integration tests
-docs/            engineering documentation
+scripts/         entry points: session, models, evaluation (eval.sh), checks (check_links.py), diagnostics
+eval/            reusable evaluation harnesses: the 90-goal agent suite, research feedback, smoke tests
+experiments/     dated measurements, each with its scripts and result files (experiments/README.md)
+  thesis/          thesis index and precursors        iis/       IIS index, public-data evaluations
+  thesis-*/        the thesis measurements (frozen)   archive/   superseded series
+  analysis/        every comparison as a figure
+docs/            documentation; preregistration/ (every registration), DATASETS.md, ENVIRONMENT.md
+tests/           unit and integration tests (make test)
+vendor/          the agentic-core engine ARIES runs on
 ```
 
 Runs that turned out to be invalid are kept with the cause recorded — two series were discarded
