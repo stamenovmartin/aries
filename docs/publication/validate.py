@@ -6,8 +6,8 @@ root=Path(__file__).resolve().parent;repo=root.parent.parent
 manifest=json.loads((root/'evidence-manifest.json').read_text())
 for item in manifest['artifacts']:
  assert hashlib.sha256((repo/item['path']).read_bytes()).hexdigest()==item['sha256'],item['path']
-rows=[json.loads(x) for x in (repo/'experiments/operator/results.jsonl').read_text().splitlines()]
-summary=json.loads((repo/'experiments/operator/summary.json').read_text())
+rows=[json.loads(x) for x in (repo/'experiments/thesis/operator/results.jsonl').read_text().splitlines()]
+summary=json.loads((repo/'experiments/thesis/operator/summary.json').read_text())
 assert len(rows)==372
 assert sum(r['class']=='control' for r in rows)==60
 assert summary['verifier_integrity']['checkable']==52
@@ -24,7 +24,7 @@ for filename in ('paper.md','slides.md','README.md','m14-results.md'):
  for target in re.findall(r'\]\(([^)]+)\)',(root/filename).read_text()):
   if not target.startswith(('http:','https:','#')):
    assert (root/target.split('#')[0]).exists(),(filename,target)
-run=json.loads((repo/'experiments/agent/20260917T204354Z-fb8722/result.json').read_text())
+run=json.loads((repo/'experiments/archive/agent/20260917T204354Z-fb8722/result.json').read_text())
 assert run['passed']==run['total']==4
 assert sum(c['metrics']['total_tokens'] for c in run['cases'])==36039
 assert sum(c['planner_calls'] for c in run['cases'])==10
@@ -32,12 +32,12 @@ assert all(c['local_model_observed'] and c['metrics']['token_measurement_complet
 negative=next(c for c in run['cases'] if c['scenario']=='negative-control')
 assert negative['task_state']=='failed' and negative['passed']
 for c in run['cases']:
- task=json.loads((repo/'experiments/agent/20260917T204354Z-fb8722/tasks'/f"{c['scenario']}.json").read_text())
+ task=json.loads((repo/'experiments/archive/agent/20260917T204354Z-fb8722/tasks'/f"{c['scenario']}.json").read_text())
  evidence={e['evidence_id']:e for e in task['evidence']}
  assert all(evidence[ref]['verified'] for ref in task['final_evidence_refs'])
  if c['scenario']=='negative-control':
   assert task['steps'][0]['error']['error_type']=='FileNotFoundError'
-replication=json.loads((repo/'experiments/agent/20260917T204843Z-1ae7a7/result.json').read_text())
+replication=json.loads((repo/'experiments/archive/agent/20260917T204843Z-1ae7a7/result.json').read_text())
 assert replication['passed']==replication['total']==4
 html=(root/'presentation.html').read_text()
 assert len(re.findall('<section id=',html))==18

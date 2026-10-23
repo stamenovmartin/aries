@@ -78,7 +78,7 @@ def stem(word):
     Four-character truncation is CRUDE, and it is recorded as crude: it folds
     `проект` and `проекција` together. It is the lexical fallback. The actual
     answer to an inflected language is `semantic-v3`, which compares meanings
-    and never looks at a suffix — and the experiment in `experiments/memory/`
+    and never looks at a suffix — and the experiment in `experiments/iis/memory/`
     exists to show by how much.
 
     Latin script keeps the earlier English suffix rules; truncating English to

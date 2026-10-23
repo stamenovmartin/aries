@@ -186,7 +186,7 @@ conclusion, by arithmetic.
 ### Does any of it beat just keeping everything?
 
 Not on retrieval — and something else matters more than either.
-[`experiments/memory/analysis.md`](../experiments/memory/analysis.md) measures
+[`experiments/iis/memory/analysis.md`](../experiments/iis/memory/analysis.md) measures
 it against store-everything-verbatim with the same embedder — the honest baseline, which is not
 "no memory" — and the extraction retrieved **one fewer** answer (17/23 against 18/23,
 p = 1.000) while being the only variant that never returned a contradicted fact or a refused topic

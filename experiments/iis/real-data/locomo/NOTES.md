@@ -147,7 +147,7 @@ Every value below is also written into each result file under `parameters`.
   episodic 0.35, utterance 0.2. The default is 0.5.
 - Cascade: `REDUNDANT_ABOVE` = 0.97, `NOVEL_BELOW` = 0.85, model `qwen2.5:7b`, context 4
   neighbours, timeout 30 s, 5 neighbours searched. These thresholds were calibrated on e5 (see
-  `experiments/memory/analysis.md`). They are applied **unchanged** to bge-m3, where they made
+  `experiments/iis/memory/analysis.md`). They are applied **unchanged** to bge-m3, where they made
   zero model calls on the 25-probe fixture.
 - Gate: `MIN_CHARS` = 8, `MAX_CHARS` = 2000. `privacy.excluded_memory_topics` = [] and
   `privacy.remember_conversations` = true, both defaults.
@@ -208,7 +208,7 @@ two parts:
   call count reflects hash-vector cosines and **is not** an estimate.
 - **Point estimate from the fixture rate: about 4,770 calls.** On the 25-probe fixture, e5
   escalated 27 of the 33 utterances that passed the gate (82%); see
-  `experiments/memory/analysis.md` §7. Applying 82% to 5,808 gives about 4,770. LoCoMo turns
+  `experiments/iis/memory/analysis.md` §7. Applying 82% to 5,808 gives about 4,770. LoCoMo turns
   are longer, and within one conversation they stay on related topics, so cosines are likely to
   fall in e5's compressed 0.83–0.99 band. The real count is therefore likely close to the upper
   bound and unlikely to be far below it.

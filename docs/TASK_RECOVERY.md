@@ -42,7 +42,7 @@ Validation: `tests/test_workspace_recovery.py` checks duplicate requests, unchan
 parent failure, no repeated write, a fresh successful read, no double-counted
 mutation, a target edited while queued, uncertain effects and unsupported agents.
 
-Installed-system validation: `experiments/workspace/verify_recovery.json` passed
+Installed-system validation: `experiments/archive/workspace/verify_recovery.json` passed
 6/6 checks using a real folder and a missing file later supplied: original failure
 preserved, child completed, duplicate request reused the child, folder inherited
 without execution, inode unchanged and fresh file contents read. The standard
