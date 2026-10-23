@@ -11,7 +11,6 @@ from agentic_core.database.base import async_session
 from aries.settings import SettingsService
 from aries.workspace import retrieval
 from aries.workspace.memory import store, extraction
-from aries.workspace.models import WorkspaceMemory, WorkspaceConclusion
 
 
 async def seed(db):

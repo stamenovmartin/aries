@@ -13,7 +13,7 @@ bootstrap("aries-interests")
 
 from agentic_core.database.base import async_session  # noqa: E402
 
-from aries.interests import matching, service as ints  # noqa: E402
+from aries.interests import service as ints  # noqa: E402
 from aries.interests.matching import Matchable, normalise  # noqa: E402
 from aries.interests.matching import score as score_terms  # noqa: E402
 from aries.interests.service import InterestError  # noqa: E402

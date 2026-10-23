@@ -8,7 +8,6 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gtk  # noqa: E402
 
 from aries_ui import design, widgets, hud  # noqa: E402
-from aries_ui.page import Page  # noqa: E402
 
 PROBE_TITLES = {
     "cpu": "Processor", "memory": "Memory", "disk": "Storage", "thermal": "Temperature",

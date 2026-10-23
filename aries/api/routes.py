@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import json
 from datetime import datetime
+from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -640,7 +641,6 @@ async def list_news(disposition: str | None = None, source_id: str | None = None
 async def news_briefing(limit: int = Query(20, ge=1, le=200),
                         db: AsyncSession = Depends(get_db)):
     """What ARIES decided the user should see, best first."""
-    from aries.news.models import AriesNewsItem
     from aries.news.selection import briefing_rows
     rows = await briefing_rows(db, limit=limit)
     return {"items": [r.as_dict() for r in rows]}
@@ -1778,15 +1778,13 @@ async def intelligence_cloud_baseline(body: IntelligenceRequest, db: AsyncSessio
 
 
 class IntelligenceABTask(IntelligenceRequest):
-    architecture: __import__('typing').Literal['A','B'] = 'B'
+    architecture: Literal['A', 'B'] = 'B'
 
 @router.post('/intelligence/ab-task')
 async def intelligence_ab_task(body: IntelligenceABTask, db: AsyncSession = Depends(get_db)):
     """Explicit paired execution benchmark; normal execution/verifiers still apply."""
     from aries.workspace import service
-    from aries.workspace.models import WorkspaceGoal
     from aries.intelligence.generation import config
-    from aries.intelligence.tracking import record
     if body.background:raise HTTPException(403,'A/B task execution is foreground only')
     if body.architecture=='A':
         cfg=await config(db)

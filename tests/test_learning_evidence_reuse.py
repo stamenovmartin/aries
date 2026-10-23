@@ -12,7 +12,6 @@ from sqlalchemy import select,func
 from aries.learning import propose,apply,history,controls
 from aries.learning.evidence_use import EvidenceUse
 from aries.interests import service as interests
-from aries.interests.models import AriesInterest
 from aries.news.models import AriesNewsItem,fingerprint
 from tests.test_learning import _items
 
