@@ -49,7 +49,7 @@ def main():
     if dest.exists():
         raise SystemExit('REFUSED: summary.json exists')
     T = B.TREATMENT
-    out = {'label': 'M2 family (Holm over the four registered tests); other rows descriptive',
+    out = {'label': 'M2 family (Holm over the six registered tests); other rows descriptive',
            'treatment_config': T, 'models': {}, 'tests': {}}
     gold = json.loads((B.HERE / 'labels/nl2bash-final.json').read_text())['labels']
     ids = [s['id'] for s in json.loads((B.HERE / 'nl2bash-sample-manifest.json').read_text())['sample']]
