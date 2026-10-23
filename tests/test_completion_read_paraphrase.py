@@ -8,8 +8,10 @@ Completion is not loosened: done still needs re-checked verified evidence.
 import importlib.util
 import json
 import os
+import subprocess
 import sys
 import tempfile
+import types
 from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -21,11 +23,22 @@ ROOT = Path(__file__).resolve().parents[1]
 FLAG = 'ARIES_COMPLETION_READ_PARAPHRASE'
 
 
+# The frozen source archive is a local snapshot, not in the public repository; its aries/ tree is identical,
+# file by file, to the tag thesis-final-20261006-snapshot, so a checkout without the archive reads the tag.
+FROZEN_TAG = 'thesis-final-20261006-snapshot'
+
+
 def frozen_contracts():
     path = ROOT / 'experiments/thesis-final-20261006/frozen/aries/workspace/contracts.py'
-    spec = importlib.util.spec_from_file_location('frozen_contracts', path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    if path.is_file():
+        spec = importlib.util.spec_from_file_location('frozen_contracts', path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
+    source = subprocess.run(['git', 'show', f'{FROZEN_TAG}:aries/workspace/contracts.py'], cwd=ROOT,
+                            capture_output=True, text=True, check=True).stdout
+    module = types.ModuleType('frozen_contracts')
+    exec(compile(source, f'{FROZEN_TAG}:aries/workspace/contracts.py', 'exec'), module.__dict__)
     return module
 
 
