@@ -65,39 +65,66 @@ EXISTS_INTENT = re.compile(r'\b(?:is there|are there|exists?|nothing called|no f
 NAMED = re.compile(r'\b(?:called|named)\s+["\']?([^\s"\'/?,;]+)', re.I)
 
 
+# ── ARIES_CONTRACT_FILENAME_JOIN ────────────────────────────────────────────────
+# "read notes.txt in ~/x" names one path, the folder, and the file only as a bare name.
+# Without this the read contract asks for the folder itself, which file.read can never
+# satisfy, and an existence question asks whether the folder exists, which it does, so
+# a wrong `done` follows (H5 result, experiments/thesis-followup-20261012/RESULTS.md §10).
+# With the flag a single bare file name (one dot-separated extension, no slash) is joined
+# to the one folder. Fail-closed otherwise: a read whose one path has no extension and
+# that names no single bare file (a folder, or two names) gets no contract, and a
+# "show me" of a path with an extension is a read, not a listing.
+BARE_NAME = re.compile(r'(?<![\w/~.\-])["\']?([\w][\w\-]*(?:\.[\w\-]+)*\.[A-Za-z0-9]{1,8})["\']?(?![\w/])')
+
+
 def _paths(text):
     return [p.rstrip(TRAILING) for p in PATH_TOKEN.findall(text)]
 
 
-def paraphrased(text):
+def bare_names(text):
+    """The bare file names in `text` outside its paths."""
+    names = {n.rstrip(TRAILING) for n in BARE_NAME.findall(PATH_TOKEN.sub(' ', text))}
+    return {n for n in names if not re.fullmatch(r'(?:e\.g|i\.e|etc)\.?', n, re.I)}
+
+
+def paraphrased(text, *, filename_join=False):
     """A closed recogniser for read, listing and existence goals said in natural words."""
     paths = [p for p in _paths(text) if len(p) > 1]
     if len(paths) != 1 or OTHER_REQUEST.search(text) or PRINTER.search(text):
         return None
     path = str(Path(paths[0]).expanduser())
+    joined, names = None, bare_names(text) if filename_join else set()
+    if filename_join and not Path(paths[0]).suffix and len(names) == 1:
+        joined = names.pop()
     listing = LIST_INTENT.fullmatch(text.rstrip(TRAILING + ' '))
+    if listing and filename_join and Path(paths[0]).suffix and not re.match(r'\s*list\b', text, re.I):
+        listing = None
     if listing:
         return {'supported': True, 'requirements': [{'capability': 'file.list', 'path': path}],
                 'answer': 'listing', 'recognised_by': 'paraphrase'}
     reads, exists = bool(READ_INTENT.search(text)), bool(EXISTS_INTENT.search(text))
     if reads and not exists and not CONDITIONAL.search(text):
-        return {'supported': True, 'requirements': [{'capability': 'file.read', 'path': path}],
+        if filename_join and not joined and not Path(paths[0]).suffix:
+            return None
+        return {'supported': True, 'requirements': [{'capability': 'file.read',
+                                                     'path': str(Path(path) / joined) if joined else path}],
                 'recognised_by': 'paraphrase'}
     if exists and not reads:
         name = NAMED.search(text)
-        target = str(Path(path) / name[1].rstrip(TRAILING)) if name else path
+        target = str(Path(path) / name[1].rstrip(TRAILING)) if name else \
+            str(Path(path) / joined) if joined else path
         return {'supported': True, 'requirements': [{'capability': 'file.exists', 'path': target}],
                 'answer': 'existence', 'recognised_by': 'paraphrase'}
     return None
 
 
-def compile_goal(goal, demo_directory, *, paraphrase=False):
+def compile_goal(goal, demo_directory, *, paraphrase=False, filename_join=False):
     text = goal.strip()
     # Only complete, independently recognizable read clauses may be combined.
     # Never split arbitrary prose or creation content into executable sub-goals.
     clauses=re.split(r'\s+(?:and|then)\s+(?=(?:read|check|list)\s)',text,flags=re.I)
     if 1<len(clauses)<=4 and all(re.match(r'^(?:read|check|list)\s',c,re.I) for c in clauses):
-        parts=[compile_goal(c,demo_directory,paraphrase=paraphrase) for c in clauses]
+        parts=[compile_goal(c,demo_directory,paraphrase=paraphrase,filename_join=filename_join) for c in clauses]
         allowed={'file.read','file.exists','file.list','system.status','system.storage','system.processes'}
         if all(p['supported'] and all(r['capability'] in allowed for r in p['requirements']) for p in parts):
             return {'supported':True,'requirements':[r for p in parts for r in p['requirements']],
@@ -142,7 +169,7 @@ def compile_goal(goal, demo_directory, *, paraphrase=False):
     if match and not re.search(r'\b(and|then|search|report|save|delete|install|и|потоа|пребарај|зачувај|избриши|инсталирај|i|potoa|prebaraj|zachuvaj|izbrishi|instaliraj)\b',match[1],re.I):
         return {'supported':True,'requirements':[{'capability':'desktop.launch','app':match[1]}]}
     if paraphrase:
-        found = paraphrased(text)
+        found = paraphrased(text, filename_join=filename_join)
         if found:
             return found
     return {'supported':False,'requirements':[],

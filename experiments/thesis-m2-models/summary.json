@@ -1,0 +1,1802 @@
+{
+ "label": "M2 family (Holm over the six registered tests); other rows descriptive",
+ "treatment_config": "C1",
+ "models": {
+  "qwen2.5:7b": {
+   "nl2bash": {
+    "aries_treatment": {
+     "top1": {
+      "k": 348,
+      "n": 500,
+      "rate": 0.696,
+      "cp95": [
+       0.6536,
+       0.7361
+      ]
+     },
+     "macro_f1": 0.2979,
+     "macro_f1_boot95": [
+      0.244,
+      0.4825
+     ],
+     "oos_precision": {
+      "k": 256,
+      "n": 361,
+      "rate": 0.7091,
+      "cp95": [
+       0.6593,
+       0.7555
+      ]
+     },
+     "oos_recall": {
+      "k": 256,
+      "n": 281,
+      "rate": 0.911,
+      "cp95": [
+       0.8715,
+       0.9416
+      ]
+     },
+     "predicted": {
+      "OUT_OF_SCOPE": 361,
+      "file.search": 81,
+      "file.list": 35,
+      "file.read": 10,
+      "system.disk": 5,
+      "file.semantic_search": 2,
+      "file.write": 2,
+      "file.metadata": 1,
+      "system.status": 1,
+      "system.packages": 1,
+      "browser.open": 1
+     }
+    },
+    "aries_frozen": {
+     "top1": {
+      "k": 233,
+      "n": 500,
+      "rate": 0.466,
+      "cp95": [
+       0.4216,
+       0.5108
+      ]
+     },
+     "macro_f1": 0.3209,
+     "macro_f1_boot95": [
+      0.2336,
+      0.4827
+     ],
+     "oos_precision": {
+      "k": 123,
+      "n": 197,
+      "rate": 0.6244,
+      "cp95": [
+       0.5527,
+       0.6922
+      ]
+     },
+     "oos_recall": {
+      "k": 123,
+      "n": 281,
+      "rate": 0.4377,
+      "cp95": [
+       0.3789,
+       0.4979
+      ]
+     },
+     "predicted": {
+      "OUT_OF_SCOPE": 197,
+      "file.search": 136,
+      "file.list": 68,
+      "file.read": 32,
+      "file.write": 18,
+      "system.processes": 13,
+      "system.status": 10,
+      "system.disk": 8,
+      "system.service_control": 6,
+      "file.metadata": 3,
+      "system.storage": 2,
+      "input.clipboard_read": 2,
+      "browser.open": 2,
+      "file.exists": 1,
+      "browser.search": 1,
+      "desktop.launch": 1
+     }
+    },
+    "zeroshot": {
+     "top1": {
+      "k": 320,
+      "n": 500,
+      "rate": 0.64,
+      "cp95": [
+       0.5962,
+       0.6821
+      ]
+     },
+     "macro_f1": 0.2654,
+     "macro_f1_boot95": [
+      0.2464,
+      0.439
+     ],
+     "oos_precision": {
+      "k": 200,
+      "n": 233,
+      "rate": 0.8584,
+      "cp95": [
+       0.8069,
+       0.9005
+      ]
+     },
+     "oos_recall": {
+      "k": 200,
+      "n": 281,
+      "rate": 0.7117,
+      "cp95": [
+       0.655,
+       0.764
+      ]
+     },
+     "predicted": {
+      "OUT_OF_SCOPE": 233,
+      "file.search": 122,
+      "file.list": 49,
+      "file.semantic_search": 20,
+      "file.read": 19,
+      "file.exists": 10,
+      "file.copy": 8,
+      "file.metadata": 7,
+      "system.disk": 7,
+      "system.processes": 5,
+      "system.packages": 3,
+      "browser.search": 3,
+      "file.move": 3,
+      "file.write": 3,
+      "system.status": 2,
+      "system.service": 2,
+      "notification.send": 1,
+      "browser.open": 1,
+      "system.service_control": 1,
+      "browser.download": 1
+     }
+    },
+    "in_scope_top1": {
+     "aries_treatment": {
+      "k": 92,
+      "n": 219,
+      "rate": 0.4201,
+      "cp95": [
+       0.3539,
+       0.4885
+      ]
+     },
+     "aries_frozen": {
+      "k": 110,
+      "n": 219,
+      "rate": 0.5023,
+      "cp95": [
+       0.4341,
+       0.5704
+      ]
+     },
+     "zeroshot": {
+      "k": 120,
+      "n": 219,
+      "rate": 0.5479,
+      "cp95": [
+       0.4795,
+       0.6151
+      ]
+     }
+    },
+    "stages_treatment": {
+     "router_error": 0,
+     "router_acts": 208,
+     "gate_out_of_scope": 61,
+     "planner_called": 208,
+     "planner_invalid": 2,
+     "planner_fail": 67,
+     "in_scope_router_abstained": 62,
+     "n": 500,
+     "seconds_per_request_mean": 1.81,
+     "seconds_per_request_median": 1.216
+    },
+    "treatment_vs_zeroshot": {
+     "b_first_only": 57,
+     "c_second_only": 29,
+     "p_two_sided_exact": 0.003353274658067905
+    },
+    "treatment_vs_frozen": {
+     "b_first_only": 170,
+     "c_second_only": 55,
+     "p_two_sided_exact": 7.434714457951735e-15
+    }
+   },
+   "clinc150": {
+    "aries_treatment": {
+     "correct": {
+      "k": 342,
+      "n": 600,
+      "rate": 0.57,
+      "cp95": [
+       0.5293,
+       0.61
+      ]
+     },
+     "oos_precision": {
+      "k": 262,
+      "n": 382,
+      "rate": 0.6859,
+      "cp95": [
+       0.6367,
+       0.7321
+      ]
+     },
+     "oos_recall": {
+      "k": 262,
+      "n": 400,
+      "rate": 0.655,
+      "cp95": [
+       0.6061,
+       0.7015
+      ]
+     },
+     "oos_f1": 0.6701,
+     "oos_f1_boot95": [
+      0.6306,
+      0.7059
+     ],
+     "in_scope_accuracy": {
+      "k": 80,
+      "n": 200,
+      "rate": 0.4,
+      "cp95": [
+       0.3315,
+       0.4715
+      ]
+     }
+    },
+    "aries_frozen": {
+     "correct": {
+      "k": 268,
+      "n": 600,
+      "rate": 0.4467,
+      "cp95": [
+       0.4064,
+       0.4875
+      ]
+     },
+     "oos_precision": {
+      "k": 168,
+      "n": 268,
+      "rate": 0.6269,
+      "cp95": [
+       0.5659,
+       0.6849
+      ]
+     },
+     "oos_recall": {
+      "k": 168,
+      "n": 400,
+      "rate": 0.42,
+      "cp95": [
+       0.3711,
+       0.4701
+      ]
+     },
+     "oos_f1": 0.503,
+     "oos_f1_boot95": [
+      0.4555,
+      0.5495
+     ],
+     "in_scope_accuracy": {
+      "k": 100,
+      "n": 200,
+      "rate": 0.5,
+      "cp95": [
+       0.4287,
+       0.5713
+      ]
+     }
+    },
+    "zeroshot": {
+     "correct": {
+      "k": 334,
+      "n": 600,
+      "rate": 0.5567,
+      "cp95": [
+       0.5159,
+       0.5969
+      ]
+     },
+     "oos_precision": {
+      "k": 233,
+      "n": 332,
+      "rate": 0.7018,
+      "cp95": [
+       0.6494,
+       0.7505
+      ]
+     },
+     "oos_recall": {
+      "k": 233,
+      "n": 400,
+      "rate": 0.5825,
+      "cp95": [
+       0.5325,
+       0.6313
+      ]
+     },
+     "oos_f1": 0.6366,
+     "oos_f1_boot95": [
+      0.5947,
+      0.6746
+     ],
+     "in_scope_accuracy": {
+      "k": 101,
+      "n": 200,
+      "rate": 0.505,
+      "cp95": [
+       0.4336,
+       0.5763
+      ]
+     }
+    },
+    "stages_treatment": {
+     "router_error": 0,
+     "router_acts": 218,
+     "gate_out_of_scope": 78,
+     "planner_called": 218,
+     "planner_invalid": 0,
+     "planner_fail": 117,
+     "n": 600,
+     "seconds_per_request_mean": 1.667,
+     "seconds_per_request_median": 1.134
+    },
+    "treatment_vs_zeroshot": {
+     "b_first_only": 53,
+     "c_second_only": 45,
+     "p_two_sided_exact": 0.479692499567487
+    },
+    "treatment_vs_frozen": {
+     "b_first_only": 112,
+     "c_second_only": 38,
+     "p_two_sided_exact": 1.158262681444883e-09
+    }
+   },
+   "hallucination": {
+    "M1_planner_invalid_treatment": {
+     "invalid": {
+      "k": 2,
+      "n": 208,
+      "rate": 0.0096,
+      "cp95": [
+       0.0012,
+       0.0343
+      ]
+     },
+     "by_kind": {
+      "invented value in the wrong format (e.g. a made-up SHA-256)": 2
+     }
+    },
+    "M1_planner_invalid_frozen": {
+     "invalid": {
+      "k": 126,
+      "n": 446,
+      "rate": 0.2825,
+      "cp95": [
+       0.2412,
+       0.3268
+      ]
+     },
+     "by_kind": {
+      "missing required argument": 106,
+      "invented value in the wrong format (e.g. a made-up SHA-256)": 4,
+      "argument the capability does not have": 14,
+      "execute without a capability": 2
+     }
+    },
+    "M5_confident_action_on_oos_nl2bash_treatment": {
+     "k": 47,
+     "n": 281,
+     "rate": 0.1673,
+     "cp95": [
+      0.1256,
+      0.2161
+     ]
+    },
+    "M5_confident_action_on_oos_nl2bash_frozen": {
+     "k": 229,
+     "n": 281,
+     "rate": 0.8149,
+     "cp95": [
+      0.7645,
+      0.8586
+     ]
+    },
+    "M5_confident_action_on_oos_clinc_treatment": {
+     "k": 136,
+     "n": 400,
+     "rate": 0.34,
+     "cp95": [
+      0.2937,
+      0.3887
+     ]
+    },
+    "M5_confident_action_on_oos_clinc_frozen": {
+     "k": 222,
+     "n": 400,
+     "rate": 0.555,
+     "cp95": [
+      0.5048,
+      0.6044
+     ]
+    }
+   },
+   "model_digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e"
+  },
+  "llama3.1:8b": {
+   "nl2bash": {
+    "aries_treatment": {
+     "top1": {
+      "k": 225,
+      "n": 500,
+      "rate": 0.45,
+      "cp95": [
+       0.4058,
+       0.4948
+      ]
+     },
+     "macro_f1": 0.3418,
+     "macro_f1_boot95": [
+      0.266,
+      0.4992
+     ],
+     "oos_precision": {
+      "k": 82,
+      "n": 91,
+      "rate": 0.9011,
+      "cp95": [
+       0.8205,
+       0.9538
+      ]
+     },
+     "oos_recall": {
+      "k": 82,
+      "n": 281,
+      "rate": 0.2918,
+      "cp95": [
+       0.2393,
+       0.3488
+      ]
+     },
+     "predicted": {
+      "file.search": 175,
+      "file.list": 122,
+      "OUT_OF_SCOPE": 91,
+      "file.read": 38,
+      "file.metadata": 17,
+      "file.write": 16,
+      "system.processes": 9,
+      "file.exists": 4,
+      "browser.open": 4,
+      "system.status": 3,
+      "file.semantic_search": 3,
+      "system.storage": 3,
+      "system.packages": 3,
+      "system.disk": 2,
+      "browser.read": 2,
+      "network.status": 2,
+      "input.clipboard_write": 1,
+      "desktop.launch": 1,
+      "browser.type": 1,
+      "input.clipboard_read": 1,
+      "desktop.close": 1,
+      "system.services": 1
+     }
+    },
+    "aries_frozen": {
+     "top1": {
+      "k": 110,
+      "n": 500,
+      "rate": 0.22,
+      "cp95": [
+       0.1844,
+       0.2589
+      ]
+     },
+     "macro_f1": 0.1925,
+     "macro_f1_boot95": [
+      0.0979,
+      0.2823
+     ],
+     "oos_precision": {
+      "k": 49,
+      "n": 73,
+      "rate": 0.6712,
+      "cp95": [
+       0.5513,
+       0.7767
+      ]
+     },
+     "oos_recall": {
+      "k": 49,
+      "n": 281,
+      "rate": 0.1744,
+      "cp95": [
+       0.1319,
+       0.2239
+      ]
+     },
+     "predicted": {
+      "file.list": 281,
+      "OUT_OF_SCOPE": 73,
+      "file.read": 59,
+      "file.search": 31,
+      "browser.open": 29,
+      "system.status": 13,
+      "file.write": 5,
+      "file.exists": 4,
+      "file.metadata": 1,
+      "desktop.launch": 1,
+      "system.processes": 1,
+      "system.storage": 1,
+      "notification.send": 1
+     }
+    },
+    "zeroshot": {
+     "top1": {
+      "k": 170,
+      "n": 500,
+      "rate": 0.34,
+      "cp95": [
+       0.2985,
+       0.3834
+      ]
+     },
+     "macro_f1": 0.2512,
+     "macro_f1_boot95": [
+      0.1872,
+      0.3993
+     ],
+     "oos_precision": {
+      "k": 26,
+      "n": 27,
+      "rate": 0.963,
+      "cp95": [
+       0.8103,
+       0.9991
+      ]
+     },
+     "oos_recall": {
+      "k": 26,
+      "n": 281,
+      "rate": 0.0925,
+      "cp95": [
+       0.0613,
+       0.1326
+      ]
+     },
+     "predicted": {
+      "file.search": 188,
+      "file.list": 122,
+      "file.read": 45,
+      "OUT_OF_SCOPE": 27,
+      "file.write": 25,
+      "file.metadata": 22,
+      "system.processes": 12,
+      "file.move": 10,
+      "file.copy": 9,
+      "desktop.launch": 5,
+      "system.packages": 4,
+      "system.status": 3,
+      "file.semantic_search": 3,
+      "browser.type": 3,
+      "system.storage": 3,
+      "network.status": 3,
+      "browser.read": 2,
+      "browser.open": 2,
+      "file.exists": 2,
+      "input.clipboard_write": 1,
+      "screen.read": 1,
+      "system.disk": 1,
+      "browser.search": 1,
+      "desktop.close": 1,
+      "system.services": 1,
+      "file.edit": 1,
+      "input.clipboard_read": 1,
+      "input.type_text": 1,
+      "browser.download": 1
+     }
+    },
+    "in_scope_top1": {
+     "aries_treatment": {
+      "k": 143,
+      "n": 219,
+      "rate": 0.653,
+      "cp95": [
+       0.5859,
+       0.7158
+      ]
+     },
+     "aries_frozen": {
+      "k": 61,
+      "n": 219,
+      "rate": 0.2785,
+      "cp95": [
+       0.2203,
+       0.3429
+      ]
+     },
+     "zeroshot": {
+      "k": 144,
+      "n": 219,
+      "rate": 0.6575,
+      "cp95": [
+       0.5906,
+       0.7201
+      ]
+     }
+    },
+    "stages_treatment": {
+     "router_error": 0,
+     "router_acts": 427,
+     "gate_out_of_scope": 14,
+     "planner_called": 427,
+     "planner_invalid": 18,
+     "planner_fail": 0,
+     "in_scope_router_abstained": 4,
+     "n": 500,
+     "seconds_per_request_mean": 3.081,
+     "seconds_per_request_median": 3.468
+    },
+    "treatment_vs_zeroshot": {
+     "b_first_only": 64,
+     "c_second_only": 9,
+     "p_two_sided_exact": 2.378889919863532e-11
+    },
+    "treatment_vs_frozen": {
+     "b_first_only": 147,
+     "c_second_only": 32,
+     "p_two_sided_exact": 8.155060330003249e-19
+    }
+   },
+   "clinc150": {
+    "aries_treatment": {
+     "correct": {
+      "k": 327,
+      "n": 600,
+      "rate": 0.545,
+      "cp95": [
+       0.5042,
+       0.5854
+      ]
+     },
+     "oos_precision": {
+      "k": 256,
+      "n": 385,
+      "rate": 0.6649,
+      "cp95": [
+       0.6154,
+       0.712
+      ]
+     },
+     "oos_recall": {
+      "k": 256,
+      "n": 400,
+      "rate": 0.64,
+      "cp95": [
+       0.5908,
+       0.6871
+      ]
+     },
+     "oos_f1": 0.6522,
+     "oos_f1_boot95": [
+      0.6105,
+      0.6913
+     ],
+     "in_scope_accuracy": {
+      "k": 71,
+      "n": 200,
+      "rate": 0.355,
+      "cp95": [
+       0.2888,
+       0.4256
+      ]
+     }
+    },
+    "aries_frozen": {
+     "correct": {
+      "k": 222,
+      "n": 600,
+      "rate": 0.37,
+      "cp95": [
+       0.3313,
+       0.41
+      ]
+     },
+     "oos_precision": {
+      "k": 39,
+      "n": 56,
+      "rate": 0.6964,
+      "cp95": [
+       0.559,
+       0.8122
+      ]
+     },
+     "oos_recall": {
+      "k": 39,
+      "n": 400,
+      "rate": 0.0975,
+      "cp95": [
+       0.0703,
+       0.1309
+      ]
+     },
+     "oos_f1": 0.1711,
+     "oos_f1_boot95": [
+      0.1256,
+      0.2171
+     ],
+     "in_scope_accuracy": {
+      "k": 183,
+      "n": 200,
+      "rate": 0.915,
+      "cp95": [
+       0.8674,
+       0.9497
+      ]
+     }
+    },
+    "zeroshot": {
+     "correct": {
+      "k": 329,
+      "n": 600,
+      "rate": 0.5483,
+      "cp95": [
+       0.5075,
+       0.5887
+      ]
+     },
+     "oos_precision": {
+      "k": 261,
+      "n": 393,
+      "rate": 0.6641,
+      "cp95": [
+       0.6151,
+       0.7107
+      ]
+     },
+     "oos_recall": {
+      "k": 261,
+      "n": 400,
+      "rate": 0.6525,
+      "cp95": [
+       0.6036,
+       0.6991
+      ]
+     },
+     "oos_f1": 0.6583,
+     "oos_f1_boot95": [
+      0.6175,
+      0.6974
+     ],
+     "in_scope_accuracy": {
+      "k": 68,
+      "n": 200,
+      "rate": 0.34,
+      "cp95": [
+       0.2747,
+       0.4102
+      ]
+     }
+    },
+    "stages_treatment": {
+     "router_error": 0,
+     "router_acts": 215,
+     "gate_out_of_scope": 286,
+     "planner_called": 215,
+     "planner_invalid": 2,
+     "planner_fail": 1,
+     "n": 600,
+     "seconds_per_request_mean": 2.032,
+     "seconds_per_request_median": 1.738
+    },
+    "treatment_vs_zeroshot": {
+     "b_first_only": 30,
+     "c_second_only": 32,
+     "p_two_sided_exact": 0.899076313652859
+    },
+    "treatment_vs_frozen": {
+     "b_first_only": 221,
+     "c_second_only": 116,
+     "p_two_sided_exact": 1.1272617875402982e-08
+    }
+   },
+   "hallucination": {
+    "M1_planner_invalid_treatment": {
+     "invalid": {
+      "k": 18,
+      "n": 427,
+      "rate": 0.0422,
+      "cp95": [
+       0.0252,
+       0.0658
+      ]
+     },
+     "by_kind": {
+      "invented value in the wrong format (e.g. a made-up SHA-256)": 18
+     }
+    },
+    "M1_planner_invalid_frozen": {
+     "invalid": {
+      "k": 33,
+      "n": 460,
+      "rate": 0.0717,
+      "cp95": [
+       0.0499,
+       0.0993
+      ]
+     },
+     "by_kind": {
+      "missing required argument": 33
+     }
+    },
+    "M5_confident_action_on_oos_nl2bash_treatment": {
+     "k": 206,
+     "n": 281,
+     "rate": 0.7331,
+     "cp95": [
+      0.6773,
+      0.7839
+     ]
+    },
+    "M5_confident_action_on_oos_nl2bash_frozen": {
+     "k": 243,
+     "n": 281,
+     "rate": 0.8648,
+     "cp95": [
+      0.8191,
+      0.9025
+     ]
+    },
+    "M5_confident_action_on_oos_clinc_treatment": {
+     "k": 87,
+     "n": 400,
+     "rate": 0.2175,
+     "cp95": [
+      0.178,
+      0.2612
+     ]
+    },
+    "M5_confident_action_on_oos_clinc_frozen": {
+     "k": 255,
+     "n": 400,
+     "rate": 0.6375,
+     "cp95": [
+      0.5883,
+      0.6847
+     ]
+    }
+   },
+   "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e"
+  },
+  "qwen2.5:1.5b": {
+   "nl2bash": {
+    "aries_treatment": {
+     "top1": {
+      "k": 281,
+      "n": 500,
+      "rate": 0.562,
+      "cp95": [
+       0.5173,
+       0.606
+      ]
+     },
+     "macro_f1": 0.072,
+     "macro_f1_boot95": [
+      0.0701,
+      0.1218
+     ],
+     "oos_precision": {
+      "k": 281,
+      "n": 500,
+      "rate": 0.562,
+      "cp95": [
+       0.5173,
+       0.606
+      ]
+     },
+     "oos_recall": {
+      "k": 281,
+      "n": 281,
+      "rate": 1.0,
+      "cp95": [
+       0.987,
+       1.0
+      ]
+     },
+     "predicted": {
+      "OUT_OF_SCOPE": 500
+     }
+    },
+    "aries_frozen": {
+     "top1": {
+      "k": 109,
+      "n": 500,
+      "rate": 0.218,
+      "cp95": [
+       0.1826,
+       0.2568
+      ]
+     },
+     "macro_f1": 0.0867,
+     "macro_f1_boot95": [
+      0.0754,
+      0.1538
+     ],
+     "oos_precision": {
+      "k": 87,
+      "n": 125,
+      "rate": 0.696,
+      "cp95": [
+       0.6074,
+       0.7751
+      ]
+     },
+     "oos_recall": {
+      "k": 87,
+      "n": 281,
+      "rate": 0.3096,
+      "cp95": [
+       0.256,
+       0.3672
+      ]
+     },
+     "predicted": {
+      "system.disk": 170,
+      "OUT_OF_SCOPE": 125,
+      "file.read": 68,
+      "file.write": 64,
+      "system.status": 44,
+      "file.search": 16,
+      "file.list": 10,
+      "file.metadata": 3
+     }
+    },
+    "zeroshot": {
+     "top1": {
+      "k": 103,
+      "n": 500,
+      "rate": 0.206,
+      "cp95": [
+       0.1714,
+       0.2441
+      ]
+     },
+     "macro_f1": 0.1099,
+     "macro_f1_boot95": [
+      0.1011,
+      0.1913
+     ],
+     "oos_precision": {
+      "k": 9,
+      "n": 9,
+      "rate": 1.0,
+      "cp95": [
+       0.6637,
+       1.0
+      ]
+     },
+     "oos_recall": {
+      "k": 9,
+      "n": 281,
+      "rate": 0.032,
+      "cp95": [
+       0.0147,
+       0.0599
+      ]
+     },
+     "predicted": {
+      "file.list": 99,
+      "file.search": 97,
+      "file.semantic_search": 95,
+      "file.copy": 40,
+      "file.move": 37,
+      "file.read": 25,
+      "system.processes": 23,
+      "file.write": 18,
+      "file.edit": 14,
+      "system.services": 14,
+      "OUT_OF_SCOPE": 9,
+      "network.wifi_connect": 7,
+      "system.storage": 5,
+      "system.service_control": 5,
+      "system.status": 2,
+      "network.wifi_list": 2,
+      "system.packages": 2,
+      "desktop.launch": 1,
+      "file.metadata": 1,
+      "file.exists": 1,
+      "system.service": 1,
+      "network.status": 1,
+      "system.disk": 1
+     }
+    },
+    "in_scope_top1": {
+     "aries_treatment": {
+      "k": 0,
+      "n": 219,
+      "rate": 0.0,
+      "cp95": [
+       0.0,
+       0.0167
+      ]
+     },
+     "aries_frozen": {
+      "k": 22,
+      "n": 219,
+      "rate": 0.1005,
+      "cp95": [
+       0.064,
+       0.1481
+      ]
+     },
+     "zeroshot": {
+      "k": 94,
+      "n": 219,
+      "rate": 0.4292,
+      "cp95": [
+       0.3627,
+       0.4976
+      ]
+     }
+    },
+    "stages_treatment": {
+     "router_error": 2,
+     "router_acts": 479,
+     "gate_out_of_scope": 9,
+     "planner_called": 479,
+     "planner_invalid": 0,
+     "planner_fail": 479,
+     "in_scope_router_abstained": 1,
+     "n": 500,
+     "seconds_per_request_mean": 1.167,
+     "seconds_per_request_median": 1.191
+    },
+    "treatment_vs_zeroshot": {
+     "b_first_only": 272,
+     "c_second_only": 94,
+     "p_two_sided_exact": 3.478573661744996e-21
+    },
+    "treatment_vs_frozen": {
+     "b_first_only": 194,
+     "c_second_only": 22,
+     "p_two_sided_exact": 1.4345906173224114e-35
+    }
+   },
+   "clinc150": {
+    "aries_treatment": {
+     "correct": {
+      "k": 245,
+      "n": 600,
+      "rate": 0.4083,
+      "cp95": [
+       0.3687,
+       0.4489
+      ]
+     },
+     "oos_precision": {
+      "k": 65,
+      "n": 85,
+      "rate": 0.7647,
+      "cp95": [
+       0.6603,
+       0.85
+      ]
+     },
+     "oos_recall": {
+      "k": 65,
+      "n": 400,
+      "rate": 0.1625,
+      "cp95": [
+       0.1277,
+       0.2024
+      ]
+     },
+     "oos_f1": 0.268,
+     "oos_f1_boot95": [
+      0.2156,
+      0.3206
+     ],
+     "in_scope_accuracy": {
+      "k": 180,
+      "n": 200,
+      "rate": 0.9,
+      "cp95": [
+       0.8498,
+       0.9378
+      ]
+     }
+    },
+    "aries_frozen": {
+     "correct": {
+      "k": 219,
+      "n": 600,
+      "rate": 0.365,
+      "cp95": [
+       0.3264,
+       0.4049
+      ]
+     },
+     "oos_precision": {
+      "k": 19,
+      "n": 19,
+      "rate": 1.0,
+      "cp95": [
+       0.8235,
+       1.0
+      ]
+     },
+     "oos_recall": {
+      "k": 19,
+      "n": 400,
+      "rate": 0.0475,
+      "cp95": [
+       0.0288,
+       0.0732
+      ]
+     },
+     "oos_f1": 0.0907,
+     "oos_f1_boot95": [
+      0.0529,
+      0.1296
+     ],
+     "in_scope_accuracy": {
+      "k": 200,
+      "n": 200,
+      "rate": 1.0,
+      "cp95": [
+       0.9817,
+       1.0
+      ]
+     }
+    },
+    "zeroshot": {
+     "correct": {
+      "k": 224,
+      "n": 600,
+      "rate": 0.3733,
+      "cp95": [
+       0.3345,
+       0.4134
+      ]
+     },
+     "oos_precision": {
+      "k": 41,
+      "n": 58,
+      "rate": 0.7069,
+      "cp95": [
+       0.5727,
+       0.8191
+      ]
+     },
+     "oos_recall": {
+      "k": 41,
+      "n": 400,
+      "rate": 0.1025,
+      "cp95": [
+       0.0746,
+       0.1365
+      ]
+     },
+     "oos_f1": 0.179,
+     "oos_f1_boot95": [
+      0.1312,
+      0.2249
+     ],
+     "in_scope_accuracy": {
+      "k": 183,
+      "n": 200,
+      "rate": 0.915,
+      "cp95": [
+       0.8674,
+       0.9497
+      ]
+     }
+    },
+    "stages_treatment": {
+     "router_error": 5,
+     "router_acts": 515,
+     "gate_out_of_scope": 37,
+     "planner_called": 515,
+     "planner_invalid": 0,
+     "planner_fail": 515,
+     "n": 600,
+     "seconds_per_request_mean": 1.136,
+     "seconds_per_request_median": 1.245
+    },
+    "treatment_vs_zeroshot": {
+     "b_first_only": 38,
+     "c_second_only": 17,
+     "p_two_sided_exact": 0.006455803109956637
+    },
+    "treatment_vs_frozen": {
+     "b_first_only": 47,
+     "c_second_only": 21,
+     "p_two_sided_exact": 0.0021862431776861705
+    }
+   },
+   "hallucination": {
+    "M1_planner_invalid_treatment": {
+     "invalid": {
+      "k": 0,
+      "n": 479,
+      "rate": 0.0,
+      "cp95": [
+       0.0,
+       0.0077
+      ]
+     },
+     "by_kind": {}
+    },
+    "M1_planner_invalid_frozen": {
+     "invalid": {
+      "k": 125,
+      "n": 500,
+      "rate": 0.25,
+      "cp95": [
+       0.2126,
+       0.2904
+      ]
+     },
+     "by_kind": {
+      "invented value in the wrong format (e.g. a made-up SHA-256)": 43,
+      "argument the capability does not have": 81,
+      "missing required argument": 1
+     }
+    },
+    "M5_confident_action_on_oos_nl2bash_treatment": {
+     "k": 260,
+     "n": 281,
+     "rate": 0.9253,
+     "cp95": [
+      0.888,
+      0.9531
+     ]
+    },
+    "M5_confident_action_on_oos_nl2bash_frozen": {
+     "k": 281,
+     "n": 281,
+     "rate": 1.0,
+     "cp95": [
+      0.987,
+      1.0
+     ]
+    },
+    "M5_confident_action_on_oos_clinc_treatment": {
+     "k": 335,
+     "n": 400,
+     "rate": 0.8375,
+     "cp95": [
+      0.7976,
+      0.8723
+     ]
+    },
+    "M5_confident_action_on_oos_clinc_frozen": {
+     "k": 381,
+     "n": 400,
+     "rate": 0.9525,
+     "cp95": [
+      0.9268,
+      0.9712
+     ]
+    }
+   },
+   "model_digest": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b"
+  },
+  "qwen2.5:14b": {
+   "nl2bash": {
+    "aries_treatment": {
+     "top1": {
+      "k": 349,
+      "n": 500,
+      "rate": 0.698,
+      "cp95": [
+       0.6557,
+       0.738
+      ]
+     },
+     "macro_f1": 0.4714,
+     "macro_f1_boot95": [
+      0.341,
+      0.6335
+     ],
+     "oos_precision": {
+      "k": 224,
+      "n": 279,
+      "rate": 0.8029,
+      "cp95": [
+       0.7513,
+       0.8479
+      ]
+     },
+     "oos_recall": {
+      "k": 224,
+      "n": 281,
+      "rate": 0.7972,
+      "cp95": [
+       0.7453,
+       0.8426
+      ]
+     },
+     "predicted": {
+      "OUT_OF_SCOPE": 279,
+      "file.search": 110,
+      "file.list": 62,
+      "file.semantic_search": 20,
+      "file.read": 12,
+      "file.metadata": 4,
+      "system.disk": 3,
+      "file.write": 3,
+      "system.processes": 2,
+      "system.packages": 2,
+      "system.status": 1,
+      "system.storage": 1,
+      "browser.open": 1
+     }
+    },
+    "aries_frozen": {
+     "top1": {
+      "k": 210,
+      "n": 500,
+      "rate": 0.42,
+      "cp95": [
+       0.3763,
+       0.4646
+      ]
+     },
+     "macro_f1": 0.3661,
+     "macro_f1_boot95": [
+      0.2486,
+      0.5206
+     ],
+     "oos_precision": {
+      "k": 53,
+      "n": 65,
+      "rate": 0.8154,
+      "cp95": [
+       0.6997,
+       0.9008
+      ]
+     },
+     "oos_recall": {
+      "k": 53,
+      "n": 281,
+      "rate": 0.1886,
+      "cp95": [
+       0.1446,
+       0.2393
+      ]
+     },
+     "predicted": {
+      "file.search": 181,
+      "file.list": 126,
+      "OUT_OF_SCOPE": 65,
+      "file.read": 56,
+      "system.processes": 22,
+      "file.metadata": 13,
+      "system.disk": 7,
+      "file.write": 7,
+      "system.status": 5,
+      "system.packages": 5,
+      "file.exists": 5,
+      "notification.send": 2,
+      "browser.open": 2,
+      "system.services": 1,
+      "system.storage": 1,
+      "desktop.launch": 1,
+      "input.clipboard_read": 1
+     }
+    },
+    "zeroshot": {
+     "top1": {
+      "k": 315,
+      "n": 500,
+      "rate": 0.63,
+      "cp95": [
+       0.586,
+       0.6724
+      ]
+     },
+     "macro_f1": 0.3718,
+     "macro_f1_boot95": [
+      0.2969,
+      0.5531
+     ],
+     "oos_precision": {
+      "k": 175,
+      "n": 185,
+      "rate": 0.9459,
+      "cp95": [
+       0.9028,
+       0.9738
+      ]
+     },
+     "oos_recall": {
+      "k": 175,
+      "n": 281,
+      "rate": 0.6228,
+      "cp95": [
+       0.5633,
+       0.6797
+      ]
+     },
+     "predicted": {
+      "OUT_OF_SCOPE": 185,
+      "file.search": 142,
+      "file.list": 53,
+      "file.semantic_search": 41,
+      "file.read": 31,
+      "file.metadata": 14,
+      "system.processes": 5,
+      "file.copy": 5,
+      "system.disk": 5,
+      "system.packages": 3,
+      "file.write": 3,
+      "system.status": 2,
+      "file.edit": 2,
+      "system.service": 1,
+      "file.move": 1,
+      "file.exists": 1,
+      "system.services": 1,
+      "system.storage": 1,
+      "system.service_control": 1,
+      "input.clipboard_read": 1,
+      "browser.search": 1,
+      "browser.download": 1
+     }
+    },
+    "in_scope_top1": {
+     "aries_treatment": {
+      "k": 125,
+      "n": 219,
+      "rate": 0.5708,
+      "cp95": [
+       0.5024,
+       0.6373
+      ]
+     },
+     "aries_frozen": {
+      "k": 157,
+      "n": 219,
+      "rate": 0.7169,
+      "cp95": [
+       0.6523,
+       0.7755
+      ]
+     },
+     "zeroshot": {
+      "k": 140,
+      "n": 219,
+      "rate": 0.6393,
+      "cp95": [
+       0.5718,
+       0.7029
+      ]
+     }
+    },
+    "stages_treatment": {
+     "router_error": 0,
+     "router_acts": 224,
+     "gate_out_of_scope": 13,
+     "planner_called": 224,
+     "planner_invalid": 3,
+     "planner_fail": 0,
+     "in_scope_router_abstained": 53,
+     "n": 500,
+     "seconds_per_request_mean": 3.795,
+     "seconds_per_request_median": 2.709
+    },
+    "treatment_vs_zeroshot": {
+     "b_first_only": 69,
+     "c_second_only": 35,
+     "p_two_sided_exact": 0.0011086208878113386
+    },
+    "treatment_vs_frozen": {
+     "b_first_only": 194,
+     "c_second_only": 55,
+     "p_two_sided_exact": 2.351479726618974e-19
+    }
+   },
+   "clinc150": {
+    "aries_treatment": {
+     "correct": {
+      "k": 354,
+      "n": 600,
+      "rate": 0.59,
+      "cp95": [
+       0.5494,
+       0.6297
+      ]
+     },
+     "oos_precision": {
+      "k": 252,
+      "n": 350,
+      "rate": 0.72,
+      "cp95": [
+       0.6698,
+       0.7664
+      ]
+     },
+     "oos_recall": {
+      "k": 252,
+      "n": 400,
+      "rate": 0.63,
+      "cp95": [
+       0.5806,
+       0.6774
+      ]
+     },
+     "oos_f1": 0.672,
+     "oos_f1_boot95": [
+      0.6319,
+      0.7096
+     ],
+     "in_scope_accuracy": {
+      "k": 102,
+      "n": 200,
+      "rate": 0.51,
+      "cp95": [
+       0.4385,
+       0.5812
+      ]
+     }
+    },
+    "aries_frozen": {
+     "correct": {
+      "k": 316,
+      "n": 600,
+      "rate": 0.5267,
+      "cp95": [
+       0.4858,
+       0.5672
+      ]
+     },
+     "oos_precision": {
+      "k": 184,
+      "n": 252,
+      "rate": 0.7302,
+      "cp95": [
+       0.6709,
+       0.7839
+      ]
+     },
+     "oos_recall": {
+      "k": 184,
+      "n": 400,
+      "rate": 0.46,
+      "cp95": [
+       0.4104,
+       0.5102
+      ]
+     },
+     "oos_f1": 0.5644,
+     "oos_f1_boot95": [
+      0.5172,
+      0.6094
+     ],
+     "in_scope_accuracy": {
+      "k": 132,
+      "n": 200,
+      "rate": 0.66,
+      "cp95": [
+       0.5898,
+       0.7253
+      ]
+     }
+    },
+    "zeroshot": {
+     "correct": {
+      "k": 350,
+      "n": 600,
+      "rate": 0.5833,
+      "cp95": [
+       0.5427,
+       0.6231
+      ]
+     },
+     "oos_precision": {
+      "k": 235,
+      "n": 320,
+      "rate": 0.7344,
+      "cp95": [
+       0.6824,
+       0.782
+      ]
+     },
+     "oos_recall": {
+      "k": 235,
+      "n": 400,
+      "rate": 0.5875,
+      "cp95": [
+       0.5375,
+       0.6362
+      ]
+     },
+     "oos_f1": 0.6528,
+     "oos_f1_boot95": [
+      0.6118,
+      0.6931
+     ],
+     "in_scope_accuracy": {
+      "k": 115,
+      "n": 200,
+      "rate": 0.575,
+      "cp95": [
+       0.5033,
+       0.6444
+      ]
+     }
+    },
+    "stages_treatment": {
+     "router_error": 0,
+     "router_acts": 250,
+     "gate_out_of_scope": 78,
+     "planner_called": 250,
+     "planner_invalid": 0,
+     "planner_fail": 20,
+     "n": 600,
+     "seconds_per_request_mean": 3.687,
+     "seconds_per_request_median": 2.768
+    },
+    "treatment_vs_zeroshot": {
+     "b_first_only": 43,
+     "c_second_only": 39,
+     "p_two_sided_exact": 0.7406528413457828
+    },
+    "treatment_vs_frozen": {
+     "b_first_only": 81,
+     "c_second_only": 43,
+     "p_two_sided_exact": 0.0008202604148752646
+    }
+   },
+   "hallucination": {
+    "M1_planner_invalid_treatment": {
+     "invalid": {
+      "k": 3,
+      "n": 224,
+      "rate": 0.0134,
+      "cp95": [
+       0.0028,
+       0.0386
+      ]
+     },
+     "by_kind": {
+      "invented value in the wrong format (e.g. a made-up SHA-256)": 3
+     }
+    },
+    "M1_planner_invalid_frozen": {
+     "invalid": {
+      "k": 23,
+      "n": 458,
+      "rate": 0.0502,
+      "cp95": [
+       0.0321,
+       0.0744
+      ]
+     },
+     "by_kind": {
+      "invented value in the wrong format (e.g. a made-up SHA-256)": 5,
+      "argument the capability does not have": 7,
+      "missing required argument": 11
+     }
+    },
+    "M5_confident_action_on_oos_nl2bash_treatment": {
+     "k": 54,
+     "n": 281,
+     "rate": 0.1922,
+     "cp95": [
+      0.1478,
+      0.2432
+     ]
+    },
+    "M5_confident_action_on_oos_nl2bash_frozen": {
+     "k": 240,
+     "n": 281,
+     "rate": 0.8541,
+     "cp95": [
+      0.8073,
+      0.8932
+     ]
+    },
+    "M5_confident_action_on_oos_clinc_treatment": {
+     "k": 147,
+     "n": 400,
+     "rate": 0.3675,
+     "cp95": [
+      0.3201,
+      0.4168
+     ]
+    },
+    "M5_confident_action_on_oos_clinc_frozen": {
+     "k": 202,
+     "n": 400,
+     "rate": 0.505,
+     "cp95": [
+      0.4549,
+      0.5551
+     ]
+    }
+   },
+   "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6"
+  }
+ },
+ "tests": {
+  "M2-a": {
+   "model": "llama3.1:8b",
+   "dataset": "nl2bash",
+   "first": "aries_treatment",
+   "second": "aries_frozen",
+   "b_first_only": 147,
+   "c_second_only": 32,
+   "p_two_sided_exact": 8.155060330003249e-19,
+   "p_holm": 3.2620241320012996e-18,
+   "significant_holm_0_05": true
+  },
+  "M2-b": {
+   "model": "llama3.1:8b",
+   "dataset": "clinc150",
+   "first": "aries_treatment",
+   "second": "aries_frozen",
+   "b_first_only": 221,
+   "c_second_only": 116,
+   "p_two_sided_exact": 1.1272617875402982e-08,
+   "p_holm": 3.3817853626208945e-08,
+   "significant_holm_0_05": true
+  },
+  "M2-c": {
+   "model": "qwen2.5:1.5b",
+   "dataset": "nl2bash",
+   "first": "aries_treatment",
+   "second": "aries_frozen",
+   "b_first_only": 194,
+   "c_second_only": 22,
+   "p_two_sided_exact": 1.4345906173224114e-35,
+   "p_holm": 8.607543703934469e-35,
+   "significant_holm_0_05": true
+  },
+  "M2-d": {
+   "model": "qwen2.5:1.5b",
+   "dataset": "clinc150",
+   "first": "aries_treatment",
+   "second": "aries_frozen",
+   "b_first_only": 47,
+   "c_second_only": 21,
+   "p_two_sided_exact": 0.0021862431776861705,
+   "p_holm": 0.0021862431776861705,
+   "significant_holm_0_05": true
+  },
+  "M2-e": {
+   "model": "qwen2.5:14b",
+   "dataset": "nl2bash",
+   "first": "aries_treatment",
+   "second": "aries_frozen",
+   "b_first_only": 194,
+   "c_second_only": 55,
+   "p_two_sided_exact": 2.351479726618974e-19,
+   "p_holm": 1.1757398633094872e-18,
+   "significant_holm_0_05": true
+  },
+  "M2-f": {
+   "model": "qwen2.5:14b",
+   "dataset": "clinc150",
+   "first": "aries_treatment",
+   "second": "aries_frozen",
+   "b_first_only": 81,
+   "c_second_only": 43,
+   "p_two_sided_exact": 0.0008202604148752646,
+   "p_holm": 0.0016405208297505293,
+   "significant_holm_0_05": true
+  }
+ }
+}

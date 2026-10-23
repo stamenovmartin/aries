@@ -96,3 +96,23 @@ def step_toward(current: float, target: float, *, confidence: float, max_step: f
     # relevance score (which is itself rounded). Precision the system cannot
     # justify is noise, and noise that reaches the user is a bug.
     return round(max(0.0, min(1.0, current + delta)), 3)
+
+
+# ── ARIES_LEARNING_RELATIVE_CTR ─────────────────────────────────────────────────
+# MIND-small dev (experiments/iis/real-data/mind): the click-through rate is about 4%, so
+# an "engaged" bar of 40% and an "ignored" bar of 10% are never crossed by a topic's
+# interval, and learning added +0.0001 AUC. The bars are absolute; what learning needs to
+# know is whether a topic is opened MORE or LESS than this user opens things in general.
+# With the flag each bar becomes the smaller of its setting and a multiple of the user's
+# pooled rate, so a user who opens 40% of what is delivered sees the settings unchanged.
+# The two ratios are fixed here, not fitted on any evaluation data.
+RELATIVE_ENGAGED_RATIO = 2.0
+RELATIVE_IGNORED_RATIO = 0.5
+
+
+def relative_thresholds(engaged: int, shown: int, engaged_at: float, ignored_at: float) -> tuple[float, float]:
+    """(engaged bar, ignored bar) relative to the pooled rate engaged/shown; the settings when shown is 0."""
+    if shown <= 0:
+        return engaged_at, ignored_at
+    rate = engaged / shown
+    return min(engaged_at, RELATIVE_ENGAGED_RATIO * rate), min(ignored_at, RELATIVE_IGNORED_RATIO * rate)
