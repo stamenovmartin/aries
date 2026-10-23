@@ -7,6 +7,19 @@ fixed before the runs and are written in each folder's `NOTES.md`. No parameter 
 The datasets are not in the repository (their licences, and the rule that external data is never committed).
 `download.sh` in each folder fetches them and checks their SHA-256. The result files hold aggregate numbers only.
 
+## Results at a glance
+
+![MIND AUC by system](../../analysis/figures/mind_auc.svg)
+
+On MIND-small (73,152 impressions, 50,000 users) the ARIES interest profile ranks clicked news above skipped news
+better than every baseline (AUC 0.613; the best baseline, embedding, 0.600). MMR diversity costs almost nothing
+(0.611). Learning from clicks adds nothing, with either rule.
+
+![LoCoMo hit@5](../../analysis/figures/locomo_hit5.svg)
+
+On LoCoMo (1,982 questions) the first ARIES memory found the evidence in the top 5 for 37.7% of the questions,
+below BM25 (50.0%). After the remedies (section 3) it finds it for 62.0%, above BM25 in every question type.
+
 ## 1. News ranking on MIND-small
 
 **The question.** ARIES keeps an interest profile (topics with weights) and scores each news item against it.
