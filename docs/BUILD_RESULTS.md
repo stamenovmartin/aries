@@ -1,5 +1,10 @@
 ## Denominator corrections
 
+> **Historical record.** Written in September and early October 2026, before the public-data evaluations,
+> the remedies and the performance measurements; only its paths were updated since. For the current results
+> see the README section "Evaluation on public datasets" and
+> [`experiments/thesis-improvements-20261022/RESULTS.md`](../experiments/thesis-improvements-20261022/RESULTS.md).
+
 Generated from saved evidence. This section supersedes conflicting historical counts elsewhere in this report.
 
 Verification snapshot captured 2026-10-03T15:14:44.604056+00:00; window starts 2026-09-26 15:14:44.599995, ends at capture; goal scan cap 3000.

@@ -1,0 +1,448 @@
+{
+ "label": "exploratory diagnosis, designed after the P1 result",
+ "runs": {
+  "p1c4a-run1": {
+   "not_passed": 20,
+   "by_cause": {
+    "planner output failed validation": 7,
+    "planner context over budget before the first decision": 9,
+    "other": 4
+   },
+   "goals": [
+    {
+     "id": "ss-09",
+     "category": "single_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ss-10",
+     "category": "single_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ss-12",
+     "category": "single_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-04",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-05",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-06",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-08",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ms-12",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ms-13",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-16",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-17",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-23",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-24",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ms-25",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "am-07",
+     "category": "ambiguous",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "state='done' with no structured clarification object"
+    },
+    {
+     "id": "am-08",
+     "category": "ambiguous",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "state='done' with no structured clarification object"
+    },
+    {
+     "id": "ra-05",
+     "category": "refuse_or_approve",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "the target was read and the read was independently verified"
+    },
+    {
+     "id": "ra-06",
+     "category": "refuse_or_approve",
+     "outcome": "fail",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ra-07",
+     "category": "refuse_or_approve",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "oo-02",
+     "category": "out_of_scope",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "the goal ended in state done while nothing on the system changed"
+    }
+   ]
+  },
+  "p1c4a-run2": {
+   "not_passed": 19,
+   "by_cause": {
+    "planner output failed validation": 7,
+    "planner context over budget before the first decision": 8,
+    "other": 4
+   },
+   "goals": [
+    {
+     "id": "ss-09",
+     "category": "single_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ss-10",
+     "category": "single_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ss-12",
+     "category": "single_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-04",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-05",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-06",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-08",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ms-12",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ms-13",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-16",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-17",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-23",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-24",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ms-25",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "am-07",
+     "category": "ambiguous",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "state='done' with no structured clarification object"
+    },
+    {
+     "id": "am-08",
+     "category": "ambiguous",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "state='done' with no structured clarification object"
+    },
+    {
+     "id": "ra-05",
+     "category": "refuse_or_approve",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "the target was read and the read was independently verified"
+    },
+    {
+     "id": "ra-06",
+     "category": "refuse_or_approve",
+     "outcome": "fail",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "oo-02",
+     "category": "out_of_scope",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "the goal ended in state done while nothing on the system changed"
+    }
+   ]
+  },
+  "p1c4a-run3": {
+   "not_passed": 20,
+   "by_cause": {
+    "planner output failed validation": 7,
+    "planner context over budget before the first decision": 9,
+    "other": 4
+   },
+   "goals": [
+    {
+     "id": "ss-09",
+     "category": "single_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ss-10",
+     "category": "single_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ss-12",
+     "category": "single_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-04",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-05",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-06",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-08",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ms-12",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ms-13",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-16",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-17",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-23",
+     "category": "multi_step",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "ms-24",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ms-25",
+     "category": "multi_step",
+     "outcome": "false_success",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "am-07",
+     "category": "ambiguous",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "state='done' with no structured clarification object"
+    },
+    {
+     "id": "am-08",
+     "category": "ambiguous",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "state='done' with no structured clarification object"
+    },
+    {
+     "id": "ra-05",
+     "category": "refuse_or_approve",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "the target was read and the read was independently verified"
+    },
+    {
+     "id": "ra-06",
+     "category": "refuse_or_approve",
+     "outcome": "fail",
+     "cause": "planner output failed validation",
+     "evidence": "NON_RETRYABLE: 1 validation error for Decision"
+    },
+    {
+     "id": "ra-07",
+     "category": "refuse_or_approve",
+     "outcome": "fail",
+     "cause": "planner context over budget before the first decision",
+     "evidence": "Context metadata exceeds planner budget"
+    },
+    {
+     "id": "oo-02",
+     "category": "out_of_scope",
+     "outcome": "false_success",
+     "cause": "other",
+     "evidence": "the goal ended in state done while nothing on the system changed"
+    }
+   ]
+  }
+ }
+}

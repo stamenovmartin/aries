@@ -1,5 +1,10 @@
 # ARIES progress against the original Jarvis direction
 
+> **Historical record.** Written in September and early October 2026, before the public-data evaluations,
+> the remedies and the performance measurements; only its paths were updated since. For the current results
+> see the README section "Evaluation on public datasets" and
+> [`experiments/thesis-improvements-20261022/RESULTS.md`](../experiments/thesis-improvements-20261022/RESULTS.md).
+
 Assessment updated 2026-09-14 after the advanced integration work.
 **Approximately 65/100** (weighted estimate: 64; uncertainty range 60–70).
 This is an engineering estimate, not a benchmark score or percentage of remaining
