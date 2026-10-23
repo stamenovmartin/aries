@@ -147,6 +147,57 @@ FLAGS = {
                                   "is UNVERIFIED (aries/workspace/scope_verifiers.py, docs/AUDIT.md "
                                   "4e). Read when the registry is imported. Off, every verifier is the "
                                   "frozen function"),
+    "ARIES_CONTRACT_FILENAME_JOIN": (False, "designed after H5: a read or existence goal that names one folder and "
+                                           "one bare file name (\"read notes.txt in ~/x\") gets a contract for "
+                                           "the file in that folder, not for the folder; a read naming a folder "
+                                           "and no single file gets no contract, and \"show me\" a path with an "
+                                           "extension is a read, not a listing (aries/workspace/contracts.py). "
+                                           "Off, the folder is the target, as in the H5 run"),
+    "ARIES_TYPED_CONTRACT_CODE_PATH": (False, "designed after H5, with ARIES_COMPLETION_TYPED_CONTRACT: the model "
+                                             "returns only the goal type and a verbatim name, and code supplies "
+                                             "the one path the request names; a read of a folder with no name is "
+                                             "rejected (aries/workspace/typed_contract.py). Off, the model copies "
+                                             "the path, as in the H5 run"),
+    "ARIES_RESOLVER_CODE_SELECT": (False, "designed after H4b, with ARIES_CLARIFY_RESOLVER: no model call decides "
+                                         "between candidates; code selects the one candidate a request word or "
+                                         "order word singles out (the same check that guarded the model's "
+                                         "span), otherwise ARIES asks (aries/workspace/clarify_resolver.py). "
+                                         "Off, the decision call runs, as in the H4b run"),
+    "ARIES_ROUTER_CAPABILITY_GATE": (False, "designed after R1: when a local router decision would act, one "
+                                           "grammar-constrained call names the registered capability that "
+                                           "fulfils the request completely, or OUT_OF_SCOPE, which turns the "
+                                           "decision into OUT_OF_SCOPE; it never turns an abstention into an "
+                                           "action (aries/intelligence/capability_gate.py). Off, the module is "
+                                           "never imported"),
+    "ARIES_ROUTER_SURFACE_CONSISTENT": (False, "designed after R1: the router's abstention text no longer says "
+                                              "the listed capabilities are never OUT_OF_SCOPE, says a request "
+                                              "needing something none of them does is OUT_OF_SCOPE, and names "
+                                              "email and calendar as having no capability. Off, the frozen A1 "
+                                              "text"),
+    "ARIES_PLANNER_PER_CAP_GRAMMAR": (False, "designed after R1: the planner grammar has one branch per "
+                                            "capability with that capability's own required arguments, so an "
+                                            "action missing a required argument cannot be generated "
+                                            "(aries/workspace/agent_planner.py). Off, the flat grammar"),
+    "ARIES_PLANNER_OOS_ACTION": (False, "designed after R1: when fail is allowed, the planner is told to choose "
+                                       "fail with reason OUT_OF_SCOPE when no capability fulfils the goal "
+                                       "completely, instead of the nearest capability. Off, no such message"),
+    "ARIES_PLANNER_GATE_HINT": (False, "with ARIES_ROUTER_CAPABILITY_GATE: the planner is told which capability "
+                                      "the gate chose as the first step. Off, the planner does not see it"),
+    "ARIES_MEMORY_HYBRID_RRF": (False, "designed after LoCoMo: semantic-v3 memory retrieval fuses the cosine "
+                                      "ranking with a BM25 ranking of the same rows by Reciprocal Rank Fusion "
+                                      "(k=60) as its similarity term; recency, importance and layer are added "
+                                      "as before (aries/workspace/retrieval.py). Off, cosine only"),
+    "ARIES_LEARNING_RELATIVE_CTR": (False, "designed after MIND: the ordinary learning path judges a topic against "
+                                          "this user's pooled engagement rate, each bar the smaller of its setting "
+                                          "and 2x (engaged) or 0.5x (ignored) that rate (aries/learning/"
+                                          "statistics.py). Off, the absolute settings 0.4 and 0.1"),
+    "ARIES_NEWS_DIVERSE_TOPK": (False, "designed after MIND: the briefing picks by Maximal Marginal Relevance "
+                                      "(lambda 0.7, topic redundancy) instead of round-robin over topics "
+                                      "(aries/news/selection.py). Off, round-robin"),
+    "ARIES_MEMORY_SIMILARITY_RANK": (False, "designed after M1 (LoCoMo): semantic-v3 memory retrieval orders by the "
+                                           "similarity term alone (with ARIES_MEMORY_HYBRID_RRF, the fused rank); "
+                                           "recency, importance and layer only break ties (aries/workspace/"
+                                           "retrieval.py). Off, the weighted sum"),
     "ARIES_TILE_HIDPI": (True, "desktop.tile reads the monitor's scale factor from Mutter and "
                                "expects the device-pixel-aligned rectangle, so a correct tile on a "
                                "fractionally scaled display is not reported unverified"),

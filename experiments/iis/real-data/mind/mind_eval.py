@@ -43,7 +43,8 @@ for _p in (ROOT / "vendor" / "agentic-core", ROOT / "vendor", ROOT):
 
 from aries.interests.matching import Matchable, normalise, score  # noqa: E402
 from aries.learning.statistics import step_toward, wilson  # noqa: E402
-from aries.news.selection import diverse  # noqa: E402  (imports sqlalchemy + ORM models; no connection)
+from aries.news.selection import diverse, mmr  # noqa: E402  (imports sqlalchemy + ORM models; no connection)
+from aries.learning.statistics import relative_thresholds  # noqa: E402
 import aries.learning.settings  # noqa: E402,F401  registers learning.* defaults
 from aries.settings.schema import require as _setting  # noqa: E402
 from aries.learning.history import LOOKBACK  # noqa: E402
@@ -335,8 +336,8 @@ def learning_step(state: TopicState, base: float, cfg=LEARN) -> dict | None:
 class LearningUser:
     """Per-user learned layer over the static profile."""
 
-    def __init__(self, profile: Profile, static: dict[str, float]):
-        self.static = static
+    def __init__(self, profile: Profile, static: dict[str, float], relative: bool = False):
+        self.static, self.relative = static, relative
         self.profile = Profile.__new__(Profile)
         self.profile.index, self.profile.required = profile.index, profile.required
         self.profile.matchables = [dataclasses.replace(m) for m in profile.matchables]
@@ -355,10 +356,17 @@ class LearningUser:
                 st.shown += 1
                 st.clicked += int(y)
                 touched.add(k)
+        cfg = LEARN
+        if self.relative:
+            # ARIES_LEARNING_RELATIVE_CTR, as loop.propose() applies it: bars from this user's pooled rate.
+            eng, ign = relative_thresholds(sum(s.clicked for s in self.state.values()),
+                                           sum(s.shown for s in self.state.values()),
+                                           float(LEARN["engaged_threshold"]), float(LEARN["ignored_threshold"]))
+            cfg = {**LEARN, "engaged_threshold": eng, "ignored_threshold": ign}
         for k in sorted(touched):
             st = self.state[k]
             base = st.learned if st.learned is not None else self.static[k]
-            if learning_step(st, base) is not None:
+            if learning_step(st, base, cfg) is not None:
                 self.profile.matchables[self.pos[k]].weight = st.learned
                 self.changes += 1
 
@@ -475,8 +483,12 @@ def embedding_scores(cache: EmbeddingCache, history, candidates) -> np.ndarray:
 # ── the run ─────────────────────────────────────────────────────────────────
 
 SYSTEMS = ("aries-interests", "aries-interests+diverse", "aries-learning",
+           "aries-interests+mmr", "aries-learning-relative",
            "random", "popular", "recent", "tfidf", "bm25")
-ARIES = ("aries-interests", "aries-interests+diverse", "aries-learning")
+# The +mmr and -relative systems were added after the 2026-10-22 results (ARIES_NEWS_DIVERSE_TOPK,
+# ARIES_LEARNING_RELATIVE_CTR); they are exploratory and named as such in NOTES.md.
+ARIES = ("aries-interests", "aries-interests+diverse", "aries-learning",
+         "aries-interests+mmr", "aries-learning-relative")
 BASELINES = ("random", "popular", "recent", "tfidf", "bm25")
 
 
@@ -512,7 +524,7 @@ def evaluate(train_beh, dev_beh, news, *, embed_cache=None, validate_pairs=20000
         return cand_text[nid]
 
     order = sorted(dev_beh, key=lambda i: (i.time, i.iid))
-    profiles, learners, user_docs = {}, {}, {}
+    profiles, learners, relatives, user_docs = {}, {}, {}, {}
     pop, ptr = Counter(), 0
     records = []
     validation = {"pairs": 0, "mismatches": 0}
@@ -531,7 +543,9 @@ def evaluate(train_beh, dev_beh, news, *, embed_cache=None, validate_pairs=20000
         prof, w = profiles[key]
         if imp.user not in learners:
             learners[imp.user] = (LearningUser(prof, w), key)
+            relatives[imp.user] = LearningUser(prof, w, relative=True)
         learner, lkey = learners[imp.user]
+        relative = relatives[imp.user]
         if lkey != key:
             history_variants += 1      # never happens in MIND-small dev; counted to be sure
 
@@ -539,6 +553,7 @@ def evaluate(train_beh, dev_beh, news, *, embed_cache=None, validate_pairs=20000
         nc = len(imp.candidates)
         s_static = np.zeros(nc)
         s_learn = np.zeros(nc)
+        s_relative = np.zeros(nc)
         primary, matched_keys = [], []
         for j, nid in enumerate(imp.candidates):
             txt = ctext(nid)
@@ -548,6 +563,7 @@ def evaluate(train_beh, dev_beh, news, *, embed_cache=None, validate_pairs=20000
             primary.append(primary_topic(rel))
             matched_keys.append([m["topic"] for m in rel.matched])
             s_learn[j] = score(txt, [learner.profile.matchables[i] for i in sub]).score
+            s_relative[j] = score(txt, [relative.profile.matchables[i] for i in sub]).score
             if validation["pairs"] < validate_pairs:
                 full = score(txt, prof.matchables)
                 validation["pairs"] += 1
@@ -561,6 +577,10 @@ def evaluate(train_beh, dev_beh, news, *, embed_cache=None, validate_pairs=20000
         div_order = np.array(div, dtype=np.int64)
         div_scores = np.empty(nc)
         div_scores[div_order] = -np.arange(nc, dtype=float)
+        mmr_order = np.array(mmr(list(rank_static), relevance=lambda j: s_static[j], topics=lambda j: primary[j],
+                                 source=lambda j: None, limit=nc, per_source=0), dtype=np.int64)
+        mmr_scores = np.empty(nc)
+        mmr_scores[mmr_order] = -np.arange(nc, dtype=float)
 
         rng = np.random.default_rng([SEED, imp.iid])
         s_rand = rng.random(nc)
@@ -574,7 +594,8 @@ def evaluate(train_beh, dev_beh, news, *, embed_cache=None, validate_pairs=20000
         s_tfidf = np.array([text.tfidf(uvec, nid) for nid in imp.candidates])
         s_bm25 = np.array([text.bm25(ucounts, ulen, nid) for nid in imp.candidates])
 
-        scores = {"aries-interests": s_static, "aries-learning": s_learn, "random": s_rand,
+        scores = {"aries-interests": s_static, "aries-learning": s_learn,
+                  "aries-learning-relative": s_relative, "random": s_rand,
                   "popular": s_pop, "recent": s_rec, "tfidf": s_tfidf, "bm25": s_bm25}
         if embed_cache is not None:
             scores["embedding"] = embedding_scores(embed_cache, imp.history, imp.candidates)
@@ -585,6 +606,7 @@ def evaluate(train_beh, dev_beh, news, *, embed_cache=None, validate_pairs=20000
             rec[name] = impression_metrics(imp.labels, rank_static if name == "aries-interests"
                                            else ranking(s, tb), s)
         rec["aries-interests+diverse"] = impression_metrics(imp.labels, div_order, div_scores)
+        rec["aries-interests+mmr"] = impression_metrics(imp.labels, mmr_order, mmr_scores)
         if keep_scores:     # tests only; never written to a result file
             rec["scores"] = {k: [float(x) for x in v] for k, v in scores.items()}
             rec["diverse_order"] = [imp.candidates[j] for j in div_order]
@@ -592,12 +614,15 @@ def evaluate(train_beh, dev_beh, news, *, embed_cache=None, validate_pairs=20000
 
         # prequential: the learner sees this impression's outcome only now
         learner.update(matched_keys, imp.labels)
+        relative.update(matched_keys, imp.labels)
 
         if log and (n_imp + 1) % 5000 == 0:
             log(f"  {n_imp + 1}/{len(order)} impressions, {time.time() - t0:.0f}s")
 
     extra = {"prefilter_validation": validation, "history_variants": history_variants,
              "learning_changes": int(sum(l.changes for l, _ in learners.values())),
+             "learning_relative_changes": int(sum(l.changes for l in relatives.values())),
+             "learning_relative_users_changed": int(sum(1 for l in relatives.values() if l.changes)),
              "learning_users_changed": int(sum(1 for l, _ in learners.values() if l.changes)),
              "profile_topics_mean": float(np.mean([len(p.matchables) for p, _ in profiles.values()])),
              "bm25_avgdl": text.avgdl, "news_items": len(news), "systems": systems}
@@ -661,7 +686,9 @@ def bootstrap(records, systems, pairs, *, replicates=BOOTSTRAP_REPLICATES, seed=
 def pairs_for(systems):
     base = [b for b in (*BASELINES, "embedding") if b in systems]
     p = [(a, b) for a in ARIES for b in base]
-    p += [("aries-learning", "aries-interests"), ("aries-interests+diverse", "aries-interests")]
+    p += [("aries-learning", "aries-interests"), ("aries-interests+diverse", "aries-interests"),
+          ("aries-learning-relative", "aries-interests"), ("aries-learning-relative", "aries-learning"),
+          ("aries-interests+mmr", "aries-interests"), ("aries-interests+mmr", "aries-interests+diverse")]
     return p
 
 

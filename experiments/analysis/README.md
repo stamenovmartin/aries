@@ -115,8 +115,9 @@ zero-shot 120/193. Embedding и BM25 скоро никогаш не избира
 
 Обичното пребарување по зборови (BM25) го враќа вистинскиот дел од разговорот меѓу првите пет во 50,0% од
 прашањата, а ARIES (e5) во 37,7%. По вид на прашање сликата е различна: ARIES е подобар кај multi-hop
-прашањата (+0,106), сличен кај open-domain, а послаб кај temporal, single-hop и adversarial. Следниот логичен
-чекор, hybrid (BM25 + embedding), не е тестиран.
+прашањата (+0,106), сличен кај open-domain, а послаб кај temporal, single-hop и adversarial. Следниот чекор,
+hybrid (BM25 + embedding), е измерен подоцна (M1, истражувачко): со `ARIES_MEMORY_HYBRID_RRF` и
+`ARIES_MEMORY_SIMILARITY_RANK` hit@5 е 0,620, +0,120 [0,098; 0,147] над BM25 ([детали](../iis/real-data/README.md)).
 
 ## 4. Накратко
 

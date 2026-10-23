@@ -199,7 +199,8 @@ async def _run(goal_id, goal, data):
                 data['context_packet']=packet
         data.update(steps=[], evidence=[], schema_version=2)
         data['agent'] = {'engine':'m14', 'request':goal, 'finished':False, 'max_steps':limit,
-            'contract':contracts.compile_goal(goal,directory,paraphrase=flags.enabled('ARIES_COMPLETION_READ_PARAPHRASE')), 'decisions':[],
+            'contract':contracts.compile_goal(goal,directory,paraphrase=flags.enabled('ARIES_COMPLETION_READ_PARAPHRASE'),
+                                               filename_join=flags.enabled('ARIES_CONTRACT_FILENAME_JOIN')), 'decisions':[],
             'context':agent_planner.bounded(historical,max_chars=2500),
             'environment':{'home':str(Path.home()), 'demo_directory':directory, 'now':now()},
             'metrics':{'planner_calls':0,'number_of_steps':0,'execution_time':0.,'planner_time':0.,
@@ -283,6 +284,19 @@ async def _run(goal_id, goal, data):
             return None
         async with async_session() as db:
             cands = await resolver.stat_candidates(cands, {'db':db})
+        from aries import flags
+        if flags.enabled('ARIES_RESOLVER_CODE_SELECT'):
+            picked = resolver.code_select(goal, state['folder'], cands)
+            state.update(code_select=True,
+                         candidate_attributes=[{k:c[k] for k in ('path','modified','size')} for c in cands])
+            if picked is not None:
+                state.update(accepted=True, selected=picked[0]['path'], evidence_span=picked[1],
+                             why='selected in code on a request word', outcome='selected: planner continues with the selection')
+                return None
+            state.update(accepted=False, why='no request word singles out one candidate', outcome='asked')
+            await ask(agent_planner.Decision(action='ask_clarification', question=resolver.question(cands),
+                                             choices=[c['path'] for c in resolver.choices(cands)]), source='resolver')
+            return 'asked'
         if len(cands) > resolver.MAX_DECIDE:
             state.update(outcome='asked', why=f'{len(cands)} candidates: no model call')
             await ask(agent_planner.Decision(action='ask_clarification', question=resolver.question(cands),

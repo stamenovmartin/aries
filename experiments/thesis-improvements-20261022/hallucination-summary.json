@@ -1,0 +1,982 @@
+{
+ "label": "HAL1, descriptive",
+ "agent_runs": {
+  "h4b:baseline": {
+   "model_level": {
+    "M1_invented_action": {
+     "k": 8,
+     "n": 2148,
+     "rate": 0.0037,
+     "cp95": [
+      0.0016,
+      0.0073
+     ]
+    },
+    "M1_by_kind": {
+     "missing required argument": 8
+    },
+    "M2_invented_evidence": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "M3_finish_without_verified_evidence": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "M4_ungrounded_path_in_claim": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    }
+   },
+   "system_level": {
+    "S1_false_done_G_N": null,
+    "S1_done_on_failed_heldout": null,
+    "S1_twin_done_on_wrong_file": 0,
+    "S2_finish_rejected_by_check": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "S3_final_text_with_model_prose_marked": {
+     "k": 0,
+     "n": 240,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0153
+     ]
+    },
+    "done_runs": {
+     "k": 0,
+     "n": 240,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0153
+     ]
+    }
+   },
+   "counts": {
+    "M1_invalid": 8,
+    "S1_twin_wrong_file_done": 0,
+    "S2_finish_rejected": 0,
+    "S3_done_or_answered": 0,
+    "S3_model_prose_marked": 0,
+    "done": 0,
+    "finish_checked": 0,
+    "goal_runs": 240,
+    "model_decisions": 2148,
+    "outcomes": 240,
+    "runs": 3
+   },
+   "runs": 3
+  },
+  "h4b:code-select": {
+   "model_level": {
+    "M1_invented_action": {
+     "k": 2,
+     "n": 766,
+     "rate": 0.0026,
+     "cp95": [
+      0.0003,
+      0.0094
+     ]
+    },
+    "M1_by_kind": {
+     "missing required argument": 2
+    },
+    "M2_invented_evidence": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "M3_finish_without_verified_evidence": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "M4_ungrounded_path_in_claim": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    }
+   },
+   "system_level": {
+    "S1_false_done_G_N": null,
+    "S1_done_on_failed_heldout": null,
+    "S1_twin_done_on_wrong_file": 0,
+    "S2_finish_rejected_by_check": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "S3_final_text_with_model_prose_marked": {
+     "k": 0,
+     "n": 240,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0153
+     ]
+    },
+    "done_runs": {
+     "k": 0,
+     "n": 240,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0153
+     ]
+    }
+   },
+   "counts": {
+    "M1_invalid": 2,
+    "S1_twin_wrong_file_done": 0,
+    "S2_finish_rejected": 0,
+    "S3_done_or_answered": 0,
+    "S3_model_prose_marked": 0,
+    "code_decisions": 240,
+    "done": 0,
+    "finish_checked": 0,
+    "goal_runs": 240,
+    "model_decisions": 766,
+    "outcomes": 240,
+    "runs": 3
+   },
+   "runs": 3
+  },
+  "h4b:treatment": {
+   "model_level": {
+    "M1_invented_action": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "M1_by_kind": {},
+    "M2_invented_evidence": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "M3_finish_without_verified_evidence": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "M4_ungrounded_path_in_claim": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    }
+   },
+   "system_level": {
+    "S1_false_done_G_N": null,
+    "S1_done_on_failed_heldout": null,
+    "S1_twin_done_on_wrong_file": 0,
+    "S2_finish_rejected_by_check": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    },
+    "S3_final_text_with_model_prose_marked": {
+     "k": 0,
+     "n": 240,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0153
+     ]
+    },
+    "done_runs": {
+     "k": 0,
+     "n": 240,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0153
+     ]
+    }
+   },
+   "counts": {
+    "S1_twin_wrong_file_done": 0,
+    "S2_finish_rejected": 0,
+    "S3_done_or_answered": 0,
+    "S3_model_prose_marked": 0,
+    "code_decisions": 240,
+    "done": 0,
+    "finish_checked": 0,
+    "goal_runs": 240,
+    "outcomes": 240,
+    "runs": 3
+   },
+   "runs": 3
+  },
+  "h5:consolidated": {
+   "model_level": {
+    "M1_invented_action": {
+     "k": 14,
+     "n": 143,
+     "rate": 0.0979,
+     "cp95": [
+      0.0546,
+      0.1588
+     ]
+    },
+    "M1_by_kind": {
+     "invented value in the wrong format (e.g. a made-up SHA-256)": 6,
+     "missing required argument": 6,
+     "malformed output": 2
+    },
+    "M2_invented_evidence": {
+     "k": 0,
+     "n": 5,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.5218
+     ]
+    },
+    "M3_finish_without_verified_evidence": {
+     "k": 0,
+     "n": 5,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.5218
+     ]
+    },
+    "M4_ungrounded_path_in_claim": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    }
+   },
+   "system_level": {
+    "S1_false_done_G_N": {
+     "k": 5,
+     "n": 25,
+     "rate": 0.2,
+     "cp95": [
+      0.0683,
+      0.407
+     ]
+    },
+    "S1_done_on_failed_heldout": {
+     "k": 6,
+     "n": 49,
+     "rate": 0.1224,
+     "cp95": [
+      0.0463,
+      0.2477
+     ]
+    },
+    "S1_twin_done_on_wrong_file": null,
+    "S2_finish_rejected_by_check": {
+     "k": 6,
+     "n": 30,
+     "rate": 0.2,
+     "cp95": [
+      0.0771,
+      0.3857
+     ]
+    },
+    "S3_final_text_with_model_prose_marked": {
+     "k": 0,
+     "n": 73,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0493
+     ]
+    },
+    "done_runs": {
+     "k": 25,
+     "n": 74,
+     "rate": 0.3378,
+     "cp95": [
+      0.2319,
+      0.4572
+     ]
+    }
+   },
+   "counts": {
+    "M1_invalid": 14,
+    "S1_done_heldout_fail": 6,
+    "S1_false_done": 5,
+    "S2_finish_rejected": 6,
+    "S3_done_or_answered": 24,
+    "S3_model_prose_marked": 0,
+    "code_decisions": 25,
+    "done": 25,
+    "finish_checked": 30,
+    "finish_model": 5,
+    "goal_runs": 73,
+    "heldout_outcomes": 49,
+    "model_decisions": 143,
+    "outcomes": 74,
+    "outcomes_G_N": 25,
+    "records_without_agent": 1,
+    "runs": 1
+   },
+   "runs": 1
+  },
+  "h5:control": {
+   "model_level": {
+    "M1_invented_action": {
+     "k": 45,
+     "n": 1366,
+     "rate": 0.0329,
+     "cp95": [
+      0.0241,
+      0.0438
+     ]
+    },
+    "M1_by_kind": {
+     "malformed output": 1,
+     "other validation error": 1,
+     "invented value in the wrong format (e.g. a made-up SHA-256)": 18,
+     "missing required argument": 21,
+     "argument the capability does not have": 3,
+     "terminal decision with arguments": 1
+    },
+    "M2_invented_evidence": {
+     "k": 0,
+     "n": 50,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0711
+     ]
+    },
+    "M3_finish_without_verified_evidence": {
+     "k": 0,
+     "n": 50,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0711
+     ]
+    },
+    "M4_ungrounded_path_in_claim": {
+     "k": 0,
+     "n": 0,
+     "rate": null,
+     "cp95": null
+    }
+   },
+   "system_level": {
+    "S1_false_done_G_N": {
+     "k": 3,
+     "n": 75,
+     "rate": 0.04,
+     "cp95": [
+      0.0083,
+      0.1125
+     ]
+    },
+    "S1_done_on_failed_heldout": {
+     "k": 0,
+     "n": 147,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0248
+     ]
+    },
+    "S1_twin_done_on_wrong_file": null,
+    "S2_finish_rejected_by_check": {
+     "k": 50,
+     "n": 50,
+     "rate": 1.0,
+     "cp95": [
+      0.9289,
+      1.0
+     ]
+    },
+    "S3_final_text_with_model_prose_marked": {
+     "k": 0,
+     "n": 219,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0167
+     ]
+    },
+    "done_runs": {
+     "k": 3,
+     "n": 222,
+     "rate": 0.0135,
+     "cp95": [
+      0.0028,
+      0.039
+     ]
+    }
+   },
+   "counts": {
+    "M1_invalid": 45,
+    "S1_done_heldout_fail": 0,
+    "S1_false_done": 3,
+    "S2_finish_rejected": 50,
+    "S3_done_or_answered": 1,
+    "S3_model_prose_marked": 0,
+    "done": 3,
+    "finish_checked": 50,
+    "finish_model": 50,
+    "goal_runs": 219,
+    "heldout_outcomes": 147,
+    "model_decisions": 1366,
+    "outcomes": 222,
+    "outcomes_G_N": 75,
+    "records_without_agent": 3,
+    "runs": 3
+   },
+   "runs": 3
+  },
+  "h5:remedies": {
+   "model_level": {
+    "M1_invented_action": {
+     "k": 37,
+     "n": 777,
+     "rate": 0.0476,
+     "cp95": [
+      0.0337,
+      0.065
+     ]
+    },
+    "M1_by_kind": {
+     "missing required argument": 17,
+     "invented value in the wrong format (e.g. a made-up SHA-256)": 12,
+     "malformed output": 7,
+     "other validation error": 1
+    },
+    "M2_invented_evidence": {
+     "k": 0,
+     "n": 8,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.3694
+     ]
+    },
+    "M3_finish_without_verified_evidence": {
+     "k": 0,
+     "n": 8,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.3694
+     ]
+    },
+    "M4_ungrounded_path_in_claim": {
+     "k": 0,
+     "n": 2,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.8419
+     ]
+    }
+   },
+   "system_level": {
+    "S1_false_done_G_N": {
+     "k": 15,
+     "n": 75,
+     "rate": 0.2,
+     "cp95": [
+      0.1165,
+      0.3083
+     ]
+    },
+    "S1_done_on_failed_heldout": {
+     "k": 18,
+     "n": 147,
+     "rate": 0.1224,
+     "cp95": [
+      0.0742,
+      0.1866
+     ]
+    },
+    "S1_twin_done_on_wrong_file": null,
+    "S2_finish_rejected_by_check": {
+     "k": 11,
+     "n": 83,
+     "rate": 0.1325,
+     "cp95": [
+      0.0681,
+      0.2248
+     ]
+    },
+    "S3_final_text_with_model_prose_marked": {
+     "k": 0,
+     "n": 219,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0167
+     ]
+    },
+    "done_runs": {
+     "k": 75,
+     "n": 222,
+     "rate": 0.3378,
+     "cp95": [
+      0.2759,
+      0.4042
+     ]
+    }
+   },
+   "counts": {
+    "M1_invalid": 37,
+    "S1_done_heldout_fail": 18,
+    "S1_false_done": 15,
+    "S2_finish_rejected": 11,
+    "S3_done_or_answered": 72,
+    "S3_model_prose_marked": 0,
+    "code_decisions": 75,
+    "done": 75,
+    "finish_checked": 83,
+    "finish_model": 8,
+    "goal_runs": 219,
+    "heldout_outcomes": 147,
+    "model_decisions": 777,
+    "outcomes": 222,
+    "outcomes_G_N": 75,
+    "records_without_agent": 3,
+    "runs": 3,
+    "terminal_with_path": 2
+   },
+   "runs": 3
+  },
+  "h5:treatment": {
+   "model_level": {
+    "M1_invented_action": {
+     "k": 37,
+     "n": 1112,
+     "rate": 0.0333,
+     "cp95": [
+      0.0235,
+      0.0456
+     ]
+    },
+    "M1_by_kind": {
+     "missing required argument": 15,
+     "invented value in the wrong format (e.g. a made-up SHA-256)": 15,
+     "malformed output": 6,
+     "terminal decision with arguments": 1
+    },
+    "M2_invented_evidence": {
+     "k": 0,
+     "n": 26,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.1323
+     ]
+    },
+    "M3_finish_without_verified_evidence": {
+     "k": 0,
+     "n": 26,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.1323
+     ]
+    },
+    "M4_ungrounded_path_in_claim": {
+     "k": 0,
+     "n": 5,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.5218
+     ]
+    }
+   },
+   "system_level": {
+    "S1_false_done_G_N": {
+     "k": 12,
+     "n": 75,
+     "rate": 0.16,
+     "cp95": [
+      0.0855,
+      0.2628
+     ]
+    },
+    "S1_done_on_failed_heldout": {
+     "k": 9,
+     "n": 147,
+     "rate": 0.0612,
+     "cp95": [
+      0.0284,
+      0.113
+     ]
+    },
+    "S1_twin_done_on_wrong_file": null,
+    "S2_finish_rejected_by_check": {
+     "k": 26,
+     "n": 71,
+     "rate": 0.3662,
+     "cp95": [
+      0.255,
+      0.489
+     ]
+    },
+    "S3_final_text_with_model_prose_marked": {
+     "k": 0,
+     "n": 219,
+     "rate": 0.0,
+     "cp95": [
+      0.0,
+      0.0167
+     ]
+    },
+    "done_runs": {
+     "k": 48,
+     "n": 222,
+     "rate": 0.2162,
+     "cp95": [
+      0.1639,
+      0.2762
+     ]
+    }
+   },
+   "counts": {
+    "M1_invalid": 37,
+    "S1_done_heldout_fail": 9,
+    "S1_false_done": 12,
+    "S2_finish_rejected": 26,
+    "S3_done_or_answered": 45,
+    "S3_model_prose_marked": 0,
+    "code_decisions": 45,
+    "done": 48,
+    "finish_checked": 71,
+    "finish_model": 26,
+    "goal_runs": 219,
+    "heldout_outcomes": 147,
+    "model_decisions": 1112,
+    "outcomes": 222,
+    "outcomes_G_N": 75,
+    "records_without_agent": 3,
+    "runs": 3,
+    "terminal_with_path": 5
+   },
+   "runs": 3
+  }
+ },
+ "router_M5": {
+  "R1": {
+   "nl2bash frozen A1: gold_oos": 307,
+   "nl2bash frozen A1: acts": 263,
+   "nl2bash frozen A1: acts_conf_ge_0.9": 262,
+   "clinc frozen A1: gold_oos": 400,
+   "clinc frozen A1: acts": 226,
+   "clinc frozen A1: acts_conf_ge_0.9": 217,
+   "clinc frozen A0: gold_oos": 400,
+   "clinc frozen A0: acts": 310,
+   "clinc frozen A0: acts_conf_ge_0.9": 277,
+   "clinc frozen A0: M5 confident wrong action": {
+    "k": 277,
+    "n": 400,
+    "rate": 0.6925,
+    "cp95": [
+     0.6447,
+     0.7374
+    ]
+   },
+   "clinc frozen A1: M5 confident wrong action": {
+    "k": 217,
+    "n": 400,
+    "rate": 0.5425,
+    "cp95": [
+     0.4923,
+     0.5921
+    ]
+   },
+   "nl2bash frozen A1: M5 confident wrong action": {
+    "k": 262,
+    "n": 307,
+    "rate": 0.8534,
+    "cp95": [
+     0.8088,
+     0.891
+    ]
+   }
+  },
+  "R1b": {
+   "nl2bash frozen A1: gold_oos": 281,
+   "nl2bash frozen A1: acts": 230,
+   "nl2bash frozen A1: acts_conf_ge_0.9": 229,
+   "clinc frozen A1: gold_oos": 400,
+   "clinc frozen A1: acts": 232,
+   "clinc frozen A1: acts_conf_ge_0.9": 222,
+   "nl2bash C1: gold_oos": 281,
+   "nl2bash C1: acts": 51,
+   "nl2bash C1: acts_conf_ge_0.9": 47,
+   "clinc C1: gold_oos": 400,
+   "clinc C1: acts": 138,
+   "clinc C1: acts_conf_ge_0.9": 136,
+   "nl2bash C0: gold_oos": 281,
+   "nl2bash C0: acts": 187,
+   "nl2bash C0: acts_conf_ge_0.9": 183,
+   "clinc C0: gold_oos": 400,
+   "clinc C0: acts": 251,
+   "clinc C0: acts_conf_ge_0.9": 226,
+   "nl2bash G: gold_oos": 281,
+   "nl2bash G: acts": 70,
+   "nl2bash G: acts_conf_ge_0.9": 65,
+   "clinc G: gold_oos": 400,
+   "clinc G: acts": 155,
+   "clinc G: acts_conf_ge_0.9": 149,
+   "nl2bash S: gold_oos": 281,
+   "nl2bash S: acts": 97,
+   "nl2bash S: acts_conf_ge_0.9": 88,
+   "clinc S: gold_oos": 400,
+   "clinc S: acts": 184,
+   "clinc S: acts_conf_ge_0.9": 174,
+   "nl2bash C3: gold_oos": 281,
+   "nl2bash C3: acts": 52,
+   "nl2bash C3: acts_conf_ge_0.9": 48,
+   "clinc C3: gold_oos": 400,
+   "clinc C3: acts": 136,
+   "clinc C3: acts_conf_ge_0.9": 132,
+   "clinc C0: M5 confident wrong action": {
+    "k": 226,
+    "n": 400,
+    "rate": 0.565,
+    "cp95": [
+     0.5148,
+     0.6142
+    ]
+   },
+   "clinc C1: M5 confident wrong action": {
+    "k": 136,
+    "n": 400,
+    "rate": 0.34,
+    "cp95": [
+     0.2937,
+     0.3887
+    ]
+   },
+   "clinc C3: M5 confident wrong action": {
+    "k": 132,
+    "n": 400,
+    "rate": 0.33,
+    "cp95": [
+     0.2841,
+     0.3785
+    ]
+   },
+   "clinc G: M5 confident wrong action": {
+    "k": 149,
+    "n": 400,
+    "rate": 0.3725,
+    "cp95": [
+     0.325,
+     0.4219
+    ]
+   },
+   "clinc S: M5 confident wrong action": {
+    "k": 174,
+    "n": 400,
+    "rate": 0.435,
+    "cp95": [
+     0.3858,
+     0.4852
+    ]
+   },
+   "clinc frozen A1: M5 confident wrong action": {
+    "k": 222,
+    "n": 400,
+    "rate": 0.555,
+    "cp95": [
+     0.5048,
+     0.6044
+    ]
+   },
+   "nl2bash C0: M5 confident wrong action": {
+    "k": 183,
+    "n": 281,
+    "rate": 0.6512,
+    "cp95": [
+     0.5924,
+     0.7069
+    ]
+   },
+   "nl2bash C1: M5 confident wrong action": {
+    "k": 47,
+    "n": 281,
+    "rate": 0.1673,
+    "cp95": [
+     0.1256,
+     0.2161
+    ]
+   },
+   "nl2bash C3: M5 confident wrong action": {
+    "k": 48,
+    "n": 281,
+    "rate": 0.1708,
+    "cp95": [
+     0.1287,
+     0.22
+    ]
+   },
+   "nl2bash G: M5 confident wrong action": {
+    "k": 65,
+    "n": 281,
+    "rate": 0.2313,
+    "cp95": [
+     0.1833,
+     0.2851
+    ]
+   },
+   "nl2bash S: M5 confident wrong action": {
+    "k": 88,
+    "n": 281,
+    "rate": 0.3132,
+    "cp95": [
+     0.2594,
+     0.3709
+    ]
+   },
+   "nl2bash frozen A1: M5 confident wrong action": {
+    "k": 229,
+    "n": 281,
+    "rate": 0.8149,
+    "cp95": [
+     0.7645,
+     0.8586
+    ]
+   }
+  }
+ },
+ "planner_M1_public": {
+  "R1 frozen planner, NL2Bash": {
+   "invalid": {
+    "k": 126,
+    "n": 449,
+    "rate": 0.2806,
+    "cp95": [
+     0.2395,
+     0.3247
+    ]
+   },
+   "by_kind": {
+    "missing required argument": 95,
+    "argument the capability does not have": 25,
+    "invented value in the wrong format (e.g. a made-up SHA-256)": 5,
+    "malformed output": 1
+   }
+  },
+  "R1b C1, NL2Bash": {
+   "invalid": {
+    "k": 2,
+    "n": 208,
+    "rate": 0.0096,
+    "cp95": [
+     0.0012,
+     0.0343
+    ]
+   },
+   "by_kind": {
+    "invented value in the wrong format (e.g. a made-up SHA-256)": 2
+   }
+  },
+  "R1b C0, NL2Bash": {
+   "invalid": {
+    "k": 111,
+    "n": 396,
+    "rate": 0.2803,
+    "cp95": [
+     0.2366,
+     0.3273
+    ]
+   },
+   "by_kind": {
+    "missing required argument": 95,
+    "invented value in the wrong format (e.g. a made-up SHA-256)": 4,
+    "argument the capability does not have": 11,
+    "execute without a capability": 1
+   }
+  },
+  "R1b G, NL2Bash": {
+   "invalid": {
+    "k": 70,
+    "n": 249,
+    "rate": 0.2811,
+    "cp95": [
+     0.2262,
+     0.3414
+    ]
+   },
+   "by_kind": {
+    "invented value in the wrong format (e.g. a made-up SHA-256)": 9,
+    "missing required argument": 50,
+    "argument the capability does not have": 11
+   }
+  },
+  "R1b S, NL2Bash": {
+   "invalid": {
+    "k": 79,
+    "n": 277,
+    "rate": 0.2852,
+    "cp95": [
+     0.2328,
+     0.3423
+    ]
+   },
+   "by_kind": {
+    "missing required argument": 69,
+    "argument the capability does not have": 8,
+    "invented value in the wrong format (e.g. a made-up SHA-256)": 2
+   }
+  },
+  "R1b C3, NL2Bash": {
+   "invalid": {
+    "k": 7,
+    "n": 205,
+    "rate": 0.0341,
+    "cp95": [
+     0.0138,
+     0.0691
+    ]
+   },
+   "by_kind": {
+    "invented value in the wrong format (e.g. a made-up SHA-256)": 7
+   }
+  },
+  "R1b frozen planner, NL2Bash": {
+   "invalid": {
+    "k": 126,
+    "n": 446,
+    "rate": 0.2825,
+    "cp95": [
+     0.2412,
+     0.3268
+    ]
+   },
+   "by_kind": {
+    "missing required argument": 106,
+    "invented value in the wrong format (e.g. a made-up SHA-256)": 4,
+    "argument the capability does not have": 14,
+    "execute without a capability": 2
+   }
+  }
+ }
+}
