@@ -118,7 +118,6 @@ async def test_the_service_defends_the_minimum_too():
     direct write) and the cost of being wrong here is a subsystem that quietly
     starts answering differently."""
     await reset_db()
-    from aries.settings import SettingsService
     rule = policy.get("aries_automation_runs")
     async with async_session() as db:
         # Straight past the schema, as a bad migration would.

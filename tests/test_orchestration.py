@@ -206,7 +206,6 @@ async def test_reads_take_no_lane_so_questions_are_actually_parallel():
 # ── 3. what to try next: the typed code ─────────────────────────────────────
 
 async def test_every_typed_code_has_one_decision_and_a_reason():
-    from aries.workspace import agent
     codes = ('TRANSIENT', 'TARGET_NOT_FOUND', 'CAPABILITY_UNAVAILABLE', 'PERMISSION_REQUIRED',
              'AUTH_REQUIRED', 'AMBIGUOUS', 'NETWORK_ERROR', 'VERIFICATION_FAILED', 'NON_RETRYABLE')
     check('every code agent.error can produce is routed', set(codes) <= set(orc.ROUTE))

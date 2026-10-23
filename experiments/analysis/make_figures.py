@@ -20,8 +20,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 TABLES = ROOT / 'experiments/thesis-followup-20261012/thesis-tables'
 R1_SUMMARY = ROOT / 'experiments/thesis-r1-real-data/summary.json'
-MIND = ROOT / 'experiments/iis/real-data/mind/results/mind-dev-20261022T142633Z.json'
-LOCOMO = ROOT / 'experiments/iis/real-data/locomo/results/locomo-20261022T142603Z.json'
+# M1 runs (2026-10-22T19:35Z): every earlier system plus MMR and relative learning, same data and seeds
+MIND = ROOT / 'experiments/iis/real-data/mind/results/mind-dev-20261022T193501Z.json'
+LOCOMO = ROOT / 'experiments/iis/real-data/locomo/results/locomo-20261022T200243Z.json'   # M1: BM25, e5, hybrid
 OUT = Path(__file__).resolve().parent / 'figures'
 
 ACCENT = '#2f6f9f'    # ARIES, or the new version
@@ -166,6 +167,28 @@ def fig_tests():
         color = (GOOD if t['b_first_only'] > t['c_second_only'] else BAD) if sig else NEUTRAL
         out.append((f"{tid} {ds.split()[0]}: {short[t['first']]} vs {short[t['second']]}",
                     float(a['rate']), float(b['rate']), t['p_holm'], color, f"{a['k']}/{a['n']} vs {b['k']}/{b['n']}"))
+    breaks = [4, len(out)]
+    r1b = json.load(open(R1B))
+    sysname = {'aries_treatment': 'ARIES fixed', 'aries_frozen': 'frozen', 'zeroshot_qwen': 'zero-shot',
+               'router_A1_frozen': 'frozen'}
+    for tid, t in r1b['tests'].items():
+        d = 'nl2bash' if t['dataset'].startswith('nl2bash') else 'clinc150'
+        metric = 'top1' if d == 'nl2bash' else 'correct'
+        a, b = r1b[d][t['first']][metric], r1b[d][t['second']][metric]
+        sig = t['significant_holm_0_05']
+        color = (GOOD if t['b_first_only'] > t['c_second_only'] else BAD) if sig else NEUTRAL
+        out.append((f"{tid.replace('H-', '')} {'NL2Bash' if d == 'nl2bash' else 'CLINC150'}: ARIES fixed vs {sysname[t['second']]}",
+                    a['rate'], b['rate'], t['p_holm'], color, f"{a['k']}/{a['n']} vs {b['k']}/{b['n']}"))
+    breaks.append(len(out))
+    m2 = json.load(open(M2))
+    for tid, t in m2['tests'].items():
+        d = t['dataset']
+        metric = 'top1' if d == 'nl2bash' else 'correct'
+        a, b = m2['models'][t['model']][d]['aries_treatment'][metric], m2['models'][t['model']][d]['aries_frozen'][metric]
+        sig = t['significant_holm_0_05']
+        color = (GOOD if t['b_first_only'] > t['c_second_only'] else BAD) if sig else NEUTRAL
+        out.append((f"{tid} {t['model']} {'NL2Bash' if d == 'nl2bash' else 'CLINC150'}: fixed vs frozen",
+                    a['rate'], b['rate'], t['p_holm'], color, f"{a['k']}/{a['n']} vs {b['k']}/{b['n']}"))
 
     left = 24 + CHAR_W * max(len(r[0]) for r in out)
     width, row_h, top = 860, 30, 82
@@ -173,14 +196,14 @@ def fig_tests():
     sx = lambda v: x0 + (x1 - x0) * v
     bottom = top + row_h * len(out)
     svg = Svg(width, bottom + 40, 'Every confirmatory test: ARIES (filled) vs the comparison (hollow)',
-              'Green: ARIES better; red: comparison better; grey: no significant difference (McNemar, Holm)')
+              'Families, top to bottom: H4b-H8, R1, R1b, M2 (Holm inside each). Green: ARIES better; red: comparison better; grey: n.s.')
     svg.legend(16, 66, [('ARIES / new version', ACCENT), ('comparison', MUTED)])
     svg.axis(x0, x1, top - 4, bottom, 0, 1, 5, lambda v: f'{100 * v:.0f}%')
     svg.text(x1 + 14, top - 10, 'counts', size=11, weight='bold')
     svg.text(x1 + 140, top - 10, 'p (Holm)', size=11, weight='bold')
     for i, (label, a, b, p, color, counts) in enumerate(out):
         cy = top + row_h * i + row_h / 2
-        if i == 4:
+        if i in breaks:
             svg.line(16, cy - row_h / 2, width - 16, cy - row_h / 2, FG2, 0.8, '3 3')
         svg.text(x0 - 10, cy + 4, label, anchor='end', color=FG)
         svg.line(sx(min(a, b)), cy, sx(max(a, b)), cy, color, 3.5)
@@ -264,7 +287,9 @@ def fig_heldout():
 def fig_mind():
     m = json.load(open(MIND))['all_impressions']
     names = {'aries-interests': 'ARIES interests', 'aries-learning': 'ARIES + online learning',
-             'aries-interests+diverse': 'ARIES + diversity', 'embedding': 'embedding (e5)', 'popular': 'popularity',
+             'aries-learning-relative': 'ARIES + relative learning (M1)',
+             'aries-interests+diverse': 'ARIES + round-robin topics', 'aries-interests+mmr': 'ARIES + MMR diversity (M1)',
+             'embedding': 'embedding (e5)', 'popular': 'popularity',
              'bm25': 'BM25', 'tfidf': 'TF-IDF', 'recent': 'most recent', 'random': 'random'}
     rows = sorted(((names.get(k, k), v['auc']['mean'], *v['auc']['ci95'], ACCENT if k.startswith('aries') else MUTED, False)
                    for k, v in m['systems'].items()), key=lambda r: -r[1])
@@ -276,15 +301,68 @@ def fig_mind():
 def fig_locomo():
     lc = json.load(open(LOCOMO))
     cats = ['all', '1 multi-hop', '2 temporal', '3 open-domain', '4 single-hop', '5 adversarial']
-    series = [('BM25 (baseline)', 'bm25', MUTED), ('ARIES e5', 'embedding-only-e5', ACCENT),
-              ('ARIES bge-m3', 'embedding-only-bge-m3', SECOND)]
+    series = [('BM25 (baseline)', 'bm25', MUTED), ('ARIES before (e5 similarity)', 'embedding-only-e5', SECOND),
+              ('ARIES after M1 (BM25 + e5, RRF)', 'hybrid-similarity-e5', ACCENT)]
     labels = {c: (c.split(' ', 1)[1] if ' ' in c else 'all questions') + f" (n={lc['variants']['bm25']['metrics'][c]['n']})"
               for c in cats}
     key = {name: v for name, v, _ in series}
     return grouped('LoCoMo: evidence turn among the top 5 retrieved (hit@5)',
-                   'BM25 wins overall, ARIES e5 wins on multi-hop; the write cascade changes nothing (not drawn)',
+                   'Before M1 BM25 beat ARIES; with hybrid retrieval and similarity ranking ARIES beats BM25',
                    cats, [(n, c) for n, _, c in series],
                    lambda g, s: lc['variants'][key[s]]['metrics'][g]['hit@5']['mean'], labels)
+
+
+R1B = ROOT / 'experiments/thesis-r1b/summary.json'
+M2 = ROOT / 'experiments/thesis-m2-models/summary.json'
+P1 = ROOT / 'experiments/thesis-p1-performance'
+MODELS = ('qwen2.5:1.5b', 'qwen2.5:7b', 'llama3.1:8b', 'qwen2.5:14b')
+
+
+def fig_r1b():
+    n = json.load(open(R1B))['nl2bash']
+    names = [('aries_treatment', 'ARIES with the remedies', ACCENT, False), ('zeroshot_qwen', 'zero-shot qwen2.5:7b', MUTED, False),
+             ('embedding', 'embedding (e5)', MUTED, True), ('bm25', 'BM25', MUTED, True),
+             ('aries_frozen', 'ARIES frozen (as in R1)', SECOND, False),
+             ('always_out_of_scope', 'always out of scope (reference)', MUTED, True)]
+    rows = [(label, n[k]['top1']['rate'], *n[k]['top1']['cp95'], color, faded) for k, label, color, faded in names]
+    return bars_ci('R1b NL2Bash: right tool or out of scope, new sample (top-1)',
+                   'n = 500, disjoint from R1; lines: 95% Clopper-Pearson; faded: outside the test family', rows)
+
+
+def fig_m2():
+    m = json.load(open(M2))['models']
+    series = [('ARIES frozen', SECOND), ('zero-shot (the model alone)', MUTED), ('ARIES with the remedies', ACCENT)]
+    key = {'ARIES frozen': 'aries_frozen', 'zero-shot (the model alone)': 'zeroshot', 'ARIES with the remedies': 'aries_treatment'}
+    return grouped('M2: the same architecture with four local models (NL2Bash r1b, top-1)',
+                   'remedies vs frozen significant for every model (Holm, 6 of 6); qwen2.5:1.5b gains only by refusing',
+                   [x for x in MODELS if x in m], series, lambda g, s: m[g]['nl2bash'][key[s]]['top1']['rate'])
+
+
+def fig_p1_latency():
+    s = json.load(open(P1 / 'summary.json'))['decision_full_samples']
+    rows = [(f'{x}', s[x]['decision_total_s']['median'], s[x]['decision_total_s']['median'],
+             s[x]['decision_total_s']['p90'], ACCENT if x == 'qwen2.5:7b' else MUTED, False) for x in MODELS]
+    return bars_ci('P1: time to decide (router + planner), 1,100 requests per model',
+                   'bar: median; line: median to 90th percentile; one machine (RTX 3060 12 GB)',
+                   rows, lo=0, hi=7, fmt=lambda v: f'{v:.2f} s', tick_fmt=lambda v: f'{v:.0f} s', ticks=7)
+
+
+SERIES = [('p1', '1. as it was (screen blanked by ARIES)'), ('p1c2', '2. screen awake'),
+          ('p1c3', '3. + old context fix'), ('p1c4a', '4. current source'), ('p1c4b', '5. repaired system')]
+
+
+def fig_system_runs():
+    rows = []
+    for label, name in SERIES:
+        runs = [json.load(open(f)) for f in sorted((P1 / 'suite').glob(f'{label}-run*/results.json'))]
+        runs = [r for r in runs if r.get('finished_at')]          # a run still in progress is not drawn
+        if len(runs) != 3:
+            continue
+        rates = [r['counts']['pass'] / r['counts']['scored'] for r in runs]
+        rows.append((name, sum(rates) / 3, min(rates), max(rates), ACCENT if label == 'p1c4b' else MUTED, False))
+    return bars_ci('The installed system end to end: 90-goal agent suite, three runs per measurement',
+                   'bar: mean pass rate over the scored goals; line: lowest to highest run; each step changes one thing',
+                   rows)
 
 
 FIGURES = {
@@ -298,6 +376,10 @@ FIGURES = {
     'heldout.svg': fig_heldout,
     'mind_auc.svg': fig_mind,
     'locomo_hit5.svg': fig_locomo,
+    'r1b_nl2bash.svg': fig_r1b,
+    'm2_models.svg': fig_m2,
+    'p1_latency.svg': fig_p1_latency,
+    'p1_system_runs.svg': fig_system_runs,
 }
 
 

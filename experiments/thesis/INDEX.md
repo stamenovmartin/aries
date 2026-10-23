@@ -17,6 +17,7 @@ read them by exact path and hash.
 | `experiments/thesis-r1-real-data/` | R1: NL2Bash and CLINC150 samples, labels, runner, analysis | confirmatory (own family) |
 | `experiments/thesis-r1b/` | R1b: new samples and labels, development log, runner, analysis | confirmatory (own family) |
 | `experiments/thesis-m2-models/` | M2: the R1b systems with four local models | confirmatory (own family) |
+| `experiments/thesis-p1-performance/` | P1: latency, resources and reliability (decision pipeline per model; the installed system three times) | descriptive |
 | `experiments/thesis-improvements-20261022/` | X1 reruns, HAL1 hallucination measures, results index | exploratory / descriptive |
 | `experiments/router-ood/` | out-of-distribution router fixture | input; pinned by sha256 in `thesis-final-20261006/semantic_labels.json` |
 | `experiments/router-en/` | English router fixture with its own `check.py` | descriptive |
@@ -47,6 +48,7 @@ All in [`docs/preregistration/`](../../docs/preregistration/README.md), with the
 | R1 public data (NL2Bash, CLINC150) | confirmatory (own family); ARIES lost to the baselines |
 | R1b remedies on new public samples | confirmatory (own family), 3 of 4 |
 | M2 four local language models | confirmatory (own family), 6 of 6 |
+| P1 latency, resources, reliability | registered descriptive |
 | X1 H5 and H4b with the remedies | registered exploratory |
 | HAL1 hallucination measures | registered descriptive |
 

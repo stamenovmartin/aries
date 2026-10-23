@@ -1,5 +1,10 @@
 # Production readiness
 
+> **Historical record.** Written in September and early October 2026, before the public-data evaluations,
+> the remedies and the performance measurements; only its paths were updated since. For the current results
+> see the README section "Evaluation on public datasets" and
+> [`experiments/thesis-improvements-20261022/RESULTS.md`](../experiments/thesis-improvements-20261022/RESULTS.md).
+
 ## Current verification — 1 October 2026 (Europe/Skopje)
 
 The existing feature set passes the full regression suite and the isolated desktop

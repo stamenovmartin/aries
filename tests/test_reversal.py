@@ -23,9 +23,8 @@ from sqlalchemy import select  # noqa: E402
 from agentic_core.database.base import async_session  # noqa: E402
 
 from aries.interests import service as interests  # noqa: E402
-from aries.learning import evidence, history, reversal  # noqa: E402
-from aries.learning.loop import apply, propose, run_pass, verdicts_for  # noqa: E402
-from aries.learning.reversal import AriesReversal  # noqa: E402
+from aries.learning import history, reversal  # noqa: E402
+from aries.learning.loop import apply, propose, verdicts_for  # noqa: E402
 from aries.news.models import AriesNewsItem, fingerprint  # noqa: E402
 from aries.settings import SettingsService  # noqa: E402
 

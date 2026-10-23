@@ -340,7 +340,7 @@ async def research(request):
     return unique[:24], gaps
 
 async def approve(db, goal_id):
-    from aries.workspace import capabilities
+    from aries.workspace import capabilities  # noqa: F401  registers the capabilities before approval
     from agentic_core.security import approvals, principal
     from agentic_core.security.permissions import Permission
     who = principal.current()

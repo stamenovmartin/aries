@@ -8,8 +8,8 @@ Importing this package registers the settings, the tables and the automation.
 from __future__ import annotations
 
 from aries.learning import evidence, explain as explain_mod, feedback, history, reversal
-from aries.learning import controls  # registers durable learned-value reset/undo history
-from aries.learning import evidence_use  # registers durable evidence consumption receipts
+from aries.learning import controls  # noqa: F401  registers durable learned-value reset/undo history
+from aries.learning import evidence_use  # noqa: F401  registers durable evidence consumption receipts
 from aries.learning import settings as _settings  # noqa: F401
 from aries.learning.automation import AUTOMATION_ID, SPEC
 from aries.learning.evidence import Slice, TopicEvidence, gather

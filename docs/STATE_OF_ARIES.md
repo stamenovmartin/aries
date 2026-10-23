@@ -1,5 +1,10 @@
 # ARIES — State of the System
 
+> **Historical record.** Written in September and early October 2026, before the public-data evaluations,
+> the remedies and the performance measurements; only its paths were updated since. For the current results
+> see the README section "Evaluation on public datasets" and
+> [`experiments/thesis-improvements-20261022/RESULTS.md`](../experiments/thesis-improvements-20261022/RESULTS.md).
+
 > **18 September — terminal cloud correction:** `claude-cli` and `codex-cli`
 > adapters use existing terminal login. Cloud routing is enabled with Codex selected;
 > no separate API key is required. The HTTP-only “unconfigured cloud” limitation

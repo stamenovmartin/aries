@@ -19,7 +19,7 @@ from agentic_core.database.base import async_session  # noqa: E402
 from aries.settings import SettingsService  # noqa: E402
 from aries.sources import safety, service as src, types  # noqa: E402
 from aries.sources.safety import SourceRejected  # noqa: E402
-from aries.sources.types import Priority, Trust  # noqa: E402
+from aries.sources.types import Priority  # noqa: E402
 
 TMP = tempfile.mkdtemp(prefix="aries-sources-")
 DOCS = os.path.join(TMP, "docs")
