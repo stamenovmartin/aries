@@ -81,3 +81,8 @@ the current source with default flags; C4b, the same with `ARIES_PLAN_DISPATCH_F
 `ARIES_PLANNER_PER_CAP_GRAMMAR`. **Not run on 2026-10-23:** moving the live service to the current source is a
 deployment that needs the owner's explicit approval. Until it runs, the remedies' effect on the live system is
 not claimed.
+
+**2026-10-23, later the same day:** the owner approved moving the live service to the current source. C4a and
+C4b run as described above: `aries-core` from a detached worktree `~/aries-deploy` at the commit that adds this
+note, through a systemd drop-in (`~/.config/systemd/user/aries-core.service.d/p1-deploy.conf`); the database,
+data directory, models, voice and local-model services are unchanged; the flag file stays `~/aries/var/flags.env`.
