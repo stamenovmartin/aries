@@ -52,7 +52,7 @@ from agentic_core.scheduler.queue import register_kind
 from agentic_core.security.permissions import Permission
 from agentic_core.workflows import spec as wf
 
-from aries.automations.genome import AutomationSpec, record_run, register
+from aries.automations.genome import AutomationSpec, register
 from aries.health.findings import Severity
 from aries.interests import service as interests
 from aries.news import settings as _settings  # noqa: F401  registers the settings

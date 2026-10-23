@@ -19,7 +19,7 @@ from agentic_core.database.models import AuditEvent  # noqa: E402
 from aries.interests import service as interests  # noqa: E402
 from aries.learning import explain, preferences  # noqa: E402
 from aries.learning import feedback as fb  # noqa: E402
-from aries.settings import Layer, SettingsService  # noqa: E402
+from aries.settings import SettingsService  # noqa: E402
 
 
 async def _say(text: str, **context):

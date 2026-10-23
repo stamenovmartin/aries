@@ -119,13 +119,6 @@ async def run_pass(ctx: dict) -> dict:
     duration_ms = int((time.monotonic() - t0) * 1000)
 
     summary = _summarise(findings, alerts, critical, unavailable, blind)
-    detail = {
-        "probes": [pr.as_dict() for pr in results],
-        "findings": [f.as_dict() for f in findings],
-        "notifications": notifications,
-        "samples_recorded": recorded,
-        "baselines_used": len(bl),
-    }
     # The run row is written by the runner (aries/automations/runner.py), which
     # does it for every automation on the lifecycle path. `status` travels back
     # in the result below so the runner records `degraded` rather than guessing
