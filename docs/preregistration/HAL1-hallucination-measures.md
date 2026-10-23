@@ -50,3 +50,12 @@ Clopper-Pearson 95% intervals, per condition.
 - M1–M4 are mechanical; a paraphrased hallucination without a path or an evidence id is not caught.
 - M5 uses LLM gold labels (R1/R1b).
 - The items were written by a model, not people; one machine; qwen2.5:7b.
+
+## Amendment 1 (2026-10-22, before the final computation)
+
+A dry computation on the existing H5 and H4b runs (nothing written) showed two defects in the script, fixed
+before `hallucination-summary.json` is written: (1) S1 false `done` was divided by every outcome, held-out
+goals included; it is now over G and N item-runs, as in H5, and the held-out false `done` has its own
+denominator; (2) M1's kinds now separate a value the model made up in the wrong format (most often an
+`expected_sha256` that is not a 64-character hex string) and the router's malformed output. The definitions
+are unchanged.
