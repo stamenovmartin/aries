@@ -148,7 +148,7 @@ What it was missing is ARIES. So ARIES registers as a **search provider** —
 `Main.overview.searchController.addProvider()`, a public API in GNOME 50 — and
 typing in the overview reaches everything ARIES knows:
 
-![ARIES in the overview](screenshots/shell-overview.png)
+*(screenshot “ARIES in the overview”, `shell-overview.png`, not in the public repository)*
 
 Typing `brief` now surfaces an **ARIES** section with *Show the morning brief*,
 *Run Morning Brief*, and the three settings that control briefing length and
@@ -392,12 +392,12 @@ Captured from the nested session, so they are the real shell rather than a mocku
 
 | | |
 |---|---|
-| ![the desktop](screenshots/shell-desktop.png) | workspace pills, ARIES status, the dock |
-| ![ARIES Search](screenshots/shell-search.png) | one router, real results |
-| ![the launcher](screenshots/shell-launcher.png) | the application grid |
-| ![quick settings](screenshots/shell-quicksettings.png) | one panel: the machine and ARIES |
-| ![ARIES status](screenshots/shell-status.png) | what ARIES is doing and about to do |
-| ![the overview](screenshots/shell-overview.png) | ARIES results in GNOME's own search |
+| *(screenshot “the desktop”, `shell-desktop.png`, not in the public repository)* | workspace pills, ARIES status, the dock |
+| *(screenshot “ARIES Search”, `shell-search.png`, not in the public repository)* | one router, real results |
+| *(screenshot “the launcher”, `shell-launcher.png`, not in the public repository)* | the application grid |
+| *(screenshot “quick settings”, `shell-quicksettings.png`, not in the public repository)* | one panel: the machine and ARIES |
+| *(screenshot “ARIES status”, `shell-status.png`, not in the public repository)* | what ARIES is doing and about to do |
+| *(screenshot “the overview”, `shell-overview.png`, not in the public repository)* | ARIES results in GNOME's own search |
 
 Note what the quick settings panel says on this machine: *"no backlight"* and
 *"Bluetooth · no adapter"*. Those are the honest-absence rule showing through —

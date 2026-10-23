@@ -37,15 +37,25 @@ async def _refused(target):
             return str(exc)
 
 
+# The installation as the user would type it (`~/aries` when installed; any checkout under home works).
+# A checkout outside home is refused by the home confinement before this guard is reached.
+_HOME = Path.home().resolve()
+_INSIDE_HOME = cap.INSTALLATION.resolve().is_relative_to(_HOME)
+ROOT = '~/' + cap.INSTALLATION.resolve().relative_to(_HOME).as_posix() if _INSIDE_HOME else None
+
+
 async def test_its_own_source_is_not_a_write_target():
     await _ready()
     check('the installation root is where this file lives',
           (cap.INSTALLATION / 'aries' / 'workspace' / 'capabilities.py').is_file())
-    for target in ('~/aries/aries/workspace/capabilities.py',
-                   '~/aries/aries/speech/engines.py',
-                   '~/aries/scripts/aries-voice',
-                   '~/aries/var/anything.txt',
-                   '~/aries/brand-new-module.py'):
+    if not _INSIDE_HOME:
+        print('SKIP  this checkout is outside home; the installation guard applies to a tree under home')
+        return
+    for target in (f'{ROOT}/aries/workspace/capabilities.py',
+                   f'{ROOT}/aries/speech/engines.py',
+                   f'{ROOT}/scripts/aries-voice',
+                   f'{ROOT}/var/anything.txt',
+                   f'{ROOT}/brand-new-module.py'):
         why = await _refused(target)
         check(f'refused: {target}', why is not None and 'installation' in why)
 
@@ -54,8 +64,11 @@ async def test_reading_its_own_source_is_still_allowed():
     """A refusal that also blocked reads would break introspection and any
     reviewed self-development before either was written."""
     await _ready()
+    if not _INSIDE_HOME:
+        print('SKIP  this checkout is outside home')
+        return
     async with async_session() as db:
-        path = await cap.checked_path(db, '~/aries/aries/speech/engines.py', write=False)
+        path = await cap.checked_path(db, f'{ROOT}/aries/speech/engines.py', write=False)
         check('ARIES can still read its own code', path.name == 'engines.py')
 
 

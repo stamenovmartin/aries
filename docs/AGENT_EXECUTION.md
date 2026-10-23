@@ -174,7 +174,7 @@ and the explicitly requested public Python page. Unknown approvals stay pending.
 All included scenarios must pass for exit code 0. Network/browser failure is
 recorded as a failed included scenario, never silently relabelled as skipped.
 
-Artifacts: `experiments/agent/<run>/report.md`, `result.json`, `tasks/`, `evidence/`.
+Artifacts: `experiments/archive/agent/<run>/report.md`, `result.json`, `tasks/`, `evidence/`.
 Failed development attempts are retained. See [CAPABILITIES.md](CAPABILITIES.md),
 [API.md](API.md), [RESEARCH_DEMO.md](RESEARCH_DEMO.md), and
 [publication materials](publication/README.md).

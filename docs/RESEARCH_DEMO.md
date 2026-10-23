@@ -59,7 +59,7 @@ source digest, Git revision, dirty-working-tree flag, IDs and elapsed time.
 It is not a randomized baseline comparison. `evaluate tasks` summarizes the
 latest 500 operational goals; it is also not a controlled scientific benchmark.
 
-Historical operator comparisons are preserved in `experiments/operator/analysis.md`
+Historical operator comparisons are preserved in `experiments/thesis/operator/analysis.md`
 and [EXPERIMENTS.md](EXPERIMENTS.md). Their own null findings and fixed-order
 confound remain valid caveats; new regression tests do not turn them into wins.
 
@@ -67,7 +67,7 @@ confound remain valid caveats; new regression tests do not turn them into wins.
 
 `./scripts/aries-agent-demo` executes four natural-language scenarios through the
 real local model, persistent queue, capability registry and independent verifiers.
-The first complete accepted run is `experiments/agent/20260917T204354Z-fb8722/`:
+The first complete accepted run is `experiments/archive/agent/20260917T204354Z-fb8722/`:
 
 | Scenario | Outcome | Acceptance | Submission-to-result seconds |
 |---|---|---|---:|
@@ -82,7 +82,7 @@ persisted observations/evidence. Native local-model token counts and all decisio
 are included in task JSON. The runner approves only its explicitly requested
 new file and public Python navigation, preserving the user's confirmation setting.
 
-Development attempts remain in `experiments/agent/`: grammar incompatibility,
+Development attempts remain in `experiments/archive/agent/`: grammar incompatibility,
 service-start readiness, repeated reads, invented terminal evidence and refusal
 without observing a missing path were encountered before this accepted run.
 Prompt/grammar changes were made after observing those failures. This is therefore

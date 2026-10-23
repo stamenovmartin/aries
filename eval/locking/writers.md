@@ -90,7 +90,7 @@ on-demand process point `DATABASE_URL` at the same file:
 | `scripts/aries <cmd>` | `export DATABASE_URL="${DATABASE_URL:-...var/aries.db}"` | yes, one new process each time |
 | `aries-lock-observer-20261003-final.service` | — | no: it reads `journalctl`, not the database |
 | `experiments/**` probes | `?mode=ro&uri=true` | no, SQLite refuses the write |
-| `experiments/memory-preservation/measure.py` | sets `DATABASE_URL` to the **live** file | writes, then rolls back (a test fixture) |
+| `experiments/iis/memory-preservation/measure.py` | sets `DATABASE_URL` to the **live** file | writes, then rolls back (a test fixture) |
 
 **This bounds what "one writer" can mean.** A process-local lock cannot serialise
 `aries-core` against `aries-local-model` or against a CLI run. For those, SQLite's

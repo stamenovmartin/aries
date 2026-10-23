@@ -244,7 +244,7 @@ ARIES демонстрира локална архитектура во која
 1. Yao et al. *ReAct: Synergizing Reasoning and Acting in Language Models*. ICLR 2023. https://arxiv.org/abs/2210.03629
 2. Zhou et al. *WebArena: A Realistic Web Environment for Building Autonomous Agents*. 2023 preprint. https://arxiv.org/abs/2307.13854
 3. Xie et al. *OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments*. 2024. https://arxiv.org/abs/2404.07972
-4. ARIES historical Operator: [raw rows](../../experiments/operator/results.jsonl), [summary](../../experiments/operator/summary.json), [analysis](../../experiments/operator/analysis.md), [protocol](../../experiments/operator/config.yaml).
+4. ARIES historical Operator: [raw rows](../../experiments/thesis/operator/results.jsonl), [summary](../../experiments/thesis/operator/summary.json), [analysis](../../experiments/thesis/operator/analysis.md), [protocol](../../experiments/thesis/operator/config.yaml).
 5. [Full demo 11/11](../../experiments/demo/20260917T185011Z-72477e/results.json); [core demo 7/7](../../experiments/demo/20260917T185338Z-04f0a5/results.json).
 6. [Research methods](../RESEARCH_DEMO.md); [retrieval comparison](../../experiments/learning/comparison-20260917T184530443474Z.json).
 7. Artifact inventory with repository paths and SHA-256 digests: [evidence-manifest.json](evidence-manifest.json).

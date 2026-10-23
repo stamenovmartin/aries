@@ -48,7 +48,7 @@ not held-out proof of general improvement.
 > before", which is a question about literal command vocabulary, while an
 > embedding answers "what does this mean". `workspace.review_retrieval` stays at
 > `overlap-v1`; `semantic-v3` is proposed for MEMORY retrieval, measured against
-> its own baseline in `experiments/memory/`, and the two are not the same job. Installed-system acceptance is kept
+> its own baseline in `experiments/iis/memory/`, and the two are not the same job. Installed-system acceptance is kept
 separately under `experiments/demo/`, reproducible with `./scripts/aries-demo`.
 
 ```
@@ -76,7 +76,7 @@ not support the hypothesis.
 > **Run 2: 2026-09-13, after the current shell build was installed and a fresh
 > ARIES session logged in.** 31 tasks × 4 variants × 3 repeats = **372 trials**.
 > Full results and the argument in
-> [`experiments/operator/analysis.md`](../experiments/operator/analysis.md).
+> [`experiments/thesis/operator/analysis.md`](../experiments/thesis/operator/analysis.md).
 >
 > **Nothing was unverifiable.** Run 1 could not check 7 of 26 tasks because that
 > session's shell predated `org.aries.Shell.Windows()`; this is the measurement
@@ -256,7 +256,7 @@ oscillation rate · user correction rate.
 ### `memory/` — ARIES Semantic Memory v0.1 · **RUN 2026-09-29**
 
 > **Run: 2026-09-29.** 45 utterances × 25 probes × 5 variants. Full results and
-> the argument in [`experiments/memory/analysis.md`](../experiments/memory/analysis.md),
+> the argument in [`experiments/iis/memory/analysis.md`](../experiments/iis/memory/analysis.md),
 > reproducible with `./scripts/aries-memory-eval`.
 >
 > **The honest baseline is not "no memory".** It is store-every-utterance-
@@ -339,7 +339,7 @@ answers without cleaning anything, or if a false supersession destroys a true
 memory at a rate a user would notice. Any variant returning a credential is a
 defect, not a measurement.
 
-**Task set.** `experiments/memory/corpus.jsonl` — 15 utterances transcribed by
+**Task set.** `experiments/iis/memory/corpus.jsonl` — 15 utterances transcribed by
 this machine's own voice loop, verbatim including the mis-transcriptions, and 30
 authored in the same register and the same language mix. `tasks.jsonl` — 25
 probes, each labelled `same-language-inflected`, `cross-language`, `paraphrase`

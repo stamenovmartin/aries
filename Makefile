@@ -4,6 +4,7 @@
 #   make test         the whole suite (scripts/test.sh)
 #   make lint         pyflakes and syntax errors only (ruff --select F,E9); RUFF=<path> if not on PATH
 #   make check        the frozen thesis tables and the figures still match their sources (read-only)
+#   make links        every relative Markdown link points to a file in git (scripts/check_links.py)
 #   make figures      redraw the comparison figures (experiments/analysis/figures/)
 #   make smoke        "can I use ARIES right now?" against the running service (scripts/aries-smoke)
 #   make eval-thesis  print the thesis evaluations; EVAL=<name> runs exactly one of them
@@ -15,7 +16,7 @@
 PY ?= .venv/bin/python
 RUFF ?= ruff
 
-.PHONY: setup test lint check figures smoke eval-thesis eval-iis
+.PHONY: setup test lint check links figures smoke eval-thesis eval-iis
 
 setup:
 	uv venv --python 3.12 .venv
@@ -31,6 +32,9 @@ lint:
 check:
 	PYTHONPATH=$(CURDIR)/vendor/agentic-core:$(CURDIR)/vendor:$(CURDIR) $(PY) experiments/thesis-followup-20261012/thesis-tables/check.py
 	$(PY) experiments/analysis/make_figures.py --check
+
+links:
+	python3 scripts/check_links.py
 
 figures:
 	$(PY) experiments/analysis/make_figures.py

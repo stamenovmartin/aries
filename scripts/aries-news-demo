@@ -4,7 +4,7 @@ import json, os, sys, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 base=os.environ.get('ARIES_API','http://127.0.0.1:8000')+'/api/aries'
-root=Path(__file__).resolve().parents[1]/'experiments/news'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+root=Path(__file__).resolve().parents[1]/'experiments/iis/news'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
 root.mkdir(parents=True,exist_ok=True)
 def call(path,data=None):
     req=urllib.request.Request(base+path,data=json.dumps(data).encode() if data is not None else None,headers={'Content-Type':'application/json'})

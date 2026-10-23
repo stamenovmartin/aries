@@ -9,7 +9,7 @@ emit before it says anything, and the confidence it writes inside the object is
 a number it invented. The probability below is the model's own, read off the
 logits.
 
-METHOD — verified in experiments/intent_confidence.py on ollama 0.34.0 +
+METHOD — verified in experiments/archive/intent-confidence/intent_confidence.py on ollama 0.34.0 +
 qwen2.5:7b, 2026-09-24: **68 ms per call, expected calibration error 0.0035**.
 Generate the label unconstrained with `logprobs`/`top_logprobs=20`, then walk a
 prefix trie of the emitted token path to score every competing label:

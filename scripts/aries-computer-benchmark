@@ -13,12 +13,12 @@ def api(method,path,body=None):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--only',default='');p.add_argument('--timeout',type=int,default=120);p.add_argument('--acceptance',action='store_true');a=p.parse_args()
     run=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:6]
-    out=ROOT/'experiments/aries100'/run
+    out=ROOT/'experiments/archive/aries100'/run
     for name in ('tasks','evidence'):(out/name).mkdir(parents=True,exist_ok=True)
     fixture=Path.home()/'Documents/ARIES-M15'/run;fixture.mkdir(parents=True)
     content='Theory of Mind methodology: paired controlled experiments. Section 4 compares agent beliefs.'
     (fixture/'paper.txt').write_text(content)
-    catalog=json.loads((ROOT/'experiments/aries100/scenarios.json').read_text())
+    catalog=json.loads((ROOT/'experiments/archive/aries100/scenarios.json').read_text())
     if a.acceptance:
         catalog=[{'id':'primary','goal':f'Search the web for Python documentation about virtual environments, identify the official result, save useful content to {fixture}/research.txt, open that file in the appropriate desktop application, and verify every stage.','file':'research.txt'},
                  {'id':'context-find','goal':'Find a recent paper about Theory of Mind in language models.'},

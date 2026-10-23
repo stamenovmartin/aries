@@ -62,7 +62,7 @@ define(SettingDef('workspace.memory_model', str, 'qwen2.5:7b', 'Memory decision 
                   'The local model asked, in one word, how a new statement relates to what is already stored. It never writes the memory text and never decides which of two conflicting facts is true.',
                   'workspace', control='text', advanced=True, user_only=True))
 define(SettingDef('workspace.memory_redundant_above', float, 0.97, 'Redundant above',
-                  'Cosine similarity at or above which a new statement is treated as already stored, with no model call. Calibrate against experiments/memory before changing.',
+                  'Cosine similarity at or above which a new statement is treated as already stored, with no model call. Calibrate against experiments/iis/memory before changing.',
                   'workspace', control='slider', minimum=0.5, maximum=1.0, advanced=True, user_only=True))
 define(SettingDef('workspace.memory_novel_below', float, 0.85, 'Novel below',
                   'Cosine similarity at or below which a new statement is kept outright, with no model call. Between the two thresholds the local model is asked.',

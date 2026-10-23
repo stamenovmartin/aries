@@ -57,10 +57,10 @@ close temporary agent browsers” and “Always keep completed result windows op
 - Standard suite passed: `/tmp/aries-navigation-learning-tests.log`.
 - Follow-up planner, workspace, browser, UI rendering and 410 UI client checks passed.
 - Lifecycle/ownership/feedback regressions: `tests/test_window_lifecycle.py`.
-- Real GTK state transitions: `experiments/workspace/verify_window_controls.json`
+- Real GTK state transitions: `experiments/archive/workspace/verify_window_controls.json`
   (6/6 checks, including independent compositor confirmation of minimization).
-- Real public browser completion/cleanup: `experiments/workspace/verify_browser_cleanup.json`.
-- Explicit saved user feedback: `experiments/workspace/navigation-learning-validation.json`.
+- Real public browser completion/cleanup: `experiments/archive/workspace/verify_browser_cleanup.json`.
+- Explicit saved user feedback: `experiments/archive/workspace/navigation-learning-validation.json`.
 - Architecture: [interactive view](architecture/index.html), [Mermaid source](architecture/jarvis.mmd),
   [SVG](architecture/jarvis.svg), [Markdown](JARVIS_ARCHITECTURE.md).
 

@@ -217,14 +217,14 @@ intent 4/4, false/missed escalation 0 on this reused fixture. Mean routing laten
 0.641 seconds, native local tokens 1,914 input + 429 output. All attempts remain.
 These are development results, not held-out statistical confirmation.
 
-The real M14 execution demo `experiments/agent/20260917T215447Z-f7bdba/` passed
+The real M14 execution demo `experiments/archive/agent/20260917T215447Z-f7bdba/` passed
 4/4 through the gateway. The initial A/B execution attempt records B 2/2 and A
 unavailable: paired savings/success differences remain null. No percentage API
 saving or cost advantage is claimed without a measured usable baseline.
 
 Live service, routing, classification, cloud policy refusal, intentional gateway
 outage/fallback/recovery and background no-cloud evidence is retained in
-`experiments/intelligence/validation-20260917/live-validation.json`. All services
+`experiments/archive/intelligence/validation-20260917/live-validation.json`. All services
 were restored after the fault test. Backend-native outage, invalid decisions,
 cloud response/failure and accounting are additionally covered by deterministic
 unit/integration tests with clearly simulated providers.
@@ -235,7 +235,7 @@ execution runner recorded B 3/3 and A unavailable in `20260917T220125Z-ab-8a2e51
 paired savings remain null. Final M14 run `20260917T220135Z-27c955` passed 4/4.
 
 
-Terminal correction validation: `experiments/intelligence/cli-20260918/`.
+Terminal correction validation: `experiments/archive/intelligence/cli-20260918/`.
 Real Codex paired run `20260917T222712Z-ab-f2e66d` passed A 3/3 and B 3/3.
 A used six CLI cloud calls (77,151 native tokens including cached input); B used
 zero cloud calls and four local calls plus a deterministic system probe. This
