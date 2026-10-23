@@ -43,6 +43,19 @@ All of these are in `docs/preregistration/` (frozen). `docs/INDEX.md` lists the 
 | H6 abstention replication | `docs/preregistration/H6-abstention-replication.md` | confirmatory, measured |
 | H8 verifier fault injection | `docs/preregistration/H8-verifier-fault-injection.md` | confirmatory, measured |
 | R1 public data (NL2Bash, CLINC150) | `docs/preregistration/R1-real-data-benchmarks.md` | confirmatory (own family), measured; data in `experiments/thesis-r1-real-data/` |
+| R1b remedies on new public samples | `docs/preregistration/R1b-improved-router-planner.md` | confirmatory (own family, 3 of 4), measured |
+| M2 four local language models | `docs/preregistration/M2-local-models.md` | confirmatory (own family, 6 of 6), measured |
+| X1 H5 and H4b re-run with the remedies | `docs/preregistration/X1-remedy-reruns.md` | registered exploratory, measured |
+| HAL1 hallucination measures | `docs/preregistration/HAL1-hallucination-measures.md` | registered descriptive, measured |
+
+## After the diagnosis (2026-10-22/23), in place
+
+| path | what | status |
+|---|---|---|
+| `experiments/thesis-r1-real-data/` | R1: NL2Bash and CLINC150 samples, labels, runner, analysis | confirmatory (own family) |
+| `experiments/thesis-r1b/` | R1b: new samples and labels, development log, runner, analysis | confirmatory (own family) |
+| `experiments/thesis-m2-models/` | M2: the R1b systems with four local models | confirmatory (own family) |
+| `experiments/thesis-improvements-20261022/` | X1 reruns, HAL1 hallucination measures, the results index `RESULTS.md` | exploratory / descriptive |
 
 ## Exploratory work designed after a confirmatory result
 
