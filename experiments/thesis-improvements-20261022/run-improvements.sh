@@ -29,7 +29,7 @@ step() {
   N=$((N+1)); if [ $N -lt $FROM ]; then log "skip $N (done) $*"; return; fi
   log "start $N $*"
   gnome-session-inhibit --inhibit idle --reason "ARIES R1b/X1 measurement" $PY "$@" >> $T/run-improvements.log 2>&1
-  c=$?; log "exit $c $N $*"; [ $c -eq 0 ] || exit 1
+  local rc=$?; log "exit $rc $N $*"; [ $rc -eq 0 ] || exit 1
 }
 # R1b, confirmatory
 step $B/run_r1b.py frozen --set nl2bash-r1b

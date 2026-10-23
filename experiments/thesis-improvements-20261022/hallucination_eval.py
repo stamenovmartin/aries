@@ -27,9 +27,11 @@ TRAILING = '.,;:!?)"\''
 
 def kind_of(error):
     msg = json.dumps(error)
-    for needle, kind in (('Field required', 'missing required argument'), ('Extra inputs', 'argument the capability does not have'),
+    for needle, kind in (('string_pattern_mismatch', 'invented value in the wrong format (e.g. a made-up SHA-256)'),
+                         ('Field required', 'missing required argument'), ('Extra inputs', 'argument the capability does not have'),
                          ('Unknown capability', 'capability that does not exist'), ('not registered', 'capability that does not exist'),
                          ('Capability required', 'execute without a capability'), ('JSON', 'malformed output'),
+                         ('Invalid local decision', 'malformed output'),
                          ('Terminal decisions cannot carry', 'terminal decision with arguments')):
         if needle in msg:
             return kind
@@ -49,7 +51,6 @@ def run_folders(*globs):
 def goal_measures(folder, study):
     run = json.loads((folder / 'results.json').read_text())
     cond = run['run']['condition']
-    outcome = {x['id']: x for x in run['results']}
     c = Counter()
     for rec_path in (folder / 'records').glob('*.json'):
         rec = json.loads(rec_path.read_text())
@@ -96,6 +97,10 @@ def goal_measures(folder, study):
             continue
         c['outcomes'] += 1
         if study == 'h5':
+            # Amendment (2026-10-22, before the final computation): false done is over G and N item-runs, as in H5;
+            # the first version divided by every outcome, held-out goals included.
+            c['outcomes_G_N'] += x.get('set') in ('G', 'N')
+            c['heldout_outcomes'] += x.get('set') == 'heldout'
             c['S1_false_done'] += bool((x.get('h5') or {}).get('false_done'))
             c['S1_done_heldout_fail'] += x.get('set') == 'heldout' and x['terminal_state'] == 'done' and x.get('verdict') != 'PASS'
             c['done'] += x['terminal_state'] == 'done'
@@ -150,8 +155,8 @@ def summarise(c):
             'M3_finish_without_verified_evidence': rate(c['M3_finish_without_verified_evidence'], c['finish_model']),
             'M4_ungrounded_path_in_claim': rate(c['M4_ungrounded_path'], c['terminal_with_path'])},
         'system_level': {
-            'S1_false_done_G_N': rate(c['S1_false_done'], c['outcomes']) if 'S1_false_done' in c else None,
-            'S1_done_on_failed_heldout': c.get('S1_done_heldout_fail'),
+            'S1_false_done_G_N': rate(c['S1_false_done'], c['outcomes_G_N']) if 'S1_false_done' in c else None,
+            'S1_done_on_failed_heldout': rate(c['S1_done_heldout_fail'], c['heldout_outcomes']) if 'S1_false_done' in c else None,
             'S1_twin_done_on_wrong_file': c.get('S1_twin_wrong_file_done'),
             'S2_finish_rejected_by_check': rate(c['S2_finish_rejected'], c['finish_checked']),
             'S3_final_text_with_model_prose_marked': rate(c['S3_model_prose_marked'], c['goal_runs']),
