@@ -1,37 +1,32 @@
 # Archive
 
-These are superseded or one-off experiment folders. Each one was moved here only when both of
-these held:
-- `docs/AUDIT.md` §1.2 marked it "move → archive";
-- `git grep` found no path reference to it outside itself.
+Superseded or one-off series, kept as evidence. No frozen measurement reads them. A few older entry points
+still run from here and were pointed at the new paths: `scripts/aries-demo` and `scripts/aries-agent-demo`
+(`workspace/`, `agent/`), `scripts/aries-intelligence-ab` and `scripts/aries-intelligence-eval`
+(`intelligence/`), `scripts/aries-computer-benchmark` (`aries100/`) and `scripts/aries-production-check`
+(writes to `readiness/`). Scripts that compute the repository root from their own location were updated for the new depth
+(`parents[k]` → `parents[k+1]`); their results are unchanged files.
 
-The only mentions left were bare names in the historical inventory
-`experiments/product/independent-acceptance/raw/repo_facts.json`, and those still resolve. Each
-moved item has a relative symlink at its old path, so `experiments/<name>` keeps working.
+| path | what |
+|---|---|
+| [`agent/`](agent/) | agent run evidence, 2026-09-17; superseded by `eval/agent_suite` and the held-out run |
+| [`architecture/`](architecture/) | 2026-10-06 architecture review (findings, focused-check logs) |
+| [`aries100/`](aries100/) | ARIES-100 benchmark, self-declared superseded on 2026-10-03 |
+| [`background/`](background/) | 2026-09-19 background-mode validation logs |
+| [`hardening/`](hardening/) | maintenance and screen-lock policy logs |
+| [`intelligence/`](intelligence/) | router A/B runs, 2026-09-17..24, precursor of the thesis router runs |
+| [`readiness/`](readiness/) | readiness reports, 2026-09-19..10-01 |
+| [`remediation/`](remediation/) | 2026-10-01/03 remediation logs |
+| [`ui/`](ui/) | Settings-page latency measurement |
+| [`workspace/`](workspace/) | workspace acceptance protocol, 2026-09-14, superseded |
+| [`router-rejected-handoff/`](router-rejected-handoff/) | a rejected router candidate (`decision.json` and two `.py` files) |
+| [`runtime/`](runtime/) | `no-login-update/` logs |
+| [`stability-watch/`](stability-watch/) | `watch.py` and two 2026-10-03 smoke samples |
+| [`intent-confidence/`](intent-confidence/) | calibrated intent classification probe and its fixture; cited in `aries/workspace/memory/calibration.py` |
 
-## Moved here (symlink at the old path)
-
-| now | old path (symlink) | what |
-|---|---|---|
-| `experiments/archive/router-rejected-handoff/` | `experiments/router-rejected-handoff` | a rejected router candidate (`decision.json` and two `.py` files) |
-| `experiments/archive/runtime/` | `experiments/runtime` | `no-login-update/` logs |
-| `experiments/archive/stability-watch/` | `experiments/stability-watch` | `watch.py` and two 2026-10-03 smoke samples. Its `ROOT` was changed from `parents[2]` to `parents[3]` for the new depth; it resolves the same root through the symlink |
-| `experiments/archive/intent_fixture.json` | `experiments/intent_fixture.json` | a fixture that nothing reads; `intent_confidence.py` stays in place because `aries/workspace/memory/calibration.py:12` cites it |
-
-## Marked "archive" by the audit, still in place (referenced)
-
-| path | refs outside | why it stays |
-|---|---:|---|
-| `experiments/agent/` | 14 | superseded by `eval/agent_suite`; the refs need rewriting or a symlink |
-| `experiments/architecture/` | 3 | one-off review |
-| `experiments/aries100/` | 3 | self-declared superseded on 2026-10-03; `scripts/aries-computer-benchmark` goes with it |
-| `experiments/background/` | 1 | one-off |
-| `experiments/hardening/` | 1 | one-off |
-| `experiments/intelligence/` | 7 | router A/B runs, precursor of the thesis runs |
-| `experiments/readiness/` | 3 | one-off |
-| `experiments/remediation/` | 3 | one-off |
-| `experiments/ui/` | 1 | one-off |
-| `experiments/workspace/` | 12 | superseded acceptance protocol |
+Historical records (`thesis-followup-20261012/revert-tests/revert-plan.json`, the raw inventories under
+`product/independent-acceptance/raw/`) name the old paths; they describe the tree at their own commit and are
+not edited.
 
 ## Deleted, recorded here
 
@@ -43,4 +38,4 @@ moved item has a relative symlink at its old path, so `experiments/<name>` keeps
 | `experiments/model_router/` | an empty `.gitkeep` | **evaluation owed:** the model router milestone (same section) |
 | `experiments/evolution/` | an empty `.gitkeep` | **evaluation owed:** the evolution milestone (same section) |
 
-When one of these evaluations starts, make its folder again at the old path.
+When one of these evaluations starts, make its folder under `experiments/thesis/`.

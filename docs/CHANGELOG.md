@@ -259,7 +259,7 @@ Control Centre → **Operator** · [docs/OPERATOR.md](OPERATOR.md)
 * **Local by default.** `qwen2.5:7b` on the GPU, ~0.43 s median to a plan, and
   ARIES refuses rather than falling back to a remote provider.
 * **Evaluated, with a falsified criterion recorded** rather than rewritten —
-  [`experiments/operator/analysis.md`](../experiments/operator/analysis.md).
+  [`experiments/thesis/operator/analysis.md`](../experiments/thesis/operator/analysis.md).
 * Four real bugs found by the verifier along the way, including a News Radar
   that had opened its own circuit breaker while reporting success.
 

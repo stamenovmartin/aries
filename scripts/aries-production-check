@@ -4,7 +4,7 @@ import json,subprocess,urllib.request
 from datetime import datetime,timezone
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
-out=root/'experiments/readiness'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ');out.mkdir(parents=True,exist_ok=True)
+out=root/'experiments/archive/readiness'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ');out.mkdir(parents=True,exist_ok=True)
 def get(url):
     try:
         with urllib.request.urlopen(url,timeout=15) as r:return {'ok':True,'data':json.load(r)}

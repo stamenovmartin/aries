@@ -86,14 +86,14 @@ Custom comments, related widgets, scripts, navigation and fallback notices are
 removed before extraction. Extraction and local-model summarization remain
 separate stages; the summary retains its coverage and extractor name. The old
 parser remains an explicitly labelled fallback. See
-[extraction/comparison.json](../experiments/workspace/extraction/comparison.json)
+[extraction/comparison.json](../experiments/archive/workspace/extraction/comparison.json)
 for the two-page comparison; this is not a broad extraction-quality benchmark.
 
 ## Validation and remaining work
 
 The standard test suite passed. Focused follow-up checks cover the latest planner,
 browser redirect handling and UI changes. Live results are retained in
-`experiments/workspace/acceptance-*.json`, including unsuccessful attempts. The
+`experiments/archive/workspace/acceptance-*.json`, including unsuccessful attempts. The
 broad run at 23:22 recorded 15/16 checks: independent concurrency, Python.org DOM,
 field read-back, link navigation, generated code plus five independent assertions,
 real GTK control activation, and the evaluation surface passed; the planner
@@ -102,7 +102,7 @@ addresses that overrun. See the final validation report for its follow-up result
 
 Final follow-up: **3/3** bounded navigation goals passed after the completion and
 DOM-link fixes. The broad run remains recorded as 15/16; it is not relabelled as a
-new full passing run. [Validation report](../experiments/workspace/advanced-validation.md).
+new full passing run. [Validation report](../experiments/archive/workspace/advanced-validation.md).
 
 Runtime dependencies are pinned in `requirements.txt`. A fresh checkout also needs
 the Playwright browser installed with `.venv/bin/python -m playwright install chromium`,

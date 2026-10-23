@@ -39,8 +39,9 @@ To reproduce the environment: `make setup` creates `.venv` with Python 3.12 and 
 | model | ID | size | used for |
 |---|---|---|---|
 | qwen2.5:7b | 845dbda0ea48 | 4.7 GB | router, planner and every confirmatory run. The full digest `845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e` is recorded in `experiments/thesis-followup-20261012/inputs/final-evaluation.json` |
-| llama3.1:8b | 46e0c10c039e | 4.9 GB | the second-model router run and the H6 secondary run (exploratory) |
-| qwen2.5:1.5b | 65ec06548149 | 986 MB | small local model |
+| llama3.1:8b | 46e0c10c039e | 4.9 GB | the second-model router run and the H6 secondary run (exploratory); M2 (confirmatory) |
+| qwen2.5:1.5b | 65ec06548149 | 986 MB | M2 (confirmatory): the smaller model of the same family |
+| qwen2.5:14b | 7cdf5a0187d5 | 9.0 GB | M2 (confirmatory): the largest model of the family that fits the 12 GB GPU |
 | bge-m3:latest | 790764642607 | 1.2 GB | the alternative memory embedder (exploratory) |
 
 The default memory embedder, `intfloat/multilingual-e5-base` as int8 ONNX, is not an Ollama model.

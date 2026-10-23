@@ -1,20 +1,29 @@
 # experiments/
 
-Raw experimental artifacts. See [`docs/EXPERIMENTS.md`](../docs/EXPERIMENTS.md)
-for the rule and the index.
+Dated measurements. Each folder is one measurement or one series: its registration (if any), the scripts
+that ran it, the scripts that analysed it, and the files the numbers are read from. A run writes new files
+and never overwrites old ones. Reusable evaluation harnesses are in [`../eval/`](../eval/), not here.
 
-Each directory holds, once its milestone runs:
+## Layout
 
-| file | |
+| path | what |
 |---|---|
-| `config.yaml` | variants, task set, repetitions, environment |
-| `tasks.jsonl` | the dataset — versioned with the code |
-| `results.jsonl` | one line per run per task, carrying the commit |
-| `summary.json` | derived, regenerable from results |
-| `analysis.md` | the argument, including results that did not support the hypothesis |
+| [`thesis/`](thesis/INDEX.md) | **thesis** (the agent): the index, and the precursor series moved into it |
+| [`iis/`](iis/INDEX.md) | **IIS project** (the information layer): the index, public-data evaluations and the earlier series |
+| [`analysis/`](analysis/README.md) | every comparison as a figure, regenerated from the result files |
+| [`archive/`](archive/INDEX.md) | superseded or one-off series, kept as evidence |
+| `thesis-final-20261006/`, `thesis-followup-20261012/`, `thesis-r1-real-data/`, `thesis-r1b/`, `thesis-m2-models/`, `thesis-improvements-20261022/` | the thesis measurements. **Frozen in place**: other frozen files, the thesis tables and the thesis build name them by exact path and hash |
+| `router-ood/`, `router-en/`, `product/` | fixtures and acceptance runs that the frozen measurements read by exact path or hash |
+| `verification-feedback/` | the fixture that `eval/research_feedback/` reads; its path is recorded with a hash in every run |
+| `exploratory/` | analyses designed after a confirmatory result |
+| `assistant-benchmark/`, `demo/`, `speech/`, `locking/` | product benchmarks and diagnoses that scripts still write to |
+| `endurance/`, `voice/` | written or run by the installed system (`scripts/aries-endurance`, `scripts/aries-voice`); they stay where the systemd units find them |
+| `learning/` | one lesson per finished batch (`problem`, `change`, `validation`, `limitations`), and the learning-layer JSONs |
 
-Empty directories were deliberate: they named the evaluations that are owed. On 2026-10-22 the four
-`.gitkeep`-only folders (`orchestrator`, `dynamic_agents`, `model_router`, `evolution`) were removed,
-and each owed evaluation is now a line in [`archive/INDEX.md`](archive/INDEX.md). The indexes
-[`thesis/INDEX.md`](thesis/INDEX.md), [`iis/INDEX.md`](iis/INDEX.md) and
-[`archive/INDEX.md`](archive/INDEX.md) map every folder by its current path.
+## Rules
+
+- A frozen folder is never edited; a correction is a new file or a dated amendment.
+- A registered measurement has its registration in `docs/preregistration/`, committed before the run.
+- Raw outputs that contain dataset texts or personal data are not committed (`.gitignore`); manifests of
+  item ids, labels, summaries and per-item correctness are.
+- Every number in the README, the thesis and the reviewer guide is read from a file here.

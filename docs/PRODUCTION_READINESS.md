@@ -8,19 +8,19 @@ session is locked. This is not a declaration that every future roadmap feature o
 arbitrary agent task is complete.
 
 Evidence and exact changed-source hashes:
-[system completion manifest](../experiments/coordination/system-completion-20260930/manifest.json).
-The subsequent [independent review follow-up](../experiments/coordination/claude-review-20261001/result.json)
+system completion manifest (`experiments/coordination/system-completion-20260930/manifest.json`, a local record not in the public repository).
+The subsequent independent review follow-up (`experiments/coordination/claude-review-20261001/result.json`, a local record not in the public repository)
 adds SQLite result-code logging and visible interruption of worker checkpoint
 recording; 15 execution-boundary checks and 13 scheduler checks passed. Core was
 updated through the maintenance drain. The earlier manifest retains its original
 batch hashes; the follow-up records the two newer source hashes.
 
-The latest [recovery and memory privacy batch](../experiments/coordination/recovery-memory-20261001/manifest.json)
+The latest recovery and memory privacy batch (`experiments/coordination/recovery-memory-20261001/manifest.json`, a local record not in the public repository)
 records 69 counted application/UI/HTTP suites and 3,630 checks passing, plus
 engine/reference suites. The final question-prefix change was checked separately
 after the relevant full-run suite: 26 privacy/question checks and 126 existing
 memory checks passed. Recovery has 26 passing checks and existing agent tests 65.
-The [installed real-planner recovery](../experiments/coordination/read-recovery-20260930T235336Z-6615e5/result.json)
+The installed real-planner recovery (`experiments/coordination/read-recovery-20260930T235336Z-6615e5/result.json`, a local record not in the public repository)
 passed 7/7 checks: a failed file read resumed in a linked child, independently
 verified fresh content, preserved the parent's failure, and reused the child on
 duplicate recovery. Core was updated through the maintenance drain.
@@ -33,7 +33,7 @@ are filtered by bounded MK/Latin/English prefixes, not a complete semantic
 classifier. Exclusions hide context reversibly without deleting historical rows.
 Implementation learning record: 49.
 
-The [latest readiness check](../experiments/readiness/20260930T235615Z/result.json)
+The [latest readiness check](../experiments/archive/readiness/20260930T235615Z/result.json)
 passes every check except the desktop protocol, with `session_locked=true`.
 Live desktop focus and a fresh real microphone-to-speaker interaction remain
 pending. The table below retains the preceding batch's measurements.

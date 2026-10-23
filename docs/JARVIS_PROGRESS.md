@@ -56,7 +56,7 @@ they are not replayed over it automatically.
 
 Live run: `python_project` completed with expected output `total: 55` and a matching
 VS Code project window. `inspect_app` correctly returned partial coverage.
-See [integration-results.json](../experiments/workspace/integration-results.json).
+See [integration-results.json](../experiments/archive/workspace/integration-results.json).
 
 ## Original next priorities (historical; see advanced report for current status)
 
