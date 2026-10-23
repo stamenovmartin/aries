@@ -26,6 +26,34 @@ filled in.
 > **Branches.** `main` is the whole project. [`diplomska`](https://github.com/stamenovmartin/aries/tree/diplomska) and [`iis`](https://github.com/stamenovmartin/aries/tree/iis) hold the
 > same code, each with a front page that leads straight to that project's results.
 
+## Evaluation on public datasets
+
+Each component is evaluated on a public dataset, not only on the author's own fixtures. The datasets are not in this
+repository (their licences); `download.sh` in each folder fetches them, and the **sample manifests (item ids), the
+labels and every result are committed**, so each number can be recomputed.
+
+| Component | Dataset (source) | What it measures | Sample | Labels |
+|---|---|---|---|---|
+| Tool selection (router + planner: which of 58 capabilities, or refuse) | [NL2Bash](https://github.com/TellinaTool/nl2bash) (Lin et al., 2018) | right capability, or refusal when no capability fulfils the request | 500 (R1) + 500 new (R1b) | two LLM annotators + adjudication, κ 0.649 / 0.733 ([`labels/`](experiments/thesis-r1-real-data/labels/)) |
+| Act or refuse (router) | [CLINC150](https://github.com/clinc/oos-eval) (Larson et al., 2019) | out-of-scope detection | 600 (R1) + 600 new (R1b) | the dataset's out-of-scope class; intents mapped to capabilities, κ 0.826 |
+| The same with four local models | the R1b samples | does the result depend on the model? | 4 models × 1,100 | as above |
+| Verifiers | 218 injected faults (sealed manifest) | does the check catch an executor that lies? | 218 mutants | by construction |
+| Semantic memory | [LoCoMo](https://github.com/snap-research/locomo) (Maharana et al., 2024) | are the annotated evidence turns retrieved in the top 5? | 10 conversations, 1,982 questions | the dataset's evidence annotations |
+| News ranking and learning | [MIND-small](https://msnews.github.io/) (Wu et al., 2020) | ranking clicked over skipped news | 73,152 impressions, 50,000 users | the dataset's clicks |
+
+| Result | Status | Numbers | Evidence |
+|---|---|---|---|
+| R1: the frozen ARIES on NL2Bash | confirmatory | **ARIES lost**: 229/500 vs zero-shot 321/500, BM25 307/500, embedding 297/500 | [`thesis-r1-real-data/`](experiments/thesis-r1-real-data/) |
+| R1b: after diagnosis and repair, on new samples | confirmatory | NL2Bash **348/500** vs frozen 233/500 and zero-shot 320/500; CLINC150 342/600 vs 268/600 (vs zero-shot 334/600, n.s.) | [`thesis-r1b/summary.json`](experiments/thesis-r1b/summary.json) |
+| M2: four local models (qwen2.5 1.5B/7B/14B, llama3.1:8b) | confirmatory | repaired > frozen for every model, both datasets, 6/6 after Holm; the 1.5B model wins only by refusing everything | [`thesis-m2-models/summary.json`](experiments/thesis-m2-models/summary.json) |
+| H8: verifier strength | confirmatory | hardened verifiers catch 188/218 faults vs 155/218 | [`h8/`](experiments/thesis-followup-20261012/h8/) |
+| Memory on LoCoMo | exploratory | hit@5 0.377 (original) → **0.620** (hybrid + similarity rank) vs BM25 0.500 | [`iis/real-data/locomo/`](experiments/iis/real-data/locomo/) |
+| News on MIND-small | exploratory | AUC 0.613, above all 7 baselines (best 0.600); online learning adds nothing | [`iis/real-data/mind/`](experiments/iis/real-data/mind/) |
+
+The first public-data result (R1) was negative and stays reported; the repairs were designed from its records,
+registered before the new measurement (R1b), and checked with four models (M2). All results in one place:
+[`experiments/thesis-improvements-20261022/RESULTS.md`](experiments/thesis-improvements-20261022/RESULTS.md).
+
 ## Evaluation map
 
 Status labels: **confirmatory** = preregistered hypothesis, measured as registered (Holm family H4b/H5/H6/H8 for
@@ -357,12 +385,13 @@ not in this repository.
 
 Stated up front, because a reader finds these anyway.
 
-- **One run per goal and per arm.** No statistical test sits behind 88/90. A 4-utterance
+- **One run per item in R1, R1b and M2; one run per goal on the fixtures.** No statistical test sits behind 88/90. A 4-utterance
   difference between two arms out of 225 is not claimed.
-- **Fixtures written by the system's author**, except the held-out set above. For the abstention
-  result this is a direct confound: the out-of-scope class encodes the author's model of the
+- **The historical fixtures were written by the system's author** (the public-dataset evaluations above
+  and the held-out set are not). For the historical abstention result this is a direct confound: the out-of-scope class encodes the author's model of the
   system's limits, and the capability surface the model reads comes from the same registry.
-- **No second annotator.** No inter-rater reliability on any label.
+- **No human annotator.** The public-dataset labels come from two LLM annotators with adjudication
+  (κ 0.649–0.826), not from people.
 - **One machine.** Which matters more than usual, because the machine-limits component is
   host-specific by definition.
 - **The local/cloud privacy partition is enforced in code but unmeasured.** No instrument counts
@@ -370,7 +399,8 @@ Stated up front, because a reader finds these anyway.
   the gate compares labels to labels; what is missing is a content-independent oracle.
 - **No human subjects.** Nothing establishes that refusal feels helpful rather than obstructive to
   anyone who is not the author.
-- **No external baseline.** Every comparison is ARIES against an ablation of itself.
+- **External baselines only on the public datasets.** There ARIES is compared with a zero-shot model, BM25 and
+  embeddings (R1, R1b); the historical fixtures compare ARIES only with ablations of itself.
 - **`database is locked`** recurs under concurrent writers; diagnosed, not eliminated.
 
 ### Claims this project made and later had to withdraw
