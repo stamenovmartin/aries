@@ -10,7 +10,7 @@ The historical 200-versus-272 conflict cannot be reconciled as one denominator w
 
 Memory experiment: **n=23** answerable retrieval queries; **n=25** total privacy/consistency probes. The remaining **2** have no expected answer. Thus the two denominators describe different outcomes, not competing sample counts. Historical source run: 2026-09-29T18:35:59.410542+00:00; these are retained historical denominators, not a measurement of today’s system.
 
-Sources: `eval/reporting/denominators.json` and `experiments/memory/summary.json`.
+Sources: `eval/reporting/denominators.json` and `experiments/iis/memory/summary.json`.
 
 ## Results — Part B
 

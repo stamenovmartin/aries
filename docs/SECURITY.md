@@ -158,7 +158,7 @@ Recorded rather than hidden.
    and a credential-pattern gate are enforced *before* anything is embedded, on the machine write
    path as well as the user's (`aries/workspace/memory/extraction.py`, asserted in
    `tests/test_memory.py`). What remains: the gate refuses commands and credentials by pattern, so
-   a statement that is neither still reaches the store, and `experiments/memory/analysis.md` records
+   a statement that is neither still reaches the store, and `experiments/iis/memory/analysis.md` records
    one such false keep per 45 utterances. `workspace.semantic_memory` turns the unasked write off
    entirely, and `privacy.remember_conversations` still governs whether anything is kept at all.
 3. **No rate limiting on ARIES routes.** Loopback-only plus `max_actions_per_hour` on tools

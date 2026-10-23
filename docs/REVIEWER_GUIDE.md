@@ -89,7 +89,7 @@ component is in [`components.csv`](../experiments/thesis-followup-20261012/thesi
 |---|---|---|---|
 | Does the ARIES interest profile rank news better than standard baselines on MIND-small (73,152 impressions)? | Yes: AUC 0.613 vs 0.600 for the strongest baseline (embedding), 0.578 for popularity; the online learning adds +0.0001 | exploratory (not preregistered) | [`iis/real-data/mind/`](../experiments/iis/real-data/mind/) |
 | Does ARIES semantic memory retrieve the annotated evidence on LoCoMo (1,982 questions)? | Worse than BM25: hit@5 0.377 (e5) and 0.349 (bge-m3) vs 0.500; the write cascade changes nothing | exploratory | [`iis/real-data/locomo/`](../experiments/iis/real-data/locomo/) |
-| Extract-then-store vs store-everything (author corpus) | supported on clean@3, not on hit@3 | preregistered | [`memory/analysis.md`](../experiments/memory/analysis.md) |
+| Extract-then-store vs store-everything (author corpus) | supported on clean@3, not on hit@3 | preregistered | [`memory/analysis.md`](../experiments/iis/memory/analysis.md) |
 
 ## The code, by component
 

@@ -63,7 +63,7 @@ VERIFIED_SPOKEN = {
 # "nobody got round to it" cannot hide among the genuine cases.
 UNVERIFIED_SPOKEN = {
     "research": "no verifier on any path; 144 of 288 steps in the last week. See "
-                "experiments/verification/analysis.md",
+                "experiments/thesis/verification/analysis.md",
     "system": "system.status in the registry verifies the same probes; the spoken path does not call it",
     "find_files": "needs a match-set re-read; file.search's verifier now does one "
                   "(probe_verification.agrees) but the spoken path does not call it",
@@ -193,7 +193,7 @@ async def test_a_nested_verification_is_invisible_to_the_bucket():
         verdict = getattr(capabilities, "verdict", None)
         if verdict is None:
             print("SKIP  capabilities.verdict() is not applied yet — see "
-                  "experiments/verification/analysis.md, patch P1")
+                  "experiments/thesis/verification/analysis.md, patch P1")
             return
         check("verdict() lifts a nested affirmative verification",
               verdict({"verification": {"met": True}}) == "verified")

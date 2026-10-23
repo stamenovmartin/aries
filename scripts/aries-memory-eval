@@ -5,7 +5,7 @@
 #   EMBEDDER=bge-m3-ollama ./scripts/aries-memory-eval
 #
 # Writes results.jsonl (one line per variant per probe, carrying the commit),
-# summary.json and a timestamped raw artifact under experiments/memory/.
+# summary.json and a timestamped raw artifact under experiments/iis/memory/.
 set -euo pipefail
 cd "$(dirname "$(readlink -f "$0")")/.."
 export PYTHONPATH="$PWD/vendor/agentic-core:$PWD/vendor:$PWD:${PYTHONPATH:-}"
@@ -26,7 +26,7 @@ except Exception:
     report["commit"] = "unknown"
 report["ran_at_utc"] = datetime.now(timezone.utc).isoformat()
 
-out = Path("experiments/memory")
+out = Path("experiments/iis/memory")
 with (out / "results.jsonl").open("w") as fh:
     for variant, score in report["variants"].items():
         for case in score["cases"]:
@@ -48,5 +48,5 @@ for name, stats in report["statistics"].items():
     print(f"  {name:6s} {stats['accuracy_difference']:+.1%}  improved={stats['improved']} "
           f"regressed={stats['regressed']}  exact two-sided McNemar p={stats['exact_mcnemar_two_sided_p']:.4f}")
 print("\nVERDICT: " + report["verdict"])
-print("\nEvidence: experiments/memory/summary.json · experiments/memory/results.jsonl")
+print("\nEvidence: experiments/iis/memory/summary.json · experiments/iis/memory/results.jsonl")
 PY

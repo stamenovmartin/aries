@@ -84,7 +84,7 @@ Scheduled topics only collect research; they cannot install or change files.
 UI contracts/rendering and the vendored engine. `./scripts/aries-e2e` passes 31 real
 desktop assertions; `./scripts/aries-smoke` passes all 13 installed-system checks.
 
-The [live acceptance report](../experiments/workspace/live-results.md) records
+The [live acceptance report](../experiments/archive/workspace/live-results.md) records
 20/20 requests reaching their verified completion criteria on the installed
 system. It uses YouTube, DuckDuckGo, real news sources and disposable local files.
 Separate command-router journeys opened GitHub and kernel.org and built an AI
@@ -123,8 +123,8 @@ attempt denominator; partial/failed/interrupted outcomes are included.
 The UI's command router and Operator recognize the same screen aliases. It never
 tries to install or launch an imaginary application called “vesti” or “monitoring”.
 All new pages render against real API payloads. Reproducible screenshots live in
-[experiments/workspace/screens](../experiments/workspace/screens); capture them with
-`/usr/bin/python3 experiments/workspace/capture_screens.py` against a running core.
+[experiments/archive/workspace/screens](../experiments/archive/workspace/screens); capture them with
+`/usr/bin/python3 experiments/archive/workspace/capture_screens.py` against a running core.
 The monitor distinguishes operational evidence from still-unmeasured research
 claims and self-improvement.
 
@@ -156,7 +156,7 @@ and its source image. The final recorded response read 6,996 extracted character
 with an attributed source image. The reader uses hierarchical reduction to retain
 complete extracted coverage within local model context. Independent-window
 acceptance verified three separate windows, no required control-centre container,
-and preservation of the saved goal when its response is closed. [Reading screenshot](../experiments/workspace/screens/reading.png).
+and preservation of the saved goal when its response is closed. [Reading screenshot](../experiments/archive/workspace/screens/reading.png).
 
 Design references consulted at the user's request:
 - [Cantina Creative: Iron Man 3 HUD design](https://www.cantinacreative.com/film/iron-man-3).

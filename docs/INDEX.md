@@ -10,9 +10,11 @@ This page is a map. It adds nothing that is not already in the files it links to
 | [`../README.md`](../README.md) | what ARIES is, and the **evaluation map** (thesis and IIS), with a status label for each result |
 | [`STATE_OF_ARIES.md`](STATE_OF_ARIES.md) | the current state of the system, area by area |
 | [`AUDIT.md`](AUDIT.md) | the 2026-10-22 static audit: layout, code health, flags, test failures, known bugs, integration and runtime health, plus the **Fixed / remaining** section. Raw tool outputs are in [`audit/`](audit/) |
+| [`DATASETS.md`](DATASETS.md) | every dataset and item set: source, licence, what it measures, sample, labels, what is committed |
+| [`../experiments/README.md`](../experiments/README.md), [`../eval/README.md`](../eval/README.md) | the layout of the measurements and of the evaluation harnesses |
 | [`ENVIRONMENT.md`](ENVIRONMENT.md) | the machine, Python, the pinned packages (`../requirements.lock`), the Ollama version and the model IDs |
 | [`CONFIG_REFERENCE.md`](CONFIG_REFERENCE.md) | every flag and every setting, with its default, **generated from the code** by `../scripts/gen_config_reference.py` |
-| [`../Makefile`](../Makefile) | one entry point: `setup`, `test`, `lint`, `check`, `smoke`, `eval-thesis`, `eval-iis` |
+| [`../Makefile`](../Makefile) | one entry point: `setup`, `test`, `lint`, `check`, `links`, `smoke`, `eval-thesis`, `eval-iis` |
 
 ## Architecture
 
