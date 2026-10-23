@@ -488,6 +488,6 @@ capabilities and the machine's limits improves the decision to act, ask or refus
 gives evidence that is independent of the executor. Every number in it is read from a file in this repository
 and checked when the thesis is built.
 
-`thesis/` holds the package submitted on 2026-10-06, frozen. The current version, with the public-data
+`thesis/` holds the thesis PDF and Word as submitted on 2026-10-06, frozen; the defence presentation is no longer part of the package. The current version, with the public-data
 evaluations, the remedies, four local models, the system design and the performance measurements, is built
 from sources outside the repository and shared separately.
