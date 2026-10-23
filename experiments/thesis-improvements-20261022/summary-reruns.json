@@ -1,0 +1,350 @@
+{
+ "label": "exploratory (X1): same items as H5 and H4b, remedies designed after their results",
+ "refused_runs": [],
+ "commits": [
+  "f7e1e4952ffc5440d5dfdd2f656a2fa6f780e263"
+ ],
+ "h5": {
+  "runs_per_condition": {
+   "treatment": 3,
+   "control": 3,
+   "remedies": 3,
+   "consolidated": 1
+  },
+  "by_condition": {
+   "consolidated": {
+    "G_correct_done_majority": null,
+    "G_correct_done_item_runs": {
+     "k": 4,
+     "n": 15,
+     "rate": 0.2667,
+     "ci95": [
+      0.0779,
+      0.551
+     ]
+    },
+    "false_done_item_runs": {
+     "k": 5,
+     "n": 25,
+     "rate": 0.2,
+     "ci95": [
+      0.0683,
+      0.407
+     ]
+    },
+    "N_done_item_runs": {
+     "k": 2,
+     "n": 10,
+     "rate": 0.2,
+     "ci95": [
+      0.0252,
+      0.5561
+     ]
+    },
+    "heldout_pass_item_runs": {
+     "k": 29,
+     "n": 49,
+     "rate": 0.5918,
+     "ci95": [
+      0.4421,
+      0.73
+     ]
+    },
+    "heldout_done_item_runs": {
+     "k": 16,
+     "n": 49,
+     "rate": 0.3265,
+     "ci95": [
+      0.1995,
+      0.4754
+     ]
+    },
+    "heldout_terminal_states": {
+     "failed": 17,
+     "done": 16,
+     "partial": 11,
+     "proposed": 5
+    },
+    "contract_source_G_runs": {
+     "typed step": 5,
+     "fast path": 5,
+     "none": 5
+    }
+   },
+   "control": {
+    "G_correct_done_majority": {
+     "k": 0,
+     "n": 15
+    },
+    "G_correct_done_item_runs": {
+     "k": 0,
+     "n": 45,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.0787
+     ]
+    },
+    "false_done_item_runs": {
+     "k": 3,
+     "n": 75,
+     "rate": 0.04,
+     "ci95": [
+      0.0083,
+      0.1125
+     ]
+    },
+    "N_done_item_runs": {
+     "k": 0,
+     "n": 30,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.1157
+     ]
+    },
+    "heldout_pass_item_runs": {
+     "k": 92,
+     "n": 147,
+     "rate": 0.6259,
+     "ci95": [
+      0.5423,
+      0.7042
+     ]
+    },
+    "heldout_done_item_runs": {
+     "k": 0,
+     "n": 147,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.0248
+     ]
+    },
+    "heldout_terminal_states": {
+     "partial": 78,
+     "failed": 53,
+     "proposed": 15,
+     "answered": 1
+    },
+    "contract_source_G_runs": {
+     "none": 45
+    },
+    "heldout_pass_majority": {
+     "k": 30,
+     "n": 49
+    }
+   },
+   "remedies": {
+    "G_correct_done_majority": {
+     "k": 4,
+     "n": 15
+    },
+    "G_correct_done_item_runs": {
+     "k": 12,
+     "n": 45,
+     "rate": 0.2667,
+     "ci95": [
+      0.146,
+      0.4194
+     ]
+    },
+    "false_done_item_runs": {
+     "k": 15,
+     "n": 75,
+     "rate": 0.2,
+     "ci95": [
+      0.1165,
+      0.3083
+     ]
+    },
+    "N_done_item_runs": {
+     "k": 6,
+     "n": 30,
+     "rate": 0.2,
+     "ci95": [
+      0.0771,
+      0.3857
+     ]
+    },
+    "heldout_pass_item_runs": {
+     "k": 86,
+     "n": 147,
+     "rate": 0.585,
+     "ci95": [
+      0.5009,
+      0.6656
+     ]
+    },
+    "heldout_done_item_runs": {
+     "k": 48,
+     "n": 147,
+     "rate": 0.3265,
+     "ci95": [
+      0.2515,
+      0.4087
+     ]
+    },
+    "heldout_terminal_states": {
+     "failed": 53,
+     "done": 48,
+     "partial": 31,
+     "proposed": 15
+    },
+    "contract_source_G_runs": {
+     "typed step": 15,
+     "fast path": 15,
+     "none": 15
+    },
+    "heldout_pass_majority": {
+     "k": 29,
+     "n": 49
+    }
+   },
+   "treatment": {
+    "G_correct_done_majority": {
+     "k": 2,
+     "n": 15
+    },
+    "G_correct_done_item_runs": {
+     "k": 6,
+     "n": 45,
+     "rate": 0.1333,
+     "ci95": [
+      0.0505,
+      0.2679
+     ]
+    },
+    "false_done_item_runs": {
+     "k": 12,
+     "n": 75,
+     "rate": 0.16,
+     "ci95": [
+      0.0855,
+      0.2628
+     ]
+    },
+    "N_done_item_runs": {
+     "k": 3,
+     "n": 30,
+     "rate": 0.1,
+     "ci95": [
+      0.0211,
+      0.2653
+     ]
+    },
+    "heldout_pass_item_runs": {
+     "k": 87,
+     "n": 147,
+     "rate": 0.5918,
+     "ci95": [
+      0.5078,
+      0.6721
+     ]
+    },
+    "heldout_done_item_runs": {
+     "k": 30,
+     "n": 147,
+     "rate": 0.2041,
+     "ci95": [
+      0.1421,
+      0.2783
+     ]
+    },
+    "heldout_terminal_states": {
+     "failed": 54,
+     "partial": 45,
+     "done": 30,
+     "proposed": 18
+    },
+    "contract_source_G_runs": {
+     "none": 18,
+     "fast path": 24,
+     "typed step": 3
+    },
+    "heldout_pass_majority": {
+     "k": 30,
+     "n": 49
+    }
+   }
+  },
+  "remedies_vs_treatment_G": {
+   "b_remedies_only": 2,
+   "c_treatment_only": 0,
+   "n": 15,
+   "p_two_sided_exact_orientation_only": 0.5
+  }
+ },
+ "h4b": {
+  "runs_per_condition": {
+   "treatment": 3,
+   "baseline": 3,
+   "code-select": 3
+  },
+  "by_condition": {
+   "baseline": {
+    "pairs_correct": {
+     "k": 0,
+     "n": 40
+    },
+    "ambiguous_correct": {
+     "k": 0,
+     "n": 40
+    },
+    "twins_correct": {
+     "k": 40,
+     "n": 40
+    },
+    "twins_over_asked": {
+     "k": 0,
+     "n": 40
+    },
+    "seconds_per_item_mean": 24.75
+   },
+   "code-select": {
+    "pairs_correct": {
+     "k": 32,
+     "n": 40
+    },
+    "ambiguous_correct": {
+     "k": 40,
+     "n": 40
+    },
+    "twins_correct": {
+     "k": 32,
+     "n": 40
+    },
+    "twins_over_asked": {
+     "k": 8,
+     "n": 40
+    },
+    "seconds_per_item_mean": 10.65
+   },
+   "treatment": {
+    "pairs_correct": {
+     "k": 0,
+     "n": 40
+    },
+    "ambiguous_correct": {
+     "k": 40,
+     "n": 40
+    },
+    "twins_correct": {
+     "k": 0,
+     "n": 40
+    },
+    "twins_over_asked": {
+     "k": 40,
+     "n": 40
+    },
+    "seconds_per_item_mean": 4.8
+   }
+  },
+  "code_select_vs_treatment_pairs": {
+   "b_code_select_only": 32,
+   "c_treatment_only": 0,
+   "n": 40,
+   "p_two_sided_exact_orientation_only": 4.656612873077393e-10
+  }
+ }
+}
