@@ -164,7 +164,7 @@ async def test_coding_routes_once_and_preserves_structured_boundary():
 
 
 async def test_terminal_cloud_protocol_and_boundaries():
-    from aries.intelligence.cli import argv_for,decode,CLIProviderError,CLIDecisionProvider
+    from aries.intelligence.cli import argv_for,decode,CLIDecisionProvider
     from aries.intelligence.generation import cloud_unavailable,config
     from tempfile import TemporaryDirectory
     claude=argv_for('claude-cli','/usr/bin/claude','','/tmp/owned')

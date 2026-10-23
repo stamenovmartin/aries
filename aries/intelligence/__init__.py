@@ -12,7 +12,7 @@ import subprocess
 
 from aries.settings.schema import SettingDef, define
 
-from . import settings as router_settings
+from . import settings as router_settings  # noqa: F401  registers the intelligence settings
 from . import models as models
 from .providers import loopback_url
 

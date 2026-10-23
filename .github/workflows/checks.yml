@@ -1,5 +1,5 @@
-# The read-only checks a reviewer would run: the thesis tables and figures still match their sources,
-# and every relative link in the documentation resolves. Nothing here needs a model, a GPU or a desktop.
+# The read-only checks a reviewer would run: pyflakes and syntax errors, the thesis tables and figures still
+# match their sources, and every relative link in the documentation resolves. Nothing here needs a model, a GPU or a desktop.
 name: checks
 
 on:
@@ -18,6 +18,8 @@ jobs:
           python-version: '3.12'
       - name: Install the pinned dependencies
         run: pip install -r requirements.lock
+      - name: Lint (pyflakes and syntax errors)
+        run: pip install ruff==0.8.4 && ruff check --isolated --select F,E9 aries aries_ui tests
       - name: Thesis tables match their sources
         run: PYTHONPATH=$PWD/vendor/agentic-core:$PWD/vendor:$PWD python experiments/thesis-followup-20261012/thesis-tables/check.py
       - name: Figures match their sources

@@ -44,6 +44,7 @@ section in the same file, dated, and written before the measurement it changes.
 | R1 public data (NL2Bash, CLINC150) | [`R1-real-data-benchmarks.md`](preregistration/R1-real-data-benchmarks.md) | 1, 2 (10-22) | confirmatory (own family), measured |
 | R1b remedies on new public samples | [`R1b-improved-router-planner.md`](preregistration/R1b-improved-router-planner.md) | — | confirmatory (own family, 3 of 4), measured |
 | M2 four local language models | [`M2-local-models.md`](preregistration/M2-local-models.md) | — | confirmatory (own family, 6 of 6), measured |
+| P1 latency, resources and reliability | [`P1-performance.md`](preregistration/P1-performance.md) | — | registered descriptive, measured |
 | X1 H5 and H4b re-run with the remedies | [`X1-remedy-reruns.md`](preregistration/X1-remedy-reruns.md) | — | registered exploratory, measured |
 | HAL1 hallucination measures | [`HAL1-hallucination-measures.md`](preregistration/HAL1-hallucination-measures.md) | 1 (10-22) | registered descriptive, measured |
 | M1 information-layer remedies (IIS) | [`M1-information-layer-remedies.md`](preregistration/M1-information-layer-remedies.md) | — | registered exploratory, measured |
