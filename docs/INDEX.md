@@ -40,6 +40,11 @@ section in the same file, dated, and written before the measurement it changes.
 | H6 abstention replication | [`H6-abstention-replication.md`](preregistration/H6-abstention-replication.md) | 1, 2, 3 (10-18) | confirmatory, measured |
 | H8 verifier fault injection | [`H8-verifier-fault-injection.md`](preregistration/H8-verifier-fault-injection.md) | 1, 2, 3 (10-18) | confirmatory, measured |
 | R1 public data (NL2Bash, CLINC150) | [`R1-real-data-benchmarks.md`](preregistration/R1-real-data-benchmarks.md) | 1, 2 (10-22) | confirmatory (own family), measured |
+| R1b remedies on new public samples | [`R1b-improved-router-planner.md`](preregistration/R1b-improved-router-planner.md) | — | confirmatory (own family, 3 of 4), measured |
+| M2 four local language models | [`M2-local-models.md`](preregistration/M2-local-models.md) | — | confirmatory (own family, 6 of 6), measured |
+| X1 H5 and H4b re-run with the remedies | [`X1-remedy-reruns.md`](preregistration/X1-remedy-reruns.md) | — | registered exploratory, measured |
+| HAL1 hallucination measures | [`HAL1-hallucination-measures.md`](preregistration/HAL1-hallucination-measures.md) | 1 (10-22) | registered descriptive, measured |
+| M1 information-layer remedies (IIS) | [`M1-information-layer-remedies.md`](preregistration/M1-information-layer-remedies.md) | — | registered exploratory, measured |
 | H7 hybrid scope gate | [`H7-hybrid-scope-gate.md`](preregistration/H7-hybrid-scope-gate.md) | — | postponed (future work) |
 | H9 progress ledger | [`H9-progress-ledger.md`](preregistration/H9-progress-ledger.md) | — | dropped (design record) |
 
