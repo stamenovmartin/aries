@@ -46,8 +46,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from aries.interests import service as interests
 from aries.learning import history, reversal
 from aries.learning.evidence import TopicEvidence, gather
-from aries.learning.statistics import Interval, step_toward, wilson
-from aries.news.models import AriesNewsItem
+from aries.learning.statistics import step_toward, wilson
 from aries.settings import SettingsService
 
 logger = logging.getLogger(__name__)

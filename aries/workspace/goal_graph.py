@@ -14,7 +14,6 @@ from sqlalchemy import select, update
 from agentic_core.database.base import async_session
 from aries.workspace.models import WorkspaceGoal
 from aries.workspace import contracts
-from aries.workspace.registry import registry
 from aries.workspace.scopes import Grant
 
 SAFE_READS=frozenset({'system.status','system.storage','system.processes','file.read','file.exists','file.list'})

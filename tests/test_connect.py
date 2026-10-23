@@ -23,7 +23,7 @@ bootstrap("aries-connect")
 
 from agentic_core.database.base import async_session  # noqa: E402
 
-from aries.connect import base, files, mail, secrets, service, untrusted  # noqa: E402
+from aries.connect import base, mail, secrets, service, untrusted  # noqa: E402
 from aries.settings import SettingsService  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

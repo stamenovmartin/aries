@@ -1,5 +1,5 @@
 """File command surface with real task history and explicit locations."""
-from gi.repository import Gtk, Adw
+from gi.repository import Adw
 from aries_ui import hud, widgets
 from aries_ui.page import Page
 
