@@ -129,6 +129,7 @@ def planner_context(historical,packet,*,max_chars=2500):
     if size()>max_chars:
         from aries import flags
         if flags.enabled('ARIES_PLAN_DISPATCH_FIX'):compact(result,max_chars,size)
+        if flags.enabled('ARIES_PLAN_CONTEXT_FIT'):fit(result,max_chars,size)
     if size()>max_chars:raise ValueError('Context metadata exceeds planner budget')
     return result
 
@@ -153,3 +154,14 @@ def compact(result,max_chars,size):
             result.pop('preferences');result.setdefault('omitted_sections',[]).append('preferences')
             steps.append('preferences_omitted')
     coverage['compacted']=steps
+
+
+def fit(result,max_chars,size):
+    """ARIES_PLAN_CONTEXT_FIT (P1 diagnosis, experiments/thesis-p1-performance/diagnosis.json): the records added
+    after the memory loop (omitted_sections, the compaction note) can push a context that fitted back over the
+    budget by a few characters, and the goal then fails before its first planner call. Drop the lowest-ranked
+    memories, one at a time, until it fits, and record how many; the caller still raises if nothing is left."""
+    dropped=0
+    while size()>max_chars and result['memories']:
+        result['memories'].pop();dropped+=1
+        result['context_coverage']['fit_dropped_memories']=dropped

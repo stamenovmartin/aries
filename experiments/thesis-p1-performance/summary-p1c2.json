@@ -1,0 +1,769 @@
+{
+ "label": "P1 Amendment 1, series p1c2, exploratory",
+ "idle": {
+  "samples": 54,
+  "seconds": 30.0,
+  "gpu_mem_mb": {
+   "mean": 4000.0,
+   "max": 4000.0
+  },
+  "gpu_util_pct": {
+   "mean": 1.1,
+   "max": 6.0
+  },
+  "gpu_power_w": {
+   "mean": 13.6,
+   "max": 14.2
+  },
+  "gpu_temp_c": {
+   "mean": 35.0,
+   "max": 35.0
+  },
+  "system_cpu_pct": {
+   "mean": 3.0,
+   "max": 10.2
+  },
+  "system_mem_used_mb": {
+   "mean": 4276.6,
+   "max": 4303.5
+  },
+  "ollama_rss_mb": {
+   "mean": 21.5,
+   "max": 21.5
+  },
+  "ollama_cpu_pct_of_one_core": {
+   "mean": 0.0,
+   "max": 0.0
+  },
+  "aries_rss_mb": {
+   "mean": 858.5,
+   "max": 858.7
+  },
+  "aries_cpu_pct_of_one_core": {
+   "mean": 3.6,
+   "max": 18.2
+  },
+  "gpu_energy_j": 401.7
+ },
+ "agent_suite": {
+  "run1": {
+   "counts": {
+    "selected": 90,
+    "attempted": 90,
+    "scored": 90,
+    "pass": 69,
+    "fail": 10,
+    "false_success": 11,
+    "skip": 0,
+    "recovered": 15
+   },
+   "pass": {
+    "k": 69,
+    "n": 90,
+    "rate": 0.7667,
+    "cp95": [
+     0.6657,
+     0.8494
+    ]
+   },
+   "false_success": {
+    "k": 11,
+    "n": 90,
+    "rate": 0.1222,
+    "cp95": [
+     0.0626,
+     0.2082
+    ]
+   },
+   "latency_s": {
+    "n": 90,
+    "mean": 4.265,
+    "median": 1.907,
+    "p90": 12.582,
+    "p95": 17.047,
+    "max": 27.594
+   },
+   "by_category": {
+    "single_step": {
+     "pass": {
+      "k": 17,
+      "n": 20,
+      "rate": 0.85,
+      "cp95": [
+       0.6211,
+       0.9679
+      ]
+     },
+     "latency_s": {
+      "n": 20,
+      "mean": 6.075,
+      "median": 3.385,
+      "p90": 14.305,
+      "p95": 17.235,
+      "max": 21.575
+     }
+    },
+    "multi_step": {
+     "pass": {
+      "k": 13,
+      "n": 25,
+      "rate": 0.52,
+      "cp95": [
+       0.3131,
+       0.722
+      ]
+     },
+     "latency_s": {
+      "n": 25,
+      "mean": 6.279,
+      "median": 3.339,
+      "p90": 17.949,
+      "p95": 24.237,
+      "max": 27.594
+     }
+    },
+    "ambiguous": {
+     "pass": {
+      "k": 13,
+      "n": 15,
+      "rate": 0.8667,
+      "cp95": [
+       0.5954,
+       0.9834
+      ]
+     },
+     "latency_s": {
+      "n": 15,
+      "mean": 0.642,
+      "median": 0.324,
+      "p90": 1.318,
+      "p95": 2.389,
+      "max": 3.413
+     }
+    },
+    "refuse_or_approve": {
+     "pass": {
+      "k": 7,
+      "n": 10,
+      "rate": 0.7,
+      "cp95": [
+       0.3475,
+       0.9333
+      ]
+     },
+     "latency_s": {
+      "n": 10,
+      "mean": 5.491,
+      "median": 2.624,
+      "p90": 11.207,
+      "p95": 12.586,
+      "max": 13.965
+     }
+    },
+    "fault_injected": {
+     "pass": {
+      "k": 15,
+      "n": 15,
+      "rate": 1.0,
+      "cp95": [
+       0.782,
+       1.0
+      ]
+     },
+     "latency_s": {
+      "n": 15,
+      "mean": 0.086,
+      "median": 0.011,
+      "p90": 0.156,
+      "p95": 0.283,
+      "max": 0.578
+     }
+    },
+    "out_of_scope": {
+     "pass": {
+      "k": 4,
+      "n": 5,
+      "rate": 0.8,
+      "cp95": [
+       0.2836,
+       0.9949
+      ]
+     },
+     "latency_s": {
+      "n": 5,
+      "mean": 7.912,
+      "median": 6.392,
+      "p90": 13.652,
+      "p95": 14.551,
+      "max": 15.45
+     }
+    }
+   },
+   "service_flags": {},
+   "models": {
+    "gateway": {
+     "gateway_live": true,
+     "gateway": {
+      "service": "aries-local-model",
+      "backend": {
+       "reachable": true,
+       "model_available": true,
+       "models": [
+        "qwen2.5:14b",
+        "llama3.1:8b",
+        "bge-m3:latest",
+        "qwen2.5:1.5b",
+        "qwen2.5:7b"
+       ]
+      }
+     }
+    },
+    "settings": {
+     "intelligence.cloud_model": "",
+     "intelligence.local_model": "qwen2.5:7b",
+     "intelligence.location": "local",
+     "operator.confirm_model_plans": true,
+     "operator.model_location": "local",
+     "workspace.goal_max_model_calls": 32,
+     "workspace.memory_model": "qwen2.5:7b"
+    }
+   },
+   "runtime_changed": false,
+   "resources": {
+    "samples": 710,
+    "seconds": 384.3,
+    "gpu_mem_mb": {
+     "mean": 8316.0,
+     "max": 9051.0
+    },
+    "gpu_util_pct": {
+     "mean": 31.8,
+     "max": 100.0
+    },
+    "gpu_power_w": {
+     "mean": 78.1,
+     "max": 170.3
+    },
+    "gpu_temp_c": {
+     "mean": 46.3,
+     "max": 59.0
+    },
+    "system_cpu_pct": {
+     "mean": 15.5,
+     "max": 52.3
+    },
+    "system_mem_used_mb": {
+     "mean": 5619.4,
+     "max": 7184.4
+    },
+    "ollama_rss_mb": {
+     "mean": 1322.5,
+     "max": 2978.5
+    },
+    "ollama_cpu_pct_of_one_core": {
+     "mean": 126.5,
+     "max": 529.3
+    },
+    "aries_rss_mb": {
+     "mean": 891.0,
+     "max": 907.4
+    },
+    "aries_cpu_pct_of_one_core": {
+     "mean": 24.5,
+     "max": 217.4
+    },
+    "gpu_energy_j": 29865.8,
+    "gpu_energy_j_per_request": 331.84
+   }
+  },
+  "run2": {
+   "counts": {
+    "selected": 90,
+    "attempted": 90,
+    "scored": 90,
+    "pass": 70,
+    "fail": 10,
+    "false_success": 10,
+    "skip": 0,
+    "recovered": 15
+   },
+   "pass": {
+    "k": 70,
+    "n": 90,
+    "rate": 0.7778,
+    "cp95": [
+     0.6779,
+     0.8587
+    ]
+   },
+   "false_success": {
+    "k": 10,
+    "n": 90,
+    "rate": 0.1111,
+    "cp95": [
+     0.0546,
+     0.1949
+    ]
+   },
+   "latency_s": {
+    "n": 90,
+    "mean": 3.575,
+    "median": 1.894,
+    "p90": 10.959,
+    "p95": 12.486,
+    "max": 15.536
+   },
+   "by_category": {
+    "single_step": {
+     "pass": {
+      "k": 17,
+      "n": 20,
+      "rate": 0.85,
+      "cp95": [
+       0.6211,
+       0.9679
+      ]
+     },
+     "latency_s": {
+      "n": 20,
+      "mean": 5.371,
+      "median": 3.396,
+      "p90": 12.441,
+      "p95": 12.637,
+      "max": 15.536
+     }
+    },
+    "multi_step": {
+     "pass": {
+      "k": 14,
+      "n": 25,
+      "rate": 0.56,
+      "cp95": [
+       0.3493,
+       0.756
+      ]
+     },
+     "latency_s": {
+      "n": 25,
+      "mean": 4.359,
+      "median": 1.918,
+      "p90": 10.908,
+      "p95": 12.174,
+      "max": 15.459
+     }
+    },
+    "ambiguous": {
+     "pass": {
+      "k": 13,
+      "n": 15,
+      "rate": 0.8667,
+      "cp95": [
+       0.5954,
+       0.9834
+      ]
+     },
+     "latency_s": {
+      "n": 15,
+      "mean": 0.647,
+      "median": 0.332,
+      "p90": 1.309,
+      "p95": 2.34,
+      "max": 3.389
+     }
+    },
+    "refuse_or_approve": {
+     "pass": {
+      "k": 7,
+      "n": 10,
+      "rate": 0.7,
+      "cp95": [
+       0.3475,
+       0.9333
+      ]
+     },
+     "latency_s": {
+      "n": 10,
+      "mean": 5.49,
+      "median": 2.627,
+      "p90": 11.221,
+      "p95": 12.578,
+      "max": 13.935
+     }
+    },
+    "fault_injected": {
+     "pass": {
+      "k": 15,
+      "n": 15,
+      "rate": 1.0,
+      "cp95": [
+       0.782,
+       1.0
+      ]
+     },
+     "latency_s": {
+      "n": 15,
+      "mean": 0.087,
+      "median": 0.01,
+      "p90": 0.159,
+      "p95": 0.291,
+      "max": 0.591
+     }
+    },
+    "out_of_scope": {
+     "pass": {
+      "k": 4,
+      "n": 5,
+      "rate": 0.8,
+      "cp95": [
+       0.2836,
+       0.9949
+      ]
+     },
+     "latency_s": {
+      "n": 5,
+      "mean": 7.896,
+      "median": 6.37,
+      "p90": 13.644,
+      "p95": 14.539,
+      "max": 15.434
+     }
+    }
+   },
+   "service_flags": {},
+   "models": {
+    "gateway": {
+     "gateway_live": true,
+     "gateway": {
+      "service": "aries-local-model",
+      "backend": {
+       "reachable": true,
+       "model_available": true,
+       "models": [
+        "qwen2.5:14b",
+        "llama3.1:8b",
+        "bge-m3:latest",
+        "qwen2.5:1.5b",
+        "qwen2.5:7b"
+       ]
+      }
+     }
+    },
+    "settings": {
+     "intelligence.cloud_model": "",
+     "intelligence.local_model": "qwen2.5:7b",
+     "intelligence.location": "local",
+     "operator.confirm_model_plans": true,
+     "operator.model_location": "local",
+     "workspace.goal_max_model_calls": 32,
+     "workspace.memory_model": "qwen2.5:7b"
+    }
+   },
+   "runtime_changed": false,
+   "resources": {
+    "samples": 596,
+    "seconds": 322.3,
+    "gpu_mem_mb": {
+     "mean": 8605.7,
+     "max": 9042.0
+    },
+    "gpu_util_pct": {
+     "mean": 35.5,
+     "max": 100.0
+    },
+    "gpu_power_w": {
+     "mean": 81.8,
+     "max": 170.5
+    },
+    "gpu_temp_c": {
+     "mean": 44.6,
+     "max": 53.0
+    },
+    "system_cpu_pct": {
+     "mean": 15.6,
+     "max": 48.7
+    },
+    "system_mem_used_mb": {
+     "mean": 5721.6,
+     "max": 7454.4
+    },
+    "ollama_rss_mb": {
+     "mean": 1396.2,
+     "max": 3197.1
+    },
+    "ollama_cpu_pct_of_one_core": {
+     "mean": 129.2,
+     "max": 503.4
+    },
+    "aries_rss_mb": {
+     "mean": 909.6,
+     "max": 935.1
+    },
+    "aries_cpu_pct_of_one_core": {
+     "mean": 26.2,
+     "max": 208.9
+    },
+    "gpu_energy_j": 26242.8,
+    "gpu_energy_j_per_request": 291.59
+   }
+  },
+  "run3": {
+   "counts": {
+    "selected": 90,
+    "attempted": 90,
+    "scored": 90,
+    "pass": 70,
+    "fail": 10,
+    "false_success": 10,
+    "skip": 0,
+    "recovered": 15
+   },
+   "pass": {
+    "k": 70,
+    "n": 90,
+    "rate": 0.7778,
+    "cp95": [
+     0.6779,
+     0.8587
+    ]
+   },
+   "false_success": {
+    "k": 10,
+    "n": 90,
+    "rate": 0.1111,
+    "cp95": [
+     0.0546,
+     0.1949
+    ]
+   },
+   "latency_s": {
+    "n": 90,
+    "mean": 3.526,
+    "median": 1.895,
+    "p90": 11.112,
+    "p95": 12.471,
+    "max": 16.973
+   },
+   "by_category": {
+    "single_step": {
+     "pass": {
+      "k": 17,
+      "n": 20,
+      "rate": 0.85,
+      "cp95": [
+       0.6211,
+       0.9679
+      ]
+     },
+     "latency_s": {
+      "n": 20,
+      "mean": 4.974,
+      "median": 2.656,
+      "p90": 12.421,
+      "p95": 12.548,
+      "max": 13.936
+     }
+    },
+    "multi_step": {
+     "pass": {
+      "k": 14,
+      "n": 25,
+      "rate": 0.56,
+      "cp95": [
+       0.3493,
+       0.756
+      ]
+     },
+     "latency_s": {
+      "n": 25,
+      "mean": 4.615,
+      "median": 1.943,
+      "p90": 10.966,
+      "p95": 13.357,
+      "max": 16.973
+     }
+    },
+    "ambiguous": {
+     "pass": {
+      "k": 13,
+      "n": 15,
+      "rate": 0.8667,
+      "cp95": [
+       0.5954,
+       0.9834
+      ]
+     },
+     "latency_s": {
+      "n": 15,
+      "mean": 0.556,
+      "median": 0.343,
+      "p90": 1.283,
+      "p95": 1.872,
+      "max": 1.903
+     }
+    },
+    "refuse_or_approve": {
+     "pass": {
+      "k": 7,
+      "n": 10,
+      "rate": 0.7,
+      "cp95": [
+       0.3475,
+       0.9333
+      ]
+     },
+     "latency_s": {
+      "n": 10,
+      "mean": 5.335,
+      "median": 2.644,
+      "p90": 12.4,
+      "p95": 12.434,
+      "max": 12.467
+     }
+    },
+    "fault_injected": {
+     "pass": {
+      "k": 15,
+      "n": 15,
+      "rate": 1.0,
+      "cp95": [
+       0.782,
+       1.0
+      ]
+     },
+     "latency_s": {
+      "n": 15,
+      "mean": 0.083,
+      "median": 0.01,
+      "p90": 0.154,
+      "p95": 0.278,
+      "max": 0.566
+     }
+    },
+    "out_of_scope": {
+     "pass": {
+      "k": 4,
+      "n": 5,
+      "rate": 0.8,
+      "cp95": [
+       0.2836,
+       0.9949
+      ]
+     },
+     "latency_s": {
+      "n": 5,
+      "mean": 7.898,
+      "median": 6.386,
+      "p90": 13.644,
+      "p95": 14.545,
+      "max": 15.446
+     }
+    }
+   },
+   "service_flags": {},
+   "models": {
+    "gateway": {
+     "gateway_live": true,
+     "gateway": {
+      "service": "aries-local-model",
+      "backend": {
+       "reachable": true,
+       "model_available": true,
+       "models": [
+        "qwen2.5:14b",
+        "llama3.1:8b",
+        "bge-m3:latest",
+        "qwen2.5:1.5b",
+        "qwen2.5:7b"
+       ]
+      }
+     }
+    },
+    "settings": {
+     "intelligence.cloud_model": "",
+     "intelligence.local_model": "qwen2.5:7b",
+     "intelligence.location": "local",
+     "operator.confirm_model_plans": true,
+     "operator.model_location": "local",
+     "workspace.goal_max_model_calls": 32,
+     "workspace.memory_model": "qwen2.5:7b"
+    }
+   },
+   "runtime_changed": false,
+   "resources": {
+    "samples": 589,
+    "seconds": 317.8,
+    "gpu_mem_mb": {
+     "mean": 8578.2,
+     "max": 9042.0
+    },
+    "gpu_util_pct": {
+     "mean": 36.2,
+     "max": 100.0
+    },
+    "gpu_power_w": {
+     "mean": 83.4,
+     "max": 170.4
+    },
+    "gpu_temp_c": {
+     "mean": 44.9,
+     "max": 53.0
+    },
+    "system_cpu_pct": {
+     "mean": 15.7,
+     "max": 53.7
+    },
+    "system_mem_used_mb": {
+     "mean": 5712.3,
+     "max": 7424.6
+    },
+    "ollama_rss_mb": {
+     "mean": 1389.9,
+     "max": 3206.3
+    },
+    "ollama_cpu_pct_of_one_core": {
+     "mean": 132.8,
+     "max": 516.5
+    },
+    "aries_rss_mb": {
+     "mean": 912.4,
+     "max": 914.7
+    },
+    "aries_cpu_pct_of_one_core": {
+     "mean": 26.7,
+     "max": 186.8
+    },
+    "gpu_energy_j": 26437.5,
+    "gpu_energy_j_per_request": 293.75
+   }
+  }
+ },
+ "reliability": {
+  "goals_same_outcome_all_runs": {
+   "k": 89,
+   "n": 90,
+   "rate": 0.9889,
+   "cp95": [
+    0.9396,
+    0.9997
+   ]
+  },
+  "goals_pass_all_runs": {
+   "k": 69,
+   "n": 90,
+   "rate": 0.7667,
+   "cp95": [
+    0.6657,
+    0.8494
+   ]
+  },
+  "goals_pass_in_some_but_not_all": [
+   "ms-11"
+  ],
+  "outcome_patterns": {
+   "pass/pass/pass": 69,
+   "false_success/false_success/false_success": 10,
+   "fail/fail/fail": 10,
+   "false_success/pass/pass": 1
+  }
+ }
+}

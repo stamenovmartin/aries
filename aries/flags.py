@@ -139,6 +139,12 @@ FLAGS = {
                                        "instead of failing the goal before its first planner call with "
                                        "'Context metadata exceeds planner budget' (docs/AUDIT.md 7.2: the six "
                                        "never-planned held-out goals). Off, the error is raised as frozen"),
+    "ARIES_PLAN_CONTEXT_FIT": (False, "designed after P1 (experiments/thesis-p1-performance/diagnosis.json: "
+                                      "9 of 90 suite goals failed with 'Context metadata exceeds planner "
+                                      "budget' even with ARIES_PLAN_DISPATCH_FIX, because the records added "
+                                      "after the memory loop pushed a fitting context back over 2,500 "
+                                      "characters): drop the lowest-ranked memories one at a time, recording "
+                                      "the count, until the planner context fits. Off, the error is raised"),
     "ARIES_VERIFY_SCOPE": (False, "exploratory, designed after H8: the 14 capabilities of the H8 "
                                   "side_effect_outside_scope operator snapshot their declared scope "
                                   "before the executor runs (parent folder of each path, the other "
