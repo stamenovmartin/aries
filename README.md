@@ -80,6 +80,17 @@ script that computed the numbers, and the file the numbers are read from:
 Each run writes a new file and never overwrites one. The runs record the source commit or code hash, and, where a
 model is used, its digest. Every ratio in the thesis is checked against these files when the thesis is built.
 
+<p align="center"><img src="experiments/analysis/figures/tests.svg" alt="Every confirmatory test" width="760"></p>
+
+| | |
+|---|---|
+| ![R1b NL2Bash](experiments/analysis/figures/r1b_nl2bash.svg) | ![M2 four models](experiments/analysis/figures/m2_models.svg) |
+| ![MIND AUC](experiments/analysis/figures/mind_auc.svg) | ![LoCoMo hit@5](experiments/analysis/figures/locomo_hit5.svg) |
+| ![P1 latency](experiments/analysis/figures/p1_latency.svg) | ![The installed system, five measurements](experiments/analysis/figures/p1_system_runs.svg) |
+
+Every figure is drawn from the result files by [`make_figures.py`](experiments/analysis/make_figures.py) and
+checked in CI; the explanations are in [`experiments/analysis/README.md`](experiments/analysis/README.md).
+
 The first public-data result (R1) was negative and stays reported; the repairs were designed from its records,
 registered before the new measurement (R1b), and checked with four models (M2). All results in one place:
 [`experiments/thesis-improvements-20261022/RESULTS.md`](experiments/thesis-improvements-20261022/RESULTS.md).
@@ -112,7 +123,7 @@ preregistration exists and no measurement does. Full follow-up results: [`experi
 | R1: tool selection on NL2Bash; out-of-scope detection on CLINC150 | public datasets, LLM-labelled (κ 0.65 / 0.83) | 500 / 600 sampled | confirmatory (R1 family): **zero-shot, BM25 and embedding baselines beat ARIES** | [`experiments/thesis-r1-real-data/`](experiments/thesis-r1-real-data/), RESULTS §13 |
 | R1b: the R1 remedies (capability gate, consistent surface, per-capability grammar) on new samples | public datasets, new disjoint samples, LLM-labelled (κ 0.733) | 500 / 600 | confirmatory (R1b family, 3 of 4 tests significant): **NL2Bash 348/500 vs frozen 233/500 and zero-shot 320/500; CLINC150 342/600 vs frozen 268/600, vs zero-shot 334/600 n.s.**; weaker in scope (92/219 vs 120/219) | [`experiments/thesis-r1b/`](experiments/thesis-r1b/), [prereg](docs/preregistration/R1b-improved-router-planner.md) |
 | M2: the R1b systems with three more local models (llama3.1:8b, qwen2.5:1.5b, qwen2.5:14b) | the R1b samples | 500 / 600 per model | confirmatory (M2 family, **6 of 6 tests significant**, T vs frozen): NL2Bash llama 225 vs 110, 1.5b 281 vs 109, 14b 349 vs 210 (/500); CLINC150 327 vs 222, 245 vs 219, 354 vs 316 (/600); 1.5b reaches its NL2Bash score by refusing everything (in scope 0/219) | [`experiments/thesis-m2-models/`](experiments/thesis-m2-models/), [prereg](docs/preregistration/M2-local-models.md) |
-| P1: latency, resources and reliability | the R1b samples (decision); the 90-goal agent suite on the installed system, three runs | 1,100 decisions per model; 3 × 90 goals | descriptive: decision median 1.2 s (7b) to 2.8 s (14b), p90 up to 6.5 s; VRAM 1.7-10.0 GB; **installed system 63/85 in every run, 89/90 goals with the same outcome**, down from 88/90 on 2026-10-04 (diagnosis: 8 locked session, 9 planner context over budget, 6 invalid planner output) | [`experiments/thesis-p1-performance/`](experiments/thesis-p1-performance/), [prereg](docs/preregistration/P1-performance.md) |
+| P1: latency, resources and reliability | the R1b samples (decision); the 90-goal agent suite on the installed system, three runs | 1,100 decisions per model; 3 × 90 goals | descriptive: decision median 1.2 s (7b) to 2.8 s (14b), p90 up to 6.5 s; VRAM 1.7-10.0 GB; **installed system 63/85 in every run, 89/90 goals with the same outcome**, down from 88/90 on 2026-10-04; ARIES's own Background Mode was blanking the screen (8 goals); with the screen awake 69-70/90 (C2), unchanged with ARIES_PLAN_DISPATCH_FIX (C3); the remaining 9 context-budget and 7 invalid-output failures are reproduced, with the remedies (`ARIES_PLAN_CONTEXT_FIT`, `ARIES_PLANNER_PER_CAP_GRAMMAR`) the repaired live system passes **79/90 in each of three runs**; they stay on | [`experiments/thesis-p1-performance/`](experiments/thesis-p1-performance/), [prereg](docs/preregistration/P1-performance.md) |
 | X1: H5 and H4b re-run with the remedies | the H5 and H4b items (already seen) | 3 runs per condition | exploratory: H4b code-select 32/40 pairs (was 0/40); H5 correct done 12/45 (was 6/45) but false done 15/75 (was 12/75) | [`experiments/thesis-improvements-20261022/`](experiments/thesis-improvements-20261022/) |
 | HAL1: what the model invents vs what the system lets through | all H5, H4b, X1, R1, R1b runs | — | descriptive: no invented evidence (0/50, 0/26, 0/8); invalid planner output 126/449 → 2/208; final texts with model prose 0 | [`hallucination-summary.json`](experiments/thesis-improvements-20261022/hallucination-summary.json), [prereg](docs/preregistration/HAL1-hallucination-measures.md) |
 | One row per component (router, planner, verifiers, completion, clarification, end to end) | the rows above | — | summary | [`experiments/thesis-followup-20261012/thesis-tables/components.csv`](experiments/thesis-followup-20261012/thesis-tables/components.csv) |
@@ -484,15 +495,12 @@ recorded in every artifact.
 
 ## The thesis
 
-`thesis/` holds the written work, in Macedonian:
+The thesis is written in Macedonian. Its title is *ARIES: Design and evaluation of an intelligent agentic system
+for Linux based on large language models*. It answers two questions: whether an explicit description of the
+capabilities and the machine's limits improves the decision to act, ask or refuse, and how far the verification
+gives evidence that is independent of the executor. Every number in it is read from a file in this repository
+and checked when the thesis is built.
 
-| file | |
-|---|---|
-| `ARIES_03_Diplomska.pdf` | the thesis — marked a working draft |
-| `ARIES_03_Diplomska.docx` | the same, editable |
-| `ARIES_Diplomska_Paket_20261006.zip` | the full package: technical documentation, operating manual, thesis and research part |
-
-Its title is *ARIES: Design and evaluation of an intelligent agentic system for Linux based on
-large language models*, with the research question as its subtitle. It is a draft: the evaluation
-scope and the number of repetitions are still to be agreed, and the limitations above are stated
-in it rather than left to be discovered.
+`thesis/` holds the package submitted on 2026-10-06, frozen. The current version, with the public-data
+evaluations, the remedies, four local models, the system design and the performance measurements, is built
+from sources outside the repository and shared separately.

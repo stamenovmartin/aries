@@ -2,13 +2,15 @@
 """P1 exploratory diagnosis (designed after the P1 result; not registered): why each agent-suite goal that did
 not pass did not pass.
 
-    diagnose_p1.py   ->  diagnosis.json (refuses to overwrite)
+    diagnose_p1.py                ->  diagnosis.json (the first P1-C; refuses to overwrite)
+    diagnose_p1.py LABEL          ->  diagnosis-LABEL.json (an Amendment 1 series, runs LABEL-run1..3)
 
 Reads the three suite results and, read-only, the goal records of the installed system's database
 (~/aries/var/aries.db) by the goal ids the suite recorded. Writes only goal ids, categories, outcomes and the
 cause class with the error code or gap text that decided it; no memory, context or user text."""
 import json
 import sqlite3
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -39,13 +41,13 @@ def cause(goal, record):
     return 'other', detail[:120]
 
 
-def main():
-    dest = HERE / 'diagnosis.json'
+def main(label=None):
+    dest = HERE / (f'diagnosis-{label}.json' if label else 'diagnosis.json')
     if dest.exists():
-        raise SystemExit('REFUSED: diagnosis.json exists')
+        raise SystemExit(f'REFUSED: {dest.name} exists')
     con = sqlite3.connect(f'file:{DB}?mode=ro', uri=True)
     out = {'label': 'exploratory diagnosis, designed after the P1 result', 'runs': {}}
-    for run in ('p1-run1', 'p1-run2', 'p1-run3'):
+    for run in [f'{label or "p1"}-run{r}' for r in (1, 2, 3)]:
         d = json.loads((HERE / 'suite' / run / 'results.json').read_text())
         rows = []
         for g in d['goals']:
@@ -62,4 +64,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1] if len(sys.argv) > 1 else None)
