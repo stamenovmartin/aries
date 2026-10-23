@@ -7,11 +7,18 @@
 > | | |
 > |---|---|
 > | Водич за преглед (македонски) | [`docs/REVIEWER_GUIDE.md`](docs/REVIEWER_GUIDE.md) |
-> | Сите резултати на дипломската | [`experiments/thesis-followup-20261012/RESULTS.md`](experiments/thesis-followup-20261012/RESULTS.md) |
+> | Сите резултати по дијагнозата: поправки, четири модели, халуцинации, перформанси | [`experiments/thesis-improvements-20261022/RESULTS.md`](experiments/thesis-improvements-20261022/RESULTS.md) |
+> | Резултатите пред дијагнозата (H4b, H5, H6, H8, R1) | [`experiments/thesis-followup-20261012/RESULTS.md`](experiments/thesis-followup-20261012/RESULTS.md) |
 > | Споредбите како графици | [`experiments/analysis/README.md`](experiments/analysis/README.md), делови 1 и 2 |
 > | Мапа на експериментите на дипломската | [`experiments/thesis/INDEX.md`](experiments/thesis/INDEX.md) |
-> | Пререгистрации (H4b, H5, H6, H8, R1) | [`docs/preregistration/`](docs/preregistration/) |
+> | Пререгистрации, со семејствата на тестови | [`docs/preregistration/README.md`](docs/preregistration/README.md) |
+> | Податочните множества | [`docs/DATASETS.md`](docs/DATASETS.md) |
 > | Табели и нивна проверка | [`thesis-tables/`](experiments/thesis-followup-20261012/thesis-tables/), `make check` |
+>
+> | Сите потврдни тестови | Инсталираниот систем, пет мерења |
+> |---|---|
+> | ![Every confirmatory test](experiments/analysis/figures/tests.svg) | ![The installed system](experiments/analysis/figures/p1_system_runs.svg) |
+> | 20 тестови во четири семејства (Holm) | поправениот систем: 79/90 во секое од трите извршувања |
 
 A voice-driven assistant that acts on a live Ubuntu/GNOME desktop, built around one question:
 
