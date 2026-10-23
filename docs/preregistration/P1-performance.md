@@ -69,3 +69,15 @@ suite three times exactly as in P1-C, are added. Both are **exploratory**; the f
 
 Reported per series as in P1-C (pass, false success, skip, latency, resources, reliability across the three runs),
 by `analyze_p1_suite.py`, and diagnosed by `diagnose_p1.py` with the same rules.
+
+## Amendment 2 (2026-10-23, after P1-C2 and P1-C3): registered, not run
+
+C2 and C3 left two causes, both reproduced from the goal records: 9 goals fail with "Context metadata exceeds
+planner budget" (the records added after the memory loop push the context 32 characters over), and 7 on planner
+output that fails validation (6 `ask_clarification` with arguments attached, 1 an argument the capability does not
+have). Remedies are in the current source behind flags, default off: `ARIES_PLAN_CONTEXT_FIT` (new,
+`tests/test_p1_remedies.py`) and `ARIES_PLANNER_PER_CAP_GRAMMAR` (R1b). The planned series: C4a, `aries-core` on
+the current source with default flags; C4b, the same with `ARIES_PLAN_DISPATCH_FIX`, `ARIES_PLAN_CONTEXT_FIT` and
+`ARIES_PLANNER_PER_CAP_GRAMMAR`. **Not run on 2026-10-23:** moving the live service to the current source is a
+deployment that needs the owner's explicit approval. Until it runs, the remedies' effect on the live system is
+not claimed.
